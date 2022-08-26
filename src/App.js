@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { useContext } from "react";
+import styled from "styled-components";
+import GlobalStyles from "./GlobalStyles";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { CycloContext } from "./CycloContext";
+
+import Entete from "./1.Entete/Entete";
+import Corps from "./2.Corps/Corps";
+import Pied from "./3.Pied/Pied";
+
+const App = () => {
+    return (
+        <Wrapper>
+            <GlobalStyles />
+            <Entete />
+            <Corps />
+            <Pied />
+        </Wrapper>
+    );
 }
+
+const Wrapper = styled.div``
 
 export default App;
