@@ -5,12 +5,15 @@ export const CycloContext = createContext();
 const CycloContextProvider = ({ children }) => {
 
     const [modeNuit, setModeNuit] = useState(false);
+    const [lang, setLang] = useState("FR");
     
     return (
         <CycloContext.Provider
             value={{
                 modeNuit,
-                setModeNuit
+                setModeNuit,
+                lang,
+                setLang
             }}
         >{children}</CycloContext.Provider>
     )

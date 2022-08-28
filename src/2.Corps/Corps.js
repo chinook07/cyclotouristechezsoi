@@ -9,18 +9,16 @@ import Transport from "./sections/Transport";
 
 const Corps = () => {
     return (
-        <BrowserRouter>
-            <Wrapper>
-                <Routes>
-                    <Route path="/commencement" element={<Commencement />} />
-                    <Route path="/destinations" element={<Destinations />} />
-                    <Route path="/equipement" element={<Equipement />} />
-                    <Route path="/transport" element={<Transport />} />
-                    <Route exact path="/" element={<Accueil />} />
-                    <Route path="*" element={<div>***</div>} />
-                </Routes>
-            </Wrapper>
-        </BrowserRouter>
+        <Wrapper>
+            <Routes>
+                <Route path="/commencement" element={<Commencement />} />
+                <Route path="/destinations" element={<Destinations />} />
+                <Route path="/equipement" element={<Equipement />} />
+                <Route path="/transport" element={<Transport />} />
+                <Route exact path="/" element={<Accueil />} />
+                <Route path="*" element={<div>***</div>} />
+            </Routes>
+        </Wrapper>
     )
 }
 

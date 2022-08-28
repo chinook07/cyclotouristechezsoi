@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { BrowserRouter } from "react-router-dom";
 import styled from "styled-components";
 import GlobalStyles from "./GlobalStyles";
 
@@ -12,9 +13,11 @@ const App = () => {
     return (
         <Wrapper>
             <GlobalStyles />
-            <Entete />
-            <Corps />
-            <Pied />
+            <BrowserRouter>
+                <Entete />
+                <Corps />
+                <Pied />
+            </BrowserRouter>
         </Wrapper>
     );
 }
