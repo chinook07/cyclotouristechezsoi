@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { ExternalLink } from "react-external-link";
 
 const APropos = () => {
@@ -16,6 +17,22 @@ const APropos = () => {
                     <img></img>
                     <figcaption>L'auteur de ce site web sur le Chemin du Roy en 2016.</figcaption>
                 </figure>
+            </div>
+            <div>
+                <h3>Vous cherchez un collaborateur pour faire la promotion d'un itinéraire cyclable ou la pratique du cyclotourisme?</h3>
+                <p>Alors que l'engouement pour le vélo se fait sentir de plus en plus, votre association ou votre entreprise pourrait profiter de cette tendance, là pour rester. Que ça soit pour la rédaction d'un article ou une conférence à vos employés, je vous invite à <Link to="/contact">me contacter</Link> pour discuter des possibilités.</p>
+                <p>Expérience à ce jour :</p>
+                <ul>
+                    <li>À venir...</li>
+                    <li>Deux articles de blogue en collaboration avec Tourisme Montérégie suite à un séjour <ExternalLink href="https://www.tourisme-monteregie.qc.ca/une-viree-a-velo-juste-parfaite-dans-le-suroit/?season=summer">dans Suroît</ExternalLink> et un autre <ExternalLink href="https://www.tourisme-monteregie.qc.ca/sejour-a-velo-pour-admirer-les-couleurs-de-lautomne/?season=fall">dans le nord-est de la région</ExternalLink> en 2020.</li>
+                    <li>Fait parti du comité organisateur du <ExternalLink href="https://www.facebook.com/events/parc-maisonneuve/v%C3%A9lo-sur-glace-2020-forum-v%C3%A9lo-dhiver/439723316683787/">Forum du vélo d'hiver 2020</ExternalLink>.</li>
+                    <li>Miniconférences données au Salon du vélo de Montréal en 2018, avec Vélo Québec.</li>
+                    <li>Trois conférences données à <ExternalLink href="https://www.velo.qc.ca/categorie-evenement/conference-velo-maison-des-cyclistes/">la Maison des cyclistes</ExternalLink> entre 2017 et 2019.</li>
+                </ul>
+            </div>
+            <div>
+                <h3>Vous avez besoin d'un site web comme celui-ci?</h3>
+                <p>N'hésitez pas à <Link to="/contact">me contacter</Link> pour voir si je peux vous aider à réaliser votre projet. J'ai bâti ce site web par moi-même en apprenant des langues de programmation, et il me fera plaisir de trouver un autre défi à surmonter!</p>
             </div>
         </Wrapper>
     )
