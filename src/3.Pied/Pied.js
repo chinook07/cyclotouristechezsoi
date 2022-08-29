@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { ExternalLink } from "react-external-link";
 
 const Pied = () => {
 
@@ -9,12 +10,15 @@ const Pied = () => {
         <Wrapper>
             <Auteur>
                 <span>Cyclotouristechezsoi.ca 2020–{Annee}</span>
-                <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+                <ExternalLink
+                    rel="license"
+                    href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
+                >
                     <img
                         alt="Licence Creative Commons"
                         src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png"
                     />
-                </a>
+                </ExternalLink>
             </Auteur>
             <Menu>
                 <NavLink to="/limitations">Limitations</NavLink>

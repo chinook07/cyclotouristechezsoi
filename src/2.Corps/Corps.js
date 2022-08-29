@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import Accueil from "./accueil/Accueil";
 import Commencement from "./sections/Commencement";
@@ -22,6 +22,8 @@ const Corps = () => {
     )
 }
 
-const Wrapper = styled.main``
+const Wrapper = styled.main`
+    min-height: calc(100vh - 452.6px);
+`
 
 export default Corps;
