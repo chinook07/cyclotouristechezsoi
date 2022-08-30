@@ -1,8 +1,26 @@
-{
-    "voyages effectués": 23 ,
-    "jrs en cyclotourisme": 162 ,
-    "km voyagés": 8616 ,
-    "crevaisons souffertes": 4 ,
-    "parc nationaux SÉPAQ visités": 12 ,
-    "Route verte pédalée": 65
-}
+[
+    {
+        "valeur" : "voyages effectués",
+        "nombre" : 23
+    },
+    {
+        "valeur" : "jrs en cyclotourisme",
+        "nombre" : 162
+        },
+    {
+        "valeur" : "km voyagés",
+        "nombre" : 8616
+        },
+    {
+        "valeur" : "crevaisons souffertes",
+        "nombre" : 4
+        },
+    {
+        "valeur" : "parc nationaux SÉPAQ visités",
+        "nombre" : 12
+        },
+    {
+        "valeur" : "Route verte pédalée",
+        "nombre" : 65
+    }
+]

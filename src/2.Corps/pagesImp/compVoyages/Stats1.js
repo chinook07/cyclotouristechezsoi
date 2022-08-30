@@ -1,17 +1,21 @@
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import statsDonnees from "./statsDonnes.json";
+import { faRoute, faCalendarDay, faExpandAlt, faCog, faLeaf, faPercent } from "@fortawesome/free-solid-svg-icons";
 
 const Stats1 = () => {
 
-    console.log(statsDonnees);
+    let iconesAUtiliser = [faRoute, faCalendarDay, faExpandAlt, faCog, faLeaf, faPercent];
 
     return (
         <Wrapper>
             {
-                Object.keys(statsDonnees).map((item, index) => {
+                statsDonnees.map((item, index) => {
                     return <div key={index}>
-                        {item} :
-                        {statsDonnees[item]}
+                        {item.nombre}
+                        {item.valeur}
+                        <FontAwesomeIcon icon={iconesAUtiliser[index]} />
                     </div>
                 })
             }
@@ -21,6 +25,9 @@ const Stats1 = () => {
 
 const Wrapper = styled.div`
     display: flex;
+    > div {
+        border: 1px solid black;
+    }
 `
 
 export default Stats1;
