@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import * as imagesTout from "../../../images/galerie-paysage/index"
+import * as imagesTout from "../../../images/galerie-paysage/index";
 
 const Galerie = () => {
 
@@ -10,25 +10,29 @@ const Galerie = () => {
         let resultat = Math.ceil(Math.random() * 99);
         if (!sample.includes(resultat)) sample.push(resultat);
     }
+    console.log(sample);
 
-    const tableauDImages = [];
-    console.log(imagesTout);
+    const tableauLiens = Object.values(imagesTout);
+    console.log("tableau de liens", tableauLiens);
     
     return (
         <Wrapper>
-            {/* {
+            {
                 sample.map((item, index) => {
-                    console.log("Je dois afficher :", tableauDImages[item - 1]);
-                    return <img key={index} src={tableauDImages[item - 1]} />
+                    console.log("Je dois afficher :", item, tableauLiens[item - 1]);
+                    return <img key={index} src={tableauLiens[item - 1]} />
                 })
-            } */}
-            <img src={imagesTout.GalPaysage04}></img>
+            }
         </Wrapper>
     )
 }
 
 const Wrapper = styled.div`
     display: flex;
+    justify-content: space-evenly;
+    img {
+        width: 15%;
+    }
 `
 
 export default Galerie;
