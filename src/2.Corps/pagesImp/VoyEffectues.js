@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Stats1 from "./compVoyages/Stats1";
 import Stats2 from "./compVoyages/Stats2";
+import Galerie from "./compVoyages/Galerie";
 import { faMoon, faMap, faImages, faClock } from "@fortawesome/free-solid-svg-icons";
 
 const VoyEffectues = () => {
@@ -17,6 +18,7 @@ const VoyEffectues = () => {
             <Stats2 />
             <h2>Mes voyages sur une carte<FontAwesomeIcon icon={faMap} /></h2>
             <h2>Galerie d'images<FontAwesomeIcon icon={faImages} /></h2>
+            <Galerie />
             <h2>Mes voyages en détail<FontAwesomeIcon icon={faClock} /></h2>
         </Wrapper>
     )
