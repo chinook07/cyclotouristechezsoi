@@ -3,40 +3,92 @@ import { useState } from "react";
 
 import * as imagesToutPa from "../../../images/galerie-paysage/index";
 import * as imagesToutPo from "../../../images/galerie-portrait/index";
-import galerieSousTitre from "./galerieSousTitre.json";
+import galerieSousTitrePaysage from "./galerieSousTitrePaysage.json";
+import galerieSousTitrePortrait from "./galerieSousTitrePortrait.json";
 
-const GalerieEtendue = () => {
+const GalerieEtendue = ({ montrerGal, setMontrerGal }) => {
 
     const [diapo, setDiapo] = useState();
 
-    const tableauLiensPa = Object.values(imagesToutPa);
-    const tableauLiensPo = Object.values(imagesToutPo);
+    const tableauPaysage = [];
+    Object.keys(imagesToutPa).forEach(item => {
+        tableauPaysage.push({ "titre": item })
+    })
+    tableauPaysage.forEach((item, index) => {
+        item.lien = (Object.values(imagesToutPa)[index])
+        item.description = galerieSousTitrePaysage[index]
+    })
 
-    const handleMontrerImage = (image) => {
-        console.log("ouvrir image", image, galerieSousTitre[image]);
-        setDiapo(image);
+    const tableauPortrait = [];
+    Object.keys(imagesToutPo).forEach(item => {
+        tableauPortrait.push({ "titre": item })
+    })
+    tableauPortrait.forEach((item, index) => {
+        item.lien = (Object.values(imagesToutPo)[index])
+        item.description = galerieSousTitrePortrait[index]
+    })
+
+    const ordreDesPhoto = [];
+    while (ordreDesPhoto.length < 3) {
+        let resultat = Math.ceil(Math.random() * 99);
+        if (!ordreDesPhoto.includes(resultat)) {
+            ordreDesPhoto.push(tableauPaysage[resultat])
+        } else {
+            console.log("duplicat");
+        }
     }
+
+    // automatiser avec une boucle
+    while (ordreDesPhoto.length < 133) {
+        for (let i = 0; i < 2; i++) {
+            let resultat = Math.ceil(Math.random() * 33);
+            // if (!ordreDesPhoto.includes(tableauPortrait[resultat]))
+                ordreDesPhoto.push(tableauPortrait[resultat]);
+        }
+        for (let i = 0; i < 6; i++) {
+            let resultat = Math.ceil(Math.random() * 99);
+            // if (!ordreDesPhoto.includes(tableauPaysage[resultat]))
+                ordreDesPhoto.push(tableauPaysage[resultat]);
+        }
+    }
+    // boucle infinie?
+
+    console.log(ordreDesPhoto);
+
+    const handleMontrerImage = (image) => setDiapo(image);
+    
+    const photoPrec = () => {
+        if (diapo > 1) setDiapo(diapo - 1)
+    }
+
+    const photoSuiv = () => {
+        if (diapo < 98) setDiapo(diapo + 1)
+    }
+
+    const fermerGalEtendue = () => setMontrerGal(false);
 
     return (
         <Wrapper>
-            {/* <div>TEst</div> */}
-            <GalerieComplete>
+            <Fermer>
+                <button onClick={fermerGalEtendue}>Fermer</button>
+            </Fermer>
+            {/* <GalerieComplete>
                 {
-                    tableauLiensPa.map((item, index) => {
-                        return <img onClick={() => handleMontrerImage(index)} key={index} src={tableauLiensPa[index]} />
+                    ordreDesPhoto.map((item, index) => {
+                        return <img onClick={() => handleMontrerImage(index)} key={index} src={ordreDesPhoto[index].lien} />
                     })
                 }
-            </GalerieComplete>
+            </GalerieComplete> */}
             
             {
                 diapo !== undefined
                 && <Zoom>
-                        <div>←</div>
+                        <div onClick={photoPrec}>←</div>
                         <figure>
-                            <img src={tableauLiensPa[diapo]} />
-                            <figcaption>{galerieSousTitre[diapo]}</figcaption>
+                            <img src={tableauPaysage[diapo].lien} />
+                            <figcaption>{tableauPaysage[diapo].description}</figcaption>
                         </figure>
-                        <div>→</div>
+                        <div onClick={photoSuiv}>→</div>
                 </Zoom>
             }
         </Wrapper>
@@ -47,6 +99,11 @@ const Wrapper = styled.div`
     background-color: black;
     position: relative;
     
+`
+
+const Fermer = styled.div`
+    color: var(--c1);
+    cursor: pointer;
 `
 
 const GalerieComplete = styled.div`

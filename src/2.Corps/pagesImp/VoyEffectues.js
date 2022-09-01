@@ -13,8 +13,8 @@ const VoyEffectues = () => {
 
     const [montrerGal, setMontrerGal] = useState(false);
 
-    const handleMontrerGal = () => {
-        montrerGal ? setMontrerGal(false) : setMontrerGal(true);
+    const ouvrirGalerieEtendue = () => {
+        setMontrerGal(true);
     }
 
     return (
@@ -27,12 +27,13 @@ const VoyEffectues = () => {
             <Stats2 />
             <h2>Mes voyages sur une carte<FontAwesomeIcon icon={faMap} /></h2>
             <h2>Galerie d'images<FontAwesomeIcon icon={faImages} /></h2>
-            <div onClick={handleMontrerGal}>
-                <Galerie />
-            </div>
+            {
+                !montrerGal
+                && <Galerie montrerGal={montrerGal} setMontrerGal={setMontrerGal} />
+            }
             {
                 montrerGal
-                && <GalerieEtendue />
+                && <GalerieEtendue montrerGal={montrerGal} setMontrerGal={setMontrerGal} />
             }
             <h2>Mes voyages en détail<FontAwesomeIcon icon={faClock} /></h2>
         </Wrapper>
