@@ -10,16 +10,12 @@ const Galerie = () => {
         let resultat = Math.ceil(Math.random() * 99);
         if (!sample.includes(resultat)) sample.push(resultat);
     }
-    console.log(sample);
-
     const tableauLiens = Object.values(imagesTout);
-    console.log("tableau de liens", tableauLiens);
     
     return (
         <Wrapper>
             {
                 sample.map((item, index) => {
-                    console.log("Je dois afficher :", item, tableauLiens[item - 1]);
                     return <img key={index} src={tableauLiens[item - 1]} />
                 })
             }

@@ -1,13 +1,22 @@
 import styled from "styled-components";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Stats1 from "./compVoyages/Stats1";
 import Stats2 from "./compVoyages/Stats2";
 import Galerie from "./compVoyages/Galerie";
+import GalerieEtendue from "./compVoyages/GalerieEtendue";
 import { faMoon, faMap, faImages, faClock } from "@fortawesome/free-solid-svg-icons";
 
 const VoyEffectues = () => {
+
+    const [montrerGal, setMontrerGal] = useState(false);
+
+    const handleMontrerGal = () => {
+        montrerGal ? setMontrerGal(false) : setMontrerGal(true);
+    }
+
     return (
         <Wrapper>
             <h2>Quelques idées pour vous mettre sur la bonne piste!</h2>
@@ -18,7 +27,13 @@ const VoyEffectues = () => {
             <Stats2 />
             <h2>Mes voyages sur une carte<FontAwesomeIcon icon={faMap} /></h2>
             <h2>Galerie d'images<FontAwesomeIcon icon={faImages} /></h2>
-            <Galerie />
+            <div onClick={handleMontrerGal}>
+                <Galerie />
+            </div>
+            {
+                montrerGal
+                && <GalerieEtendue />
+            }
             <h2>Mes voyages en détail<FontAwesomeIcon icon={faClock} /></h2>
         </Wrapper>
     )
