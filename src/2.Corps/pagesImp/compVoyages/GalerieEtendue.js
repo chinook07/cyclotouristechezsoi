@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import * as imagesToutPa from "../../../images/galerie-paysage/index";
 import * as imagesToutPo from "../../../images/galerie-portrait/index";
@@ -9,90 +9,110 @@ import galerieSousTitrePortrait from "./galerieSousTitrePortrait.json";
 const GalerieEtendue = ({ montrerGal, setMontrerGal }) => {
 
     const [diapo, setDiapo] = useState();
+    const [tousPhotos, setTousPhoto] = useState();
+    const [ordreDesPhotos, setOrdreDesPhotos] = useState([]);
 
-    const tableauPaysage = [];
-    Object.keys(imagesToutPa).forEach(item => {
-        tableauPaysage.push({ "titre": item })
-    })
-    tableauPaysage.forEach((item, index) => {
-        item.lien = (Object.values(imagesToutPa)[index])
-        item.description = galerieSousTitrePaysage[index]
-    })
+    const mettrePhotosEnAleatoire = () => {
+        const tableauPaysage = [];
+        const tableauPortrait = [];
+        const tableauTous = [];
 
-    const tableauPortrait = [];
-    Object.keys(imagesToutPo).forEach(item => {
-        tableauPortrait.push({ "titre": item })
-    })
-    tableauPortrait.forEach((item, index) => {
-        item.lien = (Object.values(imagesToutPo)[index])
-        item.description = galerieSousTitrePortrait[index]
-    })
+        Object.keys(imagesToutPa).forEach(item => {
+            tableauPaysage.push({ "titre": item })
+        })
+        tableauPaysage.forEach((item, index) => {
+            item.lien = (Object.values(imagesToutPa)[index])
+            item.description = galerieSousTitrePaysage[index];
+            tableauTous.push(item);
+        })
 
-    const ordreDesPhoto = [];
-    while (ordreDesPhoto.length < 3) {
-        let resultat = Math.ceil(Math.random() * 99);
-        if (!ordreDesPhoto.includes(resultat)) {
-            ordreDesPhoto.push(tableauPaysage[resultat])
-        } else {
-            console.log("duplicat");
+        Object.keys(imagesToutPo).forEach(item => {
+            tableauPortrait.push({ "titre": item })
+        })
+        tableauPortrait.forEach((item, index) => {
+            item.lien = (Object.values(imagesToutPo)[index])
+            item.description = galerieSousTitrePortrait[index]
+            tableauTous.push(item)
+        })
+
+        const ordrePhotos = [];
+        while (ordrePhotos.length < 133) {
+            let resultat = Math.ceil(Math.random() * 133);
+            if (!ordrePhotos.includes(resultat)) {
+                ordrePhotos.push(resultat)
+            }
         }
+        setOrdreDesPhotos(ordrePhotos);
+        setTousPhoto(tableauTous);
     }
 
-    // automatiser avec une boucle
-    while (ordreDesPhoto.length < 133) {
-        for (let i = 0; i < 2; i++) {
-            let resultat = Math.ceil(Math.random() * 33);
-            // if (!ordreDesPhoto.includes(tableauPortrait[resultat]))
-                ordreDesPhoto.push(tableauPortrait[resultat]);
-        }
-        for (let i = 0; i < 6; i++) {
-            let resultat = Math.ceil(Math.random() * 99);
-            // if (!ordreDesPhoto.includes(tableauPaysage[resultat]))
-                ordreDesPhoto.push(tableauPaysage[resultat]);
-        }
-    }
-    // boucle infinie?
+    useEffect(() => {
+        mettrePhotosEnAleatoire();
+    }, []);
 
-    console.log(ordreDesPhoto);
-
-    const handleMontrerImage = (image) => setDiapo(image);
+    const handleMontrerImage = (image) => {
+        setDiapo(image);
+        console.log("image :", image);
+    };
     
     const photoPrec = () => {
-        if (diapo > 1) setDiapo(diapo - 1)
+        let indexPhotoPresente = ordreDesPhotos.indexOf(diapo);
+        if (indexPhotoPresente > 0) {
+            setDiapo(ordreDesPhotos[indexPhotoPresente - 1])
+        } else {
+            console.log(ordreDesPhotos[ordreDesPhotos.length - 1]);
+            setDiapo(ordreDesPhotos[ordreDesPhotos.length - 1])
+        }
     }
 
     const photoSuiv = () => {
-        if (diapo < 98) setDiapo(diapo + 1)
+        let indexPhotoPresente = ordreDesPhotos.indexOf(diapo);
+        if (indexPhotoPresente < ordreDesPhotos.length - 1) {
+            setDiapo(ordreDesPhotos[indexPhotoPresente + 1])
+        } else {
+            console.log(ordreDesPhotos[0]);
+            setDiapo(ordreDesPhotos[0])
+        }
     }
 
     const fermerGalEtendue = () => setMontrerGal(false);
 
-    return (
-        <Wrapper>
-            <Fermer>
-                <button onClick={fermerGalEtendue}>Fermer</button>
-            </Fermer>
-            {/* <GalerieComplete>
+    if (ordreDesPhotos.length) {
+
+        return (
+            <Wrapper>
+                <Fermer>
+                    <button onClick={fermerGalEtendue}>Fermer</button>
+                </Fermer>
+                <GalerieComplete>
+                    {
+                        ordreDesPhotos.map((item, index) => {
+                            return <img
+                                onClick={() => handleMontrerImage(item)}
+                                key={index}
+                                src={tousPhotos[item - 1]["lien"]}
+                            />
+                        })
+                    }
+                </GalerieComplete>
+                
                 {
-                    ordreDesPhoto.map((item, index) => {
-                        return <img onClick={() => handleMontrerImage(index)} key={index} src={ordreDesPhoto[index].lien} />
-                    })
+                    diapo !== undefined
+                    && <Zoom>
+                            <div onClick={photoPrec}>←</div>
+                            <figure>
+                                <img src={tousPhotos[diapo - 1].lien} />
+                                <figcaption>{tousPhotos[diapo - 1].description}</figcaption>
+                            </figure>
+                            <div onClick={photoSuiv}>→</div>
+                    </Zoom>
                 }
-            </GalerieComplete> */}
-            
-            {
-                diapo !== undefined
-                && <Zoom>
-                        <div onClick={photoPrec}>←</div>
-                        <figure>
-                            <img src={tableauPaysage[diapo].lien} />
-                            <figcaption>{tableauPaysage[diapo].description}</figcaption>
-                        </figure>
-                        <div onClick={photoSuiv}>→</div>
-                </Zoom>
-            }
-        </Wrapper>
-    )
+            </Wrapper>
+        )
+    } else {
+        return <div>Loading...</div>
+    }
+    
 }
 
 const Wrapper = styled.div`
