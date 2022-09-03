@@ -1,16 +1,34 @@
 import styled from "styled-components";
+import { useState } from "react";
+
+import Recto from "./Recto";
+import Verso from "./Verso";
 
 const Voyage = ({ index, item }) => {
-    console.log(index, item);
+    const [montrerVerso, setMontrerVerso] = useState(false);
+    const retournerCarte = () => setMontrerVerso(true);
+    const retourCarte2 = () => setMontrerVerso(false);
+
+
     return (
-        <Wrapper>Voyage</Wrapper>
+        <Wrapper onMouseEnter={retournerCarte} onMouseLeave={retourCarte2}>
+            {
+                !montrerVerso
+                && <Recto index={index} item={item} />
+            }
+            {
+                montrerVerso
+                && <Verso index={index} item={item} />
+            }
+        </Wrapper>
     )
 }
 
 const Wrapper = styled.div`
-    background-color: var(--c3);
-    border-radius: 5px;
-    padding: 10px;
+    
+    height: 470px;
+    text-align: center;
+    width: 250px;
 `
 
 export default Voyage;

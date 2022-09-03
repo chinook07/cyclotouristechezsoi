@@ -14,7 +14,7 @@
         "difficulte" : 2,
         "villes" : ["Deux-Montagnes", "Hawkesbury", "Ottawa-Gatineau", "Smiths Falls", "Kingston"],
         "alle" : "train de banlieue",
-        "coucher" : "camping",
+        "coucher" : "la tente",
         "retour" : "train",
         "lienURL" : "http://www.crazyguyonabike.com/doc/grandeboucle",
         "lien titre" : "Billet de blogue"
@@ -32,7 +32,7 @@
         "ratio" : 260,
         "difficulte" : 2,
         "villes" : ["Montréal", "Chambly", "Granby", "St-Jean-sur-Richelieu", "Montréal"],
-        "coucher" : "camping",
+        "coucher" : "la tente",
         "lienURL" : "http://www.crazyguyonabike.com/doc/grandeboucle",
         "lien titre" : "Récit de voyage"
     },
@@ -50,7 +50,7 @@
         "difficulte" : 2,
         "villes" : ["Deux-Montagnes", "Hawkesbury", "Ottawa-Gatineau", "Smiths Falls", "Kingston"],
         "alle" : "train",
-        "coucher" : "auberge",
+        "coucher" : "un toit",
         "retour" : "train de banlieue",
         "lienURL" : "http://www.crazyguyonabike.com/doc/grandeboucle",
         "lien titre" : "Billet de blogue"
@@ -70,7 +70,7 @@
         "difficulte" : 2,
         "villes" : ["Deux-Montagnes", "Hawkesbury", "Ottawa-Gatineau", "Smiths Falls", "Kingston"],
         "alle" : "train",
-        "coucher" : "auberge",
+        "coucher" : "un toit",
         "retour" : "train",
         "lienURL" : "http://www.crazyguyonabike.com/doc/grandeboucle",
         "lien titre" : "Billet de blogue"
@@ -90,7 +90,7 @@
         "difficulte" : 2,
         "villes" : ["Deux-Montagnes", "Hawkesbury", "Ottawa-Gatineau", "Smiths Falls", "Kingston"],
         "alle" : "autocar",
-        "coucher" : "auberge",
+        "coucher" : "un toit",
         "retour" : "train de banlieue",
         "lienURL" : "http://www.crazyguyonabike.com/doc/grandeboucle",
         "lien titre" : "Billet de blogue"
@@ -110,7 +110,7 @@
         "difficulte" : 2,
         "villes" : ["Deux-Montagnes", "Hawkesbury", "Ottawa-Gatineau", "Smiths Falls", "Kingston"],
         "alle" : "autobus",
-        "coucher" : "auberge",
+        "coucher" : "un toit",
         "retour" : "autocar",
         "lienURL" : "http://www.crazyguyonabike.com/doc/grandeboucle",
         "lien titre" : "Billet de blogue"
@@ -130,7 +130,7 @@
         "difficulte" : 2,
         "villes" : ["Deux-Montagnes", "Hawkesbury", "Ottawa-Gatineau", "Smiths Falls", "Kingston"],
         "alle" : "avion",
-        "coucher" : "auberge",
+        "coucher" : "un toit",
         "retour" : "avion",
         "lienURL" : "http://www.crazyguyonabike.com/doc/grandeboucle",
         "lien titre" : "Billet de blogue"
@@ -150,7 +150,7 @@
         "difficulte" : 2,
         "villes" : ["Deux-Montagnes", "Hawkesbury", "Ottawa-Gatineau", "Smiths Falls", "Kingston"],
         "alle" : "avion",
-        "coucher" : "auberge",
+        "coucher" : "un toit",
         "retour" : "avion",
         "lienURL" : "http://www.crazyguyonabike.com/doc/grandeboucle",
         "lien titre" : "Billet de blogue"
@@ -170,7 +170,7 @@
         "difficulte" : 2,
         "villes" : ["Deux-Montagnes", "Hawkesbury", "Ottawa-Gatineau", "Smiths Falls", "Kingston"],
         "alle" : "avion",
-        "coucher" : "auberge",
+        "coucher" : "un toit",
         "retour" : "avion",
         "lienURL" : "http://www.crazyguyonabike.com/doc/grandeboucle",
         "lien titre" : "Billet de blogue"
@@ -190,7 +190,7 @@
         "difficulte" : 2,
         "villes" : ["Deux-Montagnes", "Hawkesbury", "Ottawa-Gatineau", "Smiths Falls", "Kingston"],
         "alle" : "avion",
-        "coucher" : "auberge",
+        "coucher" : "un toit",
         "retour" : "avion",
         "lienURL" : "http://www.crazyguyonabike.com/doc/grandeboucle",
         "lien titre" : "Billet de blogue"
@@ -210,7 +210,7 @@
         "difficulte" : 2,
         "villes" : ["Deux-Montagnes", "Hawkesbury", "Ottawa-Gatineau", "Smiths Falls", "Kingston"],
         "alle" : "avion",
-        "coucher" : "auberge",
+        "coucher" : "un toit",
         "retour" : "avion",
         "lienURL" : "http://www.crazyguyonabike.com/doc/grandeboucle",
         "lien titre" : "Billet de blogue"
@@ -230,7 +230,7 @@
         "difficulte" : 2,
         "villes" : ["Deux-Montagnes", "Hawkesbury", "Ottawa-Gatineau", "Smiths Falls", "Kingston"],
         "alle" : "avion",
-        "coucher" : "auberge",
+        "coucher" : "un toit",
         "retour" : "avion",
         "lienURL" : "http://www.crazyguyonabike.com/doc/grandeboucle",
         "lien titre" : "Billet de blogue"
@@ -250,7 +250,7 @@
         "difficulte" : 2,
         "villes" : ["Deux-Montagnes", "Hawkesbury", "Ottawa-Gatineau", "Smiths Falls", "Kingston"],
         "alle" : "avion",
-        "coucher" : "auberge",
+        "coucher" : "un toit",
         "retour" : "avion",
         "lienURL" : "http://www.crazyguyonabike.com/doc/grandeboucle",
         "lien titre" : "Billet de blogue"
