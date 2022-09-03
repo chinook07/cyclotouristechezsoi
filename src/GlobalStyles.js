@@ -8,6 +8,11 @@ export default createGlobalStyle`
         font-family: "Trebuchet MS", Helvetica, sans-serif;
         margin: 0;
     }
+    figcaption {
+        font-style: italic;
+        margin: 5px;
+        text-align: center;
+    }
     :root {
         --c1: #e9d985;
         --c2: #b2bd7e;

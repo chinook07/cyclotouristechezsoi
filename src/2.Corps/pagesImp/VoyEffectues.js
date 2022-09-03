@@ -5,17 +5,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Stats1 from "./compVoyages/Stats1";
 import Stats2 from "./compVoyages/Stats2";
+import Cartes from "./compVoyages/Cartes";
 import Galerie from "./compVoyages/Galerie";
 import GalerieEtendue from "./compVoyages/GalerieEtendue";
+import VoyagesListe from "./compVoyages/VoyagesListe";
 import { faMoon, faMap, faImages, faClock } from "@fortawesome/free-solid-svg-icons";
 
 const VoyEffectues = () => {
 
     const [montrerGal, setMontrerGal] = useState(false);
-
-    const ouvrirGalerieEtendue = () => {
-        setMontrerGal(true);
-    }
 
     return (
         <Wrapper>
@@ -26,6 +24,7 @@ const VoyEffectues = () => {
             <h3>Nuitées<FontAwesomeIcon icon={faMoon} /></h3>
             <Stats2 />
             <h2>Mes voyages sur une carte<FontAwesomeIcon icon={faMap} /></h2>
+            {/* <Cartes /> */}
             <h2>Galerie d'images<FontAwesomeIcon icon={faImages} /></h2>
             {
                 !montrerGal
@@ -36,6 +35,7 @@ const VoyEffectues = () => {
                 && <GalerieEtendue montrerGal={montrerGal} setMontrerGal={setMontrerGal} />
             }
             <h2>Mes voyages en détail<FontAwesomeIcon icon={faClock} /></h2>
+            <VoyagesListe />
         </Wrapper>
     )
 }

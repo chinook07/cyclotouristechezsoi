@@ -52,7 +52,6 @@ const GalerieEtendue = ({ montrerGal, setMontrerGal }) => {
 
     const handleMontrerImage = (image) => {
         setDiapo(image);
-        console.log("image :", image);
     };
     
     const photoPrec = () => {
@@ -60,7 +59,6 @@ const GalerieEtendue = ({ montrerGal, setMontrerGal }) => {
         if (indexPhotoPresente > 0) {
             setDiapo(ordreDesPhotos[indexPhotoPresente - 1])
         } else {
-            console.log(ordreDesPhotos[ordreDesPhotos.length - 1]);
             setDiapo(ordreDesPhotos[ordreDesPhotos.length - 1])
         }
     }
@@ -70,9 +68,12 @@ const GalerieEtendue = ({ montrerGal, setMontrerGal }) => {
         if (indexPhotoPresente < ordreDesPhotos.length - 1) {
             setDiapo(ordreDesPhotos[indexPhotoPresente + 1])
         } else {
-            console.log(ordreDesPhotos[0]);
             setDiapo(ordreDesPhotos[0])
         }
+    }
+
+    const fermerZoom = () => {
+        setDiapo(undefined)
     }
 
     const fermerGalEtendue = () => setMontrerGal(false);
@@ -81,9 +82,7 @@ const GalerieEtendue = ({ montrerGal, setMontrerGal }) => {
 
         return (
             <Wrapper>
-                <Fermer>
-                    <button onClick={fermerGalEtendue}>Fermer</button>
-                </Fermer>
+                <Fermer onClick={fermerGalEtendue}>Fermer</Fermer>
                 <GalerieComplete>
                     {
                         ordreDesPhotos.map((item, index) => {
@@ -99,12 +98,16 @@ const GalerieEtendue = ({ montrerGal, setMontrerGal }) => {
                 {
                     diapo !== undefined
                     && <Zoom>
-                            <div onClick={photoPrec}>←</div>
-                            <figure>
-                                <img src={tousPhotos[diapo - 1].lien} />
-                                <figcaption>{tousPhotos[diapo - 1].description}</figcaption>
-                            </figure>
-                            <div onClick={photoSuiv}>→</div>
+                            <button onClick={fermerZoom}>Fermer</button>
+                            <Caroussel>
+                                <div onClick={photoPrec}>←</div>
+                                <figure>
+                                    <img src={tousPhotos[diapo - 1].lien} />
+                                    <figcaption>{tousPhotos[diapo - 1].description}</figcaption>
+                                </figure>
+                                <div onClick={photoSuiv}>→</div>
+                            </Caroussel>
+                            
                     </Zoom>
                 }
             </Wrapper>
@@ -117,13 +120,18 @@ const GalerieEtendue = ({ montrerGal, setMontrerGal }) => {
 
 const Wrapper = styled.div`
     background-color: black;
-    position: relative;
-    
+    padding: 10px;
+    /* position: relative; */
 `
 
-const Fermer = styled.div`
+const Fermer = styled.button`
+    background-color: var(--c6);
+    border-radius: 5px;
     color: var(--c1);
     cursor: pointer;
+    display: block;
+    margin: 15px auto;
+    padding: 15px;
 `
 
 const GalerieComplete = styled.div`
@@ -133,29 +141,35 @@ const GalerieComplete = styled.div`
     justify-content: center;
     img {
         cursor: pointer;
-        height: 50px;
+        height: 100px;
         object-fit: contain;
-        width: 80px;
     }
 `
 
 const Zoom = styled.div`
-    align-items: center;
     background-color: var(--c5);
     border-radius: 10px;
     display: flex;
+    flex-direction: column;
     left: 50%;
-    padding: 20px;
-    position: absolute;
+    max-height: 90vh;
+    padding: 10px;
+    position: fixed;
     top: 50%;
     transform: translate(-50%, -50%);
+    width: 75%;
+`
+
+const Caroussel = styled.div`
+    align-items: center;
+    display: flex;
     > div {
         cursor: pointer;
     }
     figure {
         display: flex;
         flex-direction: column;
-        text-align: center;
+        margin: 10px;
         img {
             width: 100%;
         }
