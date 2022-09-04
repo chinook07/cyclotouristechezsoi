@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import { useLocation } from "react-router-dom"
+
+import imgAvecLien from "./ImgAvecLien.json";
 import ent1 from "../../images/entetes/canot-ukelele.JPG";
 import ent2 from "../../images/entetes/pont-nouvelle.jpg";
 import ent3 from "../../images/entetes/pont-cambellton.jpg";
@@ -7,13 +10,19 @@ import ent5 from "../../images/entetes/sacoches-velo.jpg";
 import ent6 from "../../images/entetes/velo-dans-train.jpg";
 
 const ImgTitre = () => {
-    return (
+    const urlPage = useLocation().pathname;
+    const infosPage = imgAvecLien.filter(item => item.lien === urlPage)[0]
+    console.log(infosPage);
+    if (infosPage) {
+        return (
         <Wrapper>
-            <img src={ent1} />
+            <img src={infosPage.photo} alt={infosPage.alt} />
             <div>Cyclotouristechezsoi</div>
-            <h1>Page</h1>
+                <h1>{infosPage.nom}</h1>
         </Wrapper>
     )
+    }
+    
 }
 
 const Wrapper = styled.div`

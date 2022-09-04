@@ -10,30 +10,32 @@ const Contact = () => {
             method="POST"
             target="blank"
         >
-            <Prenom
-                type="text"
-                id="prenom"
-                name="prenom"
-                placeholder="Prénom"
-            />
-            <Nom
-                type="text"
-                id="nomf"
-                name="nomf"
-                placeholder="Nom de famille"
-            />
-            <Courriel
-                type="email"
-                id="courriel"
-                name="courriel"
-                placeholder="Courriel (requis)"
-                required
-            />
-            <Message
+            <Coordonnees>
+                <input
+                    type="text"
+                    id="prenom"
+                    name="prenom"
+                    placeholder="Prénom"
+                />
+                <input
+                    type="text"
+                    id="nomf"
+                    name="nomf"
+                    placeholder="Nom de famille"
+                />
+                <input
+                    type="email"
+                    id="courriel"
+                    name="courriel"
+                    placeholder="Courriel (requis)"
+                    required
+                />
+            </Coordonnees>
+            
+            <textarea
                 name="message"
                 placeholder="Message"
                 rows="10"
-                cols="30"
                 required
             />
             <Emplacement
@@ -55,16 +57,50 @@ const Contact = () => {
     )
 }
 
-const Wrapper = styled.form``
+const Wrapper = styled.form`
+    background-color: var(--c2);
+    padding: 50px 0;
+    textarea {
+        border-radius: 10px;
+        display: block;
+        margin: 10px auto;
+        max-width: 90%;
+        padding: 10px;
+        width: 300px;
+    }
+    button {
+        background-color: var(--c1);
+        border-radius: 10px;
+        display: block;
+        margin: 10px auto;
+        padding: 10px;
+    }
+`
 
-const Prenom = styled.input``
+const Coordonnees = styled.div`
+    display: flex;
+    flex-direction: column;
+    input {
+        border-radius: 10px;
+        margin: 10px auto;
+        max-width: 90%;
+        padding: 10px;
+        width: 300px;
+    }
+`
 
-const Nom = styled.input``
-
-const Courriel = styled.input``
-
-const Message = styled.textarea``
-
-const Emplacement = styled.div``
+const Emplacement = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin: 10px auto;
+    text-align: center;
+    select {
+        border-radius: 10px;
+        margin: 10px auto;
+        max-width: 90%;
+        padding: 10px;
+        width: 300px;
+    }
+`
 
 export default Contact;

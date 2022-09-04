@@ -15,12 +15,15 @@ const Nav2 = () => {
 const Wrapper = styled.nav`
     background-color: var(--c4);
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     a {
         color: white;
-        padding: 15px;
+        padding: 15px 25px;
         text-decoration: none;
         &:hover {
+            background-color: var(--c5);
+        }
+        &.active {
             background-color: var(--c6);
         }
     }

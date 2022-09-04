@@ -45,6 +45,12 @@ const Menu = styled.div`
             content: "|";
             margin-left: 10px;
         }
+        &:hover {
+            color: var(--c5);
+        }
+        &.active {
+            font-weight: bold;
+        }
     }
 ` 
 
