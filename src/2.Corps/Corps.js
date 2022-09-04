@@ -20,10 +20,10 @@ const Corps = () => {
                 <Route path="/apropos" element={<APropos />} />
                 <Route path="/voyages-effectues" element={<VoyEffectues />} />
                 <Route path="/contact" element={<Contact />} />
-                <Route path="/commencement" element={<Commencement />} />
-                <Route path="/destinations" element={<Destinations />} />
-                <Route path="/equipement" element={<Equipement />} />
-                <Route path="/transport" element={<Transport />} />
+                <Route path="/commencement/*" element={<Commencement />} />
+                <Route path="/destinations/*" element={<Destinations />} />
+                <Route path="/equipement/*" element={<Equipement />} />
+                <Route path="/transport/*" element={<Transport />} />
                 <Route path="/limitations" element={<Limitations />} />
                 <Route path="/confidentialite" element={<Confidentialite />} />
                 <Route path="*" element={<div>***</div>} />

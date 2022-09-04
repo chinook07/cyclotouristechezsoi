@@ -10,19 +10,19 @@ import ent5 from "../../images/entetes/sacoches-velo.jpg";
 import ent6 from "../../images/entetes/velo-dans-train.jpg";
 
 const ImgTitre = () => {
+
     const urlPage = useLocation().pathname;
-    const infosPage = imgAvecLien.filter(item => item.lien === urlPage)[0]
-    console.log(infosPage);
+    const infosPage = imgAvecLien.filter(item => urlPage.includes(item.lien))[0]
+
     if (infosPage) {
         return (
-        <Wrapper>
-            <img src={infosPage.photo} alt={infosPage.alt} />
-            <div>Cyclotouristechezsoi</div>
-                <h1>{infosPage.nom}</h1>
-        </Wrapper>
-    )
+            <Wrapper>
+                <img src={infosPage.photo} alt={infosPage.alt} />
+                <div>Cyclotouristechezsoi</div>
+                    <h1>{infosPage.nom}</h1>
+            </Wrapper>
+        )
     }
-    
 }
 
 const Wrapper = styled.div`

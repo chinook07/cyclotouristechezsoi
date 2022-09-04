@@ -1,8 +1,18 @@
 import styled from "styled-components";
+import FilDArianne from "./comp/FilDArianne";
 
 const Transport = () => {
+
+    const choix = [
+        { "titre": "Transport régional", "lien": "regional" },
+        { "titre": "Transport interurbain", "lien": "interurbain" },
+        { "titre": "Synthèse", "lien": "synthese" }
+    ]
+
     return (
-        <Wrapper>Transport</Wrapper>
+        <Wrapper>
+            <FilDArianne racine={"transport"} choix={choix} />
+        </Wrapper>
     )
 }
 
