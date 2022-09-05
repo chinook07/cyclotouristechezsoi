@@ -1,9 +1,58 @@
 [
     {
-        "trajet" : "aaaaaaaa",
+        "trajet" : "trajet1",
         "distance" : 111,
-        "veloroutes" : 
-            "test <a href='www.test.ca'>test</a>"
-        
+        "veloroutes" : "test <a href='www.test.ca'>test</a>",
+        "proportion" : 20,
+        "terrain" : "texte",
+        "deja" : ["dddddddddddd", "aaaaaaaaaaa"],
+        "appreciation" : 4,
+        "coups" : "ccccccccccccccccc",
+        "defis" : "defidefidefidefi",
+        "notes" : "notesnotesnotesnotesnotes",
+        "carteURL" : "//umap.openstreetmap.fr/fr/map/carte-generale-cyclotouristechezsoi_584684?scaleControl=true&miniMap=false&scrollWheelZoom=true&zoomControl=true&allowEdit=false&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=true&onLoadPanel=undefined&captionBar=false#10/48.6268/-78.4675",
+        "ass" : ["trajet3", "trajet4"]
+    },
+    {
+        "trajet" : "trajet2",
+        "distance" : 111,
+        "veloroutes" : "test <a href='www.test.ca'>test</a>",
+        "proportion" : 20,
+        "terrain" : "texte",
+        "deja" : ["dddddddddddd", "aaaaaaaaaaa"],
+        "appreciation" : 4,
+        "coups" : "ccccccccccccccccc",
+        "defis" : "defidefidefidefi",
+        "notes" : "notesnotesnotesnotesnotes",
+        "carteURL" : "//umap.openstreetmap.fr/fr/map/carte-generale-cyclotouristechezsoi_584684?scaleControl=true&miniMap=false&scrollWheelZoom=true&zoomControl=true&allowEdit=false&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=true&onLoadPanel=undefined&captionBar=false#10/48.6268/-78.4675",
+        "ass" : ["trajet3", "trajet4"]
+    },
+    {
+        "trajet" : "trajet3",
+        "distance" : 111,
+        "veloroutes" : "test <a href='www.test.ca'>test</a>",
+        "proportion" : 20,
+        "terrain" : "texte",
+        "deja" : ["dddddddddddd", "aaaaaaaaaaa"],
+        "appreciation" : 4,
+        "coups" : "ccccccccccccccccc",
+        "defis" : "defidefidefidefi",
+        "notes" : "notesnotesnotesnotesnotes",
+        "carteURL" : "//umap.openstreetmap.fr/fr/map/carte-generale-cyclotouristechezsoi_584684?scaleControl=true&miniMap=false&scrollWheelZoom=true&zoomControl=true&allowEdit=false&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=true&onLoadPanel=undefined&captionBar=false#10/48.6268/-78.4675",
+        "ass" : ["trajet1", "trajet4"]
+    },
+    {
+        "trajet" : "trajet4",
+        "distance" : 111,
+        "veloroutes" : "test <a href='www.test.ca'>test</a>",
+        "proportion" : 20,
+        "terrain" : "texte",
+        "deja" : ["dddddddddddd", "aaaaaaaaaaa"],
+        "appreciation" : 4,
+        "coups" : "ccccccccccccccccc",
+        "defis" : "defidefidefidefi",
+        "notes" : "notesnotesnotesnotesnotes",
+        "carteURL" : "//umap.openstreetmap.fr/fr/map/carte-generale-cyclotouristechezsoi_584684?scaleControl=true&miniMap=false&scrollWheelZoom=true&zoomControl=true&allowEdit=false&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=true&onLoadPanel=undefined&captionBar=false#10/48.6268/-78.4675",
+        "ass" : ["trajet1", "trajet2"]
     }
 ]
