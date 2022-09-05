@@ -1,0 +1,72 @@
+[
+    {
+        "categorie" : "Ça prend d'abord un vélo!",
+        "articles" : [
+            {
+                "id" : 1,
+                "objet" : "Cadenas",
+                "toit" : true
+            },
+            {
+                "id" : 2,
+                "objet" : "Rétroviseur",
+                "toit" : true
+            },
+            {
+                "id" : 3,
+                "objet" : "Lumières",
+                "toit" : true
+            },
+            {
+                "id" : 4,
+                "objet" : "Attaches",
+                "toit" : true
+            },
+            {
+                "id" : 5,
+                "objet" : "Étuis imperméables pour les sacoches",
+                "toit" : true
+            },
+            {
+                "id" : 6,
+                "objet" : "Protection pour l'emballage du vélo",
+                "toit" : true
+            }
+        ]
+    },
+    {
+        "categorie" : "Être capable de réparer",
+        "articles" : [
+            {
+                "id" : 11,
+                "objet" : "Rustines",
+                "toit" : true
+            },
+            {
+                "id" : 12,
+                "objet" : "Démonte-pneus",
+                "toit" : true
+            },
+            {
+                "id" : 13,
+                "objet" : "Multi-outil",
+                "toit" : true
+            },
+            {
+                "id" : 14,
+                "objet" : "Clé 8/10 mm",
+                "toit" : true
+            },
+            {
+                "id" : 15,
+                "objet" : "Chambre à air",
+                "toit" : true
+            },
+            {
+                "id" : 16,
+                "objet" : "Kit de réparation pour pneus",
+                "toit" : true
+            }
+        ]
+    }
+]

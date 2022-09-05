@@ -1,9 +1,15 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { faPlay } from "@fortawesome/free-solid-svg-icons";
 
 const FilDArianne = ({racine, choix}) => {
     return (
         <Wrapper>
+            <NavLink to={`/${racine}`}>
+                <FontAwesomeIcon icon={faPlay} />
+            </NavLink>
             {
                 choix.map((item, index) => {
                     return <NavLink key={index} to={`/${racine}/${item.lien}`} >{item.titre}</NavLink>
