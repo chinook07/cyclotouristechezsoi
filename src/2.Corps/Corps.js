@@ -34,6 +34,7 @@ const Corps = () => {
 
 const Wrapper = styled.main`
     background-color: #e8def3;
+    padding: 20px;
     min-height: calc(100vh - 452.6px);
 `
 
