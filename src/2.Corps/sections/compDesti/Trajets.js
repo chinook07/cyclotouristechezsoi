@@ -3,22 +3,21 @@ import { useState } from "react";
 
 import trajetsDB from "./donnees/trajets.json";
 import DetailsDuTrajet from "./comp/DetailsDuTrajet";
+import * as schemasTout from "./schemas/index";
 
 const Trajets = () => {
 
     const [trajetChoisi, setTrajetChoisi] = useState();
     const [trajetSelect, setTrajetSelect] = useState();
 
-    const choisirTrajet = (e) => {
-        console.log(e.target.value);
-        setTrajetChoisi(e.target.value)
-    }
+    const choisirTrajet = (e) => setTrajetChoisi(e.target.value);
 
     const changerTrajet = (nouveau) => {
-        console.log(nouveau);
         setTrajetChoisi(nouveau)
         setTrajetSelect(nouveau)
     }
+
+    console.log(window.innerWidth, schemasTout);
 
     return (
         <Wrapper>

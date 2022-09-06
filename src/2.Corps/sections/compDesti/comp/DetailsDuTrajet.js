@@ -4,17 +4,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import trajetsDB from "../donnees/trajets.json";
 import { faBicycle } from "@fortawesome/free-solid-svg-icons";
+import { Abitibi, BasSaintLaurent } from "../schemas";
 
 const DetailsDuTrajet = ({ itineraire, changerTrajet }) => {
-    console.log(itineraire);
 
     const details = trajetsDB.find(item => item.trajet === itineraire)
-    console.log(details);
 
     return (
         <Wrapper>
             <h2>Aperçu de {details.trajet}</h2>
-            <div>Image à venir...</div>
+            <div></div>
             <div>
                 <p>Distance : {details.distance} km.</p>
                 <p>Véloroutes : </p>

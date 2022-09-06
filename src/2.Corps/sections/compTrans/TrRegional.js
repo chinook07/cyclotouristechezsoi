@@ -2,7 +2,10 @@ import styled from "styled-components";
 
 const ABCDEF = () => {
     return (
-        <TrRegional>TrRegional</TrRegional>
+        <TrRegional>
+            <div>Montréal</div>
+            <div>Autres régions</div>
+        </TrRegional>
     )
 }
 

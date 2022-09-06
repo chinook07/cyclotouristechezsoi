@@ -2,7 +2,11 @@ import styled from "styled-components";
 
 const ABCDEF = () => {
     return (
-        <TrInterurbain>TrInterurbain</TrInterurbain>
+        <TrInterurbain>
+            <div>Autocars</div>
+            <div>Trains</div>
+            <div>Avions</div>
+        </TrInterurbain>
     )
 }
 
