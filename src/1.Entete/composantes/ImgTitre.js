@@ -50,12 +50,29 @@ const Wrapper = styled.div`
     }
     h1 {
         color: var(--c6);
-		font-size: 32px;
-		font-weight: normal;
-		left: 10%;
-		margin: 0;
-		position: absolute;
-		top: 70%;
+        font-size: 32px;
+        font-weight: normal;
+        left: 10%;
+        margin: 0;
+        position: absolute;
+        top: 70%;
+    }
+    @media screen and (max-width: 600px) {
+        div {
+            letter-spacing: 0;
+        }
+        h1 {
+            font-size: 26px;
+            left: 5%;
+        }
+    }
+    @media screen and (max-width: 400px) {
+        div {
+            font-size: 28px;
+        }
+        h1 {
+            font-size: 24px;
+        }
     }
 `
 

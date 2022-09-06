@@ -1,18 +1,25 @@
 import styled from "styled-components";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { ExternalLink } from "react-external-link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { CycloContext } from "../../CycloContext";
 import imgLogo from "../../images/icones/logo.png";
+import { faGlobeEurope } from "@fortawesome/free-solid-svg-icons";
 
 const Nav1 = () => {
 
     const { lang } = useContext(CycloContext);
 
+    // const taille = window.innerWidth;
+
     return (
         <Wrapper>
-            <img src={imgLogo} height="48px" alt="icône"></img>
+            <Link to="/">
+                <img src={imgLogo} height="48px" alt="icône"></img>
+            </Link>
             <Menu>
                 <NavLink to="/">Accueil</NavLink>
                 <NavLink to="/apropos">À propos</NavLink>
@@ -22,19 +29,27 @@ const Nav1 = () => {
             </Menu>
             <Langue>
                 <span>{lang}</span>
-                <span>/*-</span>
+                <span><FontAwesomeIcon icon={faGlobeEurope}/></span>
             </Langue>
         </Wrapper>
     )
 }
 
 const Wrapper = styled.nav`
-    align-items: center;
     display: flex;
     justify-content: space-between;
+    > * {
+        height: 48px;
+    }
+    @media screen and (max-width: 700px) {
+        > * {
+            height: unset;
+        }
+    }
 `
 
 const Menu = styled.div`
+    align-items: center;
     display: flex;
     justify-content: center;
     a {
@@ -52,8 +67,20 @@ const Menu = styled.div`
             font-weight: bold;
         }
     }
+    @media screen and (max-width: 700px) {
+        flex-direction: column;
+        a {
+            &:not(:last-child)::after {
+                content: "";
+                margin-left: 0;
+            }
+        }
+    }
 ` 
 
-const Langue = styled.div``
+const Langue = styled.div`
+    align-items: center;
+    display: flex;
+`
 
 export default Nav1;

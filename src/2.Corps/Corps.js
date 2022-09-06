@@ -11,6 +11,7 @@ import Equipement from "./sections/Equipement";
 import Transport from "./sections/Transport";
 import Limitations from "./pagesAutres/Limitations";
 import Confidentialite from "./pagesAutres/Confidentialite";
+import Erreur from "./pagesAutres/Erreur";
 
 const Corps = () => {
     return (
@@ -26,7 +27,7 @@ const Corps = () => {
                 <Route path="/transport/*" element={<Transport />} />
                 <Route path="/limitations" element={<Limitations />} />
                 <Route path="/confidentialite" element={<Confidentialite />} />
-                <Route path="*" element={<div>***</div>} />
+                <Route path="*" element={<Erreur />} />
             </Routes>
         </Wrapper>
     )
