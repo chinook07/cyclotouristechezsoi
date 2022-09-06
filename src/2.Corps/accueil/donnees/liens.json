@@ -1,0 +1,30 @@
+[
+    {
+        "nom" : "Commencer",
+        "url" : "/commencement",
+        "description" : "La base du cyclotourisme : les réponses à vos questions",
+        "image" : "img01",
+        "alt" : "baie des Chaleurs, soleil bas à l'horizon, petite partie de la structure d'un pont"
+    },
+    {
+        "nom" : "Découvrir",
+        "url" : "/destinations",
+        "description" : "Des suggestions de parcours au Québec et dans les environs",
+        "image" : "img02",
+        "alt" : "carte avec piste cyclable, Lac Témiscouata"
+    },
+    {
+        "nom" : "S'équiper",
+        "url" : "/equipement",
+        "description" : "Quoi apporter pour vous assurer d'un séjour agréable",
+        "image" : "img03",
+        "alt" : "pièces de réparation de vélo"
+    },
+    {
+        "nom" : "Se transporter",
+        "url" : "/transport",
+        "description" : "Se rendre à votre point de départ autrement qu'à vélo",
+        "image" : "img04",
+        "alt" : "vélos suspendus dans un train, opérateur de train droit devant"
+    }
+]
