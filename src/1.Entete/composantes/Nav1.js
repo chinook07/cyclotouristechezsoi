@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { ExternalLink } from "react-external-link";
@@ -7,43 +7,100 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { CycloContext } from "../../CycloContext";
 import imgLogo from "../../images/icones/logo.png";
-import { faGlobeEurope } from "@fortawesome/free-solid-svg-icons";
+import { faGlobeEurope, faBars } from "@fortawesome/free-solid-svg-icons";
 
 const Nav1 = () => {
 
-    const { lang } = useContext(CycloContext);
+    const { ecran, lang } = useContext(CycloContext);
+    const [nav1Visible, setNav1Visible] = useState(false);
 
-    // const taille = window.innerWidth;
+    const montrerMenu = () => {
+        nav1Visible === false ? setNav1Visible(true) : setNav1Visible(false);
+    }
 
-    return (
-        <Wrapper>
-            <Link to="/">
-                <img src={imgLogo} height="48px" alt="icône"></img>
-            </Link>
-            <Menu>
-                <NavLink to="/">Accueil</NavLink>
-                <NavLink to="/apropos">À propos</NavLink>
-                <NavLink to="/voyages-effectues">Voyages effectués</NavLink>
-                <NavLink to="/contact">Contact</NavLink>
-                <ExternalLink href="https://www.touristechezsoi.ca">Blogue</ExternalLink>
-            </Menu>
-            <Langue>
-                <span>{lang}</span>
-                <span><FontAwesomeIcon icon={faGlobeEurope}/></span>
-            </Langue>
-        </Wrapper>
-    )
+    if (ecran < 700) {
+        return (
+            <WrapperMobi>
+                <div>
+                    <Link to="/">
+                        <img src={imgLogo} height="48px" alt="icône"></img>
+                    </Link>
+                    <FontAwesomeIcon icon={faBars} onClick={montrerMenu} />
+                </div>
+                {
+                    nav1Visible &&
+                    <MenuMobi>
+                        <NavLink onClick={montrerMenu} to="/">Accueil</NavLink>
+                        <NavLink onClick={montrerMenu} to="/apropos">À propos</NavLink>
+                        <NavLink onClick={montrerMenu} to="/voyages-effectues">Voyages effectués</NavLink>
+                        <NavLink onClick={montrerMenu} to="/contact">Contact</NavLink>
+                        <ExternalLink onClick={montrerMenu} href="https://www.touristechezsoi.ca">Blogue</ExternalLink>
+                        <Langue>
+                            <span>{lang}</span>
+                            <span><FontAwesomeIcon icon={faGlobeEurope}/></span>
+                        </Langue>
+                    </MenuMobi>
+                }
+                
+                
+            </WrapperMobi>
+        )
+    } else {
+        return (
+            <Wrapper>
+                <Link to="/">
+                    <img src={imgLogo} height="48px" alt="icône"></img>
+                </Link>
+                <Menu>
+                    <NavLink to="/">Accueil</NavLink>
+                    <NavLink to="/apropos">À propos</NavLink>
+                    <NavLink to="/voyages-effectues">Voyages effectués</NavLink>
+                    <NavLink to="/contact">Contact</NavLink>
+                    <ExternalLink href="https://www.touristechezsoi.ca">Blogue</ExternalLink>
+                </Menu>
+                <Langue>
+                    <span>{lang}</span>
+                    <span><FontAwesomeIcon icon={faGlobeEurope}/></span>
+                </Langue>
+            </Wrapper>
+        )
+    }
 }
+
+const WrapperMobi = styled.nav`
+    > div {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 5px;
+        svg {
+            cursor: pointer;
+        }
+    }
+    
+`
 
 const Wrapper = styled.nav`
     display: flex;
     justify-content: space-between;
+    padding: 0 5px;
     > * {
         height: 48px;
     }
-    @media screen and (max-width: 700px) {
-        > * {
-            height: unset;
+`
+
+const MenuMobi = styled.div`
+    display: flex;
+    flex-direction: column;
+    a {
+        color: black;
+        line-height: 1.3;
+        text-decoration: none;
+        &:hover {
+            color: var(--c5);
+        }
+        &.active {
+            font-weight: bold;
         }
     }
 `
@@ -65,15 +122,6 @@ const Menu = styled.div`
         }
         &.active {
             font-weight: bold;
-        }
-    }
-    @media screen and (max-width: 700px) {
-        flex-direction: column;
-        a {
-            &:not(:last-child)::after {
-                content: "";
-                margin-left: 0;
-            }
         }
     }
 ` 

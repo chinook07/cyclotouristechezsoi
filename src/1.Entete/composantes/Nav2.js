@@ -1,19 +1,14 @@
 import styled from "styled-components";
-import { useState, useEffect } from "react";
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import { CycloContext } from "../../CycloContext";
 import { faPlay, faMapSigns, faSuitcase, faTrain } from "@fortawesome/free-solid-svg-icons";
 
 const Nav2 = () => {
 
-    const [ecran, setEcran] = useState(window.innerWidth);
-
-    useEffect(() => {
-        const handleResizeWindow = () => setEcran(window.innerWidth)
-        window.addEventListener("resize", handleResizeWindow)
-        return () => {window.removeEventListener("resize", handleResizeWindow)}
-    }, [])
+    const { ecran } = useContext(CycloContext);
 
     if (ecran < 600) {
         return (

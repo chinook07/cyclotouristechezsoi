@@ -33,13 +33,17 @@ const Wrapper = styled.footer`
     background-color: var(--c1);
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
     padding: 15px;
 `
 
 const Auteur = styled.div`
+    span {
+        margin-right: 10px;
+    }
     a {
         line-height: 1.6;
-        margin: 0 10px;
+        margin-right: 10px;
     }
 `
 
@@ -51,9 +55,12 @@ const Menu = styled.nav`
             content: "|";
             margin-left: 10px;
         }
+        
     }
-    > * {
-        padding-left: 10px;
+    @media screen and (min-width : 760px) {
+        > * {
+            padding-left: 10px;
+        } 
     }
 `
 

@@ -4,8 +4,15 @@ export const CycloContext = createContext();
 
 const CycloContextProvider = ({ children }) => {
 
+    const [ecran, setEcran] = useState(window.innerWidth);
     const [modeNuit, setModeNuit] = useState(false);
     const [lang, setLang] = useState("FR");
+
+    useEffect(() => {
+        const handleResizeWindow = () => setEcran(window.innerWidth)
+        window.addEventListener("resize", handleResizeWindow)
+        return () => {window.removeEventListener("resize", handleResizeWindow)}
+    }, [])
     
     return (
         <CycloContext.Provider
@@ -13,7 +20,8 @@ const CycloContextProvider = ({ children }) => {
                 modeNuit,
                 setModeNuit,
                 lang,
-                setLang
+                setLang,
+                ecran
             }}
         >{children}</CycloContext.Provider>
     )
