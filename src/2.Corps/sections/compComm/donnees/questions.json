@@ -1,0 +1,34 @@
+[
+    {
+        "question" : "Voulez-vous dormir dans la tente ou sous un toit?",
+        "reponse" : ["Camper vous permet de respecter un budget serré, profiter de la nature, et être davantage flexible par rapport à votre trajet.", "Les auberges, hôtels et motels vous offrent un certain niveau de confort."]
+    },
+    {
+        "question" : "Avez-vous une voiture?",
+        "reponse" : ["", ""]
+    },
+    {
+        "question" : "",
+        "reponse" : ["", ""]
+    },
+    {
+        "question" : "",
+        "reponse" : ["", ""]
+    },
+    {
+        "question" : "",
+        "reponse" : ["", ""]
+    },
+    {
+        "question" : "",
+        "reponse" : ["", ""]
+    },
+    {
+        "question" : "",
+        "reponse" : ["", ""]
+    },
+    {
+        "question" : "10",
+        "reponse" : ["", ""]
+    }
+]
