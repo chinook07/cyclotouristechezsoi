@@ -5,7 +5,7 @@
             {
                 "id" : 1,
                 "objet" : "Cadenas",
-                "toit" : true
+                "toit" : false
             },
             {
                 "id" : 2,

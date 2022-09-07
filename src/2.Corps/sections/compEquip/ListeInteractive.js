@@ -2,19 +2,36 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import listeEquipement from "./donnees/listeEquipment.json";
-import { faPlus, faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faBed, faCampground } from "@fortawesome/free-solid-svg-icons";
+import Liste from "./comp/Liste";
 
-const ABCDEF = () => {
+const ListeInteractive = () => {
 
     const [bagages, setBagages] = useState([]);
     const [camping, setCamping] = useState(true);
 
+    // corrections à faire
     useEffect(() => {
         const enMemoire = localStorage.getItem("packed");
-        enMemoire !== null &&
+        console.log(localStorage.getItem("camping"), camping);
+        if (enMemoire !== null) {
             setBagages(enMemoire.split(",").map(item => parseInt(item)));
+            setCamping(localStorage.getItem("camping"));
+        } else {
+            localStorage.setItem("camping", true);
+        }
     }, [])
+
+    const camper = () => {
+        setCamping(true);
+        localStorage.setItem("camping", true);
+        console.log(true);
+    };
+    const coucherALInterieur = () => {
+        setCamping(false);
+        localStorage.setItem("camping", false);
+        console.log(false);
+    };
 
     const packThis = (objet) => {
         if (!bagages.includes(objet.id)) {
@@ -26,73 +43,92 @@ const ABCDEF = () => {
         }
     }
 
+    const imprimer = window.print;
+
     const reinit = () => {
         setBagages([]);
-        localStorage.removeItem("packed")
+        localStorage.removeItem("packed");
     }
 
     return (
-        <ListeInteractive>
-            <div>Profil du voyage</div>
+        <Wrapper>
+            <Profil>Profil du voyage</Profil>
             <Panneau>
-                <button>En tente</button>
-                <button>Dans un lit</button>
+                <BoutonPanneau
+                    onClick={camper}
+                    styleDiff={
+                        camping
+                            ? { fond: "--c6", coul: "--c1" }
+                            : { fond: "--c1", coul: "--c6" }
+                    }
+                >
+                    <div>En tente</div>
+                    <FontAwesomeIcon icon={faCampground} />
+                </BoutonPanneau>
+                <BoutonPanneau
+                    onClick={coucherALInterieur}
+                    styleDiff={
+                        camping
+                            ? { fond: "--c1", coul: "--c6" }
+                            : { fond: "--c6", coul: "--c1" }
+                    }
+                >
+                    <div>Dans un lit</div>
+                    <FontAwesomeIcon icon={faBed} />
+                </BoutonPanneau>
             </Panneau>
-            <Liste>
-                {
-                    listeEquipement.map((itemCat, indexCat) => {
-                        return (
-                            <Categorie key={indexCat}>
-                                <div>{itemCat.categorie}</div>
-                                <div>
-                                    {
-                                        itemCat.articles.map((itemObj, indexObj) => {
-                                            return (
-                                                <Chose
-                                                    onClick={() => packThis(itemObj)}
-                                                    key={indexObj}
-                                                >
-                                                    {
-                                                        bagages.includes(itemObj.id)
-                                                            ? <FontAwesomeIcon icon={faCheck} />
-                                                            : <FontAwesomeIcon icon={faPlus} />
-                                                    }
-                                                    {itemObj.objet}
-                                                </Chose>
-                                            )
-                                        })
-                                    }
-                                </div>
-                            </Categorie>
-                        )
-                    })
-                }
-            </Liste>
+            <Liste
+                bagages={bagages}
+                camping={camping}
+                packThis={packThis}
+            />
             <Controles>
-                <button>Imprimer</button>
+                <button onClick={imprimer}>Imprimer</button>
                 <button onClick={reinit}>Réinitialiser</button>
             </Controles>
-        </ListeInteractive>
+        </Wrapper>
     )
 }
 
-const ListeInteractive = styled.div``
+const Wrapper = styled.div``
 
-const Panneau = styled.div``
-
-const Liste = styled.div``
-
-const Categorie = styled.div``
-
-const Chose = styled.button`
-    border: 2px solid var(--c5);
-    border-radius: 15px;
-    background-color: var(--c1);
-    cursor: pointer;
-    margin: 5px;
-    padding: 8px 12px;
+const Profil = styled.div`
+    margin: 20px auto;
+    text-align: center;
 `
 
-const Controles = styled.div``
+const Panneau = styled.div`
+    margin: 20px auto;
+    text-align: center;
+`
 
-export default ABCDEF;
+const BoutonPanneau = styled.button`
+    background-color: var(${props => props.styleDiff.fond});
+    border: none;
+    border-radius: 10px;
+    color: var(${props => props.styleDiff.coul});
+    cursor: pointer;
+    margin: 5px;
+    padding: 10px;
+    transition: all 0.5s;
+    &:hover {
+        background-color: var(--c3);
+    }
+`
+
+const Controles = styled.div`
+    display: flex;
+    justify-content: center;
+    margin: 40px auto;
+    button {
+        background-color: var(--c3);
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+        font-size: large;
+        margin: auto 10px;
+        padding: 20px;
+    }
+`
+
+export default ListeInteractive;
