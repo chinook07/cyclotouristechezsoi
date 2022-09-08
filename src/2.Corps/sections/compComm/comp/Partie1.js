@@ -4,6 +4,8 @@ import { ExternalLink } from "react-external-link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faAngleDoubleDown, faAngleDoubleUp, faCar, faBusAlt, faTrain } from "@fortawesome/free-solid-svg-icons";
+import Moment from "./Moment";
+import Diff from "./Diff";
 
 const Partie1 = ({boiteOuverte, setBoiteOuverte}) => {
 
@@ -79,7 +81,7 @@ const Partie1 = ({boiteOuverte, setBoiteOuverte}) => {
             </Boite>
             <Boite>
                 <h3 onClick={() => ouvrirFermer(3)}>
-                    <span>Les vents dominants...</span>
+                    <span>Les vents dominants</span>
                     {
                         boiteOuverte === 3
                             ? <FontAwesomeIcon icon={faAngleDoubleUp} />
@@ -89,7 +91,22 @@ const Partie1 = ({boiteOuverte, setBoiteOuverte}) => {
                 {
                     boiteOuverte === 3 &&
                     <Infos>
-                            <p>Texte</p>
+                            <p>Si le vent peut souffler de n'importe quelle direction, il suit plus ou moins une règle de base : être le plus chiant possible envers les cyclistes circulant vers l'ouest.</p>
+                            <Vents>
+                                <ExternalLink href="https://fr.weatherspark.com/s/25077/1/M%C3%A9t%C3%A9o-moyenne-en-%C3%A9t%C3%A9-%C3%A0-Montr%C3%A9al-Canada#Figures-WindDirection">
+                                    <figure>
+                                        <img src="" alt="graphique montrant les vents dominants à Montréal durant l'été" />
+                                        <figcaption>Les vents à Montréal</figcaption>
+                                    </figure>
+                                </ExternalLink>
+                                <ExternalLink href="https:\/\/fr.weatherspark.com/s/27467/1/M%C3%A9t%C3%A9o-moyenne-en-%C3%A9t%C3%A9-%C3%A0-Rimouski-Canada#Figures-WindDirection">
+                                    <figure>
+                                        <img src="" alt="graphique montrant les vents dominants à Rimouski durant l'été" />
+                                        <figcaption>Les vents à Rimouski</figcaption>
+                                    </figure>
+                                </ExternalLink>
+                            </Vents>
+                            <p>Tel qu'aperçu sur les tableaux ci-dessus, les vents d'ouest dans le sud du Québec dominent principalement en début juillet, tandis que dans le Bas-Saint-Laurent, les vents du sud sont presque aussi fréquents à partir de ce même moment. À noter qu'un vent de l'est durant l'été s'accompagne souvent de pluie et de températures froides.</p>
                     </Infos>
                 }
             </Boite>
@@ -105,7 +122,8 @@ const Partie1 = ({boiteOuverte, setBoiteOuverte}) => {
                 {
                     boiteOuverte === 4 &&
                     <Infos>
-                            <p>Texte</p>
+                            <p>Il s'agit d'une question de préférence. Il y a grosso modo de quatre à cinq mois qui sont propices au cyclotourisme. Chaque période de cette courte saison amène ses bienfaits et ses importunités.</p>
+                            <Moment />
                     </Infos>
                 }
             </Boite>
@@ -121,7 +139,22 @@ const Partie1 = ({boiteOuverte, setBoiteOuverte}) => {
                 {
                     boiteOuverte === 5 &&
                     <Infos>
-                            <p>Texte</p>
+                            <p>Ce qui empêche les gens de gouter au cyclotourisme, c'est souvent l'effort physique requis. Or, on peut choisir un parcours selon sa difficulté, et rouler une distance qu'on trouve acceptable. La vallée du fleuve Saint-Laurent, celle de l'Outaouais, ainsi que les nombreuses pistes cyclables aménagées sur d'anciennes emprises ferroviaires, présentent des espaces conviviaux pour les débutants. Le reste du Québec offre des collines pour ceux et celles qui le souhaitent. Comment choisir une destination qui respecte nos capacités physiques? Dans votre planificateur d'itinéraire préféré, une fois que vous aurez choisi un trajet, vous aurez un dénivelé positif (ascension) et négatif (descente).</p>
+                            <div>
+                                <figure>
+                                    <img />
+                                    <figcaption>Un calcul d'itinéraire sur Ride with GPS</figcaption>
+                                </figure>
+                                <figure>
+                                    <img />
+                                    <figcaption>Un calcul d'itinéraire sur Google Maps</figcaption>
+                                </figure>
+                            </div>
+                            <p>À noter que le dénivelé pour un même trajet peut différer selon la calculateur utilisé, puisque la source des données topographiques n'est pas la même.</p>
+                            <p>Plutôt qu'avec des RPM, une façon scientifique et ludique de connaitre la difficulté d'un trajet consiste à diviser le nombre de mètres montés par le nombre de kilomètres franchis. Cela nous donne aussi le nombre de jurons par minute qu'un cycliste risque de grommeler.</p>
+                            <p>Ce calcul peut être fait pour estimer la difficulté d'une journée ou bien d'un voyage au complet. Il est déconseillé pour les courtes distances.</p>
+                            <Diff />
+                            <div>*La difficulté dépend aussi d'autres facteurs, tels la surface de roulement, la distribution du dénivelé sur un trajet (une énorme côte vs. des faux-plats toute la journée), le nombre de km effectué par jour, la vitesse et la direction du vent, ainsi que la motivation.</div>
                     </Infos>
                 }
             </Boite>
@@ -137,7 +170,8 @@ const Partie1 = ({boiteOuverte, setBoiteOuverte}) => {
                 {
                     boiteOuverte === 6 &&
                     <Infos>
-                            <p>Texte</p>
+                            <p>Il y a plusieurs facteurs à considérer ici. Solo, il est possible d'être le maitre de son destin. Duo, on a quelqu'un avec qui partager l'aventure. En famille, on s'assure que la prochaine génération reprenne le flambeau. Avec quelques amis ou collègues, ça peut plaire à certains, tandis que des évènements cyclotouristiques existent pour les gens qui veulent rouler en groupe.</p>
+                            <p>L'important, c'est de voyager avec des gens qui ont la même cadence et les mêmes objectifs. Sinon, vous pouvez toujours abandonner votre compagnon de voyage au prochain village!</p>
                     </Infos>
                 }
             </Boite>
@@ -154,5 +188,9 @@ const Boite = styled.div`
 `
 
 const Infos = styled.div``
+
+const Vents = styled.div`
+    display: flex;
+`
 
 export default Partie1;

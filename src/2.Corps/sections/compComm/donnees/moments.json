@@ -1,0 +1,51 @@
+[
+    {
+        "titre" : "Début mai",
+        "icone" : "faTemperatureEmpty",
+        "description" : "Les matinées sont fraiches. Les pistes cyclables en poussière de pierre peuvent être encore en période de dégel. Les campings sont pour la plupart fermés, mais il est facile de réserver de l'hébergement intérieur ou trouver un endroit pour monter sa tente à l'abri des regards.",
+        "imgAlt" : "zzz",
+        "caption" : "Quoiqu'on peut toujours tolérer une certaine absence de végétation, ça se complique lorsqu'une route ou une piste cyclable se trouve encore sous l'eau! Lieu : Varennes (Montérégie)"
+    },
+    {
+        "titre" : "Entre la mi-mai et la Fête Nationale (24 juin)",
+        "icone" : "iii",
+        "description" : "Les journées sont longues, et la température grimpe un peu plus. La réservation d'hébergement n'est pas trop ardue. Les moustiques nuisent fortement à l'expérience en camping, surtout dans les zones boisées.",
+        "imgAlt" : "zzz",
+        "caption" : "Un bel endroit invitant à la contemplation peut rapidement devenir un piège de maringouins. Lieu : Ange-Gardien (Montérégie)"
+    },
+    {
+        "titre" : "Entre la Fête Nationale et la mi-juillet",
+        "icone" : "iii",
+        "description" : "Il y a plus de touristes sur la route, mais on n'a plus froid en camping. La quantité d'insectes commence à décliner lentement. C'est alors un bon moment pour voyager léger, ou en camping en dehors des zones boisées.",
+        "imgAlt" : "zzz",
+        "caption" : "Lors d'une canicule, il faut se lever à une heure pas très catholique si l'on veut rouler durant la fraicheur du matin. Lieu : Cardinal (Ontario)"
+    },
+    {
+        "titre" : "Les deux dernières semaines de juillet",
+        "icone" : "iii",
+        "description" : "C'est les vacances de la construction! Les campings sont à ras bord, les véhicules récréatifs abondent sur les routes, il y a même des files d'attente pour utiliser les toilettes aux haltes routières. C'est aussi la période la plus chaude de l'année.",
+        "imgAlt" : "zzz",
+        "caption" : "Quoiqu'à vélo, on peut dépasser les voitures, les traversiers seront toujours plein durant ces deux semaines. Lieu : Gare maritime de Baie-Ste-Catherine (Charlevoix)"
+    },
+    {
+        "titre" : "Entre les vacances de la construction et la rentrée scolaire",
+        "icone" : "iii",
+        "description" : "Voilà le moment idéal pour voyager en vélo-camping. Il y a moins de moustiques, les journées étant presque aussi chaudes, mais un peu moins longues. La baignade demeure agréable et beaucoup de gens sont de retour au travail.",
+        "imgAlt" : "zzz",
+        "caption" : "Il y a deux semaines, il y aurait eu trop de passants. Il y a un mois, trop de moustiques. Lieu : Grenville-sur-la-Rouge (Laurentides)"
+    },
+    {
+        "titre" : "Entre la rentrée scolaire et mi-septembre",
+        "icone" : "iii",
+        "description" : "Les familles ont déserté les campings. Les matinées sont fraiches et les journées courtes. Les insectes piqueurs se font rares, faisant de cette période le moment idéal pour profiter de l'été une dernière fois.",
+        "imgAlt" : "zzz",
+        "caption" : "Dans les champs agricoles, on constate la saison des récoltes. L'air frais taquine les narines et on ne transpire pas autant qu'à l'été. Lieu : St-Tite (Mauricie)"
+    },
+    {
+        "titre" : "Fin septembre",
+        "icone" : "iii",
+        "description" : "C'est l'automne. La température ne dépasse presque plus le cap des 20°C. La plupart des campings sont fermés. En optant pour l'hébergement intérieur, on en profite pour faire le plein de cyclotourisme une dernière fois avant l'hiver!",
+        "imgAlt" : "zzz",
+        "caption" : "Une rivière froide et un Soleil encore couché, un matin frisquet de septembre. Lieu : Parc provincial Rideau (Ontario)."
+    }
+]
