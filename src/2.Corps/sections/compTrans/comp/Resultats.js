@@ -1,8 +1,27 @@
 import styled from "styled-components";
 
-const Resultats = () => {
+import indexVilles from "../donnees/indexVilles.json";
+
+const Resultats = ({ recherchee, setVilleSouhaitee }) => {
+
+    const toutesVilles = Object.keys(indexVilles);
+    const total = toutesVilles.filter(ville => ville.toLowerCase().includes(recherchee.toLowerCase()))
+
+    const choisirVille = (ville) => setVilleSouhaitee(ville);
+
     return (
-        <Wrapper>ABCDEF</Wrapper>
+        <Wrapper>
+            <div>Résultats :</div>
+            <ul>
+                {
+                    total.length > 0 && recherchee.length > 2 &&
+                    total.map((item, index) => {
+                        return <li key={index} onClick={() => choisirVille(item)}>{item}</li>
+                    })
+                }
+            </ul>
+            
+        </Wrapper>
     )
 }
 
