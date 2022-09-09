@@ -11,7 +11,6 @@ const Diff = () => {
     // corrections
 
     const couleurDiff = (unite, nombre) => {
-        console.log( nombre);
         unite(nombre)
     }
 

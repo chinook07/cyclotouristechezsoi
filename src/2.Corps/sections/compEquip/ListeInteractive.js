@@ -13,7 +13,6 @@ const ListeInteractive = () => {
     // corrections à faire
     useEffect(() => {
         const enMemoire = localStorage.getItem("packed");
-        console.log(localStorage.getItem("camping"), camping);
         if (enMemoire !== null) {
             setBagages(enMemoire.split(",").map(item => parseInt(item)));
             setCamping(localStorage.getItem("camping"));
@@ -25,12 +24,10 @@ const ListeInteractive = () => {
     const camper = () => {
         setCamping(true);
         localStorage.setItem("camping", true);
-        console.log(true);
     };
     const coucherALInterieur = () => {
         setCamping(false);
         localStorage.setItem("camping", false);
-        console.log(false);
     };
 
     const packThis = (objet) => {

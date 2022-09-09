@@ -113,7 +113,7 @@ const GalerieEtendue = ({ montrerGal, setMontrerGal }) => {
             </Wrapper>
         )
     } else {
-        return <div>Loading...</div>
+        return <div>Chargement en cours...</div>
     }
     
 }

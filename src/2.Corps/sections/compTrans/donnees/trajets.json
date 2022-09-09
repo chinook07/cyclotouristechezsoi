@@ -1,0 +1,14 @@
+{
+    "12" : {
+        "infoA" : "texteA",
+        "infoB" : "texteB"
+    },
+    "34" : {
+        "infoA" : "texteA",
+        "infoB" : "texteB"
+    },
+    "56" : {
+        "infoA" : "texteA",
+        "infoB" : "texteB"
+    }
+}

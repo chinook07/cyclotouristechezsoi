@@ -1,11 +1,25 @@
 import styled from "styled-components";
+import { useState } from "react";
 
-const ABCDEF = () => {
+import indexVilles from "./donnees/indexVilles.json";
+import trajets from "./donnees/trajets.json";
+import Recherche from "./comp/Recherche";
+import Resultats from "./comp/Resultats";
+
+const Synthese = () => {
+
+    const [recherchee, setRecherchee] = useState("")
+
+    console.log(Object.keys(indexVilles));
+
     return (
-        <Synthese>Synthese</Synthese>
+        <Wrapper>
+            <Recherche setRecherchee={setRecherchee} />
+            <Resultats recherchee={recherchee} />
+        </Wrapper>
     )
 }
 
-const Synthese = styled.div``
+const Wrapper = styled.div``
 
-export default ABCDEF;
+export default Synthese;

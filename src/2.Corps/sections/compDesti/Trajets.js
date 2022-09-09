@@ -17,8 +17,6 @@ const Trajets = () => {
         setTrajetSelect(nouveau)
     }
 
-    console.log(window.innerWidth, schemasTout);
-
     return (
         <Wrapper>
             <Selectionnez>
