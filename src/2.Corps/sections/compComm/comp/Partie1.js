@@ -6,11 +6,44 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDoubleDown, faAngleDoubleUp, faCar, faBusAlt, faTrain } from "@fortawesome/free-solid-svg-icons";
 import Moment from "./Moment";
 import Diff from "./Diff";
+import DeuxFigures from "../../../../CompReutilisables/DeuxFigures";
+import ventMontreal from "../images/vent-montreal.png";
+import ventRimouski from "../images/vent-rimouski.png";
+import diff1 from "../images/difficulte1.png";
+import diff2 from "../images/difficulte2.png";
 
 const Partie1 = ({boiteOuverte, setBoiteOuverte}) => {
 
     const ouvrirFermer = (index) => {
         boiteOuverte === index ? setBoiteOuverte() : setBoiteOuverte(index)
+    }
+
+    const photo1 = {
+        "src": ventMontreal,
+        "alt": "graphique montrant les vents dominants à Montréal durant l'été",
+        "cap": "Les vents à Montréal.",
+        "lien": "Weather Spark",
+        "href": "https://fr.weatherspark.com/s/25077/1/M%C3%A9t%C3%A9o-moyenne-en-%C3%A9t%C3%A9-%C3%A0-Montr%C3%A9al-Canada#Figures-WindDirection"
+    }
+
+    const photo2 = {
+        "src": ventRimouski,
+        "alt": "graphique montrant les vents dominants à Rimouski durant l'été",
+        "cap": "Les vents à Rimouski.",
+        "lien": "Weather Spark",
+        "href": "https://fr.weatherspark.com/s/27467/1/M%C3%A9t%C3%A9o-moyenne-en-%C3%A9t%C3%A9-%C3%A0-Rimouski-Canada#Figures-WindDirection"
+    }
+
+    const photo3 = {
+        "src": diff1,
+        "alt": "dénivelé d'un trajet sur Ride With GPS",
+        "cap": "Un calcul d'itinéraire sur Ride with GPS."
+    }
+
+    const photo4 = {
+        "src": diff2,
+        "alt": "dénivelé d'un trajet sur Google Maps",
+        "cap": "Un calcul d'itinéraire sur Google Maps."
     }
 
     return (
@@ -92,20 +125,7 @@ const Partie1 = ({boiteOuverte, setBoiteOuverte}) => {
                     boiteOuverte === 3 &&
                     <Infos>
                             <p>Si le vent peut souffler de n'importe quelle direction, il suit plus ou moins une règle de base : être le plus chiant possible envers les cyclistes circulant vers l'ouest.</p>
-                            <Vents>
-                                <ExternalLink href="https://fr.weatherspark.com/s/25077/1/M%C3%A9t%C3%A9o-moyenne-en-%C3%A9t%C3%A9-%C3%A0-Montr%C3%A9al-Canada#Figures-WindDirection">
-                                    <figure>
-                                        <img src="" alt="graphique montrant les vents dominants à Montréal durant l'été" />
-                                        <figcaption>Les vents à Montréal</figcaption>
-                                    </figure>
-                                </ExternalLink>
-                                <ExternalLink href="https:\/\/fr.weatherspark.com/s/27467/1/M%C3%A9t%C3%A9o-moyenne-en-%C3%A9t%C3%A9-%C3%A0-Rimouski-Canada#Figures-WindDirection">
-                                    <figure>
-                                        <img src="" alt="graphique montrant les vents dominants à Rimouski durant l'été" />
-                                        <figcaption>Les vents à Rimouski</figcaption>
-                                    </figure>
-                                </ExternalLink>
-                            </Vents>
+                            <DeuxFigures photo1={photo1} photo2={photo2} />
                             <p>Tel qu'aperçu sur les tableaux ci-dessus, les vents d'ouest dans le sud du Québec dominent principalement en début juillet, tandis que dans le Bas-Saint-Laurent, les vents du sud sont presque aussi fréquents à partir de ce même moment. À noter qu'un vent de l'est durant l'été s'accompagne souvent de pluie et de températures froides.</p>
                     </Infos>
                 }
@@ -140,16 +160,7 @@ const Partie1 = ({boiteOuverte, setBoiteOuverte}) => {
                     boiteOuverte === 5 &&
                     <Infos>
                             <p>Ce qui empêche les gens de gouter au cyclotourisme, c'est souvent l'effort physique requis. Or, on peut choisir un parcours selon sa difficulté, et rouler une distance qu'on trouve acceptable. La vallée du fleuve Saint-Laurent, celle de l'Outaouais, ainsi que les nombreuses pistes cyclables aménagées sur d'anciennes emprises ferroviaires, présentent des espaces conviviaux pour les débutants. Le reste du Québec offre des collines pour ceux et celles qui le souhaitent. Comment choisir une destination qui respecte nos capacités physiques? Dans votre planificateur d'itinéraire préféré, une fois que vous aurez choisi un trajet, vous aurez un dénivelé positif (ascension) et négatif (descente).</p>
-                            <div>
-                                <figure>
-                                    <img />
-                                    <figcaption>Un calcul d'itinéraire sur Ride with GPS</figcaption>
-                                </figure>
-                                <figure>
-                                    <img />
-                                    <figcaption>Un calcul d'itinéraire sur Google Maps</figcaption>
-                                </figure>
-                            </div>
+                            <DeuxFigures photo1={photo3} photo2={photo4} />
                             <p>À noter que le dénivelé pour un même trajet peut différer selon la calculateur utilisé, puisque la source des données topographiques n'est pas la même.</p>
                             <p>Plutôt qu'avec des RPM, une façon scientifique et ludique de connaitre la difficulté d'un trajet consiste à diviser le nombre de mètres montés par le nombre de kilomètres franchis. Cela nous donne aussi le nombre de jurons par minute qu'un cycliste risque de grommeler.</p>
                             <p>Ce calcul peut être fait pour estimer la difficulté d'une journée ou bien d'un voyage au complet. Il est déconseillé pour les courtes distances.</p>
@@ -188,9 +199,5 @@ const Boite = styled.div`
 `
 
 const Infos = styled.div``
-
-const Vents = styled.div`
-    display: flex;
-`
 
 export default Partie1;

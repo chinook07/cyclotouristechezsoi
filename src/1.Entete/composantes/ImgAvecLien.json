@@ -1,43 +1,43 @@
 [
     {
         "lien" : "/apropos" , 
-        "photo" : "ent1", 
+        "photo" : 0, 
         "nom" : "À propos",
         "alt" : "ukulélé et canot sur une plage de sable près d'un lac avec le reflet du soleil"
     },
     { 
         "lien" : "/voyages-effectues" , 
-        "photo" : "ent1", 
+        "photo" : 0, 
         "nom" : "Voyages effectués",
         "alt" : "ukulélé et canot sur une plage de sable près d'un lac avec le reflet du soleil"
     },
     { 
         "lien" : "/contact" , 
-        "photo" : "ent2", 
+        "photo" : 1, 
         "nom" : "Contact",
         "alt" : "pont de motoneige en bois par dessus une rivière"
     },
     { 
         "lien" : "/commencement" , 
-        "photo" : "ent3", 
+        "photo" : 2, 
         "nom" : "Commencer",
         "alt" : "soleil bas sur l'horizon par dessus une baie"
     },
     { 
         "lien" : "/destinations" , 
-        "photo" : "ent4", 
+        "photo" : 3, 
         "nom" : "Découvrir",
         "alt" : "plusieurs panneaux sur le bord d'une piste cyclable en forêt peu dense"
     },
     { 
         "lien" : "/equipement" , 
-        "photo" : "ent5", 
+        "photo" : 4, 
         "nom" : "S'équiper",
         "alt" : "vélo, et plusieurs sacoches de vélo par terre"
     },
     { 
         "lien" : "/transport" , 
-        "photo" : "ent6", 
+        "photo" : 5, 
         "nom" : "Se transporter",
         "alt" : "vélos suspendus dans un train"
     }

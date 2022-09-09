@@ -9,6 +9,7 @@ export default createGlobalStyle`
         margin: 0;
     }
     figcaption {
+        font-size: small;
         font-style: italic;
         margin: 5px;
         text-align: center;

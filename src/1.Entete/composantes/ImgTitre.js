@@ -11,13 +11,15 @@ import ent6 from "../../images/entetes/velo-dans-train.jpg";
 
 const ImgTitre = () => {
 
+    const toutesImage = [ent1, ent2, ent3, ent4, ent5, ent6]
+
     const urlPage = useLocation().pathname;
     const infosPage = imgAvecLien.filter(item => urlPage.includes(item.lien))[0]
 
     if (infosPage) {
         return (
             <Wrapper>
-                <img src={infosPage.photo} alt={infosPage.alt} />
+                <img src={toutesImage[infosPage.photo]} alt={infosPage.alt} />
                 <div>Cyclotouristechezsoi</div>
                     <h1>{infosPage.nom}</h1>
             </Wrapper>

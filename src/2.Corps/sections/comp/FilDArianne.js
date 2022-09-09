@@ -27,17 +27,25 @@ const Wrapper = styled.div`
         color: black;
         padding-left: 10px;
         text-decoration: none;
-        &:not(:last-child)::after {
-            content: "|";
-            margin-left: 10px;
-        }
+        
         &:hover {
             color: var(--c5);
         }
         &.active {
             font-weight: bold;
         }
+        @media screen and (min-width: 550px) {
+            &:not(:last-child)::after {
+                content: "|";
+                margin-left: 10px;
+            }
+        }
     }
+    @media screen and (max-width: 550px) {
+        flex-direction: column;
+        text-align: center;
+    }
+    
 `
 
 export default FilDArianne;
