@@ -24,8 +24,14 @@ const Galerie = ({ montrerGal, setMontrerGal }) => {
 }
 
 const Wrapper = styled.div`
+    cursor: pointer;
     display: flex;
     justify-content: space-evenly;
+    transition: 0.2s all;
+    &:hover {
+        transition: 0.2s all;
+        transform: scale(1.05);
+    }
     img {
         width: 15%;
     }

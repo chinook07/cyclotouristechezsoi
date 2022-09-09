@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import voyagesListeDonnees from "./VoyagesListe.json";
+import voyagesListeDonnees from "../donnees/VoyagesListe.json";
 import Voyage from "./Voyage";
 
 const VoyagesListe = () => {

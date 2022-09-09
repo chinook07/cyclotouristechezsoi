@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 
 import * as imagesToutPa from "../../../images/galerie-paysage/index";
 import * as imagesToutPo from "../../../images/galerie-portrait/index";
-import galerieSousTitrePaysage from "./galerieSousTitrePaysage.json";
-import galerieSousTitrePortrait from "./galerieSousTitrePortrait.json";
+import galerieSousTitrePaysage from "../donnees/galerieSousTitrePaysage.json";
+import galerieSousTitrePortrait from "../donnees/galerieSousTitrePortrait.json";
 
 const GalerieEtendue = ({ montrerGal, setMontrerGal }) => {
 
@@ -158,11 +158,20 @@ const Zoom = styled.div`
     top: 50%;
     transform: translate(-50%, -50%);
     width: 75%;
+    button {
+        margin: 0 auto;
+        padding: 10px;
+        width: 80px;
+    }
+    @media screen and (max-width : 600px) {
+        width: 88%;
+    }
 `
 
 const Caroussel = styled.div`
     align-items: center;
     display: flex;
+    justify-content: center;
     > div {
         cursor: pointer;
     }
@@ -171,7 +180,14 @@ const Caroussel = styled.div`
         flex-direction: column;
         margin: 10px;
         img {
+            max-height: 80vh;
             width: 100%;
+        }
+    }
+    @media screen and (max-width : 600px) {
+        flex-direction: column;
+        figure {
+            margin: 10px 0;
         }
     }
 `
