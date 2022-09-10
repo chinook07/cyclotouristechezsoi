@@ -7,7 +7,19 @@
         "infoA" : "texteA",
         "infoB" : "texteB"
     },
+    "45" : {
+        "infoA" : "texteA",
+        "infoB" : "texteB"
+    },
+    "52" : {
+        "infoA" : "texteA",
+        "infoB" : "texteB"
+    },
     "56" : {
+        "infoA" : "texteA",
+        "infoB" : "texteB"
+    },
+    "66" : {
         "infoA" : "texteA",
         "infoB" : "texteB"
     }
