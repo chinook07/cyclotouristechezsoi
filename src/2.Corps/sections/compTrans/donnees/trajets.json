@@ -1,7 +1,50 @@
 {
+    "1" : {
+        "icone" : 0,
+        "transporteur" : "Via Rail",
+        "trajet" : "Lien entre Montréal, Kingston et Toronto.",
+        "heures" : "7 jours sur 7.",
+        "velos" : "Transport des vélos non disponible jusqu'au renouvellement de la flotte de trains entre fin 2022 et 2024."
+    },
+    "2" : {
+        "icone" : 0,
+        "transporteur" : "Via Rail",
+        "trajet" : "Lien entre Ottawa, Montréal et Québec.",
+        "heures" : "7 jours sur 7.",
+        "velos" : "Transport des vélos non disponible jusqu'au renouvellement de la flotte de trains entre fin 2022 et 2024."
+    },
+    "3" : {
+        "icone" : 0,
+        "transporteur" : "Via Rail",
+        "trajet" : "Lien entre Ottawa, Kingston et Toronto.",
+        "heures" : "7 jours sur 7.",
+        "velos" : "Transport des vélos non disponible jusqu'au renouvellement de la flotte de trains entre fin 2022 et 2024."
+    },
+    "4" : {
+        "icone" : 0,
+        "transporteur" : "Via Rail",
+        "trajet" : "Lien entre Montréal, Québec, Moncton et Halifax.",
+        "heures" : "3 départs par semaine, de nuit.",
+        "velos" : "Vélos permis sur tous les départs, normalement non démontés, mais des exceptions peuvent s'appliquer. L'enregistrement des vélos n'est pas possible à toutes les gares."
+    },
+    "5" : {
+        "icone" : 0,
+        "transporteur" : "Via Rail",
+        "trajet" : "Lien entre Montréal et Saguenay.",
+        "heures" : "3 départs par semaine.",
+        "velos" : "Vélos non démontés permis sur tous les départs."
+    },
+    "6" : {
+        "icone" : 0,
+        "transporteur" : "Via Rail",
+        "trajet" : "Lien entre Montréal et Senneterre (Abitibi).",
+        "heures" : "3 départs par semaine.",
+        "velos" : "Vélos non démontés permis sur tous les départs."
+    },
     "12" : {
         "infoA" : "texteA",
-        "infoB" : "texteB"
+        "infoB" : "texteB",
+        "icone" : 1
     },
     "34" : {
         "infoA" : "texteA",
@@ -22,5 +65,40 @@
     "66" : {
         "infoA" : "texteA",
         "infoB" : "texteB"
+    },
+    "100" : {
+        "icone" : 1,
+        "transporteur" : "exo",
+        "trajet" : "Lien entre Montréal et Vaudreuil, avec un départ par jour jusqu'à Hudson.",
+        "heures" : "7 jours sur 7.",
+        "velos" : "Vélos permis à bord en tout temps"
+    },
+    "101" : {
+        "icone" : 1,
+        "transporteur" : "exo",
+        "trajet" : "Lien entre Montréal (ou Laval en fin de semaine) et Saint-Jérôme.",
+        "heures" : "7 jours sur 7.",
+        "velos" : "Vélos permis à bord en tout temps"
+    },
+    "102" : {
+        "icone" : 1,
+        "transporteur" : "exo",
+        "trajet" : "Lien entre Montréal et Mascouche.",
+        "heures" : "sur semaine seulement, principalement à l'heure de pointe.",
+        "velos" : "Vélos permis à bord en tout temps"
+    },
+    "103" : {
+        "icone" : 1,
+        "transporteur" : "exo",
+        "trajet" : "Lien entre Montréal et Candiac.",
+        "heures" : "sur semaine seulement, principalement à l'heure de pointe.",
+        "velos" : "Vélos permis à bord en tout temps"
+    },
+    "104" : {
+        "icone" : 1,
+        "transporteur" : "exo",
+        "trajet" : "Lien entre Montréal et Mont-Saint-Hilaire.",
+        "heures" : "sur semaine seulement, principalement à l'heure de pointe.",
+        "velos" : "Vélos permis à bord en tout temps"
     }
 }
