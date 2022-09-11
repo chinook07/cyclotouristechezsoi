@@ -3,7 +3,7 @@ import { ExternalLink } from "react-external-link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import trajetsDB from "../donnees/trajets.json";
-import { faBicycle } from "@fortawesome/free-solid-svg-icons";
+import { faBicycle, faCheck, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import { Abitibi, BasSaintLaurent } from "../schemas";
 
 const DetailsDuTrajet = ({ itineraire, changerTrajet }) => {
@@ -16,27 +16,56 @@ const DetailsDuTrajet = ({ itineraire, changerTrajet }) => {
             <div></div>
             <div>
                 <p>Distance : {details.distance} km.</p>
-                <p>Véloroutes : </p>
+                <p>
+                    <span>Véloroutes : </span>
+                    {
+                        details.veloroutes.map((item, index) => {
+                            return <span key={index}>{item}</span>
+                        })
+                    }
+                </p>
                 <p>Proportion sur piste cyclable : {details.proportion} %.</p>
                 <p>Terrain : {details.terrain}</p>
             </div>
             <h2>Notes de l'auteur</h2>
             <div>
-                <p>Déjà pédalé : </p>
                 <p>
-                    <span>Appréciation personnelle de 1 à 5 :</span>
-                    <span>
-                        {
-                            // details.appreciation.map((item, index) => {
-                            //     return <FontAwesomeIcon icon={faBicycle} />
-                            // })
-                            [...Array(details.appreciation)].map((e, i) => <FontAwesomeIcon key={i} icon={faBicycle} />)
-                        }
-                    </span>
+                    <span>Déjà pédalé : </span>
+                    {
+                        details.deja.length &&
+                        details.deja.map((item, index) => {
+                            return (
+                                <span key={index}>{item} <FontAwesomeIcon icon={faCheck} /></span>
+                            )
+                        })
+                    }
+                    {
+                        details.deja === true &&
+                        <span>tout le parcours <FontAwesomeIcon icon={faCheck} /></span>
+                    }
+                    {
+                        details.deja === false &&
+                        <span>aucun tronçon <FontAwesomeIcon icon={faTimesCircle} /></span>
+                    }
                 </p>
+                {
+                    details.appreciation !== null &&
+                    <p>
+                        <span>Appréciation personnelle de 1 à 5 :</span>
+                        <span>
+                            {
+                                [...Array(details.appreciation)].map((e, i) => <FontAwesomeIcon key={i} icon={faBicycle} />)
+                            }
+                        </span>
+                    </p>
+                }
                 <p>Coups de cœur : {details.coups}</p>
                 <p>Défis rencontrés : {details.defis}</p>
                 <p>Autres notes : {details.notes}</p>
+                {
+                    details.varietes &&
+                    <p>Variétés au parcours : {details.varietes}</p>
+                }
             </div>
             <h2>Carte</h2>
             <iframe
