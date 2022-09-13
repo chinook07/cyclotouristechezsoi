@@ -1,14 +1,23 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 import trajetsDB from "./donnees/trajets.json";
 import DetailsDuTrajet from "./comp/DetailsDuTrajet";
 import * as schemasTout from "./schemas/index";
+import { CycloContext } from "../../../CycloContext";
 
 const Trajets = () => {
 
+    const { trajetRedig, setTrajetRedig } = useContext(CycloContext);
+
     const [trajetChoisi, setTrajetChoisi] = useState();
     const [trajetSelect, setTrajetSelect] = useState();
+
+    // if (trajetRedig !== "") {
+    //     setTrajetRedig("");
+    //     setTrajetChoisi(trajetRedig);
+    //     console.log(trajetRedig);
+    // }
 
     const choisirTrajet = (e) => setTrajetChoisi(e.target.value);
 

@@ -7,6 +7,7 @@ const CycloContextProvider = ({ children }) => {
     const [ecran, setEcran] = useState(window.innerWidth);
     const [modeNuit, setModeNuit] = useState(false);
     const [lang, setLang] = useState("FR");
+    const [trajetRedig, setTrajetRedig] = useState("");
 
     useEffect(() => {
         const handleResizeWindow = () => setEcran(window.innerWidth)
@@ -21,7 +22,9 @@ const CycloContextProvider = ({ children }) => {
                 setModeNuit,
                 lang,
                 setLang,
-                ecran
+                ecran,
+                trajetRedig,
+                setTrajetRedig
             }}
         >{children}</CycloContext.Provider>
     )

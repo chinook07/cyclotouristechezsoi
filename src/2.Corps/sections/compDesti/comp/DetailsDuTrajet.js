@@ -12,22 +12,23 @@ const DetailsDuTrajet = ({ itineraire, changerTrajet }) => {
 
     return (
         <Wrapper>
-            <h2>Aperçu de {details.trajet}</h2>
-            <div></div>
+            <h2>{details.trajet}</h2>
+            <div>{details.intro}</div>
+            <h3>Aperçu</h3>
             <div>
                 <p>Distance : {details.distance} km.</p>
-                <p>
-                    <span>Véloroutes : </span>
+                <p>Véloroutes : </p>
+                <ul>
                     {
                         details.veloroutes.map((item, index) => {
-                            return <span key={index}>{item}</span>
+                            return <li key={index}>{item}</li>
                         })
                     }
-                </p>
+                </ul>
                 <p>Proportion sur piste cyclable : {details.proportion} %.</p>
                 <p>Terrain : {details.terrain}</p>
             </div>
-            <h2>Notes de l'auteur</h2>
+            <h3>Notes de l'auteur</h3>
             <div>
                 <p>
                     <span>Déjà pédalé : </span>
@@ -59,22 +60,28 @@ const DetailsDuTrajet = ({ itineraire, changerTrajet }) => {
                         </span>
                     </p>
                 }
-                <p>Coups de cœur : {details.coups}</p>
-                <p>Défis rencontrés : {details.defis}</p>
+                {
+                    details.coups &&
+                    <p>Coups de cœur : {details.coups}</p>
+                }
+                {
+                    details.defis &&
+                    <p>Défis rencontrés : {details.defis}</p>
+                }
                 <p>Autres notes : {details.notes}</p>
                 {
                     details.varietes &&
                     <p>Variétés au parcours : {details.varietes}</p>
                 }
             </div>
-            <h2>Carte</h2>
+            <h3>Carte</h3>
             <iframe
                 frameBorder="0"
                 allowFullScreen
                 src={details.carteURL}
             />
             <ExternalLink href="https://umap.openstreetmap.fr/fr/map/carte-generale-cyclotouristechezsoi_584684">Voir en plein écran</ExternalLink>
-            <h2>Trajets associés</h2>
+            <h3>Trajets associés</h3>
             <div>
                 {
                     details.ass.map((item, index) => {
@@ -82,7 +89,7 @@ const DetailsDuTrajet = ({ itineraire, changerTrajet }) => {
                     })
                 }
             </div>
-            <h2>Galerie des photos</h2>
+            <h3>Galerie des photos</h3>
             <p>Cliquez sur les images ci-dessous pour rêver!</p>
         </Wrapper>
     )

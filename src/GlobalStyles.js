@@ -15,6 +15,7 @@ export default createGlobalStyle`
         text-align: center;
     }
     :root {
+        --c0: #e8def3;
         --c1: #e9d985;
         --c2: #b2bd7e;
         --c3: #749c75;
