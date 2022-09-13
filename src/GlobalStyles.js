@@ -1,6 +1,9 @@
 import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
+    * {
+        box-sizing: border-box;
+    }
     html {
         scrollbar-color: $coul6 $coul2;
     }

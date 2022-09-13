@@ -1,0 +1,30 @@
+[
+    {
+        "nom" : "2039 dans une ville méconnaissable",
+        "url" : "https://touristechezsoi.ca/blogue/2039.html",
+        "description" : "C'est l'histoire d'Olivia et sa famille qui s'installent dans leur nouvel appartement à Montréal, dans un monde radicalement différent suite à l'accélération de la crise climatique. Le hockey sur glace est en voie de disparition, la chaleur accablante et les feux de forêt ont changé le visage du Québec, et la politique municipale est devenue plus captivante qu'auparavant.",
+        "image" : "https://touristechezsoi.ca/blogue/2039/parlement-feu.jpg",
+        "alt" : "ciel rouge, parlement au loin"
+    },
+    {
+        "nom" : "Pour une ville à 30 km/h",
+        "url" : "https://touristechezsoi.ca/blogue/30-km-h.html",
+        "description" : "Il est bien connu que la baisse de la limite de vitesse à l'échelle d'un quartier contribue à rendre les rues plus conviviales. Quoique cette action seule ne suffise pas par elle-même, elle demeure une partie critique parmi l'éventail des transformations qui apaisent la circulation.",
+        "image" : "https://touristechezsoi.ca/blogue/30-km-h/graphique.png",
+        "alt" : "graphique indiquant la corrélation entre la vitesse et la probabilité de mort suite à une collision"
+    },
+    {
+        "nom" : "Élections : comment le transport actif s'en est tiré",
+        "url" : "https://touristechezsoi.ca/blogue/elections-bilan.html",
+        "description" : "Après un été de records climatiques, il sera bientôt le temps d'aller aux urnes et choisir la composition de notre conseil municipal, ainsi que nos conseils d'arrondissement pour les quatre prochaines années. Puisque Montréal est divisée en 19, le parti au pouvoir au niveau de l'arrondissement influence grandement les orientations données dans celui-ci. Qu'en est-il alors du travail fait depuis les dernières élections, strictement au point de vue du transport actif?",
+        "image" : "https://touristechezsoi.ca/blogue/elections-bilan-2017/Plateau.png",
+        "alt" : "piste cyclable sur la rue St-Denis"
+    },
+    {
+        "nom" : "Cyclotourisme de proximité : 5 destinations tout près",
+        "url" : "https://touristechezsoi.ca/blogue/cyclotourisme-proximite.html",
+        "description" : "Les opportunités de voyage sont encore limitées et vous cherchez peut-être la destination parfaite pour rouler quelques jours en campagne. Vous avez de grands projets d'aller découvrir d'autres pays à vélo, mais vous préférez attendre que la tempête passe. Bonne idée! Puisque l'été n'est pas terminé, je vous présente quelques idées pour votre prochaine sortie en cyclotourisme, le tout dans un rayon limité à partir de Montréal.",
+        "image" : "https://touristechezsoi.ca/blogue/cyclotourisme-proximite/ca-va-bien-aller.jpg",
+        "alt" : "vieille maison de campagne, affiche avec les mots 'ça va bien aller'"
+    }
+]
