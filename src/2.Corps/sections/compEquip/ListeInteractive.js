@@ -4,20 +4,23 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faBed, faCampground } from "@fortawesome/free-solid-svg-icons";
 import Liste from "./comp/Liste";
+import ListePers from "./comp/ListePers";
 
 const ListeInteractive = () => {
 
     const [bagages, setBagages] = useState([]);
     const [camping, setCamping] = useState(true);
 
-    // corrections à faire
     useEffect(() => {
         const enMemoire = localStorage.getItem("packed");
-        if (enMemoire !== null) {
+        enMemoire !== null &&
             setBagages(enMemoire.split(",").map(item => parseInt(item)));
-            setCamping(localStorage.getItem("camping"));
-        } else {
-            localStorage.setItem("camping", true);
+        const modeHebergement = localStorage.getItem("camping");
+        if (modeHebergement !== null) {
+            modeHebergement === "true" &&
+                setCamping(true);
+            modeHebergement === "false" &&
+                setCamping(false);
         }
     }, [])
 
@@ -46,6 +49,8 @@ const ListeInteractive = () => {
         setBagages([]);
         localStorage.removeItem("packed");
     }
+
+    
 
     return (
         <Wrapper>
@@ -77,6 +82,9 @@ const ListeInteractive = () => {
             <Liste
                 bagages={bagages}
                 camping={camping}
+                packThis={packThis}
+            />
+            <ListePers
                 packThis={packThis}
             />
             <Controles>
