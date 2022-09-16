@@ -1,0 +1,44 @@
+[
+    {
+        "region": "Outaouais",
+        "transporteur": "Transcollines",
+        "lien": "http://transcollines.ca/",
+        "desserte": ["Gatineau", "Val-des-Monts, Chelsea et Cantley"],
+        "dates": "7 jrs"
+    },
+    {
+        "region": "Laurentides",
+        "transporteur": "TaCL",
+        "lien": "https://www.transportlaurentides.ca/",
+        "desserte": ["St-Jérôme", "Mont-Tremblant"],
+        "dates": "7 jrs"
+    },
+    {
+        "region": "Lanaudière",
+        "transporteur": "MRC de Joliette",
+        "lien": "https://mrcjoliette.qc.ca/transport-mrc-joliette/circuits-regionaux/",
+        "desserte": ["Montréal", "différentes localités de Lanaudière"],
+        "dates": "7 jrs"
+    },
+    {
+        "region": "Québec",
+        "transporteur": "PLUMobile",
+        "lien": "http://www.plumobile.ca/",
+        "desserte": ["Québec", "la Côte-de-Beaupré et l'Ile d'Orléans"],
+        "dates": "7 jrs"
+    },
+    {
+        "region": "Québec et Charlevoix",
+        "transporteur": "Train de Charlevoix",
+        "lien": "http://traindecharlevoix.com/",
+        "desserte": ["Québec (Beauport)", "La Malbaie"],
+        "dates": "7 jrs"
+    },
+    {
+        "region": "Gaspésie",
+        "transporteur": "RÉGIM",
+        "lien": "https://regim.info/",
+        "desserte": ["Les différentes communautés de la région"],
+        "dates": "LUN–VEN"
+    }
+]

@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { ExternalLink } from "react-external-link";
 
+import TableauRegions from "./comp/TableauRegions";
+
 const ABCDEF = () => {
     return (
         <TrRegional>
@@ -11,6 +13,7 @@ const ABCDEF = () => {
             <h2>Se déplacer dans les régions du Québec</h2>
             <p>Quelques transporteurs en dehors de Montréal offrent la combinaison vélo-bus ou vélo-train sur une échelle régionale, c'est-à-dire pour des distances de quelques dizaines de kilomètres. Cette catégorie s'avère utile en voyage pour sauter par-dessus une étape particulièrement difficile, par exemple entre Ste-Anne-de-Beaupré et Baie-St-Paul (Charlevoix), ou dans le nord-est de la Gaspésie.</p>
             <div>Tableau</div>
+            <TableauRegions />
         </TrRegional>
     )
 }
