@@ -48,6 +48,7 @@ const Partie1 = ({boiteOuverte, setBoiteOuverte}) => {
 
     return (
         <Wrapper>
+            <h2>Concevoir un plan</h2>
             <Boite>
                 <h3 onClick={() => ouvrirFermer(0)}>
                     <span>Choisir son style d'aventure</span>
@@ -132,7 +133,7 @@ const Partie1 = ({boiteOuverte, setBoiteOuverte}) => {
             </Boite>
             <Boite>
                 <h3 onClick={() => ouvrirFermer(4)}>
-                    <span>Le meilleur moment de l'année...</span>
+                    <span>Le meilleur moment de l'année</span>
                     {
                         boiteOuverte === 4
                             ? <FontAwesomeIcon icon={faAngleDoubleUp} />
@@ -193,11 +194,23 @@ const Partie1 = ({boiteOuverte, setBoiteOuverte}) => {
 const Wrapper = styled.div``
 
 const Boite = styled.div`
+    background-color: var(--c2);
+    border-radius: 10px;
     h3 {
+        background-color: var(--c3);
+        border-radius: 10px;
         cursor: pointer;
+        padding: 10px 20px;
+        transition: all 0.2s;
+        &:hover {
+            background-color: var(--c1);
+            transition: all 0.2s;
+        }
     }
 `
 
-const Infos = styled.div``
+const Infos = styled.div`
+    padding: 0 20px 20px;
+`
 
 export default Partie1;
