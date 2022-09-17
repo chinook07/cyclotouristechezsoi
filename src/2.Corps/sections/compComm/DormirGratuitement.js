@@ -1,12 +1,19 @@
 import styled from "styled-components";
+import { useState } from "react";
 import { ExternalLink } from "react-external-link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import interditParDefault from "./donnees/interditParDefault.json"
 import { faAngleRight, faAnglesRight } from "@fortawesome/free-solid-svg-icons";
 import CarteCampings from "./comp/CarteCampings";
+import FormAjout from "./comp/FormAjout";
 
 const DormirGratuitement = () => {
+
+    const [montrerAjoutCarte, setMontrerAjoutCarte] = useState(false);
+
+    const alternerFormulaire = () => montrerAjoutCarte ? setMontrerAjoutCarte(false) : setMontrerAjoutCarte(true);
+
     return (
         <Wrapper>
             <p>Il est possible de voyager à vélo sans toujours devoir débourser un montant parfois dérisoire chaque nuit. Les campings privés offrent souvent des activités, une piscine, des attraits touristiques et la possibilité d'y passer ses vacances sans sortir de son véhicule motorisé. Par contre, le cyclotouriste arrive normalement à l'heure du souper pour repartir tôt le lendemain, en profitant d'un bloc sanitaire et d'une table à piquenique. Or, une personne voulant manger un sandwich et une salade n'irait pas à un buffet cinq étoiles. Sous cette même optique, il existe des solutions de rechange aux campings payants.</p>
@@ -30,14 +37,19 @@ const DormirGratuitement = () => {
             <h2>C'est quoi le principe du <ExternalLink href="https://www.sanstrace.ca/principes">Sans trace?</ExternalLink></h2>
             <p>Il s'agit de laisser le site de camping dans le même état qu'avant son séjour. En résumé, on protège la végétation, on évite les feux et on rapporte ses déchets. Ça veut aussi dire qu'on ne harcèle pas les écureuils... même si c'est trop tentant!</p>
             <h2>Comment ajouter un emplacement de camping?</h2>
-            <p>
+            {/* <p>
                 <FontAwesomeIcon icon={faAngleRight} />
                 <span>Si vous n'avez qu'un ou deux sites à ajouter, veuillez remplir ce court formulaire.</span>
             </p>
             <p>
                 <FontAwesomeIcon icon={faAnglesRight} />
                 <span>À venir...</span>
-            </p>
+            </p> */}
+            <p onClick={alternerFormulaire}>En utilisant ce formulaire.</p>
+            {
+                montrerAjoutCarte &&
+                <FormAjout />
+            }
             <h2>J'aimerais proposer aux cyclotouristes de monter leurs tentes dans ma cour arrière.</h2>
             <p>Texte à venir...</p>
         </Wrapper>

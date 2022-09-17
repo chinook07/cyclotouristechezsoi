@@ -1,7 +1,10 @@
 import styled from "styled-components";
+import { useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup, ScaleControl, LayersControl } from "react-leaflet";
+import { LatLng } from "leaflet";
 
 const CarteCampings = () => {
+
     return (
         <Carte
             center={[46, -73]}
