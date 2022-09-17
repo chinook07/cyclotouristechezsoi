@@ -39,6 +39,7 @@ const DormirGratuitement = () => {
                 <span>À venir...</span>
             </p>
             <h2>J'aimerais proposer aux cyclotouristes de monter leurs tentes dans ma cour arrière.</h2>
+            <p>Texte à venir...</p>
         </Wrapper>
     )
 }

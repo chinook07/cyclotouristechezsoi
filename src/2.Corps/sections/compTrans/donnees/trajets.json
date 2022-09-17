@@ -45,10 +45,77 @@
         "trajet" : "Lien entre Montréal, Val-d'Or et Rouyn-Noranda.",
         "heures" : "7 jours sur 7"
     },
-    "12" : {
-        "infoA" : "texteA",
-        "infoB" : "texteB",
-        "icone" : [1, 5, 8]
+    "11" : {
+        "icone" : [2, 6, 7, 8],
+        "transporteur" : "Autobus Maheux",
+        "trajet" : "Lien entre Val-d'Or, Matagami et Chisasibi.",
+        "heures" : "2 départs par semaine"
+    },
+    "20" : {
+        "icone" : [2, 6, 7, 8],
+        "transporteur" : "Autobus Maheux",
+        "trajet" : "Lien entre Montréal, Gatineau et Ottawa.",
+        "heures" : "2 départs par semaine"
+    },
+    "21" : {
+        "icone" : [2, 6, 7, 8],
+        "transporteur" : "Autobus Maheux",
+        "trajet" : "Lien entre Grand-Remous, Gatineau et Ottawa.",
+        "heures" : "sur semaine seulement"
+    },
+    "30" : {
+        "icone" : [2, 6, 7, 8],
+        "transporteur" : "Autobus Galland",
+        "trajet" : "Lien entre Montréal, Mont-Tremblant et Mont-Laurier.",
+        "heures" : "7 jours sur 7"
+    },
+    "40" : {
+        "icone" : [2, 6, 7, 8],
+        "transporteur" : "Limocar",
+        "trajet" : "Lien entre Montréal, Magog et Sherbrooke.",
+        "heures" : "7 jours sur 7"
+    },
+    "50" : {
+        "icone" : [2, 6, 7, 8],
+        "transporteur" : "Orléans Express",
+        "trajet" : "Lien entre Montréal et Québec.",
+        "heures" : "7 jours sur 7"
+    },
+    "51" : {
+        "icone" : [2, 6, 7, 8],
+        "transporteur" : "Orléans Express",
+        "trajet" : "Lien entre Montréal, Trois-Rivières et Québec.",
+        "heures" : "7 jours sur 7"
+    },
+    "52" : {
+        "icone" : [2, 6, 7, 8],
+        "transporteur" : "Orléans Express",
+        "trajet" : "Lien entre Montréal, Victoriaville et Québec.",
+        "heures" : "2 départs par semaine"
+    },
+    "53" : {
+        "icone" : [2, 6, 7, 8],
+        "transporteur" : "Orléans Express",
+        "trajet" : "Lien entre Montréal, Ottawa et Gatineau.",
+        "heures" : "7 jours sur 7"
+    },
+    "60" : {
+        "icone" : [2, 6, 7, 8],
+        "transporteur" : "Orléans Express",
+        "trajet" : "Lien entre Québec et Rimouski.",
+        "heures" : "7 jours sur 7"
+    },
+    "61" : {
+        "icone" : [2, 6, 7, 8],
+        "transporteur" : "Orléans Express",
+        "trajet" : "Lien entre Rimouski, Matane et Gaspé.",
+        "heures" : "7 jours sur 7"
+    },
+    "62" : {
+        "icone" : [2, 6, 7, 8],
+        "transporteur" : "Orléans Express",
+        "trajet" : "Lien entre Rimouski, Percé et Gaspé.",
+        "heures" : "7 jours sur 7"
     },
     "100" : {
         "icone" : [1, 5, 8],
@@ -79,5 +146,64 @@
         "transporteur" : "exo",
         "trajet" : "Lien entre Montréal et Mont-Saint-Hilaire.",
         "heures" : "sur semaine seulement, principalement à l'heure de pointe."
+    },
+    "120" : {
+        "icone" : [3, 5, 10],
+        "transporteur" : "exo",
+        "trajet" : "Circuit 1 – Lien entre Montréal et Salaberry-de-Valleyfield.",
+        "heures" : "7 jours sur 7."
+    },
+    "121" : {
+        "icone" : [3, 5, 10],
+        "transporteur" : "exo",
+        "trajet" : "Circuits 31/32 – Lien entre Montréal et Châteauguay.",
+        "heures" : "7 jours sur 7."
+    },
+    "130" : {
+        "icone" : [3, 5, 10],
+        "transporteur" : "exo",
+        "trajet" : "Circuit 200 – Lien entre Longueuil, Mont-Saint-Hilaire et Saint-Hyacinthe.",
+        "heures" : "7 jours sur 7."
+    },
+    "160" : {
+        "icone" : [3, 5, 10],
+        "transporteur" : "exo",
+        "trajet" : "Circuit 19 – Lien entre Laval et Terrebonne.",
+        "heures" : "7 jours sur 7."
+    },
+    "161" : {
+        "icone" : [3, 5, 10],
+        "transporteur" : "exo",
+        "trajet" : "Circuit 25/25B – Lien entre Montréal et Terrebonne.",
+        "heures" : "7 jours sur 7."
+    },
+    "162" : {
+        "icone" : [3, 5, 10],
+        "transporteur" : "exo",
+        "trajet" : "Circuit 30 – Lien entre Montréal et Terrebonne.",
+        "heures" : "7 jours sur 7."
+    },
+    "163" : {
+        "icone" : [3, 5, 10],
+        "transporteur" : "exo",
+        "trajet" : "Circuit 40/140 – Lien entre Montréal et Terrebonne.",
+        "heures" : "7 jours sur 7."
+    },
+    "170" : {
+        "icone" : [3, 5, 10],
+        "transporteur" : "exo",
+        "trajet" : "Circuit 8 – Lien entre Laval et Saint-Eustache.",
+        "heures" : "7 jours sur 7."
+    },
+    "171" : {
+        "icone" : [3, 5, 10],
+        "transporteur" : "exo",
+        "trajet" : "Circuit 9 – Lien entre Laval, Sainte-Thérèse et Saint-Jérôme.",
+        "heures" : "7 jours sur 7."
+    },
+    "999" : {
+        "infoA" : "texteA",
+        "infoB" : "texteB",
+        "icone" : [1, 5, 8]
     }
 }
