@@ -1,17 +1,40 @@
 import styled from "styled-components";
-import { useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup, ScaleControl, LayersControl } from "react-leaflet";
-import { LatLng } from "leaflet";
+import { useState, useEffect } from "react";
+import { MapContainer, TileLayer, ScaleControl, GeoJSON, Popup } from "react-leaflet";
 
 const CarteCampings = () => {
+
+    const [lesSites, setLesSites] = useState({});
+    const [cartePrete, setCartePrete] = useState(false);
+
+    const rendreCompatible = (donnees) => {
+        donnees.features.forEach(item => item.type = "Feature");
+        setLesSites(donnees)
+        setCartePrete(true);
+    }
+
+    const surChaque = (feature, layer) => {
+        let contenu = `Description : ${feature.properties.description}<br/>Type : ${feature.properties.type}`;
+        layer.bindPopup(contenu)
+        console.log(feature, layer);
+    }
+
+    useEffect(() => {
+        fetch("/api/tous-sites")
+            .then(res => res.json())
+            .then(data => {
+                setLesSites(data.collection)
+                rendreCompatible(data.collection)
+            })
+    }, [])
+
+    
 
     return (
         <Carte
             center={[46, -73]}
             zoom={8}
         >
-            
-            
             {/* <LayersControl position="topright">
                 <LayersControl.Overlay name="CyclOSM"> */}
                     <TileLayer
@@ -29,6 +52,13 @@ const CarteCampings = () => {
                 </LayersControl.Overlay>
             </LayersControl> */}
             <ScaleControl imperial={false} position="topright"></ScaleControl>
+            
+            {
+                cartePrete &&
+                <GeoJSON data={lesSites} onEachFeature={surChaque} />
+            }
+            
+            
             {/* <Marker position={[45.2, -73.3]}>
             </Marker> */}
         </Carte>
