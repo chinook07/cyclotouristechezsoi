@@ -10,6 +10,25 @@ const options = {
 const client = new MongoClient(MONGO_URI, options);
 const db = client.db();
 
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+    destination: uploading = (request, file, callback) => {
+        callback(null, "./public/uploads/images");
+    },
+    // rajouter ext
+    filename: rajouter = (request, file, callback) => {
+        callback(null, Date.now() + file.originalname)
+    }
+});
+
+const uploading = multer({
+    storage: storage,
+    limits: {
+        fieldSize: 1024*1024*5
+    }
+})
+
 const openSesame = async () => {
     await client.connect();
     console.log("connected!");
@@ -21,9 +40,12 @@ const closeSesame = async () => {
 }
 
 const nouveauSite = async (req, res) => {
-    const {type, properties, geometry} = req.body;
+    const { type, properties, geometry } = req.body;
+    console.log(req.file);
     await openSesame();
-    await db.collection("dormir").insertOne({type, properties, geometry});
+    const sites = await db.collection("dormir").find().toArray();
+    const nombre = sites.length + 1001
+    await db.collection("dormir").insertOne({_id: nombre, type, properties, geometry});
     await closeSesame();
     return res.status(201).json({ status: 201, message: `nouveau site` })
 }

@@ -16,6 +16,8 @@
         "dotenv": "^16.0.2",
         "leaflet": "^1.8.0",
         "leaflet-control-geocoder": "^2.4.0",
+        "rc-progress": "^3.4.0",
+        "rc-upload": "^4.3.4",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-external-link": "^2.0.0",

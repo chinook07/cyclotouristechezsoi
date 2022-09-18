@@ -3,6 +3,9 @@ import { useState, useContext } from "react";
 
 import CarteAjout from "./CarteAjout";
 import { CycloContext } from "../../../../CycloContext";
+import TypeDeSite from "./TypeDeSite";
+import TelevPhotos from "./TelevPhotos";
+import Contributeur from "./Contributeur";
 
 const FormAjout = () => {
 
@@ -16,8 +19,6 @@ const FormAjout = () => {
         legit: false
     });
 
-    const [aEnvoyer, setAEnvoyer] = useState({})
-
     const mAJDescription = (e) => setChamps(prec => ({ ...prec, description: e.target.value }));
     const mAJNom = (e) => setChamps(prec => ({ ...prec, nom: e.target.value }));
     const mAJCourriel = (e) => setChamps(prec => ({ ...prec, courriel: e.target.value }));
@@ -27,17 +28,6 @@ const FormAjout = () => {
     const ajoutSite = (e) => {
         e.preventDefault()
         if (coordAjout.lat) {
-            setAEnvoyer({
-                "type": "Feature",
-                "properties": {
-                    "description": champs.description,
-                    "type": champs.type
-                },
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [coordAjout.lng, coordAjout.lat]
-                }
-            });
             fetch("/api/nouveau-site", {
                 method: "POST",
                 headers: {
@@ -64,7 +54,7 @@ const FormAjout = () => {
     }
     
     return (
-        <Wrapper onSubmit={ajoutSite}>
+        <Wrapper onSubmit={ajoutSite} encType="multipart/form-data">
             <fieldset>
                 <legend>Ajout d'un site de camping</legend>
                 <p>Cliquez sur la carte pour définir l'emplacement du terrain. Si vous faites une erreur, cliquez de nouveau. Un marqueur apparaitra au bon endroit.</p>
@@ -89,56 +79,9 @@ const FormAjout = () => {
                     required
                     value={champs.description}
                 />
-                <Type>
-                    <span>Type d'emplacement</span>
-                    <div>
-                        <label>
-                            <input
-                                name="typeCamping"
-                                onChange={mAJType}
-                                required
-                                type="radio"
-                                value="site_non-officiel"
-                            ></input>
-                            <span>Site non-officiel</span>
-                        </label>
-                        <label>
-                            <input
-                                name="typeCamping"
-                                onChange={mAJType}
-                                required
-                                type="radio"
-                                value="site_officiel"
-                            ></input>
-                            <span>Site officiel pour cyclistes seulement OU à faible cout / gratuit</span>
-                        </label>
-                        <label>
-                            <input
-                                name="typeCamping"
-                                onChange={mAJType}
-                                required
-                                type="radio"
-                                value="site_proprio"
-                            ></input>
-                            <span>Site offert par un propriétaire</span>
-                        </label>
-                    </div>
-                </Type>
-                <Contributeur>
-                    <input
-                        onChange={mAJNom}
-                        placeholder="Nom (facultatif)"
-                        type="text"
-                        value={champs.nom}
-                    />
-                    <input
-                        onChange={mAJCourriel}
-                        placeholder="Courriel"
-                        required
-                        type="email"
-                        value={champs.courriel}
-                    />
-                </Contributeur>
+                <TelevPhotos />
+                <TypeDeSite mAJType={mAJType} />
+                <Contributeur mAJNom={mAJNom} mAJCourriel={mAJCourriel} champs={champs} />
                 <Legit>
                     <input
                         onChange={mAJLegit}
@@ -148,7 +91,7 @@ const FormAjout = () => {
                     />
                     <span>J'ai visité cet endroit et je me sentirais en sécurité dormir ici. Si j'ai un site offert par un ou une propriétaire, je confirme être celui-ci ou avoir la permission d'offrir l'hébergement sur mon terrain.</span>
                 </Legit>
-                <button type="submit">Ajouter</button>
+                <Envoyer type="submit">Ajouter</Envoyer>
             </fieldset>
         </Wrapper>
     )
@@ -163,17 +106,6 @@ const Wrapper = styled.form`
             padding: 5px 10px;
         }
         background-color: var(--c2);
-        button {
-            background-color: var(--c1);
-            border-radius: 10px;
-            cursor: pointer;
-            display: block;
-            margin: 10px auto;
-            padding: 10px 15px;
-            &:hover {
-                box-shadow: 1px 1px var(--c6);
-            }
-        }
     }
 `
 
@@ -196,31 +128,20 @@ const Description = styled.textarea`
     width: 100%;
 `
 
-const Type = styled.label`
-    display: block;
-    margin: 10px auto;
-    text-align: center;
-    div {
-        display: flex;
-        flex-direction: column;
-        margin-top: 10px;
-    }
-`
-
-const Contributeur = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: 10px 0;
-    > input {
-        border-radius: 5px;
-        margin: 0 5px;
-        padding: 5px;
-    }
-`
-
 const Legit = styled.label`
     text-align: center;
+`
+
+const Envoyer = styled.button`
+    background-color: var(--c1);
+    border-radius: 10px;
+    cursor: pointer;
+    display: block;
+    margin: 10px auto;
+    padding: 10px 15px;
+    &:hover {
+        box-shadow: 1px 1px var(--c6);
+    }
 `
 
 export default FormAjout;

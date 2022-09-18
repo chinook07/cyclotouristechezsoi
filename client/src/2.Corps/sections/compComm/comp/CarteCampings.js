@@ -15,8 +15,12 @@ const CarteCampings = () => {
 
     const surChaque = (feature, layer) => {
         let contenu = `Description : ${feature.properties.description}<br/>Type : ${feature.properties.type}`;
+        let couleur;
+        if (feature.properties.type === "Site non-officiel") couleur = "green";
+        if (feature.properties.type === "Site officiel pour cyclistes seulement OU à faible cout / gratuit") couleur = "blue";
+        if (feature.properties.type === "Site offert par un propriétaire") couleur = "red";
+        console.log(couleur);
         layer.bindPopup(contenu)
-        console.log(feature, layer);
     }
 
     useEffect(() => {
@@ -55,7 +59,7 @@ const CarteCampings = () => {
             
             {
                 cartePrete &&
-                <GeoJSON data={lesSites} onEachFeature={surChaque} />
+                <Site data={lesSites} onEachFeature={surChaque} />
             }
             
             
@@ -68,6 +72,12 @@ const CarteCampings = () => {
 const Carte = styled(MapContainer)`
     height: 500px;
     width: 100%;
+`
+
+const Site = styled(GeoJSON)`
+    img {
+        width: 10px;
+    }
 `
 
 export default CarteCampings;
