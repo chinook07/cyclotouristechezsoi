@@ -38,7 +38,6 @@ const FormAjout = () => {
                     "coordinates": [coordAjout.lng, coordAjout.lat]
                 }
             });
-            console.log(aEnvoyer);
             fetch("/api/nouveau-site", {
                 method: "POST",
                 headers: {
@@ -58,9 +57,7 @@ const FormAjout = () => {
                 })
             })
                 .then(res => res.json())
-                .then((req) => {
-                    // console.log(req);
-                })
+                .then(req => console.log(req))
         } else {
             console.log("non");
         }
