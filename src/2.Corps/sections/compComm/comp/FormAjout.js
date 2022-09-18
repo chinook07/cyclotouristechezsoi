@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useContext } from "react";
+import { useState, useContext } from "react";
 
 import CarteAjout from "./CarteAjout";
 import { CycloContext } from "../../../../CycloContext";
@@ -8,15 +8,46 @@ const FormAjout = () => {
 
     const { coordAjout } = useContext(CycloContext);
 
+    const [champs, setChamps] = useState({
+        description: "",
+        nom: "",
+        courriel: "",
+        type: "",
+        legit: false
+    });
+
+    const [aEnvoyer, setAEnvoyer] = useState({})
+
+    const mAJDescription = (e) => setChamps(prec => ({ ...prec, description: e.target.value }));
+    const mAJNom = (e) => setChamps(prec => ({ ...prec, nom: e.target.value }));
+    const mAJCourriel = (e) => setChamps(prec => ({ ...prec, courriel: e.target.value }));
+    const mAJType = (e) => setChamps(prec => ({ ...prec, type: e.target.value }));
+    const mAJLegit = (e) => setChamps(prec => ({ ...prec, legit: e.target.checked }));
+
     const ajoutSite = (e) => {
         e.preventDefault()
-        console.log("ajout site");
+        if (coordAjout.lat) {
+            setAEnvoyer({
+                "type": "Feature",
+                "properties": {
+                    "description": champs.description,
+                    "type": champs.type
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [coordAjout.lng, coordAjout.lat]
+                }
+            });
+        } else {
+            console.log("non");
+        }
     }
     
     return (
         <Wrapper onSubmit={ajoutSite}>
             <fieldset>
                 <legend>Ajout d'un site de camping</legend>
+                <p>Cliquez sur la carte pour définir l'emplacement du terrain. Si vous faites une erreur, cliquez de nouveau. Un marqueur apparaitra au bon endroit.</p>
                 <CarteAjout />
                 {
                     coordAjout.lat &&
@@ -31,33 +62,70 @@ const FormAjout = () => {
                         </div>
                     </Endroit>
                 }
-                
                 <Description
+                    onChange={mAJDescription}
                     placeholder="Description détaillée : accès, quiétude, services, etc."
                     rows="10"
                     required
+                    value={champs.description}
                 />
                 <Type>
                     <span>Type d'emplacement</span>
-                    <select>
-                        <option value="bivouac">Site non-officiel</option>
-                        <option value="rustique">Site officiel pour cyclistes seulement OU à faible cout / gratuit</option>
-                        <option value="proprio">Site offert par un propriétaire</option>
-                    </select>
+                    <div>
+                        <label>
+                            <input
+                                name="typeCamping"
+                                onChange={mAJType}
+                                required
+                                type="radio"
+                                value="site_non-officiel"
+                            ></input>
+                            <span>Site non-officiel</span>
+                        </label>
+                        <label>
+                            <input
+                                name="typeCamping"
+                                onChange={mAJType}
+                                required
+                                type="radio"
+                                value="site_officiel"
+                            ></input>
+                            <span>Site officiel pour cyclistes seulement OU à faible cout / gratuit</span>
+                        </label>
+                        <label>
+                            <input
+                                name="typeCamping"
+                                onChange={mAJType}
+                                required
+                                type="radio"
+                                value="site_proprio"
+                            ></input>
+                            <span>Site offert par un propriétaire</span>
+                        </label>
+                    </div>
                 </Type>
                 <Contributeur>
                     <input
+                        onChange={mAJNom}
                         placeholder="Nom (facultatif)"
                         type="text"
+                        value={champs.nom}
                     />
                     <input
-                        placeholder="courriel"
+                        onChange={mAJCourriel}
+                        placeholder="Courriel"
                         required
                         type="email"
+                        value={champs.courriel}
                     />
                 </Contributeur>
                 <Legit>
-                    <input type="checkbox" required />
+                    <input
+                        onChange={mAJLegit}
+                        type="checkbox"
+                        required
+                        value={champs.legit}
+                    />
                     <span>J'ai visité cet endroit et je me sentirais en sécurité dormir ici. Si j'ai un site offert par un ou une propriétaire, je confirme être celui-ci ou avoir la permission d'offrir l'hébergement sur mon terrain.</span>
                 </Legit>
                 <button type="submit">Ajouter</button>
@@ -98,26 +166,24 @@ const Endroit = styled.div`
         flex-wrap: wrap;
         justify-content: center;
         width: 50%;
-        span {
-            /* background-color: inherit; */
-        }
     }
 `
 
 const Description = styled.textarea`
     border-radius: 5px;
+    margin: 10px 0;
     padding: 10px;
     width: 100%;
 `
 
 const Type = styled.label`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    select {
-        border-radius: 5px;
-        padding: 5px;
-        width: 40%;
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+    div {
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
     }
 `
 
@@ -133,6 +199,8 @@ const Contributeur = styled.div`
     }
 `
 
-const Legit = styled.label``
+const Legit = styled.label`
+    text-align: center;
+`
 
 export default FormAjout;
