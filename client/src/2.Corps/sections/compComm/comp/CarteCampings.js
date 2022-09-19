@@ -6,6 +6,9 @@ import { MapContainer, TileLayer, ScaleControl, GeoJSON, LayersControl, useMapEv
 const CarteCampings = () => {
 
     const [lesSites, setLesSites] = useState({});
+    const [lesSitesA, setLesSitesA] = useState({});
+    const [lesSitesB, setLesSitesB] = useState({});
+    const [lesSitesC, setLesSitesC] = useState({});
     const [cartePrete, setCartePrete] = useState(false);
     const [position, setPosition] = useState(null);
 
@@ -15,8 +18,34 @@ const CarteCampings = () => {
     })
 
     const rendreCompatible = (donnees) => {
-        donnees.features.forEach(item => item.type = "Feature");
-        setLesSites(donnees)
+        let sitesA = {
+            type: "FeatureCollection",
+            features: []
+        };
+        let sitesB = {
+            type: "FeatureCollection",
+            features: []
+        };
+        let sitesC = {
+            type: "FeatureCollection",
+            features: []
+        };
+        donnees.features.forEach(item => {
+            item.type = "Feature";
+            if (item.properties.type === "Site non-officiel") {
+                sitesA.features.push(item)
+                setLesSitesA(sitesA)
+            };
+            if (item.properties.type === "Site officiel pour cyclistes seulement OU à faible cout / gratuit") {
+                sitesB.features.push(item)
+                setLesSitesB(sitesB)
+            };
+            if (item.properties.type === "Site offert par un propriétaire") {
+                sitesC.features.push(item)
+                setLesSitesC(sitesC)
+            };
+        });
+        setLesSites(donnees);
         setCartePrete(true);
     }
 
@@ -33,12 +62,11 @@ const CarteCampings = () => {
         fetch("/api/tous-sites")
             .then(res => res.json())
             .then(data => {
+                console.log(data);
                 setLesSites(data.collection)
                 rendreCompatible(data.collection)
             })
     }, [])
-
-    
 
     const LocationControl = () => {
         const map = useMapEvents({
@@ -63,28 +91,43 @@ const CarteCampings = () => {
             zoom={8}
         >
             <LayersControl position="topright">
-                <LayersControl.Overlay name="CyclOSM" checked>
+                <LayersControl.BaseLayer name="CyclOSM" checked>
                     <TileLayer
                         minZoom={5}
                         url="https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png"
                         attribution='<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases" title="CyclOSM - Open Bicycle render">CyclOSM</a> | Données: &copy; contributeurs <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                     />
-                </LayersControl.Overlay>
-                <LayersControl.Overlay name="Esri">
+                </LayersControl.BaseLayer>
+                <LayersControl.BaseLayer name="Esri">
                     <TileLayer
                         minZoom={5}
                         url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
                         attribution='Tuiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, et la communauté des utilisateurs des SIG'
                     />
+                </LayersControl.BaseLayer>
+                <LayersControl.Overlay name="Sites non-officiels" checked>
+                    {
+                        cartePrete &&
+                        <Sites data={lesSitesA} onEachFeature={surChaque} />
+                    }
+                </LayersControl.Overlay>
+                <LayersControl.Overlay name="Sites officiels pour cyclistes seulement OU à faible cout / gratuit" checked>
+                    {
+                        cartePrete &&
+                        <Sites data={lesSitesB} onEachFeature={surChaque} />
+                    }
+                </LayersControl.Overlay>
+                <LayersControl.Overlay name="Sites offerts par un propriétaire" checked>
+                    {
+                        cartePrete &&
+                        <Sites data={lesSitesC} onEachFeature={surChaque} />
+                    }
                 </LayersControl.Overlay>
             </LayersControl>
-            <LayerGroup></LayerGroup>
+            
             <ScaleControl imperial={false} position="topright"></ScaleControl>
             <LocationControl />
-            {
-                cartePrete &&
-                <Sites data={lesSites} onEachFeature={surChaque} />
-            }
+            
         </Carte>
     )
 }
@@ -95,6 +138,7 @@ const Carte = styled(MapContainer)`
 `
 
 const Sites = styled(GeoJSON)`
+    color: var(--c1);
 `
 
 export default CarteCampings;

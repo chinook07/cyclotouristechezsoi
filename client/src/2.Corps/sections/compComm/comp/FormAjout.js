@@ -43,6 +43,10 @@ const FormAjout = () => {
                     geometry: {
                         type: "Point",
                         coordinates: [coordAjout.lng, coordAjout.lat]
+                    },
+                    contributeur: {
+                        nom: champs.nom,
+                        courriel: champs.courriel
                     }
                 })
             })

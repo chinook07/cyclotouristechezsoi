@@ -40,12 +40,13 @@ const closeSesame = async () => {
 }
 
 const nouveauSite = async (req, res) => {
-    const { type, properties, geometry } = req.body;
+    const { type, properties, geometry, contributeurs } = req.body;
     console.log(req.file);
     await openSesame();
     const sites = await db.collection("dormir").find().toArray();
     const nombre = sites.length + 1001
-    await db.collection("dormir").insertOne({_id: nombre, type, properties, geometry});
+    db.collection("dormir").insertOne({ _id: nombre, type, properties, geometry });
+    db.collection("contributeurs").insertOne({ _id: nombre, contributeurs })
     await closeSesame();
     return res.status(201).json({ status: 201, message: `nouveau site` })
 }
