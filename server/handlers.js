@@ -12,22 +12,22 @@ const db = client.db();
 
 const multer = require("multer");
 
-const storage = multer.diskStorage({
-    destination: uploading = (request, file, callback) => {
-        callback(null, "./public/uploads/images");
-    },
-    // rajouter ext
-    filename: rajouter = (request, file, callback) => {
-        callback(null, Date.now() + file.originalname)
-    }
-});
+// const storage = multer.diskStorage({
+//     destination: uploading = (request, file, callback) => {
+//         callback(null, "./public/uploads/images");
+//     },
+//     // rajouter ext
+//     filename: rajouter = (request, file, callback) => {
+//         callback(null, Date.now() + file.originalname)
+//     }
+// });
 
-const uploading = multer({
-    storage: storage,
-    limits: {
-        fieldSize: 1024*1024*5
-    }
-})
+// const uploading = multer({
+//     storage: storage,
+//     limits: {
+//         fieldSize: 1024*1024*5
+//     }
+// })
 
 const openSesame = async () => {
     await client.connect();
