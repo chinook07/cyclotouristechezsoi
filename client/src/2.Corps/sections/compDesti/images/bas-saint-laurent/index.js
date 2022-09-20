@@ -1,0 +1,12 @@
+export { default as Gal01 } from "./bas-saint-laurent-1.jpg";
+export { default as Gal02 } from "./bas-saint-laurent-2.jpg";
+export { default as Gal03 } from "./bas-saint-laurent-3.jpg";
+export { default as Gal04 } from "./bas-saint-laurent-4.jpg";
+export { default as Gal05 } from "./bas-saint-laurent-5.jpg";
+export { default as Gal06 } from "./bas-saint-laurent-6.jpg";
+export { default as Gal07 } from "./bas-saint-laurent-7.jpg";
+export { default as Gal08 } from "./bas-saint-laurent-8.jpg";
+export { default as Gal09 } from "./bas-saint-laurent-9.jpg";
+export { default as Gal10 } from "./bas-saint-laurent-10.jpg";
+export { default as Gal11 } from "./bas-saint-laurent-11.jpg";
+export { default as Gal12 } from "./bas-saint-laurent-12.jpg";

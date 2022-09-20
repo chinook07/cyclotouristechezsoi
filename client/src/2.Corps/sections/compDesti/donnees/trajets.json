@@ -1,5 +1,6 @@
 [
     {
+        "id" : 0,
         "trajet" : "Abitibi-Témiscamingue",
         "intro" : "Cette région n'est pas seulement l'idéale pour observer (et se faire piquer par) la faune entomologique, mais aussi pour rouler à travers de grands espaces sur de longues routes ou d'anciennes voies ferrées.",
         "distance" : 340,
@@ -14,6 +15,7 @@
         "deA" : ["Ville-Marie", "Val-d'Or"]
     },
     {
+        "id" : 1,
         "trajet" : "Bas-Saint-Laurent",
         "intro" : "Au fur et au mesure que l'on avance vers l'est, le fleuve s'élargit, les paysages deviennent plus grandioses, et éventuellement, l'odeur de la mer remplit nos narines.",
         "distance" : 330,
@@ -31,6 +33,7 @@
         "deA" : ["Québec", "Rimouski"]
     },
     {
+        "id" : 2,
         "trajet" : "Beauce",
         "intro" : "Voici un couloir cyclable s'étirant de la Capitale-Nationale jusqu'à la frontière de nos voisins au sud. Ici, la rivière Chaudière n'est jamais trop loin.",
         "distance" : 165,
@@ -45,6 +48,7 @@
         "deA" : ["Québec", "Maine (É.-U.)"]
     },
     {
+        "id" : 3,
         "trajet" : "Bécancour – Sutton",
         "intro" : "",
         "distance" : 111,

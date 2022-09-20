@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { ExternalLink } from "react-external-link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import GalerieDuTrajet from "./GalerieDuTrajet";
 import trajetsDB from "../donnees/trajets.json";
 import { faBicycle, faCheck, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import { Abitibi, BasSaintLaurent } from "../schemas";
@@ -91,6 +92,7 @@ const DetailsDuTrajet = ({ itineraire, changerTrajet }) => {
             </div>
             <h3>Galerie des photos</h3>
             <p>Cliquez sur les images ci-dessous pour rêver!</p>
+            <GalerieDuTrajet details={details} />
         </Wrapper>
     )
 }
