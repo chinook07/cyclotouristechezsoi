@@ -52,6 +52,7 @@ const FormAjout = () => {
             })
                 .then(res => res.json())
                 .then(req => console.log(req))
+                .catch(err => console.log(err))
         } else {
             console.log("non");
         }

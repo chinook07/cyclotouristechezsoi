@@ -40,20 +40,19 @@ const closeSesame = async () => {
 }
 
 const nouveauSite = async (req, res) => {
-    const { type, properties, geometry, contributeurs } = req.body;
-    console.log(req.file);
+    const { type, properties, geometry, contributeur } = req.body;
     await openSesame();
-    const sites = await db.collection("dormir").find().toArray();
-    const nombre = sites.length + 1001
-    db.collection("dormir").insertOne({ _id: nombre, type, properties, geometry });
-    db.collection("contributeurs").insertOne({ _id: nombre, contributeurs })
+    const sites = await db.collection("sites").find().toArray();
+    const nombre = sites.length + 1001;
+    await db.collection("sites").insertOne({ _id: nombre, type, properties, geometry });
+    await db.collection("contributeurs").insertOne({ _id: nombre, contributeur })
     await closeSesame();
     return res.status(201).json({ status: 201, message: `nouveau site` })
 }
 
 const tousSites = async (req, res) => {
     await openSesame();
-    const sites = await db.collection("dormir").find().toArray();
+    const sites = await db.collection("sites").find().toArray();
     await closeSesame();
     const collection = {
         "type": "FeatureCollection",

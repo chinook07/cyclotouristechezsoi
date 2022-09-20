@@ -45,7 +45,7 @@ const CarteCampings = () => {
                 setLesSitesC(sitesC)
             };
         });
-        setLesSites(donnees);
+        // setLesSites(donnees);
         setCartePrete(true);
     }
 
@@ -63,7 +63,7 @@ const CarteCampings = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                setLesSites(data.collection)
+                // setLesSites(data.collection)
                 rendreCompatible(data.collection)
             })
     }, [])
@@ -98,7 +98,14 @@ const CarteCampings = () => {
                         attribution='<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases" title="CyclOSM - Open Bicycle render">CyclOSM</a> | Données: &copy; contributeurs <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                     />
                 </LayersControl.BaseLayer>
-                <LayersControl.BaseLayer name="Esri">
+                <LayersControl.BaseLayer name="OpenStreetMap">
+                    <TileLayer
+                        minZoom={5}
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        attribution='<a href="https://openstreetmap.org/copyright" title="OpenStreetMap Copyright">OpenStreetMap</a> | Données: &copy; contributeurs <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                    />
+                </LayersControl.BaseLayer>
+                <LayersControl.BaseLayer name="Esri (satellite)">
                     <TileLayer
                         minZoom={5}
                         url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
