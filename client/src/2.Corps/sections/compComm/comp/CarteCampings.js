@@ -118,7 +118,7 @@ const CarteCampings = () => {
                         <Sites data={lesSitesA} onEachFeature={surChaque} />
                     }
                 </LayersControl.Overlay>
-                <LayersControl.Overlay name="Sites officiels pour cyclistes seulement OU à faible cout / gratuit" checked>
+                <LayersControl.Overlay name="Sites pour cyclistes seulement OU à faible cout / gratuits" checked>
                     {
                         cartePrete &&
                         <Sites data={lesSitesB} onEachFeature={surChaque} />
