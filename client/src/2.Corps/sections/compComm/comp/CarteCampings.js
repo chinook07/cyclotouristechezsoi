@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
+
 import { Icon } from "leaflet";
 import { MapContainer, TileLayer, ScaleControl, GeoJSON, LayersControl, useMapEvents, useMap, Marker, Popup, LayerGroup } from "react-leaflet";
+import L from "leaflet";
+import Logo from "../../../../images/icones/logo.png"
 
 const CarteCampings = () => {
 
-    const [lesSites, setLesSites] = useState({});
     const [lesSitesA, setLesSitesA] = useState({});
     const [lesSitesB, setLesSitesB] = useState({});
     const [lesSitesC, setLesSitesC] = useState({});
@@ -45,7 +47,6 @@ const CarteCampings = () => {
                 setLesSitesC(sitesC)
             };
         });
-        // setLesSites(donnees);
         setCartePrete(true);
     }
 
@@ -63,7 +64,6 @@ const CarteCampings = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                // setLesSites(data.collection)
                 rendreCompatible(data.collection)
             })
     }, [])

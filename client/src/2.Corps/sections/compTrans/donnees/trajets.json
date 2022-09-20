@@ -120,31 +120,31 @@
     "100" : {
         "icone" : [1, 5, 8],
         "transporteur" : "exo",
-        "trajet" : "Lien entre Montréal et Vaudreuil, avec un départ par jour jusqu'à Hudson.",
+        "trajet" : "Train de banlieue entre Montréal et Vaudreuil, avec un départ par jour jusqu'à Hudson.",
         "heures" : "7 jours sur 7."
     },
     "101" : {
         "icone" : [1, 5, 8],
         "transporteur" : "exo",
-        "trajet" : "Lien entre Montréal (ou Laval en fin de semaine) et Saint-Jérôme.",
+        "trajet" : "Train de banlieue entre Montréal (ou Laval en fin de semaine) et Saint-Jérôme.",
         "heures" : "7 jours sur 7."
     },
     "102" : {
         "icone" : [1, 5, 8],
         "transporteur" : "exo",
-        "trajet" : "Lien entre Montréal et Mascouche.",
+        "trajet" : "Train de banlieue entre Montréal et Mascouche.",
         "heures" : "sur semaine seulement, principalement à l'heure de pointe."
     },
     "103" : {
         "icone" : [1, 5, 8],
         "transporteur" : "exo",
-        "trajet" : "Lien entre Montréal et Candiac.",
+        "trajet" : "Train de banlieue entre Montréal et Candiac.",
         "heures" : "sur semaine seulement, principalement à l'heure de pointe."
     },
     "104" : {
         "icone" : [1, 5, 8],
         "transporteur" : "exo",
-        "trajet" : "Lien entre Montréal et Mont-Saint-Hilaire.",
+        "trajet" : "Train de banlieue entre Montréal et Mont-Saint-Hilaire.",
         "heures" : "sur semaine seulement, principalement à l'heure de pointe."
     },
     "120" : {
@@ -163,6 +163,24 @@
         "icone" : [3, 5, 10],
         "transporteur" : "exo",
         "trajet" : "Circuit 200 – Lien entre Longueuil, Mont-Saint-Hilaire et Saint-Hyacinthe.",
+        "heures" : "7 jours sur 7."
+    },
+    "131" : {
+        "icone" : [3, 5, 10],
+        "transporteur" : "exo",
+        "trajet" : "Circuit 300 – Lien entre Montréal, Mont-Saint-Hilaire et Saint-Hyacinthe.",
+        "heures" : "sur semaine seulement, principalement à l'heure de pointe."
+    },
+    "150" : {
+        "icone" : [3, 5, 10],
+        "transporteur" : "exo",
+        "trajet" : "Circuit 300 – Lien entre Montréal et Repentigny.",
+        "heures" : "sur semaine seulement, principalement à l'heure de pointe."
+    },
+    "151" : {
+        "icone" : [3, 5, 10],
+        "transporteur" : "exo",
+        "trajet" : "Circuit 400 – Lien entre Montréal et Repentigny.",
         "heures" : "7 jours sur 7."
     },
     "160" : {
@@ -200,6 +218,18 @@
         "transporteur" : "exo",
         "trajet" : "Circuit 9 – Lien entre Laval, Sainte-Thérèse et Saint-Jérôme.",
         "heures" : "7 jours sur 7."
+    },
+    "172" : {
+        "icone" : [3, 5, 10],
+        "transporteur" : "exo",
+        "trajet" : "Circuit 28 – Lien entre Laval, Bois-des-Fillion et Terrebonne.",
+        "heures" : "7 jours sur 7."
+    },
+    "173" : {
+        "icone" : [3, 5, 10],
+        "transporteur" : "exo",
+        "trajet" : "Circuit 59 – Lien entre Laval et Mirabel.",
+        "heures" : "sur semaine seulement, principalement à l'heure de pointe."
     },
     "999" : {
         "infoA" : "texteA",
