@@ -12,7 +12,7 @@ import ventRimouski from "../images/vent-rimouski.png";
 import diff1 from "../images/difficulte1.png";
 import diff2 from "../images/difficulte2.png";
 
-const Partie1 = ({boiteOuverte, setBoiteOuverte}) => {
+const Comm1 = ({boiteOuverte, setBoiteOuverte}) => {
 
     const ouvrirFermer = (index) => {
         boiteOuverte === index ? setBoiteOuverte() : setBoiteOuverte(index)
@@ -213,4 +213,4 @@ const Infos = styled.div`
     padding: 0 20px 20px;
 `
 
-export default Partie1;
+export default Comm1;

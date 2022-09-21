@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { useState } from "react";
 
 import Choix from "./comp/Choix";
-import Partie1 from "./comp/Partie1";
-import Partie2 from "./comp/Partie2";
+import Comm1 from "./comp/Comm1";
+import Comm2 from "./comp/Comm2";
 
 const Preparation = () => {
 
@@ -12,11 +12,11 @@ const Preparation = () => {
     return (
         <Wrapper>
             <p></p>
-            <Partie1
+            <Comm1
                 boiteOuverte={boiteOuverte}
                 setBoiteOuverte={setBoiteOuverte}
             />
-            <Partie2
+            <Comm2
                 boiteOuverte={boiteOuverte}
                 setBoiteOuverte={setBoiteOuverte}
             />

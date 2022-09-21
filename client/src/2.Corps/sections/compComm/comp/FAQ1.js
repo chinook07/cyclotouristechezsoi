@@ -1,9 +1,8 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { ExternalLink } from "react-external-link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import CalculJours from "./CalculJours";
+import CalculCarburant from "./CalculCarburant";
 import { faAngleDoubleDown, faAngleDoubleUp } from "@fortawesome/free-solid-svg-icons";
 
 const FAQ1 = ({ boiteOuverte, setBoiteOuverte }) => {
@@ -51,66 +50,59 @@ const FAQ1 = ({ boiteOuverte, setBoiteOuverte }) => {
                 }
             </Boite>
             <Boite>
-                <h3 onClick={() => ouvrirFermer(0)}>
-                    <span>Titre</span>
+                <h3 onClick={() => ouvrirFermer(2)}>
+                    <span>Comment savoir si ma bonbonne de carburant est pleine?</span>
                     {
-                        boiteOuverte === 1
+                        boiteOuverte === 2
                             ? <FontAwesomeIcon icon={faAngleDoubleUp} />
                             : <FontAwesomeIcon icon={faAngleDoubleDown} />
                     }
                 </h3>
                 {
-                    boiteOuverte === 0 &&
+                    boiteOuverte === 2 &&
                     <Infos>
-                            <p>Paragraphe</p>
+                            <p>Pour calculer le pourcentage de carburant qu'il vous reste, il suffit de peser votre cartouche, et de connaitre le poids de celle-là lorsqu'elle est vide.</p>
+                            <p>Si vous avez un réchaud à l'isobutane, vous pouvez utiliser les calculateurs ci-dessous selon la bonbonne que vous avez.</p>
+                            <ol>
+                                <li>Quelle était la quantité de carburant (g) à l'achat? Regardez l'étiquette et sélectionnez le bon montant.</li>
+                                <li>Pesez maintenant votre cartouche telle quelle et entrez le poids (g) dans la boite correspondante.</li>
+                            </ol>
+                            <CalculCarburant />
+                            <Details>*À noter que le poids des cartouches peut varier légèrement selon la marque.</Details>
                     </Infos>
                 }
             </Boite>
             <Boite>
-                <h3 onClick={() => ouvrirFermer(0)}>
-                    <span>Titre</span>
+                <h3 onClick={() => ouvrirFermer(3)}>
+                    <span>Combien de kilomètres par jour?</span>
                     {
-                        boiteOuverte === 0
+                        boiteOuverte === 3
                             ? <FontAwesomeIcon icon={faAngleDoubleUp} />
                             : <FontAwesomeIcon icon={faAngleDoubleDown} />
                     }
                 </h3>
                 {
-                    boiteOuverte === 0 &&
+                    boiteOuverte === 3 &&
                     <Infos>
-                            <p>Paragraphe</p>
+                            <p>Cher cyclotouriste potentiel, le verbe « devoir » dans votre question est à proscrire, puisque vous roulez la distance que vous voulez. Beaucoup de débutants roulent de 50 à 70 km par jour, d'autres frôlent ou dépassent le 100. Certains iront même rallier Montréal et Québec en deux jours, ce qui équivaut à environ 150 km à la fois. Il faut respecter ses limites et surtout, s'amuser.</p>
+                            <p>Si l'on voyage avec ses enfants et qu'on veut savourer son séjour, il est conseillé de revoir ces chiffres à la baisse. Surtout, il ne faut oublier que lorsqu'on s'initie, plus on pédale, plus on doit s'arrêter pour se reposer!</p>
                     </Infos>
                 }
             </Boite>
             <Boite>
-                <h3 onClick={() => ouvrirFermer(0)}>
-                    <span>Titre</span>
+                <h3 onClick={() => ouvrirFermer(4)}>
+                    <span>ESt-ce que j'ai besoin d'une journée de repos?</span>
                     {
-                        boiteOuverte === 0
+                        boiteOuverte === 4
                             ? <FontAwesomeIcon icon={faAngleDoubleUp} />
                             : <FontAwesomeIcon icon={faAngleDoubleDown} />
                     }
                 </h3>
                 {
-                    boiteOuverte === 0 &&
+                    boiteOuverte === 4 &&
                     <Infos>
-                            <p>Paragraphe</p>
-                    </Infos>
-                }
-            </Boite>
-            <Boite>
-                <h3 onClick={() => ouvrirFermer(0)}>
-                    <span>Titre</span>
-                    {
-                        boiteOuverte === 0
-                            ? <FontAwesomeIcon icon={faAngleDoubleUp} />
-                            : <FontAwesomeIcon icon={faAngleDoubleDown} />
-                    }
-                </h3>
-                {
-                    boiteOuverte === 0 &&
-                    <Infos>
-                            <p>Paragraphe</p>
+                            <p>Plusieurs cyclotouristes effectuent une journée de repos lors d'un voyage de longue durée. Personnellement, je juge qu'une journée par semaine où je reste à la même place est une bonne idée. L'endroit où je m'arrête dépend de plusieurs facteurs, mais de préférence une ville où il y a beaucoup à visiter, sinon un parc national ou un autre endroit où il y a de quoi explorer, par exemple des sentiers de randonnée ou la possibilité de louer un canot pour la matinée. Même une courte balade en boucle à vélo n'est pas à exclure.</p>
+                            <p>Le corps a besoin de repos. Si ce n'est pas une journée complète, assurez-vous d'alterner entre les journées faciles et difficiles.</p>
                     </Infos>
                 }
             </Boite>
@@ -142,6 +134,11 @@ const Infos = styled.div`
 
 const Gras = styled.span`
     font-weight: bold;
+`
+
+const Details = styled.p`
+    font-style: italic;
+    font-size: small;
 `
 
 export default FAQ1;

@@ -4,29 +4,31 @@ import { useState, useEffect } from "react";
 const CalculJours = () => {
 
     const [type, setType] = useState();
-    const [total, setTotal] = useState(50);
+    const [distance, setDistance] = useState(50);
     const [nJours, setNJours] = useState();
     const [distJr, setDistJr] = useState();
     const [tropCourt, setTropCourt] = useState(false);
 
     const mAJType = (e) => setType(parseInt(e.target.value));
-    const mAJTotal = (e) => setTotal(parseInt(e.target.value))
+    const mAJTotal = (e) => setDistance(parseInt(e.target.value))
 
     useEffect(() => {
-        let moyennee = parseInt(total / type);
-        if (total / moyennee > type + 10) {
-            moyennee++
-            if (moyennee <= 1) {
-                setTropCourt(true)
-            } else {
-                setNJours(moyennee)
-                setDistJr(parseInt(total / moyennee))
-            }
+        let nJoursCalcul1 = parseInt((distance / type).toFixed());
+        if (distance / nJoursCalcul1 > type + 10) {
+            nJoursCalcul1++
         }
-        // cacher si type n'est pas sélectionné
-        
-        
-    }, [type, total])
+        if (nJoursCalcul1 >= 12) {
+            console.log("repos");
+            // ajouter jours de repos
+        }
+        if (nJoursCalcul1 <= 1) {
+            setTropCourt(true);
+        } else {
+            setTropCourt(false);
+            setNJours(nJoursCalcul1);
+            setDistJr(parseInt((distance / nJoursCalcul1).toFixed()));
+        }
+    }, [type, distance])
 
     return (
         <Wrapper>
@@ -51,12 +53,17 @@ const CalculJours = () => {
             </Choix>
             <label>
                 <span>Trajet total (km)</span>
-                <input type="number" min="50" step="10" onChange={mAJTotal} value={total} />
+                <input type="number" min="50" step="10" onChange={mAJTotal} value={distance} />
             </label>
             {
-                tropCourt
-                    ? <output>Pas assez long pour du cyclotourisme</output>
-                    : <output>{nJours} jours × {distJr} km</output>
+                type && nJours > 1 &&
+                <output>
+                        {
+                            tropCourt
+                                ? <span>Pas assez long pour du cyclotourisme</span>
+                                : <span>{nJours} jours × {distJr}</span>
+                        }
+                </output>
             }
         </Wrapper>
     )

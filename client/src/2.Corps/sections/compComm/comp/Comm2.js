@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDoubleDown, faAngleDoubleUp, faTrain, faPlane, faCampground, faHotel } from "@fortawesome/free-solid-svg-icons";
 import demontepneus from "../images/demontepneus.jpg"
 
-const Partie2 = ({ boiteOuverte, setBoiteOuverte }) => {
+const Comm2 = ({ boiteOuverte, setBoiteOuverte }) => {
     
     const ouvrirFermer = (index) => {
         boiteOuverte === index ? setBoiteOuverte() : setBoiteOuverte(index)
@@ -198,4 +198,4 @@ const Infos = styled.div`
     padding: 0 20px 20px;
 `
 
-export default Partie2;
+export default Comm2;
