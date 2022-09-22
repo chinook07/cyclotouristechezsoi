@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
-const Recto = ({item, index}) => {
+import * as ImagesTout from "../images/voyagesEff/index"
+
+const Recto = ({ item, index }) => {
+
     return (
         <Wrapper>
             <Intro>
@@ -13,10 +16,10 @@ const Recto = ({item, index}) => {
                 <div>{item.anecdote}</div>
             </Desc>
             {
-                item.details &&
+                item.note &&
                 <Details>{item.note}</Details>
             }
-            <img alt={item.imgAlt} src={item.imgSrc} />
+            <img alt={item.imgAlt} src={ImagesTout[`PhotoTitre${index + 1}`]} />
         </Wrapper>
     )
 }
@@ -26,21 +29,38 @@ const Wrapper = styled.div`
     border-radius: 5px;
     color: var(--c11);
     height: 100%;
+    padding: 10px;
+    position: relative;
     width: 100%;
+    img {
+        border-radius: 0 0 5px 5px;
+        bottom: 0;
+        display: block;
+        height: 200px;
+        left: 0;
+        object-fit: cover;
+        position: absolute;
+        width: 100%;
+    }
 `
 
 const Intro = styled.div`
     display: flex;
     justify-content: space-between;
-    /* margin: 10px; */
 `
 
 const Titre = styled.div`
     font-size: larger;
+    margin: 25px 20px 0;
 `
 
-const Desc = styled.div``
+const Desc = styled.div`
+    margin: 20px 20px 0;
+`
 
-const Details = styled.div``
+const Details = styled.div`
+    font-size: small;
+    margin: 15px 20px;
+`
 
 export default Recto;

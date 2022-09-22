@@ -21,7 +21,6 @@ const CalculJours = () => {
         if (nJoursCalcul1 >= 12) {
             console.log("repos de ", parseInt((nJoursCalcul1) / 7));
             setRepos(parseInt((nJoursCalcul1) / 7))
-            // ajouter jours de repos
         }
         if (nJoursCalcul1 < 12) setRepos(0)
         if (nJoursCalcul1 <= 1) {
@@ -64,7 +63,7 @@ const CalculJours = () => {
                         {
                             tropCourt
                                 ? <span>Pas assez long pour du cyclotourisme</span>
-                                : <span>{nJours} jours × {distJr} km{repos > 0 && <span> + {repos} jours de repos</span>}</span>
+                                : <span>{nJours} jours × {distJr} km{repos > 0 && <span> + {repos} jour{repos > 1 && <span>s</span>} de repos</span>}</span>
                         }
                 </output>
             }
