@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import * as imagesToutPa from "../../../images/galerie-paysage/index";
-import * as imagesToutPo from "../../../images/galerie-portrait/index";
+import * as imagesToutPa from "../images/galerie-paysage/index";
+import * as imagesToutPo from "../images/galerie-portrait/index";
 import galerieSousTitrePaysage from "../donnees/galerieSousTitrePaysage.json";
 import galerieSousTitrePortrait from "../donnees/galerieSousTitrePortrait.json";
 import { faBackwardStep, faForwardStep } from "@fortawesome/free-solid-svg-icons";

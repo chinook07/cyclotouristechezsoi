@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import * as imagesTout from "../../../images/galerie-paysage/index";
+import * as imagesTout from "../images/galerie-paysage/index";
 
 const Galerie = ({ montrerGal, setMontrerGal }) => {
 

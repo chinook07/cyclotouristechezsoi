@@ -3,12 +3,12 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import Stats1 from "./compVoyages/Stats1";
-import Stats2 from "./compVoyages/Stats2";
-import Cartes from "./compVoyages/Cartes";
-import Galerie from "./compVoyages/Galerie";
-import GalerieEtendue from "./compVoyages/GalerieEtendue";
-import VoyagesListe from "./compVoyages/VoyagesListe";
+import Stats1 from "./comp/Stats1";
+import Stats2 from "./comp/Stats2";
+import Cartes from "./comp/Cartes";
+import Galerie from "./comp/Galerie";
+import GalerieEtendue from "./comp/GalerieEtendue";
+import VoyagesListe from "./comp/VoyagesListe";
 import { faMoon, faMap, faImages, faClock } from "@fortawesome/free-solid-svg-icons";
 
 const VoyEffectues = () => {
