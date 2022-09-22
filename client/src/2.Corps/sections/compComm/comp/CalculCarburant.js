@@ -57,6 +57,7 @@ const CalculCarburant = () => {
                 resultat >= 0 && resultat <= 100 &&
                 <output>
                         <span>Il vous en reste donc {resultat} %, soit {poids - tare[carb]} g de carburant.</span>
+                        <meter min="0" low="50" value={poids - tare[carb]} max={carb}></meter>
                 </output>
             }
         </Wrapper>

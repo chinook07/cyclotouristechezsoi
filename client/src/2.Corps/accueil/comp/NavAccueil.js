@@ -4,10 +4,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faPlay, faMapSigns, faSuitcase, faTrain } from "@fortawesome/free-solid-svg-icons";
 import liens from "../donnees/liens.json"
-import img01 from "../../../images/navAccueil/pont-cambellton.jpg";
-import img02 from "../../../images/navAccueil/temiscouata.png";
-import img03 from "../../../images/navAccueil/outils.jpg";
-import img04 from "../../../images/navAccueil/velo-dans-train.jpg";
+import img01 from "../images/navAccueil/pont-cambellton.jpg";
+import img02 from "../images/navAccueil/temiscouata.png";
+import img03 from "../images/navAccueil/outils.jpg";
+import img04 from "../images/navAccueil/velo-dans-train.jpg";
 
 
 const NavAccueil = () => {

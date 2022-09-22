@@ -4,10 +4,11 @@ import { useState, useEffect } from "react";
 const CalculJours = () => {
 
     const [type, setType] = useState();
-    const [distance, setDistance] = useState(50);
+    const [distance, setDistance] = useState(70);
     const [nJours, setNJours] = useState();
     const [distJr, setDistJr] = useState();
     const [tropCourt, setTropCourt] = useState(false);
+    const [repos, setRepos] = useState(0)
 
     const mAJType = (e) => setType(parseInt(e.target.value));
     const mAJTotal = (e) => setDistance(parseInt(e.target.value))
@@ -18,9 +19,11 @@ const CalculJours = () => {
             nJoursCalcul1++
         }
         if (nJoursCalcul1 >= 12) {
-            console.log("repos");
+            console.log("repos de ", parseInt((nJoursCalcul1) / 7));
+            setRepos(parseInt((nJoursCalcul1) / 7))
             // ajouter jours de repos
         }
+        if (nJoursCalcul1 < 12) setRepos(0)
         if (nJoursCalcul1 <= 1) {
             setTropCourt(true);
         } else {
@@ -53,7 +56,7 @@ const CalculJours = () => {
             </Choix>
             <label>
                 <span>Trajet total (km)</span>
-                <input type="number" min="50" step="10" onChange={mAJTotal} value={distance} />
+                <input type="number" min="70" step="10" onChange={mAJTotal} value={distance} />
             </label>
             {
                 type && nJours > 1 &&
@@ -61,7 +64,7 @@ const CalculJours = () => {
                         {
                             tropCourt
                                 ? <span>Pas assez long pour du cyclotourisme</span>
-                                : <span>{nJours} jours × {distJr}</span>
+                                : <span>{nJours} jours × {distJr} km{repos > 0 && <span> + {repos} jours de repos</span>}</span>
                         }
                 </output>
             }

@@ -1,19 +1,21 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Diff = () => {
 
-    const [km, setKm] = useState();
-    const [m, setM] = useState();
-    
-    const calcul = (m / km).toFixed(1);
+    const [km, setKm] = useState(100);
+    const [m, setM] = useState(100);
+    const [jpm, setJpm] = useState();
 
-    // corrections
+    useEffect(() => {
+        setJpm(parseFloat((m / km).toFixed(1)))
+    }, [km, m])
 
     const couleurDiff = (unite, nombre) => {
-        unite(nombre)
+        unite(parseInt(nombre))
     }
 
+    let coul;
     return (
         <Wrapper>
             <svg></svg>
@@ -24,15 +26,15 @@ const Diff = () => {
                     onChange={(e) => couleurDiff(setM, e.target.value)}
                     step={10}
                     type="number"
-                    defaultValue="10"
+                    defaultValue="100"
                 />
                 <label htmlFor="calcA"> m de dénivelé</label>
                 <div> sur </div>
                 <input
                     id="calcB"
                     onChange={(e) => couleurDiff(setKm, e.target.value)}
-                    min={0}
-                    step={100}
+                    min={10}
+                    step={10}
                     type="number"
                     defaultValue="100"
                 />
@@ -40,10 +42,13 @@ const Diff = () => {
                 <div> = </div>
                 {
                     km !== undefined && m !== undefined &&
-                    <output>{calcul}</output>
+                    <output>{jpm}</output>
                 }
-                
-                <div> jurons/min*!</div>
+                {
+                    jpm == 1
+                        ? <span> juron/min*!</span>
+                        : <span> jurons/min*!</span>
+                }
             </form>
         </Wrapper>
     )

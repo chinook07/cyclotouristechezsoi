@@ -91,7 +91,7 @@ const FAQ1 = ({ boiteOuverte, setBoiteOuverte }) => {
             </Boite>
             <Boite>
                 <h3 onClick={() => ouvrirFermer(4)}>
-                    <span>ESt-ce que j'ai besoin d'une journée de repos?</span>
+                    <span>Est-ce que j'ai besoin d'une journée de repos?</span>
                     {
                         boiteOuverte === 4
                             ? <FontAwesomeIcon icon={faAngleDoubleUp} />
