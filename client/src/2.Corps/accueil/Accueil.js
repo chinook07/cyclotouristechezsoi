@@ -15,7 +15,7 @@ const Accueil = () => {
                 <p>Bonne visite!</p>
             </Intro>
             <NavAccueil />
-            <h2>Récents billets de blogue sur <ExternalLink href="https://touristechezsoi.ca/">Touriste chez soi</ExternalLink></h2>
+            <Billets>Récents billets de blogue sur <ExternalLink href="https://touristechezsoi.ca/">Touriste chez soi</ExternalLink></Billets>
             <NavBlogue />
         </Wrapper>
     )
@@ -27,6 +27,13 @@ const Wrapper = styled.div`
 
 const Intro = styled.div`
     text-align: center;
+`
+
+const Billets = styled.h2`
+    color: var(--c4);
+    a {
+        color: var(--c4);
+    }
 `
 
 export default Accueil;

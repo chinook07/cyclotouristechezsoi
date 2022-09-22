@@ -24,7 +24,7 @@ const Wrapper = styled.div`
     justify-content: center;
     margin: 15px 0;
     a {
-        color: black;
+        color: var(--c10);
         padding-left: 10px;
         text-decoration: none;
         

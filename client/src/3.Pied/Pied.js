@@ -49,7 +49,7 @@ const Auteur = styled.div`
 
 const Menu = styled.nav`
     a {
-        color: black;
+        color: var(--c10);
         text-decoration: none;
         &::after {
             content: "|";

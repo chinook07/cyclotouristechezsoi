@@ -39,7 +39,7 @@ const Wrapper = styled.section`
     display: flex;
     flex-wrap: wrap;
     a {
-        color: black;
+        color: var(--c4);
         padding: 15px;
         text-decoration: none;
         width: 25%;

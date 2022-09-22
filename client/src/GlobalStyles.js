@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { useContext } from "react";
 
 export default createGlobalStyle`
     * {
@@ -25,5 +26,7 @@ export default createGlobalStyle`
         --c4: #0e3b10;
         --c5: #6a5d7b;
         --c6: #5d4a66;
+        --c10: #000;
+        --c11: #fff;
     }
 `

@@ -38,7 +38,7 @@ const Wrapper = styled.nav`
     display: flex;
     justify-content: center;
     a {
-        color: white;
+        color: var(--c11);
         padding: 15px 25px;
         text-decoration: none;
         &:hover {
@@ -55,7 +55,7 @@ const WrapperMobi = styled.nav`
     display: flex;
     justify-content: center;
     a {
-        color: white;
+        color: var(--c11);
         padding: 15px 25px;
         text-decoration: none;
         &:hover {

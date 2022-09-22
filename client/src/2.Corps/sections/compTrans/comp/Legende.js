@@ -35,7 +35,7 @@ const Legende = ({toutesIcones}) => {
 
 const Wrapper = styled.div`
     background-color: var(--c6);
-    color: white;
+    color: var(--c11);
     display: flex;
     flex-wrap: wrap;
     justify-content: center;

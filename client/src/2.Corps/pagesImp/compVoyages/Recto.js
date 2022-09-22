@@ -24,7 +24,7 @@ const Recto = ({item, index}) => {
 const Wrapper = styled.div`
     background-color: var(--c3);
     border-radius: 5px;
-    color: white;
+    color: var(--c11);
     height: 100%;
     width: 100%;
 `

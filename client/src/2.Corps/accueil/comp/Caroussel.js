@@ -41,7 +41,7 @@ const Wrapper = styled.div`
     
     width: 100%;
     figure {
-        background-color: black;
+        background-color: var(--c4);
         margin: 0;
         position: relative;
         width: 100%;
@@ -49,8 +49,9 @@ const Wrapper = styled.div`
             width: 100%;
         }
         figcaption {
-            color: white;
+            color: var(--c11);
             font-size: 18px;
+            padding: 10px;
         }
     }
     
@@ -64,7 +65,7 @@ const Indicateur = styled.div`
 `
 
 const Titre = styled.div`
-    color: white;
+    color: var(--c11);
     font-size: 50px;
     left: 50%;
     position: absolute;

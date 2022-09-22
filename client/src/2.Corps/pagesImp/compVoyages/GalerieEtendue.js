@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import * as imagesToutPa from "../../../images/galerie-paysage/index";
 import * as imagesToutPo from "../../../images/galerie-portrait/index";
 import galerieSousTitrePaysage from "../donnees/galerieSousTitrePaysage.json";
 import galerieSousTitrePortrait from "../donnees/galerieSousTitrePortrait.json";
+import { faBackwardStep, faForwardStep } from "@fortawesome/free-solid-svg-icons";
 
 const GalerieEtendue = ({ montrerGal, setMontrerGal }) => {
 
@@ -100,12 +102,12 @@ const GalerieEtendue = ({ montrerGal, setMontrerGal }) => {
                     && <Zoom>
                             <button onClick={fermerZoom}>Fermer</button>
                             <Caroussel>
-                                <div onClick={photoPrec}>←</div>
+                                <FontAwesomeIcon icon={faBackwardStep} onClick={photoPrec} size="2x" />
                                 <figure>
                                     <img src={tousPhotos[diapo - 1].lien} />
                                     <figcaption>{tousPhotos[diapo - 1].description}</figcaption>
                                 </figure>
-                                <div onClick={photoSuiv}>→</div>
+                                <FontAwesomeIcon icon={faForwardStep} onClick={photoSuiv} size="2x" />
                             </Caroussel>
                             
                     </Zoom>
@@ -119,7 +121,7 @@ const GalerieEtendue = ({ montrerGal, setMontrerGal }) => {
 }
 
 const Wrapper = styled.div`
-    background-color: black;
+    background-color: var(--c10);
     padding: 10px;
     /* position: relative; */
 `
@@ -172,7 +174,7 @@ const Caroussel = styled.div`
     align-items: center;
     display: flex;
     justify-content: center;
-    > div {
+    > svg {
         cursor: pointer;
     }
     figure {

@@ -128,7 +128,7 @@ const Controles = styled.div`
     button {
         background-color: var(--c3);
         border-radius: 5px;
-        color: white;
+        color: var(--c11);
         cursor: pointer;
         font-size: large;
         margin: auto 10px;

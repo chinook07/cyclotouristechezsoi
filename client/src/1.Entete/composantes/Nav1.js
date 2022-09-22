@@ -93,7 +93,7 @@ const MenuMobi = styled.div`
     display: flex;
     flex-direction: column;
     a {
-        color: black;
+        color: var(--c4);
         line-height: 1.3;
         text-decoration: none;
         &:hover {
@@ -110,7 +110,7 @@ const Menu = styled.div`
     display: flex;
     justify-content: center;
     a {
-        color: black;
+        color: var(--c4);
         padding-left: 10px;
         text-decoration: none;
         &:not(:last-child)::after {
