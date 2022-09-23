@@ -1,8 +1,13 @@
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import RubanIcones from "./comp/RubanIcones";
 
 const ABCDEF = () => {
     return (
-        <Materiel>Materiel</Materiel>
+        <Materiel>
+            <RubanIcones />
+        </Materiel>
     )
 }
 

@@ -57,12 +57,17 @@ const Wrapper = styled.div`
             border-color: var(--c4);
             transition: 0.3s all;
         }
+        @media screen and (max-width: 500px) {
+            width: 40%
+        }
+        @media screen and (min-width: 500px) and (max-width: 730px) {
+            width: 27%
+        }
     }
     @media screen and (max-width: 730px) {
         flex-wrap: wrap;
         > div {
             margin: 5px 0;
-            width: 27%;
         }
     }
 `

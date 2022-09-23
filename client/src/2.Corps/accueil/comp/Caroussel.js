@@ -32,19 +32,18 @@ const Carrousel = () => {
                     <figcaption>{carrousel[carMontrer].desc}</figcaption>
                 </figure>
             }
-            
         </Wrapper>
     )
 }
 
 const Wrapper = styled.div`
-    
-    width: 100%;
+    background-image: linear-gradient(var(--c4), var(--c3));
+    margin: -20px -20px 0 -20px;
+    width: calc(100% + 40px);
     figure {
-        background-color: var(--c4);
-        margin: 0;
+        margin: 0 auto;
         position: relative;
-        width: 100%;
+        max-width: 700px;
         img {
             width: 100%;
         }
@@ -72,6 +71,12 @@ const Titre = styled.div`
     text-shadow: 2px 2px 1px var(--c2);
     top: 50%;
     transform: translate(-50%, -50%);
+    @media screen and (min-width: 450px) and (max-width: 550px) {
+        font-size: 40px;
+    }
+    @media screen and (max-width: 450px) {
+        font-size: 30px;
+    }
 `
 
 export default Carrousel;

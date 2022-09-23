@@ -46,8 +46,8 @@ const TableauRegions = () => {
 }
 
 const Wrapper = styled.table`
-    border: 2px solid var(--c6);
-    border-collapse: collapse;
+    border: 2px solid var(--c5);
+    border-radius: 5px;
     thead {
         background-color: var(--c3);
         border-radius: 5px;

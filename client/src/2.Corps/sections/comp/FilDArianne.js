@@ -22,7 +22,7 @@ const FilDArianne = ({racine, choix}) => {
 const Wrapper = styled.div`
     display: flex;
     justify-content: center;
-    margin: 15px 0;
+    margin: 20px 0;
     a {
         color: var(--c10);
         padding-left: 10px;
