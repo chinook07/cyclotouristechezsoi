@@ -1,16 +1,24 @@
 import styled from "styled-components";
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import RubanIcones from "./comp/RubanIcones";
+import Rubriques from "./comp/Rubriques";
 
-const ABCDEF = () => {
+const Materiel = () => {
+
+    const [montrerRubrique, setMontrerRubrique] = useState(0);
+
+    const changerRubrique = (r) => setMontrerRubrique(r);
+
     return (
-        <Materiel>
-            <RubanIcones />
-        </Materiel>
+        <Wrapper>
+            <RubanIcones changerRubrique={changerRubrique} />
+            <Rubriques montrerRubrique={montrerRubrique} />
+        </Wrapper>
     )
 }
 
-const Materiel = styled.div``
+const Wrapper = styled.div``
 
-export default ABCDEF;
+export default Materiel;

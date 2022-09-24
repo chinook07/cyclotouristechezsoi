@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faBicycle, faTools, faWineGlassAlt, faPizzaSlice, faFlag, faSurprise, faHatCowboy, faHeadSideMask, faBath, faPuzzlePiece, faPlug, faPlus, faGlobe } from "@fortawesome/free-solid-svg-icons";
 
-const RubanIcones = () => {
+const RubanIcones = ({changerRubrique}) => {
 
     const icones = [faBicycle, faTools, faWineGlassAlt, faPizzaSlice, faFlag, faSurprise, faHatCowboy, faHeadSideMask, faBath, faPuzzlePiece, faPlug, faPlus, faGlobe];
 
@@ -12,7 +12,7 @@ const RubanIcones = () => {
             {
                 icones.map((item, index) => {
                     return (
-                        <button key={index}>
+                        <button key={index} onClick={() => changerRubrique(index)}>
                             <FontAwesomeIcon icon={item} size="2x" />
                         </button>
                     )
