@@ -9,7 +9,6 @@ import { faArrowsRotate, faArrowRight, faCalendarDays, faUmbrellaBeach, faUpDown
 const VoyagesListe = () => {
 
     const [catAMontrer, setCatAMontrer] = useState("tout");
-    // const [estActif, setEstActif] = useState(false);
 
     const changerCategories = (cat) => {
         setCatAMontrer(cat)

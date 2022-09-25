@@ -9,11 +9,11 @@ const Materiel = () => {
 
     const [montrerRubrique, setMontrerRubrique] = useState(0);
 
-    const changerRubrique = (r) => setMontrerRubrique(r);
+    const changerRubrique = (r) => {setMontrerRubrique(r)};
 
     return (
         <Wrapper>
-            <RubanIcones changerRubrique={changerRubrique} />
+            <RubanIcones changerRubrique={changerRubrique} montrerRubrique={montrerRubrique} />
             <Rubriques montrerRubrique={montrerRubrique} />
         </Wrapper>
     )
