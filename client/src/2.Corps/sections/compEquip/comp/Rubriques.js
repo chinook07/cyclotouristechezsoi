@@ -289,13 +289,36 @@ const Rubriques = ({montrerRubrique}) => {
                 <Rubrique>
                         <h2>Le maintien de l'hygiène</h2>
                         <div>
-                            <p>Paragraphe</p>
+                            <p>C'est certain qu'on va suer, mais un minimum d'hygiène personnelle est tout de même de mise. Pour éviter les déversements de produits chimiques, il faut prendre soin de bien renfermer certains articles dans des sacs ou d'autres contenants adaptés.</p>
                             <img src="" alt="aVenir" />
-                            <p>Paragraphe</p>
+                            <ul>
+                                <li>Mouchoirs</li>
+                                <li>Désinfectant</li>
+                                <li>Déodorant</li>
+                                <li>Brosse à dents</li>
+                                <li>Dentifrice</li>
+                            </ul>
                             <img src="" alt="aVenir" />
-                            <p>Paragraphe</p>
+                            <ul>
+                                <li>Crème solaire</li>
+                                <li>Chasse-moustiques</li>
+                                <li>Baume à lèvres : au besoin</li>
+                                <li>Crème hydratante : au besoin</li>
+                            </ul>
                             <img src="" alt="aVenir" />
-                            <p>Paragraphe</p>
+                            <ul>
+                                <li>Rasoir non électrique et autres produits de rasage au besoin</li>
+                                <li>Coupe-ongles : pour les longs séjours</li>
+                                <li>Savon lessive : en format capsule, au besoin</li>
+                            </ul>
+                            <img src="" alt="aVenir" />
+                            <ul>
+                                <li>Gel de douche (ou savon + shampoing)</li>
+                                <li>Lingettes humides : pour les soirées sans accès à une douche</li>
+                                <li>Papier toilette : pas besoin de 50 rouleaux!</li>
+                            </ul>
+                            <p>Mesdames, n'oubliez pas d'adapter cette liste et d'amener les produits féminins que vous nécessitez.</p>
+                            <p>Messieurs, vous n'avez pas besoin de vous raser chaque matin. ;) Peut-être une ou deux fois par semaine?</p>
                         </div>
                 </Rubrique>
             }
@@ -304,13 +327,15 @@ const Rubriques = ({montrerRubrique}) => {
                 <Rubrique>
                         <h2>Le jeu sur la route</h2>
                         <div>
-                            <p>Paragraphe</p>
+                            <ul>
+                                <li>Quelques feuilles de mots croisés ou de sudoku.</li>
+                                <li>Roman intéressant ou liseuse</li>
+                                <li>Carnet résistant à l'eau</li>
+                                <li>Crayons et/ou stylos à encre effaçable</li>
+                                <li>Jeu de cartes</li>
+                                <li>Jeux de société en version miniature</li>
+                            </ul>
                             <img src="" alt="aVenir" />
-                            <p>Paragraphe</p>
-                            <img src="" alt="aVenir" />
-                            <p>Paragraphe</p>
-                            <img src="" alt="aVenir" />
-                            <p>Paragraphe</p>
                         </div>
                 </Rubrique>
             }
@@ -319,13 +344,19 @@ const Rubriques = ({montrerRubrique}) => {
                 <Rubrique>
                         <h2>Le voltage et le câblage</h2>
                         <div>
-                            <p>Paragraphe</p>
+                            <p>Malgré le fait qu'on veut passer moins de temps à l'écran, il n'est pas souhaitable de toujours être à la recherche d'une prise de courant au camping ou au restaurant. C'est là où un chargeur externe et/ou une pile supplémentaire deviennent essentiels pour pouvoir continuer à utiliser ses appareils électroniques.</p>
                             <img src="" alt="aVenir" />
-                            <p>Paragraphe</p>
-                            <img src="" alt="aVenir" />
-                            <p>Paragraphe</p>
-                            <img src="" alt="aVenir" />
-                            <p>Paragraphe</p>
+                            <ul>
+                                <li>Chargeur pour appareils USB</li>
+                                <li>Téléphone et câble USB</li>
+                                <li>Pile supplémentaire</li>
+                                <li>Lecteur MP3 portatif avec hautparleur et câble USB</li>
+                                <li>Chargeur externe et son câble USB</li>
+                                <li>Lampe de poche</li>
+                                <li>Écouteurs : si ce n'est que pour le trajet en train / autocar.</li>
+                            </ul>
+                            <p>Évitez les doublons non nécessaires des câbles, à moins de pouvoir brancher deux appareils en même temps.</p>
+                            <p>Si vous partez longtemps, vous allez peut-être penser à amener une tablette (+ câble USB) si l'on souhaite mettre à jour son journal, ou écouter un film de temps à autre.</p>
                         </div>
                 </Rubrique>
             }
@@ -334,13 +365,20 @@ const Rubriques = ({montrerRubrique}) => {
                 <Rubrique>
                         <h2>Le hors-catégorie</h2>
                         <div>
-                            <p>Paragraphe</p>
+                            <p>Même à l'époque de la Grèce antique, les gens qui partaient en voyage oubliaient souvent quelque chose d'essentiel à la maison. Cette liste d'articles qui ne rentrent pas dans les autres catégories est tout aussi primordiale que les autres.</p>
                             <img src="" alt="aVenir" />
-                            <p>Paragraphe</p>
+                            <ul>
+                                <li>Cartes ou guides-vélo en format papier</li>
+                                <li>Masque pour les yeux : le Soleil se lève tôt en juin!</li>
+                                <li>Bouchons : pour les campings turbulents</li>
+                            </ul>
                             <img src="" alt="aVenir" />
-                            <p>Paragraphe</p>
-                            <img src="" alt="aVenir" />
-                            <p>Paragraphe</p>
+                            <ul>
+                                <li>Sac réutilisable : pour les ravitaillements à l'épicerie</li>
+                                <li>Sac (filet) réutilisable pour vrac : lire fruits juteux</li>
+                                <li>Sac de poubelle (2)</li>
+                                <li>Sac à dos pliable : pour les randonnées et les découvertes en ville à pied</li>
+                            </ul>
                         </div>
                 </Rubrique>
             }
@@ -349,13 +387,14 @@ const Rubriques = ({montrerRubrique}) => {
                 <Rubrique>
                         <h2>Le passeport pour l'étranger</h2>
                         <div>
-                            <p>Paragraphe</p>
+                            <p>Vous partez à l'international? N'oubliez pas ces trucs essentiels.</p>
                             <img src="" alt="aVenir" />
-                            <p>Paragraphe</p>
-                            <img src="" alt="aVenir" />
-                            <p>Paragraphe</p>
-                            <img src="" alt="aVenir" />
-                            <p>Paragraphe</p>
+                            <ul>
+                                <li>Un passeport... valide!</li>
+                                <li>Adaptateur électrique : on peut toujours acheter un chargeur USB à l'arrivée.</li>
+                                <li>Devises étrangères</li>
+                                <li>Guide de conversation dans la langue, en papier ou sur téléphone</li>
+                            </ul>
                         </div>
                 </Rubrique>
             }

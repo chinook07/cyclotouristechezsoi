@@ -22,8 +22,10 @@ const Pied = () => {
             </Auteur>
             <Menu>
                 <NavLink to="/limitations">Limitations</NavLink>
+                <span>|</span>
                 <NavLink to="/confidentialite">Confidentialité</NavLink>
-                <span>Faire un don</span>
+                <span>|</span>
+                <ExternalLink href="https://secure.causevox.com/pay?url=cyclotouristechezsoi.causevox.com">Faire un don</ExternalLink>
             </Menu>
         </Wrapper>
     )
@@ -51,11 +53,9 @@ const Menu = styled.nav`
     a {
         color: var(--c10);
         text-decoration: none;
-        &::after {
-            content: "|";
-            margin-left: 10px;
-        }
-        
+    }
+    span {
+        margin: 0 5px;
     }
     @media screen and (min-width : 760px) {
         > * {
