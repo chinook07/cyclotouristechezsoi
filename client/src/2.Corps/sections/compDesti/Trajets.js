@@ -22,8 +22,9 @@ const Trajets = () => {
     const choisirTrajet = (e) => setTrajetChoisi(e.target.value);
 
     const changerTrajet = (nouveau) => {
-        setTrajetChoisi(nouveau)
-        setTrajetSelect(nouveau)
+        // setTrajetChoisi(nouveau)
+        // setTrajetSelect(nouveau)
+        console.log(nouveau);
     }
 
     return (
@@ -63,6 +64,10 @@ const Selectionnez = styled.div`
     margin: 15px auto;
     max-width: 250px;
     text-align: center;
+    select {
+        margin-top: 5px;
+        padding: 5px;
+    }
 `
 
 export default Trajets;

@@ -11,7 +11,7 @@
         "appreciation" : null,
         "notes" : "La distance entre les villes peut être longue. Il est important de bien se ravitailler lorsqu'on a l'opportunité.",
         "carteURL" : "//umap.openstreetmap.fr/fr/map/carte-generale-cyclotouristechezsoi_584684?scaleControl=true&miniMap=false&scrollWheelZoom=true&zoomControl=true&allowEdit=false&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=true&onLoadPanel=undefined&captionBar=false#10/48.6268/-78.4675",
-        "ass" : ["trajet3", "trajet4"],
+        "ass" : [3, 4],
         "deA" : ["Ville-Marie", "Val-d'Or"]
     },
     {
@@ -29,7 +29,7 @@
         "notes" : "Après Trois-Pistoles, la Route verte contient des passages à pic.",
         "varietes" : "Alternative plus facile par la route 132 entre Trois-Pistoles et le parc national du Bic, accotement large mais haut débit de circulation. Possibilité de visiter l'Isle-aux-Grues et l'Ile-Verte, mais à la marée haute seulement.",
         "carteURL" : "//umap.openstreetmap.fr/fr/map/carte-generale-cyclotouristechezsoi_584684?scaleControl=true&miniMap=false&scrollWheelZoom=true&zoomControl=true&allowEdit=false&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=true&onLoadPanel=undefined&captionBar=false#10/48.6268/-78.4675",
-        "ass" : ["trajet3", "trajet4"],
+        "ass" : [3, 4],
         "deA" : ["Québec", "Rimouski"]
     },
     {
@@ -44,7 +44,7 @@
         "appreciation" : null,
         "notes" : "De nouveaux tronçons de piste cyclable ont fait leurs apparitions dans les années précédentes.",
         "carteURL" : "//umap.openstreetmap.fr/fr/map/carte-generale-cyclotouristechezsoi_584684?scaleControl=true&miniMap=false&scrollWheelZoom=true&zoomControl=true&allowEdit=false&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=true&onLoadPanel=undefined&captionBar=false#10/48.6268/-78.4675",
-        "ass" : ["trajet1", "trajet4"],
+        "ass" : [1, 2],
         "deA" : ["Québec", "Maine (É.-U.)"]
     },
     {
@@ -61,7 +61,7 @@
         "defis" : "defidefidefidefi",
         "notes" : "notesnotesnotesnotesnotes",
         "carteURL" : "//umap.openstreetmap.fr/fr/map/carte-generale-cyclotouristechezsoi_584684?scaleControl=true&miniMap=false&scrollWheelZoom=true&zoomControl=true&allowEdit=false&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=true&onLoadPanel=undefined&captionBar=false#10/48.6268/-78.4675",
-        "ass" : ["trajet1", "trajet2"],
+        "ass" : [1, 2],
         "deA" : ["Québec", "Rimouski"]
     }
 ]

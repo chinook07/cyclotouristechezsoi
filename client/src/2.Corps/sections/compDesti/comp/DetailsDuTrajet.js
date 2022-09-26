@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { ExternalLink } from "react-external-link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import CarteDuTrajet from "./CarteDuTrajet";
 import GalerieDuTrajet from "./GalerieDuTrajet";
 import trajetsDB from "../donnees/trajets.json";
 import { faBicycle, faCheck, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
@@ -76,20 +77,25 @@ const DetailsDuTrajet = ({ itineraire, changerTrajet }) => {
                 }
             </div>
             <h3>Carte</h3>
-            <iframe
+            <CarteDuTrajet details={details} />
+            {/* <iframe
                 frameBorder="0"
                 allowFullScreen
                 src={details.carteURL}
-            />
-            <ExternalLink href="https://umap.openstreetmap.fr/fr/map/carte-generale-cyclotouristechezsoi_584684">Voir en plein écran</ExternalLink>
+            /> */}
+            {/* <ExternalLink href="https://umap.openstreetmap.fr/fr/map/carte-generale-cyclotouristechezsoi_584684">Voir en plein écran</ExternalLink> */}
             <h3>Trajets associés</h3>
-            <div>
+            <TrajetsAss>
                 {
                     details.ass.map((item, index) => {
-                        return <button onClick={() => changerTrajet(item)} key={index}>{item}</button>
+                        let rel = trajetsDB.find(route => route.id === item);
+                        if (rel.trajet) {
+                            return <button onClick={() => changerTrajet(item)} key={index}>{rel["trajet"]}</button>
+                        }
+                        
                     })
                 }
-            </div>
+            </TrajetsAss>
             <h3>Galerie des photos</h3>
             <p>Cliquez sur les images ci-dessous pour rêver!</p>
             <GalerieDuTrajet details={details} />
@@ -98,5 +104,14 @@ const DetailsDuTrajet = ({ itineraire, changerTrajet }) => {
 }
 
 const Wrapper = styled.div``
+
+const TrajetsAss = styled.div`
+    display: flex;
+    button {
+        background-color: var(--c4);
+        color: var(--c11);
+        padding: 5px 10px;
+    }
+`
 
 export default DetailsDuTrajet;
