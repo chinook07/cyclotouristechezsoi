@@ -76,7 +76,7 @@
         "deja" : false,
         "appreciation" : null,
         "varietes" : "Il y a plusieurs façons de transformer ce trajet en boucle, soit via Beaumont, ou bien par Scott.",
-        "carteURL" : "10/45.6385/-72.5655",
+        "carteURL" : "10/46.5778/-70.8147",
         "ass" : [1, 2],
         "deA" : ["Lévis", "St-Armagh (boucle)"]
     },
@@ -94,7 +94,7 @@
         "defis" : "Le dénivelé, bien sûr!",
         "notes" : "En direction est, les étapes deviennent légèrement plus faciles au fur et au mesure que l'on avance. La circulation peut être lourde par moment.",
         "varietes" : "Le cycliste peut choisir entre au moins quatre options pour rallier Baie-St-Paul à La Malbaie. Il y a la Route du fleuve, très difficile mais bordant la mer, d'où la difficulté puisque la route descend au niveau de la mer à St-Irénée. Il y a la route 138, moins conviviale, mais contenant moins de montées abruptes. Entre les deux se trouve une large sélection de chemins en gravier. Plus au nord, la Route des Montagnes comporte un dénivelé raisonnable et un débit de circulation plus relaxe. Ce chemin passe par Notre-Dame-des-Monts et St-Aimé-des-Lacs.",
-        "carteURL" : "10/45.6385/-72.5655",
+        "carteURL" : "10/47.6619/-70.1388",
         "ass" : [1, 2],
         "deA" : ["Beaupré", "Tadoussac"]
     },
@@ -112,102 +112,66 @@
         "defis" : "La pente entre le traversier et le centre de Tadoussac, la haute circulation durant les vacances.",
         "notes" : "Prévoir assez d'eau car les distances entre les villages peuvent être longues. Certaines parties de la route ne sont pas encore dotées d'accotements asphaltés. Possibilité de continuer jusqu'à Sept-Iles et au-delà.",
         "varietes" : "Le Sentier polyvalent du Club le Morillon n'est plus considéré comme une piste cyclable, et n'est recommandé que pour les vélos de montagne.",
-        "carteURL" : "10/45.6385/-72.5655",
+        "carteURL" : "10/49.2015/-68.2226",
         "ass" : [1, 2],
-        "deA" : ["Beaupré", "Tadoussac"]
+        "deA" : ["Tadoussac", "Baie-Comeau et au-delà"]
     },
     {
         "id" : 7,
-        "trajet" : "Charlevoix",
-        "intro" : "Le parcours le plus extrême du Québec, la région de Charlevoix représente le défi ultime pour ceux et celles cherchant de la côte.",
-        "distance" : 195,
-        "veloroutes" : ["Route verte 5"],
-        "proportion" : 0,
-        "terrain" : "très difficile.",
-        "deja" : ["La Malbaie à Tadoussac"],
-        "appreciation" : 4,
-        "coups" : "Les beaux points de vue et le sentiment d'avoir survécu à travers!",
-        "defis" : "Le dénivelé, bien sûr!",
-        "notes" : "En direction est, les étapes deviennent légèrement plus faciles au fur et au mesure que l'on avance. La circulation peut être lourde par moment.",
-        "varietes" : "Le cycliste peut choisir entre au moins quatre options pour rallier Baie-St-Paul à La Malbaie. Il y a la Route du fleuve, très difficile mais bordant la mer, d'où la difficulté puisque la route descend au niveau de la mer à St-Irénée. Il y a la route 138, moins conviviale, mais contenant moins de montées abruptes. Entre les deux se trouve une large sélection de chemins en gravier. Plus au nord, la Route des Montagnes comporte un dénivelé raisonnable et un débit de circulation plus relaxe. Ce chemin passe par Notre-Dame-des-Monts et St-Aimé-des-Lacs.",
-        "carteURL" : "10/45.6385/-72.5655",
+        "trajet" : "Fjord-du-Saguenay (nord)",
+        "intro" : "Voici un bon défi réalisable pour le cyclotouriste moyennement chevronné. Ici, on roule en pleine forêt presque sans interruption. Pour voir autre chose que des arbres et des petits cours d'eau, il faudra descendre vers le fjord.",
+        "distance" : 130,
+        "veloroutes" : ["Route verte 8", "Véloroute du Fjord du Saguenay"],
+        "proportion" : 5,
+        "terrain" : "variable, très côteux entre St-Fulgence et la vallée de la rivière Ste-Marguerite.",
+        "deja" : ["Ste-Rose-du-Nord à Tadoussac"],
+        "appreciation" : 5,
+        "coups" : "Rouler le bord de la rivière Ste-Marguerite pendant tout l'après-midi.",
+        "defis" : "La montée à l'est de Ste-Rose-du-Nord.",
+        "notes" : "Il faut se munir d'un filtre car il n'y a aucun point d'eau sur une très longue distance.",
+        "varietes" : "Possibilité de traverser le fjord par la Navette du fjord.",
+        "carteURL" : "10/48.4320/-70.4537",
         "ass" : [1, 2],
-        "deA" : ["Beaupré", "Tadoussac"]
+        "deA" : ["Saguenay", "Tadoussac"]
     },
     {
         "id" : 8,
-        "trajet" : "Côte-Nord",
-        "intro" : "Le parcours le plus extrême du Québec, la région de Charlevoix représente le défi ultime pour ceux et celles cherchant de la côte.",
-        "distance" : 195,
-        "veloroutes" : ["Route verte 5"],
-        "proportion" : 0,
-        "terrain" : "très difficile.",
-        "deja" : ["La Malbaie à Tadoussac"],
+        "trajet" : "Fjord-du-Saguenay (sud)",
+        "intro" : "À l'ouest de Saguenay, ce parcours est réalisable pour le commun des cyclotouristes, mais à l'est, c'est un niveau cyclosportif qui est exigé. Que le plaisir commence!",
+        "distance" : 230,
+        "veloroutes" : ["Route verte 8", "Véloroute du Fjord du Saguenay"],
+        "proportion" : 10,
+        "terrain" : "variable, très côteux à l'est de Saguenay.",
+        "deja" : ["Métabetchouan–Lac-à-la-Croix à Saguenay (La Baie)"],
         "appreciation" : 4,
-        "coups" : "Les beaux points de vue et le sentiment d'avoir survécu à travers!",
-        "defis" : "Le dénivelé, bien sûr!",
-        "notes" : "En direction est, les étapes deviennent légèrement plus faciles au fur et au mesure que l'on avance. La circulation peut être lourde par moment.",
-        "varietes" : "Le cycliste peut choisir entre au moins quatre options pour rallier Baie-St-Paul à La Malbaie. Il y a la Route du fleuve, très difficile mais bordant la mer, d'où la difficulté puisque la route descend au niveau de la mer à St-Irénée. Il y a la route 138, moins conviviale, mais contenant moins de montées abruptes. Entre les deux se trouve une large sélection de chemins en gravier. Plus au nord, la Route des Montagnes comporte un dénivelé raisonnable et un débit de circulation plus relaxe. Ce chemin passe par Notre-Dame-des-Monts et St-Aimé-des-Lacs.",
-        "carteURL" : "10/45.6385/-72.5655",
+        "coups" : "Rouler tôt le matin dans la forêt près du Lac-Kénogami.",
+        "defis" : "La circulation en sortant entre les secteurs de Chicoutimi et de La Baie sur la route 372 en période de pointe.",
+        "notes" : "Il y a très peu de services sur le bord de la route 170 à l'est de Saguenay. Il sera peut-être nécessaire de descendre vers les villages ou le parc national, ce qui impliquera par défaut une montée atroce.",
+        "varietes" : "Possibilité de traverser le fjord par la Navette du fjord.",
+        "carteURL" : "10/48.3817/-70.9394",
         "ass" : [1, 2],
-        "deA" : ["Beaupré", "Tadoussac"]
+        "deA" : ["Métabetchouan", "St-Siméon"]
     },
     {
         "id" : 9,
-        "trajet" : "Fjord-du-Saguenay (nord)",
-        "intro" : "Le parcours le plus extrême du Québec, la région de Charlevoix représente le défi ultime pour ceux et celles cherchant de la côte.",
-        "distance" : 195,
-        "veloroutes" : ["Route verte 5"],
-        "proportion" : 0,
-        "terrain" : "très difficile.",
-        "deja" : ["La Malbaie à Tadoussac"],
+        "trajet" : "Gaspésie",
+        "intro" : "Faire la Gaspésie est un classique des cyclotouristes québécois. Une bonne partie de la boucle étant de calibre facile-intermédiaire, il ne faut par contre pas sous-estimer les côtes présentes dans l'autre moitié.",
+        "distance" : 955,
+        "veloroutes" : ["Route verte 1, Véloroute de la Matapédia"],
+        "proportion" : 5,
+        "terrain" : "variable, très côteux dans le nord-est de la péninsule.",
+        "deja" : ["Rimouski à Rivière-au-Renard via la Baie des Chaleurs"],
         "appreciation" : 4,
         "coups" : "Les beaux points de vue et le sentiment d'avoir survécu à travers!",
         "defis" : "Le dénivelé, bien sûr!",
         "notes" : "En direction est, les étapes deviennent légèrement plus faciles au fur et au mesure que l'on avance. La circulation peut être lourde par moment.",
         "varietes" : "Le cycliste peut choisir entre au moins quatre options pour rallier Baie-St-Paul à La Malbaie. Il y a la Route du fleuve, très difficile mais bordant la mer, d'où la difficulté puisque la route descend au niveau de la mer à St-Irénée. Il y a la route 138, moins conviviale, mais contenant moins de montées abruptes. Entre les deux se trouve une large sélection de chemins en gravier. Plus au nord, la Route des Montagnes comporte un dénivelé raisonnable et un débit de circulation plus relaxe. Ce chemin passe par Notre-Dame-des-Monts et St-Aimé-des-Lacs.",
-        "carteURL" : "10/45.6385/-72.5655",
+        "carteURL" : "10/48.8986/-64.5393",
         "ass" : [1, 2],
-        "deA" : ["Beaupré", "Tadoussac"]
+        "deA" : ["Rimouski", "Gaspé (boucle)"]
     },
     {
         "id" : 10,
-        "trajet" : "Fjord-du-Saguenay (sud)",
-        "intro" : "Le parcours le plus extrême du Québec, la région de Charlevoix représente le défi ultime pour ceux et celles cherchant de la côte.",
-        "distance" : 195,
-        "veloroutes" : ["Route verte 5"],
-        "proportion" : 0,
-        "terrain" : "très difficile.",
-        "deja" : ["La Malbaie à Tadoussac"],
-        "appreciation" : 4,
-        "coups" : "Les beaux points de vue et le sentiment d'avoir survécu à travers!",
-        "defis" : "Le dénivelé, bien sûr!",
-        "notes" : "En direction est, les étapes deviennent légèrement plus faciles au fur et au mesure que l'on avance. La circulation peut être lourde par moment.",
-        "varietes" : "Le cycliste peut choisir entre au moins quatre options pour rallier Baie-St-Paul à La Malbaie. Il y a la Route du fleuve, très difficile mais bordant la mer, d'où la difficulté puisque la route descend au niveau de la mer à St-Irénée. Il y a la route 138, moins conviviale, mais contenant moins de montées abruptes. Entre les deux se trouve une large sélection de chemins en gravier. Plus au nord, la Route des Montagnes comporte un dénivelé raisonnable et un débit de circulation plus relaxe. Ce chemin passe par Notre-Dame-des-Monts et St-Aimé-des-Lacs.",
-        "carteURL" : "10/45.6385/-72.5655",
-        "ass" : [1, 2],
-        "deA" : ["Beaupré", "Tadoussac"]
-    },
-    {
-        "id" : 11,
-        "trajet" : "Gaspésie",
-        "intro" : "Le parcours le plus extrême du Québec, la région de Charlevoix représente le défi ultime pour ceux et celles cherchant de la côte.",
-        "distance" : 195,
-        "veloroutes" : ["Route verte 5"],
-        "proportion" : 0,
-        "terrain" : "très difficile.",
-        "deja" : ["La Malbaie à Tadoussac"],
-        "appreciation" : 4,
-        "coups" : "Les beaux points de vue et le sentiment d'avoir survécu à travers!",
-        "defis" : "Le dénivelé, bien sûr!",
-        "notes" : "En direction est, les étapes deviennent légèrement plus faciles au fur et au mesure que l'on avance. La circulation peut être lourde par moment.",
-        "varietes" : "Le cycliste peut choisir entre au moins quatre options pour rallier Baie-St-Paul à La Malbaie. Il y a la Route du fleuve, très difficile mais bordant la mer, d'où la difficulté puisque la route descend au niveau de la mer à St-Irénée. Il y a la route 138, moins conviviale, mais contenant moins de montées abruptes. Entre les deux se trouve une large sélection de chemins en gravier. Plus au nord, la Route des Montagnes comporte un dénivelé raisonnable et un débit de circulation plus relaxe. Ce chemin passe par Notre-Dame-des-Monts et St-Aimé-des-Lacs.",
-        "carteURL" : "10/45.6385/-72.5655",
-        "ass" : [1, 2],
-        "deA" : ["Beaupré", "Tadoussac"]
-    },
-    {
-        "id" : 12,
         "trajet" : "La Vérendrye",
         "intro" : "Le parcours le plus extrême du Québec, la région de Charlevoix représente le défi ultime pour ceux et celles cherchant de la côte.",
         "distance" : 195,
@@ -220,12 +184,12 @@
         "defis" : "Le dénivelé, bien sûr!",
         "notes" : "En direction est, les étapes deviennent légèrement plus faciles au fur et au mesure que l'on avance. La circulation peut être lourde par moment.",
         "varietes" : "Le cycliste peut choisir entre au moins quatre options pour rallier Baie-St-Paul à La Malbaie. Il y a la Route du fleuve, très difficile mais bordant la mer, d'où la difficulté puisque la route descend au niveau de la mer à St-Irénée. Il y a la route 138, moins conviviale, mais contenant moins de montées abruptes. Entre les deux se trouve une large sélection de chemins en gravier. Plus au nord, la Route des Montagnes comporte un dénivelé raisonnable et un débit de circulation plus relaxe. Ce chemin passe par Notre-Dame-des-Monts et St-Aimé-des-Lacs.",
-        "carteURL" : "10/45.6385/-72.5655",
+        "carteURL" : "10/47.3458/-76.9351",
         "ass" : [1, 2],
-        "deA" : ["Beaupré", "Tadoussac"]
+        "deA" : ["Val-d'Or", "Mont-Laurier"]
     },
     {
-        "id" : 13,
+        "id" : 11,
         "trajet" : "Lac Champlain",
         "intro" : "Le parcours le plus extrême du Québec, la région de Charlevoix représente le défi ultime pour ceux et celles cherchant de la côte.",
         "distance" : 195,
@@ -238,12 +202,12 @@
         "defis" : "Le dénivelé, bien sûr!",
         "notes" : "En direction est, les étapes deviennent légèrement plus faciles au fur et au mesure que l'on avance. La circulation peut être lourde par moment.",
         "varietes" : "Le cycliste peut choisir entre au moins quatre options pour rallier Baie-St-Paul à La Malbaie. Il y a la Route du fleuve, très difficile mais bordant la mer, d'où la difficulté puisque la route descend au niveau de la mer à St-Irénée. Il y a la route 138, moins conviviale, mais contenant moins de montées abruptes. Entre les deux se trouve une large sélection de chemins en gravier. Plus au nord, la Route des Montagnes comporte un dénivelé raisonnable et un débit de circulation plus relaxe. Ce chemin passe par Notre-Dame-des-Monts et St-Aimé-des-Lacs.",
-        "carteURL" : "10/45.6385/-72.5655",
+        "carteURL" : "10/44.9420/-73.2802",
         "ass" : [1, 2],
-        "deA" : ["Beaupré", "Tadoussac"]
+        "deA" : ["Montréal", "New York"]
     },
     {
-        "id" : 14,
+        "id" : 12,
         "trajet" : "Lac-St-Jean",
         "intro" : "Le parcours le plus extrême du Québec, la région de Charlevoix représente le défi ultime pour ceux et celles cherchant de la côte.",
         "distance" : 195,
@@ -256,12 +220,12 @@
         "defis" : "Le dénivelé, bien sûr!",
         "notes" : "En direction est, les étapes deviennent légèrement plus faciles au fur et au mesure que l'on avance. La circulation peut être lourde par moment.",
         "varietes" : "Le cycliste peut choisir entre au moins quatre options pour rallier Baie-St-Paul à La Malbaie. Il y a la Route du fleuve, très difficile mais bordant la mer, d'où la difficulté puisque la route descend au niveau de la mer à St-Irénée. Il y a la route 138, moins conviviale, mais contenant moins de montées abruptes. Entre les deux se trouve une large sélection de chemins en gravier. Plus au nord, la Route des Montagnes comporte un dénivelé raisonnable et un débit de circulation plus relaxe. Ce chemin passe par Notre-Dame-des-Monts et St-Aimé-des-Lacs.",
-        "carteURL" : "10/45.6385/-72.5655",
+        "carteURL" : "10/48.6061/-72.1567",
         "ass" : [1, 2],
-        "deA" : ["Beaupré", "Tadoussac"]
+        "deA" : ["Alma", "Roberval (boucle)"]
     },
     {
-        "id" : 15,
+        "id" : 13,
         "trajet" : "Laurentides",
         "intro" : "Le parcours le plus extrême du Québec, la région de Charlevoix représente le défi ultime pour ceux et celles cherchant de la côte.",
         "distance" : 195,
@@ -274,12 +238,12 @@
         "defis" : "Le dénivelé, bien sûr!",
         "notes" : "En direction est, les étapes deviennent légèrement plus faciles au fur et au mesure que l'on avance. La circulation peut être lourde par moment.",
         "varietes" : "Le cycliste peut choisir entre au moins quatre options pour rallier Baie-St-Paul à La Malbaie. Il y a la Route du fleuve, très difficile mais bordant la mer, d'où la difficulté puisque la route descend au niveau de la mer à St-Irénée. Il y a la route 138, moins conviviale, mais contenant moins de montées abruptes. Entre les deux se trouve une large sélection de chemins en gravier. Plus au nord, la Route des Montagnes comporte un dénivelé raisonnable et un débit de circulation plus relaxe. Ce chemin passe par Notre-Dame-des-Monts et St-Aimé-des-Lacs.",
-        "carteURL" : "10/45.6385/-72.5655",
+        "carteURL" : "10/46.0885/-74.3658",
         "ass" : [1, 2],
-        "deA" : ["Beaupré", "Tadoussac"]
+        "deA" : ["Mont-Laurier", "Montréal"]
     },
     {
-        "id" : 16,
+        "id" : 14,
         "trajet" : "Mauricie",
         "intro" : "Le parcours le plus extrême du Québec, la région de Charlevoix représente le défi ultime pour ceux et celles cherchant de la côte.",
         "distance" : 195,
@@ -292,12 +256,12 @@
         "defis" : "Le dénivelé, bien sûr!",
         "notes" : "En direction est, les étapes deviennent légèrement plus faciles au fur et au mesure que l'on avance. La circulation peut être lourde par moment.",
         "varietes" : "Le cycliste peut choisir entre au moins quatre options pour rallier Baie-St-Paul à La Malbaie. Il y a la Route du fleuve, très difficile mais bordant la mer, d'où la difficulté puisque la route descend au niveau de la mer à St-Irénée. Il y a la route 138, moins conviviale, mais contenant moins de montées abruptes. Entre les deux se trouve une large sélection de chemins en gravier. Plus au nord, la Route des Montagnes comporte un dénivelé raisonnable et un débit de circulation plus relaxe. Ce chemin passe par Notre-Dame-des-Monts et St-Aimé-des-Lacs.",
-        "carteURL" : "10/45.6385/-72.5655",
+        "carteURL" : "10/46.8771/-72.3779",
         "ass" : [1, 2],
-        "deA" : ["Beaupré", "Tadoussac"]
+        "deA" : ["Louiseville", "Rivière-à-Pierre"]
     },
     {
-        "id" : 17,
+        "id" : 15,
         "trajet" : "Montréal–Québec (nord)",
         "intro" : "Le parcours le plus extrême du Québec, la région de Charlevoix représente le défi ultime pour ceux et celles cherchant de la côte.",
         "distance" : 195,
@@ -310,12 +274,12 @@
         "defis" : "Le dénivelé, bien sûr!",
         "notes" : "En direction est, les étapes deviennent légèrement plus faciles au fur et au mesure que l'on avance. La circulation peut être lourde par moment.",
         "varietes" : "Le cycliste peut choisir entre au moins quatre options pour rallier Baie-St-Paul à La Malbaie. Il y a la Route du fleuve, très difficile mais bordant la mer, d'où la difficulté puisque la route descend au niveau de la mer à St-Irénée. Il y a la route 138, moins conviviale, mais contenant moins de montées abruptes. Entre les deux se trouve une large sélection de chemins en gravier. Plus au nord, la Route des Montagnes comporte un dénivelé raisonnable et un débit de circulation plus relaxe. Ce chemin passe par Notre-Dame-des-Monts et St-Aimé-des-Lacs.",
-        "carteURL" : "10/45.6385/-72.5655",
+        "carteURL" : "10/46.7142/-71.8719",
         "ass" : [1, 2],
-        "deA" : ["Beaupré", "Tadoussac"]
+        "deA" : ["Montréal", "Beaupré"]
     },
     {
-        "id" : 18,
+        "id" : 16,
         "trajet" : "Montréal–Québec (sud)",
         "intro" : "Le parcours le plus extrême du Québec, la région de Charlevoix représente le défi ultime pour ceux et celles cherchant de la côte.",
         "distance" : 195,
@@ -328,12 +292,12 @@
         "defis" : "Le dénivelé, bien sûr!",
         "notes" : "En direction est, les étapes deviennent légèrement plus faciles au fur et au mesure que l'on avance. La circulation peut être lourde par moment.",
         "varietes" : "Le cycliste peut choisir entre au moins quatre options pour rallier Baie-St-Paul à La Malbaie. Il y a la Route du fleuve, très difficile mais bordant la mer, d'où la difficulté puisque la route descend au niveau de la mer à St-Irénée. Il y a la route 138, moins conviviale, mais contenant moins de montées abruptes. Entre les deux se trouve une large sélection de chemins en gravier. Plus au nord, la Route des Montagnes comporte un dénivelé raisonnable et un débit de circulation plus relaxe. Ce chemin passe par Notre-Dame-des-Monts et St-Aimé-des-Lacs.",
-        "carteURL" : "10/45.6385/-72.5655",
+        "carteURL" : "10/46.0082/-73.0138",
         "ass" : [1, 2],
-        "deA" : ["Beaupré", "Tadoussac"]
+        "deA" : ["Côteau-du-Lac", "Lévis"]
     },
     {
-        "id" : 19,
+        "id" : 17,
         "trajet" : "Montréal–Sherbrooke",
         "intro" : "Le parcours le plus extrême du Québec, la région de Charlevoix représente le défi ultime pour ceux et celles cherchant de la côte.",
         "distance" : 195,
@@ -346,12 +310,12 @@
         "defis" : "Le dénivelé, bien sûr!",
         "notes" : "En direction est, les étapes deviennent légèrement plus faciles au fur et au mesure que l'on avance. La circulation peut être lourde par moment.",
         "varietes" : "Le cycliste peut choisir entre au moins quatre options pour rallier Baie-St-Paul à La Malbaie. Il y a la Route du fleuve, très difficile mais bordant la mer, d'où la difficulté puisque la route descend au niveau de la mer à St-Irénée. Il y a la route 138, moins conviviale, mais contenant moins de montées abruptes. Entre les deux se trouve une large sélection de chemins en gravier. Plus au nord, la Route des Montagnes comporte un dénivelé raisonnable et un débit de circulation plus relaxe. Ce chemin passe par Notre-Dame-des-Monts et St-Aimé-des-Lacs.",
-        "carteURL" : "10/45.6385/-72.5655",
+        "carteURL" : "10/45.3258/-72.2821",
         "ass" : [1, 2],
-        "deA" : ["Beaupré", "Tadoussac"]
+        "deA" : ["Montréal", "Sherbrooke"]
     },
     {
-        "id" : 20,
+        "id" : 18,
         "trajet" : "Outaouais (nord)",
         "intro" : "Le parcours le plus extrême du Québec, la région de Charlevoix représente le défi ultime pour ceux et celles cherchant de la côte.",
         "distance" : 195,
@@ -364,12 +328,12 @@
         "defis" : "Le dénivelé, bien sûr!",
         "notes" : "En direction est, les étapes deviennent légèrement plus faciles au fur et au mesure que l'on avance. La circulation peut être lourde par moment.",
         "varietes" : "Le cycliste peut choisir entre au moins quatre options pour rallier Baie-St-Paul à La Malbaie. Il y a la Route du fleuve, très difficile mais bordant la mer, d'où la difficulté puisque la route descend au niveau de la mer à St-Irénée. Il y a la route 138, moins conviviale, mais contenant moins de montées abruptes. Entre les deux se trouve une large sélection de chemins en gravier. Plus au nord, la Route des Montagnes comporte un dénivelé raisonnable et un débit de circulation plus relaxe. Ce chemin passe par Notre-Dame-des-Monts et St-Aimé-des-Lacs.",
-        "carteURL" : "10/45.6385/-72.5655",
+        "carteURL" : "10/45.6875/-74.9549",
         "ass" : [1, 2],
-        "deA" : ["Beaupré", "Tadoussac"]
+        "deA" : ["Gatineau–Ottawa", "Montréal"]
     },
     {
-        "id" : 21,
+        "id" : 19,
         "trajet" : "Outaouais (sud)",
         "intro" : "Le parcours le plus extrême du Québec, la région de Charlevoix représente le défi ultime pour ceux et celles cherchant de la côte.",
         "distance" : 195,
@@ -382,12 +346,12 @@
         "defis" : "Le dénivelé, bien sûr!",
         "notes" : "En direction est, les étapes deviennent légèrement plus faciles au fur et au mesure que l'on avance. La circulation peut être lourde par moment.",
         "varietes" : "Le cycliste peut choisir entre au moins quatre options pour rallier Baie-St-Paul à La Malbaie. Il y a la Route du fleuve, très difficile mais bordant la mer, d'où la difficulté puisque la route descend au niveau de la mer à St-Irénée. Il y a la route 138, moins conviviale, mais contenant moins de montées abruptes. Entre les deux se trouve une large sélection de chemins en gravier. Plus au nord, la Route des Montagnes comporte un dénivelé raisonnable et un débit de circulation plus relaxe. Ce chemin passe par Notre-Dame-des-Monts et St-Aimé-des-Lacs.",
-        "carteURL" : "10/45.6385/-72.5655",
+        "carteURL" : "10/45.5790/-74.9151",
         "ass" : [1, 2],
-        "deA" : ["Beaupré", "Tadoussac"]
+        "deA" : ["Ottawa–Gatineau", "Montréal"]
     },
     {
-        "id" : 22,
+        "id" : 20,
         "trajet" : "Pontiac",
         "intro" : "Le parcours le plus extrême du Québec, la région de Charlevoix représente le défi ultime pour ceux et celles cherchant de la côte.",
         "distance" : 195,
@@ -400,12 +364,12 @@
         "defis" : "Le dénivelé, bien sûr!",
         "notes" : "En direction est, les étapes deviennent légèrement plus faciles au fur et au mesure que l'on avance. La circulation peut être lourde par moment.",
         "varietes" : "Le cycliste peut choisir entre au moins quatre options pour rallier Baie-St-Paul à La Malbaie. Il y a la Route du fleuve, très difficile mais bordant la mer, d'où la difficulté puisque la route descend au niveau de la mer à St-Irénée. Il y a la route 138, moins conviviale, mais contenant moins de montées abruptes. Entre les deux se trouve une large sélection de chemins en gravier. Plus au nord, la Route des Montagnes comporte un dénivelé raisonnable et un débit de circulation plus relaxe. Ce chemin passe par Notre-Dame-des-Monts et St-Aimé-des-Lacs.",
-        "carteURL" : "10/45.6385/-72.5655",
+        "carteURL" : "10/45.8331/-76.6626",
         "ass" : [1, 2],
-        "deA" : ["Beaupré", "Tadoussac"]
+        "deA" : ["Pembroke", "Gatineau–Ottawa"]
     },
     {
-        "id" : 23,
+        "id" : 21,
         "trajet" : "Portneuf",
         "intro" : "Le parcours le plus extrême du Québec, la région de Charlevoix représente le défi ultime pour ceux et celles cherchant de la côte.",
         "distance" : 195,
@@ -418,12 +382,12 @@
         "defis" : "Le dénivelé, bien sûr!",
         "notes" : "En direction est, les étapes deviennent légèrement plus faciles au fur et au mesure que l'on avance. La circulation peut être lourde par moment.",
         "varietes" : "Le cycliste peut choisir entre au moins quatre options pour rallier Baie-St-Paul à La Malbaie. Il y a la Route du fleuve, très difficile mais bordant la mer, d'où la difficulté puisque la route descend au niveau de la mer à St-Irénée. Il y a la route 138, moins conviviale, mais contenant moins de montées abruptes. Entre les deux se trouve une large sélection de chemins en gravier. Plus au nord, la Route des Montagnes comporte un dénivelé raisonnable et un débit de circulation plus relaxe. Ce chemin passe par Notre-Dame-des-Monts et St-Aimé-des-Lacs.",
-        "carteURL" : "10/45.6385/-72.5655",
+        "carteURL" : "10/46.8968/-71.8039",
         "ass" : [1, 2],
-        "deA" : ["Beaupré", "Tadoussac"]
+        "deA" : ["Rivière-à-Pierre", "Québec"]
     },
     {
-        "id" : 24,
+        "id" : 22,
         "trajet" : "Sentier Waterfront",
         "intro" : "Le parcours le plus extrême du Québec, la région de Charlevoix représente le défi ultime pour ceux et celles cherchant de la côte.",
         "distance" : 195,
@@ -436,12 +400,12 @@
         "defis" : "Le dénivelé, bien sûr!",
         "notes" : "En direction est, les étapes deviennent légèrement plus faciles au fur et au mesure que l'on avance. La circulation peut être lourde par moment.",
         "varietes" : "Le cycliste peut choisir entre au moins quatre options pour rallier Baie-St-Paul à La Malbaie. Il y a la Route du fleuve, très difficile mais bordant la mer, d'où la difficulté puisque la route descend au niveau de la mer à St-Irénée. Il y a la route 138, moins conviviale, mais contenant moins de montées abruptes. Entre les deux se trouve une large sélection de chemins en gravier. Plus au nord, la Route des Montagnes comporte un dénivelé raisonnable et un débit de circulation plus relaxe. Ce chemin passe par Notre-Dame-des-Monts et St-Aimé-des-Lacs.",
-        "carteURL" : "10/45.6385/-72.5655",
+        "carteURL" : "10/44.3312/-76.2389",
         "ass" : [1, 2],
-        "deA" : ["Beaupré", "Tadoussac"]
+        "deA" : ["Toronto", "Montréal"]
     },
     {
-        "id" : 25,
+        "id" : 23,
         "trajet" : "Sherbrooke–Québec",
         "intro" : "Le parcours le plus extrême du Québec, la région de Charlevoix représente le défi ultime pour ceux et celles cherchant de la côte.",
         "distance" : 195,
@@ -454,12 +418,12 @@
         "defis" : "Le dénivelé, bien sûr!",
         "notes" : "En direction est, les étapes deviennent légèrement plus faciles au fur et au mesure que l'on avance. La circulation peut être lourde par moment.",
         "varietes" : "Le cycliste peut choisir entre au moins quatre options pour rallier Baie-St-Paul à La Malbaie. Il y a la Route du fleuve, très difficile mais bordant la mer, d'où la difficulté puisque la route descend au niveau de la mer à St-Irénée. Il y a la route 138, moins conviviale, mais contenant moins de montées abruptes. Entre les deux se trouve une large sélection de chemins en gravier. Plus au nord, la Route des Montagnes comporte un dénivelé raisonnable et un débit de circulation plus relaxe. Ce chemin passe par Notre-Dame-des-Monts et St-Aimé-des-Lacs.",
-        "carteURL" : "10/45.6385/-72.5655",
+        "carteURL" : "10/46.1998/-71.8375",
         "ass" : [1, 2],
-        "deA" : ["Beaupré", "Tadoussac"]
+        "deA" : ["Sherbrooke", "Lévis"]
     },
     {
-        "id" : 26,
+        "id" : 24,
         "trajet" : "Témiscouata",
         "intro" : "Le parcours le plus extrême du Québec, la région de Charlevoix représente le défi ultime pour ceux et celles cherchant de la côte.",
         "distance" : 195,
@@ -472,12 +436,12 @@
         "defis" : "Le dénivelé, bien sûr!",
         "notes" : "En direction est, les étapes deviennent légèrement plus faciles au fur et au mesure que l'on avance. La circulation peut être lourde par moment.",
         "varietes" : "Le cycliste peut choisir entre au moins quatre options pour rallier Baie-St-Paul à La Malbaie. Il y a la Route du fleuve, très difficile mais bordant la mer, d'où la difficulté puisque la route descend au niveau de la mer à St-Irénée. Il y a la route 138, moins conviviale, mais contenant moins de montées abruptes. Entre les deux se trouve une large sélection de chemins en gravier. Plus au nord, la Route des Montagnes comporte un dénivelé raisonnable et un débit de circulation plus relaxe. Ce chemin passe par Notre-Dame-des-Monts et St-Aimé-des-Lacs.",
-        "carteURL" : "10/45.6385/-72.5655",
+        "carteURL" : "10/47.5677/-68.7016",
         "ass" : [1, 2],
-        "deA" : ["Beaupré", "Tadoussac"]
+        "deA" : ["Rivière-du-Loup", "Edmundston"]
     },
     {
-        "id" : 27,
+        "id" : 25,
         "trajet" : "Trois-Rivières–Shawinigan",
         "intro" : "Le parcours le plus extrême du Québec, la région de Charlevoix représente le défi ultime pour ceux et celles cherchant de la côte.",
         "distance" : 195,
@@ -490,12 +454,12 @@
         "defis" : "Le dénivelé, bien sûr!",
         "notes" : "En direction est, les étapes deviennent légèrement plus faciles au fur et au mesure que l'on avance. La circulation peut être lourde par moment.",
         "varietes" : "Le cycliste peut choisir entre au moins quatre options pour rallier Baie-St-Paul à La Malbaie. Il y a la Route du fleuve, très difficile mais bordant la mer, d'où la difficulté puisque la route descend au niveau de la mer à St-Irénée. Il y a la route 138, moins conviviale, mais contenant moins de montées abruptes. Entre les deux se trouve une large sélection de chemins en gravier. Plus au nord, la Route des Montagnes comporte un dénivelé raisonnable et un débit de circulation plus relaxe. Ce chemin passe par Notre-Dame-des-Monts et St-Aimé-des-Lacs.",
-        "carteURL" : "10/45.6385/-72.5655",
+        "carteURL" : "10/46.4587/-72.6739",
         "ass" : [1, 2],
-        "deA" : ["Beaupré", "Tadoussac"]
+        "deA" : ["Shawinigan", "Trois-Rivières"]
     },
     {
-        "id" : 27,
+        "id" : 26,
         "trajet" : "Vallée de la Gatineau",
         "intro" : "Le parcours le plus extrême du Québec, la région de Charlevoix représente le défi ultime pour ceux et celles cherchant de la côte.",
         "distance" : 195,
@@ -508,8 +472,8 @@
         "defis" : "Le dénivelé, bien sûr!",
         "notes" : "En direction est, les étapes deviennent légèrement plus faciles au fur et au mesure que l'on avance. La circulation peut être lourde par moment.",
         "varietes" : "Le cycliste peut choisir entre au moins quatre options pour rallier Baie-St-Paul à La Malbaie. Il y a la Route du fleuve, très difficile mais bordant la mer, d'où la difficulté puisque la route descend au niveau de la mer à St-Irénée. Il y a la route 138, moins conviviale, mais contenant moins de montées abruptes. Entre les deux se trouve une large sélection de chemins en gravier. Plus au nord, la Route des Montagnes comporte un dénivelé raisonnable et un débit de circulation plus relaxe. Ce chemin passe par Notre-Dame-des-Monts et St-Aimé-des-Lacs.",
-        "carteURL" : "10/45.6385/-72.5655",
+        "carteURL" : "10/46.0970/-76.0604",
         "ass" : [1, 2],
-        "deA" : ["Beaupré", "Tadoussac"]
+        "deA" : ["Grand-Remous", "Gatineau–Ottawa"]
     }
 ]
