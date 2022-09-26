@@ -70,7 +70,10 @@ const DetailsDuTrajet = ({ itineraire, changerTrajet }) => {
                     details.defis &&
                     <p>Défis rencontrés : {details.defis}</p>
                 }
-                <p>Autres notes : {details.notes}</p>
+                {
+                    details.notes &&
+                    <p>Autres notes : {details.notes}</p>
+                }
                 {
                     details.varietes &&
                     <p>Variétés au parcours : {details.varietes}</p>
