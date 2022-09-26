@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { ExternalLink } from "react-external-link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import CarteDuTrajet from "./CarteDuTrajet";
+// import CarteDuTrajet from "./CarteDuTrajet";
 import GalerieDuTrajet from "./GalerieDuTrajet";
 import trajetsDB from "../donnees/trajets.json";
 import { faBicycle, faCheck, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
@@ -77,19 +77,22 @@ const DetailsDuTrajet = ({ itineraire, changerTrajet }) => {
                 }
             </div>
             <h3>Carte</h3>
-            <CarteDuTrajet details={details} />
-            {/* <iframe
-                frameBorder="0"
-                allowFullScreen
-                src={details.carteURL}
-            /> */}
-            {/* <ExternalLink href="https://umap.openstreetmap.fr/fr/map/carte-generale-cyclotouristechezsoi_584684">Voir en plein écran</ExternalLink> */}
+            <figure>
+                <iframe
+                    frameBorder="0"
+                    allowFullScreen
+                    src={`//umap.openstreetmap.fr/fr/map/carte-generale-cyclotouristechezsoi_584684?scaleControl=true&miniMap=false&scrollWheelZoom=true&zoomControl=true&allowEdit=false&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=true&onLoadPanel=undefined&captionBar=false#${details.carteURL}`}
+                />
+                <ExternalLink href="https://umap.openstreetmap.fr/fr/map/carte-generale-cyclotouristechezsoi_584684">Voir en plein écran</ExternalLink>
+            </figure>
+            
+            
             <h3>Trajets associés</h3>
             <TrajetsAss>
                 {
                     details.ass.map((item, index) => {
                         let rel = trajetsDB.find(route => route.id === item);
-                        if (rel.trajet) {
+                        if (rel) {
                             return <button onClick={() => changerTrajet(item)} key={index}>{rel["trajet"]}</button>
                         }
                         
@@ -103,7 +106,29 @@ const DetailsDuTrajet = ({ itineraire, changerTrajet }) => {
     )
 }
 
-const Wrapper = styled.div``
+const Wrapper = styled.div`
+    figure {
+        height: 500px;
+        margin: 10px 0 50px;
+        max-height: 70vh;
+        max-width: 860px;
+        width: 100%;
+        iframe {
+            box-shadow: var(--c3) 5px 5px 5px 5px;
+            display: block;
+            height: 100%;
+            width: 100%;
+            &:hover {
+                box-shadow: var(--c6) 5px 5px 5px 5px;
+            }
+        }
+        > a {
+            display: block;
+            margin-top: 15px;
+            text-align: center;
+        }
+    }
+`
 
 const TrajetsAss = styled.div`
     display: flex;
