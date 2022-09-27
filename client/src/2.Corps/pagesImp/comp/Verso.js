@@ -1,12 +1,28 @@
 import styled from "styled-components";
 import { ExternalLink } from "react-external-link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import {FaMountain} from "react-icons/fa"
+import { FaMountain } from "react-icons/fa"
+import { faPlane, faTrain, faTrainSubway, faBusAlt, faBus, faCampground, faHotel, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
-const Verso = ({item, index}) => {
+const Verso = ({ item, index }) => {
+    
+    const afficher = {
+        "avion": faPlane,
+        "train": faTrain,
+        "train de banlieue": faTrainSubway,
+        "autocar": faBusAlt,
+        "autobus": faBus,
+        "la tente": faCampground,
+        "un toit": faHotel
+    }
+
     return (
         <Wrapper>
-            <Intro>Km: {item.km}</Intro>
+            <Intro>
+                <span>{index + 1}</span>
+                <span>Km: {item.km}</span>
+            </Intro>
             <Titre>{item.titre}</Titre>
             <Diff>
                 <div>Dénivelé positif : {item.denivele}</div>
@@ -18,7 +34,12 @@ const Verso = ({item, index}) => {
                 <ul>
                     {
                         item.villes.map((item, index) => {
-                            return <li key={index}>{item}</li>
+                            return (
+                                <li key={index}>
+                                    <FontAwesomeIcon icon={faArrowRight} />
+                                    <span>{item}</span>
+                                </li>
+                            )
                         })
                     }
                 </ul>
@@ -28,19 +49,31 @@ const Verso = ({item, index}) => {
                 ? <Details>
                         {
                             item.alle &&
-                            <div>Allé et rentré en {item.alle}</div>
+                            <div>
+                                    <FontAwesomeIcon icon={afficher[item.alle]} />
+                                    <span>Allé et rentré en {item.alle}</span>
+                            </div>
                         }
-                        <div>Couché sous {item.coucher}</div>
+                        <div>
+                            <FontAwesomeIcon icon={afficher[item.coucher]} />
+                            <span>Couché sous {item.coucher}</span>
+                        </div>
                     </Details>
                     : <Details>
                         {
                             item.alle &&
-                            <div>Allé en {item.alle}</div>
+                            <div>
+                                    <FontAwesomeIcon icon={afficher[item.alle]} />
+                                    <span>Allé en {item.alle}</span>
+                            </div>
                         }
                         <div>Couché sous {item.coucher}</div>
                         {
                             item.retour &&
-                            <div>Rentré en {item.retour}</div>
+                            <div>
+                                    <FontAwesomeIcon icon={afficher[item.retour]} />
+                                    <span>Rentré en {item.retour}</span>
+                            </div>
                         }
                 </Details>
             }
@@ -57,6 +90,7 @@ const Wrapper = styled.div`
     border-radius: 5px;
     color: var(--c5);
     height: 100%;
+    padding: 10px;
     width: 100%;
     a {
         color: var(--c5);
@@ -65,21 +99,37 @@ const Wrapper = styled.div`
 `
 
 const Intro = styled.div`
-    text-align: right;
+    display: flex;
+    justify-content: space-between;
 `
 
 const Titre = styled.div`
     font-size: larger;
+    margin: 25px 20px 0;
 `
 
-const Diff = styled.div``
+const Diff = styled.div`
+    margin: 20px 20px 0;
+`
 
 const VillesTrav = styled.div`
     font-size: small;
+    margin: 15px 20px;
+    li {
+        list-style: none;
+        text-align: left;
+        svg {
+            margin-right: 4px;
+        }
+    }
 `
 
 const Details = styled.div`
     font-size: small;
+    margin: 15px 20px;
+    svg {
+        margin-right: 4px;
+    }
 `
 
 export default Verso;

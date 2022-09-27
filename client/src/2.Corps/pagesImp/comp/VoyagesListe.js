@@ -27,7 +27,7 @@ const VoyagesListe = () => {
                         className={catAMontrer === "flipBoucle" ? "active" : "false"}
                         onClick={() => changerCategories("flipBoucle")}
                     ><FontAwesomeIcon icon={faArrowsRotate}
-                        />Boucles<span>ou presque</span></button>
+                        />Boucles <span>(ou presque)</span></button>
                     <button
                         className={catAMontrer === "flipLineaire" ? "active" : "false"}
                         onClick={() => changerCategories("flipLineaire")}
@@ -78,13 +78,19 @@ const Panneau = styled.div`
 `
 
 const Boutons = styled.div`
+    /* display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly; */
     button {
         background-color: inherit;
         border: none;
         border-radius: 10px;
         cursor: pointer;
-        margin: 0 5px;
+        margin: 0 5px 5px;
         padding: 10px;
+        svg {
+            margin-right: 4px;
+        }
         &:hover {
             background-color: var(--c3);
         }

@@ -231,6 +231,72 @@
         "trajet" : "Circuit 59 – Lien entre Laval et Mirabel.",
         "heures" : "sur semaine seulement, principalement à l'heure de pointe."
     },
+    "400" : {
+        "icone" : [4, 5, 8],
+        "transporteur" : "Navark",
+        "trajet" : "Tajet IPC – Lien entre Notre-Dame-de-l'Ile-Perrot et Pointe-des-Cascades",
+        "heures" : "seulement quelques jours de fin de semaine par été"
+    },
+    "401" : {
+        "icone" : [4, 5, 8],
+        "transporteur" : "Navark",
+        "trajet" : "Tajet IPB – Lien entre Notre-Dame-de-l'Ile-Perrot et Beauharnois",
+        "heures" : "seulement quelques jours de fin de semaine par été"
+    },
+    "402" : {
+        "icone" : [4, 5, 8],
+        "transporteur" : "Navark",
+        "trajet" : "Tajet IPS – Lien entre Notre-Dame-de-l'Ile-Perrot et Sainte-Anne-de-Bellevue",
+        "heures" : "seulement quelques jours de fin de semaine par été"
+    },
+    "403" : {
+        "icone" : [4, 5, 8],
+        "transporteur" : "Navark",
+        "trajet" : "Tajet LCH – Lien entre Lachine et Châteauguay",
+        "heures" : "fins de semaine et jours fériés en été"
+    },
+    "404" : {
+        "icone" : [4, 5, 8],
+        "transporteur" : "Navark",
+        "trajet" : "Tajet BCH – Lien entre Montréal (Vieux-Port) et Boucherville",
+        "heures" : "7 jours sur 7, du printemps à l'automne"
+    },
+    "405" : {
+        "icone" : [4, 5, 8],
+        "transporteur" : "Navark",
+        "trajet" : "Tajet PVP – Lien à Montréal entre Vieux-Port et Pointe-aux-Trembles",
+        "heures" : "7 jours sur 7, du printemps à l'automne"
+    },
+    "406" : {
+        "icone" : [4, 5, 8],
+        "transporteur" : "Navark",
+        "trajet" : "Tajet MMB – Lien entre Montréal (Mercier) et Boucherville",
+        "heures" : "7 jours sur 7, du printemps à l'automne"
+    },
+    "407" : {
+        "icone" : [4, 5, 8],
+        "transporteur" : "Navark",
+        "trajet" : "Tajet LFC – Lien entre Longueuil et l'Ile-Charron",
+        "heures" : "horaire variable, du printemps à l'automne"
+    },
+    "408" : {
+        "icone" : [4, 5, 8],
+        "transporteur" : "Navark",
+        "trajet" : "Tajet MMC – Lien entre Montréal (Mercier) et l'Ile-Charron",
+        "heures" : "fins de semaine et jours fériés en été"
+    },
+    "409" : {
+        "icone" : [4, 5, 8],
+        "transporteur" : "Navark",
+        "trajet" : "Tajet BGR – Lien entre Boucherville et l'Ile-Grosbois",
+        "heures" : "horaire variable, du printemps à l'automne"
+    },
+    "410" : {
+        "icone" : [4, 5, 8],
+        "transporteur" : "Navark",
+        "trajet" : "Tajet PVR – Lien entre Montréal (Pointe-aux-Trembles), Varennes et Repentigny",
+        "heures" : "horaire variable, en été et à l'automne"
+    },
     "999" : {
         "infoA" : "texteA",
         "infoB" : "texteB",

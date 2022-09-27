@@ -40,6 +40,12 @@ const VoyEffectues = () => {
     )
 }
 
-const Wrapper = styled.div``
+const Wrapper = styled.div`
+    h2, h3 {
+        svg {
+            margin-left: 5px;
+        }
+    }
+`
 
 export default VoyEffectues;
