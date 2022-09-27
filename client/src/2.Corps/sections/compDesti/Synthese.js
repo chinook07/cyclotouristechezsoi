@@ -37,9 +37,9 @@ const Synthese = () => {
                                     <td>{item.distance}</td>
                                     <td>{item.proportion}</td>
                                     {
-                                        item.appreciation === null
-                                            ? <td></td>
-                                            : <td>{item.appreciation} <FontAwesomeIcon icon={faStar} /></td>
+                                        item.appreciation
+                                            ? <td>{item.appreciation} <FontAwesomeIcon icon={faStar} /></td>
+                                            : <td></td>
                                     }
                                 </tr>
                             )

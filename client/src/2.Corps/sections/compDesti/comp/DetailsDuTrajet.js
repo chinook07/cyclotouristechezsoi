@@ -2,11 +2,9 @@ import styled from "styled-components";
 import { ExternalLink } from "react-external-link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-// import CarteDuTrajet from "./CarteDuTrajet";
 import GalerieDuTrajet from "./GalerieDuTrajet";
 import trajetsDB from "../donnees/trajets.json";
 import { faBicycle, faCheck, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
-import { Abitibi, BasSaintLaurent } from "../schemas";
 
 const DetailsDuTrajet = ({ itineraire, changerTrajet }) => {
 
@@ -88,16 +86,14 @@ const DetailsDuTrajet = ({ itineraire, changerTrajet }) => {
                 />
                 <ExternalLink href="https://umap.openstreetmap.fr/fr/map/carte-generale-cyclotouristechezsoi_584684">Voir en plein écran</ExternalLink>
             </figure>
-            
-            
             <h3>Trajets associés</h3>
             <TrajetsAss>
                 {
                     details.ass.map((item, index) => {
-                        let rel = trajetsDB.find(route => route.id === item);
-                        if (rel) {
-                            return <button onClick={() => changerTrajet(item)} key={index}>{rel["trajet"]}</button>
-                        }
+                        let rel = trajetsDB.find(route => route.id === item.nombre);
+                        // if (rel) {
+                            return <button onClick={() => changerTrajet(item.nombre)} key={index}>{item.titre}</button>
+                        // }
                         
                     })
                 }
@@ -137,8 +133,14 @@ const TrajetsAss = styled.div`
     display: flex;
     button {
         background-color: var(--c4);
+        border: none;
+        border-radius: 5px;
         color: var(--c11);
-        padding: 5px 10px;
+        cursor: pointer;
+        padding: 10px 12px;
+        &:not(:last-of-type) {
+            margin-right: 10px;
+        }
     }
 `
 
