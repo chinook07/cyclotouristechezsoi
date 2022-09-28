@@ -179,9 +179,9 @@
         "varietes" : "Possibilité de traverser le fjord par la Navette du fjord.",
         "carteURL" : "10/48.3817/-70.9394",
         "ass" : [
-            {"titre" : "titre", "nombre" : 1},
-            {"titre" : "titre", "nombre" : 1}, 
-            {"titre" : "titre", "nombre" : 1}
+            {"titre" : "Retournez par le côté nord", "nombre" : 7},
+            {"titre" : "Faites le tour du Lac-St-Jean", "nombre" : 12}, 
+            {"titre" : "Traversez vers le Témiscouata", "nombre" : 24}
         ],
         "deA" : ["Métabetchouan", "St-Siméon"]
     },
@@ -201,9 +201,9 @@
         "varietes" : "Sortir de la Route verte à Forillon pour aller dans l'est du parc. Possibilité de prendre deux ponts ferroviaires entre Percé et Gaspé pour sauver du kilométrage, mais pas pour ceux ayant le vertige! De plus, pour le pont le plus au sud, il faut pousser son vélo dans le sable, pour y accéder du côté sud, donc on ne sauve pas tant de temps que ça.",
         "carteURL" : "10/48.8986/-64.5393",
         "ass" : [
-            {"titre" : "titre", "nombre" : 1},
-            {"titre" : "titre", "nombre" : 1}, 
-            {"titre" : "titre", "nombre" : 1}
+            {"titre" : "Partez de Montréal...", "nombre" : 15},
+            {"titre" : "...puis passez par le Bas-du-fleuve", "nombre" : 1}, 
+            {"titre" : "Traversez sur la Côte-Nord", "nombre" : 6}
         ],
         "deA" : ["Rimouski", "Gaspé (boucle)"]
     },
@@ -222,9 +222,9 @@
         "notes" : "Un filtre à eau est une nécessité. La circulation est assez dense et rapide, mais l'accotement est aussi très large.",
         "carteURL" : "10/47.3458/-76.9351",
         "ass" : [
-            {"titre" : "titre", "nombre" : 1},
-            {"titre" : "titre", "nombre" : 1}, 
-            {"titre" : "titre", "nombre" : 1}
+            {"titre" : "Partez de l'Abitibi", "nombre" : 0},
+            {"titre" : "Descendez jusqu'à Gatineau", "nombre" : 26}, 
+            {"titre" : "Continuez vers Montréal", "nombre" : 13}
         ],
         "deA" : ["Val-d'Or", "Mont-Laurier"]
     },

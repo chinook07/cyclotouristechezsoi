@@ -1,12 +1,11 @@
 import styled from "styled-components";
 import { useContext } from "react";
 import { ExternalLink } from "react-external-link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { CycloContext } from "../../../../CycloContext";
+import NotesAuteur from "./NotesAuteur";
 import GalerieDuTrajet from "./GalerieDuTrajet";
 import trajetsDB from "../donnees/trajets.json";
-import { faBicycle, faCheck, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import * as TousSchemas from "../schemas/index";
 
 const DetailsDuTrajet = ({ itineraire, changerTrajet }) => {
@@ -39,54 +38,7 @@ const DetailsDuTrajet = ({ itineraire, changerTrajet }) => {
                 <p>Terrain : {details.terrain}</p>
             </div>
             <h3>Notes de l'auteur</h3>
-            <div>
-                <p>
-                    <span>Déjà pédalé : </span>
-                    {
-                        details.deja.length &&
-                        details.deja.map((item, index) => {
-                            return (
-                                <span key={index}>{item} <FontAwesomeIcon icon={faCheck} /></span>
-                            )
-                        })
-                    }
-                    {
-                        details.deja === true &&
-                        <span>tout le parcours <FontAwesomeIcon icon={faCheck} /></span>
-                    }
-                    {
-                        details.deja === false &&
-                        <span>aucun tronçon <FontAwesomeIcon icon={faTimesCircle} /></span>
-                    }
-                </p>
-                {
-                    details.appreciation &&
-                    <p>
-                        <span>Appréciation personnelle de 1 à 5 :</span>
-                        <span>
-                            {
-                                [...Array(details.appreciation)].map((e, i) => <FontAwesomeIcon key={i} icon={faBicycle} />)
-                            }
-                        </span>
-                    </p>
-                }
-                {
-                    details.coups &&
-                    <p>Coups de cœur : {details.coups}</p>
-                }
-                {
-                    details.defis &&
-                    <p>Défis rencontrés : {details.defis}</p>
-                }
-                {
-                    details.notes &&
-                    <p>Autres notes : {details.notes}</p>
-                }
-                {
-                    details.varietes &&
-                    <p>Variétés au parcours : {details.varietes}</p>
-                }
-            </div>
+            <NotesAuteur details={details} />
             <h3>Carte</h3>
             <figure>
                 <iframe
