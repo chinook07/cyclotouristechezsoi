@@ -8,7 +8,6 @@
         "proportion" : 25,
         "terrain" : "quelques côtes.",
         "deja" : false,
-        "appreciation" : null,
         "notes" : "La distance entre les villes peut être longue. Il est important de bien se ravitailler lorsqu'on a l'opportunité.",
         "carteURL" : "10/48.6268/-78.4675",
         "ass" : [
@@ -49,7 +48,6 @@
         "proportion" : 50,
         "terrain" : "faux plat entre Lévis et Scott, plusieurs côtes entre St-Georges et le Maine.",
         "deja" : false,
-        "appreciation" : null,
         "notes" : "De nouveaux tronçons de piste cyclable ont fait leurs apparitions dans les années précédentes.",
         "carteURL" : "10/46.2936/-70.8667",
         "ass" : [
@@ -90,13 +88,12 @@
         "proportion" : 70,
         "terrain" : "faux plats, quelques côtes dans la partie sur route.",
         "deja" : false,
-        "appreciation" : null,
         "varietes" : "Il y a plusieurs façons de transformer ce trajet en boucle, soit via Beaumont, ou bien par Scott.",
         "carteURL" : "10/46.5778/-70.8147",
         "ass" : [
-            {"titre" : "titre", "nombre" : 1},
-            {"titre" : "titre", "nombre" : 1}, 
-            {"titre" : "titre", "nombre" : 1}
+            {"titre" : "Visitez la Beauce", "nombre" : 2},
+            {"titre" : "Poursuivez vers Rimouski", "nombre" : 1}, 
+            {"titre" : "Retournez à Lanaudière", "nombre" : 15}
         ],
         "deA" : ["Lévis", "St-Armagh (boucle)"]
     },
@@ -116,9 +113,9 @@
         "varietes" : "Le cycliste peut choisir entre au moins quatre options pour rallier Baie-St-Paul à La Malbaie. Il y a la Route du fleuve, très difficile mais bordant la mer, d'où la difficulté puisque la route descend au niveau de la mer à St-Irénée. Il y a la route 138, moins conviviale, mais contenant moins de montées abruptes. Entre les deux se trouve une large sélection de chemins en gravier. Plus au nord, la Route des Montagnes comporte un dénivelé raisonnable et un débit de circulation plus relaxe. Ce chemin passe par Notre-Dame-des-Monts et St-Aimé-des-Lacs.",
         "carteURL" : "10/47.6619/-70.1388",
         "ass" : [
-            {"titre" : "titre", "nombre" : 1},
-            {"titre" : "titre", "nombre" : 1}, 
-            {"titre" : "titre", "nombre" : 1}
+            {"titre" : "Partez de Montréal", "nombre" : 15},
+            {"titre" : "Traversez vers le Témiscouata", "nombre" : 24}, 
+            {"titre" : "Bifurquez vers le fiord", "nombre" : 7}
         ],
         "deA" : ["Beaupré", "Tadoussac"]
     },
@@ -138,9 +135,9 @@
         "varietes" : "Le Sentier polyvalent du Club le Morillon n'est plus considéré comme une piste cyclable, et n'est recommandé que pour les vélos de montagne.",
         "carteURL" : "10/49.2015/-68.2226",
         "ass" : [
-            {"titre" : "titre", "nombre" : 1},
-            {"titre" : "titre", "nombre" : 1}, 
-            {"titre" : "titre", "nombre" : 1}
+            {"titre" : "Venez de Saguenay", "nombre" : 7},
+            {"titre" : "Retournez par le Bas-du-fleuve", "nombre" : 1}, 
+            {"titre" : "Traversez vers la Gaspésie", "nombre" : 9}
         ],
         "deA" : ["Tadoussac", "Baie-Comeau et au-delà"]
     },
@@ -160,9 +157,9 @@
         "varietes" : "Possibilité de traverser le fjord par la Navette du fjord.",
         "carteURL" : "10/48.4320/-70.4537",
         "ass" : [
-            {"titre" : "titre", "nombre" : 1},
-            {"titre" : "titre", "nombre" : 1}, 
-            {"titre" : "titre", "nombre" : 1}
+            {"titre" : "Retournez par le côté sud", "nombre" : 8},
+            {"titre" : "Allez vers Charlevoix", "nombre" : 5}, 
+            {"titre" : "Continuez vers la Côte-Nord", "nombre" : 6}
         ],
         "deA" : ["Saguenay", "Tadoussac"]
     },

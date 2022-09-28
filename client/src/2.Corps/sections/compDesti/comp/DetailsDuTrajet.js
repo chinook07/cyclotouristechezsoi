@@ -1,12 +1,17 @@
 import styled from "styled-components";
+import { useContext } from "react";
 import { ExternalLink } from "react-external-link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import { CycloContext } from "../../../../CycloContext";
 import GalerieDuTrajet from "./GalerieDuTrajet";
 import trajetsDB from "../donnees/trajets.json";
 import { faBicycle, faCheck, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+import * as TousSchemas from "../schemas/index";
 
 const DetailsDuTrajet = ({ itineraire, changerTrajet }) => {
+
+    const { ecran } = useContext(CycloContext);
 
     const details = trajetsDB.find(item => item.trajet === itineraire)
 
@@ -15,6 +20,11 @@ const DetailsDuTrajet = ({ itineraire, changerTrajet }) => {
             <h2>{details.trajet}</h2>
             <div>{details.intro}</div>
             <h3>Aperçu</h3>
+            {
+                ecran > 720
+                    ? <Schema src={TousSchemas[`Schema${details.id + 1}`]} />
+                    : <Schema src={TousSchemas[`SchemaM${details.id + 1}`]} />
+            }
             <div>
                 <p>Distance : {details.distance} km.</p>
                 <p>Véloroutes : </p>
@@ -50,7 +60,7 @@ const DetailsDuTrajet = ({ itineraire, changerTrajet }) => {
                     }
                 </p>
                 {
-                    details.appreciation !== null &&
+                    details.appreciation &&
                     <p>
                         <span>Appréciation personnelle de 1 à 5 :</span>
                         <span>
@@ -127,6 +137,10 @@ const Wrapper = styled.div`
             text-align: center;
         }
     }
+`
+
+const Schema = styled.img`
+    max-width: 110%;
 `
 
 const TrajetsAss = styled.div`
