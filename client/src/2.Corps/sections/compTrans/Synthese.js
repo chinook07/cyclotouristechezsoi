@@ -17,7 +17,10 @@ const Synthese = () => {
             <Recherche setRecherchee={setRecherchee} setVilleSouhaitee={setVilleSouhaitee} />
             {
                 recherchee &&
-                <Resultats recherchee={recherchee} setVilleSouhaitee={setVilleSouhaitee} />
+                <Resultats
+                    recherchee={recherchee}
+                    setVilleSouhaitee={setVilleSouhaitee}
+                />
             }
             
             {
