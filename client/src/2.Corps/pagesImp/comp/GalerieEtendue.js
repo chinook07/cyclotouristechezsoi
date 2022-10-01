@@ -52,9 +52,7 @@ const GalerieEtendue = ({ montrerGal, setMontrerGal }) => {
         mettrePhotosEnAleatoire();
     }, []);
 
-    const handleMontrerImage = (image) => {
-        setDiapo(image);
-    };
+    const handleMontrerImage = (image) => setDiapo(image);
     
     const photoPrec = () => {
         let indexPhotoPresente = ordreDesPhotos.indexOf(diapo);
@@ -74,9 +72,7 @@ const GalerieEtendue = ({ montrerGal, setMontrerGal }) => {
         }
     }
 
-    const fermerZoom = () => {
-        setDiapo(undefined)
-    }
+    const fermerZoom = () => setDiapo(undefined);
 
     const fermerGalEtendue = () => setMontrerGal(false);
 
@@ -85,7 +81,7 @@ const GalerieEtendue = ({ montrerGal, setMontrerGal }) => {
         return (
             <Wrapper>
                 <Fermer onClick={fermerGalEtendue}>Fermer</Fermer>
-                <GalerieComplete>
+                <GalerieComplete opaque={diapo === undefined ? 1 : 0.4}>
                     {
                         ordreDesPhotos.map((item, index) => {
                             return <img
@@ -141,6 +137,7 @@ const GalerieComplete = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    opacity: ${props => props.opaque};
     img {
         cursor: pointer;
         height: 100px;

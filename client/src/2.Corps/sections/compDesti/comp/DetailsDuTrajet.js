@@ -44,6 +44,7 @@ const DetailsDuTrajet = ({ itineraire, changerTrajet }) => {
                 <iframe
                     frameBorder="0"
                     allowFullScreen
+                    title="Carte du Québec cyclable"
                     src={`//umap.openstreetmap.fr/fr/map/carte-generale-cyclotouristechezsoi_584684?scaleControl=true&miniMap=false&scrollWheelZoom=true&zoomControl=true&allowEdit=false&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=true&onLoadPanel=undefined&captionBar=false#${details.carteURL}`}
                 />
                 <ExternalLink href="https://umap.openstreetmap.fr/fr/map/carte-generale-cyclotouristechezsoi_584684">Voir en plein écran</ExternalLink>
@@ -52,11 +53,7 @@ const DetailsDuTrajet = ({ itineraire, changerTrajet }) => {
             <TrajetsAss>
                 {
                     details.ass.map((item, index) => {
-                        let rel = trajetsDB.find(route => route.id === item.nombre);
-                        // if (rel) {
-                            return <button onClick={() => changerTrajet(item.nombre)} key={index}>{item.titre}</button>
-                        // }
-                        
+                        return <button onClick={() => changerTrajet(item.nombre)} key={index}>{item.titre}</button>
                     })
                 }
             </TrajetsAss>

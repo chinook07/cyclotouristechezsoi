@@ -50,8 +50,6 @@ const ListeInteractive = () => {
         localStorage.removeItem("packed");
     }
 
-    
-
     return (
         <Wrapper>
             <Profil>Profil du voyage</Profil>

@@ -27,7 +27,14 @@ const Verso = ({ item, index }) => {
             <Diff>
                 <div>Dénivelé positif : {item.denivele}</div>
                 <div>Ratio : {item.ratio}</div>
-                <div>Difficulté de 1 à 5 : {item.difficulte} <FaMountain/></div>
+                <div>
+                    <span>Difficulté de 1 à 5 : </span>
+                    <div>
+                        {
+                            [...Array(item.difficulte)].map((e, i) => <FaMountain key={i} />)
+                        }
+                    </div>
+                </div>
             </Diff>
             <VillesTrav>
                 <span>Villes traversées :</span>
