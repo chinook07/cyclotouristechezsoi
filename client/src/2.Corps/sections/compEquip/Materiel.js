@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import RubanIcones from "./comp/RubanIcones";
 import Rubriques from "./comp/Rubriques";

@@ -3,7 +3,6 @@ import { useState } from "react";
 
 import trajetsDB from "./donnees/trajets.json";
 import DetailsDuTrajet from "./comp/DetailsDuTrajet";
-import * as schemasTout from "./schemas/index";
 
 const Trajets = () => {
 
