@@ -39,6 +39,18 @@
         "trajet" : "Lien entre Montréal et Senneterre (Abitibi).",
         "heures" : "3 départs par semaine."
     },
+    "8" : {
+        "icone" : [0, 5, 8],
+        "transporteur" : "Train de Charlevoix",
+        "trajet" : "Lien entre Québec (Beauport) et Baie-Saint-Paul.",
+        "heures" : "7 jours sur 7, horaire variable selon la saison."
+    },
+    "9" : {
+        "icone" : [0, 5, 8],
+        "transporteur" : "Train de Charlevoix",
+        "trajet" : "Lien entre Baie-Saint-Paul et La Malbaie.",
+        "heures" : "7 jours sur 7, horaire variable selon la saison."
+    },
     "10" : {
         "icone" : [2, 6, 7, 8],
         "transporteur" : "Autobus Maheux",
