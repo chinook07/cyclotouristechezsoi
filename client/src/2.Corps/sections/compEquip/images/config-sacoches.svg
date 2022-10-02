@@ -68,9 +68,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="521.23236"
-     inkscape:cy="374.89536"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="546.44736"
+     inkscape:cy="350.6347"
      inkscape:document-units="mm"
      inkscape:current-layer="layer2"
      inkscape:document-rotation="0"
@@ -267,7 +267,9 @@
     </g>
     <g
        id="g1570"
-       transform="translate(94.078874)">
+       transform="translate(94.078874)"
+       inkscape:export-xdpi="92"
+       inkscape:export-ydpi="92">
       <rect
          style="fill:#006500;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.79846;stroke-linecap:round;stroke-linejoin:round;paint-order:fill markers stroke"
          id="rect1566"
@@ -285,7 +287,9 @@
     </g>
     <g
        id="g1576"
-       transform="translate(186.55413)">
+       transform="translate(186.55413)"
+       inkscape:export-xdpi="92"
+       inkscape:export-ydpi="92">
       <rect
          style="fill:#006500;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.79846;stroke-linecap:round;stroke-linejoin:round;paint-order:fill markers stroke"
          id="rect1572"
@@ -302,7 +306,9 @@
          y="132.44519" />
     </g>
     <g
-       id="g1628">
+       id="g1628"
+       inkscape:export-xdpi="92"
+       inkscape:export-ydpi="92">
       <rect
          style="fill:#006500;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.7075;stroke-linecap:round;stroke-linejoin:round;paint-order:fill markers stroke"
          id="rect1550-8"
@@ -330,7 +336,9 @@
        inkscape:export-filename="C:\Users\nicol\image1552.png" />
     <g
        id="g1634"
-       transform="translate(92.475257)">
+       transform="translate(92.475257)"
+       inkscape:export-xdpi="92"
+       inkscape:export-ydpi="92">
       <rect
          style="fill:#006500;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.7075;stroke-linecap:round;stroke-linejoin:round;paint-order:fill markers stroke"
          id="rect1630"
@@ -352,7 +360,9 @@
        width="25.221346"
        height="12.727428"
        x="222.69687"
-       y="53.972" />
+       y="53.972"
+       inkscape:export-xdpi="92"
+       inkscape:export-ydpi="92" />
     <rect
        style="fill:#ffff00;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:2.29315;stroke-linecap:round;stroke-linejoin:round;paint-order:fill markers stroke"
        id="rect1636"
@@ -371,7 +381,9 @@
        height="46.869049"
        x="135.11789"
        y="-166.28368"
-       transform="rotate(90)" />
+       transform="rotate(90)"
+       inkscape:export-xdpi="92"
+       inkscape:export-ydpi="92" />
     <rect
        style="fill:#ff6600;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.89594;stroke-linecap:round;stroke-linejoin:round;paint-order:fill markers stroke"
        id="rect1640"

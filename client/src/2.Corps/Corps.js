@@ -37,6 +37,9 @@ const Wrapper = styled.main`
     background-color: var(--c0);
     padding: 20px;
     min-height: calc(100vh - 452.6px);
+    @media screen and (max-width: 500px) {
+        padding: 20px 15px;
+    }
 `
 
 export default Corps;
