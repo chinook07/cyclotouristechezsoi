@@ -25,7 +25,7 @@ const Rubriques = ({ montrerRubrique }) => {
                             <img src={images[2]} alt="description ci-dessous" />
                             <p>Protection pour vélo (bulles d'air, styromousse, etc.) : si l'on commence son voyage avec un trajet en avion</p>
                             <img src={images[3]} alt="description ci-dessous" />
-                            <p>Étuis imperméables (2) pour le sac de guidon et la sacoche de porte-bagages</p>
+                            <p>Étuis imperméables (2) pour les sacoches non-imperméables</p>
                         </div>
                 </Rubrique>
             }
