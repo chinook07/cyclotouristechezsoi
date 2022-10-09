@@ -11,9 +11,9 @@ const TableauRegions = () => {
             <thead>
                 <tr>
                     <th>Région</th>
-                    <th>Transporteur</th>
                     <th>Desserte</th>
-                    <th>Dates d'opération</th>
+                    <th>Transporteur</th>
+                    <th>Jrs</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,7 +22,6 @@ const TableauRegions = () => {
                         return (
                             <tr key={index}>
                                 <td>{item.region}</td>
-                                <td><ExternalLink href={item.lien}>{item.transporteur}</ExternalLink></td>
                                 {
                                     item.desserte.length === 1
                                         ? <td>
@@ -35,6 +34,7 @@ const TableauRegions = () => {
                                             <span>{item.desserte[1]}</span>
                                         </td>
                                 }
+                                <td><ExternalLink href={item.lien}>{item.transporteur}</ExternalLink></td>
                                 <td>{item.dates}</td>
                             </tr>
                         )
@@ -59,6 +59,21 @@ const Wrapper = styled.table`
     }
     th, td {
         padding: 12px;
+        svg {
+            margin-right: 5px;
+            &:not(:first-child) {
+                margin-left: 5px;
+            }
+        }
+        @media screen and (max-width: 600px) {
+            padding: 6px;
+            font-size: small;
+        }
+        @media screen and (max-width: 400px) {
+            &:first-child {
+                display: none;
+            }
+        }
     }
 `
 

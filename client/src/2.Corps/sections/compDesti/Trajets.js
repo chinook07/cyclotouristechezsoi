@@ -1,13 +1,25 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 
 import trajetsDB from "./donnees/trajets.json";
 import DetailsDuTrajet from "./comp/DetailsDuTrajet";
+import { CycloContext } from "../../../CycloContext";
 
 const Trajets = () => {
 
+    const { trajetRedig, setTrajetRedig } = useContext(CycloContext);
+    console.log(trajetRedig);
+
     const [trajetChoisi, setTrajetChoisi] = useState();
     const [trajetSelect, setTrajetSelect] = useState();
+
+    useEffect(() => {
+        if (trajetRedig.id) {
+            setTrajetChoisi(trajetsDB.find(item => item.id === trajetRedig.id).trajet);
+            setTrajetRedig({})
+            setTrajetSelect(trajetRedig.trajet)
+        }
+    }, [])
 
     const choisirTrajet = (e) => setTrajetChoisi(e.target.value);
 

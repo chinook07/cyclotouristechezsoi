@@ -1,15 +1,25 @@
 import styled from "styled-components";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 
+import { CycloContext } from "../../../../CycloContext";
 import donnees from "../donnees/trajets.json";
 
-const Hasard = ({trajetsHasard}) => {
+const Hasard = ({ trajetsHasard }) => {
+    
+    const { setTrajetRedig } = useContext(CycloContext);
+
+    const ouvrirTrajet = (trajet) => {
+        let details = donnees.find(item => item.id === trajet);
+        setTrajetRedig(details);
+    };
+
     return (
         <Wrapper>
             {
                 trajetsHasard.map((item, index) => {
                     return (
-                        <div key={index}>
+                        <div key={index} onClick={() => ouvrirTrajet(item)}>
                             <Link to="/destinations/trajets">
                                 <DeEtA>
                                     <div>{donnees[item].deA[0]}</div>

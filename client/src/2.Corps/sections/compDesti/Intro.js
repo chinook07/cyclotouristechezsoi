@@ -15,7 +15,7 @@ const Intro = () => {
             let nombre = Math.floor(Math.random() * 26);
             if (hasard.includes(nombre) === false) hasard.push(nombre);
         }
-        setTrajetsHasard(hasard)
+        setTrajetsHasard(hasard);
     }, [])
 
     return (
