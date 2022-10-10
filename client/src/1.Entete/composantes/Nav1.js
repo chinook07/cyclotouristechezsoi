@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { CycloContext } from "../../CycloContext";
 import imgLogo from "../../images/icones/logo.png";
-import { faGlobeEurope, faBars } from "@fortawesome/free-solid-svg-icons";
+import { faGlobeEurope } from "@fortawesome/free-solid-svg-icons";
 
 const Nav1 = () => {
 

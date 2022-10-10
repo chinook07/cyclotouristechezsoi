@@ -15,7 +15,6 @@ const Diff = () => {
         unite(parseInt(nombre))
     }
 
-    let coul;
     return (
         <Wrapper>
             <svg></svg>
@@ -45,7 +44,7 @@ const Diff = () => {
                     <output>{jpm}</output>
                 }
                 {
-                    jpm == 1
+                    jpm === 1
                         ? <span> juron/min*!</span>
                         : <span> jurons/min*!</span>
                 }
@@ -55,6 +54,7 @@ const Diff = () => {
 }
 
 const Wrapper = styled.div`
+    margin: 0 auto 15px;
     form {
         display: flex;
         input {

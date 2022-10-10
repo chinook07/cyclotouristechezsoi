@@ -4,7 +4,7 @@ import { ExternalLink } from "react-external-link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faAngleDoubleDown, faAngleDoubleUp, faTrain, faPlane, faCampground, faHotel } from "@fortawesome/free-solid-svg-icons";
-import demontepneus from "../images/demontepneus.jpg"
+import demontepneus from "../images/demontepneus.jpg";
 
 const Comm2 = ({ boiteOuverte, setBoiteOuverte }) => {
     
@@ -29,12 +29,12 @@ const Comm2 = ({ boiteOuverte, setBoiteOuverte }) => {
                     <Infos>
                             <p>Nul besoin d'être mécanicien chevronné pour partir à l'aventure. Cependant, il est recommandé d'avoir une connaissance des bases pour éviter d'être mal pris. Certains pourraient suivre un cours d'initiation pour mieux se sentier en confiance, mais ce n'est pas absolument nécessaire, à moins de vouloir faire du cyclotourisme de brousse, voire du bikepacking. Par contre, voici ce qu'il faut savoir par rapport aux crevaisons.</p>
                             <p>On peut éviter la plupart si l'on utilise de bons pneus anticrevaison, ainsi qu'en faisant bien attention de mettre une pression optimale située à l'intérieur de la limite recommandée.</p>
-                            <p>Un pneu est théoriquement facile à démonter et remonter, si l'on se fie aux centaines de vidéos explicatives trouvées sur le web. À la maison, ça peut devenir décourageant sans un bon démonte-pneu (voir image ci-dessous). Sur le terrain, l'adrénaline vient parfois aider le cyclotouriste mal pris.</p>
+                            <p>Un pneu est théoriquement facile à démonter et remonter, si l'on se fie aux centaines de vidéos explicatives trouvées sur le web. À la maison, ça peut devenir décourageant sans un bon démonte-pneu (voir image ci-dessous). Sur le terrain, l'adrénaline vient parfois aider le cyclotouriste mal pris. Le meilleur tutoriel web recensé à ce jour par l'auteur de ce site s'agit du <ExternalLink href="https://www.sheldonbrown.com/flats.html" hrefLang="en">guide de Sheldon Brown</ExternalLink>, rédigé en anglais avec une traduction web disponible en français.</p>
                             <p>La plupart des crevaisons se réparent avec des rustines, par contre, il est recommandé de changer la chambre à air pour éviter d'avoir des pépins dans un avenir rapproché.</p>
-                            <figure>
-                                <img src={demontepneus} alt="un démonte-pneu" />
-                                <figcaption>Un outil indispensable pour la route!</figcaption>
-                            </figure>
+                            <DemontePneu>
+                                <img src={demontepneus} alt="un démonte-pneu, un kit de réparation et une chambre à air." />
+                                <figcaption>Quelques outils indispensables pour la route!</figcaption>
+                            </DemontePneu>
                     </Infos>
                 }
             </Boite>
@@ -80,6 +80,7 @@ const Comm2 = ({ boiteOuverte, setBoiteOuverte }) => {
                                 <li>Acheter de l'occasion ou du neuf (bas de gamme), si l'on n'est pas certain de vouloir pratiquer le cyclotourisme souvent, et qu'on ne veut pas trop investir.</li>
                                 <li>Acheter des articles neufs de moyenne ou de haute qualité, si l'on n'est pas à son premier voyage et on veut du matériel qui durera longtemps.</li>
                             </ul>
+                            <p>Une attention particulière est recommandée en choissisant la tente, le réchaud et certains autres équipements. Par exemple, une tente trop usée qui laisse passer l'eau est une garantie d'un temps misérable en cas de pluie.</p>
                     </Infos>
                 }
             </Boite>
@@ -98,7 +99,7 @@ const Comm2 = ({ boiteOuverte, setBoiteOuverte }) => {
                             <p>Il est possible de se familiariser avec différentes options de trajets au sein de <Link to="/destinations">la sous-section</Link> sur ce site. Il y a autrement beaucoup de ressources pour tracer un itinéraire de vélo.</p>
                             <p>Vélo Québec chapeaute <ExternalLink href="https://www.routeverte.com/">la Route verte</ExternalLink>, un réseau de sept véloroutes sillonnant le Québec par des voies cyclables sur routes et hors route.</p>
                             <p>Les différentes <ExternalLink href="https://www.quebec.ca/tourisme-et-loisirs/services-industrie-touristique/organismes-partenaires#c20108">associations touristiques régionales</ExternalLink> sont chargées de promouvoir leurs réseaux cyclables. Plusieurs publient même des cartes vélo, disponibles en téléchargement ou en version papier.</p>
-                            <p>Quoiqu'il est possible de tracer un itinéraire détaillé en mode vélo par l'entremise de Google Maps, d'autres planificateurs existent qui sont davantage adaptés aux besoins des cyclistes. Parmi le lot, il y a <ExternalLink href="https://cycle.travel/">Cycle Travel</ExternalLink>, <ExternalLink href="https://ridewithgps.com/">Ride with GPS</ExternalLink>, <ExternalLink href="https://www.bikemap.net/">Bikemap</ExternalLink> et <ExternalLink href="https://www.komoot.fr/">Komoot</ExternalLink>. Plusieurs de ceux-ci permettent de modifier la source des données cartographiques, de tracer des lignes en dehors des routes, par exemple lorsqu'une piste n'apparait pas sur la carte, et même de voir la proportion d'un trajet empruntant des pistes cyclables.</p>
+                            <p>Quoiqu'il est possible de tracer un itinéraire détaillé en mode vélo par l'entremise de Google Maps, d'autres planificateurs existent qui sont davantage adaptés aux besoins des cyclistes. Parmi le lot, il y a <ExternalLink href="https://brouter.de/brouter-web">BRouter-Web</ExternalLink>, <ExternalLink href="https://cycle.travel/">Cycle Travel</ExternalLink>, <ExternalLink href="https://ridewithgps.com/">Ride with GPS</ExternalLink>, <ExternalLink href="https://www.bikemap.net/">Bikemap</ExternalLink> et <ExternalLink href="https://www.komoot.fr/">Komoot</ExternalLink>. Plusieurs de ceux-ci permettent de modifier la source des données cartographiques, de tracer des lignes en dehors des routes, par exemple lorsqu'une piste n'apparait pas sur la carte, et même de voir la proportion d'un trajet empruntant des pistes cyclables.</p>
                             <p>Les services mentionnés ci-dessus pigent les données cartographiques à partir d'OpenStreetMap, mais on peut visualiser les voies cyclables directement sur <ExternalLink href="https://www.openstreetmap.org/">leur site</ExternalLink>, en choissisant CyclOSM ou OpenCycleMap parmi les couches disponibles dans le panneau à droite. Vous pouvez aussi consulter <ExternalLink href="https://touristechezsoi.weebly.com/blogue/la-cartographie-libre">ce billet de blogue détaillé</ExternalLink> sur l'utilisation de la cartographie libre.</p>
                             <p>Puisque les routes numérotées ne sont pas toujours agréables à vélo, il y a un outil formidable pour vérifier la convivialité d'un tronçon. Les données du ministère des Transports peuvent être visualisés en activant la couche convivialité vélo sur <ExternalLink href="https://www.quebec511.info/fr/Carte/Default.aspx">la carte 511 Québec</ExternalLink> ou sur celle de <ExternalLink href="https://www.routeverte.com/">la Route verte</ExternalLink>.</p>
                     </Infos>
@@ -182,9 +183,12 @@ const Boite = styled.div`
     background-color: var(--c2);
     border-radius: 10px;
     h3 {
+        align-items: center;
         background-color: var(--c3);
         border-radius: 10px;
         cursor: pointer;
+        display: flex;
+        justify-content: space-between;
         padding: 10px 20px;
         transition: all 0.2s;
         &:hover {
@@ -196,6 +200,18 @@ const Boite = styled.div`
 
 const Infos = styled.div`
     padding: 0 20px 20px;
+    svg {
+        margin-right: 5px;
+    }
+`
+
+const DemontePneu = styled.figure`
+    img {
+        display: block;
+        margin: 0 auto;
+        max-width: 400px;
+        width: 100%;
+    }
 `
 
 export default Comm2;

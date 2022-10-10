@@ -116,9 +116,12 @@ const Boite = styled.div`
     background-color: var(--c2);
     border-radius: 10px;
     h3 {
+        align-items: center;
         background-color: var(--c3);
         border-radius: 10px;
         cursor: pointer;
+        display: flex;
+        justify-content: space-between;
         padding: 10px 20px;
         transition: all 0.2s;
         &:hover {

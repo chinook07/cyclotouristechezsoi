@@ -81,13 +81,15 @@ const Wrapper = styled.div`
 `
 
 const Titre = styled.div`
-    text-align: center;
+    margin-bottom: 10px;
     font-weight: bold;
+    text-align: center;
 `
 
 const Fleches = styled.div`
     display: flex;
     justify-content: space-evenly;
+    margin-top: 10px;
     > svg {
         background-color: var(--c5);
         border-radius: 10px;

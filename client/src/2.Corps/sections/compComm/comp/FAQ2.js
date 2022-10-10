@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ExternalLink } from "react-external-link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import DeuxFigures from "../../../../CompReutilisables/DeuxFigures";
+import DeuxFiguresPetit from "../../../../CompReutilisables/DeuxFiguresPetit"
 import { faAngleDoubleDown, faAngleDoubleUp } from "@fortawesome/free-solid-svg-icons";
 import meteo1 from "../images/radar.jpg";
 import meteo2 from "../images/cumulonimbus.jpg";
@@ -56,10 +56,10 @@ const FAQ2 = ({ boiteOuverte, setBoiteOuverte }) => {
                     boiteOuverte === 10 &&
                     <Infos>
                             <p>Il ne faut pas se laisser décourager! Lors d'une sortie de plusieurs journées, il est rare de ne jamais avoir la pluie. Il est alors primordial de bien s'équiper d'un manteau et de pantalons imperméables pour pouvoir rouler aisément sous la pluie. De plus, les garde-boues empêchent de salir ses vêtements.</p>
-                            <DeuxFigures photo1={photo1} photo2={photo2} />
+                            <DeuxFiguresPetit photo1={photo1} photo2={photo2} />
                             <p>L'été, lorsque le temps est chaud et instable, les conditions peuvent changer rapidement. Il est alors judicieux de jeter un coup d'œil <ExternalLink href="https://meteo.gc.ca/map_f.html?layers=radar&zoom=-1&center=45.52,-73.65">au radar météo</ExternalLink>, ainsi qu'à <ExternalLink href="https://meteo.gc.ca/lightning/index_f.html?id=QUE#mapTop">la carte du risque de foudre</ExternalLink>. Il devient possible de prédire avec quasi-certitude la venue d'averses et d'orages violents.</p>
                             <p>Enfin, il est bon de connaitre la différence entre une veille d'orages violents (ou de tornade) et une alerte. La première indique que les ingrédients (chaleur, humidité, instabilité, etc.) sont présents, tandis que la deuxième nous informe que l'évènement est en formation ou en cours. Une analogie loufoque mais pertinente serait de comparer ce concept à notre mets national.</p>
-                            <DeuxFigures photo1={photo3} photo2={photo4} />
+                            <DeuxFiguresPetit photo1={photo3} photo2={photo4} />
                             <p>À noter que les tornades au Québec sont rares, mais puisqu'on en recense environ 5 par année, c'est une bonne idée de savoir <ExternalLink href="https://www.preparez-vous.gc.ca/cnt/hzd/trnds-drng-fr.aspx">quoi faire</ExternalLink> si ça arrive durant votre périple.</p>
                     </Infos>
                 }
@@ -130,9 +130,12 @@ const Boite = styled.div`
     background-color: var(--c2);
     border-radius: 10px;
     h3 {
+        align-items: center;
         background-color: var(--c3);
         border-radius: 10px;
         cursor: pointer;
+        display: flex;
+        justify-content: space-between;
         padding: 10px 20px;
         transition: all 0.2s;
         &:hover {

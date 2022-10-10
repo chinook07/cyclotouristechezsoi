@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import voyagesListeDonnees from "../donnees/VoyagesListe.json";
 import Voyage from "./Voyage";
-import { faArrowsRotate, faArrowRight, faCalendarDays, faUmbrellaBeach, faUpDown, faCircle } from "@fortawesome/free-solid-svg-icons";
+import { faArrowsRotate, faArrowRight, faCalendarDays, faUmbrellaBeach, faCircle } from "@fortawesome/free-solid-svg-icons";
 
 const VoyagesListe = () => {
 

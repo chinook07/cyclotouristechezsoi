@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 
 import donnees from "./donnees/trajets.json";
 import Hasard from "./comp/Hasard";

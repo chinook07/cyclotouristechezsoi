@@ -17,46 +17,45 @@ const CalculCarburant = () => {
     const choisirPoids = (e) => setPoids(parseInt(e.target.value));
 
     useEffect(() => {
-        // if (poids > tare[carb] + carb) {
-        //     console.log("err");
-        // }
         if (carb && poids) {
-            // setResultat(((poids / (carb + tare[carb])) * 100).toFixed())
             setResultat(((poids - tare[carb]) / carb * 100).toFixed())
         }
     }, [carb, poids])
 
     return (
         <Wrapper>
-            <div>
+            <Choix>
                 <span>J'ai une cartouche de</span>
-                <label>
-                    <input type="radio" value="100" name="choixCarb" onChange={choisirCarb} />
-                    <span>100 g</span>
-                </label>
-                <label>
-                    <input type="radio" value="230" name="choixCarb" onChange={choisirCarb} />
-                    <span>230 g</span>
-                </label>
-                <label>
-                    <input type="radio" value="450" name="choixCarb" onChange={choisirCarb} />
-                    <span>450 g.</span>
-                </label>
-            </div>
+                <span>
+                    <label>
+                        <input type="radio" value="100" name="choixCarb" onChange={choisirCarb} />
+                        <span>100 g</span>
+                    </label>
+                    <label>
+                        <input type="radio" value="230" name="choixCarb" onChange={choisirCarb} />
+                        <span>230 g</span>
+                    </label>
+                    <label>
+                        <input type="radio" value="450" name="choixCarb" onChange={choisirCarb} />
+                        <span>450 g.</span>
+                    </label>
+                </span>
+                
+            </Choix>
             {
                 carb &&
-                <div>
-                    <span>En ce moment, elle pèse</span>
+                <Poids>
+                    <span>Poids actuel : </span>
                     <label>
                         <input type="number" min={tare[carb]} max={tare[carb] + carb} step="5" onChange={choisirPoids} />
                         <span> g.</span>
                     </label>
-                </div>
+                </Poids>
             }
             {
                 resultat >= 0 && resultat <= 100 &&
                 <output>
-                        <span>Il vous en reste donc {resultat} %, soit {poids - tare[carb]} g de carburant.</span>
+                        <div>Carburant restant : {resultat} % / {poids - tare[carb]} g</div>
                         <meter min="0" low="50" value={poids - tare[carb]} max={carb}></meter>
                 </output>
             }
@@ -64,6 +63,30 @@ const CalculCarburant = () => {
     )
 }
 
-const Wrapper = styled.form``
+const Wrapper = styled.form`
+    output {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        div {
+            margin-right: 10px;
+        }
+        meter {
+            height: 25px;
+        }
+    }
+`
+
+const Choix = styled.div`
+    margin-bottom: 10px;
+    @media screen and (max-width: 430px) {
+        display: flex;
+        flex-direction: column;
+    }
+`
+
+const Poids = styled.div`
+    margin-bottom: 10px;
+`
 
 export default CalculCarburant;

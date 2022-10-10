@@ -30,25 +30,23 @@ const CalculJours = () => {
 
     return (
         <Wrapper>
-            <div>Profil du voyageur :</div>
-            <Choix>
-                <label>
-                    <input type="radio" name="calculJours" value="50" onChange={mAJType} />
-                    <span>Cyclocontemplateur, 40 à 60 km/jr</span>
-                </label>
-                <label>
-                    <input type="radio" name="calculJours" value="70" onChange={mAJType} />
-                    <span>Cyclotouriste relaxe, 60 à 80 km/jr</span>
-                </label>
-                <label>
-                    <input type="radio" name="calculJours" value="90" onChange={mAJType} />
-                    <span>Cyclotouriste motivé, 80 à 100 km/jr</span>
-                </label>
-                <label>
-                    <input type="radio" name="calculJours" value="110" onChange={mAJType} />
-                    <span>Cyclosportif, 100 à 120 km/jr</span>
-                </label>
-            </Choix>
+            <Quadri>
+                <span></span>
+                <span>Profil du voyageur</span>
+                <span>Km/jr</span>
+                <input id="profil1" type="radio" name="calculJours" value="50" onChange={mAJType} />
+                <label htmlFor="profil1">Cyclocontemplateur</label>
+                <label htmlFor="profil1">40-60</label>
+                <input id="profil2" type="radio" name="calculJours" value="70" onChange={mAJType} />
+                <label htmlFor="profil2">Cyclotouriste relaxe</label>
+                <label htmlFor="profil2">60-80</label>
+                <input id="profil3" type="radio" name="calculJours" value="90" onChange={mAJType} />
+                <label htmlFor="profil3">Cyclotouriste motivé</label>
+                <label htmlFor="profil3">80-100</label>
+                <input id="profil4" type="radio" name="calculJours" value="110" onChange={mAJType} />
+                <label htmlFor="profil4">Cyclosportif qualifié</label>
+                <label htmlFor="profil4">100-120</label>
+            </Quadri>
             <label>
                 <span>Trajet total (km) : </span>
                 <Km type="number" min="70" step="10" onChange={mAJTotal} value={distance} />
@@ -59,7 +57,7 @@ const CalculJours = () => {
                         {
                             tropCourt
                                 ? <span>Pas assez long pour du cyclotourisme</span>
-                                : <span>{nJours !== NaN && nJours} jours × {distJr !== NaN && distJr} km{repos > 0 && <span> + {repos} jour{repos > 1 && <span>s</span>} de repos</span>}</span>
+                                : <span>{!isNaN(nJours) && nJours} jours × {!isNaN(distJr) && distJr} km{repos > 0 && <span> + {repos} jour{repos > 1 && <span>s</span>} de repos</span>}</span>
                         }
                 </output>
             }
@@ -76,10 +74,15 @@ const Wrapper = styled.form`
     }
 `
 
-const Choix = styled.div`
-    display: flex;
-    flex-direction: column;
-    margin: 10px 0;
+const Quadri = styled.div`
+    display: grid;
+    gap: 5px 15px;
+    grid-template-columns: auto auto auto;
+    justify-content: center;
+    margin-bottom: 12px;
+    @media screen and (max-width: 400px) {
+        gap: 5px 5px;
+    }
 `
 
 const Km = styled.input`
