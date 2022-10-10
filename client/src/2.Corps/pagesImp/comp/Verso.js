@@ -2,20 +2,12 @@ import styled from "styled-components";
 import { ExternalLink } from "react-external-link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { FaMountain } from "react-icons/fa"
-import { faPlane, faTrain, faTrainSubway, faBusAlt, faBus, faCampground, faHotel, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import TrCoucher from "./TrCoucher";
+import TrCoucherAR from "./TrCoucherAR";
+import { FaMountain } from "react-icons/fa";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 const Verso = ({ item, index }) => {
-    
-    const afficher = {
-        "avion": faPlane,
-        "train": faTrain,
-        "train de banlieue": faTrainSubway,
-        "autocar": faBusAlt,
-        "autobus": faBus,
-        "la tente": faCampground,
-        "un toit": faHotel
-    }
 
     return (
         <Wrapper>
@@ -37,7 +29,11 @@ const Verso = ({ item, index }) => {
                 </div>
             </Diff>
             <VillesTrav>
-                <span>Villes traversées :</span>
+                {
+                    item.regions
+                        ? <span>Régions traversées :</span>
+                        : <span>Villes traversées :</span>
+                }
                 <ul>
                     {
                         item.villes.map((item, index) => {
@@ -53,36 +49,8 @@ const Verso = ({ item, index }) => {
             </VillesTrav>
             {
                 item.alle === item.retour
-                ? <Details>
-                        {
-                            item.alle &&
-                            <div>
-                                    <FontAwesomeIcon icon={afficher[item.alle]} />
-                                    <span>Allé et rentré en {item.alle}</span>
-                            </div>
-                        }
-                        <div>
-                            <FontAwesomeIcon icon={afficher[item.coucher]} />
-                            <span>Couché sous {item.coucher}</span>
-                        </div>
-                    </Details>
-                    : <Details>
-                        {
-                            item.alle &&
-                            <div>
-                                    <FontAwesomeIcon icon={afficher[item.alle]} />
-                                    <span>Allé en {item.alle}</span>
-                            </div>
-                        }
-                        <div>Couché sous {item.coucher}</div>
-                        {
-                            item.retour &&
-                            <div>
-                                    <FontAwesomeIcon icon={afficher[item.retour]} />
-                                    <span>Rentré en {item.retour}</span>
-                            </div>
-                        }
-                </Details>
+                    ? <TrCoucherAR item={item} />
+                    : <TrCoucher item={item} />
             }
             {
                 item.lienURL &&
@@ -128,14 +96,6 @@ const VillesTrav = styled.div`
         svg {
             margin-right: 4px;
         }
-    }
-`
-
-const Details = styled.div`
-    font-size: small;
-    margin: 15px 20px;
-    svg {
-        margin-right: 4px;
     }
 `
 
