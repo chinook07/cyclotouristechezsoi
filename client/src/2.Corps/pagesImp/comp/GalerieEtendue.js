@@ -7,6 +7,7 @@ import * as imagesToutPo from "../images/galerie-portrait/index";
 import galerieSousTitrePaysage from "../donnees/galerieSousTitrePaysage.json";
 import galerieSousTitrePortrait from "../donnees/galerieSousTitrePortrait.json";
 import { faBackwardStep, faForwardStep } from "@fortawesome/free-solid-svg-icons";
+import Chargement from "../../../CompReutilisables/Chargement";
 
 const GalerieEtendue = ({ montrerGal, setMontrerGal }) => {
 
@@ -111,7 +112,7 @@ const GalerieEtendue = ({ montrerGal, setMontrerGal }) => {
             </Wrapper>
         )
     } else {
-        return <div>Chargement en cours...</div>
+        return <Chargement />
     }
     
 }

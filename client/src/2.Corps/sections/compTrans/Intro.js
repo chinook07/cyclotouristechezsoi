@@ -22,6 +22,13 @@ const Intro = () => {
         <Wrapper>
             <p>Que ce soit pour partir en cyclotourisme dans une région autre que la sienne ou simplement pour effectuer un trajet linéaire – c'est-à-dire pas en boucle, il peut s'avérer nécessaire de mettre son vélo sur un train ou un autocar. Mais comment s'éviter les ennuis, et surtout, comment naviguer à travers la panoplie de règlements qui diffèrent d'un transporteur à l'autre?</p>
             <DeuxFigures photo1={photo1} photo2={photo2} />
+            <h2>Quelques conseils</h2>
+            <p>Que ça soit pour prendre un autobus, un train ou même l'avion, voici trois conseils pour bien mener votre voyage à terme.</p>
+            <ul>
+                <li>Renseignez-vous sur les modalités du transport de votre vélo.</li>
+                <li>Arrivez à l'avance pour éviter de devoir vous dépêcher, surtout si vous devez démonter votre vélo.</li>
+                <li>Munissez-vous d'un plan B, au cas où le transport du vélo s'avère impossible.</li>
+            </ul>
         </Wrapper>
     )
 }
