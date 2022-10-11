@@ -1,36 +1,31 @@
 import styled from "styled-components";
-import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { CycloContext } from "../../CycloContext";
 import { faPlay, faMapSigns, faSuitcase, faTrain } from "@fortawesome/free-solid-svg-icons";
 
 const Nav2 = () => {
 
-    const { ecran } = useContext(CycloContext);
-
-    if (ecran < 600) {
-        return (
-            <WrapperMobi>
-                <NavLink to="/commencement"><FontAwesomeIcon icon={faPlay} /></NavLink>
-                <NavLink to="/destinations"><FontAwesomeIcon icon={faMapSigns} /></NavLink>
-                <NavLink to="/equipement"><FontAwesomeIcon icon={faSuitcase} /></NavLink>
-                <NavLink to="/transport"><FontAwesomeIcon icon={faTrain} /></NavLink>
-            </WrapperMobi>
-        )
-    } else {
-        return (
-            <Wrapper>
-                <NavLink to="/commencement">Commencer</NavLink>
-                <NavLink to="/destinations">Découvrir</NavLink>
-                <NavLink to="/equipement">S'équiper</NavLink>
-                <NavLink to="/transport">Se transporter</NavLink>
-            </Wrapper>
-        )
-    }
-
-    
+    return (
+        <Wrapper>
+            <NavLink to="/commencement/">
+                <span>Commencer</span>
+                <FontAwesomeIcon icon={faPlay} />
+            </NavLink>
+            <NavLink to="/destinations/">
+                <span>Découvrir</span>
+                <FontAwesomeIcon icon={faMapSigns} />
+            </NavLink>
+            <NavLink to="/equipement/">
+                <span>S'équiper</span>
+                <FontAwesomeIcon icon={faSuitcase} />
+            </NavLink>
+            <NavLink to="/transport/">
+                <span>Se transporter</span>
+                <FontAwesomeIcon icon={faTrain} />
+            </NavLink>
+        </Wrapper>
+    )
 }
 
 const Wrapper = styled.nav`
@@ -48,21 +43,14 @@ const Wrapper = styled.nav`
             background-color: var(--c6);
         }
     }
-`
-
-const WrapperMobi = styled.nav`
-    background-color: var(--c4);
-    display: flex;
-    justify-content: center;
-    a {
-        color: var(--c11);
-        padding: 15px 25px;
-        text-decoration: none;
-        &:hover {
-            background-color: var(--c5);
+    @media screen and (max-width: 600px) {
+        span {
+            display: none;
         }
-        &.active {
-            background-color: var(--c6);
+    }
+    @media screen and (min-width: 600px) {
+        svg {
+            display: none;
         }
     }
 `

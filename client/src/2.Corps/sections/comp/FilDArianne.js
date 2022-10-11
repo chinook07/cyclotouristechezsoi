@@ -7,8 +7,9 @@ import { faPlay } from "@fortawesome/free-solid-svg-icons";
 const FilDArianne = ({racine, choix}) => {
     return (
         <Wrapper>
-            <NavLink to={`/${racine}`}>
+            <NavLink to={`/${racine}/`}>
                 <FontAwesomeIcon icon={faPlay} />
+                <span>Intro</span>
             </NavLink>
             {
                 choix.map((item, index) => {
@@ -27,7 +28,9 @@ const Wrapper = styled.div`
         color: var(--c10);
         padding-left: 10px;
         text-decoration: none;
-        
+        svg {
+            margin-right: 5px;
+        }
         &:hover {
             color: var(--c5);
         }
