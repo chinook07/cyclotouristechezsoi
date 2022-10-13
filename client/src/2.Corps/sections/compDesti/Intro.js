@@ -19,7 +19,8 @@ const Intro = () => {
 
     return (
         <Wrapper>
-            <p>Le Québec est un vaste territoire avec une possibilité de parcours infininie.</p>
+            <p>Le Québec est un vaste territoire avec une possibilité de parcours infininie. Utilisez cet outil pour choisir un trajet qui vous satisfera.</p>
+            <h2>Trouvez votre parcours idéal</h2>
             <Schema>
                 {
                     donnees.map((item, index) => {
@@ -36,12 +37,6 @@ const Intro = () => {
                 trajetsHasard.length === 5 &&
                 <Hasard trajetsHasard={trajetsHasard} />
             }
-            {/* <iframe
-                frameBorder="0"
-                allowFullScreen
-                src="//umap.openstreetmap.fr/fr/map/carte-generale-cyclotouristechezsoi_584684?scaleControl=false&miniMap=false&scrollWheelZoom=false&zoomControl=true&allowEdit=false&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=true&onLoadPanel=undefined&captionBar=false">
-            </iframe>
-            <p><a href="//umap.openstreetmap.fr/fr/map/carte-generale-cyclotouristechezsoi_584684">Voir en plein écran</a></p> */}
         </Wrapper>
     )
 }

@@ -11,8 +11,9 @@ const Recherche = ({setRecherchee, setVilleSouhaitee}) => {
 
     return (
         <Wrapper onSubmit={rienFaire}>
-            <label>Entrez votre ville de départ :</label>
+            <label htmlFor="villeDepart">Entrez votre ville de départ :</label>
             <input
+                id="villeDepart"
                 onChange={(e) => mettreRechercheAJour(e.target.value)}
                 placeholder="Entrez min. 3 lettres."
                 type="text"

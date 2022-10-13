@@ -7,8 +7,8 @@ const Legende = () => {
             <div>
                 <div>Sacoche latérale (avant ou arrière)</div>
                 <div>Sac de guidon</div>
-                <div>Sac de porte-bagages</div>
                 <div>Tente bien attaché au porte-bagages</div>
+                <div>Sac de porte-bagages</div>
             </div>
         </Wrapper>
     )
@@ -32,6 +32,7 @@ const Wrapper = styled.div`
             width: 25%;
             &:first-child {
                 background-color: #006500;
+                color: var(--c11);
             }
             &:nth-child(2) {
                 background-color: #ff00ff;

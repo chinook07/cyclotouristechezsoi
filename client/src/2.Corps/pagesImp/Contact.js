@@ -11,18 +11,21 @@ const Contact = () => {
             target="blank"
         >
             <Coordonnees>
+                <label htmlFor="prenom">Prénom</label>
                 <input
                     type="text"
                     id="prenom"
                     name="prenom"
                     placeholder="Prénom"
                 />
+                <label htmlFor="nomf">Nom de famille</label>
                 <input
                     type="text"
                     id="nomf"
                     name="nomf"
                     placeholder="Nom de famille"
                 />
+                <label htmlFor="courriel">Courriel</label>
                 <input
                     type="email"
                     id="courriel"
@@ -31,8 +34,9 @@ const Contact = () => {
                     required
                 />
             </Coordonnees>
-            
+            <label htmlFor="message">Écrivez votre message</label>
             <textarea
+                id="message"
                 name="message"
                 placeholder="Message"
                 rows="10"
@@ -43,7 +47,7 @@ const Contact = () => {
                 name="locale"
                 aria-label="Pays ou région d'origine"
             >
-                <label>Emplacement</label>
+                <label htmlFor="locale">Emplacement</label>
                 <select>
                     {
                         regions.map((item, index) => {
@@ -60,6 +64,7 @@ const Contact = () => {
 const Wrapper = styled.form`
     background-color: var(--c2);
     padding: 50px 0;
+    text-align: center;
     textarea {
         border-radius: 10px;
         display: block;
@@ -93,7 +98,6 @@ const Emplacement = styled.div`
     display: flex;
     flex-direction: column;
     margin: 10px auto;
-    text-align: center;
     select {
         border-radius: 10px;
         margin: 10px auto;

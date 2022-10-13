@@ -9,17 +9,17 @@ const Sacoches = () => {
         <Wrapper>
             <figure>
                 <div>A</div>
-                <img src={config1} />
+                <img src={config1} alt="sacoche de guidon à l'avant, sacoches latérales, de porte-bagages et une tente à l'arrière" />
                 <figcaption>La majorité du poids se situe à l'arrière. Ceci n'est pas idéal, mais permet de se passer d'un porte-bagages à l'avant.</figcaption>
             </figure>
             <figure>
                 <div>B</div>
-                <img src={config2} />
+                <img src={config2} alt="sacoches latérales à l'avant et à l'arrière, tente à l'arrière" />
                 <figcaption>Cette configuration permet un certain équilibre du poids tout en facilitant le transport d'une tente qui ne rentre pas dans une sacoche.</figcaption>
             </figure>
             <figure>
                 <div>C</div>
-                <img src={config3} />
+                <img src={config3} alt="sacoches latérales à l'avant et à l'arrière, une sacoche de guidon à l'avant" />
                 <figcaption>Cette configuration respecte le ratio 60/40 (av./arr.) adopté par de nombreux cyclotouristes. Toutes les sacoches sont facilement accessibles.</figcaption>
             </figure>
         </Wrapper>

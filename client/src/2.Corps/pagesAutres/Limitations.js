@@ -5,7 +5,7 @@ const Limitations = () => {
     return (
         <Wrapper>
             <div>
-                <h2>Cyclotouriste chez soi</h2>
+                <h1>Cyclotouriste chez soi</h1>
                 <p>Cyclotouristechezsoi.ca est une idée originale lancée en 2020 pour promouvoir le cyclotourisme, rendant accessible l'information utile ou nécessaire pour les voyageurs à vélo au Québec et ailleurs.</p>
             </div>
             <div>

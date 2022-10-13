@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { ExternalLink } from "react-external-link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -12,12 +12,20 @@ import { faGlobeEurope } from "@fortawesome/free-solid-svg-icons";
 const Nav1 = () => {
 
     const { lang } = useContext(CycloContext);
+    
+    const urlActuel = useLocation().pathname;
+
+    console.log(urlActuel);
 
     return (
         <Wrapper>
-            <Link to="/">
-                <img src={imgLogo} height="48px" alt="icône"></img>
-            </Link>
+            {
+                urlActuel === "/"
+                    ? <img src={imgLogo} height="48px" alt="logo du site" />
+                    : <Link to="/">
+                        <img src={imgLogo} height="48px" alt="retournez à la page d'accueil" />
+                    </Link>
+            }
             <Menu>
                 <NavLink to="/">Accueil</NavLink>
                 <NavLink to="/apropos">À propos</NavLink>
