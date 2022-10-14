@@ -1,0 +1,29 @@
+[
+    {
+        "region" : "Portneuf",
+        "lienRegion" : "portneuf",
+        "couleur" : "#4545bb",
+        "texte" : "blablabla",
+        "lien" : "gregregrere",
+        "url" : "wwwwwwww",
+        "complet" : true
+    },
+    {
+        "region" : "Bas-Saint-Laurent",
+        "lienRegion" : "portneuf",
+        "couleur" : "#4545bb",
+        "texte" : "blablabla",
+        "lien" : "gregregrere",
+        "url" : "wwwwwwww",
+        "complet" : true
+    },
+    {
+        "region" : "Beauce",
+        "lienRegion" : "portneuf",
+        "couleur" : "#4545bb",
+        "texte" : "blablabla",
+        "lien" : "gregregrere",
+        "url" : "wwwwwwww",
+        "complet" : false
+    }
+]

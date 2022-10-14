@@ -5,6 +5,7 @@ const CampingInterdit = (props) => {
         xmlnsXlink="http://www.w3.org/1999/xlink"
         width="150mm"
         height="97mm"
+        title="Carte des pistes cyclables où le camping sauvage est interdit par défault"
         viewBox="0 0 150 97"
         {...props}
         >
