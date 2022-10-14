@@ -3,6 +3,7 @@ import { useState } from "react";
 import { ExternalLink } from "react-external-link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import CampingInterdit from "./comp/CampingInterdit";
 import interditParDefault from "./donnees/interditParDefault.json"
 import { faAngleRight, faAnglesRight } from "@fortawesome/free-solid-svg-icons";
 import CarteCampings from "./comp/CarteCampings";
@@ -23,7 +24,7 @@ const DormirGratuitement = () => {
             <p>Il n'y a aucune loi provinciale encadrant le camping sauvage mur-à-mur. <ExternalLink href="https://educaloi.qc.ca/actualites-juridiques/camping-peut-on-installer-sa-tente-nimporte-ou/">Sur les terres du domaine public</ExternalLink>, il est possible de s'installer, par contre il s'avère difficile de trouver des cartes pour ainsi connaitre leurs emplacements. Sur les abords des pistes cyclables, il y a souvent des panneaux interdisant le camping, et couramment la même situation aux haltes routières. Même si le camping n'est pas proscrit dans le cas d'un parc public, il peut être illégal de se trouver dans celui-ci après une certaine heure. Finalement, certaines municipalités comme Gaspé ont choisi d'interdire le camping sur tout le territoire, sauf aux endroits désignés.</p>
             <p>Le camping sauvage est par défaut interdit sur les emprises des pistes cyclables suivantes. Une signalisation claire l'indique sur place. <span>Cette liste n'est pas exhaustive.</span></p>
             <IllegalParDefault>
-                <div>Carte</div>
+                <CampingInterdit />
                 <ol type="A">
                     {
                         interditParDefault.map((item, index) => {
@@ -34,8 +35,9 @@ const DormirGratuitement = () => {
             </IllegalParDefault>
             <h2>Comment alors trouver un site si c'est interdit presque partout?</h2>
             <p>Plusieurs experts du camping sauvage ont l'habitude de monter leur campement en fin de journée, pour éviter le regard des curieux. De plus, un endroit près d'une route sera plus probablement visité par d'autres personnes. Cela rend les anciennes voies ferrées converties en pistes cyclables propices à l'hébergement improvisé.</p>
-            <h2>C'est quoi le principe du <ExternalLink href="https://www.sanstrace.ca/principes">Sans trace?</ExternalLink></h2>
+            <h2>C'est quoi le principe du Sans trace?</h2>
             <p>Il s'agit de laisser le site de camping dans le même état qu'avant son séjour. En résumé, on protège la végétation, on évite les feux et on rapporte ses déchets. Ça veut aussi dire qu'on ne harcèle pas les écureuils... même si c'est trop tentant!</p>
+            <p>Lire <ExternalLink href="https://www.sanstrace.ca/principes">les sept principes du Sans trace</ExternalLink>.</p>
             <h2>Comment ajouter un emplacement de camping?</h2>
             {/* <p>
                 <FontAwesomeIcon icon={faAngleRight} />
@@ -59,10 +61,23 @@ const DormirGratuitement = () => {
 const Wrapper = styled.div``
 
 const IllegalParDefault = styled.div`
+    align-items: center;
     display: flex;
     justify-content: space-between;
     > * {
+        height: 100%;
         width: 50%;
+    }
+    @media screen and (min-width: 900px) {
+        li {
+            margin: 4% 0;
+        }
+    }
+    @media screen and (max-width: 600px) {
+        flex-direction: column;
+        > * {
+            width: 100%;
+        }
     }
 `
 

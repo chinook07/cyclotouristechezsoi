@@ -110,7 +110,7 @@ const FAQ1 = ({ boiteOuverte, setBoiteOuverte }) => {
     )
 }
 
-const Wrapper = styled.div``
+const Wrapper = styled.section``
 
 const Boite = styled.div`
     background-color: var(--c2);

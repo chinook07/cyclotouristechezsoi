@@ -11,7 +11,6 @@ const Preparation = () => {
 
     return (
         <Wrapper>
-            <p></p>
             <Comm1
                 boiteOuverte={boiteOuverte}
                 setBoiteOuverte={setBoiteOuverte}

@@ -15,8 +15,6 @@ const Nav1 = () => {
     
     const urlActuel = useLocation().pathname;
 
-    console.log(urlActuel);
-
     return (
         <Wrapper>
             {
