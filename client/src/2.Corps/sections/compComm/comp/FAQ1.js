@@ -44,7 +44,7 @@ const FAQ1 = ({ boiteOuverte, setBoiteOuverte }) => {
                 {
                     boiteOuverte === 1 &&
                     <Infos>
-                            <p>Pour ne pas trop se trouver serré dans le temps et devoir pédaler une distance immesurable, vaut mieux bien prévoir le nombre de jours nécessaires pour le périple. Utilisez cet outil pour estimer la durée d'un trajet selon votre profil. Des jours de repos vous seront suggérés si votre voyage dure plus que 12 jours.</p>
+                            <p>Pour ne pas trop se trouver serré dans le temps et devoir pédaler une distance immesurable, vaut mieux bien prévoir le nombre de jours nécessaires pour le périple. Utilisez cet outil pour estimer la durée d'un trajet selon votre profil. Des jours de repos vous seront suggérés si votre voyage dure 12 jours ou plus.</p>
                             <CalculJours />
                     </Infos>
                 }
@@ -101,8 +101,8 @@ const FAQ1 = ({ boiteOuverte, setBoiteOuverte }) => {
                 {
                     boiteOuverte === 4 &&
                     <Infos>
-                            <p>Plusieurs cyclotouristes effectuent une journée de repos lors d'un voyage de longue durée. Personnellement, je juge qu'une journée par semaine où je reste à la même place est une bonne idée. L'endroit où je m'arrête dépend de plusieurs facteurs, mais de préférence une ville où il y a beaucoup à visiter, sinon un parc national ou un autre endroit où il y a de quoi explorer, par exemple des sentiers de randonnée ou la possibilité de louer un canot pour la matinée. Même une courte balade en boucle à vélo n'est pas à exclure.</p>
-                            <p>Le corps a besoin de repos. Si ce n'est pas une journée complète, assurez-vous d'alterner entre les journées faciles et difficiles.</p>
+                            <p>Plusieurs cyclotouristes programment des journées de repos lors d'un voyage de longue durée. Une journée par semaine s'agit d'un consensus général parmi les grands voyageurs. L'endroit choisi pour s'arrêter dépend de plusieurs facteurs, mais une ville où il y a beaucoup à visiter, ou bien un parc national peut s'avérer intéressant. L'idéal, c'est d'avoir de quoi explorer, par exemple des sentiers de randonnée ou la possibilité de louer un canot pour la matinée. Même une courte balade en boucle à vélo n'est pas à exclure.</p>
+                            <p>Le corps a besoin de repos. Si ce n'est pas une journée complète, assurez-vous d'alterner entre les journées faciles et difficiles. De plus, les premières journées peuvent s'avérer ardues, étant donné que le corps n'est pas encore habitué à la nouvelle routine.</p>
                     </Infos>
                 }
             </Boite>

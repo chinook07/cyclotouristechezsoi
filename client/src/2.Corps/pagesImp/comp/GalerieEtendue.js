@@ -89,6 +89,7 @@ const GalerieEtendue = ({ montrerGal, setMontrerGal }) => {
                                 onClick={() => handleMontrerImage(item)}
                                 key={index}
                                 src={tousPhotos[item - 1]["lien"]}
+                                alt={tousPhotos[item - 1]["description"]}
                             />
                         })
                     }
@@ -119,8 +120,8 @@ const GalerieEtendue = ({ montrerGal, setMontrerGal }) => {
 
 const Wrapper = styled.div`
     background-color: var(--c10);
-    padding: 10px;
-    /* position: relative; */
+    border-radius: 5px;
+    padding: 12px;
 `
 
 const Fermer = styled.button`
@@ -140,9 +141,23 @@ const GalerieComplete = styled.div`
     justify-content: center;
     opacity: ${props => props.opaque};
     img {
+        border-radius: 50%;
         cursor: pointer;
-        height: 100px;
-        object-fit: contain;
+        height: 120px;
+        margin: 5px;
+        object-fit: cover;
+        transition: transform 0.2s;
+        width: 120px;
+        &:hover {
+            transform: scale(1.6);
+            transition: transform 0.2s;
+        }
+    }
+    @media screen and (max-width: 500px) {
+        img {
+            height: 80px;
+            width: 80px;
+        }
     }
 `
 
