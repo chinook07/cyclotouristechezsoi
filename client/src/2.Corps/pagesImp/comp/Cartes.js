@@ -49,7 +49,7 @@ const Carte2 = styled.div`
     &:hover img {
         opacity: 1;
         transition: 0.3s;
-        transform: scale(2.2) translate(4%, -17%);
+        transform: scale(2.2) translate(4%, -21%);
     }
 `
 

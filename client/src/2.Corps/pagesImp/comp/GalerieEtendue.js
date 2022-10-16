@@ -1,13 +1,12 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import * as imagesToutPa from "../images/galerie-paysage/index";
 import * as imagesToutPo from "../images/galerie-portrait/index";
 import galerieSousTitrePaysage from "../donnees/galerieSousTitrePaysage.json";
 import galerieSousTitrePortrait from "../donnees/galerieSousTitrePortrait.json";
-import { faBackwardStep, faForwardStep } from "@fortawesome/free-solid-svg-icons";
 import Chargement from "../../../CompReutilisables/Chargement";
+import Zoom from "./Zoom";
 
 const GalerieEtendue = ({ montrerGal, setMontrerGal }) => {
 
@@ -83,32 +82,28 @@ const GalerieEtendue = ({ montrerGal, setMontrerGal }) => {
             <Wrapper>
                 <Fermer onClick={fermerGalEtendue}>Fermer</Fermer>
                 <GalerieComplete opaque={diapo === undefined ? 1 : 0.4}>
-                    {
-                        ordreDesPhotos.map((item, index) => {
-                            return <img
-                                onClick={() => handleMontrerImage(item)}
-                                key={index}
-                                src={tousPhotos[item - 1]["lien"]}
-                                alt={tousPhotos[item - 1]["description"]}
-                            />
-                        })
-                    }
+                {
+                    ordreDesPhotos.map((item, index) => {
+                        return <img
+                            onClick={() => handleMontrerImage(item)}
+                            key={index}
+                            src={tousPhotos[item - 1]["lien"]}
+                            alt={tousPhotos[item - 1]["description"]}
+                        />
+                    })
+                }
                 </GalerieComplete>
+                <Fermer onClick={fermerGalEtendue}>Fermer</Fermer>
                 
                 {
                     diapo !== undefined
-                    && <Zoom>
-                            <button onClick={fermerZoom}>Fermer</button>
-                            <Caroussel>
-                                <FontAwesomeIcon icon={faBackwardStep} onClick={photoPrec} size="2x" />
-                                <figure>
-                                    <img src={tousPhotos[diapo - 1].lien} />
-                                    <figcaption>{tousPhotos[diapo - 1].description}</figcaption>
-                                </figure>
-                                <FontAwesomeIcon icon={faForwardStep} onClick={photoSuiv} size="2x" />
-                            </Caroussel>
-                            
-                    </Zoom>
+                    && <Zoom
+                        fermerZoom={fermerZoom}
+                        photoPrec={photoPrec}
+                        photoSuiv={photoSuiv}
+                        tousPhotos={tousPhotos}
+                        diapo={diapo}
+                    />
                 }
             </Wrapper>
         )
@@ -157,52 +152,6 @@ const GalerieComplete = styled.div`
         img {
             height: 80px;
             width: 80px;
-        }
-    }
-`
-
-const Zoom = styled.div`
-    background-color: var(--c5);
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    left: 50%;
-    max-height: 90vh;
-    padding: 10px;
-    position: fixed;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 75%;
-    button {
-        margin: 0 auto;
-        padding: 10px;
-        width: 80px;
-    }
-    @media screen and (max-width : 600px) {
-        width: 88%;
-    }
-`
-
-const Caroussel = styled.div`
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    > svg {
-        cursor: pointer;
-    }
-    figure {
-        display: flex;
-        flex-direction: column;
-        margin: 10px;
-        img {
-            max-height: 80vh;
-            width: 100%;
-        }
-    }
-    @media screen and (max-width : 600px) {
-        flex-direction: column;
-        figure {
-            margin: 10px 0;
         }
     }
 `

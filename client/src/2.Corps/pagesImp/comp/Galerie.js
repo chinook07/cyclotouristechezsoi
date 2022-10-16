@@ -16,7 +16,7 @@ const Galerie = ({ montrerGal, setMontrerGal }) => {
         <Wrapper onClick={ouvrirGalerieEtendue}>
             {
                 sample.map((item, index) => {
-                    return <img key={index} src={tableauLiens[item - 1]} />
+                    return <img key={index} alt="Description disponible sur la galerie étendue en cliquant ici." src={tableauLiens[item - 1]} />
                 })
             }
         </Wrapper>
@@ -33,7 +33,10 @@ const Wrapper = styled.div`
         transform: scale(1.05);
     }
     img {
+        border-radius: 10px;
+        height: 100px;
         width: 15%;
+        object-fit: cover;
     }
 `
 
