@@ -23,8 +23,6 @@ const VoyEffectues = () => {
             <Stats1 />
             <h3>Nuitées<FontAwesomeIcon icon={faMoon} /></h3>
             <Stats2 />
-            <h2>Mes voyages sur une carte<FontAwesomeIcon icon={faMap} /></h2>
-            {/* <Cartes /> */}
             <h2>Galerie d'images<FontAwesomeIcon icon={faImages} /></h2>
             {
                 !montrerGal
@@ -34,6 +32,8 @@ const VoyEffectues = () => {
                 montrerGal
                 && <GalerieEtendue montrerGal={montrerGal} setMontrerGal={setMontrerGal} />
             }
+            <h2>Mes voyages sur une carte<FontAwesomeIcon icon={faMap} /></h2>
+            <Cartes />
             <h2>Mes voyages en détail<FontAwesomeIcon icon={faClock} /></h2>
             <VoyagesListe />
         </Wrapper>
