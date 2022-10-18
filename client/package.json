@@ -2,6 +2,7 @@
     "name": "cyclotouristechezsoi",
     "version": "0.1.0",
     "private": true,
+    "homepage": "http://preprod.cyclotouristechezsoi.ca",
     "proxy": "http://localhost:8000",
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^6.2.0",

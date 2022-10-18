@@ -8,32 +8,43 @@ import car2 from "../images/carrousel/monteregie.jpg";
 import car3 from "../images/carrousel/perce.jpg";
 import car4 from "../images/carrousel/portneuf.jpg";
 import car5 from "../images/carrousel/stukely.jpg";
+import Chargement from "../../../CompReutilisables/Chargement";
 
 const Carrousel = () => {
 
-    const [carMontrer, setCarMontrer] = useState(0);
+    const [carMontrer, setCarMontrer] = useState(undefined);
+
+    useEffect(() => {
+        setCarMontrer(0)
+    }, [])
 
     const imagesCar = [car0, car1, car2, car3, car4, car5];
 
     const changerPhoto = () => {
-        if (carMontrer === 5) {setCarMontrer(0)} else {setCarMontrer(carMontrer + 1)}
+        if (carMontrer === 5 || carMontrer === undefined) {setCarMontrer(0)} else {setCarMontrer(carMontrer + 1)}
     }
     setTimeout(changerPhoto, 6000);
 
-    return (
-        <Wrapper>
-            {
-                <figure>
-                    <Indicateur>
-                        {carMontrer + 1}/{carrousel.length}
-                    </Indicateur>
-                    <Titre>Cyclotouriste<br />chez soi</Titre>
-                    <img src={imagesCar[carMontrer]} alt={carrousel[carMontrer].alt} />
-                    <figcaption>{carrousel[carMontrer].desc}</figcaption>
-                </figure>
-            }
-        </Wrapper>
-    )
+    if (carMontrer === undefined) {
+        return (
+            <Chargement />
+        )
+    } else {
+        return (
+            <Wrapper>
+                {
+                    <figure>
+                        <Indicateur>
+                            {carMontrer + 1}/{carrousel.length}
+                        </Indicateur>
+                        <Titre>Cyclotouriste<br />chez soi</Titre>
+                        <img src={imagesCar[carMontrer]} alt={carrousel[carMontrer].alt} />
+                        <figcaption>{carrousel[carMontrer].desc}</figcaption>
+                    </figure>
+                }
+            </Wrapper>
+        )
+    }
 }
 
 const Wrapper = styled.div`

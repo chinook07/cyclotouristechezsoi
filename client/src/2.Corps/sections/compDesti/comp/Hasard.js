@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import { CycloContext } from "../../../../CycloContext";
 import donnees from "../donnees/trajets.json";
+import * as TousSchemas from "../schemas/index";
 
 const Hasard = ({ trajetsHasard }) => {
     
@@ -19,7 +20,11 @@ const Hasard = ({ trajetsHasard }) => {
             {
                 trajetsHasard.map((item, index) => {
                     return (
-                        <div key={index} onClick={() => ouvrirTrajet(item)}>
+                        <Choix
+                            key={index}
+                            onClick={() => ouvrirTrajet(item)}
+                            schema={"Schema" + item}
+                        >
                             <Link to="/destinations/trajets">
                                 <DeEtA>
                                     <div>{donnees[item].deA[0]}</div>
@@ -27,7 +32,7 @@ const Hasard = ({ trajetsHasard }) => {
                                 </DeEtA>
                                 <Titre>{donnees[item].trajet}</Titre>
                             </Link>
-                        </div>
+                        </Choix>
                     )
                 })
             }
@@ -38,18 +43,20 @@ const Hasard = ({ trajetsHasard }) => {
 const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
-    > div {
-        border: 3px solid var(--c4);
-        border-radius: 9px;
-        height: 100px;
-        margin: 0 auto 20px;
-        max-width: 90%;
-        padding: 10px;
-        width: 400px;
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
+`
+
+const Choix = styled.div`
+    background-image: url(${props => TousSchemas[props.schema]});
+    border: 3px solid var(--c4);
+    border-radius: 9px;
+    height: 100px;
+    margin: 0 auto 20px;
+    max-width: 90%;
+    padding: 10px;
+    width: 400px;
+    a {
+        color: inherit;
+        text-decoration: none;
     }
 `
 

@@ -129,6 +129,12 @@
         "trajet" : "Ligne d'autocar entre Rimouski, Percé et Gaspé.",
         "heures" : "7 jours sur 7"
     },
+    "80" : {
+        "icone" : [2, 6, 8],
+        "transporteur" : "Intercar",
+        "trajet" : "Ligne d'autocar entre Québec et Saguenay.",
+        "heures" : "7 jours sur 7"
+    },
     "100" : {
         "icone" : [1, 5, 8],
         "transporteur" : "exo",
