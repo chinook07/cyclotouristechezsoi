@@ -6,6 +6,8 @@ import { faPlay, faMapSigns, faSuitcase, faTrain } from "@fortawesome/free-solid
 
 const Nav2 = () => {
 
+    //ARIA
+
     return (
         <Wrapper>
             <NavLink to="/commencement/">
