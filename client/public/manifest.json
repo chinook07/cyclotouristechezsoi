@@ -2,13 +2,17 @@
     "background_color": "#0e3b10",
     "description": "Le guide ultime pour préparer votre prochaine sortie en cyclotourisme.",
     "display": "standalone",
-    "display_override": ["minimal-ui", "browser"],
+    "display_override": [
+        "minimal-ui",
+        "browser"
+    ],
     "icons": [
         {
             "src": "favicon-16x16.png",
             "sizes": "16x16",
             "type": "image/png"
-        }, {
+        },
+        {
             "src": "favicon-32x32.png",
             "sizes": "32x32",
             "type": "image/png"
@@ -18,5 +22,5 @@
     "name": "CyclotouristeChezSoi",
     "scope": "../",
     "short_name": "CyclotouristeChezSoi",
-    "start_url": "../index.html"
+    "start_url": "/"
 }
