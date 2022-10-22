@@ -82,19 +82,18 @@ const GalerieEtendue = ({ montrerGal, setMontrerGal }) => {
             <Wrapper>
                 <Fermer onClick={fermerGalEtendue}>Fermer</Fermer>
                 <GalerieComplete opaque={diapo === undefined ? 1 : 0.4}>
-                {
-                    ordreDesPhotos.map((item, index) => {
-                        return <img
-                            onClick={() => handleMontrerImage(item)}
-                            key={index}
-                            src={tousPhotos[item - 1]["lien"]}
-                            alt={tousPhotos[item - 1]["description"]}
-                        />
-                    })
-                }
+                    {
+                        ordreDesPhotos.map((item, index) => {
+                            return <img
+                                onClick={() => handleMontrerImage(item)}
+                                key={index}
+                                src={tousPhotos[item - 1]["lien"]}
+                                alt={tousPhotos[item - 1]["description"]}
+                            />
+                        })
+                    }
                 </GalerieComplete>
                 <Fermer onClick={fermerGalEtendue}>Fermer</Fermer>
-                
                 {
                     diapo !== undefined
                     && <Zoom

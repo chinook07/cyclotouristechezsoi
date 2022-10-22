@@ -35,7 +35,7 @@ const Confidentialite = () => {
             <ul>
                 <li>En <Link to="/contact">écrivant un message à l'auteur</Link>, il recevra les informations entrées par l'utilisateur. Les messages sont envoyés par l'entremise de Formspree <ExternalLink href="https://formspree.io/legal/privacy-policy/" hrefLang="en">(politique de vie privée – en anglais)</ExternalLink>.</li>
                 <li>Quelques renseignements de base sont prélevés par <ExternalLink href="https://www.goatcounter.com/" hrefLang="en">GoatCounter</ExternalLink>, alternative davantage respectueuse de la vie privée à Google Analytics.</li>
-                <li>Lorsque vous utilisez <Link to="/equipement/listeinteractive">liste interactive</Link>, des données sont stockées dans le <code><ExternalLink href="https://developer.mozilla.org/fr/docs/Web/API/Window/localStorage">localStorage</ExternalLink></code> pour ne pas perdre le progrès de votre liste. Rien ne permet à quiquonque d'identifier l'utilisateur.</li>
+                <li>Lorsque vous utilisez la <Link to="/equipement/listeinteractive">liste interactive</Link>, des données sont stockées dans le <code><ExternalLink href="https://developer.mozilla.org/fr/docs/Web/API/Window/localStorage">localStorage</ExternalLink></code> pour ne pas perdre le progrès de votre liste. Rien ne permet à quiquonque d'identifier l'utilisateur.</li>
             </ul>
             <div>
                 {

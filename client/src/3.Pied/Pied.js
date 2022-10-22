@@ -40,12 +40,13 @@ const Wrapper = styled.footer`
 `
 
 const Auteur = styled.div`
+    display: flex;
+    flex-wrap: wrap;
     span {
         margin-right: 10px;
     }
     a {
         line-height: 1.6;
-        margin-right: 10px;
     }
 `
 

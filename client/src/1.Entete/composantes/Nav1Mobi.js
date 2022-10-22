@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { CycloContext } from "../../CycloContext";
 import imgLogo from "../../images/icones/logo.png";
-import { faGlobeEurope, faBars } from "@fortawesome/free-solid-svg-icons";
+import { faGlobeEurope, faBars, faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 
 const Nav1Mobi = () => {
 
@@ -30,15 +30,18 @@ const Nav1Mobi = () => {
             {
                 nav1Visible &&
                 <Menu>
-                    <NavLink onClick={montrerMenu} to="/">Accueil</NavLink>
-                    <NavLink onClick={montrerMenu} to="/apropos">À propos</NavLink>
-                    <NavLink onClick={montrerMenu} to="/voyages-effectues">Voyages effectués</NavLink>
-                    <NavLink onClick={montrerMenu} to="/contact">Contact</NavLink>
-                    <ExternalLink onClick={montrerMenu} href="https://www.touristechezsoi.ca">Blogue</ExternalLink>
-                    <Langue>
-                        <span>{lang}</span>
-                        <span><FontAwesomeIcon icon={faGlobeEurope}/></span>
-                    </Langue>
+                        <NavLink onClick={montrerMenu} to="/">Accueil</NavLink>
+                        <NavLink onClick={montrerMenu} to="/apropos">À propos</NavLink>
+                        <NavLink onClick={montrerMenu} to="/voyages-effectues">Voyages effectués</NavLink>
+                        <NavLink onClick={montrerMenu} to="/contact">Contact</NavLink>
+                        <ExternalLink onClick={montrerMenu} href="https://www.touristechezsoi.ca">
+                            <span>Blogue</span>
+                            <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+                        </ExternalLink>
+                        {/* <Langue>
+                            <span>{lang}</span>
+                            <span><FontAwesomeIcon icon={faGlobeEurope}/></span>
+                        </Langue> */}
                 </Menu>
             }
         </Wrapper>
@@ -65,13 +68,17 @@ const Menu = styled.div`
     margin: -30px 0 5px;
     a {
         color: var(--c4);
-        line-height: 1.5;
+        font-size: 20px;
+        line-height: 1.7;
         text-decoration: none;
         &:hover {
             color: var(--c5);
         }
         &.active {
             font-weight: bold;
+        }
+        &[target = _blank] > * {
+            margin: 0 2px;
         }
     }
 `

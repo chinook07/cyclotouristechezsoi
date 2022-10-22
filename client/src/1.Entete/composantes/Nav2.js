@@ -10,19 +10,19 @@ const Nav2 = () => {
 
     return (
         <Wrapper>
-            <NavLink to="/commencement/">
+            <NavLink to="/commencement/" aria-label="section commencer">
                 <span>Commencer</span>
                 <FontAwesomeIcon icon={faPlay} />
             </NavLink>
-            <NavLink to="/destinations/">
+            <NavLink to="/destinations/" aria-label="section destinations">
                 <span>Découvrir</span>
                 <FontAwesomeIcon icon={faMapSigns} />
             </NavLink>
-            <NavLink to="/equipement/">
+            <NavLink to="/equipement/" aria-label="section équipement">
                 <span>S'équiper</span>
                 <FontAwesomeIcon icon={faSuitcase} />
             </NavLink>
-            <NavLink to="/transport/">
+            <NavLink to="/transport/" aria-label="section transport">
                 <span>Se transporter</span>
                 <FontAwesomeIcon icon={faTrain} />
             </NavLink>

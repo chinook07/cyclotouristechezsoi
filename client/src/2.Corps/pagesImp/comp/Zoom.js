@@ -4,7 +4,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBackwardStep, faForwardStep } from "@fortawesome/free-solid-svg-icons";
 import { faCircleXmark } from "@fortawesome/free-regular-svg-icons";
 
-const Zoom = ({fermerZoom, photoPrec, photoSuiv, tousPhotos, diapo}) => {
+const Zoom = ({ fermerZoom, photoPrec, photoSuiv, tousPhotos, diapo }) => {
+    
+    window.addEventListener("keyup", photoSuiv);
+    window.addEventListener("keyup", photoPrec);
+    window.addEventListener("keyup", fermerZoom);
+
     return (
         <Wrapper>
             <button onClick={fermerZoom}>

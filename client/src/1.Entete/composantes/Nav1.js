@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { CycloContext } from "../../CycloContext";
 import imgLogo from "../../images/icones/logo.png";
-import { faGlobeEurope } from "@fortawesome/free-solid-svg-icons";
+import { faGlobeEurope, faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 
 const Nav1 = () => {
 
@@ -29,7 +29,10 @@ const Nav1 = () => {
                 <NavLink to="/apropos">À propos</NavLink>
                 <NavLink to="/voyages-effectues">Voyages effectués</NavLink>
                 <NavLink to="/contact">Contact</NavLink>
-                <ExternalLink href="https://www.touristechezsoi.ca">Blogue</ExternalLink>
+                <ExternalLink href="https://www.touristechezsoi.ca">
+                    <span>Blogue</span>
+                    <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+                </ExternalLink>
             </Menu>
             <Langue>
                 <span>{lang}</span>
@@ -65,6 +68,9 @@ const Menu = styled.div`
         }
         &.active {
             font-weight: bold;
+        }
+        &[target = _blank] > * {
+            margin: 0 2px;
         }
     }
 ` 
