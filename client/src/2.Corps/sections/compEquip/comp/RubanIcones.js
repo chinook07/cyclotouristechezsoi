@@ -6,6 +6,7 @@ import { faBicycle, faTools, faWineGlassAlt, faPizzaSlice, faFlag, faSurprise, f
 const RubanIcones = ({changerRubrique, montrerRubrique}) => {
 
     const icones = [faBicycle, faTools, faWineGlassAlt, faPizzaSlice, faFlag, faSurprise, faHatCowboy, faHeadSideMask, faBath, faPuzzlePiece, faPlug, faPlus, faGlobe];
+    const aria = ["vélo", "outils", "hydratation", "nourriture", "camping", "surprises", "vêtements", "santé", "hygiène", "loisirs", "électronique", "autres", "international"];
 
     return (
         <Wrapper>
@@ -13,6 +14,7 @@ const RubanIcones = ({changerRubrique, montrerRubrique}) => {
                 icones.map((item, index) => {
                     return (
                         <button
+                            aria-label={aria[index]}
                             className={montrerRubrique === index ? "actif" : ""}
                             key={index}
                             onClick={() => changerRubrique(index)}

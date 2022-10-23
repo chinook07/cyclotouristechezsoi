@@ -14,7 +14,7 @@ const Liste = ({ bagages, camping, packThis }) => {
                 listeEquipement.map((itemCat, indexCat) => {
                     return (
                         <Categorie key={indexCat}>
-                            <h3><FontAwesomeIcon icon={icones[indexCat]} /> {itemCat.categorie}</h3>
+                            <h2><FontAwesomeIcon icon={icones[indexCat]} /> {itemCat.categorie}</h2>
                             <div>
                                 {
                                     itemCat.articles.map((itemObj, indexObj) => {
@@ -34,7 +34,7 @@ const Liste = ({ bagages, camping, packThis }) => {
                                                             ? <FontAwesomeIcon icon={faCheck} />
                                                             : <FontAwesomeIcon icon={faPlus} />
                                                     }
-                                                    {itemObj.objet}
+                                                    <span>{itemObj.objet}</span>
                                                 </Chose>
                                             )
                                         }
@@ -54,6 +54,9 @@ const Wrapper = styled.div``
 
 const Categorie = styled.div`
     margin: 15px 0;
+    h2 {
+        font-size: 19px;
+    }
     > div {
         display: flex;
         flex-wrap: wrap;
@@ -68,6 +71,9 @@ const Chose = styled.button`
     cursor: pointer;
     margin: 5px;
     padding: 8px 12px;
+    svg {
+        margin-right: 5px;
+    }
 `
 
 const ChosePlus = styled.form`

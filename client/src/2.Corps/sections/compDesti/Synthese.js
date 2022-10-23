@@ -58,6 +58,7 @@ const Wrapper = styled.div`
         thead {
             background-color: var(--c5);
             th {
+                color: var(--c11);
                 padding: 10px;
             }
         }

@@ -26,6 +26,7 @@ const Wrapper = styled.div`
     margin: 20px 0;
     a {
         color: var(--c10);
+        margin-bottom: 5px;
         padding-left: 10px;
         text-decoration: none;
         svg {

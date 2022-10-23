@@ -48,6 +48,7 @@ const ListeInteractive = () => {
     const reinit = () => {
         setBagages([]);
         localStorage.removeItem("packed");
+        localStorage.removeItem("packedPers");
     }
 
     return (
@@ -82,9 +83,7 @@ const ListeInteractive = () => {
                 camping={camping}
                 packThis={packThis}
             />
-            <ListePers
-                packThis={packThis}
-            />
+            <ListePers/>
             <Controles>
                 <button onClick={imprimer}>Imprimer</button>
                 <button onClick={reinit}>Réinitialiser</button>
@@ -124,7 +123,7 @@ const Controles = styled.div`
     justify-content: center;
     margin: 40px auto;
     button {
-        background-color: var(--c3);
+        background-color: var(--c4);
         border-radius: 5px;
         color: var(--c11);
         cursor: pointer;

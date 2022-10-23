@@ -5,10 +5,16 @@ import { faBackwardStep, faForwardStep } from "@fortawesome/free-solid-svg-icons
 import { faCircleXmark } from "@fortawesome/free-regular-svg-icons";
 
 const Zoom = ({ fermerZoom, photoPrec, photoSuiv, tousPhotos, diapo }) => {
+
+    const clavier = (e) => {
+        console.log(e);
+        if (e.which === 27) fermerZoom();
+        if (e.which === 37) photoPrec();
+        if (e.which === 39) photoSuiv();
+        window.removeEventListener("keyup", clavier)
+    }
     
-    window.addEventListener("keyup", photoSuiv);
-    window.addEventListener("keyup", photoPrec);
-    window.addEventListener("keyup", fermerZoom);
+    window.addEventListener("keyup", clavier);
 
     return (
         <Wrapper>
