@@ -7,9 +7,9 @@ const Cartes = () => {
     
     return (
         <Wrapper>
-            <Carte1 src={carte1} />
+            <Carte1 src={carte1} alt="carte des voyages effectués" />
             <Carte2>
-                <img alt="carte des voyages effectués" src={carte2}/>
+                <img src={carte2} alt="carte des voyages effectués dans le sud du Québec"/>
             </Carte2>
             <p>Les numéros sur la carte réfèrent à ceux dans la section suivante.</p>
         </Wrapper>

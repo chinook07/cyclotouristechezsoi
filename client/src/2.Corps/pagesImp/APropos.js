@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { ExternalLink } from "react-external-link";
 
+import auteur from "./images/auteur.jpg"
+
 const APropos = () => {
     return (
         <Wrapper>
@@ -13,10 +15,10 @@ const APropos = () => {
                     <p>Je vous laisse découvrir mon site web pour en apprendre davantage. Au plaisir de se croiser sur les routes du Québec!</p>
                     <p>Nicola Z.</p>
                 </div>
-                <figure>
-                    <img></img>
-                    <figcaption>L'auteur de ce site web sur le Chemin du Roy en 2016.</figcaption>
-                </figure>
+                <PhotoAuteur>
+                    <img src={auteur} alt=""></img>
+                    <figcaption>L'auteur de ce site web lors de sa traversée de l'Acadie en 2022.</figcaption>
+                </PhotoAuteur>
             </div>
             <div>
                 <h3>Vous cherchez un collaborateur pour faire la promotion d'un itinéraire cyclable ou la pratique du cyclotourisme?</h3>
@@ -39,5 +41,14 @@ const APropos = () => {
 }
 
 const Wrapper = styled.div``
+
+const PhotoAuteur = styled.figure`
+    margin: 1em auto;
+    max-width: 100%;
+    width: 200px;
+    img {
+        width: 100%;
+    }
+`
 
 export default APropos;

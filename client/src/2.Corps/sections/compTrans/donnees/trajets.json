@@ -135,6 +135,30 @@
         "trajet" : "Ligne d'autocar entre Québec et Saguenay.",
         "heures" : "7 jours sur 7"
     },
+    "81" : {
+        "icone" : [2, 6, 8],
+        "transporteur" : "Intercar",
+        "trajet" : "Ligne d'autocar entre Saguenay et Tadoussac.",
+        "heures" : "1 départ par semaine"
+    },
+    "82" : {
+        "icone" : [2, 6, 8],
+        "transporteur" : "Intercar",
+        "trajet" : "Ligne d'autocar entre Québec et Dolbeau-Mistassini.",
+        "heures" : "4 départs par semaine"
+    },
+    "83" : {
+        "icone" : [2, 6, 8],
+        "transporteur" : "Intercar",
+        "trajet" : "Ligne d'autocar entre Saguenay et Dolbeau-Mistassini.",
+        "heures" : "4 départs par semaine"
+    },
+    "84" : {
+        "icone" : [2, 6, 8],
+        "transporteur" : "Intercar",
+        "trajet" : "Ligne d'autocar entre Saint-Félicien et Chibougamau.",
+        "heures" : "1 départ par semaine"
+    },
     "100" : {
         "icone" : [1, 5, 8],
         "transporteur" : "exo",
