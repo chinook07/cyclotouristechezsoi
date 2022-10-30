@@ -19,7 +19,7 @@ const Intro = () => {
 
     return (
         <Wrapper>
-            <p>Le Québec est un vaste territoire avec une possibilité de parcours infininie. Utilisez cet outil pour choisir un trajet qui vous satisfera.</p>
+            <p>Le Québec est un vaste territoire avec une possibilité de parcours infinie. Utilisez cet outil pour choisir un trajet qui vous satisfera.</p>
             <h2>Trouvez votre parcours idéal</h2>
             <Schema>
                 {

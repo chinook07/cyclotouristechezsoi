@@ -120,6 +120,27 @@
         "deA" : ["Beaupré", "Tadoussac"]
     },
     {
+        "id" : 10,
+        "trajet" : "Côte acadienne",
+        "intro" : "Suivez le golfe du St-Laurent et découvrez le territoire acadien, sa culture, ses dialectes, et ses paysages maritimes à volonté.",
+        "distance" : 680,
+        "veloroutes" : ["Véloroute de la Péninsule"],
+        "proportion" : 0,
+        "terrain" : "plat, quelques côtes près de Dalhousie.",
+        "deja" : true,
+        "appreciation" : 5,
+        "coups" : "La tranquillité, l'absence de tourisme de masse (jusqu'à Shediac) et des plages désertes.",
+        "defis" : "La traversée de la rivière Miramichi, certaines routes moyennement passantes mais sans accotement.",
+        "notes" : "Entre Miramichi et Shediac, le dialecte « chiac » est parlé, difficile à comprendre mais toujours intéressant à écouter!",
+        "carteURL" : "10/47.3458/-76.9351",
+        "ass" : [
+            {"titre" : "Partez de Rimouski", "nombre" : 0},
+            {"titre" : "Traversez vers l'ile...", "nombre" : 26}, 
+            {"titre" : "...puis ensuite vers LES iles!", "nombre" : 13}
+        ],
+        "deA" : ["Campbellton", "Cap-Jourimain"]
+    },
+    {
         "id" : 6,
         "trajet" : "Côte-Nord",
         "intro" : "Loin des grands centres, ce parcours permet de tomber amoureux de la mer et de la forêt boréale en même temps.",
@@ -209,6 +230,48 @@
     },
     {
         "id" : 10,
+        "trajet" : "Ile-du-Prince-Édouard",
+        "intro" : "Voici un trajet express à travers la forêt boréale, de l'Abitibi vers les Laurentides, presque sans services mais avec énormément de plans d'eau.",
+        "distance" : 290,
+        "veloroutes" : ["Sentier de la Confédération"],
+        "proportion" : 0,
+        "terrain" : "assez côteux en dehors des pistes cyclables.",
+        "deja" : ["Louvicourt à Grand-Remous"],
+        "appreciation" : 5,
+        "coups" : "L'omniprésence de l'eau sur le territoire de la réserve et l'aspect aventurier d'un tel voyage.",
+        "defis" : "Le manque d'abris par temps orageux.",
+        "notes" : "Un filtre à eau est une nécessité. La circulation est assez dense et rapide, mais l'accotement est aussi très large.",
+        "carteURL" : "10/47.3458/-76.9351",
+        "ass" : [
+            {"titre" : "Partez de l'Abitibi", "nombre" : 0},
+            {"titre" : "Descendez jusqu'à Gatineau", "nombre" : 26}, 
+            {"titre" : "Continuez vers Montréal", "nombre" : 13}
+        ],
+        "deA" : ["Borden-Carleton", "Souris"]
+    },
+    {
+        "id" : 10,
+        "trajet" : "Iles-de-la-Madeleine",
+        "intro" : "Voici un trajet express à travers la forêt boréale, de l'Abitibi vers les Laurentides, presque sans services mais avec énormément de plans d'eau.",
+        "distance" : 290,
+        "veloroutes" : ["Sentier de la Confédération"],
+        "proportion" : 0,
+        "terrain" : "assez côteux en dehors des pistes cyclables.",
+        "deja" : ["Louvicourt à Grand-Remous"],
+        "appreciation" : 5,
+        "coups" : "L'omniprésence de l'eau sur le territoire de la réserve et l'aspect aventurier d'un tel voyage.",
+        "defis" : "Le manque d'abris par temps orageux.",
+        "notes" : "Un filtre à eau est une nécessité. La circulation est assez dense et rapide, mais l'accotement est aussi très large.",
+        "carteURL" : "10/47.3458/-76.9351",
+        "ass" : [
+            {"titre" : "Partez de l'Abitibi", "nombre" : 0},
+            {"titre" : "Descendez jusqu'à Gatineau", "nombre" : 26}, 
+            {"titre" : "Continuez vers Montréal", "nombre" : 13}
+        ],
+        "deA" : ["Borden-Carleton", "Souris"]
+    },
+    {
+        "id" : 10,
         "trajet" : "La Vérendrye",
         "intro" : "Voici un trajet express à travers la forêt boréale, de l'Abitibi vers les Laurentides, presque sans services mais avec énormément de plans d'eau.",
         "distance" : 290,
@@ -240,9 +303,9 @@
         "varietes" : "Il existe une option qui passe à l'est du fleuve Hudson, soit la Voie verte de la Nouvelle-Angleterre de l'ouest (WNE Greenway).",
         "carteURL" : "10/44.9420/-73.2802",
         "ass" : [
-            {"titre" : "titre", "nombre" : 1},
-            {"titre" : "titre", "nombre" : 1}, 
-            {"titre" : "titre", "nombre" : 1}
+            {"titre" : "Partez d'Ottawa", "nombre" : 1},
+            {"titre" : "Bifurquez vers Sherbrooke", "nombre" : 1}, 
+            {"titre" : "Continuez jusqu'à Québec", "nombre" : 1}
         ],
         "deA" : ["Montréal", "New York"]
     },
@@ -262,9 +325,9 @@
         "varietes" : "Il y a d'autres pistes cyclables dans le parc national de la Pointe-Taillon, ainsi que vers Girardville qui valent le coup d'être explorées.",
         "carteURL" : "10/48.6061/-72.1567",
         "ass" : [
-            {"titre" : "titre", "nombre" : 1},
-            {"titre" : "titre", "nombre" : 1}, 
-            {"titre" : "titre", "nombre" : 1}
+            {"titre" : "Continuez vers Saguenay...", "nombre" : 1},
+            {"titre" : "...puis bifurquez vers Tadoussac", "nombre" : 1}, 
+            {"titre" : "Traversez vers le Témiscouata", "nombre" : 1}
         ],
         "deA" : ["Alma", "Roberval (boucle)"]
     },
@@ -284,9 +347,9 @@
         "varietes" : "Le Corridor aérobique est une piste cyclable d'Amherst à Morin Heights qu'on peut prendre à l'aide de deux tronçons sur route, pour effectuer une boucle avec Le P'tit train du Nord.",
         "carteURL" : "10/46.0885/-74.3658",
         "ass" : [
-            {"titre" : "titre", "nombre" : 1},
-            {"titre" : "titre", "nombre" : 1}, 
-            {"titre" : "titre", "nombre" : 1}
+            {"titre" : "Traversez La Vérendrye", "nombre" : 1},
+            {"titre" : "Retournez à Gatineau (par Maniwaki)", "nombre" : 1}, 
+            {"titre" : "Retournez à Gatineau (par Montebello)", "nombre" : 1}
         ],
         "deA" : ["Mont-Laurier", "Montréal"]
     },
@@ -306,9 +369,9 @@
         "varietes" : "Il y a un raccourci par les rangs pour aller de la région de Lanaudière vers Ste-Ursule via St-Justin. À Ste-Thècle, on peut prendre une branche des véloboucles jusqu'à St-Adelphe et Batiscan, pour revenir vers Trois-Rivières via le Chemin du Roy. À Rivière-à-Pierre, possibilité de poursuivre vers Québec via la vélopiste Jacques-Cartier-Portneuf.",
         "carteURL" : "10/46.8771/-72.3779",
         "ass" : [
-            {"titre" : "titre", "nombre" : 1},
-            {"titre" : "titre", "nombre" : 1}, 
-            {"titre" : "titre", "nombre" : 1}
+            {"titre" : "Partez de Montréal", "nombre" : 1},
+            {"titre" : "Bifurquez vers Trois-Rivières", "nombre" : 1}, 
+            {"titre" : "Terminez à Québec", "nombre" : 1}
         ],
         "deA" : ["Louiseville", "Rivière-à-Pierre"]
     },
@@ -328,9 +391,9 @@
         "varietes" : "Possibilité de faire une boucle de l'ile d'Orléans une fois rendu à Québec. La traversée du pont n'est toutefois pas de repos. Pour faire un aller-retour, revenir par la rive sud du fleuve.",
         "carteURL" : "10/46.7142/-71.8719",
         "ass" : [
-            {"titre" : "titre", "nombre" : 1},
-            {"titre" : "titre", "nombre" : 1}, 
-            {"titre" : "titre", "nombre" : 1}
+            {"titre" : "Commencez en amont", "nombre" : 1},
+            {"titre" : "Continuez vers le Bas-du-Fleuve", "nombre" : 1}, 
+            {"titre" : "Retournez vers la rive sud", "nombre" : 1}
         ],
         "deA" : ["Montréal", "Beaupré"]
     },
@@ -350,9 +413,9 @@
         "varietes" : "Pour un trajet plus direct et dramatique entre Ste-Catherine et St-Lambert, prendre la piste cyclable de la Voie maritime. Entre Yamaska et Lévis, il est toujours possible d'emprunter les rangs parallèles à la route 132. Pour faire un aller-retour, revenir par la rive nord du fleuve.",
         "carteURL" : "10/46.0082/-73.0138",
         "ass" : [
-            {"titre" : "titre", "nombre" : 1},
-            {"titre" : "titre", "nombre" : 1}, 
-            {"titre" : "titre", "nombre" : 1}
+            {"titre" : "Commencez dans les Cantons-de-l'Est", "nombre" : 1},
+            {"titre" : "Continuez vers le Bas-du-Fleuve", "nombre" : 1}, 
+            {"titre" : "Retournez par le côté nord", "nombre" : 1}
         ],
         "deA" : ["Côteau-du-Lac", "Lévis"]
     },
@@ -372,9 +435,9 @@
         "varietes" : "Plusieurs raccourcis ou alternatives permettent de faire un aller-retour en emprunter un chemin plus direct, par exemple par La Route des Champs entre Chambly et Granby, le parc national de la Yamaska entre Granby et Waterloo, des chemins alternatifs dans la région d'Orford, ainsi que l'axe de la Magog à Sherbrooke.",
         "carteURL" : "10/45.3258/-72.2821",
         "ass" : [
-            {"titre" : "titre", "nombre" : 1},
-            {"titre" : "titre", "nombre" : 1}, 
-            {"titre" : "titre", "nombre" : 1}
+            {"titre" : "Partez d'Ottawa", "nombre" : 1},
+            {"titre" : "Bifurquez vers Sutton", "nombre" : 1}, 
+            {"titre" : "Continuez vers Québec", "nombre" : 1}
         ],
         "deA" : ["Montréal", "Sherbrooke"]
     },
@@ -416,9 +479,9 @@
         "varietes" : "Possibilité d'alterner de rives en empruntant un des ponts ou traversiers vers l'Outaouais ou les Laurentides. Il existe aussi une piste cyclable entre Ottawa et St-Eugène (Sentier récréatif de Prescott et Russell), en poussière de pierre (état moyen).",
         "carteURL" : "10/45.5790/-74.9151",
         "ass" : [
-            {"titre" : "titre", "nombre" : 1},
-            {"titre" : "titre", "nombre" : 1}, 
-            {"titre" : "titre", "nombre" : 1}
+            {"titre" : "Explorez le Pontiac", "nombre" : 1},
+            {"titre" : "Retournez par la rive québécoise", "nombre" : 1}, 
+            {"titre" : "Continuez vers Québec", "nombre" : 1}
         ],
         "deA" : ["Ottawa–Gatineau", "Montréal"]
     },
@@ -435,9 +498,9 @@
         "varietes" : "Possibilité de rouler sur l'autre berge de la rivière des Outaouais pour revenir par des routes et le Sentier récréatif de la Vallée de l'Outaouais au sud de Renfrew.",
         "carteURL" : "10/45.8331/-76.6626",
         "ass" : [
-            {"titre" : "titre", "nombre" : 1},
-            {"titre" : "titre", "nombre" : 1}, 
-            {"titre" : "titre", "nombre" : 1}
+            {"titre" : "Partez de Maniwaki", "nombre" : 1},
+            {"titre" : "Explorez le Pontiac", "nombre" : 1}, 
+            {"titre" : "Retournez par la rive ontarienne", "nombre" : 1}
         ],
         "deA" : ["Pembroke", "Gatineau–Ottawa"]
     },
@@ -457,9 +520,9 @@
         "varietes" : "À Fossambault-sur-le-Lac, il est possible de quitter la véloroute pour aller chercher une autre piste cyclable à Ste-Catherine-de-la-Jacques-Cartier en direction de Pont-Rouge et ainsi faire une boucle avec le Chemin du Roy.",
         "carteURL" : "10/46.8968/-71.8039",
         "ass" : [
-            {"titre" : "titre", "nombre" : 1},
-            {"titre" : "titre", "nombre" : 1}, 
-            {"titre" : "titre", "nombre" : 1}
+            {"titre" : "Partez de Shawinigan", "nombre" : 1},
+            {"titre" : "Retournez à Montréal", "nombre" : 1}, 
+            {"titre" : "Continuez vers la Beauce", "nombre" : 1}
         ],
         "deA" : ["Rivière-à-Pierre", "Québec"]
     },
@@ -479,9 +542,9 @@
         "varietes" : "Passer soit par Belleville ou le comté du Prince-Édouard, traverser l'ile Howe par les deux traversiers.",
         "carteURL" : "10/44.3312/-76.2389",
         "ass" : [
-            {"titre" : "titre", "nombre" : 1},
-            {"titre" : "titre", "nombre" : 1}, 
-            {"titre" : "titre", "nombre" : 1}
+            {"titre" : "Contournez Montréal par le sud", "nombre" : 1},
+            {"titre" : "Restez en Ontario", "nombre" : 1}, 
+            {"titre" : "Longez le fleuve à vélo", "nombre" : 1}
         ],
         "deA" : ["Toronto", "Montréal"]
     },
@@ -497,9 +560,9 @@
         "notes" : "La portion entre Sherbrooke (Bromptonville) et Richmond est officiellement fermée. Le détour se fait par St-François-Xavier-de-Brompton. Voir la carte de la Route verte.",
         "carteURL" : "10/46.1998/-71.8375",
         "ass" : [
-            {"titre" : "titre", "nombre" : 1},
-            {"titre" : "titre", "nombre" : 1}, 
-            {"titre" : "titre", "nombre" : 1}
+            {"titre" : "Partez de Montréal ou Granby", "nombre" : 1},
+            {"titre" : "Tournez vers Bellechasse", "nombre" : 1}, 
+            {"titre" : "Continuez vers le Bas-du-Fleuve", "nombre" : 1}
         ],
         "deA" : ["Sherbrooke", "Lévis"]
     },
@@ -519,9 +582,9 @@
         "varietes" : "Possibilité de rouler sur l'autre berge du lac Témiscouata en empruntant deux traversiers.",
         "carteURL" : "10/47.5677/-68.7016",
         "ass" : [
-            {"titre" : "titre", "nombre" : 1},
-            {"titre" : "titre", "nombre" : 1}, 
-            {"titre" : "titre", "nombre" : 1}
+            {"titre" : "Partez de Saguenay", "nombre" : 1},
+            {"titre" : "Traversez vers Charlevoix", "nombre" : 1}, 
+            {"titre" : "Continuez vers Rimouski", "nombre" : 1}
         ],
         "deA" : ["Rivière-du-Loup", "Edmundston"]
     },
@@ -539,9 +602,9 @@
         "varietes" : "Il y a un intéressant parcours plus direct entre Notre-Dame-du-Mont-Carmel et Trois-Rivières passant par le secteur St-Louis-de-France, qui se fait principalement par piste cyclable.",
         "carteURL" : "10/46.4587/-72.6739",
         "ass" : [
-            {"titre" : "titre", "nombre" : 1},
-            {"titre" : "titre", "nombre" : 1}, 
-            {"titre" : "titre", "nombre" : 1}
+            {"titre" : "Partez dans la Mauricie profonde", "nombre" : 1},
+            {"titre" : "Traversez vers le Centre-du-Québec", "nombre" : 1}, 
+            {"titre" : "Continuez vers Québec", "nombre" : 1}
         ],
         "deA" : ["Shawinigan", "Trois-Rivières"]
     },
@@ -558,9 +621,9 @@
         "varietes" : "Quoique le Parc de la Gatineau offre une multitude de sentiers et de routes pour rallier la Véloroute des Draveurs à Gatineau, il est possible de prendre le Chemin de la Rivière et la Route 105 pour un accès plus direct et plus facile.",
         "carteURL" : "10/46.0970/-76.0604",
         "ass" : [
-            {"titre" : "titre", "nombre" : 1},
-            {"titre" : "titre", "nombre" : 1}, 
-            {"titre" : "titre", "nombre" : 1}
+            {"titre" : "Partez de l'Abitibi", "nombre" : 1},
+            {"titre" : "Poursuivez en Outaouais", "nombre" : 1}, 
+            {"titre" : "Entrez en Ontario", "nombre" : 1}
         ],
         "deA" : ["Grand-Remous", "Gatineau–Ottawa"]
     }

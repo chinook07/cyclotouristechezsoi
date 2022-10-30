@@ -7,7 +7,6 @@ import { faCircleXmark } from "@fortawesome/free-regular-svg-icons";
 const Zoom = ({ fermerZoom, photoPrec, photoSuiv, tousPhotos, diapo }) => {
 
     const clavier = (e) => {
-        console.log(e);
         if (e.which === 27) fermerZoom();
         if (e.which === 37) photoPrec();
         if (e.which === 39) photoSuiv();
@@ -22,23 +21,26 @@ const Zoom = ({ fermerZoom, photoPrec, photoSuiv, tousPhotos, diapo }) => {
                 <FontAwesomeIcon icon={faCircleXmark} size="3x" />
             </button>
             <Caroussel>
-                <FontAwesomeIcon icon={faBackwardStep} onClick={photoPrec} size="2x" />
+                <FontAwesomeIcon icon={faBackwardStep} onClick={photoPrec} />
                 <figure>
-                    <img src={tousPhotos[diapo - 1].lien} alt={tousPhotos[diapo - 1].description} />
+                    <img
+                        src={tousPhotos[diapo - 1].lien}
+                        alt={tousPhotos[diapo - 1].description}
+                    />
                     <figcaption>{tousPhotos[diapo - 1].description}</figcaption>
                     {
                         tousPhotos[diapo - 1].description === undefined &&
                         <figcaption>À venir...</figcaption>
                     }
                 </figure>
-                <FontAwesomeIcon icon={faForwardStep} onClick={photoSuiv} size="2x" />
+                <FontAwesomeIcon icon={faForwardStep} onClick={photoSuiv} />
             </Caroussel>
         </Wrapper>
     )
 }
 
 const Wrapper = styled.div`
-    background-color: var(--c5);
+    background-color: var(--c6);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -70,17 +72,21 @@ const Caroussel = styled.div`
     justify-content: center;
     position: relative;
     > svg {
+        background-color: #ffffff88;
+        border-radius: 50%;
         cursor: pointer;
+        height: 30px;
+        padding: 5px;
         position: absolute;
         top: 50%;
-        transform: translateY(-50%);
+        width: 30px;
         &:first-child {
             left: 5%;
-            transform: translateX(-50%);
+            transform: translate(-50%, -50%);
         }
         &:last-child {
             left: 95%;
-            transform: translateX(-50%);
+            transform: translate(-50%, -50%);
         }
     }
     figure {
