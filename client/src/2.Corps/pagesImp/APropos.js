@@ -6,7 +6,7 @@ import auteur from "./images/auteur.jpg"
 
 const APropos = () => {
     return (
-        <Wrapper>
+        <>
             <h2>Qui est l'auteur de ce site web?</h2>
             <div>
                 <div>
@@ -36,11 +36,9 @@ const APropos = () => {
                 <h3>Vous avez besoin d'un site web comme celui-ci?</h3>
                 <p>N'hésitez pas à <Link to="/contact">me contacter</Link> pour voir si je peux vous aider à réaliser votre projet. J'ai bâti ce site web par moi-même en apprenant des langues de programmation, d'abord en HTML/CSS/JavaScript, puis en React.js. Il me fera plaisir de trouver <ExternalLink href="https://www.linkedin.com/in/nicolazoghbi/">un autre défi</ExternalLink> à surmonter!</p>
             </div>
-        </Wrapper>
+        </>
     )
 }
-
-const Wrapper = styled.div``
 
 const PhotoAuteur = styled.figure`
     margin: 1em auto;

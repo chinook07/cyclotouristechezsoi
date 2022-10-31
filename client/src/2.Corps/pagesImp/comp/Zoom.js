@@ -17,23 +17,37 @@ const Zoom = ({ fermerZoom, photoPrec, photoSuiv, tousPhotos, diapo }) => {
 
     return (
         <Wrapper>
-            <button onClick={fermerZoom}>
+            <Echapper onClick={fermerZoom}>
                 <FontAwesomeIcon icon={faCircleXmark} size="3x" />
-            </button>
+            </Echapper>
             <Caroussel>
-                <FontAwesomeIcon icon={faBackwardStep} onClick={photoPrec} />
+                <FontAwesomeIcon
+                    aria-label="image précédente"
+                    icon={faBackwardStep}
+                    onClick={photoPrec}
+                    role="navigation"
+                />
                 <figure>
-                    <img
-                        src={tousPhotos[diapo - 1].lien}
-                        alt={tousPhotos[diapo - 1].description}
-                    />
+                    <ImageEtNav role="img">
+                        <button onClick={photoPrec} />
+                        <img
+                            src={tousPhotos[diapo - 1].lien}
+                            alt={tousPhotos[diapo - 1].description}
+                        />
+                        <button onClick={photoSuiv} />
+                    </ImageEtNav>
                     <figcaption>{tousPhotos[diapo - 1].description}</figcaption>
                     {
                         tousPhotos[diapo - 1].description === undefined &&
                         <figcaption>À venir...</figcaption>
                     }
                 </figure>
-                <FontAwesomeIcon icon={faForwardStep} onClick={photoSuiv} />
+                <FontAwesomeIcon
+                    aria-label="image suivante"
+                    icon={faForwardStep}
+                    onClick={photoSuiv}
+                    role="navigation"
+                />
             </Caroussel>
         </Wrapper>
     )
@@ -52,17 +66,18 @@ const Wrapper = styled.div`
     transform: translateX(-50%);
     width: 75%;
     z-index: 2;
-    button {
-        background: none;
-        border: none;
-        cursor: pointer;
-        height: 60px;
-        margin: 0 auto;
-        width: 70px;
-    }
     @media screen and (max-width : 600px) {
         width: 88%;
     }
+`
+
+const Echapper = styled.button`
+    background: none;
+    border: none;
+    cursor: pointer;
+    height: 60px;
+    margin: 0 auto;
+    width: 70px;
 `
 
 const Caroussel = styled.div`
@@ -83,6 +98,7 @@ const Caroussel = styled.div`
         &:first-child {
             left: 5%;
             transform: translate(-50%, -50%);
+            z-index: 1;
         }
         &:last-child {
             left: 95%;
@@ -95,16 +111,31 @@ const Caroussel = styled.div`
         flex-direction: column;
         margin: 10px;
         max-height: 100%;
-        img {
-            max-height: 80vh;
-            width: 100%;
-        }
     }
     @media screen and (max-width : 600px) {
         flex-direction: column;
         figure {
             margin: 10px 0;
         }
+    }
+`
+
+const ImageEtNav = styled.div`
+    max-height: 80vh;
+    position: relative;
+    width: 100%;
+    button {
+        opacity: 0;
+        position: absolute;
+        height: 100%;
+        width: 40%;
+        &:last-of-type {
+            right: 0;
+        }
+    }
+    img {
+        max-height: 80vh;
+        width: 100%;
     }
 `
 

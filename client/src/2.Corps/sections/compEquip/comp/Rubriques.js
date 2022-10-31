@@ -10,7 +10,7 @@ const Rubriques = ({ montrerRubrique }) => {
     const images = Object.values(ImaEquip);
     
     return (
-        <Wrapper>
+        <>
             {
                 montrerRubrique === 0 &&
                 <Rubrique>
@@ -402,11 +402,9 @@ const Rubriques = ({ montrerRubrique }) => {
                         </div>
                 </Rubrique>
             }
-        </Wrapper>
+        </>
     )
 }
-
-const Wrapper = styled.div``
 
 const Rubrique = styled.div`
     h2 {

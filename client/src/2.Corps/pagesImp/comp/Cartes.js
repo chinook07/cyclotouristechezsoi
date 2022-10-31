@@ -20,9 +20,20 @@ const Wrapper = styled.div`
     margin: 0 auto;
     max-width: 900px;
     position: relative;
+    transition: all 0.3s;
     width: 80%;
+    @media (prefers-reduced-motion) {
+        transition: none;
+    }
     p {
         text-align: center;
+    }
+    &:hover {
+        transition: all 0.3s;
+        width: 100%;
+        @media (prefers-reduced-motion) {
+            transition: none;
+        }
     }
 `
 
@@ -41,6 +52,9 @@ const Carte2 = styled.div`
     top: 43%;
     transition: all 0.3s;
     width: 37%;
+    @media (prefers-reduced-motion) {
+        transition: none;
+    }
     img {
         box-shadow: var(--c5) 5px 5px 5px 5px;
         opacity: 0;
@@ -50,6 +64,9 @@ const Carte2 = styled.div`
         opacity: 1;
         transition: 0.3s;
         transform: scale(2.2) translate(4%, -21%);
+        @media (prefers-reduced-motion) {
+            transition: none;
+        }
     }
 `
 

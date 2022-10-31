@@ -42,10 +42,16 @@ const Wrapper = styled.div`
         text-align: center;
         transition: 0.3s all;
         width: calc(100% / 6);
+        @media (prefers-reduced-motion) {
+            transition: none;
+        }
         &:hover {
             background-color: var(--c6);
             border-color: var(--c4);
             transition: 0.3s all;
+            @media (prefers-reduced-motion) {
+                transition: none;
+            }
         }
         @media screen and (max-width: 500px) {
             width: 40%

@@ -28,9 +28,15 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: space-evenly;
     transition: 0.2s all;
+    @media (prefers-reduced-motion) {
+        transition: none;
+    }
     &:hover {
         transition: 0.2s all;
         transform: scale(1.05);
+        @media (prefers-reduced-motion) {
+            transition: none;
+        }
     }
     img {
         border-radius: 10px;

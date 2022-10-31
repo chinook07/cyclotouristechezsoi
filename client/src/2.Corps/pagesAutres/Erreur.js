@@ -9,6 +9,7 @@ import img4 from "./images/404/Varennes-inonde.jpg";
 const Erreur = () => {
 
     const images404 = [img1, img2, img3, img4];
+    const alt404 = ["boite de vélo déchiré, guidon qui ressort de la boite", "piste cyclable barrée", "pont en bois avec barrière, vélo d'un bord et les sacoches de l'autres", "arbre et piste cyclable inondés"]
 
     const retour = () => window.history.back();
 
@@ -18,7 +19,7 @@ const Erreur = () => {
                 {
                     images404.map((item, index) => {
                         return (
-                            <img key={index} src={item} />
+                            <img key={index} src={item} alt={alt404[index]} />
                         )
                     })
                 }

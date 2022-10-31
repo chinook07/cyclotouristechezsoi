@@ -1,9 +1,8 @@
-import styled from "styled-components";
 import { ExternalLink } from "react-external-link";
 
 const Limitations = () => {
     return (
-        <Wrapper>
+        <>
             <div>
                 <h1>Cyclotouriste chez soi</h1>
                 <p>Cyclotouristechezsoi.ca est une idée originale lancée en 2020 pour promouvoir le cyclotourisme, rendant accessible l'information utile ou nécessaire pour les voyageurs à vélo au Québec et ailleurs.</p>
@@ -16,10 +15,8 @@ const Limitations = () => {
                 <h2>Responsabilité de l'auteur</h2>
                 <p>L'auteur décline toute responsabilité en cas d'erreur sur ce site web, out tout autre problème se déroulant lors de la planification ou la réalisation d'un voyage à vélo. Le cyclotourisme contient des risques (et beaucoup de bonheur) et cela importe au voyageur de connaitre ses limites.</p>
             </div>
-        </Wrapper>
+        </>
     )
 }
-
-const Wrapper = styled.div``
 
 export default Limitations;

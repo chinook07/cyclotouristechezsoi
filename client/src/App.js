@@ -9,17 +9,15 @@ import Pied from "./3.Pied/Pied";
 const App = () => {
     
     return (
-        <Wrapper>
+        <>
             <GlobalStyles />
             <BrowserRouter>
                 <Entete />
                 <Corps />
                 <Pied />
             </BrowserRouter>
-        </Wrapper>
+        </>
     );
 }
-
-const Wrapper = styled.div``
 
 export default App;

@@ -142,9 +142,15 @@ const GalerieComplete = styled.div`
         object-fit: cover;
         transition: transform 0.2s;
         width: 120px;
+        @media (prefers-reduced-motion) {
+            transition: none;
+        }
         &:hover {
             transform: scale(1.6);
             transition: transform 0.2s;
+            @media (prefers-reduced-motion) {
+                transition: none;
+            }
         }
     }
     @media screen and (max-width: 500px) {
