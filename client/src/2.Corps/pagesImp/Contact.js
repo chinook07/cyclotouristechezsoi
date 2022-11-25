@@ -42,13 +42,12 @@ const Contact = () => {
                 rows="10"
                 required
             />
-            <Emplacement
-                id="locale"
-                name="locale"
-                aria-label="Pays ou région d'origine"
-            >
+            <Emplacement>
                 <label htmlFor="locale">Emplacement</label>
-                <select>
+                <select
+                    id="locale"
+                    name="locale"
+                    aria-label="Pays ou région d'origine">
                     {
                         regions.map((item, index) => {
                             return <option key={index} value={item}>{item}</option>

@@ -131,10 +131,8 @@ const CarteCampings = () => {
                     }
                 </LayersControl.Overlay>
             </LayersControl>
-            
-            <ScaleControl imperial={false} position="topright"></ScaleControl>
+            <ScaleControl imperial={false} position="topright" />
             <LocationControl />
-            
         </Carte>
     )
 }

@@ -25,7 +25,7 @@ const Recto = ({ item, index }) => {
 }
 
 const Wrapper = styled.div`
-    background-color: var(--c3);
+    background-color: var(--c5);
     border-radius: 5px;
     color: var(--c11);
     height: 100%;
@@ -49,8 +49,9 @@ const Intro = styled.div`
     justify-content: space-between;
 `
 
-const Titre = styled.div`
+const Titre = styled.h3`
     font-size: larger;
+    font-weight: normal;
     margin: 25px 20px 0;
 `
 

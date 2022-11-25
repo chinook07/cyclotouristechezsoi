@@ -40,7 +40,6 @@ const Liste = ({ bagages, camping, packThis }) => {
                                         }
                                     })
                                 }
-                                
                             </div>
                         </Categorie>
                     )

@@ -104,6 +104,8 @@ const FormAjout = () => {
 
 const Wrapper = styled.form`
     fieldset {
+        border: none;
+        border-radius: 5px;
         legend {
             background-color: var(--c6);
             border-radius: 5px;

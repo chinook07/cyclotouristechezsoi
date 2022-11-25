@@ -37,6 +37,7 @@ const Stats2 = () => {
 
 const Wrapper = styled.div`
     background-color: var(--c3);
+    border-radius: 5px;
     color: var(--c1);
     display: flex;
     justify-content: space-evenly;

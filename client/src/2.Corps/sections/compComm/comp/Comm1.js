@@ -49,6 +49,9 @@ const Comm1 = ({boiteOuverte, setBoiteOuverte}) => {
     return (
         <Wrapper>
             <h2>Concevoir un plan</h2>
+            <ul>
+                <li>ajouter ici</li>
+            </ul>
             <Boite>
                 <h3 onClick={() => ouvrirFermer(0)}>
                     <span>Choisir son style d'aventure</span>

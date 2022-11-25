@@ -16,7 +16,7 @@ const APropos = () => {
                     <p>Nicola Z.</p>
                 </div>
                 <PhotoAuteur>
-                    <img src={auteur} alt=""></img>
+                    <img src={auteur} alt="auteur du site avec un drapeau acadien au fond"></img>
                     <figcaption>L'auteur de ce site web lors de sa traversée de l'Acadie en 2022.</figcaption>
                 </PhotoAuteur>
             </div>
@@ -25,7 +25,7 @@ const APropos = () => {
                 <p>Alors que l'engouement pour le vélo se fait sentir de plus en plus, votre association ou votre entreprise pourrait profiter de cette tendance, là pour rester. Que ça soit pour la rédaction d'un article ou une conférence à vos employés, je vous invite à <Link to="/contact">me contacter</Link> pour discuter des possibilités.</p>
                 <p>Expérience à ce jour :</p>
                 <ul>
-                    <li>Deux textes à venir dans le livre <ExternalLink href="https://www.guidesulysse.com/catalogue/Randonnees-a-velo-Amerique-du-Nord-50-itineraires-de-reve-Itineraires-de-reve-Ulysse,9782765860853,produit.html">Randonnées à vélo Amérique du Nord - 50 itinéraires de rêve</ExternalLink>. Publication prévue en mars 2023.</li>
+                    <li>Deux textes à venir dans le livre <ExternalLink href="https://www.guidesulysse.com/catalogue/Randonnees-a-velo-Amerique-du-Nord-50-itineraires-de-reve-Itineraires-de-reve-Ulysse,9782765860853,produit.html">Randonnées à vélo Amérique du Nord - 50 itinéraires de rêve</ExternalLink>. Publication prévue en avril 2023 (édition numérique en décembre 2022).</li>
                     <li>Deux articles de blogue en collaboration avec Tourisme Montérégie suite à un séjour <ExternalLink href="https://www.tourisme-monteregie.qc.ca/une-viree-a-velo-juste-parfaite-dans-le-suroit/?season=summer">dans Suroît</ExternalLink> et un autre <ExternalLink href="https://www.tourisme-monteregie.qc.ca/sejour-a-velo-pour-admirer-les-couleurs-de-lautomne/?season=fall">dans le nord-est de la région</ExternalLink> en 2020.</li>
                     <li>Fait parti du comité organisateur du <ExternalLink href="https://www.facebook.com/events/parc-maisonneuve/v%C3%A9lo-sur-glace-2020-forum-v%C3%A9lo-dhiver/439723316683787/">Forum du vélo d'hiver 2020</ExternalLink>.</li>
                     <li>Miniconférences données au Salon du vélo de Montréal en 2018, avec Vélo Québec.</li>

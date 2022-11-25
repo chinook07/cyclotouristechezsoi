@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { ExternalLink } from "react-external-link";
 
 import Carrousel from "./comp/Caroussel";

@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { ExternalLink } from "react-external-link";
 import { useState } from "react";
 
-import indexVilles from "./donnees/indexVilles.json";
-import trajets from "./donnees/trajets.json";
+// import indexVilles from "./donnees/indexVilles.json";
+// import trajets from "./donnees/trajets.json";
 import Recherche from "./comp/Recherche";
 import Resultats from "./comp/Resultats";
 import Possibilites from "./comp/Possibilites";

@@ -1,19 +1,9 @@
 import styled from "styled-components";
 import { ExternalLink } from "react-external-link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { faPlay, faMapSigns, faSuitcase, faTrain } from "@fortawesome/free-solid-svg-icons";
 import blogue from "../donnees/blogue.json"
-import img01 from "../images/navAccueil/pont-cambellton.jpg";
-import img02 from "../images/navAccueil/temiscouata.png";
-import img03 from "../images/navAccueil/outils.jpg";
-import img04 from "../images/navAccueil/velo-dans-train.jpg";
-
 
 const NavBlogue = () => {
-
-    const icones = [faPlay, faMapSigns, faSuitcase, faTrain]
-    const images = [img01, img02, img03, img04]
 
     return (
         <Wrapper>

@@ -9,7 +9,7 @@ const ListePers = () => {
     const [bagagesPers, setBagagesPers] = useState([]);
     const [entreePers, setEntreePers] = useState("");
     const [persPacked, setPersPacked] = useState([]);
-    const [f5, setF5] = useState(0);
+    // const [f5, setF5] = useState(0);
 
     useEffect(() => {
         const enMemoirePers = localStorage.getItem("pers");
