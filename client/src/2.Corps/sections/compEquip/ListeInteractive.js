@@ -63,7 +63,7 @@ const ListeInteractive = () => {
                             : { fond: "--c1", coul: "--c6" }
                     }
                 >
-                    <div>En tente</div>
+                    <p>En tente</p>
                     <FontAwesomeIcon icon={faCampground} />
                 </BoutonPanneau>
                 <BoutonPanneau
@@ -74,7 +74,7 @@ const ListeInteractive = () => {
                             : { fond: "--c6", coul: "--c1" }
                     }
                 >
-                    <div>Dans un lit</div>
+                    <p>Dans un lit</p>
                     <FontAwesomeIcon icon={faBed} />
                 </BoutonPanneau>
             </Panneau>
@@ -94,7 +94,7 @@ const ListeInteractive = () => {
 
 const Wrapper = styled.div``
 
-const Profil = styled.div`
+const Profil = styled.p`
     margin: 20px auto;
     text-align: center;
 `
@@ -113,6 +113,9 @@ const BoutonPanneau = styled.button`
     margin: 5px;
     padding: 10px;
     transition: all 0.5s;
+    p {
+        margin: 5px;
+    }
     &:hover {
         background-color: var(--c3);
     }

@@ -57,7 +57,7 @@ const Trajets = () => {
 
 const Wrapper = styled.div``;
 
-const Selectionnez = styled.div`
+const Selectionnez = styled.form`
 	display: flex;
 	flex-direction: column;
 	margin: 15px auto;

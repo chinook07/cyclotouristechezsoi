@@ -1,74 +1,32 @@
-import styled from "styled-components";
+// import styled from "styled-components";
 import { useState } from "react";
+import { create, FilePond, registerPlugin } from 'react-filepond';
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+import 'filepond/dist/filepond.min.css';
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 
-import Upload from "rc-upload";
-import { Line } from "rc-progress";
+registerPlugin(FilePondPluginImagePreview);
 
 const TelevPhotos = () => {
 
-    const [imgData, setImgdata] = useState();
-    const [fileName, setFileName] = useState();
-    const [fileSize, setFileSize] = useState();
-    const [percentage, setPercentage] = useState(0);
-    const [isUploading, setIsUploading] = useState(false);
+    const [photos, setPhotos] = useState([])
 
-    const props = {
-        action: "https://httpbin.org/post",
-        accept: ".png, .jpg, .jpeg",
-        beforeUpload(file) {
-            // Start upload
-            setIsUploading(true);
-            // Set file details
-            setFileName(file.name);
-            setFileSize(Math.floor(file.size / 1000));
-            // Display image for .png format
-            if (file.type === "image/png" || file.type === "image/jpg") {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setImgdata(reader.result);
-            };
-            reader.readAsDataURL(file);
-            }
-        },
-        onSuccess() {
-            // Finish upload
-            setIsUploading(false);
-        },
-        onProgress(step) {
-            // Update progress
-            setPercentage(Math.round(step.percent));
-        },
-        onError(err) {
-            console.log("onError", err);
-        }
-    };
+    const handle = (e) => {
+        console.log(e);
+        setPhotos(photos)
+    }
 
     return (
-        <Wrapper>
-            {/* <div>Instructions</div>
-            <input type="file" multiple />
-             */}
-            <Upload {...props}>
-                <div>Téléverser</div>
-            </Upload>
-            <Line
-                percent={percentage}
-                strokeWidth={9}
-                trailWidth={9}
-                trailColor="#FFF"
-                strokeColor={isUploading ? "#41C3D2" : "#92ed14"}
-            />
-            {
-                imgData &&
-                <div>
-                    <img src={imgData} alt="uploaded" width="250" />
-                </div>
-            }
-            <div>{isUploading ? `Téléversement : ${percentage} %` : "Terminé"}</div>
-        </Wrapper>
+        <FilePond
+            allowMultiple={true}
+            files={photos}
+            onupdatefiles={handle}
+            name="photo"
+            labelIdle="Glissez vos fichiers ici ou <span class='filepond--label-action'>parcourir</span>"
+        ></FilePond>
     )
 }
 
-const Wrapper = styled.div``
+// const Wrapper = styled.div``
 
 export default TelevPhotos;

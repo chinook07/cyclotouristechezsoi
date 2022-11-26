@@ -59,10 +59,10 @@ const ListePers = () => {
     return (
         <Wrapper>
             <Controle>
-                <h3>
+                <h2>
                     <FontAwesomeIcon icon={faList} />
                     <span> Liste personnalisée</span>
-                </h3>
+                </h2>
                 <button onClick={viderListePers} aria-label="vider liste personnalisée">
                     <FontAwesomeIcon icon={faTrash} />
                 </button>
@@ -107,9 +107,6 @@ const ListePers = () => {
                     />
                 </form>
             </Reste>
-                    
-            
-            
         </Wrapper>
     )
 }
@@ -118,8 +115,10 @@ const Wrapper = styled.div``
 
 const Controle = styled.div`
     align-items: center;
-    
     display: flex;
+    h2 {
+        font-size: 19px;
+    }
     > button {
         margin-left: 10px;
         padding: 5px 10px;

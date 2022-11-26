@@ -47,7 +47,7 @@ const Synthese = () => {
                     }
                 </tbody>
             </table>
-            <div>* L'appréciation personnelle est basée sur la partie du trajet ayant été parcourue par l'auteur.</div>
+            <p>* L'appréciation personnelle est basée sur la partie du trajet ayant été parcourue par l'auteur.</p>
         </Wrapper>
     )
 }

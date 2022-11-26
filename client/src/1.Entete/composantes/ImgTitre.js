@@ -18,7 +18,7 @@ const ImgTitre = () => {
 
     if (infosPage) {
         return (
-            <Wrapper>
+            <Wrapper role="banner">
                 <img src={toutesImage[infosPage.photo]} alt={infosPage.alt} />
                 <div>Cyclotouristechezsoi</div>
                     <h1>{infosPage.nom}</h1>

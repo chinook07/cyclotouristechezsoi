@@ -6,7 +6,7 @@ import { faPlay } from "@fortawesome/free-solid-svg-icons";
 
 const FilDArianne = ({racine, choix}) => {
     return (
-        <Wrapper>
+        <Wrapper aria-label="navigation section">
             <NavLink to={`/${racine}/`}>
                 <FontAwesomeIcon icon={faPlay} />
                 <span>Intro</span>
@@ -20,7 +20,7 @@ const FilDArianne = ({racine, choix}) => {
     )
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.nav`
     display: flex;
     justify-content: center;
     margin: 20px 0;
