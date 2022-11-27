@@ -14,7 +14,9 @@ const CalculCarburant = () => {
     }
 
     const choisirCarb = (e) => setCarb(parseInt(e.target.value));
-    const choisirPoids = (e) => setPoids(parseInt(e.target.value));
+    const choisirPoids = (e) => {
+        setPoids(parseInt(e.target.value));
+    };
 
     useEffect(() => {
         if (carb && poids) {
