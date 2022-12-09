@@ -17,22 +17,22 @@ const Verso = ({ item, index }) => {
             </Intro>
             <Titre>{item.titre}</Titre>
             <Diff>
-                <div>Dénivelé positif : {item.denivele}</div>
-                <div>Ratio : {item.ratio}</div>
-                <div>
+                <p>Dénivelé positif : {item.denivele}</p>
+                <p>Ratio : {item.ratio}</p>
+                <p>
                     <span>Difficulté de 1 à 5 : </span>
-                    <div>
+                    <Montagnes>
                         {
                             [...Array(item.difficulte)].map((e, i) => <FaMountain key={i} />)
                         }
-                    </div>
-                </div>
+                    </Montagnes>
+                </p>
             </Diff>
             <VillesTrav>
                 {
                     item.regions
-                        ? <span>Régions traversées :</span>
-                        : <span>Villes traversées :</span>
+                        ? <p>Régions traversées :</p>
+                        : <p>Villes traversées :</p>
                 }
                 <ul>
                     {
@@ -73,18 +73,26 @@ const Wrapper = styled.div`
     }
 `
 
-const Intro = styled.div`
+const Intro = styled.p`
     display: flex;
     justify-content: space-between;
+    margin: 0;
 `
 
-const Titre = styled.div`
+const Titre = styled.p`
     font-size: larger;
     margin: 25px 20px 0;
 `
 
 const Diff = styled.div`
     margin: 20px 20px 0;
+    p {
+        margin: 0;
+    }
+`
+
+const Montagnes = styled.span`
+    display: block;
 `
 
 const VillesTrav = styled.div`

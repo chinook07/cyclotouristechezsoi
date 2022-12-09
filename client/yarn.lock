@@ -6310,7 +6310,14 @@
   optionalDependencies:
     "open-location-code" "^1.0.0"
 
-"leaflet@^1.6.0", "leaflet@^1.8.0":
+"leaflet-easybutton@^2.4.0":
+  "integrity" "sha512-O+qsQq4zTF6ds8VClnytobTH/MKalctlPpiA8L+bNKHP14J3lgJpvEd/jSpq9mHTI6qOzRAvbQX6wS6qNwThvg=="
+  "resolved" "https://registry.npmjs.org/leaflet-easybutton/-/leaflet-easybutton-2.4.0.tgz"
+  "version" "2.4.0"
+  dependencies:
+    "leaflet" "^1.0.1"
+
+"leaflet@^1.0.1", "leaflet@^1.6.0", "leaflet@^1.8.0":
   "integrity" "sha512-gwhMjFCQiYs3x/Sf+d49f10ERXaEFCPr+nVTryhAW8DWbMGqJqt9G4XuIaHmFW08zYvhgdzqXGr8AlW8v8dQkA=="
   "resolved" "https://registry.npmjs.org/leaflet/-/leaflet-1.8.0.tgz"
   "version" "1.8.0"

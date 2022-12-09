@@ -20,15 +20,15 @@ const TrCoucherAR = ({item}) => {
         <Wrapper>
             {
                 item.alle &&
-                <div>
+                <p>
                         <FontAwesomeIcon icon={afficher[item.alle]} />
                         <span>Allé et rentré en {item.alle}</span>
-                </div>
+                </p>
             }
-            <div>
+            <p>
                 <FontAwesomeIcon icon={afficher[item.coucher]} />
                 <span>Couché sous {item.coucher}</span>
-            </div>
+            </p>
         </Wrapper>
     )
 }
@@ -36,8 +36,11 @@ const TrCoucherAR = ({item}) => {
 const Wrapper = styled.div`
     font-size: small;
     margin: 15px 20px;
-    svg {
-        margin-right: 4px;
+    p {
+        margin: 0;
+        svg {
+            margin-right: 4px;
+        }
     }
 `
 

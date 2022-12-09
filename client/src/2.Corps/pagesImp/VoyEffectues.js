@@ -28,7 +28,7 @@ const VoyEffectues = () => {
                 <H2e>Galerie d'images<FontAwesomeIcon icon={faImages} /></H2e>
                 {
                     !montrerGal
-                    && <Galerie montrerGal={montrerGal} setMontrerGal={setMontrerGal} />
+                    && <Galerie setMontrerGal={setMontrerGal} />
                 }
                 {
                     montrerGal

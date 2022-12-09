@@ -23,17 +23,21 @@ const Galerie = ({ montrerGal, setMontrerGal }) => {
     )
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.button`
+    background: none;
+    border: none;
     cursor: pointer;
     display: flex;
+    gap: 5px;
     justify-content: space-evenly;
     transition: 0.2s all;
+    width: 100%;
     @media (prefers-reduced-motion) {
         transition: none;
     }
     &:hover {
         transition: 0.2s all;
-        transform: scale(1.05);
+        transform: scale(1.02);
         @media (prefers-reduced-motion) {
             transition: none;
         }
@@ -41,7 +45,7 @@ const Wrapper = styled.div`
     img {
         border-radius: 10px;
         height: 100px;
-        width: 15%;
+        width: 20%;
         object-fit: cover;
     }
 `

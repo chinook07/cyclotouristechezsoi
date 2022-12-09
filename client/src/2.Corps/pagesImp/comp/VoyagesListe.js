@@ -15,7 +15,7 @@ const VoyagesListe = () => {
     }
 
     return (
-        <Wrapper>
+        <div>
             <Panneau>
                 <button
                     className={catAMontrer === "tout" ? "active" : "false"}
@@ -72,12 +72,9 @@ const VoyagesListe = () => {
                 }
             </Voyages>
             
-        </Wrapper>
+        </div>
     )
 }
-
-const Wrapper = styled.div`
-`
 
 const Panneau = styled.div`
     display: flex;

@@ -12,8 +12,8 @@ const Recto = ({ item, index }) => {
             </Intro>
             <Titre>{item.titre}</Titre>
             <Desc>
-                <div>{item.date}</div>
-                <div>{item.anecdote}</div>
+                <p>{item.date}</p>
+                <p>{item.anecdote}</p>
             </Desc>
             {
                 item.note &&
@@ -44,9 +44,10 @@ const Wrapper = styled.div`
     }
 `
 
-const Intro = styled.div`
+const Intro = styled.p`
     display: flex;
     justify-content: space-between;
+    margin: 0;
 `
 
 const Titre = styled.h3`
@@ -57,9 +58,12 @@ const Titre = styled.h3`
 
 const Desc = styled.div`
     margin: 20px 20px 0;
+    p {
+        margin: 0;
+    }
 `
 
-const Details = styled.div`
+const Details = styled.p`
     font-size: small;
     margin: 15px 20px;
 `

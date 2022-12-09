@@ -62,10 +62,7 @@ const CarteCampings = () => {
     useEffect(() => {
         fetch("/api/tous-sites")
             .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                rendreCompatible(data.collection)
-            })
+            .then(donnees => rendreCompatible(donnees.collection))
     }, [])
 
     const LocationControl = () => {

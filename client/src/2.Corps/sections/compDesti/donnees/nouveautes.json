@@ -1,29 +1,29 @@
 [
     {
-        "region" : "Portneuf",
-        "lienRegion" : "portneuf",
-        "couleur" : "#4545bb",
-        "texte" : "blablabla",
-        "lien" : "gregregrere",
-        "url" : "wwwwwwww",
-        "complet" : true
+        "region": "Portneuf",
+        "lienRegion": "portneuf",
+        "couleur": "#4545bb",
+        "texte": "Sept sites de camping rustique ont été établis le long de la Vélopiste Jacques-Cartier / Portneuf. Il faut réserver à l'avance.",
+        "lien": "gregregrere",
+        "url": "wwwwwwww",
+        "complet": true
     },
     {
-        "region" : "Bas-Saint-Laurent",
-        "lienRegion" : "portneuf",
-        "couleur" : "#4545bb",
-        "texte" : "blablabla",
-        "lien" : "gregregrere",
-        "url" : "wwwwwwww",
-        "complet" : true
+        "region": "Bas-Saint-Laurent",
+        "lienRegion": "portneuf",
+        "couleur": "#4545bb",
+        "texte": "blablabla",
+        "lien": "gregregrere",
+        "url": "wwwwwwww",
+        "complet": true
     },
     {
-        "region" : "Beauce",
-        "lienRegion" : "portneuf",
-        "couleur" : "#4545bb",
-        "texte" : "blablabla",
-        "lien" : "gregregrere",
-        "url" : "wwwwwwww",
-        "complet" : false
+        "region": "Beauce",
+        "lienRegion": "portneuf",
+        "couleur": "#4545bb",
+        "texte": "blablabla",
+        "lien": "gregregrere",
+        "url": "wwwwwwww",
+        "complet": false
     }
 ]

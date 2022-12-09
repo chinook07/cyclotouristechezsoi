@@ -74,6 +74,7 @@ const Wrapper = styled.div`
 const Echapper = styled.button`
     background: none;
     border: none;
+    color: var(--c11);
     cursor: pointer;
     height: 60px;
     margin: 0 auto;
@@ -111,6 +112,10 @@ const Caroussel = styled.div`
         flex-direction: column;
         margin: 10px;
         max-height: 100%;
+        figcaption {
+            color: var(--c11);
+            font-size: 15px;
+        }
     }
     @media screen and (max-width : 600px) {
         flex-direction: column;
@@ -134,6 +139,7 @@ const ImageEtNav = styled.div`
         }
     }
     img {
+        border-radius: 5px;
         max-height: 80vh;
         width: 100%;
     }
