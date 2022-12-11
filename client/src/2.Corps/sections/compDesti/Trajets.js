@@ -7,17 +7,15 @@ import { CycloContext } from "../../../CycloContext";
 
 const Trajets = () => {
 	const { trajetRedig, setTrajetRedig } = useContext(CycloContext);
-
 	const [trajetChoisi, setTrajetChoisi] = useState();
-	const [trajetSelect, setTrajetSelect] = useState();
 
 	useEffect(() => {
 		if (trajetRedig.id) {
 			setTrajetChoisi(
 				trajetsDB.find((item) => item.id === trajetRedig.id).trajet
 			);
-			setTrajetRedig({});
-			setTrajetSelect(trajetRedig.trajet);
+            setTrajetRedig({});
+            window.scrollTo(0, 0);
 		} else {
 			setTrajetChoisi(trajetsDB[0].trajet);
 		}
@@ -26,7 +24,8 @@ const Trajets = () => {
 	const choisirTrajet = (e) => setTrajetChoisi(e.target.value);
 
 	const changerTrajet = (nouveau) => {
-		setTrajetChoisi(trajetsDB.find((item) => item.id === nouveau).trajet);
+        setTrajetChoisi(trajetsDB.find((item) => item.id === nouveau).trajet);
+        window.scrollTo(0, 400);
 	};
 
 	return (
@@ -38,7 +37,7 @@ const Trajets = () => {
 				<select
 					id="selecteurDeTrajet"
 					onChange={choisirTrajet}
-					value={trajetSelect}
+					value={trajetChoisi}
 				>
 					{trajetsDB.map((item, index) => {
 						return <option key={index}>{item.trajet}</option>;

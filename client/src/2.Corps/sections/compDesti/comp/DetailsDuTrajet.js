@@ -96,7 +96,7 @@ const Wrapper = styled.div`
 `;
 
 const Schema = styled.img`
-	max-width: 110%;
+	max-width: 100%;
 `;
 
 const TrajetsAss = styled.div`

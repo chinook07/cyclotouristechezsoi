@@ -228,7 +228,7 @@
         "coups": "La tranquillité, l'absence de tourisme de masse (jusqu'à Shediac) et des plages désertes.",
         "defis": "La traversée de la rivière Miramichi, certaines routes moyennement passantes mais sans accotement.",
         "notes": "Entre Miramichi et Shediac, le dialecte « chiac » est parlé, difficile à comprendre mais toujours intéressant à écouter!",
-        "carteURL": "10/47.3458/-76.9351",
+        "carteURL": "10/47.2182/-64.9731",
         "ass": [
             {
                 "titre": "Partez de Rimouski",
@@ -407,7 +407,7 @@
     {
         "id": 11,
         "trajet": "Ile-du-Prince-Édouard",
-        "intro": "Choissisez entre un large réseau de pistes cyclables aménagé à travers la forêt et des chemins cotiers avec vue sur le golfe.",
+        "intro": "Choisissez entre un large réseau de pistes cyclables aménagé à travers la forêt et des chemins côtiers avec vue sur le golfe.",
         "distance": 215,
         "veloroutes": [
             "Sentier de la Confédération"
@@ -419,7 +419,7 @@
         "coups": "La beauté des paysages, à l'intérieur comme sur le bord de l'ile.",
         "defis": "L'abondance de touristes sur les routes.",
         "notes": "Une navette pour cyclistes est disponible pour traverser le pont de la Confédération.",
-        "carteURL": "10/47.3458/-76.9351",
+        "carteURL": "10/46.4014/-62.9338",
         "ass": [
             {
                 "titre": "Partez de Rimouski",
@@ -454,7 +454,7 @@
         "coups": "Les dunes, le sentiment d'être isolé de la terre ferme, l'odeur de la mer.",
         "defis": "Les vents qui peuvent dicter la journée par leur violence.",
         "notes": "Les routes peuvent devenir achalandées durant la haute saison.",
-        "carteURL": "10/47.3458/-76.9351",
+        "carteURL": "12/47.3839/-61.8618",
         "ass": [
             {
                 "titre": "Partez de Rimouski",
