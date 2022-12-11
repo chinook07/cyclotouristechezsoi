@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faAngleDoubleDown, faAngleDoubleUp, faCar, faBusAlt, faTrain } from "@fortawesome/free-solid-svg-icons";
 import Moment from "./Moment";
+import ListeLiens from "./ListeLiens";
 import Diff from "./Diff";
 import DeuxFiguresPetit from "../../../../CompReutilisables/DeuxFiguresPetit";
 import ventMontreal from "../images/vent-montreal.png";
@@ -83,8 +84,8 @@ const Comm1 = ({ boiteOuverte, setBoiteOuverte }) => {
                                 role="panel"
                             >
                                 <p>Le premier choix à faire est celui de l'hébergement.</p>
-                                <p>En mode léger, on dort à l'hôtel, au motel, au gite du passant, sinon on se fait héberger par des gens par l'entremise du <ExternalLink href="https://fr.warmshowers.org/">réseau Warmshowers</ExternalLink>. Cette option permet de maintenir un certain niveau de confort.</p>
-                                <p>En mode autonomie, on monte sa tente dans un terrain de camping, ou bien l'on trouve une place à l'abri des regards, vers le crépuscule, tout en s'assurant de laisser l'espace propre. On peut aussi demander aux gens la permission de monter sa tente sur leur terrain. Bien sûr, lors d'un long voyage en autonomie, ça peut être relaxant de louer une chambre de temps à autre pour dormir dans un vrai lit.</p>
+                                <p><Gras>En mode léger</Gras>, on dort à l'hôtel, au motel, au gite du passant, sinon on se fait héberger par des gens par l'entremise du <ExternalLink href="https://fr.warmshowers.org/">réseau Warmshowers</ExternalLink>. Cette option permet de maintenir un certain niveau de confort.</p>
+                                <p><Gras>En mode autonomie</Gras>, on monte sa tente dans un terrain de camping, ou bien l'on trouve une place à l'abri des regards, vers le crépuscule, tout en s'assurant de laisser l'espace propre. On peut aussi demander aux gens la permission de monter sa tente sur leur terrain. Bien sûr, lors d'un long voyage en autonomie, ça peut être relaxant de louer une chambre de temps à autre pour dormir dans un vrai lit.</p>
                                 <p>Le coucher sous la tente est souhaitable pour les gens voulant respecter un budget restreint, tout en conservant la spontanéité du voyage.</p>
                         </Infos>
                     }
@@ -113,16 +114,16 @@ const Comm1 = ({ boiteOuverte, setBoiteOuverte }) => {
                             >
                                 <p>L'avantage du cyclotourisme est indéniable : on peut commencer ses vacances à partir de sa porte d'entrée. Par contre, pour explorer une région plus lointaine ou pour éviter de devoir pédaler vers le point de départ, on peut prendre un moyen de transport avec son vélo. Les options seront examinées dans <Link to="/transport">cette rubrique</Link>, mais en voici un résumé :</p>
                                 <p>
-                                    <FontAwesomeIcon icon={faCar} />
-                                    <span>En voiture : pas besoin de démonter le vélo, mais il faut revenir au point A!</span>
-                                </p>
-                                <p>
                                     <FontAwesomeIcon icon={faBusAlt} />
                                     <span>En autocar : besoin d'une boite ou d'un sac géant, et permet d'avoir accès à la plupart des villes du Québec.</span>
                                 </p>
                                 <p>
                                     <FontAwesomeIcon icon={faTrain} />
                                     <span>En train : pas toujours faisable, souvent possible sans démontage, autrement une boite y est requise.</span>
+                                </p>
+                                <p>
+                                    <FontAwesomeIcon icon={faCar} />
+                                    <span>En voiture : pas besoin de démonter le vélo, mais il faut revenir au point A!</span>
                                 </p>
                                 <p>Il existe des services de transport pour cyclotouristes dans certaines régions. Cela est normalement plus dispendieux, mais l'offre est davantage adaptée aux besoins des voyageurs à deux roues.</p>
                         </Infos>
@@ -179,6 +180,8 @@ const Comm1 = ({ boiteOuverte, setBoiteOuverte }) => {
                                 <p>Si le vent peut souffler de n'importe quelle direction, il suit plus ou moins une règle de base : être le plus chiant possible envers les cyclistes circulant vers l'ouest.</p>
                                 <DeuxFiguresPetit photo1={photo1} photo2={photo2} />
                                 <p>Tel qu'aperçu sur les tableaux ci-dessus, les vents d'ouest dans le sud du Québec dominent principalement en début juillet, tandis que dans le Bas-Saint-Laurent, les vents du sud sont presque aussi fréquents à partir de ce même moment. À noter qu'un vent de l'est durant l'été s'accompagne souvent de pluie et de températures froides.</p>
+                                <p>Les vents dominants au Québec :</p>
+                                <ListeLiens />
                         </Infos>
                     }
                 </Boite>
@@ -310,6 +313,10 @@ const Infos = styled.div`
     svg:not(:last-child) {
         margin-right: 5px;
     }
+`
+
+const Gras = styled.span`
+    font-weight: bold;
 `
 
 export default Comm1;

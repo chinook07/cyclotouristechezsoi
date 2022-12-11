@@ -6,6 +6,7 @@ const CalculCarburant = () => {
     const [carb, setCarb] = useState();
     const [poids, setPoids] = useState();
     const [resultat, setResultat] = useState();
+    const [tropGros, setTropGros] = useState(false);
 
     const tare = {
         "100": 100,
@@ -16,6 +17,13 @@ const CalculCarburant = () => {
     const choisirCarb = (e) => setCarb(parseInt(e.target.value));
     const choisirPoids = (e) => {
         setPoids(parseInt(e.target.value));
+        console.log(e.target.value, carb, tare[carb]);
+        if (e.target.value > carb + tare[carb]) {
+            console.log("erreur");
+            setTropGros(true);
+        } else {
+            setTropGros(false);
+        }
     };
 
     useEffect(() => {
@@ -61,11 +69,16 @@ const CalculCarburant = () => {
                         <meter min="0" low="50" value={poids - tare[carb]} max={carb}></meter>
                 </output>
             }
+            {
+                tropGros &&
+                <Rouge>Attention, la cartouche ne peut pas dépasser son poids original.</Rouge>
+            }
         </Wrapper>
     )
 }
 
 const Wrapper = styled.form`
+    margin-top: 10px;
     output {
         align-items: center;
         display: flex;
@@ -89,6 +102,10 @@ const Choix = styled.div`
 
 const Poids = styled.div`
     margin-bottom: 10px;
+`
+
+const Rouge = styled.p`
+    font-weight: bold;
 `
 
 export default CalculCarburant;

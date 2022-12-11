@@ -34,6 +34,7 @@ const Wrapper = styled.div`
     figure {
         width: 50%;
         img {
+            border-radius: 5px;
             width: 100%;
         }
     }

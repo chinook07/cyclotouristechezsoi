@@ -44,8 +44,8 @@ const nouveauSite = async (req, res) => {
     await openSesame();
     const sites = await db.collection("sites").find().toArray();
     const nombre = sites.length + 1001;
-    await db.collection("sites").insertOne({ _id: nombre, type, properties, geometry });
-    await db.collection("contributeurs").insertOne({ _id: nombre, contributeur })
+    // await db.collection("sites").insertOne({ _id: nombre, type, properties, geometry });
+    // await db.collection("contributeurs").insertOne({ _id: nombre, contributeur })
     await closeSesame();
     return res.status(201).json({ status: 201, message: `nouveau site` })
 }

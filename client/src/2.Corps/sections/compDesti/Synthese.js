@@ -47,7 +47,7 @@ const Synthese = () => {
                     }
                 </tbody>
             </table>
-            <p>* L'appréciation personnelle est basée sur la partie du trajet ayant été parcourue par l'auteur.</p>
+            <p>* L'appréciation personnelle est basée sur la partie du trajet ayant été parcourue par l'auteur.</p>
         </Wrapper>
     )
 }
@@ -60,6 +60,12 @@ const Wrapper = styled.div`
             th {
                 color: var(--c11);
                 padding: 10px;
+                &:first-child {
+                    border-radius: 10px 0 0;
+                }
+                &:last-child {
+                    border-radius: 0 10px 0 0;
+                }
             }
         }
         tbody {

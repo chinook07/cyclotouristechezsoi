@@ -50,8 +50,13 @@ const Moment = () => {
                 </Titre>
                 <div>{moments[mois].description}</div>
                 <Fleches>
-                    <FontAwesomeIcon icon={faAngleLeft} onClick={reculer} />
-                    <FontAwesomeIcon icon={faAngleRight} onClick={avancer} />
+                    <button type="button" aria-label="moment précédent de l'année" onClick={reculer}>
+                        <FontAwesomeIcon icon={faAngleLeft} />
+                    </button>
+                    <button type="button" aria-label="moment suivant de l'année" onClick={avancer}>
+                        <FontAwesomeIcon icon={faAngleRight} />
+                    </button>
+                    
                 </Fleches>
             </div>
             <figure>
@@ -90,12 +95,17 @@ const Fleches = styled.div`
     display: flex;
     justify-content: space-evenly;
     margin-top: 10px;
-    > svg {
-        background-color: var(--c5);
+    button {
+        background-color: var(--c6);
+        border: none;
         border-radius: 10px;
-        cursor: pointer;
-        padding: 15px 20px;
+        svg {
+            color: var(--c1);
+            cursor: pointer;
+            padding: 15px 20px;
+        }
     }
+    
 `
 
 export default Moment;

@@ -13,6 +13,7 @@ const FormAjout = () => {
 
     const [champs, setChamps] = useState({
         description: "",
+        photo: null,
         nom: "",
         courriel: "",
         type: "",
@@ -20,6 +21,7 @@ const FormAjout = () => {
     });
 
     const mAJDescription = (e) => setChamps(prec => ({ ...prec, description: e.target.value }));
+    const mAJPhoto = (e) => setChamps(prec => ({ ...prec, photo: e.target.value }))
     const mAJNom = (e) => setChamps(prec => ({ ...prec, nom: e.target.value }));
     const mAJCourriel = (e) => setChamps(prec => ({ ...prec, courriel: e.target.value }));
     const mAJType = (e) => setChamps(prec => ({ ...prec, type: e.target.value }));
@@ -84,7 +86,12 @@ const FormAjout = () => {
                     required
                     value={champs.description}
                 />
-                <TelevPhotos />
+                {/* <TelevPhotos /> */}
+                <input
+                    onChange={mAJPhoto}
+                    type="file"
+                    value={champs.photo}
+                />
                 <TypeDeSite mAJType={mAJType} />
                 <Contributeur mAJNom={mAJNom} mAJCourriel={mAJCourriel} champs={champs} />
                 <Legit>
