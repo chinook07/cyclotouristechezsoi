@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import { CycloContext } from "../../../../CycloContext";
 import donnees from "../donnees/trajets.json";
-import * as HasardImg from "../images/0-hasard/index"
+import * as HasardImg from "../images/0-hasard/index";
 
 const Hasard = ({ trajetsHasard }) => {
     
@@ -20,12 +20,9 @@ const Hasard = ({ trajetsHasard }) => {
             {
                 trajetsHasard.map((item, index) => {
                     return (
-                        <Choix
-                            key={index}
-                            onClick={() => ouvrirTrajet(item)}
-                        >
+                        <Choix key={index}>
                             <ImgFond has={"Has" + item} />
-                            <Link to="/destinations/trajets">
+                            <Link to="/destinations/trajets" onClick={() => ouvrirTrajet(item)}>
                                 <DeEtA>
                                     <div>{donnees[item].deA[0]}</div>
                                     <div>{donnees[item].deA[1]}</div>
@@ -60,7 +57,6 @@ const Choix = styled.div`
         position: absolute;
         text-decoration: none;
         width: 100%;
-        /* text-shadow: var(--c4) 2px 2px 2px 2px; */
     }
 `
 
