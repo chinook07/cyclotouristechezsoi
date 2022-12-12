@@ -16,8 +16,14 @@ const Nouveau = ({ item }) => {
 
 	return (
 		<Wrapper>
-			<h3 couleur={item.couleur}>
-				<Link onClick={() => redig(item.region)} to="../trajets">
+            <h3
+                couleur={item.couleur}
+                coulinv={item.coulInv}
+            >
+                <Link
+                    onClick={() => redig(item.region)}
+                    to="../trajets"
+                >
 					{item.region}
 				</Link>
 			</h3>
@@ -38,7 +44,10 @@ const Wrapper = styled.div`
 		display: inline-block;
 		font-size: medium;
 		padding: 5px 10px;
-		color: var(--c11);
+        a {
+            color: ${props => props.coulInv === "true" ? "red" : "green"};
+            text-decoration: none;
+        }
 	}
 `;
 

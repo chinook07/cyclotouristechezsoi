@@ -12,9 +12,7 @@ const Nouveautes = () => {
 			</p>
 			<h2>Complet</h2>
 			{nouveautes.map((item, index) => {
-				if (item.complet) {
-					return <Nouveau item={item} key={index} />;
-				}
+				return <Nouveau item={item} key={index} />;
 			})}
 			<h2>À surveiller</h2>
 		</Wrapper>

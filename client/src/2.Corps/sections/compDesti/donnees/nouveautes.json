@@ -3,25 +3,28 @@
         "region": "Portneuf",
         "lienRegion": "portneuf",
         "couleur": "#4545bb",
-        "texte": "Sept sites de camping rustique ont été établis le long de la Vélopiste Jacques-Cartier / Portneuf. Il faut réserver à l'avance.",
+        "coulInv": "true",
+        "texte": "Sept sites de camping rustique ont été établis le long de la Vélopiste Jacques-Cartier/Portneuf. Il faut réserver à l'avance.",
+        "lien": "Vélopiste Jacques-Cartier/Portneuf",
+        "url": "https://www.velopistejcp.com/camping",
+        "complet": true
+    },
+    {
+        "region": "Montréal–Sherbrooke",
+        "lienRegion": "montreal-sherbrooke",
+        "couleur": "#4545bb",
+        "coulInv": "false",
+        "texte": "La Route verte à Carignan ainsi qu'un petit tronçon à Chambly passe maintenant par l'emprise ferroviaire plutôt que par des rues résidentielles. Il ne reste que la passerelle du CN à aménager.",
         "lien": "gregregrere",
         "url": "wwwwwwww",
         "complet": true
     },
     {
-        "region": "Bas-Saint-Laurent",
-        "lienRegion": "portneuf",
+        "region": "Montréal–Québec (sud)",
+        "lienRegion": "montreal-quebec-sud",
         "couleur": "#4545bb",
-        "texte": "blablabla",
-        "lien": "gregregrere",
-        "url": "wwwwwwww",
-        "complet": true
-    },
-    {
-        "region": "Beauce",
-        "lienRegion": "portneuf",
-        "couleur": "#4545bb",
-        "texte": "blablabla",
+        "coulInv": "true",
+        "texte": "Une partie de plus de La Sauvagine a été complétée en 2020 à l'est de Sorel, soit entre les rangs des Corbeaux et St-Louis. Il est possible d'accéder à ce segment par les rangs de Picourdi et St-Thomas.",
         "lien": "gregregrere",
         "url": "wwwwwwww",
         "complet": false
