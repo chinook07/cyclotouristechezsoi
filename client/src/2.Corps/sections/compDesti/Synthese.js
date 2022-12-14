@@ -90,7 +90,44 @@ const Wrapper = styled.div`
                 }
             }
         }
+        @media screen and (max-width: 650px) {
+            width: 100%;
+            thead {
+                display: none;
+            }
+            tbody {
+                width: 100%;
+                tr td {
+                    display: flex;
+                    padding: 5px;
+                    &::before {
+                        font-weight: bold;
+                        width: 50%;
+                        text-align: left;
+                    }
+                    &:first-child::before {
+                        content: "Trajet";
+                    }
+                    &:nth-child(2)::before {
+                        content: "De";
+                    }
+                    &:nth-child(3)::before {
+                        content: "À";
+                    }
+                    &:nth-child(4)::before {
+                        content: "Km";
+                    }
+                    &:nth-child(5)::before {
+                        content: "% en piste cyclable";
+                    }
+                    &:last-child::before {
+                        content: "Appréciation personnelle";
+                    }
+                }
+            }
+        }
     }
+    
 `
 
 export default Synthese;

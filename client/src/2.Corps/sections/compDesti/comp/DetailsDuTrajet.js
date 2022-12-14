@@ -63,10 +63,15 @@ const DetailsDuTrajet = ({ itineraire, changerTrajet }) => {
 						</button>
 					);
 				})}
-			</TrajetsAss>
-			<h3>Galerie des photos</h3>
-			<p>Cliquez sur les images ci-dessous pour rêver!</p>
-			<GalerieDuTrajet details={details} />
+            </TrajetsAss>
+            {
+                details.deja !== false &&
+                    <div>
+                        <h3>Galerie des photos</h3>
+                        <p>Cliquez sur les images ci-dessous pour rêver!</p>
+                        <GalerieDuTrajet details={details} />
+                </div>
+            }
 		</Wrapper>
 	);
 };
