@@ -1,23 +1,31 @@
 import styled from "styled-components";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { ExternalLink } from "react-external-link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { CycloContext } from "../../CycloContext";
+import ChangerLangMobi from "./ChangerLangMobi";
 import imgLogo from "../../images/icones/logo.png";
 import { faGlobeEurope, faBars, faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 
 const Nav1Mobi = () => {
 
-    const { lang } = useContext(CycloContext);
     const [nav1Visible, setNav1Visible] = useState(false);
+    const [monterChangLang, setMontrerChangLang] = useState(false);
 
     const montrerMenu = () => {
-        nav1Visible === false ? setNav1Visible(true) : setNav1Visible(false);
+        if (nav1Visible) {
+            setNav1Visible(false);
+            setMontrerChangLang(false);
+        } else {
+            setNav1Visible(true);
+        }
     }
 
+    const handleLang = () => {
+        monterChangLang ? setMontrerChangLang(false) : setMontrerChangLang(true)
+    };
 
     return (
         <Wrapper>
@@ -38,10 +46,14 @@ const Nav1Mobi = () => {
                             <span>Blogue</span>
                             <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
                         </ExternalLink>
-                        {/* <Langue>
-                            <span>{lang}</span>
+                        <Langue onClick={handleLang}>
+                            <span>FR</span>
                             <span><FontAwesomeIcon icon={faGlobeEurope}/></span>
-                        </Langue> */}
+                        </Langue>
+                        {
+                            monterChangLang &&
+                            <ChangerLangMobi />
+                        }
                 </Menu>
             }
         </Wrapper>
@@ -49,6 +61,7 @@ const Nav1Mobi = () => {
 }
 
 const Wrapper = styled.nav`
+    position: relative;
 `
 
 const Tete = styled.div`
@@ -65,8 +78,8 @@ const Menu = styled.div`
     align-items: center;
     display: flex;
     flex-direction: column;
-    margin: -30px 0 5px;
-    a {
+    margin-top: -30px;
+    > a {
         color: var(--c4);
         font-size: 20px;
         line-height: 1.7;
@@ -85,8 +98,10 @@ const Menu = styled.div`
 
 const Langue = styled.div`
     align-items: center;
+    cursor: pointer;
+    font-size: large;
     display: flex;
-    margin-top: 15px;
+    margin: 15px 0;
     svg {
         margin-left: 4px;
     }

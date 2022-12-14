@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import statsDonnees from "../donnees/statsDonnes.json";
+import statsDonnees from "../donnees/statsDonnees.json";
 import { faRoute, faCalendarDay, faExpandAlt, faCog, faLeaf, faPercent } from "@fortawesome/free-solid-svg-icons";
 
 const Stats1 = () => {

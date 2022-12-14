@@ -1,19 +1,23 @@
 import styled from "styled-components";
-import { useContext } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { NavLink, useLocation } from "react-router-dom";
 import { ExternalLink } from "react-external-link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { CycloContext } from "../../CycloContext";
+import ChangerLang from "./ChangerLang";
 import imgLogo from "../../images/icones/logo.png";
 import { faGlobeEurope, faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 
 const Nav1 = () => {
 
-    const { lang } = useContext(CycloContext);
+    const [monterChangLang, setMontrerChangLang] = useState(false);
     
     const urlActuel = useLocation().pathname;
+
+    const handleLang = () => {
+        monterChangLang ? setMontrerChangLang(false) : setMontrerChangLang(true)
+    };
 
     return (
         <Wrapper>
@@ -34,10 +38,14 @@ const Nav1 = () => {
                     <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
                 </ExternalLink>
             </Menu>
-            <Langue>
-                <span>{lang}</span>
+            <Langue onClick={handleLang}>
+                <span>FR</span>
                 <span><FontAwesomeIcon icon={faGlobeEurope}/></span>
             </Langue>
+            {
+                monterChangLang &&
+                <ChangerLang />
+            }
         </Wrapper>
     )
 }
@@ -46,7 +54,8 @@ const Wrapper = styled.nav`
     display: flex;
     justify-content: space-between;
     padding: 0 5px;
-    > * {
+    position: relative;
+    > *:not(:last-child) {
         height: 48px;
     }
 `
@@ -77,6 +86,7 @@ const Menu = styled.div`
 
 const Langue = styled.div`
     align-items: center;
+    cursor: pointer;
     display: flex;
     svg {
         margin-left: 4px;
