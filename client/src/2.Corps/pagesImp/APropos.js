@@ -5,6 +5,7 @@ import { ExternalLink } from "react-external-link";
 import auteur from "./images/auteur.jpg"
 
 const APropos = () => {
+
     return (
         <>
             <h2>Qui est l'auteur de ce site web?</h2>
