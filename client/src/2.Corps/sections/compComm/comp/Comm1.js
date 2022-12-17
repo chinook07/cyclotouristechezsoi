@@ -31,7 +31,7 @@ const Comm1 = ({ boiteOuverte, setBoiteOuverte }) => {
 
     const photo1 = {
         "src": ventMontreal,
-        "alt": "graphique montrant les vents dominants à Montréal durant l'été",
+        "alt": "graphique montrant les vents dominants de l'ouest à Montréal durant l'été",
         "cap": "Les vents à Montréal.",
         "lien": "Weather Spark",
         "href": "https://fr.weatherspark.com/s/25077/1/M%C3%A9t%C3%A9o-moyenne-en-%C3%A9t%C3%A9-%C3%A0-Montr%C3%A9al-Canada#Figures-WindDirection"
@@ -39,7 +39,7 @@ const Comm1 = ({ boiteOuverte, setBoiteOuverte }) => {
 
     const photo2 = {
         "src": ventRimouski,
-        "alt": "graphique montrant les vents dominants à Rimouski durant l'été",
+        "alt": "graphique montrant les vents dominants de l'ouest et du sud à Rimouski durant l'été",
         "cap": "Les vents à Rimouski.",
         "lien": "Weather Spark",
         "href": "https://fr.weatherspark.com/s/27467/1/M%C3%A9t%C3%A9o-moyenne-en-%C3%A9t%C3%A9-%C3%A0-Rimouski-Canada#Figures-WindDirection"
@@ -84,9 +84,11 @@ const Comm1 = ({ boiteOuverte, setBoiteOuverte }) => {
                                 role="panel"
                             >
                                 <p>Le premier choix à faire est celui de l'hébergement.</p>
-                                <p><Gras>En mode léger</Gras>, on dort à l'hôtel, au motel, au gite du passant, sinon on se fait héberger par des gens par l'entremise du <ExternalLink href="https://fr.warmshowers.org/">réseau Warmshowers</ExternalLink>. Cette option permet de maintenir un certain niveau de confort.</p>
-                                <p><Gras>En mode autonomie</Gras>, on monte sa tente dans un terrain de camping, ou bien l'on trouve une place à l'abri des regards, vers le crépuscule, tout en s'assurant de laisser l'espace propre. On peut aussi demander aux gens la permission de monter sa tente sur leur terrain. Bien sûr, lors d'un long voyage en autonomie, ça peut être relaxant de louer une chambre de temps à autre pour dormir dans un vrai lit.</p>
-                                <p>Le coucher sous la tente est souhaitable pour les gens voulant respecter un budget restreint, tout en conservant la spontanéité du voyage.</p>
+                                <h4>Hébergement sous un toit</h4>
+                                <p>En mode léger, on dort à l'hôtel, au motel, au gite du passant, sinon on se sert des réseaux d'hébergement pour cyclistes, tel que <ExternalLink href="https://fr.warmshowers.org/">Warmshowers</ExternalLink>. Cette option permet de maintenir un certain niveau de confort tout en transportant une charge réduite.</p>
+                                <h4>Hébergement dans la tente</h4>
+                                <p>En mode autonomie, on monte sa tente dans un terrain de camping, ou bien l'on trouve une place à l'abri des regards, vers le crépuscule, tout en s'assurant de laisser l'espace propre. On peut aussi demander aux gens la permission de monter sa tente sur leur terrain. Bien sûr, lors d'un long voyage en autonomie, ça peut être relaxant de louer une chambre de temps à autre pour dormir dans un vrai lit.</p>
+                                <p>Dormir dans sa tente comporte deux principaux avantages. Ce type d'aventure nous permet de respecter un budget restreint et conserver la spontanéité du voyage.</p>
                         </Infos>
                     }
                 </Boite>
@@ -151,7 +153,7 @@ const Comm1 = ({ boiteOuverte, setBoiteOuverte }) => {
                                 aria-labelledby="acc-tete-2"
                                 role="panel"
                             >
-                                <p>Si l'on accepte de recourir à un moyen de transport motorisé autre que sa propre voiture, il sera possible d'effectuer un trajet linéaire plutôt qu'une boucle. En roulant par exemple de Montréal à Québec, on maximise la probabilité d'avoir le vent dans le dos, puisque les vents dominants soufflent de l'ouest vers l'est. Voir <CommeUnLien onClick={() => ouvrirFermer(3)}>la prochaine rubrique</CommeUnLien> pour davantage de renseignements. Autrement, rouler sur le P'tit Train du Nord entre Mont-Laurier et Montréal permet d'avoir plus de descentes que de montées. De vraies vacances, quoi!</p>
+                                <p>Si l'on accepte de recourir à un moyen de transport motorisé autre que sa propre voiture, il sera possible d'effectuer un trajet linéaire plutôt qu'une boucle. En roulant par exemple de Montréal à Québec, on maximise la probabilité d'avoir <Gras>le vent dans le dos</Gras>, puisque les vents dominants soufflent de l'ouest vers l'est. Voir <CommeUnLien onClick={() => ouvrirFermer(3)}>la prochaine rubrique</CommeUnLien> pour davantage de renseignements. Autrement, rouler sur le P'tit Train du Nord entre Mont-Laurier et Montréal permet d'avoir <Gras>plus de descentes</Gras> que de montées. De vraies vacances, quoi!</p>
                         </Infos>
                     }
                 </Boite>
@@ -236,8 +238,8 @@ const Comm1 = ({ boiteOuverte, setBoiteOuverte }) => {
                             >
                                 <p>Ce qui empêche les gens de gouter au cyclotourisme, c'est souvent l'effort physique requis. Or, on peut choisir un parcours selon sa difficulté, et rouler une distance qu'on trouve acceptable. La vallée du fleuve Saint-Laurent, celle de l'Outaouais, ainsi que les nombreuses pistes cyclables aménagées sur d'anciennes emprises ferroviaires, présentent des espaces conviviaux pour les débutants. Le reste du Québec offre des collines pour ceux et celles qui le souhaitent. Comment choisir une destination qui respecte nos capacités physiques? Dans votre planificateur d'itinéraire préféré, une fois que vous aurez choisi un trajet, vous aurez un dénivelé positif (ascension) et négatif (descente).</p>
                                 <DeuxFiguresPetit photo1={photo3} photo2={photo4} />
-                                <p>À noter que le dénivelé pour un même trajet peut différer selon la calculateur utilisé, puisque la source des données topographiques n'est pas la même.</p>
-                                <p>Plutôt qu'avec des RPM, une façon scientifique et ludique de connaitre la difficulté d'un trajet consiste à diviser le nombre de mètres montés par le nombre de kilomètres franchis. Cela nous donne aussi le nombre de jurons par minute qu'un cycliste risque de grommeler.</p>
+                                <p>À noter que le dénivelé pour un même trajet (voir images ci-dessus) peut différer selon la calculateur utilisé, puisque la source des données topographiques n'est pas la même.</p>
+                                <p>Plutôt qu'avec des RPM, une façon scientifique et ludique de connaitre la difficulté d'un trajet consiste à diviser le nombre de mètres montés par le nombre de kilomètres franchis. Cela nous donne aussi le nombre de <Gras>jurons par minute</Gras> qu'un cycliste risque de grommeler.</p>
                                 <p>Ce calcul peut être fait pour estimer la difficulté d'une journée ou bien d'un voyage au complet. Il est déconseillé pour les courtes distances.</p>
                                 <Diff />
                                 <div>*La difficulté dépend aussi d'autres facteurs, tels la surface de roulement, la distribution du dénivelé sur un trajet (une énorme côte vs. des faux-plats toute la journée), le nombre de km effectué par jour, la vitesse et la direction du vent, ainsi que la motivation.</div>
@@ -266,7 +268,7 @@ const Comm1 = ({ boiteOuverte, setBoiteOuverte }) => {
                                 aria-labelledby="acc-tete-6"
                                 role="panel"
                             >
-                                <p>Il y a plusieurs facteurs à considérer ici. Solo, il est possible d'être le maitre de son destin. Duo, on a quelqu'un avec qui partager l'aventure. En famille, on s'assure que la prochaine génération reprenne le flambeau. Avec quelques amis ou collègues, ça peut plaire à certains, tandis que des évènements cyclotouristiques existent pour les gens qui veulent rouler en groupe.</p>
+                                <p>Il y a plusieurs facteurs à considérer ici. Solo, il est possible d'être le maitre de son destin. Duo, on a quelqu'un avec qui partager l'aventure. En famille, on s'assure que la prochaine génération reprenne le flambeau. Avec quelques amis ou collègues, ça peut plaire à certains, tandis que <ExternalLink href="https://www.adnduvelo.com/calendrier/">des évènements cyclotouristiques</ExternalLink> existent pour les gens qui veulent rouler en groupe.</p>
                                 <p>L'important, c'est de voyager avec des gens qui ont la même cadence et les mêmes objectifs. Sinon, vous pouvez toujours abandonner votre compagnon de voyage au prochain village!</p>
                         </Infos>
                     }
@@ -300,6 +302,7 @@ const Boite = styled.li`
             border: none;
             cursor: pointer;
             font: unset;
+            text-align: left;
         }
         &:hover {
             background-color: var(--c1);

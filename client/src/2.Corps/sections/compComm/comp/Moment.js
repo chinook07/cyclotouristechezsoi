@@ -50,10 +50,10 @@ const Moment = () => {
                 </Titre>
                 <div>{moments[mois].description}</div>
                 <Fleches>
-                    <button type="button" aria-label="moment précédent de l'année" onClick={reculer}>
+                    <button type="button" title="précédent" aria-label="moment précédent de l'année" onClick={reculer}>
                         <FontAwesomeIcon icon={faAngleLeft} />
                     </button>
-                    <button type="button" aria-label="moment suivant de l'année" onClick={avancer}>
+                    <button type="button" title="suivant" aria-label="moment suivant de l'année" onClick={avancer}>
                         <FontAwesomeIcon icon={faAngleRight} />
                     </button>
                     

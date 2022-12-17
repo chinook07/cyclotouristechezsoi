@@ -283,6 +283,7 @@ const Boite = styled.li`
             border: none;
             cursor: pointer;
             font: unset;
+            text-align: left;
         }
         &:hover {
             background-color: var(--c1);
