@@ -30,7 +30,7 @@ const Confidentialite = () => {
     init()
 
     return (
-        <Wrapper>
+        <>
             <p>Peu de données sont recueillies par ce site web. Quelques exceptions :</p>
             <ul>
                 <li>En <Link to="/contact">écrivant un message à l'auteur</Link>, il recevra les informations entrées par l'utilisateur. Les messages sont envoyés par l'entremise de Formspree <ExternalLink href="https://formspree.io/legal/privacy-policy/" hrefLang="en">(politique de vie privée – en anglais)</ExternalLink>.</li>
@@ -44,10 +44,8 @@ const Confidentialite = () => {
                         : <p>Attention! Vous n'utilisez pas de bloqueur de publicités. En installer un vous permettrait de naviguer plus rapidement sur le web, sans encombrement, tout en réduisant la surconsommation dans ce monde en pleine urgence climatique.</p>
                 }
             </div>
-        </Wrapper>
+        </>
     )
 }
-
-const Wrapper = styled.div``
 
 export default Confidentialite;

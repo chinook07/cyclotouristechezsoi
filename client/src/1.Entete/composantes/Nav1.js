@@ -52,6 +52,7 @@ const Nav1 = () => {
 
 const Wrapper = styled.nav`
     display: flex;
+    height: 52px;
     justify-content: space-between;
     padding: 0 5px;
     position: relative;

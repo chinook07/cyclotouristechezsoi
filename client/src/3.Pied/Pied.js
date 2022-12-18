@@ -34,23 +34,32 @@ const Pied = () => {
 const Wrapper = styled.footer`
     background-color: var(--c1);
     display: flex;
-    flex-wrap: wrap;
+    height: 130px;
     justify-content: space-between;
     padding: 15px;
+    @media screen and (max-width: 750px) {
+        flex-direction: column;
+        gap: 5px;
+        justify-content: space-evenly;
+    }
 `
 
 const Auteur = styled.div`
+    align-items: center;
     display: flex;
     flex-wrap: wrap;
     span {
         margin-right: 10px;
     }
     a {
-        line-height: 1.6;
+        /* line-height: 1.6; */
     }
 `
 
 const Menu = styled.nav`
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
     a {
         color: var(--c10);
         text-decoration: none;
@@ -58,7 +67,7 @@ const Menu = styled.nav`
     span {
         margin: 0 5px;
     }
-    @media screen and (min-width : 760px) {
+    @media screen and (min-width : 800px) {
         > * {
             padding-left: 10px;
         } 

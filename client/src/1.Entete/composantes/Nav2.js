@@ -33,6 +33,7 @@ const Nav2 = () => {
 const Wrapper = styled.nav`
     background-color: var(--c4);
     display: flex;
+    height: 50px;
     justify-content: center;
     a {
         color: var(--c11);
