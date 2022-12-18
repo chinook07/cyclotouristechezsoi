@@ -1,0 +1,12 @@
+export { default as Gal01 } from "./lac-st-jean-1.jpg";
+export { default as Gal02 } from "./lac-st-jean-2.jpg";
+export { default as Gal03 } from "./lac-st-jean-3.jpg";
+export { default as Gal04 } from "./lac-st-jean-4.jpg";
+export { default as Gal05 } from "./lac-st-jean-5.jpg";
+export { default as Gal06 } from "./lac-st-jean-6.jpg";
+export { default as Gal07 } from "./lac-st-jean-7.jpg";
+export { default as Gal08 } from "./lac-st-jean-8.jpg";
+export { default as Gal09 } from "./lac-st-jean-9.jpg";
+export { default as Gal10 } from "./lac-st-jean-10.jpg";
+export { default as Gal11 } from "./lac-st-jean-11.jpg";
+export { default as Gal12 } from "./lac-st-jean-12.jpg";

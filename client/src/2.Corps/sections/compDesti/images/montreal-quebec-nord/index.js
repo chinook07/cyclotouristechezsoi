@@ -1,0 +1,16 @@
+export { default as Gal01 } from "./montreal-quebec-nord-1.jpg";
+export { default as Gal02 } from "./montreal-quebec-nord-2.jpg";
+export { default as Gal03 } from "./montreal-quebec-nord-3.jpg";
+export { default as Gal04 } from "./montreal-quebec-nord-4.jpg";
+export { default as Gal05 } from "./montreal-quebec-nord-5.jpg";
+export { default as Gal06 } from "./montreal-quebec-nord-6.jpg";
+export { default as Gal07 } from "./montreal-quebec-nord-7.jpg";
+export { default as Gal08 } from "./montreal-quebec-nord-8.jpg";
+export { default as Gal09 } from "./montreal-quebec-nord-9.jpg";
+export { default as Gal10 } from "./montreal-quebec-nord-10.jpg";
+export { default as Gal11 } from "./montreal-quebec-nord-11.jpg";
+export { default as Gal12 } from "./montreal-quebec-nord-12.jpg";
+export { default as Gal13 } from "./montreal-quebec-nord-13.jpg";
+export { default as Gal14 } from "./montreal-quebec-nord-14.jpg";
+export { default as Gal15 } from "./montreal-quebec-nord-15.jpg";
+export { default as Gal16 } from "./montreal-quebec-nord-16.jpg";

@@ -1,0 +1,12 @@
+export { default as Gal01 } from "./montreal-sherbrooke-1.jpg";
+export { default as Gal02 } from "./montreal-sherbrooke-2.jpg";
+export { default as Gal03 } from "./montreal-sherbrooke-3.jpg";
+export { default as Gal04 } from "./montreal-sherbrooke-4.jpg";
+export { default as Gal05 } from "./montreal-sherbrooke-5.jpg";
+export { default as Gal06 } from "./montreal-sherbrooke-6.jpg";
+export { default as Gal07 } from "./montreal-sherbrooke-7.jpg";
+export { default as Gal08 } from "./montreal-sherbrooke-8.jpg";
+export { default as Gal09 } from "./montreal-sherbrooke-9.jpg";
+export { default as Gal10 } from "./montreal-sherbrooke-10.jpg";
+export { default as Gal11 } from "./montreal-sherbrooke-11.jpg";
+export { default as Gal12 } from "./montreal-sherbrooke-12.jpg";

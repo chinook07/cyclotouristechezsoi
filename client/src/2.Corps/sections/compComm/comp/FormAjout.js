@@ -6,6 +6,7 @@ import { CycloContext } from "../../../../CycloContext";
 import TypeDeSite from "./TypeDeSite";
 import TelevPhotos from "./TelevPhotos";
 import Contributeur from "./Contributeur";
+import { ExternalLink } from "react-external-link";
 
 const FormAjout = () => {
 
@@ -107,6 +108,24 @@ const FormAjout = () => {
                     type="file"
                     value={champs.photo}
                 /> */}
+                <p>Il est fortement suggéré d'ajouter des photos de l'emplacement, dans le but de bâtir un répertoire de qualité. Pour ce faire, les images doivent être stockées, le temps de les ajouter manuellement à la carte, sur un site ou une page publique, ou dont l'auteur de ce site y a accès. Exemple :</p>
+                <ul>
+                    <li>Une publication publique dans les réseaux sociaux</li>
+                    <li>Un groupe public sur Facebook</li>
+                    <li>Le <ExternalLink href="https://www.facebook.com/groups/539103319550016">groupe Cyclotourisme Québec</ExternalLink> sur Facebook</li>
+                    <li>Dans <ExternalLink href="https://c.gmx.fr/@942516742939220237/Qfd4yoXUR4mKUmxUGFJqeg">ce dossier nuagique partagé</ExternalLink>, tout en utilisant le mot de passe <em>cyclotouriste</em></li>
+                    <li>Une page web personnel</li>
+                </ul>
+                <LiensImg>
+                    <label
+                        htmlFor="lienimg"
+                        name="liens"
+                    >Veuillez lister les liens url vers vos images ci-dessous.</label>
+                    <textarea
+                        id="lienimg"
+                        placeholder="liens vers vos images (recommandé)"
+                    />
+                </LiensImg>
                 <TypeDeSite mAJType={mAJType} />
                 <Contributeur mAJNom={mAJNom} mAJCourriel={mAJCourriel} champs={champs} />
                 <Legit>
@@ -166,6 +185,22 @@ const Description = styled.textarea`
     margin: 10px 0;
     padding: 10px;
     width: 100%;
+`
+
+const LiensImg = styled.div`
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: center;
+    textarea {
+        border-radius: 5px;
+        height: 80px;
+        margin: 0 auto;
+        max-width: 500px;
+        padding: 10px;
+        width: 100%;
+    }
 `
 
 const Legit = styled.label`
