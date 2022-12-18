@@ -15,6 +15,7 @@ const Synthese = () => {
 
     return (
         <Wrapper>
+            <Tournez>Veuillez tourner votre appareil mobile ou augmenter la taille de la fenêtre pour voir ces renseignements sous la forme d'un tableau.</Tournez>
             <table>
                 <thead>
                     <tr>
@@ -128,6 +129,12 @@ const Wrapper = styled.div`
         }
     }
     
+`
+
+const Tournez = styled.p`
+    @media screen and (min-width: 650px) {
+        display: none;
+    }
 `
 
 export default Synthese;
