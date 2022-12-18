@@ -87,7 +87,7 @@ const Quadri = styled.div`
 
 const Km = styled.input`
     border-radius: 5px;
-    padding: 5px;
+    padding: 10px;
     text-align: center;
     width: 80px;
 `

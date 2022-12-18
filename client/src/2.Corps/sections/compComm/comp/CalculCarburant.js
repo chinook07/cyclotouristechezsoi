@@ -93,7 +93,7 @@ const Wrapper = styled.form`
 `
 
 const Choix = styled.div`
-    margin-bottom: 10px;
+    margin: 15px 0;
     @media screen and (max-width: 430px) {
         display: flex;
         flex-direction: column;
@@ -102,6 +102,10 @@ const Choix = styled.div`
 
 const Poids = styled.div`
     margin-bottom: 10px;
+    input {
+        border-radius: 5px;
+        padding: 10px;
+    }
 `
 
 const Rouge = styled.p`

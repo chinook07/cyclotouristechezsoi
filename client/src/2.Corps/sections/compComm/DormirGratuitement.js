@@ -6,8 +6,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CampingInterdit from "./comp/CampingInterdit";
 import interditParDefault from "./donnees/interditParDefault.json";
 import { faAngleRight, faAnglesRight } from "@fortawesome/free-solid-svg-icons";
-import CarteCampings from "./comp/CarteCampings";
+// import CarteCampings from "./comp/CarteCampings";
+import DemandeEdition from "./comp/DemandeEdition";
 import FormAjout from "./comp/FormAjout";
+import campingLaPatrie from "./images/camping-la-patrie.jpg"
 
 const DormirGratuitement = () => {
 	const [montrerAjoutCarte, setMontrerAjoutCarte] = useState(false);
@@ -22,7 +24,9 @@ const DormirGratuitement = () => {
             <section>
                 <p>Il est possible de voyager à vélo sans toujours devoir débourser un montant parfois dérisoire chaque nuit. Les campings privés offrent souvent des activités, une piscine, des attraits touristiques et la possibilité d'y passer ses vacances sans sortir de son véhicule motorisé. Par contre, le cyclotouriste lendemain, en profitant d'un bloc sanitaire et d'une table à piquenique. Or, une personne voulant manger un sandwich et une salade n'irait pas à un buffet cinq étoiles. Sous cette même optique, il existe des solutions de rechange aux campings payants.</p>
                 <p>Cette carte est le fruit du travail de plusieurs cyclotouristes ayant ajouté des sites recommandés pour le bivouac. Il incombe à l'usager d'être responsable de ses actions, de respecter les règlements en vigueur, et bien sûr de laisser l'endroit propre pour les autres utilisateurs. <span>Le cyclotourisme a un nombre très limité d'adeptes, encore moins si on ne compte que ceux et celles dormant dans leurs tentes. Pour éviter que ces endroits de repos deviennent surutilisés, veuillez ne pas partager le lien de cette page ou cette carte librement sur les réseaux sociaux. Aidons-nous à conserver ces sites pour les générations futures!</span></p>
-                <CarteCampings />
+                <p><strong>Cette carte sera améliorée dans les prochains mois.</strong></p>
+                <CarteGoogle title="carte des campings gratuits" src="https://www.google.com/maps/d/u/0/embed?mid=1obdd8oU_9xShpHUY-L29RT6OwxerfCGI&ehbc=2E312F"></CarteGoogle>
+                {/* <CarteCampings /> */}
             </section>
             <section>
                 <h2>Est-ce que c'est légal?</h2>
@@ -42,32 +46,69 @@ const DormirGratuitement = () => {
                 <p>Plusieurs experts du camping sauvage ont l'habitude de monter leur campement en fin de journée, pour éviter le regard des curieux. De plus, un endroit près d'une route sera plus probablement visité par d'autres personnes. Cela rend les anciennes voies ferrées converties en pistes cyclables propices à l'hébergement improvisé.</p>
             </section>
             <section>
+                <h2>Est-ce qu'il y a un moyen pour trouver l'emplacement des terres publiques?</h2>
+                <p>Malheureusement, ce n'est pas aussi facile que ça devrait l'être. Il n'existe pas d'atlas détaillé au niveau provincial, par contre, il est souvent possible de trouver des cartes montrant qui détient quel terrain, sur le site web des <abbr title="municipalités régionales de comté">MRC</abbr>. Utilisez les mots-clés <em>cartographie interactive MRC (nom de la MRC)</em> sur votre moteur de recherche préféré. Quelques exemples de cartes :</p>
+                <ul>
+                    <li><ExternalLink href="https://mrcargenteuil.maps.arcgis.com/apps/webappviewer/index.html?id=3bd2482392ee491d91f198a004ebab18&extent=-8360793.2707%2C5698027.9677%2C-8214034.1764%2C5770184.5224%2C102100">MRC d'Argenteuil, Laurentides</ExternalLink></li>
+                    <li><ExternalLink href="http://cartographie.mrclaurentides.qc.ca/mobile/">MRC des Laurentides, Laurentides</ExternalLink></li>
+                    <li><ExternalLink href="http://68.171.65.53/99%7CMatrice-Graphique">MRC de Papineau, Outaouais</ExternalLink></li>
+                </ul>
+                <figure>
+                    <img src={campingLaPatrie} alt="tente sous les arbres près d'une rivière" />
+                    <figcaption>Parfois, on trouve de vrais joyaux sur le domaine public.</figcaption>
+                </figure>
+                
+
+            </section>
+            <section>
                 <h2>C'est quoi le principe du Sans trace?</h2>
                 <p>Il s'agit de laisser le site de camping dans le même état qu'avant son séjour. En résumé, on protège la végétation, on évite les feux et on rapporte ses déchets. Ça veut aussi dire qu'on ne harcèle pas les écureuils... même si ces sales bêtes ont ravagé votre jardin!</p>
                 <p>Lire <ExternalLink href="https://www.sanstrace.ca/principes">les sept principes du Sans trace</ExternalLink>.</p>
             </section>
             <section>
                 <h2>Comment ajouter un emplacement de camping?</h2>
-                {/* <p>
+                <p>
                     <FontAwesomeIcon icon={faAngleRight} />
-                    <span>Si vous n'avez qu'un ou deux sites à ajouter, veuillez remplir ce court formulaire.</span>
+                    <span>Si vous n'avez qu'un ou deux sites à ajouter, veuillez remplir <CommeUnLien onClick={alternerFormulaire}>ce court formulaire</CommeUnLien>.</span>
                 </p>
+                {montrerAjoutCarte && <FormAjout />}
                 <p>
                     <FontAwesomeIcon icon={faAnglesRight} />
-                    <span>À venir...</span>
-                </p> */}
-                <p onClick={alternerFormulaire}>En utilisant ce formulaire.</p>
-                {montrerAjoutCarte && <FormAjout />}
+                    <span>Pour ajouter plusieurs lieux, la meilleure façon serait de le faire directement dans <ExternalLink href="https://www.google.com/maps/d/edit?mid=1obdd8oU_9xShpHUY-L29RT6OwxerfCGI&usp=sharing">Mes cartes Google en mode édition</ExternalLink>. Pour être en mesure de modifier la carte, vous devez en faire la demande ci-dessous. Malheureusement, il faut normalement un compte Google, sinon ça risque de ne pas fonctionner.</span>
+                </p>
+                <DemandeEdition />
+                <p>L'auteur est en train de travailler pour rendre migrer les données sur une carte Leaflet.js ou Umap. En attendant, il faut malheureusement continuer à dépendre de Google.</p>
             </section>
             <section>
                 <h2>J'aimerais proposer aux cyclotouristes de monter leurs tentes dans ma cour arrière.</h2>
-                <p>Texte à venir...</p>
+                <p>Plusieurs cyclistes de passage en seront reconnaissants. Pour ajouter votre terrain, veuillez suivre les instructions ci-dessus.</p>
+                <p>Si vous ne voulez pas que les gens cognent chez vous sans préavis, vous pouvez choisir un emplacement approximatif (≈500 mètres). Dans ce cas, laissez des coordonnées dans la description, par exemple une adresse courriel, un site web personnel, un profil sur Facebook, etc.</p>
             </section>
 		</Wrapper>
 	);
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+    section {
+        p > svg {
+            margin-right: 10px;
+        }
+        figure {
+            margin: 0 auto;
+            max-width: 450px;
+            width: 100%;
+            img {
+                width: 100%;
+            }
+        }
+    }
+`
+
+const CarteGoogle = styled.iframe`
+    height: 500px;
+    max-height: 80vh;
+    width: 100%;
+`
 
 const IllegalParDefault = styled.div`
 	align-items: center;
@@ -88,6 +129,12 @@ const IllegalParDefault = styled.div`
 			width: 100%;
 		}
 	}
-`;
+`
+
+const CommeUnLien = styled.span`
+    color: #0000cc;
+    cursor: pointer;
+    text-decoration: underline;
+`
 
 export default DormirGratuitement;

@@ -61,7 +61,11 @@ const FormAjout = () => {
     }
     
     return (
-        <Wrapper onSubmit={ajoutSite} encType="multipart/form-data">
+        // <Wrapper onSubmit={ajoutSite} encType="multipart/form-data">
+        <Wrapper
+            action="https://formspree.io/f/mvodrepv"
+            method="POST"
+        >
             <fieldset>
                 <legend>Ajout d'un site de camping</legend>
                 <p>Cliquez sur la carte pour définir l'emplacement du terrain. Si vous faites une erreur, cliquez de nouveau. Un marqueur apparaitra au bon endroit.</p>
@@ -70,16 +74,27 @@ const FormAjout = () => {
                     coordAjout.lat &&
                     <Endroit>
                         <div>
-                            <span>Latitude : </span>
-                            <span>{coordAjout.lat.toFixed(4)}</span>
-                        </div>
-                        <div>
-                            <span>Longitude : </span>
-                            <span>{coordAjout.lng.toFixed(4)}</span>
+                                <label>Latitude : </label>
+                                <input
+                                    name="lat"
+                                    readOnly
+                                    type="text"
+                                    value={coordAjout.lat.toFixed(4)}
+                                />
+                            </div>
+                            <div>
+                                <label>Longitude : </label>
+                                <input
+                                    name="lon"
+                                    readOnly
+                                    type="text"
+                                    value={coordAjout.lng.toFixed(4)}
+                                />
                         </div>
                     </Endroit>
                 }
                 <Description
+                    name="description"
                     onChange={mAJDescription}
                     placeholder="Description détaillée : accès, quiétude, services, etc."
                     rows="10"
@@ -87,15 +102,16 @@ const FormAjout = () => {
                     value={champs.description}
                 />
                 {/* <TelevPhotos /> */}
-                <input
+                {/* <input
                     onChange={mAJPhoto}
                     type="file"
                     value={champs.photo}
-                />
+                /> */}
                 <TypeDeSite mAJType={mAJType} />
                 <Contributeur mAJNom={mAJNom} mAJCourriel={mAJCourriel} champs={champs} />
                 <Legit>
                     <input
+                        name="legit"
                         onChange={mAJLegit}
                         type="checkbox"
                         required
@@ -126,12 +142,22 @@ const Wrapper = styled.form`
 const Endroit = styled.div`
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
     margin: 10px 0;
     > div {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        width: 50%;
+        input {
+            background-color: unset;
+            border: none;
+            width: 100px;
+            text-align: center;
+        }
+    }
+    @media screen and (max-width: 480px) {
+        flex-direction: column;
+        gap: 15px;
     }
 `
 

@@ -4,12 +4,14 @@ const Contributeur = ({mAJNom, mAJCourriel, champs}) => {
     return (
         <Wrapper>
             <input
+                name="nom"
                 onChange={mAJNom}
                 placeholder="Nom (facultatif)"
                 type="text"
                 value={champs.nom}
             />
             <input
+                name="courriel"
                 onChange={mAJCourriel}
                 placeholder="Courriel"
                 required

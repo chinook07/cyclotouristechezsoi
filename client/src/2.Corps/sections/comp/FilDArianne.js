@@ -23,10 +23,9 @@ const FilDArianne = ({racine, choix}) => {
 const Wrapper = styled.nav`
     display: flex;
     justify-content: center;
-    margin: 20px 0;
+    margin: 25px 0;
     a {
         color: var(--c10);
-        margin-bottom: 5px;
         padding-left: 10px;
         text-decoration: none;
         svg {
@@ -38,15 +37,16 @@ const Wrapper = styled.nav`
         &.active {
             font-weight: bold;
         }
-        @media screen and (min-width: 550px) {
+        @media screen and (min-width: 581px) {
             &:not(:last-child)::after {
                 content: "|";
                 margin-left: 10px;
             }
         }
     }
-    @media screen and (max-width: 550px) {
+    @media screen and (max-width: 580px) {
         flex-direction: column;
+        gap: 10px;
         text-align: center;
     }
     

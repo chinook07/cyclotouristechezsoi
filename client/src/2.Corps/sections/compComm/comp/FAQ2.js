@@ -56,7 +56,7 @@ const FAQ2 = ({ boiteOuverte, setBoiteOuverte }) => {
 
 	const photo5 = {
 		src: camping1,
-		alt: "tente sous des arbres en haut d'une rivière",
+		alt: "vélo sur le bord d'une piste, beau terrain dégagé sous les pins près d'une rivière",
 		cap: "Bivouac interdit mais tranquillité (quasi-) garantie!",
 	};
 
