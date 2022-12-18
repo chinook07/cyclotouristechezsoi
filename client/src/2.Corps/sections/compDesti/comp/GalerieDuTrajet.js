@@ -4,19 +4,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faBackwardStep, faForwardStep } from "@fortawesome/free-solid-svg-icons";
 import Chargement from "../../../../CompReutilisables/Chargement";
-import * as imagesTout1 from "../images/bas-saint-laurent/index";
-import * as imagesTout2 from "../images/becancour-sutton/index";
+import imagesTout from "../donnees/imagesTout";
 
 const GalerieDuTrajet = ({ details }) => {
 
     const [imgAMontrer, setImgAMontrer] = useState(undefined);
 
-    useEffect(() => {
-        setImgAMontrer(0);
-    }, [])
+    useEffect(() => setImgAMontrer(0), [])
 
-    const tableauPhotos = Object.keys(imagesTout1);
-    const nDePhotos = Object.keys(imagesTout1).length;
+    const idTrajet = details.id;
+    
+    let tableauPhotos = Object.keys(imagesTout[idTrajet]);
+    let tableauSources = Object.values(imagesTout[idTrajet]);
+    const nDePhotos = tableauSources.length;
 
     const changerPhoto = (choisi) => {
         setImgAMontrer(choisi);
@@ -24,9 +24,9 @@ const GalerieDuTrajet = ({ details }) => {
 
     let photosParRangee;
 
-    if (nDePhotos < 7) {
+    if (nDePhotos <= 8) {
         photosParRangee = nDePhotos
-    } else if (nDePhotos < 14) {
+    } else if (nDePhotos <= 16) {
         photosParRangee = nDePhotos / 2
     } else {
         photosParRangee = nDePhotos / 3
@@ -57,7 +57,7 @@ const GalerieDuTrajet = ({ details }) => {
                         onClick={photoPrec}
                         role="navigation"
                     />
-                    <img src={imagesTout1[tableauPhotos[0 + imgAMontrer]]} alt="à venir" />
+                    <img src={imagesTout[idTrajet][tableauPhotos[0 + imgAMontrer]]} alt="à venir" />
                     <FontAwesomeIcon
                         aria-label="image suivante"
                         icon={faForwardStep}
@@ -75,7 +75,7 @@ const GalerieDuTrajet = ({ details }) => {
                                     alt="à venir"
                                     key={index}
                                     onClick={() => changerPhoto(index)}
-                                    src={imagesTout1[item]}
+                                    src={imagesTout[idTrajet][item]}
                                 />
                             ) 
                         })

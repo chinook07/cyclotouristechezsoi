@@ -1,4 +1,4 @@
-export { default as Gal01 } from "./montreal-quebec-nord-1.jpg";
+export { default as Gal01 } from "./montreal-quebec-nord-1.JPG";
 export { default as Gal02 } from "./montreal-quebec-nord-2.jpg";
 export { default as Gal03 } from "./montreal-quebec-nord-3.jpg";
 export { default as Gal04 } from "./montreal-quebec-nord-4.jpg";

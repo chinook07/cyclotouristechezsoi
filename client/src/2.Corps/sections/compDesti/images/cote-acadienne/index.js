@@ -1,0 +1,16 @@
+export { default as Gal01 } from "./cote-acadienne-1.jpg";
+export { default as Gal02 } from "./cote-acadienne-2.jpg";
+export { default as Gal03 } from "./cote-acadienne-3.jpg";
+export { default as Gal04 } from "./cote-acadienne-4.jpg";
+export { default as Gal05 } from "./cote-acadienne-5.jpg";
+export { default as Gal06 } from "./cote-acadienne-6.jpg";
+export { default as Gal07 } from "./cote-acadienne-7.jpg";
+export { default as Gal08 } from "./cote-acadienne-8.jpg";
+export { default as Gal09 } from "./cote-acadienne-9.jpg";
+export { default as Gal10 } from "./cote-acadienne-10.jpg";
+export { default as Gal11 } from "./cote-acadienne-11.jpg";
+export { default as Gal12 } from "./cote-acadienne-12.jpg";
+export { default as Gal13 } from "./cote-acadienne-13.jpg";
+export { default as Gal14 } from "./cote-acadienne-14.jpg";
+export { default as Gal15 } from "./cote-acadienne-15.jpg";
+export { default as Gal16 } from "./cote-acadienne-16.jpg";
