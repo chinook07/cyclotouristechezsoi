@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import listeEquipement from "../donnees/listeEquipment.json";
-import { faPlus, faCheck, faBicycle, faTools, faWineGlassAlt, faPizzaSlice, faFlag, faSurprise, faHatCowboy, faHeadSideMask, faBath, faPuzzlePiece, faPlug, faGlobe, faList } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faCheck, faBicycle, faTools, faWineGlassAlt, faPizzaSlice, faFlag, faSurprise, faHatCowboy, faHeadSideMask, faBath, faPuzzlePiece, faPlug, faGlobe } from "@fortawesome/free-solid-svg-icons";
 
 const Liste = ({ bagages, camping, packThis }) => {
 
@@ -40,6 +40,7 @@ const Liste = ({ bagages, camping, packThis }) => {
                                         }
                                     })
                                 }
+                                {/* <ChosePlus /> */}
                             </div>
                         </Categorie>
                     )

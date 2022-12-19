@@ -3,11 +3,7 @@ import styled from "styled-components";
 import { MapContainer, TileLayer, ScaleControl, Polyline, LayersControl } from "react-leaflet";
 
 const CarteDuTrajet = ({ details }) => {
-    
-    console.log(`trajet${details.id}`);
-    // let atest = 
-    // console.log(atest);
-    
+
     return (
         <Carte
             center={[48, -75]}

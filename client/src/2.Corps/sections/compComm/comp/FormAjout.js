@@ -4,7 +4,7 @@ import { useState, useContext } from "react";
 import CarteAjout from "./CarteAjout";
 import { CycloContext } from "../../../../CycloContext";
 import TypeDeSite from "./TypeDeSite";
-import TelevPhotos from "./TelevPhotos";
+// import TelevPhotos from "./TelevPhotos";
 import Contributeur from "./Contributeur";
 import { ExternalLink } from "react-external-link";
 
@@ -22,44 +22,44 @@ const FormAjout = () => {
     });
 
     const mAJDescription = (e) => setChamps(prec => ({ ...prec, description: e.target.value }));
-    const mAJPhoto = (e) => setChamps(prec => ({ ...prec, photo: e.target.value }))
+    // const mAJPhoto = (e) => setChamps(prec => ({ ...prec, photo: e.target.value }))
     const mAJNom = (e) => setChamps(prec => ({ ...prec, nom: e.target.value }));
     const mAJCourriel = (e) => setChamps(prec => ({ ...prec, courriel: e.target.value }));
     const mAJType = (e) => setChamps(prec => ({ ...prec, type: e.target.value }));
     const mAJLegit = (e) => setChamps(prec => ({ ...prec, legit: e.target.checked }));
 
-    const ajoutSite = (e) => {
-        e.preventDefault()
-        if (coordAjout.lat) {
-            fetch("/api/nouveau-site", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                },
-                body: JSON.stringify({
-                    type: "feature",
-                    properties: {
-                        description: champs.description,
-                        type: champs.type
-                    },
-                    geometry: {
-                        type: "Point",
-                        coordinates: [coordAjout.lng, coordAjout.lat]
-                    },
-                    contributeur: {
-                        nom: champs.nom,
-                        courriel: champs.courriel
-                    }
-                })
-            })
-                .then(res => res.json())
-                .then(req => console.log(req))
-                .catch(err => console.log(err))
-        } else {
-            console.log("non");
-        }
-    }
+    // const ajoutSite = (e) => {
+    //     e.preventDefault()
+    //     if (coordAjout.lat) {
+    //         fetch("/api/nouveau-site", {
+    //             method: "POST",
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //                 "Accept": "application/json"
+    //             },
+    //             body: JSON.stringify({
+    //                 type: "feature",
+    //                 properties: {
+    //                     description: champs.description,
+    //                     type: champs.type
+    //                 },
+    //                 geometry: {
+    //                     type: "Point",
+    //                     coordinates: [coordAjout.lng, coordAjout.lat]
+    //                 },
+    //                 contributeur: {
+    //                     nom: champs.nom,
+    //                     courriel: champs.courriel
+    //                 }
+    //             })
+    //         })
+    //             .then(res => res.json())
+    //             .then(req => console.log(req))
+    //             .catch(err => console.log(err))
+    //     } else {
+    //         console.log("non");
+    //     }
+    // }
     
     return (
         // <Wrapper onSubmit={ajoutSite} encType="multipart/form-data">

@@ -33,7 +33,7 @@ const DormirGratuitement = () => {
                 <p>Il n'y a aucune loi provinciale encadrant le camping sauvage mur-à-mur. <ExternalLink href="https://educaloi.qc.ca/actualites-juridiques/camping-peut-on-installer-sa-tente-nimporte-ou/">Sur les terres du domaine public</ExternalLink>, il est possible de s'installer, par contre il s'avère difficile de trouver des cartes pour ainsi connaitre leurs emplacements. Sur les abords des pistes cyclables, il y a souvent des panneaux interdisant le camping, et couramment la même situation aux haltes routières. Même si le camping n'est pas proscrit dans le cas d'un parc public, il peut être illégal de se trouver dans celui-ci après une certaine heure. Finalement, certaines municipalités comme Gaspé ont choisi d'interdire le camping sur tout le territoire, sauf aux sites aménagés.</p>
                 <p>Le camping sauvage est par défaut interdit sur les emprises des pistes cyclables suivantes. Une signalisation claire l'indique sur place. <span>Cette liste n'est pas exhaustive.</span></p>
                 <IllegalParDefault>
-                    <CampingInterdit />
+                    <CampingInterdit aria-hidden />
                     <ol type="A">
                         {interditParDefault.map((item, index) => {
                             return <li key={index}>{item}</li>;
@@ -69,7 +69,7 @@ const DormirGratuitement = () => {
                 <h2>Comment ajouter un emplacement de camping?</h2>
                 <p>
                     <FontAwesomeIcon icon={faAngleRight} />
-                    <span>Si vous n'avez qu'un ou deux sites à ajouter, veuillez remplir <CommeUnLien onClick={alternerFormulaire}>ce court formulaire</CommeUnLien>.</span>
+                    <span>Si vous n'avez qu'un ou deux sites à ajouter, veuillez remplir <CommeUnLien onClick={alternerFormulaire} tabIndex="0">ce court formulaire</CommeUnLien>.</span>
                 </p>
                 {montrerAjoutCarte && <FormAjout />}
                 <p>

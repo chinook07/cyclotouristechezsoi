@@ -42,8 +42,6 @@ const GalerieDuTrajet = ({ details }) => {
         imgAMontrer === nDePhotos - 1 ? setImgAMontrer(0) : setImgAMontrer(imgAMontrer + 1)
     }
 
-    console.log(titrePhotos);
-
     if (imgAMontrer === undefined) {
         return (
             <Chargement />

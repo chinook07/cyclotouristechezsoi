@@ -17,9 +17,7 @@ const CalculCarburant = () => {
     const choisirCarb = (e) => setCarb(parseInt(e.target.value));
     const choisirPoids = (e) => {
         setPoids(parseInt(e.target.value));
-        console.log(e.target.value, carb, tare[carb]);
         if (e.target.value > carb + tare[carb]) {
-            console.log("erreur");
             setTropGros(true);
         } else {
             setTropGros(false);

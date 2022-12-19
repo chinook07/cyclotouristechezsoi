@@ -9,7 +9,7 @@ const ListePers = () => {
     const [bagagesPers, setBagagesPers] = useState([]);
     const [entreePers, setEntreePers] = useState("");
     const [persPacked, setPersPacked] = useState([]);
-    // const [f5, setF5] = useState(0);
+    const [f5, setF5] = useState(0);
 
     useEffect(() => {
         const enMemoirePers = localStorage.getItem("pers");
@@ -36,14 +36,13 @@ const ListePers = () => {
     };
 
     const enleverItem = (item) => {
-        const nouvelleListe = bagagesPers;
-        nouvelleListe.splice(bagagesPers.indexOf(item), 1);
-        console.log(nouvelleListe);
+        let nouvelleListe = bagagesPers;
+        nouvelleListe.splice(nouvelleListe.indexOf(item), 1);
+        setF5(f5 + 1);
         setBagagesPers(nouvelleListe);
-        localStorage.setItem("pers", bagagesPers.filter(element => element !== item));
+        localStorage.setItem("pers", nouvelleListe);
         persPacked.includes(item) &&
             localStorage.setItem("packedPers", persPacked.filter(element => element !== item));
-        
     }
 
     const packThisPers = (item) => {
@@ -79,7 +78,7 @@ const ListePers = () => {
                                         : { fond: "--c1", front: "--c5", coul: "--c6" }
                                 }
                             >
-                                <NomItem
+                                <button
                                     onClick={() => packThisPers(item)}
                                 >
                                     {
@@ -88,7 +87,7 @@ const ListePers = () => {
                                             : <FontAwesomeIcon icon={faPlus} />
                                     }
                                     <span>{item}</span>
-                                </NomItem>
+                                </button>
                                 <button onClick={() => enleverItem(item)} aria-label="enlever item">
                                     <FontAwesomeIcon icon={faCircleXmark} />
                                 </button>
@@ -103,6 +102,7 @@ const ListePers = () => {
                         id="ajoutItem"
                         onChange={(e) => mettreEntreeAJour(e.target.value)}
                         placeholder="Ajoutez quelque chose"
+                        type="text"
                         value={entreePers}
                     />
                 </form>
@@ -125,14 +125,11 @@ const Controle = styled.div`
     }
 `
 
-const NomItem = styled.button`
-    
-`
-
 const Reste = styled.div`
     align-items: center;
     display: flex;
     flex-wrap: wrap;
+    gap: 12px;
     input {
         border-radius: 15px;
         margin: 5px;
@@ -145,13 +142,13 @@ const ChosePers = styled.div`
     border: 2px solid var(${props => props.styleDiff.front});
     border-radius: 15px;
     color: var(${props => props.styleDiff.coul});    
-    margin: 5px;
+    margin: 5px 0;
     button {
         background-color: initial;
         border: none;
         color: inherit;
         cursor: pointer;
-        margin: 8px 0;
+        padding: 8px 0;
     }
     svg {
         margin: 0 12px;

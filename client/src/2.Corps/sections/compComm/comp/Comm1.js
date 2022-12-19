@@ -153,7 +153,7 @@ const Comm1 = ({ boiteOuverte, setBoiteOuverte }) => {
                                 aria-labelledby="acc-tete-2"
                                 role="panel"
                             >
-                                <p>Si l'on accepte de recourir à un moyen de transport motorisé autre que sa propre voiture, il sera possible d'effectuer un trajet linéaire plutôt qu'une boucle. En roulant par exemple de Montréal à Québec, on maximise la probabilité d'avoir <Gras>le vent dans le dos</Gras>, puisque les vents dominants soufflent de l'ouest vers l'est. Voir <CommeUnLien onClick={() => ouvrirFermer(3)}>la prochaine rubrique</CommeUnLien> pour davantage de renseignements. Autrement, rouler sur le P'tit Train du Nord entre Mont-Laurier et Montréal permet d'avoir <Gras>plus de descentes</Gras> que de montées. De vraies vacances, quoi!</p>
+                                <p>Si l'on accepte de recourir à un moyen de transport motorisé autre que sa propre voiture, il sera possible d'effectuer un trajet linéaire plutôt qu'une boucle. En roulant par exemple de Montréal à Québec, on maximise la probabilité d'avoir <Gras>le vent dans le dos</Gras>, puisque les vents dominants soufflent de l'ouest vers l'est. Voir <CommeUnLien onClick={() => ouvrirFermer(3)} tabIndex="0">la prochaine rubrique</CommeUnLien> pour davantage de renseignements. Autrement, rouler sur le P'tit Train du Nord entre Mont-Laurier et Montréal permet d'avoir <Gras>plus de descentes</Gras> que de montées. De vraies vacances, quoi!</p>
                         </Infos>
                     }
                 </Boite>
