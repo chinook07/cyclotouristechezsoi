@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBackwardStep, faForwardStep } from "@fortawesome/free-solid-svg-icons";
 import Chargement from "../../../../CompReutilisables/Chargement";
 import imagesTout from "../donnees/imagesTout";
+import titrePhotos from "../donnees/titrePhotos";
+import texteAltPhotos from "../donnees/texteAltPhotos";
 
 const GalerieDuTrajet = ({ details }) => {
 
@@ -40,6 +42,8 @@ const GalerieDuTrajet = ({ details }) => {
         imgAMontrer === nDePhotos - 1 ? setImgAMontrer(0) : setImgAMontrer(imgAMontrer + 1)
     }
 
+    console.log(titrePhotos);
+
     if (imgAMontrer === undefined) {
         return (
             <Chargement />
@@ -57,15 +61,14 @@ const GalerieDuTrajet = ({ details }) => {
                         onClick={photoPrec}
                         role="navigation"
                     />
-                    <img src={imagesTout[idTrajet][tableauPhotos[0 + imgAMontrer]]} alt="à venir" />
+                    <img src={imagesTout[idTrajet][tableauPhotos[0 + imgAMontrer]]} alt={ texteAltPhotos.trajet[idTrajet][imgAMontrer] } />
                     <FontAwesomeIcon
                         aria-label="image suivante"
                         icon={faForwardStep}
                         onClick={photoSuiv}
                         role="navigation"
                     />
-                    <figcaption>À venir...</figcaption>
-                    {/* <figcaption>{carrousel[imgAMontrer].desc}</figcaption> */}
+                    <figcaption>{titrePhotos.trajet[idTrajet][imgAMontrer]}</figcaption>
                 </figure>
                 <Selecteur photosParRangee={photosParRangee}>
                     {
