@@ -531,15 +531,15 @@
         "ass": [
             {
                 "titre": "Partez d'Ottawa",
-                "nombre": 1
+                "nombre": 22
             },
             {
                 "titre": "Bifurquez vers Sherbrooke",
-                "nombre": 1
+                "nombre": 20
             },
             {
                 "titre": "Continuez jusqu'à Québec",
-                "nombre": 1
+                "nombre": 19
             }
         ],
         "deA": [
@@ -568,15 +568,15 @@
         "ass": [
             {
                 "titre": "Continuez vers Saguenay...",
-                "nombre": 1
+                "nombre": 9
             },
             {
                 "titre": "...puis bifurquez vers Tadoussac",
-                "nombre": 1
+                "nombre": 8
             },
             {
                 "titre": "Traversez vers le Témiscouata",
-                "nombre": 1
+                "nombre": 27
             }
         ],
         "deA": [
@@ -607,15 +607,15 @@
         "ass": [
             {
                 "titre": "Traversez La Vérendrye",
-                "nombre": 1
+                "nombre": 13
             },
             {
                 "titre": "Retournez à Gatineau (par Maniwaki)",
-                "nombre": 1
+                "nombre": 29
             },
             {
                 "titre": "Retournez à Gatineau (par Montebello)",
-                "nombre": 1
+                "nombre": 21
             }
         ],
         "deA": [
@@ -645,15 +645,15 @@
         "ass": [
             {
                 "titre": "Partez de Montréal",
-                "nombre": 1
+                "nombre": 18
             },
             {
                 "titre": "Bifurquez vers Trois-Rivières",
-                "nombre": 1
+                "nombre": 28
             },
             {
                 "titre": "Terminez à Québec",
-                "nombre": 1
+                "nombre": 24
             }
         ],
         "deA": [
@@ -685,7 +685,7 @@
         "ass": [
             {
                 "titre": "Commencez en amont",
-                "nombre": 1
+                "nombre": 25
             },
             {
                 "titre": "Continuez vers le Bas-du-Fleuve",
@@ -693,7 +693,7 @@
             },
             {
                 "titre": "Retournez vers la rive sud",
-                "nombre": 1
+                "nombre": 19
             }
         ],
         "deA": [
@@ -725,7 +725,7 @@
         "ass": [
             {
                 "titre": "Commencez dans les Cantons-de-l'Est",
-                "nombre": 1
+                "nombre": 26
             },
             {
                 "titre": "Continuez vers le Bas-du-Fleuve",
@@ -733,7 +733,7 @@
             },
             {
                 "titre": "Retournez par le côté nord",
-                "nombre": 1
+                "nombre": 18
             }
         ],
         "deA": [
@@ -765,15 +765,15 @@
         "ass": [
             {
                 "titre": "Partez d'Ottawa",
-                "nombre": 1
+                "nombre": 22
             },
             {
                 "titre": "Bifurquez vers Sutton",
-                "nombre": 1
+                "nombre": 3
             },
             {
                 "titre": "Continuez vers Québec",
-                "nombre": 1
+                "nombre": 26
             }
         ],
         "deA": [
@@ -806,16 +806,16 @@
         "carteURL": "10/45.6875/-74.9549",
         "ass": [
             {
-                "titre": "titre",
-                "nombre": 1
+                "titre": "Partez de Maniwaki",
+                "nombre": 29
             },
             {
-                "titre": "titre",
-                "nombre": 1
+                "titre": "Explorez le Pontiac",
+                "nombre": 23
             },
             {
-                "titre": "titre",
-                "nombre": 1
+                "titre": "Retournez par la rive ontarienne",
+                "nombre": 22
             }
         ],
         "deA": [
@@ -847,15 +847,15 @@
         "ass": [
             {
                 "titre": "Explorez le Pontiac",
-                "nombre": 1
+                "nombre": 23
             },
             {
                 "titre": "Retournez par la rive québécoise",
-                "nombre": 1
+                "nombre": 21
             },
             {
                 "titre": "Continuez vers Québec",
-                "nombre": 1
+                "nombre": 19
             }
         ],
         "deA": [
@@ -881,15 +881,15 @@
         "ass": [
             {
                 "titre": "Partez de Maniwaki",
-                "nombre": 1
+                "nombre": 29
             },
             {
-                "titre": "Explorez le Pontiac",
-                "nombre": 1
+                "titre": "Roulez vers Montréal",
+                "nombre": 21
             },
             {
-                "titre": "Retournez par la rive ontarienne",
-                "nombre": 1
+                "titre": "Choisissez la rive ontarienne",
+                "nombre": 22
             }
         ],
         "deA": [
@@ -919,15 +919,15 @@
         "ass": [
             {
                 "titre": "Partez de Shawinigan",
-                "nombre": 1
+                "nombre": 17
             },
             {
                 "titre": "Retournez à Montréal",
-                "nombre": 1
+                "nombre": 18
             },
             {
                 "titre": "Continuez vers la Beauce",
-                "nombre": 1
+                "nombre": 2
             }
         ],
         "deA": [
@@ -958,15 +958,15 @@
         "ass": [
             {
                 "titre": "Contournez Montréal par le sud",
-                "nombre": 1
+                "nombre": 19
             },
             {
                 "titre": "Restez en Ontario",
-                "nombre": 1
+                "nombre": 22
             },
             {
                 "titre": "Longez le fleuve à vélo",
-                "nombre": 1
+                "nombre": 18
             }
         ],
         "deA": [
@@ -999,11 +999,11 @@
         "ass": [
             {
                 "titre": "Partez de Montréal ou Granby",
-                "nombre": 1
+                "nombre": 20
             },
             {
                 "titre": "Tournez vers Bellechasse",
-                "nombre": 1
+                "nombre": 4
             },
             {
                 "titre": "Continuez vers le Bas-du-Fleuve",
@@ -1036,11 +1036,11 @@
         "ass": [
             {
                 "titre": "Partez de Saguenay",
-                "nombre": 1
+                "nombre": 9
             },
             {
                 "titre": "Traversez vers Charlevoix",
-                "nombre": 1
+                "nombre": 5
             },
             {
                 "titre": "Continuez vers Rimouski",
@@ -1072,15 +1072,15 @@
         "ass": [
             {
                 "titre": "Partez dans la Mauricie profonde",
-                "nombre": 1
+                "nombre": 17
             },
             {
                 "titre": "Traversez vers le Centre-du-Québec",
-                "nombre": 1
+                "nombre": 3
             },
             {
                 "titre": "Continuez vers Québec",
-                "nombre": 1
+                "nombre": 18
             }
         ],
         "deA": [
@@ -1105,15 +1105,15 @@
         "ass": [
             {
                 "titre": "Partez de l'Abitibi",
-                "nombre": 1
+                "nombre": 0
             },
             {
                 "titre": "Poursuivez en Outaouais",
-                "nombre": 1
+                "nombre": 21
             },
             {
                 "titre": "Entrez en Ontario",
-                "nombre": 1
+                "nombre": 22
             }
         ],
         "deA": [
