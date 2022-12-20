@@ -24,7 +24,11 @@ const Entete = () => {
     )
 }
 
-const Wrapper = styled.header``
+const Wrapper = styled.header`
+    @media print {
+        display: none;
+    }
+`
 
 
 

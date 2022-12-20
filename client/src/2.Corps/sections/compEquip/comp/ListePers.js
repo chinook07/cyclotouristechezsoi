@@ -98,13 +98,16 @@ const ListePers = () => {
                 }
                 <form onSubmit={ajouterItemPers} title="ajouter item">
                     <label htmlFor="ajoutItem">Nouvel item : </label>
-                    <input
-                        id="ajoutItem"
-                        onChange={(e) => mettreEntreeAJour(e.target.value)}
-                        placeholder="Ajoutez quelque chose"
-                        type="text"
-                        value={entreePers}
-                    />
+                    <div>
+                        <input
+                            id="ajoutItem"
+                            onChange={(e) => mettreEntreeAJour(e.target.value)}
+                            placeholder="Ajoutez quelque chose"
+                            type="text"
+                            value={entreePers}
+                        />
+                        <button type="submit">Ajouter</button>
+                    </div>
                 </form>
             </Reste>
         </Wrapper>
@@ -130,10 +133,31 @@ const Reste = styled.div`
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
-    input {
-        border-radius: 15px;
-        margin: 5px;
-        padding: 8px 12px;
+    form {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        > div {
+            display: flex;
+            gap: 12px;
+            input {
+                border-radius: 15px;
+                padding: 8px 12px;
+            }
+            button {
+                background-color: var(--c4);
+                border: 2px solid var(--c10);
+                border-radius: 15px;
+                color: var(--c11);
+                cursor: pointer;
+                padding: 8px 12px;
+            }
+        }
+        @media screen and (max-width: 450px) {
+            flex-direction: column;
+            justify-content: flex-start;
+        }
     }
 `
 

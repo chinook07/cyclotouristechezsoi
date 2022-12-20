@@ -42,6 +42,9 @@ const Wrapper = styled.footer`
         gap: 5px;
         justify-content: space-evenly;
     }
+    @media print {
+        display: none;
+    }
 `
 
 const Auteur = styled.div`

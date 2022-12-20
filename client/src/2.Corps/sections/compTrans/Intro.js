@@ -15,7 +15,7 @@ const Intro = () => {
     const photo2 = {
         "src": veloTrain,
         "alt": "L'auteur qui attache son vélo à sa place à bord d'un train exo.",
-        "cap": "L'accès aux trains de banlieue se fait à la plupart des gares par l'entremise de quelques marches. Montez vos sacoches lourdes d'abord, ensuite votre vélo."
+        "cap": "L'accès aux trains de banlieue se fait normalement par l'entremise de quelques marches. Montez vos sacoches lourdes d'abord, puis votre vélo."
     }
 
     return (
