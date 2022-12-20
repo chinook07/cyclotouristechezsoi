@@ -14,6 +14,8 @@ const Possibilites = ({ villeSouhaitee }) => {
     const [montrerLegende, setMontrerLegende] = useState(true);
 
     const toutesIcones = [faTrain, faTrainSubway, faBusAlt, faBus, faFerry, faCircleCheck, faBox, faBagShopping, faClock, faExclamationCircle, faSun]
+
+    const iconesAccessible = ["train", "train de banlieue", "autocar", "autobus", "traversier", "vélos non-démontés acceptés", "boite requise", "sac requis", "vélos en tout temps", "vélos sur certains départs", "vélos durant la journée seulement"];
     
     const trajetsLocaux = indexVilles[villeSouhaitee];
     const routes = [];
@@ -44,7 +46,14 @@ const Possibilites = ({ villeSouhaitee }) => {
                         <div>
                             {
                                 item.icone.map((itemB, indexB) => {
-                                    return <FontAwesomeIcon key={indexB} icon={toutesIcones[itemB]} />
+                                    return (
+                                        <FontAwesomeIcon
+                                            aria-label={iconesAccessible[itemB]}
+                                            aria-hidden="false"
+                                            icon={toutesIcones[itemB]}
+                                            key={indexB}
+                                        />
+                                    )
                                 })
                             }
                         </div>

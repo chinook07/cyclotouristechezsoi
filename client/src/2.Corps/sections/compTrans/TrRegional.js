@@ -7,7 +7,7 @@ import trainCharlevoix2 from "./images/train-charlevoix-2.jpg"
 
 import TableauRegions from "./comp/TableauRegions";
 
-const ABCDEF = () => {
+const TrRegional = () => {
 
     const photo1 = {
         "src": trainCharlevoix1,
@@ -22,7 +22,7 @@ const ABCDEF = () => {
     }
 
     return (
-        <TrRegional>
+        <Wrapper>
             <section>
                 <h2>Sortir de la région métropolitaine</h2>
                 <p>Pour sortir de la région métropolitaine, la situation s'est grandement améliorée au fil des années. Parmi les onze secteurs d'exo, le transporteur qui opère les trains de banlieue et les autobus des banlieues de Montréal, <ExternalLink href="https://exo.quebec/fr/planifier-trajet/velo/velo-a-bord">sept en offrent la possibilité</ExternalLink> de transporter son vélo à bord des bus, avec des heures et des dates d'utilisation harmonisées depuis quelques années.</p>
@@ -39,10 +39,10 @@ const ABCDEF = () => {
                 <h2>Se déplacer à l'intérieur des villes</h2>
                 <p>À noter que certaines sociétés de transport offrent des supports à vélo sur les autobus urbains, tel qu'à <ExternalLink href="https://www.stl.laval.qc.ca/fr/autobus/cyclobus/">Laval</ExternalLink>, <ExternalLink href="https://sttr.qc.ca/sttr/cyclobus/">Trois-Rivières</ExternalLink>, <ExternalLink href="https://sts.saguenay.ca/infos-pratiques/velobus">Saguenay</ExternalLink>, <ExternalLink href="http://sto.ca/index.php?id=vlo-bus&L=fr%2Fbrochure_p12_f.pdf">Gatineau</ExternalLink> et <ExternalLink href="https://www.sts.qc.ca/77-Informations-importantes.html">Sherbrooke</ExternalLink>. Par contre, puisque le vélo est souvent plus rapide que l'autobus pour les déplacements en ville, ce service n'est utile que dans certaines situations particulières.</p>
             </section>
-        </TrRegional>
+        </Wrapper>
     )
 }
 
-const TrRegional = styled.div``
+const Wrapper = styled.div``
 
-export default ABCDEF;
+export default TrRegional;

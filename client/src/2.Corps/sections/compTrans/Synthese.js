@@ -19,6 +19,7 @@ const Synthese = () => {
                 <h2>Carte globale</h2>
                 <Carte>
                     <iframe
+                        aria-hidden
                         frameBorder="0"
                         allowFullScreen
                         title="Carte du Québec cyclable"
