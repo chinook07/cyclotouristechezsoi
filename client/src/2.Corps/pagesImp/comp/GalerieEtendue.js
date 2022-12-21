@@ -5,6 +5,8 @@ import * as imagesToutPa from "../images/galerie-paysage/index";
 import * as imagesToutPo from "../images/galerie-portrait/index";
 import galerieSousTitrePaysage from "../donnees/galerieSousTitrePaysage.json";
 import galerieSousTitrePortrait from "../donnees/galerieSousTitrePortrait.json";
+import texteAltPaysage from "../donnees/texteAltPaysage.json";
+import texteAltPortrait from "../donnees/texteAltPortrait.json";
 import Chargement from "../../../CompReutilisables/Chargement";
 import Zoom from "./Zoom";
 
@@ -25,6 +27,7 @@ const GalerieEtendue = ({ montrerGal, setMontrerGal }) => {
         tableauPaysage.forEach((item, index) => {
             item.lien = (Object.values(imagesToutPa)[index])
             item.description = galerieSousTitrePaysage[index];
+            item.texteAlt = texteAltPaysage[index];
             tableauTous.push(item);
         })
 
@@ -34,6 +37,7 @@ const GalerieEtendue = ({ montrerGal, setMontrerGal }) => {
         tableauPortrait.forEach((item, index) => {
             item.lien = (Object.values(imagesToutPo)[index])
             item.description = galerieSousTitrePortrait[index]
+            item.texteAlt = texteAltPortrait[index];
             tableauTous.push(item)
         })
 
@@ -87,8 +91,8 @@ const GalerieEtendue = ({ montrerGal, setMontrerGal }) => {
                             return <img
                                 onClick={() => handleMontrerImage(item)}
                                 key={index}
-                                src={tousPhotos[item - 1]["lien"]}
-                                alt={tousPhotos[item - 1]["description"]}
+                                src={tousPhotos[item - 1].lien}
+                                alt={tousPhotos[item - 1].texteAlt}
                             />
                         })
                     }
