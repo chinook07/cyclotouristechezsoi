@@ -32,7 +32,7 @@ const Zoom = ({ fermerZoom, photoPrec, photoSuiv, tousPhotos, diapo }) => {
                         <button onClick={photoPrec} />
                         <img
                             src={tousPhotos[diapo - 1].lien}
-                            alt={tousPhotos[diapo - 1].description}
+                            alt={tousPhotos[diapo - 1].texteAlt}
                         />
                         <button onClick={photoSuiv} />
                     </ImageEtNav>
