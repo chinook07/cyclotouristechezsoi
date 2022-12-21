@@ -12,43 +12,42 @@ const Nouveau = ({ item }) => {
 	const redig = (region) => {
 		const trouve = trajetsDB.find((item) => item.trajet === region);
 		setTrajetRedig(trouve);
-	};
+    };
+    
+    console.log(item.coulInv);
 
 	return (
-		<Wrapper>
-            <h3
-                couleur={item.couleur}
-                coulinv={item.coulInv}
-            >
-                <Link
+        <div>
+            <Region couleur={item.couleur} >
+                <Lien
                     onClick={() => redig(item.region)}
                     to="../trajets"
+                    police={item.police}
                 >
 					{item.region}
-				</Link>
-			</h3>
+				</Lien>
+			</Region>
 			<p>{item.texte}</p>
 			<p>
 				Source :{" "}
 				<ExternalLink href={item.url}>{item.lien}</ExternalLink>
 			</p>
-		</Wrapper>
+		</div>
 	);
 };
 
-const Wrapper = styled.div`
-	h3 {
-		background-color: ${(props) => props.couleur};
-		border: 1px solid var(--c10);
-		border-radius: 20px;
-		display: inline-block;
-		font-size: medium;
-		padding: 5px 10px;
-        a {
-            color: ${props => props.coulInv === "true" ? "red" : "green"};
-            text-decoration: none;
-        }
-	}
-`;
+const Region = styled.h3`
+    background-color: ${props => props.couleur };
+    border: 1px solid var(--c10);
+    border-radius: 20px;
+    display: inline-block;
+    font-size: medium;
+    padding: 5px 10px;
+`
+
+const Lien = styled(Link)`
+    color: ${props => props.police};
+    text-decoration: none;
+`
 
 export default Nouveau;
