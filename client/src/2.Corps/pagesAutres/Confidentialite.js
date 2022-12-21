@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ExternalLink } from "react-external-link";
@@ -41,7 +40,7 @@ const Confidentialite = () => {
                 {
                     pubsBloques
                         ? <p>Merci d'avoir choisi d'utiliser un bloqueur de publicités, aidant à réduire la surconsommation dans ce monde en pleine urgence climatique.</p>
-                        : <p>Attention! Vous n'utilisez pas de bloqueur de publicités. En installer un vous permettrait de naviguer plus rapidement sur le web, sans encombrement, tout en réduisant la surconsommation dans ce monde en pleine urgence climatique.</p>
+                        : <p>Attention! Vous n'utilisez pas de bloqueur de publicités. En installer un vous permettrait de naviguer plus rapidement sur le web, sans encombrement, tout en réduisant la surconsommation dans ce monde en pleine urgence climatique. À noter qu'il n'y a aucune publicité sur ce site web.</p>
                 }
             </div>
         </>
