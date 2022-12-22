@@ -59,13 +59,13 @@ const GalerieDuTrajet = ({ details }) => {
                         onClick={photoPrec}
                         role="navigation"
                     />
-                    <img src={imagesTout[idTrajet][tableauPhotos[0 + imgAMontrer]]} alt={ texteAltPhotos.trajet[idTrajet][imgAMontrer] } />
                     <FontAwesomeIcon
                         aria-label="image suivante"
                         icon={faForwardStep}
                         onClick={photoSuiv}
                         role="navigation"
                     />
+                    <img src={imagesTout[idTrajet][tableauPhotos[0 + imgAMontrer]]} alt={ texteAltPhotos.trajet[idTrajet][imgAMontrer] } />
                     <figcaption>{titrePhotos.trajet[idTrajet][imgAMontrer]}</figcaption>
                 </figure>
                 <Selecteur photosParRangee={photosParRangee}>
@@ -89,13 +89,15 @@ const GalerieDuTrajet = ({ details }) => {
 
 const Wrapper = styled.div`
     background-color: var(--c6);
+    display: flex;
+    flex-direction: column;
     margin: 0;
     max-width: 800px;
     width: 100%;
     figure {
-        height: unset;
+        height: initial;
         margin: 0;
-        max-height: unset;
+        max-height: initial;
         position: relative;
         > svg {
             background-color: #ffffff88;
