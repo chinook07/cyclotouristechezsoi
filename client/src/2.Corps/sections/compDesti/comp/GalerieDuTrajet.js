@@ -24,14 +24,20 @@ const GalerieDuTrajet = ({ details }) => {
         setImgAMontrer(choisi);
     }
 
-    let photosParRangee;
+    let photosParRangee, photosParRangeeMobi;
 
     if (nDePhotos <= 8) {
-        photosParRangee = nDePhotos
+        photosParRangee = nDePhotos;
     } else if (nDePhotos <= 16) {
         photosParRangee = nDePhotos / 2
     } else {
         photosParRangee = nDePhotos / 3
+    }
+
+    if (nDePhotos % 3 === 0) {
+        photosParRangeeMobi = 3
+    } else {
+        photosParRangeeMobi = 4
     }
 
     const photoPrec = () => {
@@ -68,7 +74,7 @@ const GalerieDuTrajet = ({ details }) => {
                     <img src={imagesTout[idTrajet][tableauPhotos[0 + imgAMontrer]]} alt={ texteAltPhotos.trajet[idTrajet][imgAMontrer] } />
                     <figcaption>{titrePhotos.trajet[idTrajet][imgAMontrer]}</figcaption>
                 </figure>
-                <Selecteur photosParRangee={photosParRangee}>
+                <Selecteur photosParRangee={photosParRangee} photosParRangeeMobi={photosParRangeeMobi}>
                     {
                         tableauPhotos.map((item, index) => {
                             return (
@@ -141,9 +147,14 @@ const Indicateur = styled.p`
 `
 
 const Selecteur = styled.div`
+    display: flex;
+    flex-wrap: wrap;
     img {
         cursor: pointer;
         width: ${props => `calc(100% / ${props.photosParRangee})`};
+        @media screen and (max-width: 600px) {
+            width: ${props => `calc(100% / ${props.photosParRangeeMobi})`};
+        }
     }
 `
 

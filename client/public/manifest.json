@@ -22,5 +22,6 @@
     "name": "CyclotouristeChezSoi",
     "scope": "../",
     "short_name": "CyclotouristeChezSoi",
-    "start_url": "/"
+    "start_url": "/",
+    "theme_color": "#749c75"
 }

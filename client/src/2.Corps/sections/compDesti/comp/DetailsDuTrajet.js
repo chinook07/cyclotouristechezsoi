@@ -24,7 +24,10 @@ const DetailsDuTrajet = ({ itineraire, changerTrajet }) => {
 					alt={`graphique montrant les villes le long du trajet de ${details.deA[0]} à ${details.deA[1]}`}
 				/>
 			) : (
-				<Schema src={TousSchemas[`SchemaM${details.id + 1}`]} />
+                    <Schema
+                        src={TousSchemas[`SchemaM${details.id + 1}`]}
+                        alt={`graphique montrant les villes le long du trajet de ${details.deA[0]} à ${details.deA[1]}`}
+                    />
 			)}
 			<div>
 				<p>Distance : {details.distance} km.</p>
