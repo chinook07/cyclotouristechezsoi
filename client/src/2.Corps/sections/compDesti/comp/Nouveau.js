@@ -42,12 +42,17 @@ const Region = styled.h3`
     border-radius: 20px;
     display: inline-block;
     font-size: medium;
-    padding: 5px 10px;
+    &:hover {
+        border-width: 2px;
+    }
 `
 
 const Lien = styled(Link)`
     color: ${props => props.police};
+    display: block;
+    padding: 5px 10px;
     text-decoration: none;
+    
 `
 
 export default Nouveau;

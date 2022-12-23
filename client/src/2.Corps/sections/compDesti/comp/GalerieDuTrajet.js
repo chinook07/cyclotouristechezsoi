@@ -100,7 +100,7 @@ const Wrapper = styled.div`
     margin: 0;
     max-width: 800px;
     width: 100%;
-    figure {
+    > figure {
         height: initial;
         margin: 0;
         max-height: initial;
