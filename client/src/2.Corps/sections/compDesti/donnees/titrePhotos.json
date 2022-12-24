@@ -141,12 +141,14 @@
             "11": "Mashteuiatsch"
         },
         "16": {
-            "0": "Lac Raymond",
-            "1": "Lac Raymond",
-            "2": "Entre Val-Morin et Ste-Adèle",
-            "3": "Piedmont",
-            "4": "Parc régional de la Rivière-du-Nord",
-            "5": "St-Jérôme"
+            "0": "Labelle",
+            "1": "Entre Labelle et La Conception-Station",
+            "2": "Lac Raymond",
+            "3": "Lac Raymond",
+            "4": "Entre Val-Morin et Ste-Adèle",
+            "5": "Piedmont",
+            "6": "Parc régional de la Rivière-du-Nord",
+            "7": "St-Jérôme"
         },
         "17": {
             "0": "St-Mathieu-du-Parc",
@@ -199,14 +201,16 @@
             "1": "La Montérégiade à Ste-Brigide-d'Iberville",
             "2": "La Montérégiade à Ange-Gardien",
             "3": "La Montérégiade à Ange-Gardien",
-            "4": "Stukely",
-            "5": "Stukely",
-            "6": "Parc national du Mont-Orford",
-            "7": "Orford",
-            "8": "Magog",
-            "9": "Entre Rock Forest et North Hatley",
-            "10": "Entre North Hatley et Lennoxville",
-            "11": "Entre Lennoxville et Sherbrooke (centre-ville)"
+            "4": "Granby",
+            "5": "Entre Bromont et Waterloo",
+            "6": "Stukely",
+            "7": "Stukely",
+            "8": "Parc national du Mont-Orford",
+            "9": "Orford",
+            "10": "Magog",
+            "11": "Entre Rock Forest et North Hatley",
+            "12": "Entre North Hatley et Lennoxville",
+            "13": "Entre Lennoxville et Sherbrooke (centre-ville)"
         },
         "21": {
             "0": "Parc national de Plaisance",
