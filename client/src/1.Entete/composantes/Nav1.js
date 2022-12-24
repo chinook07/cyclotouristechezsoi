@@ -92,6 +92,9 @@ const Langue = styled.div`
     svg {
         margin-left: 4px;
     }
+    &:hover {
+        color: var(--c6);
+    }
 `
 
 export default Nav1;

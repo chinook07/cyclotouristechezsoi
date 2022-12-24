@@ -32,21 +32,22 @@
             "6": "Baie-Ste-Catherine"
         },
         "6": {
-            "0": "ÀVenir",
-            "1": "ÀVenir",
-            "2": "ÀVenir",
-            "3": "ÀVenir",
-            "4": "ÀVenir",
-            "5": "ÀVenir",
-            "6": "ÀVenir",
-            "7": "ÀVenir",
-            "8": "ÀVenir",
-            "9": "ÀVenir",
-            "10": "ÀVenir",
-            "12": "ÀVenir",
-            "13": "ÀVenir",
-            "14": "ÀVenir",
-            "15": "ÀVenir"
+            "0": "Campbellton",
+            "1": "Beresford",
+            "2": "New Brandon",
+            "3": "Parc provincial Pokeshaw",
+            "4": "Rivière-du-Portage",
+            "5": "Tabusinctac",
+            "6": "Miramichi",
+            "7": "Escuminac",
+            "8": "Point Escuminac",
+            "9": "Pointe-Sapin",
+            "10": "Parc national Kouchibouguac",
+            "11": "St-Louis-de-Kent",
+            "12": "Entre Cap-Lumière et Ste-Anne-de-Kent",
+            "13": "Dune de Bouchtouche",
+            "14": "Beaubassin-Est",
+            "15": "Entre Beaubassin-Est et le parc provincial de la Plage-Murray"
         },
         "7": {
             "0": "Tadoussac",
@@ -96,24 +97,24 @@
             "17": "L'Anse-au-Griffon"
         },
         "11": {
-            "0": "ÀVenir",
-            "1": "ÀVenir",
-            "2": "ÀVenir",
-            "3": "ÀVenir",
-            "4": "ÀVenir",
-            "5": "ÀVenir",
-            "6": "ÀVenir",
-            "7": "ÀVenir"
+            "0": "Kinkora",
+            "1": "Entre Kensington et la côte au nord",
+            "2": "French River",
+            "3": "Parc national de l'Ile-du-Prince-Édouard – secteur Cavendish",
+            "4": "Parc national de l'Ile-du-Prince-Édouard – secteur Stanhope",
+            "5": "Mount Stewart",
+            "6": "Cable Head East",
+            "7": "Entre St-Peters et Souris"
         },
         "12": {
-            "0": "ÀVenir",
-            "1": "ÀVenir",
-            "2": "ÀVenir",
-            "3": "ÀVenir",
-            "4": "ÀVenir",
-            "5": "ÀVenir",
-            "6": "ÀVenir",
-            "7": "ÀVenir"
+            "0": "Sur le traversier",
+            "1": "Cap-aux-Meules",
+            "2": "Havre-aux-Maisons",
+            "3": "Havre-aux-Maisons",
+            "4": "Havre-aux-Maisons",
+            "5": "Havre-aux-Maisons",
+            "6": "Gros-Cap",
+            "7": "L'Étang-du-Nord"
         },
         "13": {
             "0": "Lac MacLaurin",
