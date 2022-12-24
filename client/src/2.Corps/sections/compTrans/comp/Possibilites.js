@@ -38,7 +38,6 @@ const Possibilites = ({ villeSouhaitee }) => {
                 montrerLegende &&
                 <Legende toutesIcones={toutesIcones} />
             }
-            
             {
                 villeSouhaitee &&
                 routes.map((item, index) => {
@@ -64,6 +63,7 @@ const Possibilites = ({ villeSouhaitee }) => {
                     </Itineraire>
                 })
             }
+            <p>Attention : ces informations sont sujets à changement. <strong>Toujours vérifier la source officielle avant de voyager.</strong></p>
         </Wrapper>
     )
 }

@@ -107,6 +107,17 @@
         "trajet": "Ligne d'autocar entre Val-d'Or, Matagami et Chisasibi.",
         "heures": "2 départs par semaine"
     },
+    "12": {
+        "icone": [
+            2,
+            6,
+            7,
+            8
+        ],
+        "transporteur": "Autobus Maheux",
+        "trajet": "Ligne d'autocar entre Rouyn-Noranda et Ville-Marie.",
+        "heures": "7 jours sur 7."
+    },
     "20": {
         "icone": [
             2,
@@ -116,7 +127,7 @@
         ],
         "transporteur": "Autobus Maheux",
         "trajet": "Ligne d'autocar entre Montréal, Gatineau et Ottawa.",
-        "heures": "2 départs par semaine"
+        "heures": "7 jours sur 7."
     },
     "21": {
         "icone": [
@@ -127,7 +138,7 @@
         ],
         "transporteur": "Autobus Maheux",
         "trajet": "Ligne d'autocar entre Grand-Remous, Gatineau et Ottawa.",
-        "heures": "sur semaine seulement"
+        "heures": "6 jours sur 7."
     },
     "30": {
         "icone": [
@@ -278,6 +289,36 @@
         "trajet": "Ligne d'autocar entre Saint-Félicien et Chibougamau.",
         "heures": "1 départ par semaine"
     },
+    "85": {
+        "icone": [
+            2,
+            6,
+            8
+        ],
+        "transporteur": "Intercar",
+        "trajet": "Ligne d'autocar entre Québec et Baie-Comeau.",
+        "heures": "7 jours sur 7"
+    },
+    "86": {
+        "icone": [
+            2,
+            6,
+            8
+        ],
+        "transporteur": "Intercar",
+        "trajet": "Ligne d'autocar entre Baie-Comeau et Sept-Iles.",
+        "heures": "5 départs par semaine"
+    },
+    "87": {
+        "icone": [
+            2,
+            6,
+            8
+        ],
+        "transporteur": "Intercar",
+        "trajet": "Ligne d'autocar entre Sept-Iles et Havre-St-Pierre.",
+        "heures": "sur semaine seulement"
+    },
     "100": {
         "icone": [
             1,
@@ -367,6 +408,39 @@
         "transporteur": "exo",
         "trajet": "Circuit 300 – Autobus entre Montréal, Mont-Saint-Hilaire et Saint-Hyacinthe.",
         "heures": "sur semaine seulement, principalement à l'heure de pointe."
+    },
+    "140": {
+        "icone": [
+            3,
+            5,
+            9,
+            10
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 700 – Autobus entre Longueuil et Sorel-Tracy.",
+        "heures": "7 jours sur 7"
+    },
+    "141": {
+        "icone": [
+            3,
+            5,
+            9,
+            10
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 701 – Autobus entre Longueuil et Contrecoeur.",
+        "heures": "7 jours sur 7"
+    },
+    "142": {
+        "icone": [
+            3,
+            5,
+            9,
+            10
+        ],
+        "transporteur": "exo",
+        "trajet": "Plusieurs parcours entre Longueuil, Varennes et St-Amable. Consultez le site du transporteur.",
+        "heures": "7 jours sur 7, surtout en pointe."
     },
     "150": {
         "icone": [
@@ -467,6 +541,73 @@
         "transporteur": "exo",
         "trajet": "Circuit 59 – Autobus entre Laval et Mirabel.",
         "heures": "sur semaine seulement, principalement à l'heure de pointe."
+    },
+    "300": {
+        "icone": [
+            3,
+            5,
+            10
+        ],
+        "transporteur": "Transcollines",
+        "trajet": "Plusieurs parcours régionaux. Consultez le site du transporteur.",
+        "heures": "7 jours sur 7, surtout en pointe."
+    },
+    "305": {
+        "icone": [
+            3,
+            5,
+            10
+        ],
+        "transporteur": "TaCL",
+        "trajet": "Circuit l'Inter",
+        "heures": "7 jours sur 7."
+    },
+    "310": {
+        "icone": [
+            3,
+            5
+        ],
+        "transporteur": "Jembarque",
+        "trajet": "Circuit 50 – Autobus entre Montréal et Joliette.",
+        "heures": "7 jours sur 7."
+    },
+    "311": {
+        "icone": [
+            3,
+            5
+        ],
+        "transporteur": "Jembarque",
+        "trajet": "Circuit 125 – Autobus entre Montréal et St-Donat.",
+        "heures": "7 jours sur 7."
+    },
+    "312": {
+        "icone": [
+            3,
+            5
+        ],
+        "transporteur": "Jembarque",
+        "trajet": "Circuit 131-138 – Autobus entre Berthierville et Joliette.",
+        "heures": "7 jours sur 7."
+    },
+    "320": {
+        "icone": [
+            3,
+            5,
+            10
+        ],
+        "transporteur": "PLUMobile",
+        "trajet": "Plusieurs parcours régionaux. Consultez le site du transporteur.",
+        "heures": "7 jours sur 7."
+    },
+    "330": {
+        "icone": [
+            3,
+            5,
+            10
+        ],
+        "transporteur": "Transcollines",
+        "trajet": "Plusieurs parcours régionaux. Consultez le site du transporteur.",
+        "heures": "sur semaine seulement"
     },
     "400": {
         "icone": [

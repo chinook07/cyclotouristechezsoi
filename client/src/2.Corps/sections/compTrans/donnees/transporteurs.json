@@ -1,11 +1,16 @@
 {
-    "Via Rail" : "https://www.viarail.ca/fr/planifier/bagages/articles-hors-norme",
-    "Train de Charlevoix" : "https://traindecharlevoix.com/le-train/bagages/",
-    "exo" : "https://exo.quebec/fr/planifier-trajet/velo/velo-a-bord",
-    "Autobus Maheux" : "https://autobusmaheux.com/",
-    "Autobus Galland" : "https://www.galland-bus.com/detail-actualites/17-transport-de-velos/",
-    "Orléans Express" : "https://www.orleansexpress.com/fr/politique-transport-velo/",
-    "Intercar" : "https://intercar.ca/fr/conditions-utilisation",
-    "Limocar" : "https://limocar.ca/guide-du-voyageur/#bagages-velo",
-    "Navark" : "https://www.navark.ca/navettes-fluviales/"
+    "Via Rail": "https://www.viarail.ca/fr/planifier/bagages/articles-hors-norme",
+    "Train de Charlevoix": "https://traindecharlevoix.com/le-train/bagages/",
+    "exo": "https://exo.quebec/fr/planifier-trajet/velo/velo-a-bord",
+    "Autobus Maheux": "https://autobusmaheux.com/",
+    "Autobus Galland": "https://www.galland-bus.com/detail-actualites/17-transport-de-velos/",
+    "Orléans Express": "https://www.orleansexpress.com/fr/politique-transport-velo/",
+    "Intercar": "https://intercar.ca/fr/conditions-utilisation",
+    "Limocar": "https://limocar.ca/guide-du-voyageur/#bagages-velo",
+    "Navark": "https://www.navark.ca/navettes-fluviales/",
+    "Transcollines": "https://transcollines.ca/",
+    "TaCL": "https://www.transportlaurentides.ca/",
+    "Jembarque": "https://mrcjoliette.qc.ca/transport-mrc-joliette/circuits-regionaux/",
+    "PLUMobile": "http://www.plumobile.ca/",
+    "RÉGIM": "https://regim.info/"
 }

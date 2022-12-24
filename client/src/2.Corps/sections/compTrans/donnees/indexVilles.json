@@ -20,7 +20,8 @@
         21
     ],
     "Baie-Comeau": [
-        999
+        84,
+        85
     ],
     "Baie-d'Urfé": [
         100
@@ -29,9 +30,6 @@
         8,
         9
     ],
-    "Baie-Sainte-Catherine": [
-        999
-    ],
     "Beaconsfield": [
         100
     ],
@@ -39,12 +37,16 @@
         120,
         401
     ],
+    "Beaupré": [
+        320
+    ],
     "Beloeil": [
         130,
         131
     ],
     "Berthierville": [
-        51
+        51,
+        312
     ],
     "Blainville": [
         101,
@@ -57,12 +59,19 @@
         21
     ],
     "Boisbriand": [
-        999
+        173
+    ],
+    "Boischâtel": [
+        320
     ],
     "Bonaventure": [
-        62
+        62,
+        330
     ],
     "Boucherville": [
+        140,
+        141,
+        142,
         404,
         406,
         409
@@ -83,13 +92,14 @@
         103
     ],
     "Cantley": [
-        999
+        300
     ],
     "Cap-Chat": [
         61
     ],
     "Carleton-sur-Mer": [
-        62
+        62,
+        330
     ],
     "Chambord": [
         5,
@@ -97,7 +107,11 @@
         83
     ],
     "Chandler": [
-        62
+        62,
+        330
+    ],
+    "Château-Richer": [
+        320
     ],
     "Châteauguay": [
         120,
@@ -105,10 +119,10 @@
         403
     ],
     "Chelsea": [
-        999
+        300
     ],
     "Chertsey": [
-        999
+        311
     ],
     "Chibougamau": [
         84
@@ -134,16 +148,18 @@
         10
     ],
     "Forestville": [
-        999
+        84
     ],
     "Gaspé": [
         61,
-        62
+        62,
+        330
     ],
     "Gatineau": [
         20,
         21,
-        53
+        53,
+        300
     ],
     "Gracefield": [
         21
@@ -153,17 +169,27 @@
         21
     ],
     "Grande-Rivière": [
-        62
+        62,
+        330
     ],
     "Grande-Vallée": [
-        61
+        61,
+        330
+    ],
+    "Grandes-Bergeronnes": [
+        84
+    ],
+    "Havre-Saint-Pierre": [
+        86
     ],
     "Hébertville": [
         82
     ],
     "Joliette": [
         5,
-        6
+        6,
+        310,
+        312
     ],
     "Kahnawake": [
         120,
@@ -175,11 +201,15 @@
     "Kirkland": [
         53
     ],
+    "L'Ange-Gardien": [
+        320
+    ],
     "L'Ile-Perrot": [
         100
     ],
     "La Malbaie": [
-        9
+        9,
+        84
     ],
     "La Pocatière": [
         60
@@ -201,10 +231,12 @@
         170,
         171,
         172,
-        173
+        173,
+        311
     ],
     "Lavaltrie": [
-        999
+        310,
+        312
     ],
     "Le Domaine": [
         10
@@ -212,17 +244,20 @@
     "Léry": [
         120
     ],
-    "Les Bergeronnes": [
-        999
-    ],
     "Longueuil": [
         40,
         50,
         52,
         104,
         130,
+        140,
+        141,
+        142,
         407,
         406
+    ],
+    "Longue-Rive": [
+        84
     ],
     "Louvicourt": [
         10
@@ -249,7 +284,8 @@
         61
     ],
     "Matapédia": [
-        62
+        62,
+        330
     ],
     "McMasterville": [
         130,
@@ -277,7 +313,8 @@
         30
     ],
     "Mont-Louis": [
-        61
+        61,
+        330
     ],
     "Mont-Saint-Hilaire": [
         104,
@@ -286,7 +323,8 @@
     ],
     "Mont-Tremblant": [
         10,
-        30
+        30,
+        305
     ],
     "Montmagny": [
         60
@@ -318,6 +356,8 @@
         161,
         162,
         163,
+        310,
+        311,
         403,
         404,
         405,
@@ -326,7 +366,8 @@
         410
     ],
     "New Richmond": [
-        62
+        62,
+        330
     ],
     "Normandin": [
         82,
@@ -345,13 +386,16 @@
         53
     ],
     "Paspébiac": [
-        62
+        62,
+        330
     ],
     "Percé": [
-        62
+        62,
+        330
     ],
     "Pointe-à-la-Croix": [
-        62
+        62,
+        330
     ],
     "Pointe-Claire": [
         100
@@ -360,10 +404,11 @@
         400
     ],
     "Port-Cartier": [
-        999
+        85
     ],
     "Port-Daniel": [
-        62
+        62,
+        330
     ],
     "Québec": [
         2,
@@ -374,16 +419,19 @@
         52,
         60,
         80,
-        82
+        82,
+        85,
+        320
     ],
     "Rawdon": [
-        999
+        311
     ],
     "Repentigny": [
         51,
         102,
         150,
         151,
+        310,
         410
     ],
     "Rimouski": [
@@ -395,7 +443,8 @@
         5
     ],
     "Rivière-au-Renard": [
-        61
+        61,
+        330
     ],
     "Rivière-du-Loup": [
         60
@@ -415,7 +464,8 @@
         101
     ],
     "Rouyn-Noranda": [
-        10
+        10,
+        12
     ],
     "Saguenay": [
         5,
@@ -423,7 +473,7 @@
         81
     ],
     "Saint-Amable": [
-        999
+        142
     ],
     "Saint-Basile-le-Grand": [
         104,
@@ -443,13 +493,13 @@
         103
     ],
     "Saint-Donat": [
-        999
+        311
+    ],
+    "Saint-Esprit": [
+        311
     ],
     "Saint-Eustache": [
         170
-    ],
-    "Saint-Félicien": [
-        999
     ],
     "Saint-Hyacinthe": [
         52,
@@ -466,7 +516,11 @@
         10,
         30,
         101,
-        171
+        171,
+        305
+    ],
+    "Saint-Julien": [
+        311
     ],
     "Saint-Lambert": [
         2,
@@ -476,32 +530,43 @@
         82,
         83
     ],
+    "Saint-Roch-de-l'Achigan": [
+        311
+    ],
     "Saint-Sauveur": [
-        30
+        30,
+        305
     ],
     "Saint-Siméon": [
-        999
+        84
     ],
     "Saint-Tite": [
         5,
         6
     ],
+    "Saint-Tite-des-Caps": [
+        84
+    ],
     "Sainte-Adèle": [
-        30
+        30,
+        305
     ],
     "Sainte-Agathe-des-Monts": [
         10,
-        30
+        30,
+        305
     ],
     "Sainte-Anne-de-Beaupré": [
-        8
+        8,
+        320
     ],
     "Sainte-Anne-de-Bellevue": [
         100,
         402
     ],
     "Sainte-Anne-des-Monts": [
-        61
+        61,
+        330
     ],
     "Sainte-Catherine": [
         103
@@ -517,7 +582,8 @@
         6
     ],
     "Sept-Iles": [
-        999
+        85,
+        86
     ],
     "Shawinigan": [
         5,
@@ -527,13 +593,14 @@
         40
     ],
     "Sorel": [
-        99
+        140
     ],
     "Tadoussac": [
-        81
+        81,
+        84
     ],
     "Témiscaming": [
-        999
+        12
     ],
     "Terrebonne": [
         102,
@@ -541,7 +608,8 @@
         161,
         162,
         163,
-        172
+        172,
+        311
     ],
     "Trois-Pistoles": [
         60
@@ -554,15 +622,23 @@
         11
     ],
     "Val-David": [
-        30
+        30,
+        305
+    ],
+    "Val-des-Monts": [
+        300
     ],
     "Val-Guertin": [
         21
     ],
     "Val-Morin": [
-        30
+        30,
+        305
     ],
     "Varennes": [
+        140,
+        141,
+        142,
         410
     ],
     "Vaudreuil-Dorion": [
@@ -575,9 +651,10 @@
         52
     ],
     "Ville-Marie": [
-        999
+        12
     ],
     "Wakefield": [
-        21
+        21,
+        300
     ]
 }
