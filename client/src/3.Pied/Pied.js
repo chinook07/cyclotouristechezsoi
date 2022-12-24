@@ -47,15 +47,13 @@ const Wrapper = styled.footer`
     }
 `
 
-const Auteur = styled.div`
+const Auteur = styled.p`
     align-items: center;
     display: flex;
     flex-wrap: wrap;
+    margin: 0;
     span {
         margin-right: 10px;
-    }
-    a {
-        /* line-height: 1.6; */
     }
 `
 

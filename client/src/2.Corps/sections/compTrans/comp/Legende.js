@@ -12,9 +12,9 @@ const Legende = ({toutesIcones}) => {
         "vélos non-démontés acceptés",
         "boite requise",
         "sac requis",
-        "vélos acceptés en tout temps",
-        "vélos acceptés sur certains départs",
-        "vélos acceptés durant la journée seulement"
+        "vélos en tout temps",
+        "vélos sur certains départs",
+        "vélos durant la journée seulement"
     ]
 
     return (

@@ -80,7 +80,7 @@ const DetailsDuTrajet = ({ itineraire, changerTrajet }) => {
 };
 
 const Wrapper = styled.div`
-	figure {
+	> figure {
 		height: 500px;
 		margin: 10px 0 50px;
 		max-height: 70vh;

@@ -26,14 +26,14 @@ const Possibilites = ({ villeSouhaitee }) => {
     const alternerLegende = () => montrerLegende ? setMontrerLegende(false) : setMontrerLegende(true);
 
     return (
-        <Wrapper>
-            <button onClick={alternerLegende}>
+        <div>
+            <ActiverLegende onClick={alternerLegende}>
                 {
                     montrerLegende
                         ? <div><FontAwesomeIcon icon={faAnglesUp}/><span>Cacher légende</span></div>
                         : <div><FontAwesomeIcon icon={faAnglesDown}/><span>Montrer légende</span></div>
                 }
-            </button>
+            </ActiverLegende>
             {
                 montrerLegende &&
                 <Legende toutesIcones={toutesIcones} />
@@ -56,37 +56,38 @@ const Possibilites = ({ villeSouhaitee }) => {
                                 })
                             }
                         </div>
-                        <div>{item.trajet}</div>
-                        <div>Période d'opération : {item.heures}</div>
-                        <div>{item.velos}</div>
-                        <div>Transporteur : <ExternalLink href={transporteurs[item.transporteur]}>{item.transporteur}</ExternalLink></div>
+                        <p>{item.trajet}</p>
+                        <p>Période d'opération : {item.heures}</p>
+                        <p>{item.velos}</p>
+                        <p>Transporteur : <ExternalLink href={transporteurs[item.transporteur]}>{item.transporteur}</ExternalLink></p>
                     </Itineraire>
                 })
             }
             <p>Attention : ces informations sont sujets à changement. <strong>Toujours vérifier la source officielle avant de voyager.</strong></p>
-        </Wrapper>
+        </div>
     )
 }
 
-const Wrapper = styled.div`
-    button {
-        background-color: var(--c6);
-        border: none;
-        border-radius: 5px 5px 0 0;
-        color: var(--c1);
-        cursor: pointer;
-        padding: 10px;
-        &:hover {
-            background-color: var(--c5);
-        }
-        svg {
-            margin-right: 5px;
-        }
+const ActiverLegende = styled.button`
+    background-color: var(--c6);
+    border: none;
+    border-radius: 5px 5px 0 0;
+    color: var(--c1);
+    cursor: pointer;
+    padding: 10px;
+    &:hover {
+        background-color: var(--c5);
+    }
+    svg {
+        margin-right: 5px;
     }
 `
 
 const Itineraire = styled.div`
     padding: 15px 0;
+    p {
+        margin: 0;
+    }
     svg {
         margin: 0 5px;
     }
