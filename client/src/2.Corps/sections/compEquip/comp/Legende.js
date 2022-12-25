@@ -8,7 +8,7 @@ const Legende = () => {
                 <div aria-label="vert">Sacoche latérale (avant ou arrière)</div>
                 <div aria-label="rose">Sac de guidon</div>
                 <div aria-label="jaune">Tente bien attaché au porte-bagages</div>
-                <div aria-label="orange">Sac de porte-bagages</div>
+                <div aria-label="orange">Sac de porte-bagage</div>
             </div>
         </Wrapper>
     )

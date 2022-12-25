@@ -139,7 +139,7 @@ const Comm1 = ({ boiteOuverte, setBoiteOuverte }) => {
                             className="acc-tetes-A"
                             id="acc-tete-2"
                             type="button"
-                        >Une boucle vs. un trajet linéaire</button>
+                        >Une boucle vs un trajet linéaire</button>
                         {
                             boiteOuverte === 2
                                 ? <FontAwesomeIcon icon={faAngleDoubleUp} />
@@ -238,11 +238,11 @@ const Comm1 = ({ boiteOuverte, setBoiteOuverte }) => {
                             >
                                 <p>Ce qui empêche les gens de gouter au cyclotourisme, c'est souvent l'effort physique requis. Or, on peut choisir un parcours selon sa difficulté, et rouler une distance qu'on trouve acceptable. La vallée du fleuve Saint-Laurent, celle de l'Outaouais, ainsi que les nombreuses pistes cyclables aménagées sur d'anciennes emprises ferroviaires, présentent des espaces conviviaux pour les débutants. Le reste du Québec offre des collines pour ceux et celles qui le souhaitent. Comment choisir une destination qui respecte nos capacités physiques? Dans votre planificateur d'itinéraire préféré, une fois que vous aurez choisi un trajet, vous aurez un dénivelé positif (ascension) et négatif (descente).</p>
                                 <DeuxFiguresPetit photo1={photo3} photo2={photo4} />
-                                <p>À noter que le dénivelé pour un même trajet (voir images ci-dessus) peut différer selon la calculateur utilisé, puisque la source des données topographiques n'est pas la même.</p>
+                                <p>À noter que le dénivelé pour un même trajet (voir images ci-dessus) peut différer selon le calculateur utilisé, puisque la source des données topographiques n'est pas la même.</p>
                                 <p>Plutôt qu'avec des RPM, une façon scientifique et ludique de connaitre la difficulté d'un trajet consiste à diviser le nombre de mètres montés par le nombre de kilomètres franchis. Cela nous donne aussi le nombre de <Gras>jurons par minute</Gras> qu'un cycliste risque de grommeler.</p>
                                 <p>Ce calcul peut être fait pour estimer la difficulté d'une journée ou bien d'un voyage au complet. Il est déconseillé pour les courtes distances.</p>
                                 <Diff />
-                                <div>*La difficulté dépend aussi d'autres facteurs, tels la surface de roulement, la distribution du dénivelé sur un trajet (une énorme côte vs. des faux-plats toute la journée), le nombre de km effectué par jour, la vitesse et la direction du vent, ainsi que la motivation.</div>
+                                <div>*La difficulté dépend aussi d'autres facteurs, tels la surface de roulement, la distribution du dénivelé sur un trajet (une énorme côte vs des faux plats toute la journée), le nombre de km effectué par jour, la vitesse et la direction du vent, ainsi que la motivation.</div>
                         </Infos>
                     }
                 </Boite>

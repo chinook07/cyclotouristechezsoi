@@ -82,7 +82,7 @@ const Wrapper = styled.div`
         display: flex;
         justify-content: space-between;
         margin-bottom: 0;
-        padding: 10px 20px;
+        
         button {
             background-color: unset;
             border: none;
@@ -90,8 +90,12 @@ const Wrapper = styled.div`
             font-family: inherit;
             font-size: large;
             font-weight: bold;
+            padding: 10px 20px;
             text-align: left;
             width: 100%;
+        }
+        svg {
+            padding: 10px;
         }
     }
     div {

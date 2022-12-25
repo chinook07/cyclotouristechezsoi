@@ -23,7 +23,7 @@ const Intro = () => {
             <p>Lorsque l'idée vous vient à l'esprit d'apprivoiser le cyclotourisme, il est facile de se perdre à travers les conseils que l'on reçoit. Quoiqu'il y aura beaucoup de décisions à prendre et de préparations à effectuer avant d'enfourcher son vélo pour la destination choisie, il y a deux préalables à tout voyage : vouloir voyager, et être prêt à le faire à vélo.</p>
             <DeuxFiguresPetit photo1={photo1} photo2={photo2} />
             <h2>Faire le saut</h2>
-            <p>Dans les prochaines pages, vous acquérissez des connaissances liée à la pratique du cyclotourisme dans les champs suivants :</p>
+            <p>Dans les prochaines pages, vous acquérez des connaissances liées à la pratique du cyclotourisme dans les champs suivants :</p>
             <ul>
                 <li>le sorte de voyage</li>
                 <li>le choix d'un itinéraire</li>

@@ -11,7 +11,7 @@ const Contact = () => {
             target="blank"
         >
             <p>Vous avez une suggestion à faire? Vous souhaitez signaler une erreur sur le site? Vous aimeriez collaborer avec l'auteur? Besoin de contacter Cyclotouristechezsoi pour n'importe quelle autre raison? Remplissez le formulaire ci-dessous, et vous serez rejoint dans les plus brefs délais.</p>
-            <p>Pour les demandes d'information en lien avec le cyclotourisme, il me fera plaisir de vous répondre, mais je vous recommande de consulter les pages sur ce site car votre réponse s'y trouve probablement!</p>
+            <p>Pour les demandes d'information en lien avec le cyclotourisme, il me fera plaisir de vous répondre, mais je vous conseille de consulter les pages sur ce site, car votre réponse s'y trouve probablement!</p>
             <Lang><span lang="EN">Feel free to write in English.</span> <span lang="DE">Sie können gerne auf Deutsch schreiben.</span></Lang>
             <Coordonnees>
                 <label htmlFor="prenom">Prénom</label>

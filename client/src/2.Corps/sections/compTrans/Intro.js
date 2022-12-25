@@ -27,7 +27,7 @@ const Intro = () => {
             <ul>
                 <li>Renseignez-vous sur les modalités du transport de votre vélo.</li>
                 <li>Arrivez à l'avance pour éviter de devoir vous dépêcher, surtout si vous devez démonter votre vélo.</li>
-                <li>Munissez-vous d'un plan B, au cas où le transport du vélo s'avère impossible.</li>
+                <li>Munissez-vous d'un plan B, au cas où le transport du vélo s'avèrerait impossible.</li>
             </ul>
         </Wrapper>
     )

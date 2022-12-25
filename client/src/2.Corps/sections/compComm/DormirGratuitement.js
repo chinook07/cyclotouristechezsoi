@@ -22,7 +22,7 @@ const DormirGratuitement = () => {
 	return (
         <Wrapper>
             <section>
-                <p>Il est possible de voyager à vélo sans toujours devoir débourser un montant parfois dérisoire chaque nuit. Les campings privés offrent souvent des activités, une piscine, des attraits touristiques et la possibilité d'y passer ses vacances sans sortir de son véhicule motorisé. Par contre, le cyclotouriste lendemain, en profitant d'un bloc sanitaire et d'une table à piquenique. Or, une personne voulant manger un sandwich et une salade n'irait pas à un buffet cinq étoiles. Sous cette même optique, il existe des solutions de rechange aux campings payants.</p>
+                <p>Il est possible de voyager à vélo sans toujours devoir débourser un montant parfois dérisoire chaque nuit. Les campings privés offrent souvent des activités, une piscine, des attraits touristiques et la possibilité d'y passer ses vacances sans sortir de son véhicule motorisé. Par contre, le cyclotouriste partira tôt le lendemain, en profitant d'un bloc sanitaire et d'une table à piquenique. Or, une personne voulant manger un sandwich et une salade n'irait pas à un buffet cinq-étoiles. Sous cette même optique, il existe des solutions de rechange aux campings payants.</p>
                 <p>Cette carte est le fruit du travail de plusieurs cyclotouristes ayant ajouté des sites recommandés pour le bivouac. Il incombe à l'usager d'être responsable de ses actions, de respecter les règlements en vigueur, et bien sûr de laisser l'endroit propre pour les autres utilisateurs. <span>Le cyclotourisme a un nombre très limité d'adeptes, encore moins si on ne compte que ceux et celles dormant dans leurs tentes. Pour éviter que ces endroits de repos deviennent surutilisés, veuillez ne pas partager le lien de cette page ou cette carte librement sur les réseaux sociaux. Aidons-nous à conserver ces sites pour les générations futures!</span></p>
                 <p><strong>Cette carte sera améliorée dans les prochains mois.</strong></p>
                 <CarteGoogle title="carte des campings gratuits" src="https://www.google.com/maps/d/u/0/embed?mid=1obdd8oU_9xShpHUY-L29RT6OwxerfCGI&ehbc=2E312F"></CarteGoogle>
@@ -31,7 +31,7 @@ const DormirGratuitement = () => {
             <section>
                 <h2>Est-ce que c'est légal?</h2>
                 <p>Il n'y a aucune loi provinciale encadrant le camping sauvage mur-à-mur. <ExternalLink href="https://educaloi.qc.ca/actualites-juridiques/camping-peut-on-installer-sa-tente-nimporte-ou/">Sur les terres du domaine public</ExternalLink>, il est possible de s'installer, par contre il s'avère difficile de trouver des cartes pour ainsi connaitre leurs emplacements. Sur les abords des pistes cyclables, il y a souvent des panneaux interdisant le camping, et couramment la même situation aux haltes routières. Même si le camping n'est pas proscrit dans le cas d'un parc public, il peut être illégal de se trouver dans celui-ci après une certaine heure. Finalement, certaines municipalités comme Gaspé ont choisi d'interdire le camping sur tout le territoire, sauf aux sites aménagés.</p>
-                <p>Le camping sauvage est par défaut interdit sur les emprises des pistes cyclables suivantes. Une signalisation claire l'indique sur place. <span>Cette liste n'est pas exhaustive.</span></p>
+                <p>Le camping sauvage est par défaut proscrit sur les emprises des pistes cyclables suivantes. Une signalisation claire l'indique sur place. <span>Cette liste n'est pas exhaustive.</span></p>
                 <IllegalParDefault>
                     <CampingInterdit aria-hidden />
                     <ol type="A">
@@ -47,7 +47,7 @@ const DormirGratuitement = () => {
             </section>
             <section>
                 <h2>Est-ce qu'il y a un moyen pour trouver l'emplacement des terres publiques?</h2>
-                <p>Malheureusement, ce n'est pas aussi facile que ça devrait l'être. Il n'existe pas d'atlas détaillé au niveau provincial, par contre, il est souvent possible de trouver des cartes montrant qui détient quel terrain, sur le site web des <abbr title="municipalités régionales de comté">MRC</abbr>. Utilisez les mots-clés <em>cartographie interactive MRC (nom de la MRC)</em> sur votre moteur de recherche préféré. Quelques exemples de cartes :</p>
+                <p>Malheureusement, ce n'est pas aussi facile que ça devrait l'être. Il n'existe pas d'atlas détaillé au niveau provincial, par contre, il est souvent possible de trouver des plans montrant qui détient quel terrain, sur le site web des <abbr title="municipalités régionales de comté">MRC</abbr>. Utilisez les mots-clés <em>cartographie interactive MRC (nom de la MRC)</em> sur votre moteur de recherche préféré. Quelques exemples de cartes :</p>
                 <ul>
                     <li><ExternalLink href="https://mrcargenteuil.maps.arcgis.com/apps/webappviewer/index.html?id=3bd2482392ee491d91f198a004ebab18&extent=-8360793.2707%2C5698027.9677%2C-8214034.1764%2C5770184.5224%2C102100">MRC d'Argenteuil, Laurentides</ExternalLink></li>
                     <li><ExternalLink href="http://cartographie.mrclaurentides.qc.ca/mobile/">MRC des Laurentides, Laurentides</ExternalLink></li>

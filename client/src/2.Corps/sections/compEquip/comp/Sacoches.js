@@ -10,7 +10,7 @@ const Sacoches = () => {
             <figure>
                 <div>A</div>
                 <img src={config1} alt="sacoche de guidon à l'avant, sacoches latérales, de porte-bagages et une tente à l'arrière" />
-                <figcaption>La majorité du poids se situe à l'arrière. Ceci n'est pas idéal, mais permet de se passer d'un porte-bagages à l'avant.</figcaption>
+                <figcaption>La majorité du poids se situe à l'arrière. Ceci n'est pas idéal, mais permet de se passer d'un porte-bagage à l'avant.</figcaption>
             </figure>
             <figure>
                 <div>B</div>
