@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Legende = () => {
     return (
-        <Wrapper>
+        <Wrapper aria-hidden>
             <p>Légende</p>
             <div>
                 <div aria-label="vert">Sacoche latérale (avant ou arrière)</div>

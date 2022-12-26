@@ -31,6 +31,7 @@ const Intro = () => {
             <Sacoches />
             <Legende />
             <p>Puisque le cycliste est assis par-dessus la roue arrière, il est important de mettre un peu plus que la moitié du poids du matériel à l'avant, histoire de trouver un bon équilibre. Les articles lourds devraient être le plus bas possible pour abaisser le centre de la gravité. Tout ce qui sert au courant de la journée – imperméable, collations, livre ou liseuse, cartes – devrait être facilement accessible.</p>
+            <p>Deux personnes voyageant ensemble n'auront pas à doubler la quantité requise de bagages. En plus de (probablement) partager la tente, qui sera par contre un peu plus volumineuse, le groupe partira avec sensiblement la même charge que le voyageur en solo en terme d'outils, du réchaud, de la trousse de premiers soins, de chargeurs, ainsi que de plusieurs autres items.</p>
             <p>Bien sûr, ça va de soi qu'il est impératif de bien équilibrer la droite avec la gauche pour éviter les virages difficiles.</p>
         </Wrapper>
     )
