@@ -1,0 +1,2016 @@
+<!DOCTYPE html>
+<html lang="de">
+	<head>
+		<meta
+			property="og:title"
+			content="Ihr Reiseführer für Fahrradtouren in Quebec."
+		/>
+		<meta
+			property="og:url"
+			content="https://cyclotouristechezsoi.ca/deutsch.html"
+		/>
+		<meta
+			property="og:image"
+			content="https://cyclotouristechezsoi.ca/admin/photoog.png"
+		/>
+		<meta property="og:type" content="website" />
+		<meta
+			property="og:description"
+			content="Ihr kompletter Reiseführer zur Vorbereitung Ihres bevorstehenden Radurlaubs in Quebec."
+		/>
+
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="favicon/apple-touch-icon.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="favicon/favicon-32x32.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="favicon/favicon-16x16.png"
+		/>
+		<link rel="manifest" href="favicon/manifest.json" />
+		<link
+			rel="alternate"
+			hreflang="fr"
+			href="https://cyclotouristechezsoi.ca/"
+		/>
+		<link
+			rel="alternate"
+			hreflang="en"
+			href="https://cyclotouristechezsoi.ca/english.html"
+		/>
+		<script
+			data-goatcounter="https://chinook07.goatcounter.com/count"
+			async
+			src="//gc.zgo.at/count.js"
+		></script>
+		<script
+			src="https://kit.fontawesome.com/3169e5fb04.js"
+			crossorigin="anonymous"
+		></script>
+		<script src="scripts/jquery.js"></script>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta
+			name="keywords"
+			content="'fahrrad reisen', 'radreise', reisen, quebec"
+		/>
+		<meta
+			name="description"
+			content="Deutsch – Der vollständige Leitfaden zur Vorbereitung Ihres Radtour-Abenteuers in Quebec"
+		/>
+		<meta name="author" content="Nicola Z." />
+		<link rel="stylesheet" href="sass/styleslang.css" />
+		<title>Deutsch – Durch Quebec mit dem Fahrrad</title>
+	</head>
+
+	<body onload="annee()">
+		<header>
+			<nav>
+				<li>
+					<a><i class="fa-solid fa-person-biking"></i></a>
+				</li>
+				<li><a href="#visit">Einleitung</a></li>
+				<li><a href="#getin">Einreisen</a></li>
+				<li><a href="#ride">Radrouten</a></li>
+				<li><a href="#getaround">Verkehrsmittel</a></li>
+				<li><a href="#night">Übernachten</a></li>
+				<li><a href="#about">Über mich</a></li>
+				<div class="defilantcentre">
+					<button class="boutondefilant" onclick="defilenav()">
+						<i class="fas fa-bars"></i> <i
+							class="fa fa-caret-down"
+						></i>
+					</button>
+					<div class="contdefilant" id="moncontenudefilant">
+						<li>
+							<a href="#navlangstick"
+								><i class="fas fa-home"></i> Startseite</a
+							>
+						</li>
+						<li>
+							<a href="#visit"
+								><i class="fas fa-suitcase"></i> Einleitung</a
+							>
+						</li>
+						<li>
+							<a href="#getin"
+								><i class="fas fa-plane-arrival"></i
+								> Einreisen</a
+							>
+						</li>
+						<li>
+							<a href="#ride"
+								><i class="fas fa-route"></i> Radrouten</a
+							>
+						</li>
+						<li>
+							<a href="#getaround"
+								><i class="fas fa-train"></i> Verkehrsmittel</a
+							>
+						</li>
+						<li>
+							<a href="#night"
+								><i class="fas fa-campground"></i
+								> Übernachten</a
+							>
+						</li>
+						<li>
+							<a href="#about"
+								><i class="far fa-question-circle"></i> Über
+								mich</a
+							>
+						</li>
+					</div>
+				</div>
+				<div class="defilant defilantdroite">
+					<button class="boutondefilant" onclick="defilenav()">
+						<i class="fa fa-globe-europe"></i> DE <i
+							class="fa fa-caret-down"
+						></i>
+					</button>
+					<div class="contdefilant" id="moncontenudefilant">
+						<li><a href="/">Français</a></li>
+						<li><a href="english.html">English</a></li>
+					</div>
+				</div>
+			</nav>
+
+			<div class="wideslide">
+				<div class="mySlides fade">
+					<div class="numbertext">1 / 6</div>
+					<img
+						class="carrousel"
+						src="imageseng/carrousel/baiestecath.jpg"
+					/>
+					<div class="centered">
+						Cyclotouriste chez soi –
+						<h1>Radreisen in Quebec</h1>
+					</div>
+					<div class="text">Baie-Ste-Catherine (Charlevoix)</div>
+				</div>
+
+				<div class="mySlides fade">
+					<div class="numbertext">2 / 6</div>
+					<img
+						class="carrousel"
+						src="imageseng/carrousel/monteregie.jpg"
+					/>
+					<div class="centered">
+						Cyclotouriste chez soi –
+						<h1>Radreisen in Quebec</h1>
+					</div>
+					<div class="text">
+						St-Georges-de-Clarenceville (Montérégie)
+					</div>
+				</div>
+
+				<div class="mySlides fade">
+					<div class="numbertext">3 / 6</div>
+					<img class="carrousel" src="imageseng/carrousel/perce.jpg" />
+					<div class="centered">
+						Cyclotouriste chez soi –
+						<h1>Radreisen in Quebec</h1>
+					</div>
+					<div class="text">Cap-d'Espoir, Percé (Gaspésie)</div>
+				</div>
+
+				<div class="mySlides fade">
+					<div class="numbertext">4 / 6</div>
+					<img class="carrousel" src="imageseng/carrousel/cabano.jpg" />
+					<div class="centered">
+						Cyclotouriste chez soi –
+						<h1>Radreisen in Quebec</h1>
+					</div>
+					<div class="text">
+						Cabano, Notre-Dame-du-Lac (Bas-St-Laurent)
+					</div>
+				</div>
+
+				<div class="mySlides fade">
+					<div class="numbertext">5 / 6</div>
+					<img class="carrousel" src="imageseng/carrousel/stukely.jpg" />
+					<div class="centered">
+						Cyclotouriste chez soi –
+						<h1>Radreisen in Quebec</h1>
+					</div>
+					<div class="text">Stukely (Cantons-de-l'Est)</div>
+				</div>
+
+				<div class="mySlides fade">
+					<div class="numbertext">6 / 6</div>
+					<img
+						class="carrousel"
+						src="imageseng/carrousel/portneuf.jpg"
+					/>
+					<div class="centered">
+						Cyclotouriste chez soi –
+						<h1>Radreisen in Quebec</h1>
+					</div>
+					<div class="text">
+						St-Léonard-de-Portneuf (Région de Québec)
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<main>
+			<section>
+				<p>
+					Willkommen auf der deutschen Seite auf
+					<span
+						id="traductionNomSite"
+						onmouseenter="traduction()"
+						onmouseleave="traductionBye()"
+						>Cyclotouristechezsoi</span
+					>.ca. Dies ist als Informationsseite für Radtouren in Quebec
+					gedacht. Mit 8 Millionen Einwohnern beherbergt diese Provinz
+					viele schöne Städte, atemberaubende Landschaften und
+					charmante französischsprachige Menschen, und bietet
+					hervorragende Möglichkeiten zum Radfahren in verschiedenen
+					Landschaften.
+				</p>
+
+				<div id="traductionNomSiteBoite">
+					Übersetzung: Radtourist*in in seiner oder ihrer einigen
+					Region
+				</div>
+			</section>
+
+			<section id="visit">
+				<h2><i class="fas fa-suitcase"></i> Einleitung zu Quebec</h2>
+
+				<h3>Sprache und Kultur</h3>
+
+				<p>
+					Unsere Lingua franca ist französisch, unterscheidet sich
+					jedoch in ihrer gesprochenen Form stark von der in Europa
+					gesprochenen Sorte. In der westlichen Hälfte von Montreal
+					sowie in vielen Gebieten an der Grenze zu Ontario, New York
+					und Vermont wird Englisch von einem erheblichen Teil der
+					Bevölkerung als gemeinsame Sprache verwendet.
+					Verkehrszeichen sind normalerweise nur auf Französisch, aber
+					Einheimische in vielen Dörfer entlang wichtiger Radwege sind
+					es gewohnt, verlorene Touristen auf ihren Fahrrädern zu
+					sehen, und helfen ihnen oft gerne dabei, sich
+					zurechtzufinden, ob sie fließend sind oder nur
+					<em>Ja, Nein, Toaster</em> sagen können.
+				</p>
+
+				<img
+					src="imageseng/quebec-flag.jpg"
+					width="40%"
+					alt="Eine Flagge von Quebec entlang eines Sees"
+				/>
+
+				<p>
+					Die Menschen in Québec werden Québecer, oder Québécois, in
+					ihrer Muttersprache genannt. Die Menschen identifizieren
+					sich entweder als solche, als Französisch-Kanadier, als
+					Kanadier oder als eine Kombination davon. Viele Montrealer
+					sind unterschiedlicher Herkunft und sprechen daher drei oder
+					mehr Sprachen. Wichtig ist, dass man aufgeschlossen und
+					bereit ist, auch nur ein paar Wörter auf Französisch zu
+					versuchen. Die Menschen werden es zu schätzen wissen, aber
+					seien Sie nicht beleidigt, wenn sie ins Englische wechseln.
+					Es liegt (wahrscheinlich) nicht daran, dass Ihr Französisch
+					schrecklich ist! Sie versuchen einfach nur, hilfreich zu
+					sein!
+				</p>
+
+				<h3>Klima</h3>
+
+				<p>
+					Das Sommerwetter im Süden Quebecs ist warm und feucht. Ende
+					Juli ist die heißeste Zeit des Jahres, und Hitzewellen (über
+					30°C) werden immer häufiger. Gewitter sind am nachmittags
+					häufig, erreichen aber in keiner Weise die Intensität, die
+					in den USA so häufig beobachtet wird. Tornados sind daher
+					äußerst selten, es treten etwa fünfmal im Jahr auf, in der
+					Regel kleinere Tornados. Nördlich und östlich von Quebec
+					City sind die Sommertage oft kühler, und die Meeresbrise
+					verhindert in der Regel, dass es unangenehm heiß wird.
+				</p>
+
+				<div class="climatlangue">
+					<div class="climattab">
+						<button
+							class="climattabliens"
+							onclick="ouvrirville(event, 'climatmtl')"
+						>
+							Montréal
+						</button>
+						<button
+							class="climattabliens"
+							onclick="ouvrirville(event, 'climatqc')"
+						>
+							Quebec
+						</button>
+						<button
+							class="climattabliens"
+							onclick="ouvrirville(event, 'climatgat')"
+						>
+							Gatineau
+						</button>
+						<button
+							class="climattabliens"
+							onclick="ouvrirville(event, 'climatrim')"
+						>
+							Rimouski
+						</button>
+						<button
+							class="climattabliens"
+							onclick="ouvrirville(event, 'climatgsp')"
+						>
+							Gaspé
+						</button>
+						<button
+							class="climattabliens"
+							onclick="ouvrirville(event, 'climatsag')"
+						>
+							Saguenay
+						</button>
+					</div>
+
+					<i
+						id="fermerville"
+						class="fa-regular fa-circle-xmark"
+						onclick="fermerville()"
+					></i>
+
+					<table id="climatmtl" class="climattable">
+						<tr>
+							<th></th>
+							<th>
+								<div><span>Min T°C</span></div>
+							</th>
+							<th>
+								<div><span>Max T°C</span></div>
+							</th>
+							<th>
+								<div><span>Nächte &lt; 2°C</span></div>
+							</th>
+							<th>
+								<div><span>Tage &gt; 30°C</span></div>
+							</th>
+							<th>
+								<div><span>Regen (L/m<sup>2</sup>)</span></div>
+							</th>
+							<th>
+								<div><span>Regentage</span></div>
+							</th>
+						</tr>
+
+						<tr>
+							<td>Mai</td>
+							<td>8</td>
+							<td>19</td>
+							<td>2</td>
+							<td>0.4</td>
+							<td>81</td>
+							<td>14</td>
+						</tr>
+
+						<tr>
+							<td>Juni</td>
+							<td>13</td>
+							<td>24</td>
+							<td>&lt;0.1</td>
+							<td>2</td>
+							<td>87</td>
+							<td>13</td>
+						</tr>
+
+						<tr>
+							<td>Juli</td>
+							<td>16</td>
+							<td>26</td>
+							<td>0</td>
+							<td>4</td>
+							<td>89</td>
+							<td>12</td>
+						</tr>
+
+						<tr>
+							<td>Aug.</td>
+							<td>15</td>
+							<td>25</td>
+							<td>0</td>
+							<td>3</td>
+							<td>94</td>
+							<td>12</td>
+						</tr>
+
+						<tr>
+							<td>Sept.</td>
+							<td>10</td>
+							<td>21</td>
+							<td>0.8</td>
+							<td>0.7</td>
+							<td>83</td>
+							<td>11</td>
+						</tr>
+					</table>
+
+					<table id="climatqc" class="climattable">
+						<tr>
+							<th></th>
+							<th>
+								<div><span>Min T°C</span></div>
+							</th>
+							<th>
+								<div><span>Max T°C</span></div>
+							</th>
+							<th>
+								<div><span>Nächte &lt; 2°C</span></div>
+							</th>
+							<th>
+								<div><span>Tage &gt; 30°C</span></div>
+							</th>
+							<th>
+								<div><span>Regen (L/m<sup>2</sup>)</span></div>
+							</th>
+							<th>
+								<div><span>Regentage</span></div>
+							</th>
+						</tr>
+
+						<tr>
+							<td>Mai</td>
+							<td>5</td>
+							<td>17</td>
+							<td>6</td>
+							<td>0.2</td>
+							<td>116</td>
+							<td>15</td>
+						</tr>
+
+						<tr>
+							<td>Juni</td>
+							<td>11</td>
+							<td>22</td>
+							<td>0.1</td>
+							<td>1</td>
+							<td>111</td>
+							<td>13</td>
+						</tr>
+
+						<tr>
+							<td>Juli</td>
+							<td>14</td>
+							<td>25</td>
+							<td>0</td>
+							<td>3</td>
+							<td>121</td>
+							<td>14</td>
+						</tr>
+
+						<tr>
+							<td>Aug.</td>
+							<td>13</td>
+							<td>24</td>
+							<td>0</td>
+							<td>0.8</td>
+							<td>104</td>
+							<td>13</td>
+						</tr>
+
+						<tr>
+							<td>Sept.</td>
+							<td>8</td>
+							<td>18</td>
+							<td>0.9</td>
+							<td>0.1</td>
+							<td>116</td>
+							<td>13</td>
+						</tr>
+					</table>
+
+					<table id="climatgat" class="climattable">
+						<tr>
+							<th></th>
+							<th>
+								<div><span>Min T°C</span></div>
+							</th>
+							<th>
+								<div><span>Max T°C</span></div>
+							</th>
+							<th>
+								<div><span>Nächte &lt; 2°C</span></div>
+							</th>
+							<th>
+								<div><span>Tage &gt; 30°C</span></div>
+							</th>
+							<th>
+								<div><span>Regen (L/m<sup>2</sup>)</span></div>
+							</th>
+							<th>
+								<div><span>Regentage</span></div>
+							</th>
+						</tr>
+
+						<tr>
+							<td>Mai</td>
+							<td>8</td>
+							<td>19</td>
+							<td>3</td>
+							<td>0.7</td>
+							<td>80</td>
+							<td>13</td>
+						</tr>
+
+						<tr>
+							<td>Juni</td>
+							<td>13</td>
+							<td>24</td>
+							<td>0</td>
+							<td>3</td>
+							<td>93</td>
+							<td>13</td>
+						</tr>
+
+						<tr>
+							<td>Juli</td>
+							<td>16</td>
+							<td>27</td>
+							<td>0</td>
+							<td>5</td>
+							<td>92</td>
+							<td>12</td>
+						</tr>
+
+						<tr>
+							<td>Aug.</td>
+							<td>14</td>
+							<td>25</td>
+							<td>0</td>
+							<td>4</td>
+							<td>86</td>
+							<td>11</td>
+						</tr>
+
+						<tr>
+							<td>Sept.</td>
+							<td>10</td>
+							<td>20</td>
+							<td>1</td>
+							<td>0.9</td>
+							<td>90</td>
+							<td>12</td>
+						</tr>
+					</table>
+
+					<table id="climatrim" class="climattable">
+						<tr>
+							<th></th>
+							<th>
+								<div><span>Min T°C</span></div>
+							</th>
+							<th>
+								<div><span>Max T°C</span></div>
+							</th>
+							<th>
+								<div><span>Nächte &lt; 2°C</span></div>
+							</th>
+							<th>
+								<div><span>Tage &gt; 30°C</span></div>
+							</th>
+							<th>
+								<div><span>Regen (L/m<sup>2</sup>)</span></div>
+							</th>
+							<th>
+								<div><span>Regentage</span></div>
+							</th>
+						</tr>
+
+						<tr>
+							<td>Mai</td>
+							<td>5</td>
+							<td>15</td>
+							<td>7</td>
+							<td>0.2</td>
+							<td>84</td>
+							<td>14</td>
+						</tr>
+
+						<tr>
+							<td>Juni</td>
+							<td>10</td>
+							<td>21</td>
+							<td>&lt;0.1</td>
+							<td>0.5</td>
+							<td>85</td>
+							<td>15</td>
+						</tr>
+
+						<tr>
+							<td>Juli</td>
+							<td>13</td>
+							<td>23</td>
+							<td>0</td>
+							<td>1</td>
+							<td>91</td>
+							<td>15</td>
+						</tr>
+
+						<tr>
+							<td>Aug.</td>
+							<td>13</td>
+							<td>22</td>
+							<td>0</td>
+							<td>0.4</td>
+							<td>86</td>
+							<td>14</td>
+						</tr>
+
+						<tr>
+							<td>Sept.</td>
+							<td>9</td>
+							<td>17</td>
+							<td>0.9</td>
+							<td>&lt;0.1</td>
+							<td>88</td>
+							<td>14</td>
+						</tr>
+					</table>
+
+					<table id="climatgsp" class="climattable">
+						<tr>
+							<th></th>
+							<th>
+								<div><span>Min T°C</span></div>
+							</th>
+							<th>
+								<div><span>Max T°C</span></div>
+							</th>
+							<th>
+								<div><span>Nächte &lt; 2°C</span></div>
+							</th>
+							<th>
+								<div><span>Tage &gt; 30°C</span></div>
+							</th>
+							<th>
+								<div><span>Regen (L/m<sup>2</sup>)</span></div>
+							</th>
+							<th>
+								<div><span>Regentage</span></div>
+							</th>
+						</tr>
+
+						<tr>
+							<td>Mai</td>
+							<td>1</td>
+							<td>14</td>
+							<td>18</td>
+							<td>&lt;0.1</td>
+							<td>84</td>
+							<td>14</td>
+						</tr>
+
+						<tr>
+							<td>Juni</td>
+							<td>6</td>
+							<td>20</td>
+							<td>5</td>
+							<td>0.7</td>
+							<td>80</td>
+							<td>13</td>
+						</tr>
+
+						<tr>
+							<td>Juli</td>
+							<td>10</td>
+							<td>23</td>
+							<td>&lt;0.1</td>
+							<td>2</td>
+							<td>100</td>
+							<td>15</td>
+						</tr>
+
+						<tr>
+							<td>Aug.</td>
+							<td>10</td>
+							<td>23</td>
+							<td>0.6</td>
+							<td>1</td>
+							<td>94</td>
+							<td>13</td>
+						</tr>
+
+						<tr>
+							<td>Sept.</td>
+							<td>5</td>
+							<td>18</td>
+							<td>8</td>
+							<td>0.2</td>
+							<td>82</td>
+							<td>12</td>
+						</tr>
+					</table>
+
+					<table id="climatsag" class="climattable">
+						<tr>
+							<th></th>
+							<th>
+								<div><span>Min T°C</span></div>
+							</th>
+							<th>
+								<div><span>Max T°C</span></div>
+							</th>
+							<th>
+								<div><span>Nächte &lt; 2°C</span></div>
+							</th>
+							<th>
+								<div><span>Tage &gt; 30°C</span></div>
+							</th>
+							<th>
+								<div><span>Regen (L/m<sup>2</sup>)</span></div>
+							</th>
+							<th>
+								<div><span>Regentage</span></div>
+							</th>
+						</tr>
+
+						<tr>
+							<td>Mai</td>
+							<td>3</td>
+							<td>16</td>
+							<td>12</td>
+							<td>0.5</td>
+							<td>78</td>
+							<td>15</td>
+						</tr>
+
+						<tr>
+							<td>Juni</td>
+							<td>9</td>
+							<td>22</td>
+							<td>1</td>
+							<td>2</td>
+							<td>88</td>
+							<td>15</td>
+						</tr>
+
+						<tr>
+							<td>Juli</td>
+							<td>12</td>
+							<td>24</td>
+							<td>0</td>
+							<td>3</td>
+							<td>112</td>
+							<td>17</td>
+						</tr>
+
+						<tr>
+							<td>Aug.</td>
+							<td>11</td>
+							<td>23</td>
+							<td>0.1</td>
+							<td>2</td>
+							<td>91</td>
+							<td>16</td>
+						</tr>
+
+						<tr>
+							<td>Sept.</td>
+							<td>7</td>
+							<td>18</td>
+							<td>5</td>
+							<td>0.3</td>
+							<td>103</td>
+							<td>16</td>
+						</tr>
+					</table>
+				</div>
+
+				<p>
+					Die Sommerwinde in Quebec wehen in der Regel aus dem Westen
+					oder Südwesten und begünstigen Reisen in diese Richtung.
+					Wenn Sie eine Schleife fahren, denken Sie daran, dass der
+					Wind in überdachten Gebieten, d.h. innerhalb von durch Bäume
+					geschützten Radwegen, im Allgemeinen ruhiger ist.
+				</p>
+
+				<h3>Tiere</h3>
+
+				<p>
+					Quebec ist nicht Australien! Die Fauna ist viel harmloser
+					als in vielen anderen Teilen der Welt, und das haben wir
+					unseren kalten Wintern zu verdanken. Zunächst einmal sind
+					giftige Schlangen und Spinnen äußerst selten. Es gibt jedoch
+					gewisse Gefahren, vor denen man sich in Acht nehmen muss.
+				</p>
+
+				<div id="anitable">
+					<div>
+						<div>Tier</div>
+						<div>Risikogebiet</div>
+						<div>Gefahr</div>
+						<div>Prävention und Behandlung</div>
+					</div>
+
+					<div>
+						<div>der Schwarzbär</div>
+						<div>
+							<i class="fa-solid fa-earth-americas"></i>In
+							bewaldeten Gebieten nördlich des Stroms St-Laurent
+						</div>
+						<div>
+							<i class="fa-solid fa-triangle-exclamation"></i
+							><a
+								href="https://mffp.gouv.qc.ca/english/wildlife//wildlife-habitats/pdf/ours.pdf"
+								target="blank"
+								>Angriffe</a
+							>
+						</div>
+						<div>
+							Stellen Sie sich nicht zwischen die Mutter und ihr
+							Junges.<br />Überraschen Sie sie nicht.
+						</div>
+					</div>
+
+					<div>
+						<div>die Zecke</div>
+						<div>
+							<i class="fa-solid fa-earth-americas"></i
+							>Hauptsächlich nahe der US-Grenze
+						</div>
+						<div>
+							<i class="fa-solid fa-triangle-exclamation"></i
+							><a
+								href="https://www.quebec.ca/en/health/health-issues/a-z/lyme-disease/"
+								target="blank"
+								>Lyme-Borreliose</a
+							>
+						</div>
+						<div>
+							Untersuchen Sie Ihre Knöchel und die freiliegende
+							Haut, nachdem Sie sich im Wald befunden haben.<br />Wenn
+							Sie gebissen wurden, gehen Sie in die Apotheke oder
+							zu einem Arzt, da Sie möglicherweise vorbeugende
+							Medikamente benötigen.
+						</div>
+					</div>
+
+					<div>
+						<div>der Waschbär und das Stinktier</div>
+						<div>
+							<i class="fa-solid fa-earth-americas"></i>Überall,
+							sogar in Städten
+						</div>
+						<div>
+							<i class="fa-solid fa-triangle-exclamation"></i
+							><a
+								href="https://www.quebec.ca/en/health/health-issues/a-z/rabies-in-humans/"
+								target="blank"
+								>Tollwut</a
+							>
+						</div>
+						<div>
+							Wären Sie mit einem Waschbären oder einem anderen
+							Träger von Tollwut in Kontakt gekommen, müssten Sie
+							sich präventiv behandeln lassen.<br />Wenn
+							Tollwutsymptome auftreten, ist die Krankheit tödlich
+							und es ist schon zu spät.
+						</div>
+					</div>
+				</div>
+
+				<p>
+					Obwohl sie eher lästig als gefährlich sind, machen Moskitos,
+					Bremsen und Gnitzen Ihre Reise miserabel, wenn Sie sich
+					nicht mit Mückenspray bewaffnen, vor allem zu Beginn des
+					Sommers. Ab Mitte August ist es im Allgemeinen angenehmer,
+					sich im Wald aufzuhalten, selbst in der Dämmerung. Ende Mai
+					und Juni findet die Hauptsaison für Moskitos statt, und
+					sollte vermieden werden, wenn man viel Stealth-Camping in
+					den Wäldern plant.
+				</p>
+			</section>
+
+			<section id="getin">
+				<h2><i class="fas fa-plane-arrival"></i> Einreisen</h2>
+
+				<p>
+					Wenn Sie nach Quebec fliegen, landen Sie
+					höchstwahrscheinlich auf dem internationalen Flughafen von
+					Montreal. Wenn dies der Fall ist, können Sie ganz einfach
+					mit dem Fahrrad in die Stadt fahren, indem Sie den Radwegen
+					und Fahrradspuren in Richtung Seeufer folgen, wo die Route
+					verte 5 und die Fahrradroute des Lachine-Kanals Sie durch
+					die Innenstadt führen. Pendlerzüge (selten außerhalb der
+					Hauptverkehrszeiten)
+					<a
+						href="https://exo.quebec/en/trip-planner/train/vaudreuil%E2%80%93hudson"
+						target="blank"
+						>fahren von Dorval Station aus</a
+					>, etwa 1 km vom Flughafen entfernt, bis zum Bahnhof
+					Lucien-l'Allier im Stadtzentrum.
+					<a
+						href="https://exo.quebec/en/trip-planner/bike/riding-public-transit"
+						target="blank"
+						>Das Mitnehmen von Fahrrädern sind in diesen Zügen</a
+					>
+					jederzeit erlaubt.
+				</p>
+
+				<img
+					src="transport/images/velo-train-exo.jpg"
+					width="60%"
+					alt="Der Autor dieser Seite sichert sein Fahrrad an den Sitzen eines Zuges"
+				/>
+
+				<p>
+					Sollte Ihr Fahrrad noch in einer Kiste liegen, können Sie
+					<a
+						href="http://stm.info/en/info/networks/bus/shuttle/747-yul-montreal-trudeau-airport-downtown-shuttle"
+						target="blank"
+					>
+						auf den 747-Shuttle von STM</a
+					>
+					aufspringen, der Sie mit häufigen Abfahrten in die Stadt
+					bringt.
+				</p>
+
+				<p>
+					Weitere Möglichkeiten, nach Quebec zu fliegen, bieten die
+					internationalen Flughäfen in Ottawa (in der Nähe von
+					Gatineau) und Quebec City, die beide etwa 15 km von ihren
+					jeweiligen Stadtzentren entfernt sind. Es gibt verschiedene
+					regionale Flughäfen, die über die ganze Provinz verteilt
+					sind, die jedoch nur von wenigen Flügen pro Tag angeflogen
+					werden.
+				</p>
+
+				<p>
+					Fahrradurlauber können auch mit dem Zug aus Ottawa, Toronto
+					oder den kanadischen Seeprovinzen, oder mit dem Bus
+					anreisen. In
+					<a href="#getaround">den nachstehenden Informationen</a>,
+					finden Sie weitere Einzelheiten darüber, wie Sie Ihre
+					Fahrräder für die Reise richtig packen.
+				</p>
+			</section>
+
+			<section id="ride">
+				<h2><i class="fas fa-route"></i> Radrouten</h2>
+
+				<p>
+					Oh die Orte, wo man hinfahren kann! Québec ist bekannt für
+					die großartigen Möglichkeiten, die es für Radfahrer bietet,
+					und die
+					<a href="https://www.routeverte.com/en/" target="blank"
+						>Route verte</a
+					>, die in Wirklichkeit ein Netz von sieben Radrouten ist,
+					die die Provinz kreuz und quer durchziehen. Etwas mehr als
+					die Hälfte der Route verte nutzt Abschnitte auf der Straße,
+					entweder ruhige Landstraßen oder Schultern verkehrsreicherer
+					Routen. Der Rest ist außerhalb des Straßennetzes,
+					normalerweise auf ehemaligen Eisenbahnstrecken.
+				</p>
+
+				<div class="destitab">
+					<div id="destitabRoute">Route</div>
+					<div id="destitabBoutons">
+						<button
+							class="destitabliens"
+							onclick="ouvrirdesti(event, 'desti1')"
+						>
+							1
+						</button>
+						<button
+							class="destitabliens"
+							onclick="ouvrirdesti(event, 'desti2')"
+						>
+							2
+						</button>
+						<button
+							class="destitabliens"
+							onclick="ouvrirdesti(event, 'desti3')"
+						>
+							3
+						</button>
+						<button
+							class="destitabliens"
+							onclick="ouvrirdesti(event, 'desti4')"
+						>
+							4
+						</button>
+						<button
+							class="destitabliens"
+							onclick="ouvrirdesti(event, 'desti5')"
+						>
+							5
+						</button>
+						<button
+							class="destitabliens"
+							onclick="ouvrirdesti(event, 'desti6')"
+						>
+							6
+						</button>
+						<button
+							class="destitabliens"
+							onclick="ouvrirdesti(event, 'desti8')"
+						>
+							8
+						</button>
+						<button
+							class="destitabliens"
+							onclick="ouvrirdesti(event, 'traversee')"
+						>
+							Querdurch
+						</button>
+					</div>
+				</div>
+
+				<div id="desti1" class="destitable">
+					<h3>
+						Route 1<i
+							class="fa-regular fa-circle-xmark"
+							onclick="fermerdesti()"
+						></i>
+					</h3>
+					<p>
+						Dies ist die längste Strecke des Netzwerks und verbindet
+						10 Regionen miteinander.
+					</p>
+
+					<h4>Wichtigste Städte</h4>
+					<p>
+						Grenze zu Ontario
+						<i class="fas fa-arrow-right"></i> Gatineau
+						<i class="fas fa-arrow-right"></i> Montréal
+						<i class="fas fa-arrow-right"></i> Sherbrooke
+						<i class="fas fa-arrow-right"></i> Lévis
+						<i class="fas fa-arrow-right"></i> Rivière-du-Loup
+						<i class="fas fa-arrow-right"></i> Ste-Flavie
+						<i class="fas fa-arrow-right"></i> Gaspé
+						<i class="fas fa-arrow-right"></i> Ste-Flavie (Loop)
+					</p>
+
+					<h4>Wegbeschreibung</h4>
+
+					<img src="imageseng/maps/map1.png" />
+
+					<div class="destigrid">
+						<div class="desticol">
+							<h5>A. Fluss Outaouais</h5>
+
+							<p>
+								Fahren Sie von Montreal nach Ottawa entlang des
+								Flusses Outaouais. Das Schöne an dieser Fahrt
+								ist, dass sie mit ein paar Varianten und auf
+								beiden Seiten der Provinzgrenze durchgeführt
+								werden könnte, so dass Ihre Rundfahrt etwas...
+								runder wird. Planen Sie eine ganze Woche für
+								eine Rundfahrt ein. Stellen Sie sicher, dass Sie
+								sowohl in Montreal als auch in Ottawa, die viele
+								Sehenswürdigkeiten zu bieten haben, etwas Zeit
+								verbringen.
+							</p>
+
+							<figure class="photoscolonne" id="pc1-1">
+								<img src="imageseng/1-outaouais.jpg" />
+								<figcaption>
+									Östlich von Hawkesbury, Ontario
+								</figcaption>
+							</figure>
+						</div>
+
+						<div class="desticol">
+							<h5>B. Estrie</h5>
+
+							<p>
+								Eine weitere reizvolle Region zum Radfahren ist
+								das allgemeine Gebiet zwischen Montreal und
+								Sherbrooke, die meisten davon in den östlichen
+								Townships. In den Dörfern sehen Sie Gebäude aus
+								der Zeit der Loyalisten nach der US-Revolution.
+								Auf dem Land werden Sie Ihre Augen an sanften
+								Hügeln und abfallendem Ackerland weiden sehen.
+								Auch hier ist ein Hin- und Rückweg möglich, da
+								auf einem großen Teil der Strecke andere Wege
+								zur Auswahl stehen.
+							</p>
+
+							<figure class="photoscolonne">
+								<img src="imageseng/1-montagnarde.jpg" />
+								<figcaption>
+									Zwischen Waterloo und Eastman
+								</figcaption>
+							</figure>
+						</div>
+
+						<div class="desticol">
+							<h5>C. Gaspésie-Halbinsel</h5>
+
+							<p>
+								Wenn Sie die Herausforderungen mögen, führt Sie
+								die Halbinsel Gaspé durch eine ganze Region, die
+								von Wasser umgeben ist. Die Schwierigkeit
+								variiert stark zwischen den einzelnen
+								Abschnitten, da der nordöstliche Teil Ihre Beine
+								taub macht. Wenn Sie im Uhrzeigersinn fahren,
+								profitieren Sie vom Rückenwind dort, wo Sie ihn
+								am meisten brauchen, aber auch beim
+								Fotografieren liegt die Landstraße zwischen
+								Ihnen und dem Meer.
+							</p>
+
+							<figure class="photoscolonne">
+								<img src="imageseng/1-perce.jpg" />
+								<figcaption>Nordlich von Percé</figcaption>
+							</figure>
+						</div>
+					</div>
+				</div>
+
+				<div id="desti2" class="destitable">
+					<h3>
+						Route 2<i
+							class="fa-regular fa-circle-xmark"
+							onclick="fermerdesti()"
+						></i>
+					</h3>
+					<p>
+						Von der ländlichen Region Abitibi durch den borealen
+						Dschungel führt diese Route bis in die USA.
+					</p>
+
+					<h4>Wichtigste Städte</h4>
+					<p>
+						Ville-Marie
+						<i class="fas fa-arrow-right"></i> Rouyn-Noranda
+						<i class="fas fa-arrow-right"></i> Val-d'Or
+						<i class="fas fa-arrow-right"></i> Mont-Laurier
+						<i class="fas fa-arrow-right"></i> Mont-Tremblant
+						<i class="fas fa-arrow-right"></i> Montréal
+						<i class="fas fa-arrow-right"></i> Grenze zu New York
+					</p>
+
+					<h4>Wegbeschreibung</h4>
+
+					<img src="imageseng/maps/map2.png" />
+
+					<div class="destigrid">
+						<div class="desticol">
+							<h5>A. La Vérendrye</h5>
+
+							<p>
+								Für eine epische Fahrt in den Norden sollten Sie
+								versuchen, einen Bus nach Louvicourt oder
+								Val-d'Or zu nehmen und mit dem Fahrrad nach
+								Grand-Remous oder Mont-Laurier hinunterzufahren.
+								Sie durchqueren das riesige Naturschutzgebiet La
+								Vérendrye. Achten Sie darauf, sich mit
+								Lebensmitteln einzudecken und einen Wasserfilter
+								zu besitzen, denn während der Fahrt durch "den
+								Park" gibt es nur wenige Möglichkeiten, sich mit
+								Lebensmitteln zu versorgen.
+							</p>
+
+							<figure class="photoscolonne">
+								<img src="imageseng/2-la-verendrye.jpg" />
+								<figcaption>
+									Naturschutzgebiet La Vérendrye
+								</figcaption>
+							</figure>
+						</div>
+
+						<div class="desticol">
+							<h5>B. Laurentides</h5>
+
+							<p>
+								Ein Klassiker für Familien und Anfänger ist der
+								P'tit train du Nord, die mit 220 km längste
+								Eisenbahnstrecke Quebecs, die sich von
+								Mont-Laurier bis in die nördlichen Vororte von
+								Montreal erstreckt. Sie fahren durch das Land
+								der Ferienhäuser und treffen dabei auf viele
+								Seen und Parks. In Blainville angekommen, sind
+								Sie nur eine kurze Fahrt von Montreal entfernt.
+							</p>
+
+							<figure class="photoscolonne">
+								<img src="imageseng/2-ptit-train-du-nord.jpg" />
+								<figcaption>
+									Regionalpark Rivière du Nord
+								</figcaption>
+							</figure>
+						</div>
+
+						<div class="desticol">
+							<h5>C. Nach New York</h5>
+
+							<p>
+								Wenn Sie aus dem Bundesstaat New York anreisen,
+								werden Sie höchstwahrscheinlich bei Lacolle nach
+								Quebec einfahren und die Route verte 2 nach
+								St-Jean-sur-Richelieu radeln. Von dort führen
+								Sie der Chambly-Kanal und andere Radwege direkt
+								nach Montreal.
+							</p>
+
+							<figure class="photoscolonne">
+								<img src="imageseng/2-lac-champlain.jpg" />
+								<figcaption>Chambly-Kanal</figcaption>
+							</figure>
+						</div>
+					</div>
+				</div>
+
+				<div id="desti3" class="destitable">
+					<h3>
+						Route 3<i
+							class="fa-regular fa-circle-xmark"
+							onclick="fermerdesti()"
+						></i>
+					</h3>
+					<p>
+						Ob nah oder fern, der Strom St-Laurent und diese
+						Fahrradroute sind verwoben durch den Süden der Provinz.
+					</p>
+
+					<h4>Wichtigste Städte</h4>
+					<p>
+						Coteau-du-Lac
+						<i class="fas fa-arrow-right"></i> Longueuil
+						<i class="fas fa-arrow-right"></i> Sorel-Tracy
+						<i class="fas fa-arrow-right"></i> Bécancour
+						<i class="fas fa-arrow-right"></i> Lévis
+					</p>
+
+					<h4>Wegbeschreibung</h4>
+
+					<img src="imageseng/maps/map3.png" />
+
+					<div class="destigrid">
+						<div class="desticol">
+							<h5>A. Beauharnois-Kanal</h5>
+
+							<p>
+								Wenn Sie nur ein paar Tage Zeit haben, ist eine
+								einfache Rundfahrt von Montreal nach Valleyfield
+								machbar und unterhaltsam. Die Route 5 kann auf
+								dem Rückweg abwechselnd benutzt werden. Sehen
+								Sie sich unbedingt das größte Wasserkraftwerk im
+								Süden Quebecs an, das sich in Beauharnois
+								befindet, und fahren Sie entlang des 25 km
+								langen Kanals, der dieses Kraftwerk speist.
+							</p>
+
+							<figure class="photoscolonne">
+								<img src="imageseng/3-valleyfield.jpg" />
+								<figcaption>
+									Beauharnois-Kanal, Valleyfield
+								</figcaption>
+							</figure>
+						</div>
+
+						<div class="desticol">
+							<h5>B. Montreal nach Quebec city (Südufer)</h5>
+
+							<p>
+								Diese Route von Montreal nach Quebec City
+								konkurriert mit der Route 5 über den Strom. Die
+								hier vorgestellte Option lässt Sie einige der
+								schönsten Landschaften des Flusstals erkunden,
+								mit Mauern aus Mais, offenen Horizonten und
+								gelegentlichen Ausblicken auf den Strom
+								St-Laurent. Warum nicht von der anderen Seite
+								zurückkommen?
+							</p>
+
+							<figure class="photoscolonne">
+								<img src="imageseng/3-lotbiniere.jpg" />
+								<figcaption>
+									Strom St-Laurent, MRC Lotbinière
+								</figcaption>
+							</figure>
+						</div>
+					</div>
+				</div>
+
+				<div id="desti4" class="destitable">
+					<h3>
+						Route 4<i
+							class="fa-regular fa-circle-xmark"
+							onclick="fermerdesti()"
+						></i>
+					</h3>
+					<p>
+						Wenn Sie diese Route durch das Zentrum von Quebec
+						befahren, können Sie den Kanadischen Schild, das Tal von
+						St-Laurent und die Appalachen in einer Fahrt sehen.
+					</p>
+
+					<h4>Wichtigste Städte</h4>
+					<p>
+						Shawinigan
+						<i class="fas fa-arrow-right"></i> Trois-Rivières
+						<i class="fas fa-arrow-right"></i> Bécancour
+						<i class="fas fa-arrow-right"></i> Drummondville
+						<i class="fas fa-arrow-right"></i> Bromont
+						<i class="fas fa-arrow-right"></i> Sutton
+						<i class="fas fa-arrow-right"></i> Grenze zu Vermont
+					</p>
+
+					<h4>Wegbeschreibung</h4>
+
+					<img src="imageseng/maps/map4.png" />
+
+					<div class="destigrid">
+						<div class="desticol">
+							<h5>A. Mauricie</h5>
+
+							<p>
+								Die Route verte 4 ist nur eine der
+								Möglichkeiten, um von Trois-Rivières nach
+								Shawinigan zu gelangen, was sie zu einer guten
+								Option für eine Schleife macht. Um die Sache
+								etwas anspruchsvoller zu machen, liegt der
+								Mauricie-Nationalpark nur etwas weiter oben.
+								Ansonsten sollten Sie sich die Véloboucles
+								Mauricie ansehen, Radrouten auf der Straße, die
+								durch die Landschaft der Region führen.
+							</p>
+
+							<figure class="photoscolonne">
+								<img src="imageseng/4-mauricie.jpg" />
+								<figcaption>Shawinigan</figcaption>
+							</figure>
+						</div>
+
+						<div class="desticol">
+							<h5>B. La Campagnarde</h5>
+
+							<p>
+								Wenn Sie auf der Suche nach einer einfachen
+								Fahrt sind, versuchen Sie, auf dem
+								Campagnarde-Eisenbahnweg von Drummondville zum
+								Yamaska-Nationalpark zu gelangen. Dort
+								angekommen, können Sie über Granby und Waterloo
+								eine reine Trail-Rundfahrt machen. Dies ist eine
+								sehr familienfreundliche Reisemöglichkeit.
+							</p>
+
+							<figure class="photoscolonne">
+								<img src="imageseng/4-campagnarde.jpg" />
+								<figcaption>
+									La-Campagnarde-Eisenbahnweg
+								</figcaption>
+							</figure>
+						</div>
+
+						<div class="desticol">
+							<h5>C. Brome-Missisquoi</h5>
+
+							<p>
+								Im Nord-Süd-Korridor, der sich von Bromont bis
+								zur Grenze zu Vermont erstreckt, gibt es eine
+								Welt (oder eine Region) von
+								Fahrradmöglichkeiten. Wenn Sie absichtlich von
+								dieser Route abweichen, stoßen Sie auf ein
+								großes Netz von überfüllten – nicht losen –
+								Schotterstraßen, die in alle Richtungen führen,
+								auch nach oben. Es gibt jedoch auch Steigungen.
+								Ansonsten, wenn Sie einen Pass haben und die
+								Grenze offen ist, brauchen Sie am Ende der
+								Straße nicht anzuhalten!
+							</p>
+
+							<figure class="photoscolonne">
+								<img src="imageseng/4-brome.jpg" />
+								<figcaption>
+									Zwischen Brome und Bromont
+								</figcaption>
+							</figure>
+						</div>
+					</div>
+				</div>
+
+				<div id="desti5" class="destitable">
+					<h3>
+						Route 5<i
+							class="fa-regular fa-circle-xmark"
+							onclick="fermerdesti()"
+						></i>
+					</h3>
+					<p>
+						Von Ontario bis (fast) Labrador – diese historische
+						Route wird Sie wieder in Quebec verliebt machen!
+					</p>
+
+					<h4>Wichtigste Städte</h4>
+					<p>
+						Grenze zu Ontario
+						<i class="fas fa-arrow-right"></i> Montréal
+						<i class="fas fa-arrow-right"></i> Trois-Rivières
+						<i class="fas fa-arrow-right"></i> Québec
+						<i class="fas fa-arrow-right"></i> Tadoussac
+						<i class="fas fa-arrow-right"></i> Baie-Comeau
+					</p>
+
+					<h4>Wegbeschreibung</h4>
+
+					<img src="imageseng/maps/map5.png" />
+
+					<div class="destigrid">
+						<div class="desticol">
+							<h5>A. Waterfront Radroute</h5>
+
+							<p>
+								Wenn Sie aus Toronto oder Kingston anreisen,
+								wird dies die Route sein, die Sie in Quebec
+								begrüßt. Fast sofort verwandelt sich das
+								Radfahren auf der Straße in hochmoderne Radwege,
+								durch einen herrlichen Wald und dann entlang
+								eines Kanals bis zu den Vororten von Montreal,
+								wo es immer interessanter wird.
+							</p>
+
+							<figure class="photoscolonne">
+								<img src="imageseng/5-waterfront.jpg" />
+								<figcaption>
+									Upper Canada Village historisches
+									Freilichtmuseum
+								</figcaption>
+							</figure>
+						</div>
+
+						<div class="desticol">
+							<h5>B. Der Königsweg</h5>
+
+							<p>
+								Wer auch nur ein wenig bequem auf der Straße
+								fährt und Québec sehen möchte, sollte die
+								Königsweg, oder Chemin du Roi, von Montreal nach
+								Québec City nehmen. Alte Kirchen, historische
+								Gebäude, das wird sich in fast jeder Kleinstadt
+								wiederholen. Einmal am Endpunkt angekommen,
+								könnte man sogar über die Südküste zurückkommen,
+								ansonsten mit dem Zug oder Bus.
+							</p>
+
+							<figure class="photoscolonne">
+								<img src="imageseng/5-chemin-du-roi.jpg" />
+								<figcaption>
+									Eine von vielen historischen Kirchen
+									zwischen Montreal und Quebec City
+								</figcaption>
+							</figure>
+						</div>
+
+						<div class="desticol">
+							<h5>C. Côte-Nord</h5>
+
+							<p>
+								Wenn Sie auf der Suche nach einer weiter
+								entfernten Expedition sind, radeln Sie von
+								Tadoussac nach Baie-Comeau entlang des Nordufers
+								der Flussmündung. Es ist damit zu rechnen, dass
+								Sie einige Wale erspähen werden, ansonsten
+								werden die Nadelwälder und die maritime
+								Landschaft Sie glücklich machen, dass Sie sich
+								für einen Fahrt an der Côte-Nord entschieden
+								haben. Es gibt mehrere Städte, die über
+								Fährverbindungen auf die andere Seite verfügen,
+								sollten Sie sich für eine Schleife entscheiden.
+							</p>
+
+							<figure class="photoscolonne">
+								<img src="imageseng/5-bergeronnes.jpg" />
+								<figcaption>Grandes-Bergeronnes</figcaption>
+							</figure>
+						</div>
+					</div>
+				</div>
+
+				<div id="desti6" class="destitable">
+					<h3>
+						Route 6<i
+							class="fa-regular fa-circle-xmark"
+							onclick="fermerdesti()"
+						></i>
+					</h3>
+					<p>
+						Fahren Sie von der Stadt Quebec aus nach Norden oder
+						Süden in zwei gleichermaßen abgelegene Teile Quebecs.
+					</p>
+
+					<h4>Wichtigste Städte</h4>
+					<p>
+						Rivière-à-Pierre
+						<i class="fas fa-arrow-right"></i> Québec
+						<i class="fas fa-arrow-right"></i> St-Georges
+						<i class="fas fa-arrow-right"></i> Grenze zu Maine
+					</p>
+
+					<h4>Wegbeschreibung</h4>
+
+					<img src="imageseng/maps/map6.png" />
+
+					<div class="destigrid">
+						<div class="desticol">
+							<h5>A. Portneuf</h5>
+
+							<p>
+								Wenn Sie sich in Montreal befinden und mitten im
+								Nirgendwo hinfahren möchten, nehmen Sie die
+								3-mal pro Woche verkehrende Bahn nach
+								Rivière-à-Pierre und radeln Sie hinunter nach
+								Quebec City. Bevor Sie in die historische
+								Altstadt Quebecs erreichen, haben Sie den ganzen
+								Nachmittag und den nächsten Tag Zeit gehabt,
+								durch einen "Tunnel unter den Bäumen" zu fahren,
+								d.h. durch einen schönen Eisenbahnweg mit vielen
+								Radrastplätzen entlang der Strecke.
+							</p>
+
+							<figure class="photoscolonne">
+								<img src="imageseng/6-portneuf.jpg" />
+								<figcaption>
+									Jacques-Cartier-Portneuf-Eisenbahnweg
+								</figcaption>
+							</figure>
+						</div>
+
+						<div class="desticol">
+							<h5>B. Beauce</h5>
+
+							<p>
+								Die Region Beauce ist ein Flusstal, das für
+								internationale Touristen eher ein abseits der
+								Touristenpfade gelegenes Reiseziel ist. Ein
+								Radweg wird derzeit Kilometer für Kilometer
+								ausgebaut. Falls es Ihnen langweilig wird, was
+								unwahrscheinlich ist, geht der
+								Bellechasse-Bahnweg in nordöstlicher Richtung
+								ab, mit der Möglichkeit, eine Schleife zu
+								machen, die beide Routen kombiniert.
+							</p>
+
+							<figure class="photoscolonne">
+								<img src="imageseng/6-chaudiere.jpg" />
+								<figcaption>
+									Chaudière waterfalls in Lévis
+								</figcaption>
+							</figure>
+						</div>
+					</div>
+				</div>
+
+				<div id="desti8" class="destitable">
+					<p>PS: Es gibt keine Route 7.</p>
+
+					<h3>
+						Route 8<i
+							class="fa-regular fa-circle-xmark"
+							onclick="fermerdesti()"
+						></i>
+					</h3>
+					<p>
+						Hier haben Sie eine dramatische Route, die von einem
+						riesigen Binnenmeer über einen Fjord zu einem weiteren
+						großen See führt.
+					</p>
+
+					<h4>Wichtigste Städte</h4>
+					<p>
+						Métabetchouan–Lac-à-la-Croix
+						<i class="fas fa-arrow-right"></i> Alma
+						<i class="fas fa-arrow-right"></i> Roberval
+						<i class="fas fa-arrow-right"></i>
+						Métabetchouan–Lac-à-la-Croix (Loop)
+						<i class="fas fa-arrow-right"></i> Saguenay
+						<i class="fas fa-arrow-right"></i> Tadoussac
+						<i class="fas fa-arrow-right"></i> Rivière-du-Loup
+						<i class="fas fa-arrow-right"></i>
+						Témiscouata-sur-le-Lac
+						<i class="fas fa-arrow-right"></i> Grenze zu New
+						Brunswick
+					</p>
+
+					<h4>Wegbeschreibung</h4>
+
+					<img src="imageseng/maps/map8.png" />
+
+					<div class="destigrid">
+						<div class="desticol">
+							<h5>A. Lac-St-Jean</h5>
+
+							<p>
+								Eine weitere familienfreundliche Route ist die
+								Tour zum St-Jean-See, einem der größten Seen
+								Quebecs. Auf der Tagesordnung stehen Strände,
+								ein Nationalpark, ein Dorf der First Nations,
+								eine Geisterstadt, ein Zoo und jede Menge wilde
+								Blaubeeren! Es gibt viel zu sehen und zu tun,
+								und die Route wechselt zwischen Radwegen,
+								ziemlich sicheren Schultern auf Landstraßen und
+								ruhigen Nebenstraßen.
+							</p>
+
+							<figure class="photoscolonne">
+								<img src="imageseng/8-lac-st-jean.jpg" />
+								<figcaption>
+									Pointe-Taillon-Nationalpark
+								</figcaption>
+							</figure>
+						</div>
+
+						<div class="desticol">
+							<h5>B. Fjord-du-Saguenay</h5>
+
+							<p>
+								Der Fjord ist eine der ultimativen
+								Rennrad-Herausforderungen, die die Provinz zu
+								bieten hat. Sie können auf der Route verte 8
+								fahren, die am Nordufer die Route 172 nutzt,
+								oder das Südufer-Gegenstück, die Route 170,
+								benutzt. Es gibt sogar einen Fjord-Shuttle, der
+								die Fahrgäste auf dem Wasser hin und her bringt
+								und Ihnen die Möglichkeit bietet, den
+								majestätischen Fjord zu sehen und sich einen
+								Moment lang von den Beinen brechenden Hügeln
+								auszuruhen, die diese Straßen ertragen. Eine
+								Schleife von Saguenay nach St-Siméon und
+								Tadoussac ist eine unvergessliche Reise, die man
+								mindestens einmal erleben sollte.
+							</p>
+
+							<figure class="photoscolonne">
+								<img src="imageseng/8-fjord.jpg" />
+								<figcaption>
+									Flusstal der Ste-Marguerite, in der Nähe von
+									Ste-Rose-du-Nord
+								</figcaption>
+							</figure>
+						</div>
+
+						<div class="desticol">
+							<h5>C. Témiscouata</h5>
+
+							<p>
+								Der interprovinzielle lineare Park Petit-Témis
+								ist eine weitere "Tunnel unter den Bäumen"
+								Bahntrasse mit einer langen Strecke entlang des
+								Sees von Témiscouata. Dort kann man mit einer
+								kleinen Fähre in den Nationalpark übersetzen.
+								Zwischen Rivière-du-Loup und
+								Témiscouata-sur-le-Lac bieten drei rustikale
+								Campingplätze entlang des Weges eine ruhige
+								Nachtruhe. Weiter östlich führt der Weg nach New
+								Brunswick und endet in Edmundston. Vergessen Sie
+								nicht, die Uhren um eine Stunde vorzustellen!
+							</p>
+
+							<figure class="photoscolonne">
+								<img src="imageseng/8-temiscouata.jpg" />
+								<figcaption>
+									Petit-Témis-Bahnweg entlang des Sees
+									Témiscouata
+								</figcaption>
+							</figure>
+						</div>
+					</div>
+				</div>
+
+				<div id="traversee" class="destitable">
+					<h3>
+						Querdurch Quebec<i
+							class="fa-regular fa-circle-xmark"
+							onclick="fermerdesti()"
+						></i>
+					</h3>
+					<p>
+						Auf einer Reise quer durch Kanada? Folgen Sie diesem
+						Routenvorschlag, um das Beste aus Ihrem Aufenthalt in
+						Quebec zu machen!
+					</p>
+
+					<h4>Wichtigste Städte</h4>
+					<p>
+						Pembroke, Ontario
+						<i class="fas fa-arrow-right"></i> Gatineau
+						<i class="fas fa-arrow-right"></i> Montréal
+						<i class="fas fa-arrow-right"></i> Trois-Rivières
+						<i class="fas fa-arrow-right"></i> Québec
+						<i class="fas fa-arrow-right"></i> Rivière-du-Loup
+						<i class="fas fa-arrow-right"></i> Rimouski
+						<i class="fas fa-arrow-right"></i> Campbellton, New
+						Brunswick
+					</p>
+
+					<h4>Wegbeschreibung</h4>
+
+					<img src="imageseng/maps/mapacross.png" />
+
+					<div class="destigrid">
+						<div class="desticol">
+							<h5>Teil 1: Entlang des Outaouais-Flusses</h5>
+
+							<p>
+								In Pembroke verlassen Sie Ontario (vorerst) und
+								folgen Sie der
+								<strong>Route verte 1</strong>, einem
+								Schienenweg durch die Wälder im Westen Quebecs.
+								In Gatineau sind Sie nur einen Katzensprung von
+								Ottawa und all seinen Sehenswürdigkeiten
+								entfernt. Danach radeln Sie hauptsächlich auf
+								Straßen, bis Sie den Ferienort Oka erreichen.
+								Von dort aus führt die landschaftlich schönste
+								Einfahrt nach Montreal mit der
+								<strong>Fähre nach Hudson</strong>, entlang des
+								Flusses nach Vaudreuil und über die
+								<strong>Route verte 5</strong>. Die Fahrt durch
+								die Westinsel von Montreal ist mit ihren
+								verlockenden Parks entlang des Seeufers sehr
+								beeindruckend. Der
+								<strong>Radweg am Lachine-Kanal</strong> führt
+								Sie direkt ins Stadtzentrum, aber bleiben Sie
+								auf der Route verte, wenn Sie des blauen
+								Horizonts noch nicht müde sind.
+							</p>
+
+							<figure class="photoscolonne" id="pc1-1">
+								<img src="imageseng/across-1.jpg" />
+								<figcaption>
+									Der Outaouais-Fluss in St-Placide
+								</figcaption>
+							</figure>
+						</div>
+
+						<div class="desticol">
+							<h5>Teil 2: Der Königsweg</h5>
+
+							<p>
+								Obwohl derselbe Fernradweg bis nach Quebec City
+								zu einer langen Reihe von fabelhaften
+								Bahntrassen wird, haben Sie bis zum Ende Ihrer
+								Reise noch einige Provinzen vor sich. Die
+								<strong>Route verte 5</strong> ist daher nicht
+								nur viel kürzer, sondern gibt Ihnen auch einen
+								Einblick in die Geschichte Québecs. Es handelt
+								sich um die älteste Landstraße der Provinz. Alte
+								Kirchen, Ausblicke auf den Strom St-Laurent und
+								historische Gebäude sind in fast jeder Stadt zu
+								finden. Am Endpunkt angekommen, sollten Sie sich
+								ein paar Tage Zeit nehmen, um die älteste Stadt
+								Nordamerikas zu erkunden.
+							</p>
+
+							<figure class="photoscolonne">
+								<img src="imageseng/5-chemin-du-roi.jpg" />
+								<figcaption>
+									Eine von vielen historischen Kirchen
+									zwischen Montreal und Quebec City
+								</figcaption>
+							</figure>
+						</div>
+
+						<div class="desticol">
+							<h5>Teil 3: Die Maritimes: eine Vorgeschichte</h5>
+
+							<p>
+								Hier verbreitert sich der Strom, dem Sie bisher
+								gefolgt sind, und der Geruch von Salzwasser
+								liegt in der Luft! Entlang der
+								<strong>Route verte 1</strong>, die Sie erneut
+								befahren werden, bieten Ihnen zahlreiche Dörfer
+								an der Flussmündung einen schönen Platz zum
+								Entspannen. Zwischen Trois-Pistoles und Rimouski
+								ist die Strecke alles andere als flach, aber Sie
+								werden staunen, wenn Sie durch den
+								Bic-Nationalpark fahren. Die Gaspé-Schleife
+								beginnt in Ste-Flavie. Sie müssen
+								<strong>ins Landesinnere abbiegen</strong> und
+								in die Hügel hinauffahren. Auf der anderen
+								Seite, im Tal des Matapédia-Flusses, fahren Sie
+								auf einer Talstraße, die auf beiden Seiten von
+								Baumwänden umgeben ist, hinunter nach
+								Campbellton, New Brunswick.
+							</p>
+
+							<figure class="photoscolonne">
+								<img src="imageseng/across-3.jpg" />
+								<figcaption>Bic-Nationalpark</figcaption>
+							</figure>
+						</div>
+					</div>
+
+					<p>
+						Gesamtstrecke: zwischen 1200 und 1250 km.
+						Höhenunterschied: ca. 7000 Meter.
+					</p>
+				</div>
+
+				<hr />
+
+				<p>
+					Neben der Route verte gibt es in allen Regionen viele andere
+					Wege und Möglichkeiten zum Radfahren auf den Straßen. Auf
+					Autorouten (Autobahnen), die zwischen 1 und 99 oder 401 bis
+					999 nummeriert sind, ist Radfahren nicht erlaubt. Die
+					primären Landstraßen sind von 101 bis 199 nummeriert, und
+					die sekundären Landstraßen sind zwischen 201 und 399
+					nummeriert. Radfahren ist auf allen erlaubt, außer auf
+					kurzen Strecken mit Autoroute-ähnlichen Merkmalen. Wenn Sie
+					die Fahrradfreundlichkeitsebene auf der Legende der
+					interaktiven Karte
+					<a
+						href="https://www.quebec511.info/en/Carte/Default.aspx"
+						target="blank"
+						>Quebec 511</a
+					>
+					oder der
+					<a
+						href="https://www.routeverte.com/en/discover/"
+						target="blank"
+						>Route verte</a
+					>
+					auswählen, können Sie auf ein Segment klicken und sich neben
+					anderen relevanten Informationen das Verkehrsvolumen und die
+					Schulterbreite anzeigen lassen.
+				</p>
+
+				<p>
+					Wenn Sie sich für Details interessieren, ist es hilfreich zu
+					wissen, dass die geradzahligen Routen normalerweise dem
+					Strom St-Laurent folgen, während die ungeradzahligen
+					senkrecht verlaufen.
+				</p>
+			</section>
+
+			<section id="getaround">
+				<h2><i class="fas fa-train"></i> Verkehrsmittel</h2>
+
+				<p>
+					Die Fahrradmitnahme in öffentlichen Verkehrsmitteln ist
+					nützlich, wenn man nicht unbegrenzt Zeit hat, Quebec nur mit
+					dem Rad zu erkunden. Touristen, die aus dem Ausland anreisen
+					und eine bestimmte Region mit dem Fahrrad erkunden wollen,
+					müssen unter Umständen in eine Großstadt fliegen und mit dem
+					Zug oder Bus zu ihrem Radreiseziel fahren. Glücklicherweise
+					ist das nicht mehr so komplex.
+				</p>
+
+				<p>
+					Wenn Sie mit einem Intercity-Zug reisen (<a
+						href="https://www.viarail.ca/en/travel-info/baggage/non-standard-items"
+						target="blank"
+						>VIA Rail</a
+					>), können Sie Ihr Fahrrad, normalerweise unverpackt, gegen
+					eine Gebühr von $25 mitnehmen. Charlevoix bietet einen
+					regionalen Bahnverkehr an, bei dem Fahrräder für einen
+					geringen Preis befördert werden. Näheres erfahren Sie unter
+					<a href="https://traindecharlevoix.com/en" target="blank"
+						>bei der Gesellschaft</a
+					>, da viele Seiten von ihrer Website entfernt wurden. In der
+					Gegend von Montreal bietet Exo einen
+					<a
+						href="https://exo.quebec/en/trip-planner/bike/riding-public-transit"
+						target="blank"
+						>S-Bahn</a
+					>
+					an, der es erlaubt, Fahrräder an Bord aller Abfahrten zu
+					nehmen.
+				</p>
+
+				<p>
+					Busse sind etwas komplizierter, da das Fahrrad normalerweise
+					in eine Kiste gelegt werden muss, obwohl einige
+					Transportunternehmen sie in riesigen Plastiktüten
+					akzeptieren. Das entsprechende Verpackungsmaterial wird an
+					vielen Servicestellen von
+					<a href="https://www.expedibus.com/en" target="blank"
+						>Expedibus</a
+					>
+					verkauft, dem Unternehmen, das den Versand von Gepäck und
+					Fahrrädern in ganz Quebec verwaltet. Rufen Sie im Voraus an,
+					um sicherzugehen, dass an Ihrem Abreiseort Kisten vorhanden
+					sind! Es gibt einige regionale Transportunternehmen, die es
+					erlauben, Fahrräder auf einem Gepäckträger an der
+					Vorderseite eines Busses mitzunehmen.
+				</p>
+
+				<div id="transportbike">
+					<iframe
+						frameborder="0"
+						allowfullscreen
+						src="//umap.openstreetmap.fr/fr/map/transport-intermodal-train-et-autobus-velo_570264?scaleControl=false&miniMap=false&scrollWheelZoom=false&zoomControl=true&allowEdit=false&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=true&onLoadPanel=undefined&captionBar=false"
+					>
+					</iframe>
+					<p>
+						<a
+							href="//umap.openstreetmap.fr/fr/map/transport-intermodal-train-et-autobus-velo_570264"
+							>Vollbild</a
+						>
+					</p>
+					<p>
+						Diese Karte (auf Französisch) gibt Ihnen alle
+						Informationen über die Verkehrsdienste, einschließlich
+						der Frage, wo und wie Sie ein Fahrrad mitnehmen können.
+					</p>
+				</div>
+			</section>
+
+			<section id="night">
+				<h2><i class="fas fa-campground"></i> Übernachten</h2>
+
+				<p>
+					Hervorzuheben ist das
+					<a
+						href="https://www.routeverte.com/en/lodging/"
+						target="blank"
+						>Bienvenue cyclistes</a
+					>
+					Unterkunftsnetz für Tourenradler. Das bedeutet grundlegende
+					Werkzeuge, falls Sie Ihr eigenes vergessen haben, sowie
+					Informationen über lokale Fahrradrouten. Besser noch, wenn
+					Sie zelten, haben Sie immer Platz, auch wenn Sie
+					unangekündigt auftauchen. Wenn Sie sich für eine überdachte
+					Unterbringung entscheiden, z.B. in einer Pension oder einem
+					Hotel, wird auch Ihr Fahrrad in einem überdachten und
+					abgeschlossenen Bereich untergebracht sein.
+				</p>
+
+				<p>
+					Viele der lokalen Tourenradfahrer werden sich dafür
+					entscheiden, mit Zelt und Campingausrüstung zu reisen.
+					Zeltplätze gibt es an vielen Orten, und ein Platz für Ihr
+					Zelt kostet zwischen $25 und $45, zu oft am oberen Ende der
+					Skala. Einige campieren heimlich auf öffentlichem Gelände,
+					was legal ist, oder an einem Rastplatz entlang von Radwegen,
+					was manchmal verboten ist. In der Praxis ist es einfach,
+					wenn man spät ankommt, früh geht, kein Feuer macht und keine
+					Spuren hinterlässt, ohne in irgendeine Form von Ärger zu
+					geraten. Man kann auch etwas exorbitante Campinggebühren
+					sparen und sich eine gute Nachtruhe gönnen, ohne von hundert
+					Wohnmobilen umgeben zu sein.
+				</p>
+
+				<p>
+					Ein Zimmer in einem Bed & Breakfast könnte im Hochsommer
+					schwer zu bekommen sein, daher sollten leichte Touren
+					sorgfältig im Voraus geplant werden, um böse Überraschungen
+					zu vermeiden. Viele Quebecer benutzen auch
+					<a href="https://www.warmshowers.org/" target="blank"
+						>Warmshowers</a
+					>, ein Netzwerk von Gastgebern, die eine Couch, ein Bett
+					oder einen Platz für ein Zelt für Radreisende anbieten.
+				</p>
+
+				<img
+					src="imageseng/bienvenue-cyclistes.jpg"
+					width="60%"
+					alt="Ein Campingplatz mit dem Bienvenue-Cyclistes-Schild"
+				/>
+			</section>
+
+			<section id="about">
+				<h2><i class="far fa-question-circle"></i> Über mich</h2>
+
+				<p>
+					Da ich als Gymnasiallehrer und angehender Programmierer in
+					Montreal lebe, beschloss ich, etwas Codierung zu lernen und
+					gleichzeitig mein Wissen über Fahrradtouren online
+					weiterzugeben. Nach Fertigstellung des Projekts habe ich
+					eine einseitige Website auf Deutsch erstellt, damit die
+					Menschen in den deutschsprachigen Ländern dieses
+					ausgezeichnete Radreiseziel entdecken können. Dies würde mir
+					auch die Möglichkeit geben, weiter an meinem Deutsch zu
+					arbeiten. Um mit mir Kontakt aufzunehmen, können Sie
+					<a href="contact.html">das Formular</a> auf der
+					französischsprachigen Seite verwenden.
+				</p>
+			</section>
+		</main>
+
+		<footer>
+			<p>
+				Cyclotouristechezsoi.ca 2020–<span id="anneeCourante"></span>
+				<a
+					rel="license"
+					href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
+				>
+					<img
+						alt="Licence Creative Commons"
+						style="border-width: 0"
+						src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png"
+					/>
+				</a>
+			</p>
+		</footer>
+
+		<script src="scripts/userlang.js" async></script>
+	</body>
+</html>

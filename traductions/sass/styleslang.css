@@ -1,0 +1,836 @@
+@charset "UTF-8";
+html,
+body {
+  background-color: #e8def3;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  margin: 0;
+  overflow-x: hidden;
+  padding: 0;
+  width: 100%;
+}
+
+figcaption {
+  font-size: small;
+  font-style: italic;
+  text-align: center;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 50px 50px 0;
+}
+
+@media screen and (max-width: 800px) {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    margin: 50px 10px 0;
+  }
+}
+
+p {
+  margin-left: 50px;
+  margin-right: 50px;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+@media screen and (max-width: 800px) {
+  p {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+nav {
+  background-color: #749c75;
+  list-style: none;
+  margin-top: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+nav li {
+  float: left;
+}
+
+nav li a {
+  color: white;
+  display: block;
+  padding: 15px;
+  text-align: center;
+  text-decoration: none;
+}
+
+nav li a:hover {
+  background-color: #6a5d7b;
+}
+
+nav li:first-child {
+  background-color: #5d4a66;
+}
+
+nav .defilantcentre,
+nav .defilantdroite {
+  overflow: hidden;
+}
+
+nav .defilantcentre:hover .contdefilant,
+nav .defilantdroite:hover .contdefilant {
+  display: block;
+}
+
+nav .defilantcentre .boutondefilant,
+nav .defilantdroite .boutondefilant {
+  background-color: inherit;
+  border: none;
+  color: white;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-size: 15px;
+  margin: 0;
+  outline: none;
+  padding: 16px;
+}
+
+nav .defilantcentre .contdefilant,
+nav .defilantdroite .contdefilant {
+  display: none;
+  position: absolute;
+  z-index: 1;
+}
+
+nav .defilantcentre .contdefilant a,
+nav .defilantdroite .contdefilant a {
+  background-color: #749c75;
+  display: block;
+}
+
+nav .defilantcentre .contdefilant a:hover,
+nav .defilantdroite .contdefilant a:hover {
+  background-color: #6a5d7b;
+}
+
+nav .defilantcentre .contdefilant li,
+nav .defilantdroite .contdefilant li {
+  float: none;
+}
+
+nav .defilantcentre .contdefilant li a,
+nav .defilantdroite .contdefilant li a {
+  text-align: left;
+}
+
+nav .defilantcentre {
+  float: left;
+}
+
+nav .defilantdroite {
+  float: right;
+}
+
+@media screen and (max-width: 930px) {
+  nav > li:not(:first-child) {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 930px) {
+  .defilantcentre {
+    display: none;
+  }
+}
+
+.wideslide {
+  background-color: black;
+  height: 600px;
+  margin: 0 0 40px;
+  position: relative;
+}
+
+.wideslide .mySlides {
+  display: none;
+}
+
+.wideslide .mySlides .numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+  text-shadow: 1px 1px #5d4a66;
+}
+
+.wideslide .mySlides .carrousel {
+  height: 550px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+}
+
+.wideslide .mySlides .centered {
+  color: white;
+  font-size: 35px;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  text-align: center;
+  text-shadow: 2px 2px 1px #749c75;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 80%;
+}
+
+.wideslide .mySlides .centered h1 {
+  font: unset;
+  margin: 0;
+}
+
+.wideslide .mySlides .text {
+  bottom: 3px;
+  color: #f2f2f2;
+  font-size: 18px;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+}
+
+.wideslide .fade {
+  -webkit-animation-duration: 1.5s;
+  -webkit-animation-name: fade;
+  animation-duration: 1.5s;
+  animation-name: fade;
+}
+
+@-webkit-keyframes fade {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 900px) and (min-width: 700px) {
+  .wideslide {
+    height: 450px;
+  }
+  .wideslide .mySlides .carrousel {
+    height: 400px;
+  }
+}
+
+@media screen and (max-width: 700px) and (min-width: 550px) {
+  .wideslide {
+    height: 400px;
+  }
+  .wideslide .mySlides .carrousel {
+    height: 350px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .wideslide {
+    height: 300px;
+  }
+  .wideslide .mySlides .carrousel {
+    height: 260px;
+  }
+  .wideslide .mySlides .centered {
+    font-size: 25px;
+  }
+  .wideslide .mySlides .text {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 300px) {
+  .wideslide .mySlides .centered {
+    font-size: 20px;
+  }
+  .wideslide .mySlides .text {
+    font-size: 13px;
+  }
+}
+
+#traductionNomSite {
+  cursor: help;
+  -webkit-text-decoration: underline #5d4a66 dotted;
+          text-decoration: underline #5d4a66 dotted;
+}
+
+#traductionNomSiteBoite {
+  background-color: #e9d985;
+  border: 2px solid #5d4a66;
+  border-radius: 5px;
+  -webkit-transform: translateY(-150%);
+          transform: translateY(-150%);
+  display: none;
+  left: 10%;
+  margin-right: 10px;
+  padding: 10px;
+  position: absolute;
+  z-index: 2;
+}
+
+#toggleMeasure {
+  background-color: #6a5d7b;
+  border: 1px solid #749c75;
+  border-radius: 15px;
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin: 0 auto;
+  width: MIN(300px, 100%);
+  text-align: center;
+}
+
+#toggleMeasure #toggleDescUS,
+#toggleMeasure #toggleDescWorld {
+  margin: 10px;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+#toggleMeasure .choisi {
+  text-shadow: 1px 1px #749c75;
+}
+
+#toggleMeasure .nonChoisi {
+  font-size: small;
+  text-shadow: none;
+}
+
+#toggleMeasure div:nth-child(2) {
+  display: block;
+  height: 34px;
+  margin: 10px auto;
+  position: relative;
+  width: 60px;
+}
+
+#toggleMeasure div:nth-child(2) div {
+  height: 0;
+  opacity: 0;
+  width: 0;
+}
+
+#toggleMeasure div:nth-child(2) div.deselectionne + span {
+  background-color: #ccc;
+}
+
+#toggleMeasure div:nth-child(2) div.deselectionne + span::before {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+}
+
+#toggleMeasure div:nth-child(2) div:focus + span {
+  -webkit-box-shadow: 0 0 1px #749c75;
+          box-shadow: 0 0 1px #749c75;
+}
+
+#toggleMeasure div:nth-child(2) span {
+  -webkit-transition: 0.4s;
+  background-color: #749c75;
+  border-radius: 34px;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: 0.4s;
+}
+
+#toggleMeasure div:nth-child(2) span::before {
+  -webkit-transition: 0.4s;
+  background-color: white;
+  border-radius: 50%;
+  bottom: 4px;
+  content: "";
+  height: 26px;
+  left: 4px;
+  position: absolute;
+  transition: 0.4s;
+  width: 26px;
+  -webkit-transform: translateX(24px);
+  transform: translateX(24px);
+}
+
+@media screen and (max-width: 270px) {
+  #toggleMeasure {
+    display: block;
+  }
+  #toggleMeasure #toggleDescUS,
+  #toggleMeasure #toggleDescWorld {
+    margin: 5px;
+  }
+}
+
+.uSInd {
+  display: none;
+}
+
+.climatlangue {
+  margin: 0 50px;
+  width: 530px;
+  position: relative;
+}
+
+.climatlangue .climattab {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+}
+
+.climatlangue .climattab button {
+  background-color: white;
+  cursor: pointer;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  outline: none;
+  padding: 14px;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.climatlangue .climattab button:hover, .climatlangue .climattab button.active {
+  background-color: #5d4a66;
+  color: white;
+}
+
+.climatlangue #fermerville {
+  color: white;
+  cursor: pointer;
+  display: none;
+  font-size: larger;
+  position: absolute;
+  right: 10px;
+  top: 55px;
+}
+
+.climatlangue #fermerville:hover {
+  color: #e9d985;
+}
+
+.climatlangue .climattable {
+  --table-border-width: 1px;
+  background-color: #6a5d7b;
+  border-collapse: collapse;
+  border-radius: 0 0 5px 5px;
+  color: white;
+  display: none;
+  margin: 0;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  width: 100%;
+}
+
+.climatlangue .climattable th {
+  height: 120px;
+  padding: 0 4px 4px;
+  position: relative;
+  white-space: nowrap;
+}
+
+.climatlangue .climattable th > div {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  text-align: left;
+  -webkit-transform: translate(calc(100% - var(--table-border-width) / 2), var(--table-border-width)) rotate(315deg);
+          transform: translate(calc(100% - var(--table-border-width) / 2), var(--table-border-width)) rotate(315deg);
+  -webkit-transform-origin: 0 calc(100% - var(--table-border-width));
+          transform-origin: 0 calc(100% - var(--table-border-width));
+  width: 100%;
+}
+
+.climatlangue .climattable th > div span {
+  border-bottom: var(--table-border-width) solid gray;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+}
+
+.climatlangue .climattable td {
+  border-right: var(--table-border-width) solid gray;
+  min-width: 40px;
+  padding: 4px;
+  text-align: right;
+}
+
+@media screen and (max-width: 700px) {
+  .climatlangue {
+    margin: 0 10px;
+  }
+}
+
+@media screen and (min-width: 520px) and (max-width: 580px) {
+  .climatlangue {
+    width: 478px;
+  }
+  .climatlangue .climattab button {
+    padding: 11px;
+  }
+  .climatlangue #fermerville {
+    top: 65px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .climatlangue {
+    margin: 0;
+    width: 100%;
+  }
+  .climatlangue .climattab button {
+    padding: 5px;
+  }
+  .climatlangue #fermerville {
+    top: 40px;
+  }
+  .climatlangue .climattable {
+    font-size: small;
+    padding-left: 0;
+  }
+  .climatlangue .climattable th,
+  .climatlangue .climattable td {
+    padding-left: 0;
+  }
+}
+
+@media screen and (max-width: 434px) {
+  .climatlangue #fermerville {
+    top: 55px;
+  }
+}
+
+#anitable {
+  background-color: inherit;
+  margin: 0 50px;
+}
+
+#anitable div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#anitable div div {
+  border-left: 1px solid #a0a0a0;
+  border-bottom: 1px solid #a0a0a0;
+  border-collapse: collapse;
+  text-align: left;
+  padding: 8px;
+  word-wrap: break-word;
+  font-size: smaller;
+}
+
+#anitable div div i {
+  display: none;
+}
+
+#anitable div div:first-child {
+  width: 15%;
+  font-size: 95%;
+  font-weight: bold;
+}
+
+#anitable div div:nth-child(2) {
+  width: 18%;
+}
+
+#anitable div div:nth-child(3) {
+  width: 12%;
+}
+
+#anitable div div:nth-child(4) {
+  width: 55%;
+  border-right: 1px solid #a0a0a0;
+}
+
+#anitable div:first-child {
+  font-weight: bold;
+}
+
+#anitable > div:first-child {
+  border-top: 1px solid #a0a0a0;
+}
+
+@media screen and (max-width: 800px) {
+  #anitable {
+    margin: 0 10px;
+  }
+  #anitable div div:first-child {
+    font-size: smaller;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #anitable div {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    width: 100%;
+    border: 1px solid #a0a0a0;
+    border-collapse: collapse;
+  }
+  #anitable div div {
+    text-align: center;
+    width: 100%;
+    border: none;
+    -webkit-box-align: stretch;
+        -ms-flex-align: stretch;
+            align-items: stretch;
+  }
+  #anitable div div i {
+    display: inline;
+  }
+  #anitable div div:first-child, #anitable div div:nth-child(2), #anitable div div:nth-child(3), #anitable div div:nth-child(4) {
+    width: initial;
+    border: none;
+  }
+  #anitable div:first-child div {
+    display: none;
+  }
+}
+
+.destitab {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 50px;
+  overflow: hidden;
+}
+
+.destitab #destitabRoute {
+  padding: 14px 16px 14px 0;
+}
+
+.destitab #destitabBoutons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.destitab #destitabBoutons button {
+  background-color: white;
+  cursor: pointer;
+  float: left;
+  outline: none;
+  padding: 14px 16px;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.destitab #destitabBoutons button:hover {
+  background-color: #5d4a66;
+  color: white;
+}
+
+.destitab #destitabBoutons button.active {
+  background-color: #6a5d7b;
+  color: white;
+}
+
+@media screen and (max-width: 800px) {
+  .destitab {
+    margin: 0 10px;
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .destitab #destitabBoutons button {
+    padding: 10px 12px;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .destitab #destitabBoutons button {
+    padding: 8px 10px;
+  }
+}
+
+@media screen and (max-width: 405px) {
+  .destitab {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .destitab #destitabBoutons {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
+
+/*DESTINATIONS détails*/
+.destitable {
+  display: none;
+}
+
+.destitable h3 i {
+  cursor: pointer;
+  text-align: right;
+  margin-left: 20px;
+}
+
+.destitable h3 i:hover {
+  color: #5d4a66;
+}
+
+.destitable img {
+  margin-top: 20px;
+}
+
+.destitable .destigrid {
+  -webkit-column-gap: 25px;
+          column-gap: 25px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto auto auto;
+      grid-template-columns: auto auto auto;
+  -ms-grid-rows: auto auto auto;
+      grid-template-rows: auto auto auto;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin: 0 50px;
+}
+
+.destitable .destigrid .desticol h5 {
+  font-size: medium;
+}
+
+.destitable .destigrid .desticol p {
+  line-height: 1.4;
+  margin: 10px 0;
+}
+
+.destitable .destigrid .desticol figure {
+  margin: 0 auto;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  width: 100%;
+}
+
+.destitable .destigrid .desticol figure img {
+  display: block;
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+}
+
+.destitable .destigrid .desticol figure figcaption {
+  background-color: black;
+  color: white;
+  font-size: medium;
+  padding: 10px 0;
+  width: 100%;
+}
+
+@media screen and (max-width: 850px) {
+  .destitable .destigrid {
+    -ms-grid-columns: auto;
+        grid-template-columns: auto;
+  }
+  .destitable .destigrid .desticol h5 {
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .destitable {
+    margin: 0 10px;
+  }
+  .destitable .destigrid {
+    margin: 0 10px;
+  }
+}
+
+hr {
+  color: #5d4a66;
+  margin-top: 30px;
+  width: 50%;
+}
+
+/*GETTING AROUND*/
+#transportbike iframe {
+  border-radius: 5px;
+  display: block;
+  height: 480px;
+  margin: 0 auto;
+  width: MIN(90%, 640px);
+}
+
+#transportbike p {
+  font-size: small;
+  text-align: center;
+}
+
+/*AUTRE*/
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (max-width: 650px) {
+  img {
+    width: 90%;
+  }
+}
+
+footer {
+  background-color: #e9d985;
+  margin-top: 12px;
+  padding: 15px;
+}
+
+footer p {
+  text-align: center;
+}
+
+footer p img {
+  width: 80px;
+}
+
+/* Couleurs
+    $coul1 Flax
+    $coul2 Misty Moss
+    $coul3 Russian Green
+    $coul4 Dark Green
+    $coul5 Old Lavender
+    $coul6 English Violet
+*/
+/*# sourceMappingURL=styleslang.css.map */
