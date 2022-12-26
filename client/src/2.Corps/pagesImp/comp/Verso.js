@@ -7,12 +7,13 @@ import TrCoucherAR from "./TrCoucherAR";
 import { FaMountain } from "react-icons/fa";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
-const Verso = ({ item, index }) => {
+const Verso = ({ item, index, changerCarte }) => {
 
     return (
         <Wrapper>
             <Intro>
                 <span>{index + 1}</span>
+                <Renverser onClick={changerCarte}>Montrer recto</Renverser>
                 <span>Km: {item.km}</span>
             </Intro>
             <Titre>{item.titre}</Titre>
@@ -21,6 +22,7 @@ const Verso = ({ item, index }) => {
                 <p>Ratio : {item.ratio}</p>
                 <p>
                     <span>Difficulté de 1 à 5 : </span>
+                    <Cachee>{ item.difficulte }</Cachee>
                     <Montagnes>
                         {
                             [...Array(item.difficulte)].map((e, i) => <FaMountain key={i} />)
@@ -56,6 +58,7 @@ const Verso = ({ item, index }) => {
                 item.lienURL &&
                 <ExternalLink href={item.lienURL}>{item.lienTitre}</ExternalLink>
             }
+            <Cachee onClick={changerCarte}>Montrer verso</Cachee>
         </Wrapper>
     )
 }
@@ -63,7 +66,7 @@ const Verso = ({ item, index }) => {
 const Wrapper = styled.div`
     background-color: var(--c1);
     border-radius: 5px;
-    color: var(--c5);
+    color: var(--c6);
     height: 100%;
     padding: 10px;
     width: 100%;
@@ -77,6 +80,14 @@ const Intro = styled.p`
     display: flex;
     justify-content: space-between;
     margin: 0;
+`
+
+const Renverser = styled.span`
+    cursor: pointer;
+    text-decoration: underline;
+    &:hover {
+        color: var(--c5);
+    }
 `
 
 const Titre = styled.p`
@@ -105,6 +116,11 @@ const VillesTrav = styled.div`
             margin-right: 4px;
         }
     }
+`
+
+const Cachee = styled.p`
+    left: -99999px;
+    position: absolute;
 `
 
 export default Verso;

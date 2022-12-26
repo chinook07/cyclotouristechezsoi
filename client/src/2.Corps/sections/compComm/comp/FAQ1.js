@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import CalculJours from "./CalculJours";
 import CalculCarburant from "./CalculCarburant";
+import CalculDepart from "./CalculDepart";
 import { faAngleDoubleDown, faAngleDoubleUp } from "@fortawesome/free-solid-svg-icons";
 
 const FAQ1 = ({ boiteOuverte, setBoiteOuverte }) => {
@@ -135,7 +136,7 @@ const FAQ1 = ({ boiteOuverte, setBoiteOuverte }) => {
                                 aria-labelledby="acc-tete-3"
                                 role="panel"
                             >
-                                <p>Cher cyclotouriste potentiel, le verbe « devoir » dans votre question est à proscrire, puisque vous roulez la distance que vous voulez. Beaucoup de débutants roulent de 50 à 70 km par jour, d'autres frôlent ou dépassent le 100. Certains iront même rallier Montréal et Québec en deux jours, ce qui équivaut à environ 150 km à la fois. Il faut respecter ses limites et surtout, s'amuser.</p>
+                                <p>Cher cyclotouriste potentiel, le verbe « devoir » dans votre question est à proscrire, puisque vous roulez la distance que vous voulez. Beaucoup de <Gras>débutants</Gras> roulent <Gras>de 50 à 70 km par jour</Gras>, d'autres frôlent ou dépassent le 100. Certains iront même rallier Montréal et Québec en deux jours, ce qui équivaut à environ 150 km à la fois. Il faut respecter ses limites et surtout, s'amuser.</p>
                                 <p>Si l'on voyage avec ses enfants et qu'on veut savourer son séjour, il est conseillé de revoir ces chiffres à la baisse. Surtout, il ne faut oublier que lorsqu'on s'initie, plus on pédale, plus on doit s'arrêter pour se reposer!</p>
                         </Infos>
                     }
@@ -162,8 +163,37 @@ const FAQ1 = ({ boiteOuverte, setBoiteOuverte }) => {
                                 aria-labelledby="acc-tete-4"
                                 role="panel"
                             >
-                                <p>Plusieurs cyclotouristes programment des journées de repos lors d'un voyage de longue durée. Une journée par semaine s'agit d'un consensus parmi les grands voyageurs. L'endroit choisi pour s'arrêter dépend de plusieurs facteurs, mais une ville où il y a beaucoup à visiter, ou bien un parc national peut s'avérer intéressant. L'idéal, c'est d'avoir de quoi explorer, par exemple des sentiers de randonnée ou la possibilité de louer un canot pour la matinée. Même une courte balade en boucle à vélo n'est pas à exclure.</p>
-                                <p>Le corps a besoin de repos. Si ce n'est pas une journée complète, assurez-vous d'alterner entre les journées faciles et difficiles. De plus, les premières journées peuvent s'avérer ardues, étant donné que le corps n'est pas encore habitué à la nouvelle routine.</p>
+                                <p>Plusieurs cyclotouristes programment des journées de repos lors d'un voyage de longue durée. <Gras>Une journée par semaine</Gras> s'agit d'un consensus parmi les grands voyageurs. L'endroit choisi pour s'arrêter dépend de plusieurs facteurs, mais une ville où il y a beaucoup à visiter, ou bien un parc national peut s'avérer intéressant. L'idéal, c'est d'avoir de quoi explorer, par exemple des sentiers de randonnée ou la possibilité de louer un canot pour la matinée. Même une courte balade en boucle à vélo n'est pas à exclure.</p>
+                                <p>Le corps a besoin de repos. Si ce n'est pas une journée complète, assurez-vous <Gras>d'alterner entre les journées faciles et difficiles</Gras>. De plus, les premières journées peuvent s'avérer ardues, étant donné que le corps n'est pas encore habitué à la nouvelle routine.</p>
+                        </Infos>
+                    }
+                </Boite>
+                <Boite>
+                    <h3 onClick={() => ouvrirFermer(5)}>
+                        <button
+                            aria-controls="acc-corps-5"
+                            aria-expanded="false"
+                            className="acc-tetes-B"
+                            id="acc-tete-5"
+                            type="button"
+                        >Quelle journée de la semaine prendre la route?</button>
+                        {
+                            boiteOuverte === 5
+                                ? <FontAwesomeIcon icon={faAngleDoubleUp} />
+                                : <FontAwesomeIcon icon={faAngleDoubleDown} />
+                        }
+                    </h3>
+                    {
+                        boiteOuverte === 5 &&
+                            <Infos
+                                id="acc-corps-5"
+                                aria-labelledby="acc-tete-5"
+                                role="panel"
+                            >
+                                <p>Dans la plupart des cas, cela dépend des dates de vos vacances. Par contre, si vous êtes flexible, ça devient intéressant d'y penser.</p>
+                                <p>En plein été, les fins de semaine sont sans doute plus populaires pour les voyages de toute sorte. Trouver un hébergement, parfois même un camping, peut devenir un parcours du combattant. Selon la longueur prévue de votre voyage, l'outil suivant vous aidera à planifier le scénario idéal pour prioriser la semaine de travail.</p>
+                                <p>Exemple : vous voulez faire le tour de la Gaspésie en 12 jours. En partant le dimanche ou le lundi, vous ne passerez que 2 nuitées de fin de semaine (vendredi et samedi soir) durant votre séjour, plutôt que jusqu'à 4 autrement.</p>
+                                <CalculDepart />
                         </Infos>
                     }
                 </Boite>

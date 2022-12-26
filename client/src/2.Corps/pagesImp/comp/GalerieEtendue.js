@@ -78,13 +78,16 @@ const GalerieEtendue = ({ montrerGal, setMontrerGal }) => {
 
     const fermerZoom = () => setDiapo(undefined);
 
-    const fermerGalEtendue = () => setMontrerGal(false);
+    const fermerGalEtendue = (defiler) => {
+        setMontrerGal(false);
+        if (defiler) window.scrollTo(0, 1100);
+    }
 
     if (ordreDesPhotos.length) {
 
         return (
             <Wrapper>
-                <Fermer onClick={fermerGalEtendue}>Fermer</Fermer>
+                <Fermer onClick={() => fermerGalEtendue(false)}>Fermer</Fermer>
                 <GalerieComplete opaque={diapo === undefined ? 1 : 0.4}>
                     {
                         ordreDesPhotos.map((item, index) => {
@@ -97,7 +100,7 @@ const GalerieEtendue = ({ montrerGal, setMontrerGal }) => {
                         })
                     }
                 </GalerieComplete>
-                <Fermer onClick={fermerGalEtendue}>Fermer</Fermer>
+                <Fermer onClick={() => fermerGalEtendue(true)}>Fermer</Fermer>
                 {
                     diapo !== undefined
                     && <Zoom

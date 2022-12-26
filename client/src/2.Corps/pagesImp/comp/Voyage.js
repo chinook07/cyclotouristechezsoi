@@ -6,19 +6,19 @@ import Verso from "./Verso";
 
 const Voyage = ({ index, item }) => {
     const [montrerVerso, setMontrerVerso] = useState(false);
-    const retournerCarte = () => setMontrerVerso(true);
-    const retourCarte2 = () => setMontrerVerso(false);
-
+    // const retournerCarte = () => setMontrerVerso(true);
+    // const retourCarte2 = () => setMontrerVerso(false);
+    const changerCarte = () => montrerVerso ? setMontrerVerso(false) : setMontrerVerso(true);
 
     return (
-        <Wrapper onMouseEnter={retournerCarte} onMouseLeave={retourCarte2}>
+        <Wrapper>
             {
                 !montrerVerso
-                && <Recto index={index} item={item} />
+                && <Recto index={index} item={item} changerCarte={changerCarte} />
             }
             {
                 montrerVerso
-                && <Verso index={index} item={item} />
+                && <Verso index={index} item={item} changerCarte={changerCarte} />
             }
         </Wrapper>
     )

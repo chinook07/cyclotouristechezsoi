@@ -69,6 +69,9 @@ const Wrapper = styled.div`
     @media screen and (max-width : 600px) {
         width: 88%;
     }
+    @media screen and (max-height : 450px) {
+        padding: 5px 10px;
+    }
 `
 
 const Echapper = styled.button`
@@ -76,7 +79,6 @@ const Echapper = styled.button`
     border: none;
     color: var(--c11);
     cursor: pointer;
-    height: 60px;
     margin: 0 auto;
     width: 70px;
 `

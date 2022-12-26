@@ -2,12 +2,13 @@ import styled from "styled-components";
 
 import * as ImagesTout from "../images/voyagesEff/index"
 
-const Recto = ({ item, index }) => {
+const Recto = ({ item, index, changerCarte }) => {
 
     return (
         <Wrapper>
             <Intro>
                 <span>{index + 1}</span>
+                <Renverser onClick={changerCarte}>Montrer verso</Renverser>
                 <span>Jrs : {item.jours}</span>
             </Intro>
             <Titre>{item.titre}</Titre>
@@ -20,6 +21,7 @@ const Recto = ({ item, index }) => {
                 <Details>{item.note}</Details>
             }
             <img alt={item.imgAlt} src={ImagesTout[`PhotoTitre${index + 1}`]} />
+            <Cachee onClick={changerCarte}>Montrer verso</Cachee>
         </Wrapper>
     )
 }
@@ -50,6 +52,14 @@ const Intro = styled.p`
     margin: 0;
 `
 
+const Renverser = styled.span`
+    cursor: pointer;
+    text-decoration: underline;
+    &:hover {
+        color: var(--c1);
+    }
+`
+
 const Titre = styled.h3`
     font-size: larger;
     font-weight: normal;
@@ -66,6 +76,11 @@ const Desc = styled.div`
 const Details = styled.p`
     font-size: small;
     margin: 15px 20px;
+`
+
+const Cachee = styled.p`
+    left: -99999px;
+    position: absolute;
 `
 
 export default Recto;
