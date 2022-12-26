@@ -60,7 +60,6 @@ const Wrapper = styled.div`
             width: 100%;
         }
         figcaption {
-            color: var(--c11);
             font-size: 18px;
             padding: 10px;
         }

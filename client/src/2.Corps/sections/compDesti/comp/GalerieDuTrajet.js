@@ -79,7 +79,7 @@ const GalerieDuTrajet = ({ details }) => {
                         tableauPhotos.map((item, index) => {
                             return (
                                 <img
-                                    alt="à venir"
+                                    alt={texteAltPhotos.trajet[idTrajet][index]}
                                     key={index}
                                     onClick={() => changerPhoto(index)}
                                     src={imagesTout[idTrajet][item]}
@@ -126,6 +126,11 @@ const Wrapper = styled.div`
         }
         img {
             width: 100%;
+            @media screen and (max-height: 350px) {
+                display: block;
+                margin: 0 auto;
+                width: 80%;
+            }
         }
         figcaption {
             color: var(--c11);

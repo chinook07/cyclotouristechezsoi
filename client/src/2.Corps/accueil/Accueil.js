@@ -11,11 +11,11 @@ const Accueil = () => {
             <Carrousel />
             <Intro>
                 <h1>Explorez le Québec à vélo</h1>
-                <Temp>
+                {/* <Temp>
                     <p>Site en production</p>
                     <p>Attention! Ceci est une version en préproduction. Visitez <ExternalLink href="https://cyclotouristechezsoi.ca">le site actuel</ExternalLink> pour une expérience plus complète.</p>
-                </Temp>
-                <p>L'hiver s'installe prochainement au Québec. Pour vous aider à planifier vos sorties de l'an prochain en cyclotourisme, découvrez les renseignements pertinents colligés sur ce site web. Que vous soyez débutant, chevronné, ou simplement curieux, vous trouverez des conseils de matériel, de trajets et bien davantage.</p>
+                </Temp> */}
+                <p>L'hiver s'est installé au Québec, mais les journées se rallongent déjà. Pour vous aider à planifier vos sorties de votre prochaine saison de cyclotourisme, découvrez les renseignements pertinents colligés sur ce site web. Que vous soyez débutant, chevronné, ou simplement curieux, vous trouverez des conseils de matériel, de trajets et bien davantage.</p>
                 <p>Bonne visite!</p>
             </Intro>
             <NavAccueil />
