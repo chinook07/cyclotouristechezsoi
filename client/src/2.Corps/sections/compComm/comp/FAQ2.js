@@ -16,9 +16,10 @@ import repas1 from "../images/repas-poulet.jpg";
 import repas2 from "../images/fruits.jpg";
 
 const FAQ2 = ({ boiteOuverte, setBoiteOuverte }) => {
+
 	const ouvrirFermer = (index) => {
         if (boiteOuverte === index) {
-            const fermer = document.getElementById(`acc-tete-${index}`);
+            const fermer = document.getElementById(`acc-tete-${boiteOuverte}`);
             fermer.ariaExpanded = false;
             setBoiteOuverte();
         } else {
@@ -83,7 +84,7 @@ const FAQ2 = ({ boiteOuverte, setBoiteOuverte }) => {
             <h2>FAQ sur la route</h2>
             <ul>
                 <Boite>
-                    <h3 onClick={() => ouvrirFermer(10)}>
+                    <h3 onClick={() => ouvrirFermer(10)} >
                         <button
                             aria-controls="acc-corps-10"
                             aria-expanded="false"
@@ -111,7 +112,7 @@ const FAQ2 = ({ boiteOuverte, setBoiteOuverte }) => {
                     }
                 </Boite>
                 <Boite>
-                    <h3 onClick={() => ouvrirFermer(11)}>
+                    <h3 onClick={() => ouvrirFermer(11)} >
                         <button
                             aria-controls="acc-corps-11"
                             aria-expanded="false"
@@ -136,7 +137,7 @@ const FAQ2 = ({ boiteOuverte, setBoiteOuverte }) => {
                     }
                 </Boite>
                 <Boite>
-                    <h3 onClick={() => ouvrirFermer(12)}>
+                    <h3 onClick={() => ouvrirFermer(12)} >
                         <button
                             aria-controls="acc-corps-12"
                             aria-expanded="false"
@@ -162,7 +163,7 @@ const FAQ2 = ({ boiteOuverte, setBoiteOuverte }) => {
                     }
                 </Boite>
                 <Boite>
-                    <h3 onClick={() => ouvrirFermer(14)}>
+                    <h3 onClick={() => ouvrirFermer(14)} >
                         <button
                             aria-controls="acc-corps-14"
                             aria-expanded="false"
@@ -187,7 +188,7 @@ const FAQ2 = ({ boiteOuverte, setBoiteOuverte }) => {
                     }
                 </Boite>
                 <Boite>
-                    <h3 onClick={() => ouvrirFermer(15)}>
+                    <h3 onClick={() => ouvrirFermer(15)} >
                         <button
                             aria-controls="acc-corps-15"
                             aria-expanded="false"
