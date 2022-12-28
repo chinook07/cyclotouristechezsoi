@@ -418,8 +418,12 @@ const Rubrique = styled.div`
         details {
             background-color: var(--c1);
             border-left: 4px solid var(--c5);
+            border-radius: 0 10px 10px 0;
             margin: 5px 0;
             padding: 10px;
+            summary {
+                cursor: pointer;
+            }
         }
     }
 `

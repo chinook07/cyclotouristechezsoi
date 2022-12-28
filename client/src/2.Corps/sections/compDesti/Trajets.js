@@ -1,16 +1,25 @@
 import styled from "styled-components";
 import { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 import trajetsDB from "./donnees/trajets.json";
 import DetailsDuTrajet from "./comp/DetailsDuTrajet";
 import { CycloContext } from "../../../CycloContext";
 
-const Trajets = () => {
-	const { trajetRedig, setTrajetRedig } = useContext(CycloContext);
-	const [trajetChoisi, setTrajetChoisi] = useState();
+const Trajets = ({ ancienLien }) => {
 
-	useEffect(() => {
-		if (trajetRedig.id) {
+	const { trajetRedig, setTrajetRedig } = useContext(CycloContext);
+    const [trajetChoisi, setTrajetChoisi] = useState();
+    
+    const naviguer = useNavigate();
+
+    useEffect(() => {
+        if (ancienLien) {
+            setTrajetChoisi(
+                trajetsDB.find((item) => item.id === ancienLien).trajet
+            );
+            naviguer("/destinations/trajets");
+        } else if (trajetRedig.id) {
 			setTrajetChoisi(
 				trajetsDB.find((item) => item.id === trajetRedig.id).trajet
 			);
