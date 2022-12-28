@@ -20,6 +20,16 @@
         "complet": false
     },
     {
+        "region": "Côte-Nord",
+        "lienRegion": "cote-nord",
+        "couleur": "#3D3DE2",
+        "police": "#fff",
+        "texte": "Un projet est en cours pour prolonger la Véloroute des Baleines jusqu'à Kegaska, point de fin de la route 138.",
+        "lien": "Le Manic",
+        "url": "https://www.lemanic.ca/2022/11/12/une-premiere-rencontre-pour-completer-la-veloroute-des-baleines-jusqua-kegaska/",
+        "complet": false
+    },
+    {
         "region": "Montréal–Québec (sud)",
         "lienRegion": "montreal-quebec-sud",
         "couleur": "#5fe25f",
