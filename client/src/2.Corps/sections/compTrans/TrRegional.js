@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { ExternalLink } from "react-external-link";
 
 import DeuxFigures from "../../../CompReutilisables/DeuxFigures";
@@ -22,7 +21,7 @@ const TrRegional = () => {
     }
 
     return (
-        <Wrapper>
+        <div>
             <section>
                 <h2>Sortir de la région métropolitaine</h2>
                 <p>Pour sortir de la région métropolitaine, la situation s'est grandement améliorée au fil des années. Parmi les onze secteurs d'exo, le transporteur qui opère les trains et les autobus dans la banlieue de Montréal, <ExternalLink href="https://exo.quebec/fr/planifier-trajet/velo/velo-a-bord">sept en offrent la possibilité</ExternalLink> de transporter son vélo à bord des bus, avec des heures et des dates d'utilisation harmonisées depuis quelques années.</p>
@@ -36,13 +35,22 @@ const TrRegional = () => {
                 <TableauRegions />
             </section>
             <section>
+                <h2>Les navettes pour cyclistes</h2>
+                <p>Il existe dans certaines régions des navettes exprès pour cyclistes. C'est une excellente façon de sauter d'un bout à l'autre avant ou après avoir roulé sur la véloroute du début à la fin. Le transport à bord de celles-ci doit normalement être réservé, peut couter plus cher qu'un billet d'autocar, mais le service vient avec une certitude que le vélo peut accompagner le voyageur. Dans d'autres cas, un transfert de bagages ou de déplacement de véhicule y est offert. L'un ou l'autre de ces services existent aux endroits suivants :</p>
+                <ul>
+                    <li><ExternalLink href="https://www.voyageravelo.com/">Montrérégie, Centre-du-Québec, le long du lac Ontario et le fleuve St-Laurent de Toronto à Matane, Montréal–Sherbrooke</ExternalLink></li>
+                    <li><ExternalLink href="https://www.autobuslepetittraindunord.com/">Parc linéaire le P'tit train du Nord</ExternalLink></li>
+                    <li><ExternalLink href="https://navettesdufjord.com/fr/trajets/veloroute-du-fjord-du-saguenay">Véloroute du Fjord</ExternalLink></li>
+                    <li><ExternalLink href="https://www.veloroute-des-baleines.ca/services-aux-cyclistes">Véloroute des Baleines</ExternalLink></li>
+                    <li><ExternalLink href="https://fr.veloroutedesbleuets.com/navette-de-bagages">Véloroute des Bleuets</ExternalLink></li>
+                </ul>
+            </section>
+            <section>
                 <h2>Se déplacer à l'intérieur des villes</h2>
                 <p>À noter que certaines sociétés de transport offrent des supports à vélo sur les autobus urbains, tel qu'à <ExternalLink href="https://www.stl.laval.qc.ca/fr/autobus/cyclobus/">Laval</ExternalLink>, <ExternalLink href="https://sttr.qc.ca/sttr/cyclobus/">Trois-Rivières</ExternalLink>, <ExternalLink href="https://sts.saguenay.ca/infos-pratiques/velobus">Saguenay</ExternalLink>, <ExternalLink href="http://sto.ca/index.php?id=vlo-bus&L=fr%2Fbrochure_p12_f.pdf">Gatineau</ExternalLink> et <ExternalLink href="https://www.sts.qc.ca/77-Informations-importantes.html">Sherbrooke</ExternalLink>. Par contre, puisque le vélo est souvent plus rapide que l'autobus pour les déplacements en ville, ce service n'est utile que dans certaines situations particulières.</p>
             </section>
-        </Wrapper>
+        </div>
     )
 }
-
-const Wrapper = styled.div``
 
 export default TrRegional;

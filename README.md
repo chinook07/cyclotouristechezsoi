@@ -1,6 +1,6 @@
 # Cyclotouristechezsoi
 
-C'est le temps de mettre à jour mon site web [Cyclotouriste chez soi](https://cyclotouristechezsoi.ca/) créé en 2020 avec HTML, SCSS et JavaScript!
+C'était le temps de mettre à jour mon site web [Cyclotouriste chez soi](https://cyclotouristechezsoi.ca/) créé en 2020 avec HTML, SCSS et JavaScript!
 
 ## C'est quoi, Cyclotouriste chez soi?
 
@@ -8,12 +8,12 @@ C'est un répertoire d'information sur le cyclotourisme au Québec, créé d'abo
 
 ## Est-ce que je peux voir le résultat?
 
-Oui! Le « build » le plus à jour se trouve [en préprod](https://preprod.cyclotouristechezsoi.ca/) sur le web.
+Oui, sur [Cyclotouriste chez soi](https://cyclotouristechezsoi.ca/)!
 
-## Quelles technologies seront utilisées?
+## Quelles technologies sont utilisées?
 
-Le site sera fait en React.js, avec un petit backend en Node.js / Express. En terme d'API, je me sers de celui de Leaflet pour créer des cartes.
+Le site est fait en React.js, avec un petit backend en Node.js / Express qui sera mis en service éventuellement. En terme d'API, je me servirai de celui de Leaflet pour créer des cartes.
 
-## Quand est-ce que le vieux site sera remplacé par ce nouveau?
+## Quand est-ce que le projet sera complet?
 
-Je compte compléter ce projet en grande partie d'ici Noël 2022, mais il se peut que certaines parties soient prêtes plus tard.
+Tout le front-end a été complété le 26 décembre, avec quelques ajustements à venir. Le back-end sera déployé dans un deuxième temps.

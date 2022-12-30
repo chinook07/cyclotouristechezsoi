@@ -2,7 +2,7 @@
     "name": "cyclotouristechezsoi",
     "version": "0.1.0",
     "private": true,
-    "homepage": "http://preprod.cyclotouristechezsoi.ca",
+    "homepage": "https://cyclotouristechezsoi.ca",
     "proxy": "http://localhost:8000",
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^6.2.0",
@@ -53,6 +53,9 @@
         ]
     },
     "devDependencies": {
+        "@babel/node": "^7.20.7",
+        "@babel/preset-env": "^7.20.2",
+        "@babel/preset-react": "^7.18.6",
         "rollup-plugin-svg-import": "^1.6.0"
     }
 }

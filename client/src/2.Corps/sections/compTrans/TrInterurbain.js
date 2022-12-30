@@ -1,11 +1,10 @@
-import styled from "styled-components";
 import { ExternalLink } from "react-external-link";
 
 import AvionImages from "./comp/AvionImages";
 
 const ABCDEF = () => {
     return (
-        <TrInterurbain>
+        <div>
             <section>
                 <h2>Prendre l'autocar pour aller plus loin</h2>
                 <p>L'autocar dessert toutes les régions du Québec, et l'offre des départs est généralement plus généreuse qu'avec le train, les billets étant souvent moins chers. Les transporteurs régissent les conditions d'utilisation, mais il faut faire affaire avec <ExternalLink href="https://www.expedibus.com/fr">Expédibus</ExternalLink> à la largeur du Québec (sauf pour en sortir) pour transporter son vélo. Avant de partir en voyage, il est fortement recommandé de suivre les étapes suivantes :</p>
@@ -25,10 +24,8 @@ const ABCDEF = () => {
                 <p>S'envoler dans les airs sera toujours plus compliqué que prendre un train, surtout avec un vélo. En plus des files d'attente, des contrôles de sécurité et autres trépidations, il faut s'assurer de bien emballer son vélo. Certaines lignes aériennes imposent la boite, d'autres ont des exigences plus souples. Peu importe l'emballage fourni, il n'est que rarement fourni par la ligne aérienne ou disponible pour l'achat à l'aéroport. Il serait parfois plus simple de se trouver un moyen de transport pour rejoindre l'aéroport avec son vélo déjà démonté.</p>
                 <p>Contrairement à ce qui est du transport par autocar, votre vélo sera manipulé par plusieurs personnes (et machines) avant d'arriver à bon port. <strong>Assurez-vous de bien protéger les pièces sensibles de votre monture pour éviter les mauvaises surprises à destination.</strong></p>
             </section>
-        </TrInterurbain>
+        </div>
     )
 }
-
-const TrInterurbain = styled.div``
 
 export default ABCDEF;

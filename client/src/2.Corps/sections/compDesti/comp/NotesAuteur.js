@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faBicycle, faCheck, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
@@ -6,7 +5,7 @@ import { faBicycle, faCheck, faTimesCircle } from "@fortawesome/free-solid-svg-i
 const NotesAuteur = ({ details }) => {
     
     return (
-        <Wrapper>
+        <div>
             <p>
                 <span>Déjà pédalé : </span>
                 {
@@ -53,10 +52,8 @@ const NotesAuteur = ({ details }) => {
                 details.varietes &&
                 <p>Variétés au parcours : {details.varietes}</p>
             }
-        </Wrapper>
+        </div>
     )
 }
-
-const Wrapper = styled.div``
 
 export default NotesAuteur;

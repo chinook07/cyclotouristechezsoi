@@ -1,5 +1,3 @@
-import styled from "styled-components";
-
 import DeuxFigures from "../../../CompReutilisables/DeuxFigures";
 import veloAutocar from "./images/velo-autocar.jpg"
 import veloTrain from "./images/velo-train-exo.jpg"
@@ -19,7 +17,7 @@ const Intro = () => {
     }
 
     return (
-        <Wrapper>
+        <div>
             <p>Que ce soit pour partir en cyclotourisme dans une région autre que la sienne ou simplement pour effectuer un trajet linéaire – c'est-à-dire pas en boucle, il peut s'avérer nécessaire de mettre son vélo sur un train ou un autocar. Mais comment s'éviter les ennuis, et surtout, comment naviguer à travers la panoplie de règlements qui diffèrent d'un transporteur à l'autre?</p>
             <DeuxFigures photo1={photo1} photo2={photo2} />
             <h2>Quelques conseils</h2>
@@ -29,17 +27,8 @@ const Intro = () => {
                 <li>Arrivez à l'avance pour éviter de devoir vous dépêcher, surtout si vous devez démonter votre vélo.</li>
                 <li>Munissez-vous d'un plan B, au cas où le transport du vélo s'avèrerait impossible.</li>
             </ul>
-        </Wrapper>
+        </div>
     )
 }
-
-const Wrapper = styled.div`
-    div {
-        display: flex;
-        figure {
-            width: 50%;
-        }
-    }
-`
 
 export default Intro;

@@ -51,6 +51,7 @@ const Possibilites = ({ villeSouhaitee }) => {
                                             aria-hidden="false"
                                             icon={toutesIcones[itemB]}
                                             key={indexB}
+                                            title={iconesAccessible[itemB]}
                                         />
                                     )
                                 })

@@ -70,7 +70,6 @@ const Wrapper = styled.div`
         align-self: center;
         svg {
             color: var(--c4);
-            
             &:last-child {
                 display: none;
             }

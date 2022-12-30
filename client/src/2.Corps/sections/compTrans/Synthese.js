@@ -14,9 +14,9 @@ const Synthese = () => {
     const [villeSouhaitee, setVilleSouhaitee] = useState();
 
     return (
-        <Wrapper>
+        <div>
             <section>
-                <h2>Carte globale</h2>
+                <h2>Carte des transports</h2>
                 <Carte>
                     <iframe
                         aria-hidden
@@ -44,11 +44,9 @@ const Synthese = () => {
                     <Possibilites villeSouhaitee={villeSouhaitee} />
                 }
             </section>
-        </Wrapper>
+        </div>
     )
 }
-
-const Wrapper = styled.div``
 
 const Carte = styled.figure`
     height: 500px;

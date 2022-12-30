@@ -28,6 +28,7 @@
                 "nombre": 29
             }
         ],
+        "type": "forestier",
         "deA": [
             "Ville-Marie",
             "Val-d'Or"
@@ -65,6 +66,7 @@
                 "nombre": 10
             }
         ],
+        "type": "maritime",
         "deA": [
             "Québec",
             "Rimouski"
@@ -98,6 +100,7 @@
                 "nombre": 26
             }
         ],
+        "type": "champêtre",
         "deA": [
             "Québec",
             "Maine (É.-U.)"
@@ -138,6 +141,7 @@
                 "nombre": 19
             }
         ],
+        "type": "champêtre, forestier, montagnard",
         "deA": [
             "Bécancour",
             "Abercorn"
@@ -170,6 +174,7 @@
                 "nombre": 18
             }
         ],
+        "type": "forestier, champêtre",
         "deA": [
             "Lévis",
             "St-Armagh (boucle)"
@@ -208,6 +213,7 @@
                 "nombre": 8
             }
         ],
+        "type": "montagnard",
         "deA": [
             "Beaupré",
             "Tadoussac"
@@ -243,6 +249,7 @@
                 "nombre": 12
             }
         ],
+        "type": "maritime",
         "deA": [
             "Campbellton",
             "Cap-Jourimain"
@@ -282,6 +289,7 @@
                 "nombre": 10
             }
         ],
+        "type": "maritime, forestier",
         "deA": [
             "Tadoussac",
             "Baie-Comeau et au-delà"
@@ -321,6 +329,7 @@
                 "nombre": 7
             }
         ],
+        "type": "maritime, forestier",
         "deA": [
             "Saguenay",
             "Tadoussac"
@@ -360,6 +369,7 @@
                 "nombre": 27
             }
         ],
+        "type": "maritime, forestier",
         "deA": [
             "Métabetchouan",
             "St-Siméon"
@@ -399,6 +409,7 @@
                 "nombre": 7
             }
         ],
+        "type": "maritime, montagnard",
         "deA": [
             "Rimouski",
             "Gaspé (boucle)"
@@ -434,6 +445,7 @@
                 "nombre": 12
             }
         ],
+        "type": "maritime, forestier",
         "deA": [
             "Borden-Carleton",
             "Souris"
@@ -469,6 +481,7 @@
                 "nombre": 11
             }
         ],
+        "type": "maritime",
         "deA": [
             "Cap-aux-Meules",
             "Cap-aux-Meules (boucle)"
@@ -506,6 +519,7 @@
                 "nombre": 16
             }
         ],
+        "type": "forestier",
         "deA": [
             "Val-d'Or",
             "Mont-Laurier"
@@ -542,6 +556,7 @@
                 "nombre": 19
             }
         ],
+        "type": "champêtre, montagnard, forestier",
         "deA": [
             "Montréal",
             "New York"
@@ -579,6 +594,7 @@
                 "nombre": 27
             }
         ],
+        "type": "maritime, champêtre",
         "deA": [
             "Alma",
             "Roberval (boucle)"
@@ -618,6 +634,7 @@
                 "nombre": 21
             }
         ],
+        "type": "forestier",
         "deA": [
             "Mont-Laurier",
             "Montréal"
@@ -656,6 +673,7 @@
                 "nombre": 24
             }
         ],
+        "type": "forestier, champêtre",
         "deA": [
             "Louiseville",
             "Rivière-à-Pierre"
@@ -696,6 +714,7 @@
                 "nombre": 19
             }
         ],
+        "type": "maritime, champêtre",
         "deA": [
             "Montréal",
             "Beaupré"
@@ -736,6 +755,7 @@
                 "nombre": 18
             }
         ],
+        "type": "maritime, champêtre",
         "deA": [
             "Côteau-du-Lac",
             "Lévis"
@@ -776,6 +796,7 @@
                 "nombre": 26
             }
         ],
+        "type": "montagnard, forestier",
         "deA": [
             "Montréal",
             "Sherbrooke"
@@ -818,6 +839,7 @@
                 "nombre": 22
             }
         ],
+        "type": "champêtre",
         "deA": [
             "Gatineau–Ottawa",
             "Montréal"
@@ -858,6 +880,7 @@
                 "nombre": 19
             }
         ],
+        "type": "champêtre",
         "deA": [
             "Ottawa–Gatineau",
             "Montréal"
@@ -892,6 +915,7 @@
                 "nombre": 22
             }
         ],
+        "type": "forestier",
         "deA": [
             "Pembroke",
             "Gatineau–Ottawa"
@@ -930,6 +954,7 @@
                 "nombre": 2
             }
         ],
+        "type": "forestier",
         "deA": [
             "Rivière-à-Pierre",
             "Québec"
@@ -969,6 +994,7 @@
                 "nombre": 18
             }
         ],
+        "type": "maritime, champêtre",
         "deA": [
             "Toronto",
             "Montréal"
@@ -1010,6 +1036,7 @@
                 "nombre": 1
             }
         ],
+        "type": "forestier, champêtre",
         "deA": [
             "Sherbrooke",
             "Lévis"
@@ -1047,6 +1074,7 @@
                 "nombre": 1
             }
         ],
+        "type": "forestier",
         "deA": [
             "Rivière-du-Loup",
             "Edmundston"
@@ -1083,6 +1111,7 @@
                 "nombre": 18
             }
         ],
+        "type": "forestier",
         "deA": [
             "Shawinigan",
             "Trois-Rivières"
@@ -1116,6 +1145,7 @@
                 "nombre": 22
             }
         ],
+        "type": "forestier",
         "deA": [
             "Grand-Remous",
             "Gatineau–Ottawa"

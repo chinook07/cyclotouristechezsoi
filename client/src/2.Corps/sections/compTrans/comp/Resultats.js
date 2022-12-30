@@ -23,7 +23,7 @@ const Resultats = ({ recherchee, setVilleSouhaitee }) => {
 
     if (recherchee.length > 2) {
         return (
-            <Wrapper>
+            <>
                 {
                     total.length === 0
                         ? <Aucun>
@@ -35,7 +35,7 @@ const Resultats = ({ recherchee, setVilleSouhaitee }) => {
                             </ul>
                         </Aucun>
                         : <div>
-                            <div>Résultats :</div>
+                            <p>Résultats :</p>
                             <Villes>
                                 {
                                     total.length > 0 &&
@@ -47,14 +47,11 @@ const Resultats = ({ recherchee, setVilleSouhaitee }) => {
                         </div>
                 }
                 
-            </Wrapper>
+            </>
         )
     }
     
 }
-
-const Wrapper = styled.div`
-`
 
 const Aucun = styled.div`
     > div {

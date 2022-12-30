@@ -208,6 +208,9 @@
     "L'Ange-Gardien": [
         320
     ],
+    "L'Anse-Saint-Jean": [
+        420
+    ],
     "L'Ile-Perrot": [
         100
     ],
@@ -474,7 +477,8 @@
     "Saguenay": [
         5,
         80,
-        81
+        81,
+        420
     ],
     "Saint-Amable": [
         142
@@ -579,6 +583,9 @@
         101,
         171
     ],
+    "Sainte-Rose-du-Nord": [
+        420
+    ],
     "Salaberry-de-Valleyfield": [
         120
     ],
@@ -601,7 +608,8 @@
     ],
     "Tadoussac": [
         81,
-        84
+        85,
+        420
     ],
     "Témiscaming": [
         12

@@ -6,6 +6,7 @@ import { CycloContext } from "../../../CycloContext";
 
 import donnees from "./donnees/trajets.json";
 import Hasard from "./comp/Hasard";
+import Trouvez from "./comp/Trouvez";
 import * as HasardImg from "./images/0-hasard/index"
 
 const Intro = () => {
@@ -31,6 +32,8 @@ const Intro = () => {
         <Wrapper>
             <p>Le Québec est un vaste territoire avec une possibilité de parcours infinie. Utilisez cet outil pour choisir un trajet qui vous satisfera.</p>
             <h2>Trouvez votre parcours idéal</h2>
+            <Trouvez />
+            <h2>Tous les parcours</h2>
             <Schema>
                 {
                     donnees.map((item, index) => {

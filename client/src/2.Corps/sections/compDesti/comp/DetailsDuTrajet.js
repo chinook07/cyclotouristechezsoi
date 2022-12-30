@@ -11,12 +11,12 @@ import * as TousSchemas from "../schemas/index";
 const DetailsDuTrajet = ({ itineraire, changerTrajet }) => {
 	const { ecran } = useContext(CycloContext);
 
-	const details = trajetsDB.find((item) => item.trajet === itineraire);
+    const details = trajetsDB.find((item) => item.trajet === itineraire);
 
 	return (
-		<Wrapper>
+		<div>
 			<h2>{details.trajet}</h2>
-			<div>{details.intro}</div>
+			<p>{details.intro}</p>
 			<h3>Aperçu</h3>
 			{ecran > 720 ? (
 				<Schema
@@ -43,7 +43,7 @@ const DetailsDuTrajet = ({ itineraire, changerTrajet }) => {
 			<h3>Notes de l'auteur</h3>
 			<NotesAuteur details={details} />
 			<h3>Carte</h3>
-			<figure>
+			<CarteUMap>
 				<iframe
 					frameBorder="0"
 					allowFullScreen
@@ -53,7 +53,7 @@ const DetailsDuTrajet = ({ itineraire, changerTrajet }) => {
 				<ExternalLink href="https://umap.openstreetmap.fr/fr/map/carte-generale-cyclotouristechezsoi_584684">
 					Voir en plein écran
 				</ExternalLink>
-			</figure>
+			</CarteUMap>
 			<h3>Trajets associés</h3>
 			<TrajetsAss>
 				{details.ass.map((item, index) => {
@@ -75,33 +75,31 @@ const DetailsDuTrajet = ({ itineraire, changerTrajet }) => {
                         <GalerieDuTrajet details={details} />
                 </div>
             }
-		</Wrapper>
+		</div>
 	);
 };
 
-const Wrapper = styled.div`
-	> figure {
-		height: 500px;
-		margin: 10px 0 50px;
-		max-height: 70vh;
-		max-width: 860px;
-		width: 100%;
-		iframe {
-			box-shadow: var(--c3) 5px 5px 5px 5px;
-			display: block;
-			height: 100%;
-			width: 100%;
-			&:hover {
-				box-shadow: var(--c6) 5px 5px 5px 5px;
-			}
-		}
-		> a {
-			display: block;
-			margin-top: 15px;
-			text-align: center;
-		}
-	}
-`;
+const CarteUMap = styled.div`
+    height: 500px;
+    margin: 10px 0 50px;
+    max-height: 70vh;
+    max-width: 860px;
+    width: 100%;
+    iframe {
+        box-shadow: var(--c3) 5px 5px 5px 5px;
+        display: block;
+        height: 100%;
+        width: 100%;
+        &:hover {
+            box-shadow: var(--c6) 5px 5px 5px 5px;
+        }
+    }
+    > a {
+        display: block;
+        margin-top: 15px;
+        text-align: center;
+    }
+`
 
 const Schema = styled.img`
 	max-width: 100%;

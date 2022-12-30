@@ -719,6 +719,16 @@
         "trajet": "Trajet PVR – Navette fluviale entre Montréal (Pointe-aux-Trembles), Varennes et Repentigny",
         "heures": "horaire variable, en été et à l'automne"
     },
+    "420": {
+        "icone": [
+            4,
+            5,
+            8
+        ],
+        "transporteur": "Navettes du Fjord",
+        "trajet": "Navette maritime entre Saguenay (La Baie) et Tadoussac",
+        "heures": "7 jours sur 7, en été seulement"
+    },
     "999": {
         "infoA": "texteA",
         "infoB": "texteB",
