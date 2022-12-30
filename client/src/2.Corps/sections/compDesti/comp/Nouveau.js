@@ -13,8 +13,6 @@ const Nouveau = ({ item }) => {
 		const trouve = trajetsDB.find((item) => item.trajet === region);
 		setTrajetRedig(trouve);
     };
-    
-    console.log(item.coulInv);
 
 	return (
         <div>
