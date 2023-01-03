@@ -29,13 +29,13 @@ const Intro = styled.div`
     text-align: center;
 `
 
-const Temp = styled.div`
-    background-color: orange;
-    padding: 15px;
-    p:first-child {
-        font-size: large;
-    }
-`
+// const Temp = styled.div`
+//     background-color: orange;
+//     padding: 15px;
+//     p:first-child {
+//         font-size: large;
+//     }
+// `
 
 const Billets = styled.h2`
     color: var(--c4);
