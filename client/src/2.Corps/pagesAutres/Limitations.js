@@ -1,4 +1,5 @@
 import { ExternalLink } from "react-external-link";
+import { Link } from "react-router-dom";
 
 const Limitations = () => {
     return (
@@ -9,7 +10,7 @@ const Limitations = () => {
             </div>
             <div>
                 <h2>Le site web</h2>
-                <p>Le site est gratuit d'utilisation et ne contient aucune annonce. Si vous aimez ce que vous voyez et que vous voulez soutenir l'auteur, <ExternalLink href="https://cyclotouristechezsoi.causevox.com/">vous pouvez faire un don</ExternalLink>. Pas de fenêtre surgissant (pop-up) pour vous culpabiliser si vous ne payez pas! Les liens dirigeant l'utilisateur vers d'autres sites (sites de cartographie, transporteurs, etc.) ne sont là qu'à titre indicatif, et non en tant que publicité. Le site web a été codé en React.js et devrait être adapté pour les écrans de largeurs variées. Le site web est hébergé par Hébergement Web Canada, basé à Montréal, sur des serveurs québécois. <ExternalLink href="http://www.visezjuste.uottawa.ca/pages/orthographe/nouvelle_orthographe.html">L'orthographe nouvelle</ExternalLink> a été utilisée dans le but de contribuer à la normalisation de cette réforme visant à améliorer notre belle langue française!</p>
+                <p>Le site est gratuit d'utilisation et ne contient aucune annonce. Si vous aimez ce que vous voyez et que vous voulez soutenir l'auteur, <ExternalLink href="https://cyclotouristechezsoi.causevox.com/">vous pouvez faire un don</ExternalLink>. Pas de fenêtre surgissant (pop-up) pour vous culpabiliser si vous ne payez pas! Les liens dirigeant l'utilisateur vers d'autres sites (sites de cartographie, transporteurs, etc.) ne sont là qu'à titre indicatif, et non en tant que publicité, mise à part un lien affilié sur la page <Link to="/apropos">À propos</Link>. Le site web a été codé en React.js et devrait être adapté pour les écrans de largeurs variées. Le site web est hébergé par Hébergement Web Canada, basé à Montréal, sur des serveurs québécois. <ExternalLink href="http://www.visezjuste.uottawa.ca/pages/orthographe/nouvelle_orthographe.html">L'orthographe nouvelle</ExternalLink> a été utilisée dans le but de contribuer à la normalisation de cette réforme visant à améliorer notre belle langue française!</p>
             </div>
             <div>
                 <h2>Responsabilité de l'auteur</h2>

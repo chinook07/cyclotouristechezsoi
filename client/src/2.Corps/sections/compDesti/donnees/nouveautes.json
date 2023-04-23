@@ -30,13 +30,13 @@
         "complet": false
     },
     {
-        "region": "Montréal–Québec (sud)",
-        "lienRegion": "montreal-quebec-sud",
-        "couleur": "#5fe25f",
+        "region": "Laurentides",
+        "lienRegion": "laurentides",
+        "couleur": "#f00",
         "police": "#000",
-        "texte": "La parachèvement de la Route verte entre St-Isidore et St-Constant sur l'ancienne emprise ferroviaire devrait commencer à l'automne 2022.",
-        "lien": "Journal Le Reflet",
-        "url": "https://www.lereflet.qc.ca/video-la-route-verte-sera-achevee-dans-les-terres-agricoles-a-saint-constant/",
+        "texte": "Le tronçon de 18 km entre Ste-Agathe-des-Monts et Mont-Blanc sera asphalté en 2023. Il ne restera que deux tronçons en poussière de pierre, totalisant 47 km.",
+        "lien": "Ville de Mont-Tremblant",
+        "url": "https://www.villedemont-tremblant.qc.ca/fr/nouvelles/travaux-refection-ptit-train-du-nord",
         "complet": false
     },
     {
@@ -44,9 +44,9 @@
         "lienRegion": "montreal-quebec-sud",
         "couleur": "#5fe25f",
         "police": "#000",
-        "texte": "Une partie de plus de La Sauvagine a été complétée en 2020 à l'est de Sorel, soit entre les rangs des Corbeaux et St-Louis. Il est possible d'accéder à ce segment par les rangs de Picourdi et St-Thomas.",
-        "lien": "OpenStreetMap",
-        "url": "https://www.openstreetmap.org/#map=14/46.0007/-72.9403",
+        "texte": "La parachèvement de la Route verte entre St-Isidore et St-Constant sur l'ancienne emprise ferroviaire devrait être terminé d'ici le printemps 2024.",
+        "lien": "TVRS",
+        "url": "https://tvrs.ca/actualites/premiere-phase-de-la-route-verte-dans-le-roussillon",
         "complet": false
     },
     {
@@ -84,7 +84,7 @@
         "lienRegion": "vallee-de-la-gatineau",
         "couleur": "#4900cf",
         "police": "#fff",
-        "texte": "Une vingtaine de kilomètres de la Véloroute des Draveurs entre Gracefield et Kazabazua sera asphaltée.",
+        "texte": "Une vingtaine de kilomètres de la Véloroute des Draveurs entre Gracefield et Kazabazua a été asphaltée en octobre 2022. Réalisation à confirmer.",
         "lien": "CHGA FM",
         "url": "https://www.chga.fm/la-portion-sud-de-la-veloroute-des-draveurs-sera-asphaltee-cet-automne/",
         "complet": false
