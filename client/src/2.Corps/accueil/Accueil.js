@@ -11,7 +11,7 @@ const Accueil = () => {
             <Carrousel />
             <Intro>
                 <h1>Explorez le Québec à vélo</h1>
-                <p>Le printemps est en route, et il sera bientôt temps de préparer vos sorties de 2023 en cyclotourisme. Pour vous aider dans la planification, découvrez les renseignements pertinents colligés sur ce site web. Que vous soyez débutant, chevronné, ou simplement curieux, vous trouverez des conseils de matériel, de trajets et bien davantage.</p>
+                <p>La belle saison est parmi nous. Où allez-vous rouler cet été? Dans l'est? Dans l'ouest? Au nord? Au sud? Pour vous aider dans la planification, découvrez les renseignements pertinents colligés sur ce site web. Que vous soyez débutant, chevronné, ou simplement curieux, vous trouverez des conseils de matériel, de trajets et bien davantage.</p>
                 <p>Bonne visite!</p>
             </Intro>
             <NavAccueil />
