@@ -4,6 +4,7 @@ import { ExternalLink } from "react-external-link";
 import Carrousel from "./comp/Caroussel";
 import NavAccueil from "./comp/NavAccueil";
 import NavBlogue from "./comp/NavBlogue";
+import Feux from "./comp/Feux";
 
 const Accueil = () => {
     return (
@@ -15,6 +16,7 @@ const Accueil = () => {
                 <p>Bonne visite!</p>
             </Intro>
             <NavAccueil />
+            {/* <Feux /> */}
             <Billets>Récents billets de blogue sur <ExternalLink href="https://touristechezsoi.ca/">Touriste chez soi</ExternalLink></Billets>
             <NavBlogue />
         </>

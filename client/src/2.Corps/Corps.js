@@ -11,6 +11,7 @@ import Equipement from "./sections/Equipement";
 import Transport from "./sections/Transport";
 import Limitations from "./pagesAutres/Limitations";
 import Confidentialite from "./pagesAutres/Confidentialite";
+
 import Erreur from "./pagesAutres/Erreur";
 
 const Corps = () => {
