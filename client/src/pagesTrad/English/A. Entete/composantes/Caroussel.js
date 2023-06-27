@@ -16,7 +16,6 @@ const Carrousel = () => {
 
     useEffect(() => {
         setCarMontrer(0)
-        console.log("usedEffect");
     }, [])
 
     const imagesCar = [car0, car1, car2, car3, car4, car5];
@@ -24,7 +23,6 @@ const Carrousel = () => {
     const changerPhoto = () => {
         if (carMontrer === 5 || carMontrer === undefined) { setCarMontrer(0) } else {
             setCarMontrer(carMontrer + 1)
-            console.log("changé pour", carMontrer + 1);
         }
     }
     setTimeout(changerPhoto, 6000);
