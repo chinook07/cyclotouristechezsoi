@@ -1,0 +1,284 @@
+[
+    {
+        "ville": "Montréal",
+        "climat": {
+            "tempMin": [
+                8,
+                13,
+                16,
+                15,
+                10
+            ],
+            "tempMax": [
+                19,
+                24,
+                26,
+                25,
+                21
+            ],
+            "nuitsFroides": [
+                2,
+                false,
+                0,
+                0,
+                0.8
+            ],
+            "joursChauds": [
+                0.4,
+                2,
+                4,
+                3,
+                7
+            ],
+            "pluie": [
+                81,
+                86,
+                89,
+                94,
+                84
+            ],
+            "joursPluvieux": [
+                14,
+                13,
+                12,
+                12,
+                11
+            ]
+        }
+    },
+    {
+        "ville": "Quebec City",
+        "climat": {
+            "tempMin": [
+                8,
+                13,
+                16,
+                15,
+                10
+            ],
+            "tempMax": [
+                19,
+                24,
+                26,
+                25,
+                21
+            ],
+            "nuitsFroides": [
+                2,
+                false,
+                0,
+                0,
+                0.8
+            ],
+            "joursChauds": [
+                0.4,
+                2,
+                4,
+                3,
+                7
+            ],
+            "pluie": [
+                81,
+                86,
+                89,
+                94,
+                84
+            ],
+            "joursPluvieux": [
+                14,
+                13,
+                12,
+                12,
+                11
+            ]
+        }
+    },
+    {
+        "ville": "Gatineau",
+        "climat": {
+            "tempMin": [
+                8,
+                13,
+                16,
+                15,
+                10
+            ],
+            "tempMax": [
+                19,
+                24,
+                26,
+                25,
+                21
+            ],
+            "nuitsFroides": [
+                2,
+                false,
+                0,
+                0,
+                0.8
+            ],
+            "joursChauds": [
+                0.4,
+                2,
+                4,
+                3,
+                7
+            ],
+            "pluie": [
+                81,
+                86,
+                89,
+                94,
+                84
+            ],
+            "joursPluvieux": [
+                14,
+                13,
+                12,
+                12,
+                11
+            ]
+        }
+    },
+    {
+        "ville": "Rimouski",
+        "climat": {
+            "tempMin": [
+                8,
+                13,
+                16,
+                15,
+                10
+            ],
+            "tempMax": [
+                19,
+                24,
+                26,
+                25,
+                21
+            ],
+            "nuitsFroides": [
+                2,
+                false,
+                0,
+                0,
+                0.8
+            ],
+            "joursChauds": [
+                0.4,
+                2,
+                4,
+                3,
+                7
+            ],
+            "pluie": [
+                81,
+                86,
+                89,
+                94,
+                84
+            ],
+            "joursPluvieux": [
+                14,
+                13,
+                12,
+                12,
+                11
+            ]
+        }
+    },
+    {
+        "ville": "Gaspé",
+        "climat": {
+            "tempMin": [
+                8,
+                13,
+                16,
+                15,
+                10
+            ],
+            "tempMax": [
+                19,
+                24,
+                26,
+                25,
+                21
+            ],
+            "nuitsFroides": [
+                2,
+                false,
+                0,
+                0,
+                0.8
+            ],
+            "joursChauds": [
+                0.4,
+                2,
+                4,
+                3,
+                7
+            ],
+            "pluie": [
+                81,
+                86,
+                89,
+                94,
+                84
+            ],
+            "joursPluvieux": [
+                14,
+                13,
+                12,
+                12,
+                11
+            ]
+        }
+    },
+    {
+        "ville": "Saguenay",
+        "climat": {
+            "tempMin": [
+                8,
+                13,
+                16,
+                15,
+                10
+            ],
+            "tempMax": [
+                19,
+                24,
+                26,
+                25,
+                21
+            ],
+            "nuitsFroides": [
+                2,
+                false,
+                0,
+                0,
+                0.8
+            ],
+            "joursChauds": [
+                0.4,
+                2,
+                4,
+                3,
+                7
+            ],
+            "pluie": [
+                81,
+                86,
+                89,
+                94,
+                84
+            ],
+            "joursPluvieux": [
+                14,
+                13,
+                12,
+                12,
+                11
+            ]
+        }
+    }
+]

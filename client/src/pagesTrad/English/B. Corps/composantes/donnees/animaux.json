@@ -1,0 +1,32 @@
+[
+    {
+        "animal": "Black bears",
+        "region": "In forested areas north of the St. Laurent River",
+        "danger": "Bear attacks",
+        "url": "https://mffp.gouv.qc.ca/english/wildlife//wildlife-habitats/pdf/ours.pdf",
+        "conseils": [
+            "Do not get in between the mother and her cub.",
+            "Do not surprise them."
+        ]
+    },
+    {
+        "animal": "Ticks",
+        "region": "Mostly near the US border",
+        "danger": "Lyme disease",
+        "url": "https://www.quebec.ca/en/health/health-issues/a-z/lyme-disease/",
+        "conseils": [
+            "Inspect your ankles and exposed skin after being in the forest.",
+            "If bit, go to the pharmacy or see a doctor as you may need preventive medication."
+        ]
+    },
+    {
+        "animal": "Racoons and skunks",
+        "region": "Everywhere, even in cities",
+        "danger": "Rabies",
+        "url": "https://www.quebec.ca/en/health/health-issues/a-z/rabies-in-humans/",
+        "conseils": [
+            "If you were in contact with a racoon or another carrier of rabies, you must get treated preventively.",
+            "If symptoms of rabies appear, the disease is deadly and it is too late."
+        ]
+    }
+]
