@@ -2,12 +2,14 @@ import styled from "styled-components";
 
 import Intro from "./composantes/Intro";
 import Visiting from "./composantes/Visiting";
+import GettingIn from "./composantes/GettingIn";
 
 const Corps = () => {
     return (
         <Wrapper>
             <Intro />
             <Visiting />
+            <GettingIn />
         </Wrapper>
     )
 }

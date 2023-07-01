@@ -6,7 +6,7 @@ import climat from "../donnees/climat.json"
 
 const Climat = () => {
 
-    const { mesuresMetriques } = useContext(CycloContext)
+    const { mesuresMetriques } = useContext(CycloContext);
     const [villeChoisie, setVilleChoisie] = useState(false);
 
     const choisirVille = (choix) => {

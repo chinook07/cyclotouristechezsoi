@@ -25,7 +25,7 @@ const Animaux = () => {
                             <td>{item.animal}</td>
                             <td>{item.region}</td>
                             <td>
-                                <ExternalLink href={item.url}>{item.danger}</ExternalLink>
+                                <ExternalLink href={item.url} target="blank">{item.danger}</ExternalLink>
                             </td>
                             <td>
                                 {
