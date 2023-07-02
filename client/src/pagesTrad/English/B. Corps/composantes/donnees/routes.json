@@ -1,0 +1,61 @@
+[
+    {
+        "route": "1",
+        "intro": "This is the longest route of the network and connects 10 regions together.",
+        "villes": [
+            "Ontario border",
+            "Gatineau",
+            "Montréal",
+            "Sherbrooke",
+            "Lévis",
+            "Rivière-du-Loup",
+            "Rimouski",
+            "Ste-Flavie",
+            "Gaspé",
+            "Ste-Flavie (loop)"
+        ],
+        "imgSrc": "",
+        "imgAlt": "",
+        "sections": [
+            {
+                "titre": "A. Outaouais River",
+                "descriptif": "Ride from Montréal to Ottawa along the Outaouais River. The beauty of this ride is it could be done with a few variants and on both sides of the provincial border, making your round-trip a bit more... round. Plan a full week for a loop. Make sure to spend some time in both Montréal and Ottawa which have plenty of sights to see.",
+                "imgSrc": "",
+                "imgCap": "East of Hawkesbury, Ontario"
+            },
+            {
+                "titre": "B. Eastern Townships",
+                "descriptif": "Another lovely region in which to cycle is the general area between Montréal and Sherbrooke, most of that being in the Eastern Townships. In the towns, you will see buildings dating from the post-US revolution Loyalist era. In the countryside, you will feast your eyes on rolling hills and sloping farmlands. Once again, a round-trip is doable as there are other trails to choose from along a big portion of this route.",
+                "imgSrc": "",
+                "imgCap": "Between Waterloo and Eastman"
+            },
+            {
+                "titre": "C. Gaspé peninsula",
+                "descriptif": "If you like a challenge, the Gaspé Peninsula will take you around an entire region surrounded by water. Difficulty varies greatly between sections, as the northeastern part will make your legs numb. Doing it in a clockwise fashion ensures you profit from tailwinds where you need them the most, but also puts the highway between you and the water when it comes to taking photos.",
+                "imgSrc": "",
+                "imgCap": "North of Percé"
+            }
+        ]
+    },
+    {
+        "route": "2",
+        "intro": "",
+        "villes": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ],
+        "imgSrc": "",
+        "imgAlt": "",
+        "sections": [
+            {
+                "titre": "",
+                "descriptif": "",
+                "imgSrc": "",
+                "imgCap": ""
+            }
+        ]
+    }
+]
