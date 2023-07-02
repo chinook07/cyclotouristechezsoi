@@ -3,9 +3,12 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import routes from "../donnees/routes.json";
+import * as imgVeloroutes from "../../../../images/index";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 const Veloroutes = () => {
+
+    console.log(imgVeloroutes);
 
     const [routeChoisie, setRouteChoisie] = useState(false);
 
