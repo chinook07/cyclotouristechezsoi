@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { Link as ScrollLink, Element, animateScroll as scroll } from 'react-scroll';
+import { Link as ScrollLink } from 'react-scroll';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import ChangerLang from "./ChangerLang";
@@ -20,22 +20,46 @@ const Nav1 = () => {
             <img src={imgLogo} height="48px" alt="website logo" />
             <Menu>
                 <li>
-                    <ScrollLink smooth={true} to="section1">Visiting Quebec</ScrollLink>
+                    <ScrollLink
+                        offset={-52}
+                        smooth={true}
+                        to="section1"
+                    >Visiting Quebec</ScrollLink>
                 </li>
                 <li>
-                    <ScrollLink smooth={true} to="section2">Getting in</ScrollLink>
+                    <ScrollLink
+                        offset={-52}
+                        smooth={true}
+                        to="section2"
+                    >Getting in</ScrollLink>
                 </li>
                 <li>
-                    <ScrollLink smooth={true} to="section3">Places to ride</ScrollLink>
+                    <ScrollLink
+                        offset={-52}
+                        smooth={true}
+                        to="section3"
+                    >Places to ride</ScrollLink>
                 </li>
                 <li>
-                    <ScrollLink smooth={true} to="section4">Getting around</ScrollLink>
+                    <ScrollLink
+                        offset={-52}
+                        smooth={true}
+                        to="section4"
+                    >Getting around</ScrollLink>
                 </li>
                 <li>
-                    <ScrollLink smooth={true} to="section5">Spending the night</ScrollLink>
+                    <ScrollLink
+                        offset={-52}
+                        smooth={true}
+                        to="section5"
+                    >Spending the night</ScrollLink>
                 </li>
                 <li>
-                    <ScrollLink smooth={true} to="section6">About</ScrollLink>
+                    <ScrollLink
+                        offset={-52}
+                        smooth={true}
+                        to="section6"
+                    >About</ScrollLink>
                 </li>
             </Menu>
             <Langue onClick={handleLang}>
@@ -55,7 +79,9 @@ const Wrapper = styled.nav`
     display: flex;
     height: 52px;
     justify-content: space-between;
-    position: relative;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
     > *:not(:last-child) {
         height: 52px;
     }

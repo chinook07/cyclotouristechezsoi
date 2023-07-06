@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-
+import { Link as ScrollLink } from 'react-scroll';
 import { NavLink } from "react-router-dom";
 import { ExternalLink } from "react-external-link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -39,16 +39,56 @@ const Nav1Mobi = () => {
             {
                 nav1Visible &&
                 <Menu>
-                        <NavLink onClick={montrerMenu} to="/">Accueil</NavLink>
-                        <NavLink onClick={montrerMenu} to="/apropos">À propos</NavLink>
-                        <NavLink onClick={montrerMenu} to="/voyages-effectues">Voyages effectués</NavLink>
-                        <NavLink onClick={montrerMenu} to="/contact">Contact</NavLink>
-                        <ExternalLink onClick={montrerMenu} href="https://www.touristechezsoi.ca">
-                            <span>Blogue</span>
-                            <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
-                        </ExternalLink>
+                        <li>
+                            <ScrollLink
+                                offset={-70}
+                                onClick={montrerMenu}
+                                smooth={true}
+                                to="section1"
+                            >Visiting Quebec</ScrollLink>
+                        </li>
+                        <li>
+                            <ScrollLink
+                                offset={-70}
+                                onClick={montrerMenu}
+                                smooth={true}
+                                to="section2"
+                            >Getting in</ScrollLink>
+                        </li>
+                        <li>
+                            <ScrollLink
+                                offset={-70} 
+                                onClick={montrerMenu} 
+                                smooth={true} 
+                                to="section3"
+                            >Places to ride</ScrollLink>
+                        </li>
+                        <li>
+                            <ScrollLink 
+                                offset={-70} 
+                                onClick={montrerMenu} 
+                                smooth={true} 
+                                to="section4"
+                            >Getting around</ScrollLink>
+                        </li>
+                        <li>
+                            <ScrollLink 
+                                offset={-70} 
+                                onClick={montrerMenu} 
+                                smooth={true} 
+                                to="section5"
+                            >Spending the night</ScrollLink>
+                        </li>
+                        <li>
+                            <ScrollLink
+                                offset={-70} 
+                                onClick={montrerMenu} 
+                                smooth={true} 
+                                to="section6"
+                            >About</ScrollLink>
+                        </li>
                         <Langue onClick={handleLang}>
-                            <span>FR</span>
+                            <span>EN</span>
                             <span><FontAwesomeIcon icon={faGlobeEurope}/></span>
                         </Langue>
                         {
@@ -63,7 +103,9 @@ const Nav1Mobi = () => {
 
 const Wrapper = styled.nav`
     background-color: var(--c4);
-    position: relative;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
 `
 
 const Tete = styled.div`
@@ -77,30 +119,28 @@ const Tete = styled.div`
     }
 `
 
-const Menu = styled.div`
+const Menu = styled.ul`
     align-items: center;
     display: flex;
     flex-direction: column;
-    margin-top: -30px;
-    > a {
+    margin: -30px 0 0;
+    padding: 0;
+    li {
         color: var(--c11);
+        cursor: pointer;
         font-size: 20px;
         line-height: 1.7;
+        list-style: none;
         text-decoration: none;
         &:hover {
-            color: var(--c5);
-        }
-        &.active {
-            font-weight: bold;
-        }
-        &[target = _blank] > * {
-            margin: 0 2px;
+            color: var(--c1);
         }
     }
 `
 
 const Langue = styled.div`
     align-items: center;
+    color: var(--c11);
     cursor: pointer;
     font-size: large;
     display: flex;
@@ -109,7 +149,7 @@ const Langue = styled.div`
         margin-left: 4px;
     }
     &:hover {
-        color: var(--c6);
+        color: var(--c1);
     }
 `
 
