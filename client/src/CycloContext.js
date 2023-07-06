@@ -8,7 +8,6 @@ const CycloContextProvider = ({ children }) => {
     const [modeNuit, setModeNuit] = useState(false);
     const [coordAjout, setCoordAjout] = useState({})
     const [trajetRedig, setTrajetRedig] = useState({});
-    const [langSec, setLangSec] = useState(0);
     const [mesuresMetriques, setMesuresMetriques] = useState(true);
 
     useEffect(() => {
@@ -27,8 +26,6 @@ const CycloContextProvider = ({ children }) => {
                 setCoordAjout,
                 trajetRedig,
                 setTrajetRedig,
-                langSec,
-                setLangSec,
                 mesuresMetriques,
                 setMesuresMetriques
             }}

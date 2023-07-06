@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+
 import { NavLink } from "react-router-dom";
 import { ExternalLink } from "react-external-link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -61,6 +62,7 @@ const Nav1Mobi = () => {
 }
 
 const Wrapper = styled.nav`
+    background-color: var(--c4);
     position: relative;
 `
 
@@ -70,6 +72,7 @@ const Tete = styled.div`
     justify-content: space-between;
     padding: 0 5px;
     svg {
+        color: var(--c11);
         cursor: pointer;
     }
 `
@@ -80,7 +83,7 @@ const Menu = styled.div`
     flex-direction: column;
     margin-top: -30px;
     > a {
-        color: var(--c4);
+        color: var(--c11);
         font-size: 20px;
         line-height: 1.7;
         text-decoration: none;

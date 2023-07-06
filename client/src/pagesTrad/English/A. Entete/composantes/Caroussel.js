@@ -39,7 +39,10 @@ const Carrousel = () => {
                         <Indicateur>
                             {carMontrer + 1}/{carrousel.length}
                         </Indicateur>
-                        <Titre>Cyclotouriste<br />chez soi</Titre>
+                        <Titre>
+                            <p>Cyclotouriste chez soi –</p>
+                            <h1>Bicycle touring in Quebec</h1>
+                        </Titre>
                         <img src={imagesCar[carMontrer]} alt={carrousel[carMontrer].alt} />
                         <figcaption>{carrousel[carMontrer].desc}</figcaption>
                     </figure>
@@ -77,17 +80,26 @@ const Indicateur = styled.div`
 
 const Titre = styled.div`
     color: var(--c11);
-    font-size: 50px;
+    font-size: 35px;
     left: 50%;
     position: absolute;
+    text-align: center;
     text-shadow: 2px 2px 1px var(--c2);
     top: 50%;
     transform: translate(-50%, -50%);
+    width: 80%;
+    p {
+        margin: 0;
+    }
+    h1 {
+        font: unset;
+        margin: 0;
+    }
     @media screen and (min-width: 450px) and (max-width: 550px) {
-        font-size: 40px;
+        font-size: 30px;
     }
     @media screen and (max-width: 450px) {
-        font-size: 30px;
+        font-size: 25px;
     }
 `
 

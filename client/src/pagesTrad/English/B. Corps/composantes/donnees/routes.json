@@ -14,48 +14,259 @@
             "Gaspé",
             "Ste-Flavie (loop)"
         ],
-        "imgSrc": "",
+        "imgSrc": 0,
         "imgAlt": "",
         "sections": [
             {
                 "titre": "A. Outaouais River",
                 "descriptif": "Ride from Montréal to Ottawa along the Outaouais River. The beauty of this ride is it could be done with a few variants and on both sides of the provincial border, making your round-trip a bit more... round. Plan a full week for a loop. Make sure to spend some time in both Montréal and Ottawa which have plenty of sights to see.",
-                "imgSrc": "",
+                "imgSrc": 0,
                 "imgCap": "East of Hawkesbury, Ontario"
             },
             {
                 "titre": "B. Eastern Townships",
                 "descriptif": "Another lovely region in which to cycle is the general area between Montréal and Sherbrooke, most of that being in the Eastern Townships. In the towns, you will see buildings dating from the post-US revolution Loyalist era. In the countryside, you will feast your eyes on rolling hills and sloping farmlands. Once again, a round-trip is doable as there are other trails to choose from along a big portion of this route.",
-                "imgSrc": "",
+                "imgSrc": 1,
                 "imgCap": "Between Waterloo and Eastman"
             },
             {
                 "titre": "C. Gaspé peninsula",
                 "descriptif": "If you like a challenge, the Gaspé Peninsula will take you around an entire region surrounded by water. Difficulty varies greatly between sections, as the northeastern part will make your legs numb. Doing it in a clockwise fashion ensures you profit from tailwinds where you need them the most, but also puts the highway between you and the water when it comes to taking photos.",
-                "imgSrc": "",
+                "imgSrc": 2,
                 "imgCap": "North of Percé"
             }
         ]
     },
     {
         "route": "2",
-        "intro": "",
+        "intro": "From the rural Abitibi region through the boreal jungle, this route goes all the way to the USA.",
         "villes": [
-            "",
-            "",
-            "",
-            "",
-            ""
+            "Ville-Marie",
+            "Rouyn-Noranda",
+            "Val-d'Or",
+            "Mont-Laurier",
+            "Mont-Tremblant",
+            "Montréal",
+            "New York border"
         ],
-        "imgSrc": "",
+        "imgSrc": "1",
         "imgAlt": "",
         "sections": [
             {
-                "titre": "",
-                "descriptif": "",
-                "imgSrc": "",
-                "imgCap": ""
+                "titre": "A. La Vérendrye",
+                "descriptif": "For an epic ride up north, try taking a bus to Louvicourt or Val-d'Or and cycling down to Grand-Remous or Mont-Laurier. You will cross the immense La Vérendrye Wildlife Reserve. Make sure to stock up on food and to have a water filter, as there is very little in the ways of resupplying while riding through 'the park'.",
+                "imgSrc": "3",
+                "imgCap": "La Vérendrye Wildlife Reserve"
+            },
+            {
+                "titre": "B. Laurentians",
+                "descriptif": "A classic for families and beginners is the P'tit train du Nord, Quebec's longest rail trail at 220 km, stretching from Mont-Laurier to the northern suburbs of Montréal. You will ride through cottage country, encountering many lakes and parks as you go. Once in Blainville, you're a short ride from Montréal.",
+                "imgSrc": "4",
+                "imgCap": "Rivière du Nord Regional Park"
+            },
+            {
+                "titre": "C. Towards New York",
+                "descriptif": "If you're riding in from New York state, you'll most likely cross into Quebec at Lacolle, and ride the Route verte 2 to St-Jean-sur-Richelieu. From there, the Chambly Canal and other cycle tracks bring you directly into Montréal.",
+                "imgSrc": "5",
+                "imgCap": "Chambly Canal"
             }
         ]
+    },
+    {
+        "route": "3",
+        "intro": "Near or far, the St. Laurent River and this bike route are one across the south of the province.",
+        "villes": [
+            "Coteau-du-Lac",
+            "Longueuil",
+            "Sorel-Tracy",
+            "Bécancour",
+            "Lévis"
+        ],
+        "imgSrc": "2",
+        "imgAlt": "",
+        "sections": [
+            {
+                "titre": "A. Beauharnois Canal",
+                "descriptif": "If you only have a few days, a simple loop from Montréal to Valleyfield is doable and enjoyable. Route 5 can be used on your way back for the sake of alternating. Make sure to check out the largest hydroelectric plant in southern Quebec, located at Beauharnois, and ride along the 25 km long canal which feeds this power plant.",
+                "imgSrc": "6",
+                "imgCap": "Beauharnois Canal, Valleyfield"
+            },
+            {
+                "titre": "B. Montréal to the City of Québec (south shore)",
+                "descriptif": "This Montréal to Quebec City route competes with the one on Route 5 across the river. The option presented here will have you explore some of the finest landscapes of the river valley, with walls of corn, open horizons, and occasionnal vistas on the St. Laurent River. Why not come back from the other side?",
+                "imgSrc": "7",
+                "imgCap": "St. Laurent River, MRC Lotbinière"
+            }
+        ]
+    },
+    {
+        "route": "4",
+        "intro": "Riding this route through the centre of Quebec will get you to see the Canadian shield, the St. Laurent valley and the Appalachians in one ride.",
+        "villes": [
+            "Shawinigan",
+            "Trois-Rivières",
+            "Bécancour",
+            "Drummondville",
+            "Bromont",
+            "Sutton",
+            "Vermont border"
+        ],
+        "imgSrc": "3",
+        "imgAlt": "",
+        "sections": [
+            {
+                "titre": "A. Mauricie",
+                "descriptif": "The Route verte 4 is only of the ways to get from Trois-Rivières to Shawinigan, making this a good option for a loop. To make things more challenging, La Mauricie National Park is only a bit further up. Otherwise, check out the Véloboucles Mauricie, on-road cycle routes going through the regional countryside.",
+                "imgSrc": "8",
+                "imgCap": "Shawinigan"
+            },
+            {
+                "titre": "B. La Campagnarde",
+                "descriptif": "If you're looking for an easy ride, try heading from Drummondville to the Yamaska National Park on the Campagnarde rail trail. Once there, you can do a trail-only loop via Granby and Waterloo. This is a very family-friendly option of a trip.",
+                "imgSrc": "9",
+                "imgCap": "La Campagnarde rail trail"
+            },
+            {
+                "titre": "C. Brome-Missisquoi",
+                "descriptif": "There is a world (or a region) of cycling opportunities in the north-south corridor stretching from Bromont to the Vermont border. If you purposely veer off this route, you will encounter a large network of packed – not loose – gravel roads going in all directions, including up. There is some climbing involved, however. Otherwise, if you have a passport, no need to stop at the end of the road!",
+                "imgSrc": "10",
+                "imgCap": "Between Brome and Bromont"
+            }
+        ]
+    },
+    {
+        "route": "5",
+        "intro": "From Ontario to (almost) Labrador, this historic route will make you fall in love with Quebec again!",
+        "villes": [
+            "Ontario border",
+            "Montréal",
+            "Trois-Rivières",
+            "Québec",
+            "Tadoussac",
+            "Baie-Comeau"
+        ],
+        "imgSrc": "4",
+        "imgAlt": "",
+        "sections": [
+            {
+                "titre": "A. Waterfront Trail",
+                "descriptif": "If riding in from Toronto or Kingston, this will be the route welcoming you to Quebec. Almost right away, on-road cycling turns into state-of-the-art cycle tracks, through a glorious forest and then along a canal all the way to the suburbs of Montréal, where it doesn't stop becoming more interesting.",
+                "imgSrc": "11",
+                "imgCap": "Upper Canada Village"
+            },
+            {
+                "titre": "B. The King's road",
+                "descriptif": "Anyone even slightly comfortable riding on the road who wants to see Quebec should do the King's road, or Chemin du Roi, from Montréal to the City of Québec. Old churches, historic buildings, this will repeat in almost every town. Once at the end point, you could even come back via the south shore, otherwise by train or bus.",
+                "imgSrc": "12",
+                "imgCap": "One of many historic churches between Montréal and the City of Québec"
+            },
+            {
+                "titre": "C. Côte-Nord",
+                "descriptif": "If you're looking for a more remote expedition, ride from Tadoussac until Baie-Comeau along the north shore of the estuary. You can expect to spot some whales, otherwise the coniferous forests and the maritime landscape will make you happy to have chosen to ride on the Côte-Nord. There are several towns which have ferry connections to the other side, shall you choose to do a loop.",
+                "imgSrc": "13",
+                "imgCap": "Grandes-Bergeronnes"
+            }
+        ]
+    },
+    {
+        "route": "6",
+        "intro": "From the City of Québec, head north or south to two equally remote parts of Quebec.",
+        "villes": [
+            "Rivière-à-Pierre",
+            "Québec",
+            "St-Georges",
+            "Maine border"
+        ],
+        "imgSrc": "5",
+        "imgAlt": "",
+        "sections": [
+            {
+                "titre": "A. Portneuf",
+                "descriptif": "If you find yourself in Montréal wanting to go in the middle of nowhere, take a three-times-a-week train to Rivière-à-Pierre and cycle down to the City of Québec. Before having descended into historic Old Quebec, you will have had the entire afternoon and the next day riding through a 'tunnel under the trees', i.e., a beautiful rail trail with a lot of cycling rest areas along the way.",
+                "imgSrc": "14",
+                "imgCap": "Jacques-Cartier-Portneuf rail trail"
+            },
+            {
+                "titre": "B. Beauce",
+                "descriptif": "More of an off-the-beaten-path destination for international tourists, the Beauce region is a river valley with a cycle route currently being upgraded one kilometre at a time. If you get bored, which is improbable, the Bellechasse rail trail heads off in a northeasterly direction, with the possibilities of doing a loop combining both routes.",
+                "imgSrc": "15",
+                "imgCap": "Chaudière waterfalls in Lévis"
+            }
+        ]
+    },
+    {
+        "route": "8",
+        "intro": "Here you have a dramatic route going from a vast interior sea to a fjord, to another large lake.",
+        "villes": [
+            "Métabetchouan–Lac-à-la-Croix",
+            "Alma",
+            "Roberval",
+            "Métabetchouan–Lac-à-la-Croix (loop)",
+            "Saguenay",
+            "Tadoussac",
+            "Rivière-du-Loup",
+            "Témiscouata-sur-le-Lac",
+            "New Brunswick border"
+        ],
+        "imgSrc": "6",
+        "imgAlt": "",
+        "sections": [
+            {
+                "titre": "A. Lac-St-Jean",
+                "descriptif": "Another family-friendly route is the tour of the St-Jean Lake, one of the biggest of Quebec. On the menu, beaches, a national park, a First Nations village, a ghost town, a zoo, and a lot of wild blueberries! There's a lot to see and to do, and the route alternates between off-road cycle tracks, rather safe highway shoulders, and quiet rural roads.",
+                "imgSrc": "16",
+                "imgCap": "Pointe-Taillon National Park"
+            },
+            {
+                "titre": "B. Fjord-du-Saguenay",
+                "descriptif": "The fjord is one of the ultimate road bike challenges the province has to offer. You can ride on the Route verte 8 which utilises Route 172 on the north shore, or take the south shore counterpart, Route 170. There's even a fjord shuttle which whisks passengers back and forth on the water, providing you with a way to see the majestic fjord, and a moment of resting from the leg-numbing hills these roads make you endure. A loop from Saguenay to St-Siméon and Tadoussac is a memorable journey to experience at least once.",
+                "imgSrc": "17",
+                "imgCap": "Ste-Marguerite river valley, near Ste-Rose-du-Nord"
+            },
+            {
+                "titre": "C. Témiscouata",
+                "descriptif": "The Petit-Témis interprovincial linear park is another 'tunnel under the trees' rail trail option with a long stretch along the Témiscouata Lake. There, a small ferry can take you across to the national park. Between Rivière-du-Loup and Témiscouata-sur-le-Lac, three rustic campsites along the trail offer a peaceful night's sleep. Further east, the trail enters New Brunswick, ending in Edmundston. Don't forget to advance the clocks by one hour!",
+                "imgSrc": "18",
+                "imgCap": "Petit-Témis rail trail along Témiscouata Lake"
+            }
+        ]
+    },
+    {
+        "route": "Across QC",
+        "intro": "On a cross-Canada trip? Follow this route suggestion to make the most of your stay in Quebec!",
+        "villes": [
+            "Pembroke, ON",
+            "Gatineau",
+            "Montréal",
+            "Trois-Rivières",
+            "Québec",
+            "Rivière-du-Loup",
+            "Rimouski",
+            "Campbellton, NB"
+        ],
+        "imgSrc": "7",
+        "imgAlt": "",
+        "sections": [
+            {
+                "titre": "Part 1: Straddling the Outaouais River",
+                "descriptif": "In Pembroke, you'll exit Ontario (for now) and ride the Route verte 1, on a rail trail through the western Quebec forest. In Gatineau, you're a simple hop away from Ottawa and all of its sights, after which you will ride mostly on roads until you reach the resort village of Oka. From there, the most scenic entrance to Montreal is by ferry to Hudson, along the river to Vaudreuil, and the Route verte 5. The ride through the West Island of Montreal is quite impressive with its enticing parks along the lakefront. The Lachine Canal trail will take you directly downtown, but stay on the Route verte if you're not tired of the blue horizon.",
+                "imgSrc": "19",
+                "imgCap": "The Outaouais River in St-Placide"
+            },
+            {
+                "titre": "Part 2: The King's Road",
+                "descriptif": "Although the same long-distance cycle route becomes a long string of fabulous rail trails all the way to Quebec City, you still have a few provinces to go before the end of your trip. The Route verte 5 is therefore not only much shorter, but will also give you an inside to Quebec's history. This is the oldest road of the province. Old churches, vistas on the St-Laurent river, and historic buildings will be present in almost every town. Once at the end point, it would be wise to take a few days to explore the oldest city in North America.",
+                "imgSrc": "20",
+                "imgCap": "One of many historic churches between Montréal and the City of Québec"
+            },
+            {
+                "titre": "Part 3: The Maritimes: a prequel",
+                "descriptif": "This is where the river you've been following widens, and the smell of saltwater starts to invade the air! Along the Route verte 1 that you'll once again be riding, numerous villages will give you a nice place to rest along the estuary. Between Trois-Pistoles and Rimouski, the itinerary is far from flat, but you will be amazed when going through the Bic National Park. The Gaspé loop starts at Ste-Flavie. You will need to turn inland and climb into the hills. On the other side, the Matapédia river valley, where you'll be riding down to Campbellton, New Brunswick, on a valley road surrounded by walls of trees on each side.",
+                "imgSrc": "21",
+                "imgCap": "Bic National Park"
+            }
+        ],
+        "total": "Total distance: between 1200 and 1250 km. Altitude gain: ≈ 7000 metres.",
+        "totalUS": "Total distance: between 750 and 775 miles. Altitude gain: ≈ 23000 feet."
     }
 ]

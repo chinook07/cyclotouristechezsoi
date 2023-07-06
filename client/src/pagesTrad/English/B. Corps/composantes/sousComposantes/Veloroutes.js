@@ -1,16 +1,21 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import routes from "../donnees/routes.json";
 import * as imgVeloroutes from "../../../../images/index";
+import * as cartesVeloroutes from "../../../../images/maps/index";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { CycloContext } from "../../../../../CycloContext";
 
 const Veloroutes = () => {
 
-    console.log(imgVeloroutes);
+    const { mesuresMetriques } = useContext(CycloContext);
 
     const [routeChoisie, setRouteChoisie] = useState(false);
+    
+    const tableauImg = Object.values(imgVeloroutes);
+    const tableauCartes = Object.values(cartesVeloroutes);
 
     const choisirRoute = (route) => {
         if (routeChoisie === route) {
@@ -21,14 +26,19 @@ const Veloroutes = () => {
     }
 
     return (
-        <Wrapper>
+        <div>
             <Selecteur>
                 <div>Route</div>
                 <Options>
                     {
                         routes.map((item, index) => {
                             return (
-                                <button key={index} onClick={() => choisirRoute(item)}>{item.route}</button>
+                                <Veloroute
+                                    key={index}
+                                    onClick={() => choisirRoute(item)}
+                                    routeChoisie={routeChoisie.route}
+                                    routePresente={item.route}
+                                >{item.route}</Veloroute>
                             )
                         })
                     }
@@ -36,7 +46,7 @@ const Veloroutes = () => {
             </Selecteur>
             {
                 routeChoisie !== false &&
-                <RouteInfo>
+                <div>
                         <h3>Route {routeChoisie.route}</h3>
                         <p>{routeChoisie.intro}</p>
                         <h4>Main cities</h4>
@@ -56,55 +66,66 @@ const Veloroutes = () => {
                             }
                         </Villes>
                         <h4>Itineraries</h4>
-                        <img src="" alt="" />
+                        <ImgItineraire src={tableauCartes[routeChoisie.imgSrc]} alt="" />
                         <RouteOptions>
                             {
                                 routeChoisie.sections.map((item, index) => {
                                     return (
-                                        <RouteSection key={index}>
+                                        <div key={index}>
                                             <h5>{item.titre}</h5>
                                             <p>{item.descriptif}</p>
                                             <figure>
-                                                <img src={item.imgSrc} alt="" />
+                                                <img src={tableauImg[item.imgSrc]} alt="" />
                                                 <figcaption>{item.imgCap}</figcaption>
                                             </figure>
-                                        </RouteSection>
+                                        </div>
                                     )
                                 })
                             }
                         </RouteOptions>
-                        
-                </RouteInfo>
+                        {
+                            routeChoisie.route === "Across QC" && mesuresMetriques &&
+                            <p>{routeChoisie.total}</p>
+                        }
+                        {
+                            routeChoisie.route === "Across QC" && !mesuresMetriques &&
+                            <p>{routeChoisie.totalUS}</p>
+                        }
+                </div>
             }
-        </Wrapper>
+        </div>
     )
 }
-
-const Wrapper = styled.div``
 
 const Selecteur = styled.div`
     align-items: center;
     display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 `
 
 const Options = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    button {
-        background-color: var(--c11);
-        cursor: pointer;
-        padding: 14px 16px;
-        transition: 0.3s;
-        &:hover {
-            background-color: var(--c6);
-            color: var(--c11);
-        }
+`
+
+const Veloroute = styled.button`
+    background-color: ${props => props.routeChoisie === props.routePresente ? "var(--c5)" : "var(--c11)"};
+    color: ${props => props.routeChoisie === props.routePresente ? "var(--c11)" : "var(--c10)"};
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    &:hover {
+        background-color: var(--c6);
+        color: var(--c11);
     }
 `
 
-const RouteInfo = styled.div`
-
+const ImgItineraire = styled.img`
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
 `
 
 const Villes = styled.ol`
@@ -119,11 +140,10 @@ const Villes = styled.ol`
 `
 
 const RouteOptions = styled.div`
-    display: flex;
-    gap: 25px;
-`
-
-const RouteSection = styled.div`
+    column-gap: 25px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    margin-bottom: 15px;
     h5 {
         text-align: center;
     }
@@ -131,6 +151,8 @@ const RouteSection = styled.div`
         text-align: justify;
     }
     figure {
+        display: flex;
+        flex-direction: column;
         margin: 0;
         width: 100%;
         img {
@@ -139,9 +161,14 @@ const RouteSection = styled.div`
         figcaption {
             background-color: var(--c10);
             color: var(--c11);
+            margin: 0;
             padding: 10px 0;
             text-align: center;
         }
+    }
+    @media screen and (max-width: 850px) {
+        grid-template-columns: auto;
+        row-gap: 15px;
     }
 `
 

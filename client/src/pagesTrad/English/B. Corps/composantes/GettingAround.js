@@ -6,7 +6,7 @@ import { faTrain } from "@fortawesome/free-solid-svg-icons";
 
 const GettingAround = () => {
     return (
-        <Wrapper>
+        <section>
             <h2>
                 <FontAwesomeIcon icon={faTrain} />
                 <span>Getting Around</span>
@@ -19,14 +19,9 @@ const GettingAround = () => {
                 <ExternalLink href="https://umap.openstreetmap.fr/fr/map/transport-intermodal-train-et-autobus-velo_570264" target="blank">Full screen</ExternalLink>
                 <p>This map (in French) gives you all the information regarding transport services, including where and how you can transport a bike.</p>
             </CarteUMap>
-            
-        </Wrapper>
+        </section>
     )
 }
-
-const Wrapper = styled.section`
-
-`
 
 const CarteUMap = styled.div`
     iframe {

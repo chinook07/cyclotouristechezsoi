@@ -1,47 +1,42 @@
 import styled from "styled-components";
-import { useState, useContext } from "react";
-import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { useState } from "react";
+import { Link as ScrollLink, Element, animateScroll as scroll } from 'react-scroll';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import ChangerLang from "./ChangerLang";
 import imgLogo from "../../../../images/icones/logo.png";
 import { faGlobeEurope } from "@fortawesome/free-solid-svg-icons";
-import { CycloContext } from "../../../../CycloContext";
 
 const Nav1 = () => {
 
-    const { setLangSec } = useContext(CycloContext)
-
     const [monterChangLang, setMontrerChangLang] = useState(false);
-    
-    const urlActuel = useLocation().pathname;
 
     const handleLang = () => {
         monterChangLang ? setMontrerChangLang(false) : setMontrerChangLang(true)
     };
 
-    const choisirSection = (sec) => {
-        console.log("choisir section", sec);
-        setLangSec(sec);
-    }
-
     return (
         <Wrapper>
-            {
-                urlActuel === "/english"
-                    ? <img src={imgLogo} height="48px" alt="website logo" />
-                    : <Link to="/english">
-                        <img src={imgLogo} height="48px" alt="back to home page" />
-                    </Link>
-            }
+            <img src={imgLogo} height="48px" alt="website logo" />
             <Menu>
-                <li onClick={() => choisirSection(1)}>Visiting Quebec</li>
-                <li onClick={() => choisirSection(2)}>Getting in</li>
-                <li onClick={() => choisirSection(3)}>Places to ride</li>
-                <li onClick={() => choisirSection(4)}>Getting around</li>
-                <li onClick={() => choisirSection(5)}>Spending the night</li>
-                <li onClick={() => choisirSection(6)}>About</li>
+                <li>
+                    <ScrollLink smooth={true} to="section1">Visiting Quebec</ScrollLink>
+                </li>
+                <li>
+                    <ScrollLink smooth={true} to="section2">Getting in</ScrollLink>
+                </li>
+                <li>
+                    <ScrollLink smooth={true} to="section3">Places to ride</ScrollLink>
+                </li>
+                <li>
+                    <ScrollLink smooth={true} to="section4">Getting around</ScrollLink>
+                </li>
+                <li>
+                    <ScrollLink smooth={true} to="section5">Spending the night</ScrollLink>
+                </li>
+                <li>
+                    <ScrollLink smooth={true} to="section6">About</ScrollLink>
+                </li>
             </Menu>
             <Langue onClick={handleLang}>
                 <span>EN</span>

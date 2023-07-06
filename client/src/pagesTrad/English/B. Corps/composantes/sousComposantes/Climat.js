@@ -40,7 +40,7 @@ const Climat = () => {
                 <table>
                         <thead>
                             <tr>
-                                <th></th>
+                                <td></td>
                                 <th>
                                     <div>
                                         { mesuresMetriques ? <p>Min T°C</p> : <p>Min F°C</p> }
@@ -161,10 +161,26 @@ const Wrapper = styled.div`
             text-align: right;
         }
     }
+    @media screen and (max-width: 550px) {
+        padding: 0 10px 10px;
+        table thead th div {
+            transform: translate(calc(100% - 0.5px), -3px) rotate(300deg);
+            p {
+                font-size: small;
+                min-width: 40px;
+            }
+        }
+        table tr td {
+            font-size: small;
+            min-width: 40px;
+        }
+    }
 `
 
 const Controles = styled.div`
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     width: 100%;
 `
 
@@ -172,13 +188,15 @@ const BoutonVille = styled.button`
     background-color: ${props => props.choix === props.item ? "var(--c5)" : "var(--c11)"};
     color: ${props => props.choix === props.item && "var(--c11)"};
     cursor: pointer;
-    flex-grow: 1;
     outline: none;
     padding: 14px;
     transition: 0.3s;
     &:hover {
         background-color: var(--c6);
         color: white;
+    }
+    @media screen and (max-width: 675px) {
+        padding: 8px;
     }
 `
 

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link as ScrollLink, Element, animateScroll as scroll } from 'react-scroll';
 
 import Intro from "./composantes/Intro";
 import Visiting from "./composantes/Visiting";
@@ -12,12 +13,24 @@ const Corps = () => {
     return (
         <Wrapper>
             <Intro />
-            <Visiting />
-            <GettingIn />
-            <PlacesToRide />
-            <GettingAround />
-            <SpendingTheNight />
-            <About />
+            <Element name="section1">
+                <Visiting />
+            </Element>
+            <Element name="section2">
+                <GettingIn />
+            </Element>
+            <Element name="section3">
+                <PlacesToRide />
+            </Element>
+            <Element name="section4">
+                <GettingAround />
+            </Element>
+            <Element name="section5">
+                <SpendingTheNight />
+            </Element>
+            <Element name="section6">
+                <About />
+            </Element>
         </Wrapper>
     )
 }
@@ -28,8 +41,14 @@ const Wrapper = styled.main`
     h2 svg {
         margin-right: 7px;
     }
+    h3 {
+        margin-top: 25px;
+    }
     p {
         line-height: 1.6;
+    }
+    @media screen and (max-width: 750px) {
+        padding: 15px;
     }
 `
 

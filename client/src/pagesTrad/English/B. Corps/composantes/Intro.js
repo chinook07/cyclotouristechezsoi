@@ -13,7 +13,7 @@ const Intro = () => {
     }
     
     return (
-        <Wrapper>
+        <section>
             <p>
                 <span>Welcome to the English page on </span>
                 <TitreSite onMouseEnter={() => traduc(true)} onMouseLeave={() => traduc(false)}>Cyclotouristechezsoi</TitreSite>
@@ -24,11 +24,9 @@ const Intro = () => {
                 <Traduc />
             }
             <Metrique />
-        </Wrapper>
+        </section>
     )
 }
-
-const Wrapper = styled.section``
 
 const TitreSite = styled.span`
     cursor: help;
