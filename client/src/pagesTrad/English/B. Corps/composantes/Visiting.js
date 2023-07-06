@@ -1,12 +1,15 @@
 import styled from "styled-components";
+import { useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Climat from "./sousComposantes/Climat";
 import Animaux from "./sousComposantes/Animaux";
 import { faSuitcase } from "@fortawesome/free-solid-svg-icons";
 import imgDrapeau from "../../../images/quebec-flag.jpg"
+import { CycloContext } from "../../../../CycloContext";
 
 const Visiting = () => {
+    const { mesuresMetriques } = useContext(CycloContext);
     return (
         <section>
             <h2>
@@ -18,7 +21,7 @@ const Visiting = () => {
             <ImgDrapeau src={imgDrapeau} alt="" />
             <p>The people of Quebec are called Quebecers, or Québécois, in their native language. People either identify as such, as French Canadian, as Canadian, or a combination thereof. Many Montrealers are of various origins, and therefore speak three or more languages. The important thing is to come with an open mind, and be willing to try even a few words in French. People will appreciate, but do not get offended if they switch to English. It's (probably) not because your French is horrible! They are simply trying to be helpful!</p>
             <h3>Climate</h3>
-            <p>The summer climate in southern Quebec is warm and humid. The hottest time of the year is late July and heat waves (over 30°C) are getting more common. Thunderstorms are common in the afternoon but in no way match the intensity often witnessed in the USA. Tornadoes are thus extremely rare, with around five occurring per year, generally minor ones. North and east of the City of Québec, summer days are often cooler and the sea breeze usually prevents it from getting uncomfortably hot.</p>
+            <p>The summer climate in southern Quebec is warm and humid. The hottest time of the year is late July and heat waves over { mesuresMetriques ? <span>30°C</span>: <span>86°F</span> } are getting more common. Thunderstorms are common in the afternoon but in no way match the intensity often witnessed in the USA. Tornadoes are thus extremely rare, with around five occurring per year, generally minor ones. North and east of the City of Québec, summer days are often cooler and the sea breeze usually prevents it from getting uncomfortably hot.</p>
             <Climat />
             <p>Summer winds in Quebec tend to blow from the west or south-west, favouring journeys made in this direction. When doing a loop, keep in mind the wind is generally calmer in covered areas, i.e. within rail trails sheltered by trees.</p>
             <h3>Animals</h3>

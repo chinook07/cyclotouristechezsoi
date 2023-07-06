@@ -5,8 +5,6 @@ import animaux from "../donnees/animaux.json";
 
 const Animaux = () => {
 
-    console.log(animaux);
-
     return (
         <Wrapper>
             <thead>
