@@ -4,12 +4,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
-const ChangerLangMobi = () => {
+const ChangerLang = () => {
     return (
         <Wrapper>
             <ul>
                 <li><FontAwesomeIcon icon={faChevronRight} /><ExternalLink href="https://cyclotouristechezsoi.ca">Français</ExternalLink></li>
-                <li><FontAwesomeIcon icon={faChevronRight} /><ExternalLink href="https://deutsch.cyclotouristechezsoi.ca">Deutsch</ExternalLink></li>
+                <li><FontAwesomeIcon icon={faChevronRight} /><ExternalLink href="https://english.cyclotouristechezsoi.ca">English</ExternalLink></li>
             </ul>
         </Wrapper>
     )
@@ -17,13 +17,13 @@ const ChangerLangMobi = () => {
 
 const Wrapper = styled.div`
     background-color: var(--c1);
-    border-radius: 0 0 15px 15px;
+    border-radius: 0 0 0 15px;
     height: fit-content;
-    left: 50%;
+    left: 100%;
     padding: 10px;
     position: absolute;
     top: 100%;
-    transform: translateX(-50%);
+    transform: translateX(-100%);
     z-index: 2;
     ul {
         list-style: none;
@@ -33,7 +33,6 @@ const Wrapper = styled.div`
             display: flex;
             gap: 10px;
             margin: 10px 0;
-            align-items: center;
             a {
                 color: var(--c6);
                 text-decoration: none;
@@ -42,4 +41,4 @@ const Wrapper = styled.div`
     }
 `
 
-export default ChangerLangMobi;
+export default ChangerLang;

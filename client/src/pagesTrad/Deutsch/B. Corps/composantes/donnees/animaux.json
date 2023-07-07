@@ -1,0 +1,32 @@
+[
+    {
+        "animal": "der Schwarzbär",
+        "region": "In bewaldeten Gebieten nördlich des Stroms St-Laurent",
+        "danger": "Angriffe",
+        "url": "https://mffp.gouv.qc.ca/english/wildlife//wildlife-habitats/pdf/ours.pdf",
+        "conseils": [
+            "Stellen Sie sich nicht zwischen die Mutter und ihr Junges.",
+            "Überraschen Sie sie nicht."
+        ]
+    },
+    {
+        "animal": "die Zecke",
+        "region": "Hauptsächlich nahe der US-Grenze",
+        "danger": "Lyme-Borreliose",
+        "url": "https://www.quebec.ca/en/health/health-issues/a-z/lyme-disease/",
+        "conseils": [
+            "Untersuchen Sie Ihre Knöchel und die freiliegende Haut, nachdem Sie sich im Wald befunden haben.",
+            "Wenn Sie gebissen wurden, gehen Sie in die Apotheke oder zu einem Arzt, da Sie möglicherweise vorbeugende Medikamente benötigen."
+        ]
+    },
+    {
+        "animal": "der Waschbär und das Stinktier",
+        "region": "Überall, sogar in Städten",
+        "danger": "Tollwut",
+        "url": "https://www.quebec.ca/en/health/health-issues/a-z/rabies-in-humans/",
+        "conseils": [
+            "Wären Sie mit einem Waschbären oder einem anderen Träger von Tollwut in Kontakt gekommen, müssten Sie sich präventiv behandeln lassen.",
+            "Wenn Tollwutsymptome auftreten, ist die Krankheit tödlich und es ist schon zu spät."
+        ]
+    }
+]

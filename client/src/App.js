@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import GlobalStyles from "./GlobalStyles";
 
 import English from "./pagesTrad/English";
+import Deutsch from "./pagesTrad/Deutsch";
 import Francais from "./pagesTrad/Francais";
 
 const App = () => {
@@ -13,6 +14,7 @@ const App = () => {
             <BrowserRouter>
                 <Routes>
                     <Route path="/english" element={<English />} />
+                    <Route path="/deutsch" element={<Deutsch />} />
                     <Route path="*" element={<Francais />} />
                 </Routes>
             </BrowserRouter>
