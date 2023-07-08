@@ -8,9 +8,9 @@ const About = () => {
         <section>
             <h2>
                 <FontAwesomeIcon icon={faQuestionCircle} />
-                <span>About</span>
+                <span>Über mich</span>
             </h2>
-            <p>High school teacher living in Montréal, and soon-to-be programmer, I decided to learn some coding while sharing my knowledge of bicycle touring online. After completing my project, I went on to make a one-page site in English, so people outside Quebec could discover this excellent cycling destination. To contact me, you may use <ExternalLink href="https://cyclotouristechezsoi.ca/contact">the form</ExternalLink> found on the French-language section.</p>
+            <p>Da ich als Gymnasiallehrer und angehender Programmierer in Montreal lebe, beschloss ich, etwas Codierung zu lernen und gleichzeitig mein Wissen über Fahrradtouren online weiterzugeben. Nach Fertigstellung des Projekts habe ich eine einseitige Website auf Deutsch erstellt, damit die Menschen in den deutschsprachigen Ländern dieses ausgezeichnete Radreiseziel entdecken können. Dies würde mir auch die Möglichkeit geben, weiter an meinem Deutsch zu arbeiten. Um mit mir Kontakt aufzunehmen, können Sie <ExternalLink href="https://cyclotouristechezsoi.ca/contact">das Formular</ExternalLink> auf der französischsprachigen Seite verwenden.</p>
         </section>
     )
 }

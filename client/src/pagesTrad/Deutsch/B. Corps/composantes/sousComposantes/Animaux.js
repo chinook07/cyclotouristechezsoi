@@ -9,10 +9,10 @@ const Animaux = () => {
         <Wrapper>
             <thead>
                 <tr>
-                    <th>Animal</th>
-                    <th>Areas at risk</th>
-                    <th>Danger</th>
-                    <th>Prevention and curing</th>
+                    <th>Tier</th>
+                    <th>Risikogebiet</th>
+                    <th>Gefahr</th>
+                    <th>Prävention und Behandlung</th>
                 </tr>
             </thead>
             <tbody>

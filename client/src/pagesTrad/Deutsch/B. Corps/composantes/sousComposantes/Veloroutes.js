@@ -1,16 +1,13 @@
 import styled from "styled-components";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import routes from "../donnees/routes.json";
 import * as imgVeloroutes from "../../../../images/index";
 import * as cartesVeloroutes from "../../../../images/maps/index";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { CycloContext } from "../../../../../CycloContext";
 
 const Veloroutes = () => {
-
-    const { mesuresMetriques } = useContext(CycloContext);
 
     const [routeChoisie, setRouteChoisie] = useState(false);
     
@@ -49,7 +46,7 @@ const Veloroutes = () => {
                 <div>
                         <h3>Route {routeChoisie.route}</h3>
                         <p>{routeChoisie.intro}</p>
-                        <h4>Main cities</h4>
+                        <h4>Wichtigste Städte</h4>
                         <Villes>
                             {
                                 routeChoisie.villes.map((item, index) => {
@@ -65,7 +62,7 @@ const Veloroutes = () => {
                                 })
                             }
                         </Villes>
-                        <h4>Itineraries</h4>
+                        <h4>Wegbeschreibung</h4>
                         <ImgItineraire src={tableauCartes[routeChoisie.imgSrc]} alt="" />
                         <RouteOptions>
                             {
@@ -84,12 +81,8 @@ const Veloroutes = () => {
                             }
                         </RouteOptions>
                         {
-                            routeChoisie.route === "Across QC" && mesuresMetriques &&
+                            routeChoisie.route === "Across QC" &&
                             <p>{routeChoisie.total}</p>
-                        }
-                        {
-                            routeChoisie.route === "Across QC" && !mesuresMetriques &&
-                            <p>{routeChoisie.totalUS}</p>
                         }
                 </div>
             }

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Traduc = () => {
     return (
-        <Wrapper>Translation: bicycle tourist in his or her own region</Wrapper>
+        <Wrapper>Übersetzung: Radtourist*in in seiner oder ihrer einigen Region</Wrapper>
     )
 }
 

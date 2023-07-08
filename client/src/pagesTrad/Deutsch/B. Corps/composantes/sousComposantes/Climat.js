@@ -43,39 +43,39 @@ const Climat = () => {
                                 <td></td>
                                 <th>
                                     <div>
-                                        { mesuresMetriques ? <p>Min T°C</p> : <p>Min F°C</p> }
+                                        <p>Min T°C</p>
                                     </div>
                                 </th>
                                 <th>
                                     <div>
-                                        { mesuresMetriques ? <p>Max T°C</p> : <p>Max F°C</p> }
+                                        <p>Max T°C</p>
                                     </div>
                                 </th>
                                 <th>
                                     <div>
-                                        <p>Nights {caracteres[0]} { mesuresMetriques ? <span>2°C</span> : <span>36°F</span> }</p>
+                                        <p>Nächte {caracteres[0]} 2°C</p>
                                     </div>
                                 </th>
                                 <th>
                                     <div>
-                                        <p>Days {caracteres[1]} { mesuresMetriques ? <span>30°C</span> : <span>86°F</span> }</p>
+                                        <p>Tage {caracteres[1]} 30°C</p>
                                     </div>
                                 </th>
                                 <th>
                                     <div>
-                                        { mesuresMetriques ? <p>Rain (mm)</p> : <p>Rain (in)</p> }
+                                        <p>Regen (L/m<sup>2</sup>)</p>
                                     </div>
                                 </th>
                                 <th>
                                     <div>
-                                        <p>Rainy days</p>
+                                        <p>Regentage</p>
                                     </div>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>May</td>
+                                <td>Mai</td>
                                 <td>{mesuresMetriques ? villeChoisie.climat.tempMin[0] : (villeChoisie.climat.tempMin[0] * (9/5) + 32).toFixed(0)}</td>
                                 <td>{mesuresMetriques ? villeChoisie.climat.tempMax[0] : (villeChoisie.climat.tempMax[0] * (9/5) + 32).toFixed(0)}</td>
                                 <td>{villeChoisie.climat.nuitsFroides[0]}</td>
@@ -84,7 +84,7 @@ const Climat = () => {
                                 <td>{villeChoisie.climat.joursPluvieux[0]}</td>
                             </tr>
                             <tr>
-                                <td>June</td>
+                                <td>Juni</td>
                                 <td>{mesuresMetriques ? villeChoisie.climat.tempMin[1] : (villeChoisie.climat.tempMin[1] * (9/5) + 32).toFixed(0)}</td>
                                 <td>{mesuresMetriques ? villeChoisie.climat.tempMax[1] : (villeChoisie.climat.tempMax[1] * (9/5) + 32).toFixed(0)}</td>
                                 <td>{villeChoisie.climat.nuitsFroides[1]}</td>
@@ -93,7 +93,7 @@ const Climat = () => {
                                 <td>{villeChoisie.climat.joursPluvieux[1]}</td>
                             </tr>
                             <tr>
-                                <td>July</td>
+                                <td>Juli</td>
                                 <td>{mesuresMetriques ? villeChoisie.climat.tempMin[2] : (villeChoisie.climat.tempMin[2] * (9/5) + 32).toFixed(0)}</td>
                                 <td>{mesuresMetriques ? villeChoisie.climat.tempMax[2] : (villeChoisie.climat.tempMax[2] * (9/5) + 32).toFixed(0)}</td>
                                 <td>{villeChoisie.climat.nuitsFroides[2]}</td>

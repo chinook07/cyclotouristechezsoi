@@ -116,29 +116,29 @@
         "sections": [
             {
                 "titre": "A. Mauricie",
-                "descriptif": "The Route verte 4 is only one of the ways to get from Trois-Rivières to Shawinigan, making this a good option for a loop. To make things more challenging, La Mauricie National Park is only a bit further up. Otherwise, check out the Véloboucles Mauricie, on-road cycle routes going through the regional countryside.",
+                "descriptif": "Die Route verte 4 ist nur eine der Möglichkeiten, um von Trois-Rivières nach Shawinigan zu gelangen, was sie zu einer guten Option für eine Schleife macht. Um die Sache etwas anspruchsvoller zu machen, liegt der Mauricie-Nationalpark nur etwas weiter oben. Ansonsten sollten Sie sich die Véloboucles Mauricie ansehen, Radrouten auf der Straße, die durch die Landschaft der Region führen.",
                 "imgSrc": "8",
                 "imgCap": "Shawinigan"
             },
             {
                 "titre": "B. La Campagnarde",
-                "descriptif": "If you're looking for an easy ride, try heading from Drummondville to the Yamaska National Park on the Campagnarde rail trail. Once there, you can do a trail-only loop via Granby and Waterloo. This is a very family-friendly option of a trip.",
+                "descriptif": "Wenn Sie auf der Suche nach einer einfachen Fahrt sind, versuchen Sie, auf dem Campagnarde-Eisenbahnweg von Drummondville zum Yamaska-Nationalpark zu gelangen. Dort angekommen, können Sie über Granby und Waterloo eine reine Trail-Rundfahrt machen. Dies ist eine sehr familienfreundliche Reisemöglichkeit.",
                 "imgSrc": "9",
-                "imgCap": "La Campagnarde rail trail"
+                "imgCap": "La-Campagnarde-Eisenbahnweg"
             },
             {
                 "titre": "C. Brome-Missisquoi",
-                "descriptif": "There is a world (or a region) of cycling opportunities in the north-south corridor stretching from Bromont to the Vermont border. If you purposely veer off this route, you will encounter a large network of packed – not loose – gravel roads going in all directions, including up. There is some climbing involved, however. Otherwise, if you have a passport, no need to stop at the end of the road!",
+                "descriptif": "Im Nord-Süd-Korridor, der sich von Bromont bis zur Grenze zu Vermont erstreckt, gibt es eine Welt (oder eine Region) von Fahrradmöglichkeiten. Wenn Sie absichtlich von dieser Route abweichen, stoßen Sie auf ein großes Netz von überfüllten – nicht losen – Schotterstraßen, die in alle Richtungen führen, auch nach oben. Es gibt jedoch auch Steigungen. Ansonsten, wenn Sie einen Pass haben, brauchen Sie am Ende der Straße nicht anzuhalten!",
                 "imgSrc": "10",
-                "imgCap": "Between Brome and Bromont"
+                "imgCap": "Zwischen Brome und Bromont"
             }
         ]
     },
     {
         "route": "5",
-        "intro": "From Ontario to (almost) Labrador, this historic route will make you fall in love with Quebec again!",
+        "intro": "Von Ontario bis (fast) Labrador – diese historische Route wird Sie wieder in Quebec verliebt machen!",
         "villes": [
-            "Ontario border",
+            "Grenze zu Ontario",
             "Montréal",
             "Trois-Rivières",
             "Québec",
@@ -149,20 +149,20 @@
         "imgAlt": "",
         "sections": [
             {
-                "titre": "A. Waterfront Trail",
-                "descriptif": "If riding in from Toronto or Kingston, this will be the route welcoming you to Quebec. Almost right away, on-road cycling turns into state-of-the-art cycle tracks, through a glorious forest and then along a canal all the way to the suburbs of Montréal, where it doesn't stop becoming more interesting.",
+                "titre": "A. Waterfront Radroute",
+                "descriptif": "Wenn Sie aus Toronto oder Kingston anreisen, wird dies die Route sein, die Sie in Quebec begrüßt. Fast sofort verwandelt sich das Radfahren auf der Straße in hochmoderne Radwege, durch einen herrlichen Wald und dann entlang eines Kanals bis zu den Vororten von Montreal, wo es immer interessanter wird.",
                 "imgSrc": "11",
-                "imgCap": "Upper Canada Village"
+                "imgCap": "Upper Canada Village historisches Freilichtmuseum"
             },
             {
-                "titre": "B. The King's road",
-                "descriptif": "Anyone even slightly comfortable riding on the road who wants to see Quebec should do the King's road, or Chemin du Roi, from Montréal to the City of Québec. Old churches, historic buildings, this will repeat in almost every town. Once at the end point, you could even come back via the south shore, otherwise by train or bus.",
+                "titre": "B. Der Königsweg",
+                "descriptif": "Wer auch nur ein wenig bequem auf der Straße fährt und Québec sehen möchte, sollte die Königsweg, oder Chemin du Roi, von Montreal nach Québec City nehmen. Alte Kirchen, historische Gebäude, das wird sich in fast jeder Kleinstadt wiederholen. Einmal am Endpunkt angekommen, könnte man sogar über die Südküste zurückkommen, ansonsten mit dem Zug oder Bus.",
                 "imgSrc": "12",
-                "imgCap": "One of many historic churches between Montréal and the City of Québec"
+                "imgCap": "Eine von vielen historischen Kirchen zwischen Montreal und Quebec City"
             },
             {
                 "titre": "C. Côte-Nord",
-                "descriptif": "If you're looking for a more remote expedition, ride from Tadoussac until Baie-Comeau along the north shore of the estuary. You can expect to spot some whales, otherwise the coniferous forests and the maritime landscape will make you happy to have chosen to ride on the Côte-Nord. There are several towns which have ferry connections to the other side, shall you choose to do a loop.",
+                "descriptif": "Wenn Sie auf der Suche nach einer weiter entfernten Expedition sind, radeln Sie von Tadoussac nach Baie-Comeau entlang des Nordufers der Flussmündung. Es ist damit zu rechnen, dass Sie einige Wale erspähen werden, ansonsten werden die Nadelwälder und die maritime Landschaft Sie glücklich machen, dass Sie sich für einen Fahrt an der Côte-Nord entschieden haben. Es gibt mehrere Städte, die über Fährverbindungen auf die andere Seite verfügen, sollten Sie sich für eine Schleife entscheiden.",
                 "imgSrc": "13",
                 "imgCap": "Grandes-Bergeronnes"
             }
@@ -170,70 +170,70 @@
     },
     {
         "route": "6",
-        "intro": "From the City of Québec, head north or south to two equally remote parts of Quebec.",
+        "intro": "Fahren Sie von der Stadt Quebec aus nach Norden oder Süden in zwei gleichermaßen abgelegene Teile Quebecs.",
         "villes": [
             "Rivière-à-Pierre",
             "Québec",
             "St-Georges",
-            "Maine border"
+            "Grenze zu Maine"
         ],
         "imgSrc": "5",
         "imgAlt": "",
         "sections": [
             {
                 "titre": "A. Portneuf",
-                "descriptif": "If you find yourself in Montréal wanting to go in the middle of nowhere, take a three-times-a-week train to Rivière-à-Pierre and cycle down to the City of Québec. Before having descended into historic Old Quebec, you will have had the entire afternoon and the next day riding through a 'tunnel under the trees', i.e., a beautiful rail trail with a lot of cycling rest areas along the way.",
+                "descriptif": "Wenn Sie sich in Montreal befinden und mitten im Nirgendwo hinfahren möchten, nehmen Sie die 3-mal pro Woche verkehrende Bahn nach Rivière-à-Pierre und radeln Sie hinunter nach Quebec City. Bevor Sie in die historische Altstadt Quebecs erreichen, haben Sie den ganzen Nachmittag und den nächsten Tag Zeit gehabt, durch einen 'Tunnel unter den Bäumen' zu fahren, d.h. durch einen schönen Eisenbahnweg mit vielen Radrastplätzen entlang der Strecke.",
                 "imgSrc": "14",
-                "imgCap": "Jacques-Cartier-Portneuf rail trail"
+                "imgCap": "Jacques-Cartier-Portneuf-Eisenbahnweg"
             },
             {
                 "titre": "B. Beauce",
-                "descriptif": "More of an off-the-beaten-path destination for international tourists, the Beauce region is a river valley with a cycle route currently being upgraded one kilometre at a time. If you get bored, which is improbable, the Bellechasse rail trail heads off in a northeasterly direction, with the possibilities of doing a loop combining both routes.",
+                "descriptif": "Die Region Beauce ist ein Flusstal, das für internationale Touristen eher ein abseits der Touristenpfade gelegenes Reiseziel ist. Ein Radweg wird derzeit Kilometer für Kilometer ausgebaut. Falls es Ihnen langweilig wird, was unwahrscheinlich ist, geht der Bellechasse-Bahnweg in nordöstlicher Richtung ab, mit der Möglichkeit, eine Schleife zu machen, die beide Routen kombiniert.",
                 "imgSrc": "15",
-                "imgCap": "Chaudière waterfalls in Lévis"
+                "imgCap": "Chaudière Wasserfälle in Lévis"
             }
         ]
     },
     {
         "route": "8",
-        "intro": "Here you have a dramatic route going from a vast interior sea to a fjord, to another large lake.",
+        "intro": "Hier haben Sie eine dramatische Route, die von einem riesigen Binnenmeer über einen Fjord zu einem weiteren großen See führt.",
         "villes": [
             "Métabetchouan–Lac-à-la-Croix",
             "Alma",
             "Roberval",
-            "Métabetchouan–Lac-à-la-Croix (loop)",
+            "Métabetchouan–Lac-à-la-Croix (Loop)",
             "Saguenay",
             "Tadoussac",
             "Rivière-du-Loup",
             "Témiscouata-sur-le-Lac",
-            "New Brunswick border"
+            "Grenze zu New Brunswick"
         ],
         "imgSrc": "6",
         "imgAlt": "",
         "sections": [
             {
                 "titre": "A. Lac-St-Jean",
-                "descriptif": "Another family-friendly route is the tour of the St-Jean Lake, one of the biggest of Quebec. On the menu, beaches, a national park, a First Nations village, a ghost town, a zoo, and a lot of wild blueberries! There's a lot to see and to do, and the route alternates between off-road cycle tracks, rather safe highway shoulders, and quiet rural roads.",
+                "descriptif": "Eine weitere familienfreundliche Route ist die Tour zum St-Jean-See, einem der größten Seen Quebecs. Auf der Tagesordnung stehen Strände, ein Nationalpark, ein Dorf der First Nations, eine Geisterstadt, ein Zoo und jede Menge wilde Blaubeeren! Es gibt viel zu sehen und zu tun, und die Route wechselt zwischen Radwegen, ziemlich sicheren Schultern auf Landstraßen und ruhigen Nebenstraßen.",
                 "imgSrc": "16",
-                "imgCap": "Pointe-Taillon National Park"
+                "imgCap": "Pointe-Taillon-Nationalpark"
             },
             {
                 "titre": "B. Fjord-du-Saguenay",
-                "descriptif": "The fjord is one of the ultimate road bike challenges the province has to offer. You can ride on the Route verte 8 which utilises Route 172 on the north shore, or take the south shore counterpart, Route 170. There's even a fjord shuttle which whisks passengers back and forth on the water, providing you with a way to see the majestic fjord, and a moment of resting from the leg-numbing hills these roads make you endure. A loop from Saguenay to St-Siméon and Tadoussac is a memorable journey to experience at least once.",
+                "descriptif": "Der Fjord ist eine der ultimativen Rennrad-Herausforderungen, die die Provinz zu bieten hat. Sie können auf der Route verte 8 fahren, die am Nordufer die Route 172 nutzt, oder das Südufer-Gegenstück, die Route 170, benutzt. Es gibt sogar einen Fjord-Shuttle, der die Fahrgäste auf dem Wasser hin und her bringt und Ihnen die Möglichkeit bietet, den majestätischen Fjord zu sehen und sich einen Moment lang von den Beinen brechenden Hügeln auszuruhen, die diese Straßen ertragen. Eine Schleife von Saguenay nach St-Siméon und Tadoussac ist eine unvergessliche Reise, die man mindestens einmal erleben sollte.",
                 "imgSrc": "17",
-                "imgCap": "Ste-Marguerite river valley, near Ste-Rose-du-Nord"
+                "imgCap": "Flusstal der Ste-Marguerite, in der Nähe von Ste-Rose-du-Nord"
             },
             {
                 "titre": "C. Témiscouata",
-                "descriptif": "The Petit-Témis interprovincial linear park is another 'tunnel under the trees' rail trail option with a long stretch along the Témiscouata Lake. There, a small ferry can take you across to the national park. Between Rivière-du-Loup and Témiscouata-sur-le-Lac, three rustic campsites along the trail offer a peaceful night's sleep. Further east, the trail enters New Brunswick, ending in Edmundston. Don't forget to advance the clocks by one hour!",
+                "descriptif": "Der interprovinzielle lineare Park Petit-Témis ist eine weitere 'Tunnel unter den Bäumen' Bahntrasse mit einer langen Strecke entlang des Sees von Témiscouata. Dort kann man mit einer kleinen Fähre in den Nationalpark übersetzen. Zwischen Rivière-du-Loup und Témiscouata-sur-le-Lac bieten drei rustikale Campingplätze entlang des Weges eine ruhige Nachtruhe. Weiter östlich führt der Weg nach New Brunswick und endet in Edmundston. Vergessen Sie nicht, die Uhren um eine Stunde vorzustellen!",
                 "imgSrc": "18",
-                "imgCap": "Petit-Témis rail trail along Témiscouata Lake"
+                "imgCap": "Petit-Témis-Bahnweg entlang des Sees Témiscouata"
             }
         ]
     },
     {
-        "route": "Across QC",
-        "intro": "On a cross-Canada trip? Follow this route suggestion to make the most of your stay in Quebec!",
+        "route": "durch QC",
+        "intro": "Auf einer Reise quer durch Kanada? Folgen Sie diesem Routenvorschlag, um das Beste aus Ihrem Aufenthalt in Quebec zu machen!",
         "villes": [
             "Pembroke, ON",
             "Gatineau",
@@ -248,25 +248,24 @@
         "imgAlt": "",
         "sections": [
             {
-                "titre": "Part 1: Straddling the Outaouais River",
-                "descriptif": "In Pembroke, you'll exit Ontario (for now) and ride the Route verte 1, on a rail trail through the western Quebec forest. In Gatineau, you're a simple hop away from Ottawa and all of its sights, after which you will ride mostly on roads until you reach the resort village of Oka. From there, the most scenic entrance to Montreal is by ferry to Hudson, along the river to Vaudreuil, and the Route verte 5. The ride through the West Island of Montreal is quite impressive with its enticing parks along the lakefront. The Lachine Canal trail will take you directly downtown, but stay on the Route verte if you're not tired of the blue horizon.",
+                "titre": "Teil 1: Entlang des Outaouais-Flusses",
+                "descriptif": "In Pembroke verlassen Sie Ontario (vorerst) und folgen Sie der Route verte 1, einem Schienenweg durch die Wälder im Westen Quebecs. In Gatineau sind Sie nur einen Katzensprung von Ottawa und all seinen Sehenswürdigkeiten entfernt. Danach radeln Sie hauptsächlich auf Straßen, bis Sie den Ferienort Oka erreichen. Von dort aus führt die landschaftlich schönste Einfahrt nach Montreal mit der Fähre nach Hudson, entlang des Flusses nach Vaudreuil und über die Route verte 5. Die Fahrt durch die Westinsel von Montreal ist mit ihren verlockenden Parks entlang des Seeufers sehr beeindruckend. Der Radweg am Lachine-Kanal führt Sie direkt ins Stadtzentrum, aber bleiben Sie auf der Route verte, wenn Sie des blauen Horizonts noch nicht müde sind.",
                 "imgSrc": "19",
-                "imgCap": "The Outaouais River in St-Placide"
+                "imgCap": "Der Outaouais-Fluss in St-Placide"
             },
             {
-                "titre": "Part 2: The King's Road",
-                "descriptif": "Although the same long-distance cycle route becomes a long string of fabulous rail trails all the way to Quebec City, you still have a few provinces to go before the end of your trip. The Route verte 5 is therefore not only much shorter, but will also give you an inside to Quebec's history. This is the oldest road of the province. Old churches, vistas on the St-Laurent river, and historic buildings will be present in almost every town. Once at the end point, it would be wise to take a few days to explore the oldest city in North America.",
+                "titre": "Teil 2: Der Königsweg",
+                "descriptif": "Obwohl derselbe Fernradweg bis nach Quebec City zu einer langen Reihe von fabelhaften Bahntrassen wird, haben Sie bis zum Ende Ihrer Reise noch einige Provinzen vor sich. Die Route verte 5 ist daher nicht nur viel kürzer, sondern gibt Ihnen auch einen Einblick in die Geschichte Québecs. Es handelt sich um die älteste Landstraße der Provinz. Alte Kirchen, Ausblicke auf den Strom St-Laurent und historische Gebäude sind in fast jeder Stadt zu finden. Am Endpunkt angekommen, sollten Sie sich ein paar Tage Zeit nehmen, um die älteste Stadt Nordamerikas zu erkunden.",
                 "imgSrc": "20",
-                "imgCap": "One of many historic churches between Montréal and the City of Québec"
+                "imgCap": "Eine von vielen historischen Kirchen zwischen Montreal und Quebec City"
             },
             {
-                "titre": "Part 3: The Maritimes: a prequel",
-                "descriptif": "This is where the river you've been following widens, and the smell of saltwater starts to invade the air! Along the Route verte 1 that you'll once again be riding, numerous villages will give you a nice place to rest along the estuary. Between Trois-Pistoles and Rimouski, the itinerary is far from flat, but you will be amazed when going through the Bic National Park. The Gaspé loop starts at Ste-Flavie. You will need to turn inland and climb into the hills. On the other side, the Matapédia river valley, where you'll be riding down to Campbellton, New Brunswick, on a valley road surrounded by walls of trees on each side.",
+                "titre": "Teil 3: Die Maritimes: eine Vorgeschichte",
+                "descriptif": "Hier verbreitert sich der Strom, dem Sie bisher gefolgt sind, und der Geruch von Salzwasser liegt in der Luft! Entlang der Route verte 1, die Sie erneut befahren werden, bieten Ihnen zahlreiche Dörfer an der Flussmündung einen schönen Platz zum Entspannen. Zwischen Trois-Pistoles und Rimouski ist die Strecke alles andere als flach, aber Sie werden staunen, wenn Sie durch den Bic-Nationalpark fahren. Die Gaspé-Schleife beginnt in Ste-Flavie. Sie müssen ins Landesinnere abbiegen und in die Hügel hinauffahren. Auf der anderen Seite, im Tal des Matapédia-Flusses, fahren Sie auf einer Talstraße, die auf beiden Seiten von Baumwänden umgeben ist, hinunter nach Campbellton, New Brunswick.",
                 "imgSrc": "21",
-                "imgCap": "Bic National Park"
+                "imgCap": "Bic-Nationalpark"
             }
         ],
-        "total": "Total distance: between 1200 and 1250 km. Altitude gain: ≈ 7000 metres.",
-        "totalUS": "Total distance: between 750 and 775 miles. Altitude gain: ≈ 23000 feet."
+        "total": "Gesamtstrecke: zwischen 1200 und 1250 km. Höhenunterschied: ca. 7000 Meter."
     }
 ]

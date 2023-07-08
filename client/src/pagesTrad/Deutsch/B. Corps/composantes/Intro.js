@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { useState } from "react";
 
 import Traduc from "./sousComposantes/Traduc";
-import Metrique from "./sousComposantes/Metrique";
 
 const Intro = () => {
 
@@ -15,15 +14,14 @@ const Intro = () => {
     return (
         <section>
             <p>
-                <span>Welcome to the English page on </span>
+                <span>Willkommen auf der deutschen Seite auf </span>
                 <TitreSite onMouseEnter={() => traduc(true)} onMouseLeave={() => traduc(false)}>Cyclotouristechezsoi</TitreSite>
-                <span>.ca, meant as an informational page for bicycle touring in Quebec. Home to many beautiful cities, breathtaking sceneries, and its charming French-speaking people, this province of 8.5 million inhabitants provides for excellent cycling opportunities throughout various landscapes.</span>
+                <span>.ca, Dies ist als Informationsseite für Radtouren in Quebec gedacht. Mit 8.5 Millionen Einwohnern beherbergt diese Provinz viele schöne Städte, atemberaubende Landschaften und charmante französischsprachige Menschen, und bietet hervorragende Möglichkeiten zum Radfahren in verschiedenen Landschaften.</span>
             </p>
             {
                 montrerTraduc &&
                 <Traduc />
             }
-            <Metrique />
         </section>
     )
 }
