@@ -1,33 +1,30 @@
 import styled from "styled-components";
-import { useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Climat from "./sousComposantes/Climat";
 import Animaux from "./sousComposantes/Animaux";
 import { faSuitcase } from "@fortawesome/free-solid-svg-icons";
 import imgDrapeau from "../../../images/quebec-flag.jpg"
-import { CycloContext } from "../../../../CycloContext";
 
 const Visiting = () => {
-    const { mesuresMetriques } = useContext(CycloContext);
     return (
         <section>
             <h2>
                 <FontAwesomeIcon icon={faSuitcase} />
-                <span>Visiting Quebec</span>
+                <span>Einleitung zu Quebec</span>
             </h2>
-            <h3>Language and Culture</h3>
-            <p>Our lingua franca is French. That said, it differs greatly in its spoken form from the variety spoken in Europe. In the western half of Montréal, as well as many areas bordering Ontario, New York, and Vermont, English is used as a common language by a significant proportion of the population. Road signs are normally only in French, but locals in many towns along major cycling routes are used to seeing lost tourists on their bikes, and will often be happy to help them find their way whether they are fluent, or can only say <Italique>yes, no, toaster</Italique>.</p>
+            <h3>Sprache und Kultur</h3>
+            <p>Unsere Lingua franca ist französisch, unterscheidet sich jedoch in ihrer gesprochenen Form stark von der in Europa gesprochenen Sorte. In der westlichen Hälfte von Montreal sowie in vielen Gebieten an der Grenze zu Ontario, New York und Vermont wird Englisch von einem erheblichen Teil der Bevölkerung als gemeinsame Sprache verwendet. Verkehrszeichen sind normalerweise nur auf Französisch, aber Einheimische in vielen Dörfer entlang wichtiger Radwege sind es gewohnt, verlorene Touristen auf ihren Fahrrädern zu sehen, und helfen ihnen oft gerne dabei, sich zurechtzufinden, ob sie fließend sind oder nur <Italique>Ja, Nein, Toaster</Italique> sagen können.</p>
             <ImgDrapeau src={imgDrapeau} alt="" />
-            <p>The people of Quebec are called Quebecers, or Québécois, in their native language. People either identify as such, as French Canadian, as Canadian, or a combination thereof. Many Montrealers are of various origins, and therefore speak three or more languages. The important thing is to come with an open mind, and be willing to try even a few words in French. People will appreciate, but do not get offended if they switch to English. It's (probably) not because your French is horrible! They are simply trying to be helpful!</p>
-            <h3>Climate</h3>
-            <p>The summer climate in southern Quebec is warm and humid. The hottest time of the year is late July and heat waves over { mesuresMetriques ? <span>30°C</span>: <span>86°F</span> } are getting more common. Thunderstorms are common in the afternoon but in no way match the intensity often witnessed in the USA. Tornadoes are thus extremely rare, with around five occurring per year, generally minor ones. North and east of the City of Québec, summer days are often cooler and the sea breeze usually prevents it from getting uncomfortably hot.</p>
+            <p>TDie Menschen in Québec werden Québecer, oder Québécois, in ihrer Muttersprache genannt. Die Menschen identifizieren sich entweder als solche, als Französisch-Kanadier, als Kanadier oder als eine Kombination davon. Viele Montrealer sind unterschiedlicher Herkunft und sprechen daher drei oder mehr Sprachen. Wichtig ist, dass man aufgeschlossen und bereit ist, auch nur ein paar Wörter auf Französisch zu versuchen. Die Menschen werden es zu schätzen wissen, aber seien Sie nicht beleidigt, wenn sie ins Englische wechseln. Es liegt (wahrscheinlich) nicht daran, dass Ihr Französisch schrecklich ist! Sie versuchen einfach nur, hilfreich zu sein!</p>
+            <h3>Klima</h3>
+            <p>Das Sommerwetter im Süden Quebecs ist warm und feucht. Ende Juli ist die heißeste Zeit des Jahres, und Hitzewellen (über 30°C) werden immer häufiger. Gewitter sind am nachmittags häufig, erreichen aber in keiner Weise die Intensität, die in den USA so häufig beobachtet wird. Tornados sind daher äußerst selten, es treten etwa fünfmal im Jahr auf, in der Regel kleinere Tornados. Nördlich und östlich von Quebec City sind die Sommertage oft kühler, und die Meeresbrise verhindert in der Regel, dass es unangenehm heiß wird.</p>
             <Climat />
-            <p>Summer winds in Quebec tend to blow from the west or south-west, favouring journeys made in this direction. When doing a loop, keep in mind the wind is generally calmer in covered areas, i.e. within rail trails sheltered by trees.</p>
-            <h3>Animals</h3>
-            <p>Quebec is not Australia! The fauna is a lot more benign than in many other parts of the world, and we have our cold winters to thank for that. For a start, poisonous snakes and spiders are extremely uncommon. However, there are certain dangers to watch out for.</p>
+            <p>Die Sommerwinde in Quebec wehen in der Regel aus dem Westen oder Südwesten und begünstigen Reisen in diese Richtung. Wenn Sie eine Schleife fahren, denken Sie daran, dass der Wind in überdachten Gebieten, d.h. innerhalb von durch Bäume geschützten Radwegen, im Allgemeinen ruhiger ist.</p>
+            <h3>Tiere</h3>
+            <p>Quebec ist nicht Australien! Die Fauna ist viel harmloser als in vielen anderen Teilen der Welt, und das haben wir unseren kalten Wintern zu verdanken. Zunächst einmal sind giftige Schlangen und Spinnen äußerst selten. Es gibt jedoch gewisse Gefahren, vor denen man sich in Acht nehmen muss.</p>
             <Animaux />
-            <p>Though more annoying than dangerous, mosquitoes, deer flies, horse flies, and no-see-ums will make your trip miserable if you don't arm yourself with bug spray, especially at the beginning of the summer. Once mid-August comes around, it is generally more pleasant to be in the forest, even at dusk. Peak season for mosquitoes is late May and June, and should be avoided when planning on doing a lot of stealth camping in the woods.</p>
+            <p>Obwohl sie eher lästig als gefährlich sind, machen Moskitos, Bremsen und Gnitzen Ihre Reise miserabel, wenn Sie sich nicht mit Mückenspray bewaffnen, vor allem zu Beginn des Sommers. Ab Mitte August ist es im Allgemeinen angenehmer, sich im Wald aufzuhalten, selbst in der Dämmerung. Ende Mai und Juni findet die Hauptsaison für Moskitos statt, und sollte vermieden werden, wenn man viel Stealth-Camping in den Wäldern plant.</p>
         </section>
     )
 }

@@ -63,7 +63,7 @@ const Nav1 = () => {
                 </li>
             </Menu>
             <Langue onClick={handleLang}>
-                <span>EN</span>
+                <span>DE</span>
                 <span><FontAwesomeIcon icon={faGlobeEurope}/></span>
             </Langue>
             {

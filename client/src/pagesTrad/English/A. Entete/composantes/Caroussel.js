@@ -54,7 +54,6 @@ const Carrousel = () => {
 
 const Wrapper = styled.div`
     background-image: linear-gradient(var(--c4), var(--c3));
-    /* margin-top: 52px; */
     overflow: hidden;
     figure {
         margin: 52px auto 0;

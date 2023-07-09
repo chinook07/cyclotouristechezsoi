@@ -2,13 +2,11 @@ import styled from "styled-components";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Link as ScrollLink } from 'react-scroll';
-import { NavLink } from "react-router-dom";
-import { ExternalLink } from "react-external-link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import ChangerLangMobi from "./ChangerLangMobi";
 import imgLogo from "../../../../images/icones/logo.png";
-import { faGlobeEurope, faBars, faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+import { faGlobeEurope, faBars } from "@fortawesome/free-solid-svg-icons";
 
 const Nav1Mobi = () => {
 

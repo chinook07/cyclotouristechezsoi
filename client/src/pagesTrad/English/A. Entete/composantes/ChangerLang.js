@@ -30,12 +30,16 @@ const Wrapper = styled.div`
         margin: 0;
         padding-left: 0;
         li {
+            color: var(--c6);
             display: flex;
             gap: 10px;
             margin: 10px 0;
             a {
                 color: var(--c6);
                 text-decoration: none;
+            }
+            &:hover {
+                color: var(--c4);
             }
         }
     }
