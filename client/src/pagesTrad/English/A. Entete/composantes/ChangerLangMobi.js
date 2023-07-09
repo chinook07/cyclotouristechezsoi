@@ -9,7 +9,7 @@ const ChangerLangMobi = () => {
         <Wrapper>
             <ul>
                 <li><FontAwesomeIcon icon={faChevronRight} /><ExternalLink href="https://cyclotouristechezsoi.ca">Français</ExternalLink></li>
-                <li><FontAwesomeIcon icon={faChevronRight} /><ExternalLink href="https://deutsch.cyclotouristechezsoi.ca">Deutsch</ExternalLink></li>
+                <li><FontAwesomeIcon icon={faChevronRight} /><ExternalLink href="https://cyclotouristechezsoi.ca/deutsch">Deutsch</ExternalLink></li>
             </ul>
         </Wrapper>
     )

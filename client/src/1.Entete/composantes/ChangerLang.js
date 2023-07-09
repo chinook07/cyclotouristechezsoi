@@ -8,8 +8,8 @@ const ChangerLang = () => {
     return (
         <Wrapper>
             <ul>
-                <li><FontAwesomeIcon icon={faChevronRight} /><ExternalLink href="https://english.cyclotouristechezsoi.ca">English</ExternalLink></li>
-                <li><FontAwesomeIcon icon={faChevronRight} /><ExternalLink href="https://deutsch.cyclotouristechezsoi.ca">Deutsch</ExternalLink></li>
+                <li><FontAwesomeIcon icon={faChevronRight} /><ExternalLink href="https://cyclotouristechezsoi.ca/english">English</ExternalLink></li>
+                <li><FontAwesomeIcon icon={faChevronRight} /><ExternalLink href="https://cyclotouristechezsoi.ca/deutsch">Deutsch</ExternalLink></li>
             </ul>
         </Wrapper>
     )
