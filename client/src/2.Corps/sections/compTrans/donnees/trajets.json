@@ -369,6 +369,16 @@
         "trajet": "Train de banlieue entre Montréal et Mont-Saint-Hilaire.",
         "heures": "sur semaine seulement, principalement à l'heure de pointe."
     },
+    "110": {
+        "icone": [
+            1,
+            5,
+            8
+        ],
+        "transporteur": "REM",
+        "trajet": "REM A1 entre Montréal et Brossard",
+        "heures": "OUVERTURE le 31 juillet, 7 jours sur 7"
+    },
     "120": {
         "icone": [
             3,
@@ -617,7 +627,7 @@
         ],
         "transporteur": "Navark",
         "trajet": "Trajet IPC – Navette fluviale entre Notre-Dame-de-l'Ile-Perrot et Pointe-des-Cascades",
-        "heures": "seulement quelques jours de fin de semaine par été"
+        "heures": "seulement quelques samedis par été"
     },
     "401": {
         "icone": [
@@ -627,7 +637,7 @@
         ],
         "transporteur": "Navark",
         "trajet": "Trajet IPB – Navette fluviale entre Notre-Dame-de-l'Ile-Perrot et Beauharnois",
-        "heures": "seulement quelques jours de fin de semaine par été"
+        "heures": "seulement quelques samedis par été"
     },
     "402": {
         "icone": [
@@ -637,7 +647,7 @@
         ],
         "transporteur": "Navark",
         "trajet": "Trajet IPS – Navette fluviale entre Notre-Dame-de-l'Ile-Perrot et Sainte-Anne-de-Bellevue",
-        "heures": "seulement quelques jours de fin de semaine par été"
+        "heures": "seulement quelques samedis par été"
     },
     "403": {
         "icone": [
@@ -656,7 +666,7 @@
             8
         ],
         "transporteur": "Navark",
-        "trajet": "Trajet BCH – Navette fluviale entre Montréal (Vieux-Port) et Boucherville",
+        "trajet": "Trajet N2 – Navette fluviale entre Montréal (Vieux-Port) et Boucherville",
         "heures": "7 jours sur 7, du printemps à l'automne"
     },
     "405": {
@@ -666,7 +676,7 @@
             8
         ],
         "transporteur": "Navark",
-        "trajet": "Trajet PVP – Navette fluviale à Montréal entre Vieux-Port et Pointe-aux-Trembles",
+        "trajet": "Trajet N3 – Navette fluviale entre Montréal (Vieux-Port et Pointe-aux-Trembles) et Varennes",
         "heures": "7 jours sur 7, du printemps à l'automne"
     },
     "406": {
@@ -676,7 +686,7 @@
             8
         ],
         "transporteur": "Navark",
-        "trajet": "Trajet MMB – Navette fluviale entre Montréal (Mercier) et Boucherville",
+        "trajet": "Trajet N1 – Navette fluviale entre Montréal (Mercier) et Boucherville",
         "heures": "7 jours sur 7, du printemps à l'automne"
     },
     "407": {
@@ -687,7 +697,7 @@
         ],
         "transporteur": "Navark",
         "trajet": "Trajet LFC – Navette fluviale entre Longueuil et l'Ile-Charron",
-        "heures": "horaire variable, du printemps à l'automne"
+        "heures": "fins de semaine et jours fériés en été"
     },
     "408": {
         "icone": [
@@ -696,7 +706,7 @@
             8
         ],
         "transporteur": "Navark",
-        "trajet": "Trajet MMC – Navette fluviale entre Montréal (Mercier) et l'Ile-Charron",
+        "trajet": "Trajet N6 – Navette fluviale entre Montréal (Mercier) et l'Ile-Charron",
         "heures": "fins de semaine et jours fériés en été"
     },
     "409": {
