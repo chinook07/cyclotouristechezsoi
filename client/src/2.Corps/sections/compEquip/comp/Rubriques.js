@@ -283,8 +283,7 @@ const Rubriques = ({ montrerRubrique }) => {
                                 <li>Losanges pour la gorge</li>
                                 <li>Bracelet et/ou médicaments / gingembre pour la nausée : pour les longs trajets en autocar et les traversiers en mer profonde.</li>
                             </ul>
-                            <img src={images[21]} alt="deux masques" />
-                            <p>Enfin, ajoutez tout article nécessaire pour votre état de santé (auto-injecteur EpiPen, pompe d'asthme, etc.), quelques masques ou couvre-visages au besoin, et prenez quelques minutes pour vous familiariser avec le contenu de votre trousse de premiers soins.</p>
+                            <p>Enfin, ajoutez tout article nécessaire pour votre état de santé (auto-injecteur EpiPen, pompe d'asthme, etc.) et prenez quelques minutes pour vous familiariser avec le contenu de votre trousse de premiers soins.</p>
                         </div>
                 </Rubrique>
             }
