@@ -14,6 +14,7 @@ const Materiel = () => {
         <Wrapper>
             <RubanIcones changerRubrique={changerRubrique} montrerRubrique={montrerRubrique} />
             <Rubriques montrerRubrique={montrerRubrique} />
+            <RubanIcones changerRubrique={changerRubrique} montrerRubrique={montrerRubrique} />
         </Wrapper>
     )
 }

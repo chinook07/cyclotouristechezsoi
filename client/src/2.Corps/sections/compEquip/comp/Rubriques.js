@@ -411,6 +411,7 @@ const Rubrique = styled.div`
     }
     > div {
         columns: 300px 3;
+        margin-bottom: 15px;
         img {
             width: 100%;
         }
