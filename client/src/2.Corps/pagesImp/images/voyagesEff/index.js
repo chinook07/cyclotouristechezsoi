@@ -21,3 +21,4 @@ export { default as PhotoTitre20 } from "./v20.jpg";
 export { default as PhotoTitre21 } from "./v21.jpg";
 export { default as PhotoTitre22 } from "./v22.jpg";
 export { default as PhotoTitre23 } from "./v23.jpg";
+export { default as PhotoTitre24 } from "./v24.jpg";

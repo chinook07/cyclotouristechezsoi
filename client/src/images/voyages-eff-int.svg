@@ -14,9 +14,45 @@
    version="1.1"
    id="svg3433"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
-   sodipodi:docname="voyages-eff-int.svg">
+   sodipodi:docname="voyages-eff-int.svg"
+   inkscape:export-filename="C:\Users\nicol\Documents\MEGAsync\Projets web\CycloReact\client\src\images\voyages-eff-int.png"
+   inkscape:export-xdpi="92"
+   inkscape:export-ydpi="92">
   <defs
      id="defs3427">
+    <inkscape:path-effect
+       effect="bspline"
+       id="path-effect1180"
+       is_visible="true"
+       lpeversion="1"
+       weight="33.333333"
+       steps="2"
+       helper_size="0"
+       apply_no_weight="true"
+       apply_with_weight="true"
+       only_selected="false" />
+    <inkscape:path-effect
+       effect="bspline"
+       id="path-effect1171"
+       is_visible="true"
+       lpeversion="1"
+       weight="33.333333"
+       steps="2"
+       helper_size="0"
+       apply_no_weight="true"
+       apply_with_weight="true"
+       only_selected="false" />
+    <inkscape:path-effect
+       effect="bspline"
+       id="path-effect1167"
+       is_visible="true"
+       lpeversion="1"
+       weight="33.333333"
+       steps="2"
+       helper_size="0"
+       apply_no_weight="true"
+       apply_with_weight="true"
+       only_selected="false" />
     <inkscape:path-effect
        effect="bspline"
        id="path-effect1762"
@@ -759,6 +795,16 @@
        x2="25.052549"
        y2="53.122905"
        gradientTransform="translate(-2.204254,-22.593762)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1078"
+       id="linearGradient1185"
+       gradientUnits="userSpaceOnUse"
+       x1="35.177876"
+       y1="34.978236"
+       x2="40.077617"
+       y2="34.978236"
+       gradientTransform="translate(39.780155,7.8112869)" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -767,17 +813,17 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.6830682"
-     inkscape:cx="80.623858"
-     inkscape:cy="122.00767"
+     inkscape:zoom="1.8972157"
+     inkscape:cx="108.27064"
+     inkscape:cy="169.23625"
      inkscape:document-units="mm"
      inkscape:current-layer="layer2"
      inkscape:document-rotation="0"
      showgrid="false"
      inkscape:window-width="1366"
      inkscape:window-height="697"
-     inkscape:window-x="1432"
-     inkscape:window-y="34"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1"
      height="1e-05mm" />
   <metadata
@@ -1011,6 +1057,14 @@
        inkscape:path-effect="#path-effect1762"
        inkscape:original-d="m 28.777356,31.317745 c -1.50358,-0.421199 -3.007425,-0.842659 -4.511534,-1.264383 -0.906235,0.209454 -1.812699,0.418639 -2.719445,0.627562 -0.06947,0.41865 -0.139194,0.837017 -0.209188,1.255131 -0.41812,2.64e-4 -0.836488,2.64e-4 -1.255129,0 -0.720287,0.558109 -1.440809,1.115933 -2.161611,1.673505 0.04675,0.418648 0.09324,0.837015 0.139459,1.255128 -0.0055,-0.226362 -0.01136,-0.452977 -0.01743,-0.679863 0.151348,-0.226359 0.302425,-0.452975 0.453241,-0.67986 0.569732,-0.412308 1.139177,-0.824868 1.708369,-1.237697 0.35473,-0.05203 0.70918,-0.104328 1.063373,-0.15689 0.06418,-0.301903 0.128102,-0.604057 0.191756,-0.906484 0.01189,0.226891 0.02351,0.453507 0.03486,0.679863 0.418649,-0.05203 0.837017,-0.10433 1.255129,-0.156893 0.552714,0.06655 1.105143,0.132829 1.657317,0.198845 1.027496,-0.04083 2.054687,-0.08191 3.081632,-0.123266 0.430007,-0.161304 0.85973,-0.322869 1.289199,-0.484698 z"
        inkscape:label="23" />
+    <path
+       style="fill:none;stroke:#ff0000;stroke-width:1.205;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 49.961397,52.06707 c 1.545862,0.216154 3.091431,0.432267 4.228511,0.80055 1.13708,0.368284 1.865626,0.888536 4.113258,1.304395 2.247633,0.415859 6.014089,0.727466 8.113483,0.682311 2.099394,-0.04516 2.531728,-0.447032 2.939637,-1.008206 0.407909,-0.561174 0.791406,-1.281683 1.077878,-3.437217 0.286473,-2.155535 0.475853,-5.746061 1.12947,-7.648337 0.653616,-1.902277 1.771198,-2.115933 2.782018,-1.811724 1.010819,0.304208 1.914747,1.12596 3.147396,2.473697 1.23265,1.347737 2.793978,3.221331 4.19391,5.426291 1.399932,2.204961 2.638469,4.741116 3.876875,7.277004"
+       id="path1178"
+       inkscape:path-effect="#path-effect1180"
+       inkscape:original-d="m 49.961397,52.06707 c 1.545831,0.216377 3.0914,0.432488 4.636704,0.648338 0.728851,0.520546 1.457397,1.040798 2.18572,1.560816 3.766958,0.311891 7.533414,0.623498 11.29985,0.93486 0.432627,-0.401639 0.864961,-0.803516 1.297057,-1.205683 0.383783,-0.720287 0.76728,-1.440796 1.150534,-2.161612 0.189653,-3.590406 0.379033,-7.180932 0.568153,-10.771796 1.117893,-0.2134 2.235475,-0.427056 3.352815,-0.64098 0.90423,0.82205 1.808158,1.643801 2.711837,2.465306 1.561658,1.873935 3.122985,3.747529 4.684082,5.620898 1.238851,2.53652 2.477387,5.072676 3.715684,7.608617"
+       sodipodi:nodetypes="ccccccccccc"
+       inkscape:label="24" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -1154,6 +1208,14 @@
        x="17.948553"
        y="28.436565"
        inkscape:label="023" />
+    <rect
+       style="display:inline;opacity:1;fill:url(#linearGradient1185);fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers stroke fill"
+       id="rect1182"
+       width="4.8997416"
+       height="4.1851563"
+       x="74.958031"
+       y="40.696945"
+       inkscape:label="024" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -1365,12 +1427,25 @@
          x="18.320812"
          y="31.637075"
          style="font-size:3.175px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264999;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">23</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:3.175px;line-height:1.25;font-family:sans-serif;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.265;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       x="75.088142"
+       y="43.934322"
+       id="text1189"
+       inkscape:label="24"><tspan
+         sodipodi:role="line"
+         id="tspan1187"
+         x="75.088142"
+         y="43.934322"
+         style="font-size:3.175px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.265;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">24</tspan></text>
   </g>
   <g
      id="layer2"
      inkscape:label="Liens"
      style="display:inline"
-     inkscape:groupmode="layer">
+     inkscape:groupmode="layer"
+     sodipodi:insensitive="true">
     <a
        id="a1142"
        xlink:href="http://www.crazyguyonabike.com/doc/fleuvevelo1"
@@ -1964,7 +2039,7 @@
        xlink:href="http://www.crazyguyonabike.com/doc/tourcantons"
        target="_blank"
        style="opacity:0"
-       transform="matrix(1.0136889,0,0,1.0273241,-0.82867078,-1.0229913)">
+       transform="matrix(0.9624482,0,0,1.0273241,9.0914806,-1.0229902)">
       <rect
          style="fill:#008000;fill-opacity:0.443089;fill-rule:evenodd;stroke:#ff7300;stroke-width:0;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.6;paint-order:markers stroke fill"
          id="rect933"
@@ -2057,6 +2132,20 @@
          x="37.306248"
          y="20.505207"
          inkscape:label="rect1786" />
+    </a>
+    <a
+       id="a1193"
+       xlink:href="https://cycle.travel/map/journey/466849"
+       target="_blank"
+       style="opacity:0"
+       transform="matrix(1.0775784,0,0,1.5656749,36.682109,-14.835714)">
+      <rect
+         style="fill:#008000;fill-opacity:0.443089;fill-rule:evenodd;stroke:#ff7300;stroke-width:0;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.6;paint-order:markers stroke fill"
+         id="rect1191"
+         width="6.5484376"
+         height="5.3578124"
+         x="35.520313"
+         y="33.006771" />
     </a>
   </g>
 </svg>

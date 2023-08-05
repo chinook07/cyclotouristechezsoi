@@ -1,26 +1,26 @@
 [
     {
-        "valeur" : "voyages effectués",
-        "nombre" : 23
+        "valeur": "voyages effectués",
+        "nombre": 24
     },
     {
-        "valeur" : "jrs sur la route",
-        "nombre" : 162
-        },
+        "valeur": "jrs sur la route",
+        "nombre": 166
+    },
     {
-        "valeur" : "km voyagés",
-        "nombre" : 8616
-        },
+        "valeur": "km voyagés",
+        "nombre": 8891
+    },
     {
-        "valeur" : "crevaisons souffertes",
-        "nombre" : 4
-        },
+        "valeur": "crevaisons souffertes",
+        "nombre": 5
+    },
     {
-        "valeur" : "parc nationaux SÉPAQ visités",
-        "nombre" : 12
-        },
+        "valeur": "parc nationaux SÉPAQ visités",
+        "nombre": 12
+    },
     {
-        "valeur" : "Route verte pédalée",
-        "nombre" : 65
+        "valeur": "Route verte pédalée",
+        "nombre": 66
     }
 ]

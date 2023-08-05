@@ -544,6 +544,28 @@
         "coucher": "la tente",
         "retour": "autobus",
         "lienURL": "https://ridewithgps.com/routes/40451033",
-        "lienTitre": "Récit de voyage"
+        "lienTitre": "Tracé du parcours"
+    },
+    {
+        "categories": "tout flipLineaire flipFacile",
+        "jours": 4,
+        "titre": "Vers l'université Bishop's sur du plat",
+        "date": "Jullet-aout 2023",
+        "anecdote": "Cout dépensé pour l'hébergement : 0 $",
+        "imgAlt": "guidon du vélo devant l'université Bishop's",
+        "km": 275,
+        "denivele": 1300,
+        "ratio": 470,
+        "difficulte": 2,
+        "villes": [
+            "Montréal",
+            "Granby",
+            "Drummondville",
+            "Sherbrooke"
+        ],
+        "coucher": "la tente",
+        "retour": "autocar",
+        "lienURL": "https://cycle.travel/map/journey/466849",
+        "lienTitre": "Tracé du parcours"
     }
 ]
