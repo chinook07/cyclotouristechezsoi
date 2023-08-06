@@ -68,7 +68,7 @@ const DetailsDuTrajet = ({ itineraire, changerTrajet }) => {
 				})}
             </TrajetsAss>
             {
-                details.deja !== false && details.id !== 14 && details.id !== 26 && details.id !== 28 &&
+                details.deja !== false && details.id !== 14 && details.id !== 28 &&
                     <div>
                         <h3>Galerie des photos</h3>
                         <p>Cliquez sur les images ci-dessous pour rêver!</p>

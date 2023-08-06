@@ -1017,10 +1017,9 @@
         "proportion": 85,
         "terrain": "quelques côtes entre Sherbrooke et Richmond, faux-plat entre Dosquet et Québec.",
         "deja": [
-            "Sherbrooke à Windsor",
-            "Melbourne à Danville"
+            "Sherbrooke à Danville"
         ],
-        "notes": "La portion entre Sherbrooke (Bromptonville) et Richmond est officiellement fermée. Le détour se fait par St-François-Xavier-de-Brompton. Voir la carte de la Route verte.",
+        "notes": "La portion entre Sherbrooke (Brompton) et Richmond est officiellement fermée. Le détour se fait par St-François-Xavier-de-Brompton. Voir la carte de la Route verte.",
         "carteURL": "10/46.1998/-71.8375",
         "ass": [
             {

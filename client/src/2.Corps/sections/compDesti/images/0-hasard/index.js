@@ -24,7 +24,7 @@ export { default as Has22 } from "./outaouais-sud.jpg";
 export { default as Has23 } from "./region.png";
 export { default as Has24 } from "./portneuf.jpg";
 export { default as Has25 } from "./sentier-waterfront.jpg";
-export { default as Has26 } from "./region.png";
+export { default as Has26 } from "./sherbrooke-quebec.jpg";
 export { default as Has27 } from "./temiscouata.jpg";
 export { default as Has28 } from "./trois-rivieres-shawinigan.jpg";
 export { default as Has29 } from "./region.png";
