@@ -528,12 +528,13 @@
     {
         "id": 14,
         "trajet": "Lac Champlain",
-        "intro": "Avec la réouverture de la frontière américaine, il est à nouveau possible de rouler en direction de New York.",
+        "intro": "Avec la pandémie derrière nous, il est à nouveau possible de rouler en direction de New York.",
         "distance": 675,
         "veloroutes": [
             "Route verte 2",
             "Axe cyclable Vallée-des-Forts",
-            "Véloroute NY 9"
+            "Véloroute NY 9",
+            "Empire State Trail"
         ],
         "proportion": 15,
         "terrain": "variable, très côteux entre Plattsburgh et Glen Falls.",
