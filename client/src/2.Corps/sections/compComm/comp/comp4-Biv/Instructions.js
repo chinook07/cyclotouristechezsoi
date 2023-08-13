@@ -3,10 +3,10 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faAnglesUp, faAnglesDown } from "@fortawesome/free-solid-svg-icons";
-import couche from "../images/couche.png";
-import description from "../images/description.png";
-import photo from "../images/photo.png";
-import repere from "../images/repere.png";
+import couche from "../../images/couche.png";
+import description from "../../images/description.png";
+import photo from "../../images/photo.png";
+import repere from "../../images/repere.png";
 
 const Instructions = () => {
 

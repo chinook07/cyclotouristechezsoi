@@ -3,12 +3,12 @@ import { useState } from "react";
 import { ExternalLink } from "react-external-link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import CampingInterdit from "./comp/CampingInterdit";
+import CampingInterdit from "./comp/comp4-Biv/CampingInterdit";
 import interditParDefault from "./donnees/interditParDefault.json";
 import { faAngleRight, faAnglesRight } from "@fortawesome/free-solid-svg-icons";
-// import CarteCampings from "./comp/CarteCampings";
-import DemandeEdition from "./comp/DemandeEdition";
-import FormAjout from "./comp/FormAjout";
+// import CarteCampings from "./comp/comp4-Biv/CarteCampings";
+import DemandeEdition from "./comp/comp4-Biv/DemandeEdition";
+import FormAjout from "./comp/comp4-Biv/FormAjout";
 import campingLaPatrie from "./images/camping-la-patrie.jpg"
 
 const DormirGratuitement = () => {

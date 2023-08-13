@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useState, useContext } from "react";
 
 import CarteAjout from "./CarteAjout";
-import { CycloContext } from "../../../../CycloContext";
+import { CycloContext } from "../../../../../CycloContext";
 import TypeDeSite from "./TypeDeSite";
 // import TelevPhotos from "./TelevPhotos";
 import Contributeur from "./Contributeur";
