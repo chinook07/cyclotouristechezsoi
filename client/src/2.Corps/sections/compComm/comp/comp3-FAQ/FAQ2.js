@@ -3,18 +3,18 @@ import { Link } from "react-router-dom";
 import { ExternalLink } from "react-external-link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import DeuxFiguresPetit from "../../../../CompReutilisables/DeuxFiguresPetit";
+import DeuxFiguresPetit from "../../../../../CompReutilisables/DeuxFiguresPetit";
 import TableauRoutes from "./TableauRoutes";
 import { faAngleDoubleDown, faAngleDoubleUp } from "@fortawesome/free-solid-svg-icons";
-import meteo1 from "../images/radar.jpg";
-import meteo2 from "../images/cumulonimbus.jpg";
-import meteo3 from "../images/poutine-ingredients.png";
-import meteo4 from "../images/poutine.jpg";
-import camping1 from "../images/camping-tomifobia.jpg";
-import camping2 from "../images/camping-rouge.jpg";
-import repas1 from "../images/repas-poulet.jpg";
-import repas2 from "../images/fruits.jpg";
-import osmand from "../images/osmand-eau.jpg"
+import meteo1 from "../../images/radar.jpg";
+import meteo3 from "../../images/poutine-ingredients.png";
+import meteo2 from "../../images/cumulonimbus.jpg";
+import meteo4 from "../../images/poutine.jpg";
+import camping1 from "../../images/camping-tomifobia.jpg";
+import camping2 from "../../images/camping-rouge.jpg";
+import repas1 from "../../images/repas-poulet.jpg";
+import repas2 from "../../images/fruits.jpg";
+import osmand from "../../images/osmand-eau.jpg"
 
 const FAQ2 = ({ boiteOuverte, setBoiteOuverte }) => {
 

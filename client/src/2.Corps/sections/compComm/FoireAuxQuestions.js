@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { useState } from "react";
 
-import FAQ1 from "./comp/FAQ1";
-import FAQ2 from "./comp/FAQ2";
+import FAQ1 from "./comp/comp3-FAQ/FAQ1";
+import FAQ2 from "./comp/comp3-FAQ/FAQ2";
 
 const FoireAuxQuestions = () => {
 

@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 
-import mesurediff from "../images/mesuredifficulte.png";
-import mesurediffcraque from "../images/mesuredifficultecraque.png";
+import mesurediff from "../../images/mesuredifficulte.png";
+import mesurediffcraque from "../../images/mesuredifficultecraque.png";
 
 const Diff = () => {
 

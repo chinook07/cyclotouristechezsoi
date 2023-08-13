@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-import veloPermis from "../images/velo-permis.png";
-import veloInterdit from "../images/velo-interdit.png";
-import autoroute from "../images/autoroute.png";
-import routePrimaire from "../images/route-primaire.png";
-import routeSecondaire from "../images/route-secondaire.png";
-import autorouteCollectrice from "../images/autoroute-collectrice.png";
+import veloPermis from "../../images/velo-permis.png";
+import veloInterdit from "../../images/velo-interdit.png";
+import autoroute from "../../images/autoroute.png";
+import routePrimaire from "../../images/route-primaire.png";
+import routeSecondaire from "../../images/route-secondaire.png";
+import autorouteCollectrice from "../../images/autoroute-collectrice.png";
 
 const TableauRoutes = () => {
     return (

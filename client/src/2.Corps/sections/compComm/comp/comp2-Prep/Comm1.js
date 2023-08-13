@@ -7,11 +7,11 @@ import { faAngleDoubleDown, faAngleDoubleUp, faCar, faBusAlt, faTrain } from "@f
 import Moment from "./Moment";
 import ListeLiens from "./ListeLiens";
 import Diff from "./Diff";
-import DeuxFiguresPetit from "../../../../CompReutilisables/DeuxFiguresPetit";
-import ventMontreal from "../images/vent-montreal.png";
-import ventRimouski from "../images/vent-rimouski.png";
-import diff1 from "../images/difficulte2.png";
-import diff2 from "../images/difficulte1.png";
+import DeuxFiguresPetit from "../../../../../CompReutilisables/DeuxFiguresPetit";
+import ventMontreal from "../../images/vent-montreal.png";
+import ventRimouski from "../../images/vent-rimouski.png";
+import diff1 from "../../images/difficulte2.png";
+import diff2 from "../../images/difficulte1.png";
 
 const Comm1 = ({ boiteOuverte, setBoiteOuverte }) => {
 

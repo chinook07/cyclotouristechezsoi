@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import questions from "../donnees/questions.json";
+import questions from "../../donnees/questions.json";
 
 const Choix = () => {
     return (
