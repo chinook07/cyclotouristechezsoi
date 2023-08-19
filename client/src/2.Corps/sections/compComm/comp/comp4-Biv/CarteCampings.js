@@ -38,8 +38,14 @@ const CarteCampings = () => {
             features: []
         };
         console.log(donnees);
+        donnees.sites_non_officiels.forEach(item => {
+            sitesA.features.push(item)
+        })
         donnees.sites_officiels.forEach(item => {
             sitesB.features.push(item)
+        })
+        donnees.sites_proprios.forEach(item => {
+            sitesC.features.push(item)
         })
         donnees.autres.forEach(item => {
             sitesZ.features.push(item)
@@ -49,7 +55,7 @@ const CarteCampings = () => {
         setLesSitesC(sitesC);
         setLesSitesZ(sitesZ);
         // setCartePrete(true);
-        console.log(sitesB, lesSitesB);
+        console.log(sitesA, sitesB, sitesC, sitesZ);
     }
 
     const surChaque = (feature, layer) => {
@@ -67,7 +73,6 @@ const CarteCampings = () => {
         fetch("/api/tous-sites")
             .then(res => res.json())
             .then(donnees => {
-                console.log(donnees.collections);
                 rendreCompatible(donnees.collections);
             })
             .then(() => setCartePrete(true))
@@ -124,7 +129,7 @@ const CarteCampings = () => {
                 {
                     cartePrete &&
                     <>
-                        {/* <LayersControl.Overlay name="Sites non-officiels" checked>
+                        <LayersControl.Overlay name="Sites non-officiels" checked>
                             {
                                 lesSitesA.features.length &&
                                 <Sites data={lesSitesA} onEachFeature={surChaque} />
@@ -141,7 +146,7 @@ const CarteCampings = () => {
                                 lesSitesC.features.length &&
                                 <Sites data={lesSitesC} onEachFeature={surChaque} />
                             }
-                        </LayersControl.Overlay> */}
+                        </LayersControl.Overlay>
                         <LayersControl.Overlay name="autres" checked>
                             {
                                 lesSitesZ.features.length &&
