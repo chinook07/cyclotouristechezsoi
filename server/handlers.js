@@ -52,13 +52,14 @@ const nouveauSite = async (req, res) => {
 
 const tousSites = async (req, res) => {
     await openSesame();
-    const sites = await db.collection("sites").find().toArray();
+    const sites_b = await db.collection("s_officiels").find().toArray();
+    const sites_z = await db.collection("s_autres").find().toArray();
     await closeSesame();
-    const collection = {
-        "type": "FeatureCollection",
-        "features": sites
+    const collections = {
+        "sites_officiels": sites_b,
+        "autres": sites_z
     }
-    return res.status(200).json({ status: 200, collection, message: "Voici vos sites." })
+    return res.status(200).json({ status: 200, collections, message: "Voici vos sites." })
 }
 
 module.exports = {

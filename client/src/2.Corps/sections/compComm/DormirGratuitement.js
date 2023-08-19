@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CampingInterdit from "./comp/comp4-Biv/CampingInterdit";
 import interditParDefault from "./donnees/interditParDefault.json";
 import { faAngleRight, faAnglesRight } from "@fortawesome/free-solid-svg-icons";
-// import CarteCampings from "./comp/comp4-Biv/CarteCampings";
+import CarteCampings from "./comp/comp4-Biv/CarteCampings";
 import DemandeEdition from "./comp/comp4-Biv/DemandeEdition";
 import FormAjout from "./comp/comp4-Biv/FormAjout";
 import campingLaPatrie from "./images/camping-la-patrie.jpg"
@@ -26,7 +26,7 @@ const DormirGratuitement = () => {
                 <p>Cette carte est le fruit du travail de plusieurs cyclotouristes ayant ajouté des sites recommandés pour le bivouac. Il incombe à l'usager d'être responsable de ses actions, de respecter les règlements en vigueur, et bien sûr de laisser l'endroit propre pour les autres utilisateurs. <span>Le cyclotourisme a un nombre très limité d'adeptes, encore moins si on ne compte que ceux et celles dormant dans leurs tentes. Pour éviter que ces endroits de repos deviennent surutilisés, veuillez ne pas partager le lien de cette page ou cette carte librement sur les réseaux sociaux. Aidons-nous à conserver ces sites pour les générations futures!</span></p>
                 <p><strong>Cette carte sera améliorée dans les prochains mois.</strong></p>
                 <CarteGoogle title="carte des campings gratuits" src="https://www.google.com/maps/d/u/0/embed?mid=1obdd8oU_9xShpHUY-L29RT6OwxerfCGI&ehbc=2E312F"></CarteGoogle>
-                {/* <CarteCampings /> */}
+                <CarteCampings />
             </section>
             <section>
                 <h2>Est-ce que c'est légal?</h2>
