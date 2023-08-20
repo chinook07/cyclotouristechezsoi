@@ -37,35 +37,35 @@ const CarteCampings = () => {
             type: "FeatureCollection",
             features: []
         };
-        console.log(donnees);
         donnees.sites_non_officiels.forEach(item => {
+            item.properties.type = "Site non-officiel"
             sitesA.features.push(item)
         })
         donnees.sites_officiels.forEach(item => {
+            item.properties.type = "Site officiel pour cyclistes seulement OU à faible cout / gratuit"
             sitesB.features.push(item)
         })
         donnees.sites_proprios.forEach(item => {
+            item.properties.type = "Site offert par un propriétaire"
             sitesC.features.push(item)
         })
         donnees.autres.forEach(item => {
+            item.properties.type = "autre"
             sitesZ.features.push(item)
         })
         setLesSitesA(sitesA);
         setLesSitesB(sitesB);
         setLesSitesC(sitesC);
         setLesSitesZ(sitesZ);
-        // setCartePrete(true);
-        console.log(sitesA, sitesB, sitesC, sitesZ);
     }
 
     const surChaque = (feature, layer) => {
-        console.log(feature, layer);
-        let contenu = `Description : ${feature.properties.description}<br/>Type : ${feature.properties.type}`;
         let couleur;
         if (feature.properties.type === "Site non-officiel") couleur = "green";
         if (feature.properties.type === "Site officiel pour cyclistes seulement OU à faible cout / gratuit") couleur = "blue";
         if (feature.properties.type === "Site offert par un propriétaire") couleur = "red";
         if (feature.properties.type === "autre") couleur = "purple";
+        let contenu = `<h3>${feature.properties.name}</h3><br/>${feature.properties.description}<br/>Type : <span style="font-style: italic;">${feature.properties.type}</span>`;
         layer.bindPopup(contenu);
     }
 
@@ -94,8 +94,6 @@ const CarteCampings = () => {
             </Marker>
         )
     }
-
-    console.log("prête", cartePrete);
 
     return (
         <Carte
@@ -166,6 +164,9 @@ const CarteCampings = () => {
 const Carte = styled(MapContainer)`
     height: 500px;
     width: 100%;
+    img {
+        width: 100%;
+    }
 `
 
 const Sites = styled(GeoJSON)`

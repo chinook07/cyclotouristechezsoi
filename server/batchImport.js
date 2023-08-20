@@ -16,23 +16,23 @@ const batchImport = async () => {
     console.log("connected!");
     const db = client.db();
 
-    // non_officiels.forEach((item, index) => {
-    //     item._id = 1000 + index
-    // })
+    non_officiels.forEach((item, index) => {
+        item._id = 1000 + index
+    })
     // officiels.forEach((item, index) => {
     //     item._id = 3000 + index
     // })
     // proprios.forEach((item, index) => {
     //     item._id = 4000 + index
     // })
-    autres.forEach((item, index) => {
-        item._id = 5000 + index
-    })
+    // autres.forEach((item, index) => {
+    //     item._id = 5000 + index
+    // })
 
-    // await db.collection("s_non_officiels").insertMany(non_officiels);
+    await db.collection("s_non_officiels").insertMany(non_officiels);
     // await db.collection("s_officiels").insertMany(officiels);
     // await db.collection("s_proprios").insertMany(proprios);
-    await db.collection("s_autres").insertMany(autres);
+    // await db.collection("s_autres").insertMany(autres);
 
     // Disconnect from MongoDB.
 
