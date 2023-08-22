@@ -8,6 +8,11 @@ import Logo from "../../../../../images/icones/logo.png"
 
 const CarteCampings = () => {
 
+    const icone1 = process.env.PUBLIC_URL + '/carteCampings/tente-noire.png';
+    const icone2 = process.env.PUBLIC_URL + '/carteCampings/tente-jaune.png';
+    const icone3 = process.env.PUBLIC_URL + '/carteCampings/tente.png';
+    const icone4 = process.env.PUBLIC_URL + '/carteCampings/tente.png';
+
     const [lesSitesA, setLesSitesA] = useState({});
     const [lesSitesB, setLesSitesB] = useState({});
     const [lesSitesC, setLesSitesC] = useState({});
@@ -19,6 +24,34 @@ const CarteCampings = () => {
         iconUrl: "https://cdn2.iconfinder.com/data/icons/leisure-entertainment-minimalist-icon-set/100/bike-01-256.png",
         iconSize: [30, 30]
     })
+
+    const iconeVerte = new L.Icon({
+        iconUrl: icone1,
+        iconSize: [25, 25],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+    });
+
+    const iconeJaune = new L.Icon({
+        iconUrl: icone2,
+        iconSize: [25, 25],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+    });
+
+    const iconeRouge = new L.Icon({
+        iconUrl: icone3,
+        iconSize: [25, 25],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+    });
+
+    const iconeBleue = new L.Icon({
+        iconUrl: icone4,
+        iconSize: [25, 25],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+    });
 
     const rendreCompatible = (donnees) => {
         let sitesA = {
@@ -61,11 +94,14 @@ const CarteCampings = () => {
 
     const surChaque = (feature, layer) => {
         let couleur;
-        if (feature.properties.type === "Site non-officiel") couleur = "green";
-        if (feature.properties.type === "Site officiel pour cyclistes seulement OU à faible cout / gratuit") couleur = "blue";
-        if (feature.properties.type === "Site offert par un propriétaire") couleur = "red";
-        if (feature.properties.type === "autre") couleur = "purple";
+        if (feature.properties.type === "Site non-officiel") layer.setIcon(iconeVerte);
+        if (feature.properties.type === "Site officiel pour cyclistes seulement OU à faible cout / gratuit") layer.setIcon(iconeJaune);
+        if (feature.properties.type === "Site offert par un propriétaire") layer.setIcon(iconeVerte);
+        if (feature.properties.type === "autre") layer.setIcon(iconeVerte);
         let contenu = `<h3>${feature.properties.name}</h3><br/>${feature.properties.description}<br/>Type : <span style="font-style: italic;">${feature.properties.type}</span>`;
+        // let pop = (
+            
+        // )
         layer.bindPopup(contenu);
     }
 
@@ -130,7 +166,7 @@ const CarteCampings = () => {
                         <LayersControl.Overlay name="Sites non-officiels" checked>
                             {
                                 lesSitesA.features.length &&
-                                <Sites data={lesSitesA} onEachFeature={surChaque} />
+                                <Sites data={lesSitesA} onEachFeature={surChaque} className="here!" />
                             }
                         </LayersControl.Overlay>
                         <LayersControl.Overlay name="Sites pour cyclistes seulement OU à faible cout / gratuits" checked>
@@ -170,7 +206,17 @@ const Carte = styled(MapContainer)`
 `
 
 const Sites = styled(GeoJSON)`
+    background-color: green;
+    fill: red;
+    stroke: purple;
     color: var(--c1);
+`
+
+const Bulle = styled(Popup)`
+    background-color: green;
+    fill: red;
+    stroke: purple;
+    color: var(--c5);
 `
 
 export default CarteCampings;
