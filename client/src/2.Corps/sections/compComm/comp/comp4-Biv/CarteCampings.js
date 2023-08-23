@@ -2,14 +2,14 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 
 import { Icon } from "leaflet";
-import { MapContainer, TileLayer, ScaleControl, GeoJSON, LayersControl, useMapEvents, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, ScaleControl, GeoJSON, Circle, LayersControl, useMapEvents, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import Logo from "../../../../../images/icones/logo.png"
 
 const CarteCampings = () => {
 
     const icone1 = process.env.PUBLIC_URL + '/carteCampings/marqueur-vert.png';
-    const icone2 = process.env.PUBLIC_URL + '/carteCampings/tente-jaune.png';
+    const icone2 = process.env.PUBLIC_URL + '/carteCampings/marqueur-orange.png';
     const icone3 = process.env.PUBLIC_URL + '/carteCampings/marqueur-rouge.png';
     const icone4 = process.env.PUBLIC_URL + '/carteCampings/marqueur-bleu.png';
     
@@ -18,7 +18,7 @@ const CarteCampings = () => {
     const [lesSitesC, setLesSitesC] = useState({});
     const [lesSitesZ, setLesSitesZ] = useState({});
     const [cartePrete, setCartePrete] = useState(false);
-    const [position, setPosition] = useState(null);
+    const [position, setPosition] = useState([0, 0]);
 
     const iconeVelo = new Icon({
         iconUrl: "https://cdn2.iconfinder.com/data/icons/leisure-entertainment-minimalist-icon-set/100/bike-01-256.png",
@@ -27,7 +27,7 @@ const CarteCampings = () => {
 
     const iconeVerte = new L.Icon({
         iconUrl: icone1,
-        iconSize: [25, 25],
+        iconSize: [25, 41],
         iconAnchor: [12, 41],
         popupAnchor: [1, -34],
     });
@@ -41,14 +41,14 @@ const CarteCampings = () => {
 
     const iconeRouge = new L.Icon({
         iconUrl: icone3,
-        iconSize: [25, 25],
+        iconSize: [25, 41],
         iconAnchor: [12, 41],
         popupAnchor: [1, -34],
     });
 
     const iconeBleue = new L.Icon({
         iconUrl: icone4,
-        iconSize: [25, 25],
+        iconSize: [25, 41],
         iconAnchor: [12, 41],
         popupAnchor: [1, -34],
     });
@@ -110,22 +110,16 @@ const CarteCampings = () => {
             .then(() => setCartePrete(true))
     }, [])
 
-    const LocationControl = () => {
-        const map = useMapEvents({
-            click() {
-                map.locate()
-            },
-            locationfound(e) {
-                setPosition(e.latlng);
-                map.flyTo(e.latlng, map.getZoom())
-            }
-        })
-        return position === null ? null : (
-            <Marker icon={iconeVelo} position={position}>
-                <Popup>Vous êtes ici!</Popup>
-            </Marker>
-        )
-    }
+    const locateUser = (map) => {
+        console.log("map", map);
+        map.locate();
+    };
+
+    const handleLocationFound = (e, map) => {
+        console.log("handle", e, map);
+        setPosition(e.latlng);
+        map.flyTo(e.latlng, map.getZoom());
+    };
 
     return (
         <Carte
@@ -187,14 +181,29 @@ const CarteCampings = () => {
                 }
                 
             </LayersControl>
+            <LayersControl position="topleft">
+                <button onClick={(e) => locateUser(e.target)}>Trouver mon emplacement</button>
+                <LayersControl.Overlay checked name="Emplacement">
+                    {position[0] !== 0 && position[1] !== 0 && (
+                        <>
+                            <Marker icon={iconeVelo} position={position}>
+                                <Popup>Vous êtes ici!</Popup>
+                            </Marker>
+                            <Circle center={position} radius={100} />
+                        </>
+                    )}
+                </LayersControl.Overlay>
+            </LayersControl>
+            
             <ScaleControl imperial={false} position="topright" />
-            <LocationControl />
+            {/* <LocationControl /> */}
         </Carte>
     )
 }
 
 const Carte = styled(MapContainer)`
-    height: 500px;
+    height: 800px;
+    max-height: 90vh;
     width: 100%;
     img {
         width: 100%;
