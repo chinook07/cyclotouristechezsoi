@@ -11,7 +11,7 @@ const TypeDeSite = ({mAJType}) => {
                         onChange={mAJType}
                         required
                         type="radio"
-                        value="Site non-officiel"
+                        value="s_non_officiels"
                     ></input>
                     <span>Site non-officiel</span>
                 </label>
@@ -21,7 +21,7 @@ const TypeDeSite = ({mAJType}) => {
                         onChange={mAJType}
                         required
                         type="radio"
-                        value="Site officiel pour cyclistes seulement OU à faible cout / gratuit"
+                        value="s_officiels"
                     ></input>
                     <span>Site officiel pour cyclistes seulement OU à faible cout / gratuit</span>
                 </label>
@@ -31,9 +31,19 @@ const TypeDeSite = ({mAJType}) => {
                         onChange={mAJType}
                         required
                         type="radio"
-                        value="Site offert par un propriétaire"
+                        value="s_proprios"
                     ></input>
                     <span>Site offert par un propriétaire</span>
+                </label>
+                <label>
+                    <input
+                        name="typeCamping"
+                        onChange={mAJType}
+                        required
+                        type="radio"
+                        value="s_autres"
+                    ></input>
+                    <span>Autre</span>
                 </label>
             </div>
         </Wrapper>

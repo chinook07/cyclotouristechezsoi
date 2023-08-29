@@ -71,6 +71,7 @@ const Description = styled.p`
     border-radius: 5px;
     margin: 10px;
     padding: 10px;
+    word-wrap: break-word;
 `
 
 export default DetailsSite;

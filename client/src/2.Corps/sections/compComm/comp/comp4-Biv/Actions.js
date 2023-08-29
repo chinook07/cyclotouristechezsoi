@@ -38,6 +38,14 @@ const Wrapper = styled.div`
 const Boutons = styled.div`
     display: flex;
     justify-content: space-evenly;
+    button {
+        background-color: var(--c1);
+        border: 2px solid var(--c10);
+        border-radius: 10px;
+        cursor: pointer;
+        padding: 10px 15px;
+        width: fit-content;
+    }
 `
 
 export default Actions;

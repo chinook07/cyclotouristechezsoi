@@ -1,12 +1,11 @@
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const FormCorrection = () => {
     return (
         <Wrapper>
             <p>Le terrain n'est plus accessible ou appartient à vous? Il y a une erreur dans les informations de ce site? Rapportez-le ici!</p>
             <fieldset>
-                <label htmlFor="texteCorr">Entrez l'information à jour.</label>
+                <label htmlFor="texteCorr">Entrez l'information à jour. Selon la nature de message, votre message pourrait être ajouté au contenu, ou le site enlevé de la carte.</label>
                 <textarea
                     id="texteCorr"
                     name="texteCorr"
@@ -36,9 +35,30 @@ const FormCorrection = () => {
 
 const Wrapper = styled.form`
     fieldset {
+        border-radius: 5px;
         display: flex;
         flex-direction: column;
         gap: 10px;
+        textarea {
+            border-radius: 5px;
+            height: 100px;
+            padding: 10px;
+        }
+        input[type=email] {
+            border: 2px solid var(--c10);
+            border-radius: 10px;
+            max-width: 300px;
+            padding: 10px 15px;
+        }
+        button {
+            background-color: var(--c1);
+            border: 2px solid var(--c10);
+            border-radius: 10px;
+            cursor: pointer;
+            max-width: 100px;
+            padding: 10px 15px;
+            width: fit-content;
+        }
     }
 `
 

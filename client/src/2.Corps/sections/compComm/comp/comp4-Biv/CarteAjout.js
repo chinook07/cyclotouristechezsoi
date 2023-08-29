@@ -52,7 +52,7 @@ const CarteAjout = () => {
                 </LayersControl.BaseLayer>
             </LayersControl>
             <EmplacementAChoisir />
-            <ScaleControl imperial={false} position="topright" />
+            <ScaleControl imperial={false} position="bottomleft" />
         </Carte>
     )
 }
