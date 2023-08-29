@@ -4,12 +4,11 @@ import { useState, useContext } from "react";
 import CarteAjout from "./CarteAjout";
 import { CycloContext } from "../../../../../CycloContext";
 import TypeDeSite from "./TypeDeSite";
-// import TelevPhotos from "./TelevPhotos";
 import Contributeur from "./Contributeur";
 import { ExternalLink } from "react-external-link";
 
 const FormAjout = () => {
-
+    
     const { coordAjout } = useContext(CycloContext);
 
     const [champs, setChamps] = useState({
@@ -20,6 +19,7 @@ const FormAjout = () => {
         type: "",
         legit: false
     });
+    const [confirmation, setConfirmation] = useState(false);
 
     const mAJDescription = (e) => setChamps(prec => ({ ...prec, description: e.target.value }));
     // const mAJPhoto = (e) => setChamps(prec => ({ ...prec, photo: e.target.value }))
@@ -28,44 +28,47 @@ const FormAjout = () => {
     const mAJType = (e) => setChamps(prec => ({ ...prec, type: e.target.value }));
     const mAJLegit = (e) => setChamps(prec => ({ ...prec, legit: e.target.checked }));
 
-    // const ajoutSite = (e) => {
-    //     e.preventDefault()
-    //     if (coordAjout.lat) {
-    //         fetch("/api/nouveau-site", {
-    //             method: "POST",
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //                 "Accept": "application/json"
-    //             },
-    //             body: JSON.stringify({
-    //                 type: "feature",
-    //                 properties: {
-    //                     description: champs.description,
-    //                     type: champs.type
-    //                 },
-    //                 geometry: {
-    //                     type: "Point",
-    //                     coordinates: [coordAjout.lng, coordAjout.lat]
-    //                 },
-    //                 contributeur: {
-    //                     nom: champs.nom,
-    //                     courriel: champs.courriel
-    //                 }
-    //             })
-    //         })
-    //             .then(res => res.json())
-    //             .then(req => console.log(req))
-    //             .catch(err => console.log(err))
-    //     } else {
-    //         console.log("non");
-    //     }
-    // }
+    const ajoutSite = (e) => {
+        e.preventDefault()
+        if (coordAjout.lat) {
+            fetch("/api/nouveau-site", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                    type: "Feature",
+                    properties: {
+                        description: champs.description,
+                        type: champs.type
+                    },
+                    geometry: {
+                        type: "Point",
+                        coordinates: [coordAjout.lng, coordAjout.lat]
+                    },
+                    contributeur: {
+                        nom: champs.nom,
+                        courriel: champs.courriel
+                    }
+                })
+            })
+                .then(res => {
+                    res.json()
+                    setConfirmation(true)
+                })
+                .then(req => console.log(req))
+                .catch(err => console.log(err))
+        } else {
+            console.log("non");
+        }
+    }
     
     return (
         // <Wrapper onSubmit={ajoutSite} encType="multipart/form-data">
-        <Wrapper
-            action="https://formspree.io/f/mvodrepv"
-            method="POST"
+        <Wrapper onSubmit={ajoutSite}
+            // action="https://formspree.io/f/mvodrepv"
+            // method="POST"
         >
             <fieldset>
                 <legend>Ajout d'un site de camping</legend>
@@ -140,6 +143,10 @@ const FormAjout = () => {
                 </Legit>
                 <Envoyer type="submit">Ajouter</Envoyer>
             </fieldset>
+            {
+                confirmation &&
+                <Confirm>Merci d'avoir contribué à la carte!</Confirm>
+            }
         </Wrapper>
     )
 }
@@ -217,6 +224,11 @@ const Envoyer = styled.button`
     &:hover {
         box-shadow: 1px 1px var(--c6);
     }
+`
+
+const Confirm = styled.p`
+    font-weight: bold;
+    text-align: center;
 `
 
 export default FormAjout;
