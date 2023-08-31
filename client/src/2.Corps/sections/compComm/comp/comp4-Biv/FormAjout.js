@@ -13,20 +13,36 @@ const FormAjout = () => {
 
     const [champs, setChamps] = useState({
         description: "",
-        photo: null,
+        photos: [],
         nom: "",
         courriel: "",
         type: "",
         legit: false
     });
     const [confirmation, setConfirmation] = useState(false);
+    const [qtePhotos, setQtePhotos] = useState(0);
+
+    const ajoutPhoto = () => {
+        let temp = qtePhotos;
+        let temp2 = champs.photos;
+        temp2.push("");
+        setQtePhotos(temp + 1);
+        setChamps(prec => ({ ...prec, photos: temp2 }));
+    };
+
+    const liens = [];
+    for (let index = 0; index < qtePhotos; index++) {
+        liens.push(<input key={index} type="url" />);
+    }
 
     const mAJDescription = (e) => setChamps(prec => ({ ...prec, description: e.target.value }));
-    // const mAJPhoto = (e) => setChamps(prec => ({ ...prec, photo: e.target.value }))
     const mAJNom = (e) => setChamps(prec => ({ ...prec, nom: e.target.value }));
     const mAJCourriel = (e) => setChamps(prec => ({ ...prec, courriel: e.target.value }));
     const mAJType = (e) => setChamps(prec => ({ ...prec, type: e.target.value }));
+    const mAJPhotos = (e) => setChamps(prec => ({ ...prec, photos: e.target.value })); // erreur
     const mAJLegit = (e) => setChamps(prec => ({ ...prec, legit: e.target.checked }));
+
+    console.log(champs.photos);
 
     const ajoutSite = (e) => {
         e.preventDefault()
@@ -57,7 +73,6 @@ const FormAjout = () => {
                     res.json()
                     setConfirmation(true)
                 })
-                .then(req => console.log(req))
                 .catch(err => console.log(err))
         } else {
             console.log("non");
@@ -105,12 +120,6 @@ const FormAjout = () => {
                     required
                     value={champs.description}
                 />
-                {/* <TelevPhotos /> */}
-                {/* <input
-                    onChange={mAJPhoto}
-                    type="file"
-                    value={champs.photo}
-                /> */}
                 <p>Il est fortement suggéré d'ajouter des photos de l'emplacement, dans le but de bâtir un répertoire de qualité. Pour ce faire, les images doivent être stockées, le temps de les ajouter manuellement à la carte, sur un site ou une page publique, ou dont l'auteur de ce site y a accès. Exemple :</p>
                 <ul>
                     <li>Une publication publique dans les réseaux sociaux</li>
@@ -124,10 +133,12 @@ const FormAjout = () => {
                         htmlFor="lienimg"
                         name="liens"
                     >Veuillez lister les liens url vers vos images ci-dessous.</label>
-                    <textarea
+                    {/* <textarea
                         id="lienimg"
                         placeholder="liens vers vos images (recommandé)"
-                    />
+                    /> */}
+                    <div onChange={mAJPhotos}>{liens}</div>
+                    <button onClick={ajoutPhoto} type="button">Ajouter une photo</button>
                 </LiensImg>
                 <TypeDeSite mAJType={mAJType} />
                 <Contributeur mAJNom={mAJNom} mAJCourriel={mAJCourriel} champs={champs} />

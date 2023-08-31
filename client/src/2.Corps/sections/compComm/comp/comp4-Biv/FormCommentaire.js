@@ -1,6 +1,20 @@
 import styled from "styled-components";
+import { useState } from "react";
 
 const FormCommentaire = () => {
+
+    const [nPhotos, setNPhotos] = useState(0);
+
+    const ajoutPhoto = () => {
+        let temp = nPhotos;
+        setNPhotos(temp + 1);
+    };
+
+    const liens = [];
+    for (let index = 0; index < nPhotos; index++) {
+        liens.push(<input key={index} type="url" />);
+    }
+
     return (
         <Wrapper>
             <p>Vous êtes passé par là et vous souhaitez ajouter un commentaire? Faites-le ici!</p>
@@ -20,6 +34,8 @@ const FormCommentaire = () => {
                         <li>Dans ce dossier nuagique partagé, tout en utilisant le mot de passe <span>cyclotouriste</span></li>
                         <li>Une page web personnel</li>
                     </ul>
+                    <div>{liens}</div>
+                    <button onClick={ajoutPhoto} type="button" >Ajouter une photo</button>
                 </AjImage>
                 <label htmlFor="courrielComm">L'adresse courriel ne sera utilisé que pour vous permettre de modifier ultérieurement les informations que vous avez soumises.</label>
                 <input
@@ -71,7 +87,16 @@ const Wrapper = styled.form`
     }
 `
 
-const AjImage = styled.div``
+const AjImage = styled.div`
+    > div {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        input {
+            max-width: 350px;
+        }
+    }
+`
 
 const Validation = styled.div``
 
