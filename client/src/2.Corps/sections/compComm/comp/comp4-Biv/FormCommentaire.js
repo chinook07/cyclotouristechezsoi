@@ -1,30 +1,88 @@
 import styled from "styled-components";
 import { useState } from "react";
 
-const FormCommentaire = () => {
+const FormCommentaire = ({ site }) => {
+    
+    console.log("site", site.properties.type);
 
-    const [nPhotos, setNPhotos] = useState(0);
+    const [champs, setChamps] = useState({
+        description: "",
+        photos: [],
+        nom: "",
+        courriel: "",
+        type: "",
+        legit: false
+    });
+    const [confirmation, setConfirmation] = useState(false);
+    const [qtePhotos, setQtePhotos] = useState(0);
 
     const ajoutPhoto = () => {
-        let temp = nPhotos;
-        setNPhotos(temp + 1);
+        setQtePhotos(qtePhotos + 1);
+        let photosActuels = champs.photos;
+        photosActuels.push("");
+        setChamps(prec => ({ ...prec, photos: photosActuels }));
     };
 
+    const mAJDescription = (e) => setChamps(prec => ({ ...prec, description: e.target.value }));
+    const mAJCourriel = (e) => setChamps(prec => ({ ...prec, courriel: e.target.value }));
+    const mAJPhotos = (e, index) => {
+        let copiePhotos = champs.photos;
+        copiePhotos[index] = e.target.value;
+        setChamps(prec => ({ ...prec, photos: copiePhotos }));
+    }
+    const mAJLegit = (e) => setChamps(prec => ({ ...prec, legit: e.target.checked }));
+
     const liens = [];
-    for (let index = 0; index < nPhotos; index++) {
-        liens.push(<input key={index} type="url" />);
+    for (let index = 0; index < qtePhotos; index++) {
+        liens.push(
+            <input
+                key={index}
+                onChange={(e) => mAJPhotos(e, index)}
+                type="url"
+                value={champs.photos[index]}
+            />
+        );
+    }
+
+    const ajoutCommentaire = (e) => {
+        e.preventDefault()
+        fetch("/api/commentaire-site", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                _id: site._id,
+                properties: {
+                    description: champs.description,
+                    photos: champs.photos,
+                    type: site.properties.type
+                },
+                contributeur: {
+                    courriel: champs.courriel
+                }
+            })
+        })
+            .then(res => {
+                res.json()
+                setConfirmation(true)
+            })
+            .catch(err => console.log(err))
     }
 
     return (
-        <Wrapper>
+        <Wrapper onSubmit={ajoutCommentaire}>
             <p>Vous êtes passé par là et vous souhaitez ajouter un commentaire? Faites-le ici!</p>
             <fieldset>
                 <label htmlFor="texteComm">Entrez l'information à jour pour l'afficher sur la carte.</label>
                 <textarea
                     id="texteComm"
                     name="texteComm"
+                    onChange={mAJDescription}
                     placeholder="Ex : J'ai dormi là en juin 2041 au doux son du ruisseau. Il y a maintenant une toilette sèche à 300 mètres au nord. Je recommande ce site."
                     required
+                    value={champs.description}
                 />
                 <AjImage>
                     <p>Il est fortement suggéré d'ajouter des photos de l'emplacement, dans le but de bâtir un répertoire de qualité. Pour ce faire, les images doivent être stockées sur un site ou une page publique. Exemple :</p>
@@ -41,19 +99,27 @@ const FormCommentaire = () => {
                 <input
                     id="courrielComm"
                     name="courrielComm"
+                    onChange={mAJCourriel}
                     type="email"
+                    value={champs.courriel}
                 />
                 <Validation>
                     <input
                         id="validComm"
                         name="validComm"
+                        onChange={mAJLegit}
                         required
                         type="checkbox"
+                        value={champs.legit}
                     />
                     <label htmlFor="validComm">Je consens que ces informations sont exacts, dans la mesure du possible.</label>
                 </Validation>
                 <button type="submit">Envoyer</button>
             </fieldset>
+            {
+                confirmation &&
+                <Confirm>Merci d'avoir contribué à la carte!</Confirm>
+            }
         </Wrapper>
     )
 }
@@ -96,6 +162,11 @@ const AjImage = styled.div`
             max-width: 350px;
         }
     }
+`
+
+const Confirm = styled.p`
+    font-weight: bold;
+    text-align: center;
 `
 
 const Validation = styled.div``

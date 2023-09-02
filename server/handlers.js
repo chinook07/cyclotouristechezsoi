@@ -10,25 +10,6 @@ const options = {
 const client = new MongoClient(MONGO_URI, options);
 const db = client.db();
 
-const multer = require("multer");
-
-// const storage = multer.diskStorage({
-//     destination: uploading = (request, file, callback) => {
-//         callback(null, "./public/uploads/images");
-//     },
-//     // rajouter ext
-//     filename: rajouter = (request, file, callback) => {
-//         callback(null, Date.now() + file.originalname)
-//     }
-// });
-
-// const uploading = multer({
-//     storage: storage,
-//     limits: {
-//         fieldSize: 1024*1024*5
-//     }
-// })
-
 const openSesame = async () => {
     await client.connect();
     console.log("connected!");
@@ -39,15 +20,50 @@ const closeSesame = async () => {
     console.log("disconnected!");
 }
 
+const integrerPhotos = (description, liens) => {
+    let lienDebut = '<img src=\"';
+    let lienFin = '" height=\"200\" width=\"100%\" /><br><br>';
+    let listeLiensGarni = [];
+    liens.forEach(url => {
+        let urlGarni = lienDebut.concat(url, lienFin);
+        listeLiensGarni.push(urlGarni);
+    });
+    let resultat = listeLiensGarni[0].concat(description, "<br><br>");
+    if (listeLiensGarni.length > 0) {
+        listeLiensGarni.forEach((lien, index) => {
+            if (index > 0) {
+                resultat += lien;
+            }
+        })
+    }
+    return resultat;
+}
+
 const nouveauSite = async (req, res) => {
     const { type, properties, geometry, contributeur } = req.body;
     await openSesame();
     const sites = await db.collection(properties.type).find().toArray();
     const nombre = parseInt(sites[sites.length - 1]._id) + 1;
+    let resultat = integrerPhotos(properties.description, properties.photos);
+    properties.description = resultat;
     await db.collection(properties.type).insertOne({ _id: nombre, type, properties, geometry });
     await db.collection("contributeurs").insertOne({ _id: nombre, contributeur })
     await closeSesame();
     return res.status(201).json({ status: 201, message: `nouveau site` })
+}
+
+const commentaireSite = async (req, res) => {
+    const { _id, properties, contributeur } = req.body;
+    let resultat = integrerPhotos(properties.description, properties.photos);
+    properties.description = resultat;
+    const mettreAJour = { _id: _id }
+    const nDeCommentaires = properties.commentaires.length;
+    // console.log(mettreAJour);
+    let newvalues = {$set: {properties: properties.description} };
+    await db.collection(properties.type).updateOne(mettreAJour, newvalues);
+    await openSesame();
+    await closeSesame();
+    return res.status(200).json({ status: 200, message: `commentaire ajouté` })
 }
 
 const tousSites = async (req, res) => {
@@ -68,5 +84,6 @@ const tousSites = async (req, res) => {
 
 module.exports = {
     nouveauSite,
-    tousSites
+    tousSites,
+    commentaireSite
 }

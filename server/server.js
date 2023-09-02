@@ -5,7 +5,8 @@ const morgan = require("morgan");
 
 const {
     nouveauSite,
-    tousSites
+    tousSites,
+    commentaireSite
 } = require("./handlers")
 
 express()
@@ -15,6 +16,7 @@ express()
     // .use(multer({dest: "uploads"}))
     .get("/api/tous-sites", tousSites)
     .post("/api/nouveau-site", nouveauSite)
+    .put("/api/commentaire-site", commentaireSite)
     .get("*", (req, res) => {
         res.status(404).json({
             status: 404,

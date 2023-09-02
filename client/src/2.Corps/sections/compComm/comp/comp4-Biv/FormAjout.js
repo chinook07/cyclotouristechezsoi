@@ -23,26 +23,34 @@ const FormAjout = () => {
     const [qtePhotos, setQtePhotos] = useState(0);
 
     const ajoutPhoto = () => {
-        let temp = qtePhotos;
-        let temp2 = champs.photos;
-        temp2.push("");
-        setQtePhotos(temp + 1);
-        setChamps(prec => ({ ...prec, photos: temp2 }));
+        setQtePhotos(qtePhotos + 1);
+        let photosActuels = champs.photos;
+        photosActuels.push("");
+        setChamps(prec => ({ ...prec, photos: photosActuels }));
     };
-
-    const liens = [];
-    for (let index = 0; index < qtePhotos; index++) {
-        liens.push(<input key={index} type="url" />);
-    }
 
     const mAJDescription = (e) => setChamps(prec => ({ ...prec, description: e.target.value }));
     const mAJNom = (e) => setChamps(prec => ({ ...prec, nom: e.target.value }));
     const mAJCourriel = (e) => setChamps(prec => ({ ...prec, courriel: e.target.value }));
     const mAJType = (e) => setChamps(prec => ({ ...prec, type: e.target.value }));
-    const mAJPhotos = (e) => setChamps(prec => ({ ...prec, photos: e.target.value })); // erreur
+    const mAJPhotos = (e, index) => {
+        let copiePhotos = champs.photos;
+        copiePhotos[index] = e.target.value;
+        setChamps(prec => ({ ...prec, photos: copiePhotos }));
+    }
     const mAJLegit = (e) => setChamps(prec => ({ ...prec, legit: e.target.checked }));
 
-    console.log(champs.photos);
+    const liens = [];
+    for (let index = 0; index < qtePhotos; index++) {
+        liens.push(
+            <input
+                key={index}
+                onChange={(e) => mAJPhotos(e, index)}
+                type="url"
+                value={champs.photos[index]}
+            />
+        );
+    }
 
     const ajoutSite = (e) => {
         e.preventDefault()
@@ -57,6 +65,7 @@ const FormAjout = () => {
                     type: "Feature",
                     properties: {
                         description: champs.description,
+                        photos: champs.photos,
                         type: champs.type
                     },
                     geometry: {
@@ -133,11 +142,7 @@ const FormAjout = () => {
                         htmlFor="lienimg"
                         name="liens"
                     >Veuillez lister les liens url vers vos images ci-dessous.</label>
-                    {/* <textarea
-                        id="lienimg"
-                        placeholder="liens vers vos images (recommandé)"
-                    /> */}
-                    <div onChange={mAJPhotos}>{liens}</div>
+                    <div>{liens}</div>
                     <button onClick={ajoutPhoto} type="button">Ajouter une photo</button>
                 </LiensImg>
                 <TypeDeSite mAJType={mAJType} />
