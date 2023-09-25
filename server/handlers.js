@@ -54,14 +54,56 @@ const nouveauSite = async (req, res) => {
 
 const commentaireSite = async (req, res) => {
     const { _id, properties, contributeur } = req.body;
-    let resultat = integrerPhotos(properties.description, properties.photos);
-    properties.description = resultat;
+    console.log(properties);
+    let photosATraiter = false;
+    properties.photos.forEach(item => {
+        if (item !== "") {
+            photosATraiter = true;
+        }
+    })
+    let resultat;
+    if (photosATraiter) {
+        resultat = integrerPhotos(properties.description, properties.photos);
+    } else {
+        resultat = properties.description;
+    }
     const mettreAJour = { _id: _id }
-    const nDeCommentaires = properties.commentaires.length;
-    // console.log(mettreAJour);
-    let newvalues = {$set: {properties: properties.description} };
-    await db.collection(properties.type).updateOne(mettreAJour, newvalues);
+    let nDeCommentaires;
+    if (properties.commentaires) {
+        nDeCommentaires = properties.commentaires.length;
+    } else {
+        properties.commentaires = [];
+        nDeCommentaires = 0;
+    }
+    console.log(properties.type);
+    let dbAChercher;
+    switch (properties.type) {
+        case "officiel":
+            dbAChercher = "s_officiels"
+            break;
+        case "non-officiel":
+            dbAChercher = "s_non_officiels"
+            break;
+        case "proprio":
+            dbAChercher = "s_proprios"
+            break;
+        case "autre":
+            dbAChercher = "s_autres"
+            break;
+        case "s_autres":
+            dbAChercher = "s_autres"
+            break;
+        default:
+            break;
+    }
+    console.log(dbAChercher, "db");
     await openSesame();
+    const found = await db.collection(dbAChercher).findOne({ _id: _id });
+    console.log(found, "found");
+    await db.collection(dbAChercher).updateOne(
+        { _id: _id },
+        { $push: { "properties.commentaires": resultat } }
+    );
     await closeSesame();
     return res.status(200).json({ status: 200, message: `commentaire ajouté` })
 }

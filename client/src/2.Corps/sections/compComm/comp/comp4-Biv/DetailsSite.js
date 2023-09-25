@@ -4,6 +4,7 @@ import ReactHtmlParser from 'react-html-parser';
 
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import Actions from "./Actions";
+import Commentaires from "./Commentaires";
 
 const DetailsSite = ({ site, fermerSite }) => {
         return (
@@ -16,6 +17,10 @@ const DetailsSite = ({ site, fermerSite }) => {
                 </Banniere>
                 <p>{site.properties.type}</p>
                 <Description>{ReactHtmlParser(site.properties.description)}</Description>
+                {
+                    site.properties.commentaires &&
+                    <Commentaires site={site} />
+                }
                 <Actions site={site} />
             </Wrapper>
     )

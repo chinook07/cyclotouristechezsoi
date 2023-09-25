@@ -2,15 +2,13 @@ import styled from "styled-components";
 import { useState } from "react";
 
 const FormCommentaire = ({ site }) => {
-    
-    console.log("site", site.properties.type);
 
     const [champs, setChamps] = useState({
         description: "",
         photos: [],
         nom: "",
         courriel: "",
-        type: "",
+        type: site.properties.type,
         legit: false
     });
     const [confirmation, setConfirmation] = useState(false);
