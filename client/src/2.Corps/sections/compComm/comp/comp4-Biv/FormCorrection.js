@@ -1,10 +1,17 @@
 import styled from "styled-components";
 
-const FormCorrection = () => {
+const FormCorrection = ({ site }) => {
+
+    console.log(site._id);
+    
     return (
-        <Wrapper>
+        <Wrapper
+            action="https://formspree.io/f/xoqopjyn"
+            method="POST"
+        >
             <p>Le terrain n'est plus accessible ou appartient à vous? Il y a une erreur dans les informations de ce site? Rapportez-le ici!</p>
             <fieldset>
+                <input type="hidden" name="idSite" value={site._id} />
                 <label htmlFor="texteCorr">Entrez l'information à jour. Selon la nature de message, votre message pourrait être ajouté au contenu, ou le site enlevé de la carte.</label>
                 <textarea
                     id="texteCorr"
@@ -12,7 +19,7 @@ const FormCorrection = () => {
                     placeholder="Ex : Je suis passé par là en juillet 2046, il n'y avait plus d'eau potable."
                     required
                 />
-                <label htmlFor="courrielCorr">L'adresse courriel ne sera utilisé que pour vous contacter si jamais des précisions sont demandées.</label>
+                <label htmlFor="courrielCorr">L'adresse courriel ne sera utilisée que pour vous contacter si jamais des précisions sont demandées.</label>
                 <input
                     id="courrielCorr"
                     name="courrielCorr"

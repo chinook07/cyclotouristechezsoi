@@ -10,13 +10,24 @@ const DetailsSite = ({ site, fermerSite }) => {
         return (
             <Wrapper>
                 <Banniere>
-                    <h3>{site.properties.name}</h3>
+                    {
+                        site.properties.name
+                            ? <h3>{site.properties.name}</h3>
+                            : <h3>Lieu {site._id}</h3>
+                    }
                     <button onClick={fermerSite} title="fermer">
                         <FontAwesomeIcon icon={faClose} />
                     </button>
                 </Banniere>
-                <p>{site.properties.type}</p>
-                <Description>{ReactHtmlParser(site.properties.description)}</Description>
+                <Categorie>Catégorie : {site.properties.type}</Categorie>
+                <Description>
+                    <h4>Description</h4>
+                    <p>{ReactHtmlParser(site.properties.description)}</p>
+                    {
+                        site.properties.annee &&
+                        <p>Visité en {site.properties.annee}</p>
+                    }
+                </Description>
                 {
                     site.properties.commentaires &&
                     <Commentaires site={site} />
@@ -71,12 +82,20 @@ const Banniere = styled.div`
     }
 `
 
-const Description = styled.p`
+const Categorie = styled.p`
+    margin: 10px;
+    padding: 10px;
+`
+
+const Description = styled.div`
     background-color: var(--c4);
     border-radius: 5px;
     margin: 10px;
     padding: 10px;
     word-wrap: break-word;
+    p:last-child {
+        font-style: italic;
+    }
 `
 
 export default DetailsSite;

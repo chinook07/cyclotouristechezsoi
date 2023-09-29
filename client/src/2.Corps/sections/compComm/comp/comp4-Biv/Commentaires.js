@@ -5,26 +5,38 @@ import ReactHtmlParser from 'react-html-parser';
 const Commentaires = ({ site }) => {
     
     console.log(site.properties.commentaires.length > 0);
+    console.log(site.properties.commentaires);
 
     return (
-        <Wrapper>
+        <>
             {
                 site.properties.commentaires.length > 0 &&
                 site.properties.commentaires.map((item, index) => {
                     return (
                         <Comment key={index}>
-                            <p>{ReactHtmlParser(item)}</p>
+                            <h4>Commentaire {index + 1}</h4>
+                            <p>{ReactHtmlParser(item.description)}</p>
+                            {
+                                item.annee &&
+                                <p>Visité en {item.annee}</p>
+                            }
                         </Comment>
                     )
                 })
             }
-        </Wrapper>
+        </>
     )
 
 }
 
-const Wrapper = styled.div``
-
-const Comment = styled.div``
+const Comment = styled.div`
+    background-color: var(--c4);
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    p:last-child {
+        font-style: italic;
+    }
+`
 
 export default Commentaires;

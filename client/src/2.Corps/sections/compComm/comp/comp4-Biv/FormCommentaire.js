@@ -3,8 +3,11 @@ import { useState } from "react";
 
 const FormCommentaire = ({ site }) => {
 
+    const anneeCourante = new Date().getFullYear();
+
     const [champs, setChamps] = useState({
         description: "",
+        annee: anneeCourante,
         photos: [],
         nom: "",
         courriel: "",
@@ -22,6 +25,7 @@ const FormCommentaire = ({ site }) => {
     };
 
     const mAJDescription = (e) => setChamps(prec => ({ ...prec, description: e.target.value }));
+    const mAJAnnee = (e) => setChamps(prec => ({ ...prec, annee: e.target.value }));
     const mAJCourriel = (e) => setChamps(prec => ({ ...prec, courriel: e.target.value }));
     const mAJPhotos = (e, index) => {
         let copiePhotos = champs.photos;
@@ -29,6 +33,11 @@ const FormCommentaire = ({ site }) => {
         setChamps(prec => ({ ...prec, photos: copiePhotos }));
     }
     const mAJLegit = (e) => setChamps(prec => ({ ...prec, legit: e.target.checked }));
+
+    const annees = [];
+    for (let i = 2020; i <= anneeCourante; i++) {
+        annees.push(i)
+    }
 
     const liens = [];
     for (let index = 0; index < qtePhotos; index++) {
@@ -54,6 +63,7 @@ const FormCommentaire = ({ site }) => {
                 _id: site._id,
                 properties: {
                     description: champs.description,
+                    annee: champs.annee,
                     photos: champs.photos,
                     type: site.properties.type
                 },
@@ -82,6 +92,26 @@ const FormCommentaire = ({ site }) => {
                     required
                     value={champs.description}
                 />
+                <AnneeVisite>
+                    <label htmlFor="anneeVisite">Année visitée : </label>
+                    <select
+                        id="anneeVisite"
+                        name="anneeVisite"
+                        onChange={mAJAnnee}
+                        value={champs.annee}
+                    >
+                        {
+                            annees.map((item, index) => {
+                                return (
+                                    <option
+                                        key={index}
+                                        value={item}
+                                    >{item}</option>
+                                )
+                            })
+                        }
+                    </select>
+                </AnneeVisite>
                 <AjImage>
                     <p>Il est fortement suggéré d'ajouter des photos de l'emplacement, dans le but de bâtir un répertoire de qualité. Pour ce faire, les images doivent être stockées sur un site ou une page publique. Exemple :</p>
                     <ul>
@@ -93,7 +123,7 @@ const FormCommentaire = ({ site }) => {
                     <div>{liens}</div>
                     <button onClick={ajoutPhoto} type="button" >Ajouter une photo</button>
                 </AjImage>
-                <label htmlFor="courrielComm">L'adresse courriel ne sera utilisé que pour vous permettre de modifier ultérieurement les informations que vous avez soumises.</label>
+                <label htmlFor="courrielComm">L'adresse courriel ne sera utilisée que pour vous permettre de modifier ultérieurement les informations que vous avez soumises.</label>
                 <input
                     id="courrielComm"
                     name="courrielComm"
@@ -148,6 +178,17 @@ const Wrapper = styled.form`
             padding: 10px 15px;
             width: fit-content;
         }
+    }
+`
+
+const AnneeVisite = styled.div`
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    select {
+        border-radius: 5px;
+        padding: 5px;
     }
 `
 

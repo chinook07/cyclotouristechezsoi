@@ -11,8 +11,12 @@ const FormAjout = () => {
     
     const { coordAjout } = useContext(CycloContext);
 
+    const anneeCourante = new Date().getFullYear();
+
     const [champs, setChamps] = useState({
+        name: "",
         description: "",
+        annee: anneeCourante,
         photos: [],
         nom: "",
         courriel: "",
@@ -29,7 +33,9 @@ const FormAjout = () => {
         setChamps(prec => ({ ...prec, photos: photosActuels }));
     };
 
+    const mAJName = (e) => setChamps(prec => ({ ...prec, name: e.target.value }));
     const mAJDescription = (e) => setChamps(prec => ({ ...prec, description: e.target.value }));
+    const mAJAnnee = (e) => setChamps(prec => ({ ...prec, annee: e.target.value }));
     const mAJNom = (e) => setChamps(prec => ({ ...prec, nom: e.target.value }));
     const mAJCourriel = (e) => setChamps(prec => ({ ...prec, courriel: e.target.value }));
     const mAJType = (e) => setChamps(prec => ({ ...prec, type: e.target.value }));
@@ -38,6 +44,12 @@ const FormAjout = () => {
         copiePhotos[index] = e.target.value;
         setChamps(prec => ({ ...prec, photos: copiePhotos }));
     }
+
+    const annees = [];
+    for (let i = 2020; i <= anneeCourante; i++) {
+        annees.push(i)
+    }
+
     const mAJLegit = (e) => setChamps(prec => ({ ...prec, legit: e.target.checked }));
 
     const liens = [];
@@ -64,7 +76,9 @@ const FormAjout = () => {
                 body: JSON.stringify({
                     type: "Feature",
                     properties: {
+                        name: champs.name,
                         description: champs.description,
+                        annee: champs.annee,
                         photos: champs.photos,
                         type: champs.type
                     },
@@ -121,6 +135,13 @@ const FormAjout = () => {
                         </div>
                     </Endroit>
                 }
+                <Name
+                    name="name"
+                    onChange={mAJName}
+                    placeholder="Titre"
+                    required
+                    value={champs.name}
+                />
                 <Description
                     name="description"
                     onChange={mAJDescription}
@@ -146,6 +167,26 @@ const FormAjout = () => {
                     <button onClick={ajoutPhoto} type="button">Ajouter une photo</button>
                 </LiensImg>
                 <TypeDeSite mAJType={mAJType} />
+                <AnneeVisite>
+                    <label htmlFor="anneeVisite">Année visitée : </label>
+                    <select
+                        id="anneeVisite"
+                        name="anneeVisite"
+                        onChange={mAJAnnee}
+                        value={champs.annee}
+                    >
+                        {
+                            annees.map((item, index) => {
+                                return (
+                                    <option
+                                        key={index}
+                                        value={item}
+                                    >{item}</option>
+                                )
+                            })
+                        }
+                    </select>
+                </AnneeVisite>
                 <Contributeur mAJNom={mAJNom} mAJCourriel={mAJCourriel} champs={champs} />
                 <Legit>
                     <input
@@ -203,6 +244,13 @@ const Endroit = styled.div`
     }
 `
 
+const Name = styled.input`
+    border-radius: 5px;
+    margin: 15px 0;
+    padding: 10px;
+    width: 250px;
+`
+
 const Description = styled.textarea`
     border-radius: 5px;
     margin: 10px 0;
@@ -223,6 +271,25 @@ const LiensImg = styled.div`
         max-width: 500px;
         padding: 10px;
         width: 100%;
+    }
+    button {
+        cursor: pointer;
+        display: block;
+        border-radius: 5px;
+        margin: 0 auto 15px;
+        padding: 10px;
+        width: 150px;
+    }
+`
+
+const AnneeVisite = styled.div`
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    select {
+        border-radius: 5px;
+        padding: 5px;
     }
 `
 

@@ -67,7 +67,6 @@ const commentaireSite = async (req, res) => {
     } else {
         resultat = properties.description;
     }
-    const mettreAJour = { _id: _id }
     let nDeCommentaires;
     if (properties.commentaires) {
         nDeCommentaires = properties.commentaires.length;
@@ -102,7 +101,14 @@ const commentaireSite = async (req, res) => {
     console.log(found, "found");
     await db.collection(dbAChercher).updateOne(
         { _id: _id },
-        { $push: { "properties.commentaires": resultat } }
+        {
+            $push: {
+                "properties.commentaires": {
+                    description: resultat,
+                    annee: properties.annee
+                }
+            }
+        }
     );
     await closeSesame();
     return res.status(200).json({ status: 200, message: `commentaire ajouté` })
