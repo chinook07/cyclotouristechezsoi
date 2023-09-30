@@ -3,11 +3,22 @@ import styled from "styled-components";
 const FormCorrection = ({ site }) => {
 
     console.log(site._id);
+
+    const envoyerRapport = async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const response = await fetch("https://formspree.io/f/xoqopjyn", {
+            method: "POST",
+            body: formData,
+        });
+        console.log("envoyé");
+    }
     
     return (
         <Wrapper
             action="https://formspree.io/f/xoqopjyn"
             method="POST"
+            onSubmit={envoyerRapport}
         >
             <p>Le terrain n'est plus accessible ou appartient à vous? Il y a une erreur dans les informations de ce site? Rapportez-le ici!</p>
             <fieldset>
