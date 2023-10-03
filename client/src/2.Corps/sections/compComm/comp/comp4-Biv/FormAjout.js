@@ -69,9 +69,11 @@ const FormAjout = () => {
         );
     }
 
-    const handleUploads = () => {
-        console.log("téléversement");
+    const handleUploads = (result) => {
+        console.log(result.id);
         const formData = new FormData();
+        formData.append("type", champs.type);
+        formData.append("id", result.id)
         for (let i = 0; i < champs.fichiers.length; i++) {
             formData.append("fichiers", champs.fichiers[i]);
         }
@@ -111,7 +113,7 @@ const FormAjout = () => {
                         name: champs.name,
                         description: champs.description,
                         annee: champs.annee,
-                        photos: liensPhotosFiltres,
+                        photos: [],
                         type: champs.type
                     },
                     geometry: {
@@ -129,9 +131,9 @@ const FormAjout = () => {
                 // Assuming the response is JSON, you need to await res.json() here.
                 const result = await response.json();
                 setConfirmation(true);
-
+                await console.log(result);
                 if (champs.fichiers.length > 0) {
-                    await handleUploads();
+                    await handleUploads(result);
                 }
             } else {
                 // Handle the response status if it's not 201.
@@ -140,39 +142,6 @@ const FormAjout = () => {
         } catch (err) {
             console.log(err);
         }
-        // fetch("/api/nouveau-site", {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //         "Accept": "application/json"
-        //     },
-        //     body: JSON.stringify({
-        //         type: "Feature",
-        //         properties: {
-        //             name: champs.name,
-        //             description: champs.description,
-        //             annee: champs.annee,
-        //             photos: liensPhotosFiltres,
-        //             type: champs.type
-        //         },
-        //         geometry: {
-        //             type: "Point",
-        //             coordinates: [coordAjout.lng, coordAjout.lat]
-        //         },
-        //         contributeur: {
-        //             nom: champs.nom,
-        //             courriel: champs.courriel
-        //         }
-        //     })
-        // })
-        //     .then(res => {
-        //         res.json()
-        //         setConfirmation(true)
-        //     })
-        //     .then(() => {
-        //         if (champs.fichiers.length > 0) handleUploads()
-        //     })
-        //     .catch(err => console.log(err))
     }
     
     return (

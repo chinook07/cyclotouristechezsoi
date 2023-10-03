@@ -7,33 +7,44 @@ import Actions from "./Actions";
 import Commentaires from "./Commentaires";
 
 const DetailsSite = ({ site, fermerSite }) => {
-        return (
-            <Wrapper>
-                <Banniere>
-                    {
-                        site.properties.name
-                            ? <h3>{site.properties.name}</h3>
-                            : <h3>Lieu {site._id}</h3>
-                    }
-                    <button onClick={fermerSite} title="fermer">
-                        <FontAwesomeIcon icon={faClose} />
-                    </button>
-                </Banniere>
-                <Categorie>Catégorie : {site.properties.type}</Categorie>
-                <Description>
-                    <h4>Description</h4>
-                    <p>{ReactHtmlParser(site.properties.description)}</p>
-                    {
-                        site.properties.annee &&
-                        <Ital>Visité en {site.properties.annee}</Ital>
-                    }
-                </Description>
+    console.log(site);
+    return (
+        <Wrapper>
+            <Banniere>
                 {
-                    site.properties.commentaires &&
-                    <Commentaires site={site} />
+                    site.properties.name
+                        ? <h3>{site.properties.name}</h3>
+                        : <h3>Lieu {site._id}</h3>
                 }
-                <Actions site={site} />
-            </Wrapper>
+                <button onClick={fermerSite} title="fermer">
+                    <FontAwesomeIcon icon={faClose} />
+                </button>
+            </Banniere>
+            <Categorie>Catégorie : {site.properties.type}</Categorie>
+            <Description>
+                <h4>Description</h4>
+                {
+                    site.properties.photos &&
+                    <img src={`http://serveur.touristechezsoi.ca/uploads/` + site.properties.photos[0]} alt="" />
+                }
+                <p>{ReactHtmlParser(site.properties.description)}</p>
+                {
+                    site.properties.photos &&
+                    site.properties.photos.forEach((photo, index) => {
+                        if (index > 0) return <img src={`http://serveur.touristechezsoi.ca/uploads/` + photo} alt="" />
+                    })
+                }
+                {
+                    site.properties.annee &&
+                    <Ital>Visité en {site.properties.annee}</Ital>
+                }
+            </Description>
+            {
+                site.properties.commentaires &&
+                <Commentaires site={site} />
+            }
+            <Actions site={site} />
+        </Wrapper>
     )
 }
 

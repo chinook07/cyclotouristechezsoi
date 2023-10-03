@@ -50,27 +50,58 @@ const nouveauSite = async (req, res) => {
         let resultat = integrerPhotos(properties.description, properties.photos);
         properties.description = resultat;
     }
-    // await db.collection(properties.type).insertOne({ _id: nombre, type, properties, geometry });
-    // await db.collection("contributeurs").insertOne({ _id: nombre, contributeur })
+    await db.collection(properties.type).insertOne({ _id: nombre, type, properties, geometry });
+    await db.collection("contributeurs").insertOne({ _id: nombre, contributeur })
     await closeSesame();
-    return res.status(201).json({ status: 201, message: `nouveau site` })
+    return res.status(201).json({ status: 201, message: `nouveau site`, id: nombre })
 }
 
 const televPhotos = async (req, res) => {
-    // ne fonctionne que si multiples photos
-    console.log(req.files.fichiers[0]);
-    const fichier1 = req.files.fichiers[0];
-    const sentier = path.join(__dirname, 'uploads', fichier1.name);
-    console.log(sentier);
-    try {
-        await fichier1.mv(sentier);
-        console.log("succès");
+    const dbAChercher = req.body.type;
+    const idAChercher = parseInt(req.body.id);
+    let connecte = false;
+    if (req.files.fichiers.constructor === Array) {
         await openSesame();
-        // associer noms de fichiers à Mongo
-        await closeSesame();
-        res.status(201).json({ status: 201, message: 'File uploaded!' });
-    } catch (err) {
-        res.status(500).send(err);
+        connecte = true;
+        try {
+            
+            req.files.fichiers.forEach(item => {
+                let nomDeFichier = Math.round(1e4 * Math.random()).toString().concat("-", item.name);
+                let sentier = path.join(__dirname, 'uploads', nomDeFichier);
+                item.mv(sentier);
+                console.log("tassé", nomDeFichier);
+                db.collection(dbAChercher).updateOne(
+                    { _id: idAChercher },
+                    { $push: { "properties.photos": nomDeFichier } }
+                );
+                console.log("associé");
+            })
+            if (connecte) {
+                console.log("temps de fermer");
+                await closeSesame();
+            }
+            res.status(201).json({ status: 201, message: 'File uploaded!' });
+        } catch (err) {
+            res.status(500).send(err);
+            await closeSesame();
+        }
+        
+    } else {
+        const fichier = req.files.fichiers;
+        const nomDeFichier = Math.round(1e4 * Math.random()).toString().concat("-", fichier.name)
+        const sentier = path.join(__dirname, 'uploads', nomDeFichier);
+        try {
+            await fichier.mv(sentier);
+            await openSesame();
+            await db.collection(dbAChercher).updateOne(
+                { _id: idAChercher },
+                { $push: { "properties.photos": nomDeFichier } }
+            );
+            await closeSesame();
+            res.status(201).json({ status: 201, message: 'Fichier téléversé!' });
+        } catch (err) {
+            res.status(500).send(err);
+        }
     }
 }
 
