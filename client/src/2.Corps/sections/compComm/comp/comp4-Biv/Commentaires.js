@@ -18,7 +18,7 @@ const Commentaires = ({ site }) => {
                             <p>{ReactHtmlParser(item.description)}</p>
                             {
                                 item.annee &&
-                                <p>Visité en {item.annee}</p>
+                                <Ital>Visité en {item.annee}</Ital>
                             }
                         </Comment>
                     )
@@ -34,9 +34,10 @@ const Comment = styled.div`
     border-radius: 5px;
     margin: 10px;
     padding: 10px;
-    p:last-child {
-        font-style: italic;
-    }
+`
+
+const Ital = styled.p`
+    font-style: italic;
 `
 
 export default Commentaires;

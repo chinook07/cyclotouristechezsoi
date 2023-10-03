@@ -23,10 +23,15 @@ const DormirGratuitement = () => {
         <Wrapper>
             <section>
                 <p>Il est possible de voyager à vélo sans toujours devoir débourser un montant parfois dérisoire chaque nuit. Les campings privés offrent souvent des activités, une piscine, des attraits touristiques et la possibilité d'y passer ses vacances sans sortir de son véhicule motorisé. Par contre, le cyclotouriste partira tôt le lendemain, en profitant d'un bloc sanitaire et d'une table à piquenique. Or, une personne voulant manger un sandwich et une salade n'irait pas à un buffet cinq-étoiles. Sous cette même optique, il existe des solutions de rechange aux campings payants.</p>
-                <p>Cette carte est le fruit du travail de plusieurs cyclotouristes ayant ajouté des sites recommandés pour le bivouac. Il incombe à l'usager d'être responsable de ses actions, de respecter les règlements en vigueur, et bien sûr de laisser l'endroit propre pour les autres utilisateurs. <span>Le cyclotourisme a un nombre très limité d'adeptes, encore moins si on ne compte que ceux et celles dormant dans leurs tentes. Pour éviter que ces endroits de repos deviennent surutilisés, veuillez ne pas partager le lien de cette page ou cette carte librement sur les réseaux sociaux. Aidons-nous à conserver ces sites pour les générations futures!</span></p>
-                <p><strong>Cette carte sera améliorée dans les prochains mois.</strong></p>
-                <CarteGoogle title="carte des campings gratuits" src="https://www.google.com/maps/d/u/0/embed?mid=1obdd8oU_9xShpHUY-L29RT6OwxerfCGI&ehbc=2E312F"></CarteGoogle>
+                <p>Cette carte est le fruit du travail de plusieurs cyclotouristes ayant ajouté des sites recommandés pour le bivouac. Il incombe à l'usager d'être responsable de ses actions, de respecter les règlements en vigueur, et bien sûr de laisser l'endroit propre pour les autres utilisateurs. <span>Le cyclotourisme a un nombre très limité d'adeptes, encore moins si on ne compte que ceux et celles dormant dans leurs tentes. Pour éviter que ces endroits de repos deviennent surutilisés, veuillez ne pas partager le lien de cette page librement sur les réseaux sociaux. Aidons-nous à conserver ces sites pour les générations futures!</span></p>
+                {/* <p><strong>Cette carte sera améliorée dans les prochains mois.</strong></p> */}
+                {/* <CarteGoogle title="carte des campings gratuits" src="https://www.google.com/maps/d/u/0/embed?mid=1obdd8oU_9xShpHUY-L29RT6OwxerfCGI&ehbc=2E312F"></CarteGoogle> */}
                 <CarteCampings />
+            </section>
+            <section>
+                <h2>Comment ajouter un emplacement de camping?</h2>
+                <p>Vous pouvez maintenant ajouter un site directement sur la carte <CommeUnLien onClick={alternerFormulaire} tabIndex="0">par ce court formulaire</CommeUnLien>, sans délai et sans devoir apprendre à utiliser Google My Maps.</p>
+                {montrerAjoutCarte && <FormAjout />}
             </section>
             <section>
                 <h2>Est-ce que c'est permis?</h2>
@@ -65,7 +70,7 @@ const DormirGratuitement = () => {
                 <p>Il s'agit de laisser le site de camping dans le même état qu'avant son séjour. En résumé, on protège la végétation, on évite les feux et on rapporte ses déchets. Ça veut aussi dire qu'on ne harcèle pas les écureuils... même si ces sales bêtes ont ravagé votre jardin!</p>
                 <p>Lire <ExternalLink href="https://www.sanstrace.ca/principes">les sept principes du Sans trace</ExternalLink>.</p>
             </section>
-            <section>
+            {/* <section>
                 <h2>Comment ajouter un emplacement de camping?</h2>
                 <p>
                     <FontAwesomeIcon icon={faAngleRight} />
@@ -78,7 +83,7 @@ const DormirGratuitement = () => {
                 </p>
                 <DemandeEdition />
                 <p>L'auteur est en train de travailler pour rendre migrer les données sur une carte Leaflet.js ou Umap. En attendant, il faut malheureusement continuer à dépendre de Google.</p>
-            </section>
+            </section> */}
             <section>
                 <h2>J'aimerais proposer aux cyclotouristes de monter leurs tentes dans ma cour arrière.</h2>
                 <p>Plusieurs cyclistes de passage en seront reconnaissants. Pour ajouter votre terrain, veuillez suivre les instructions ci-dessus.</p>

@@ -53,6 +53,12 @@ const FormCommentaire = ({ site }) => {
 
     const ajoutCommentaire = (e) => {
         e.preventDefault()
+        let liensPhotosFiltres = [];
+        champs.photos.forEach(item => {
+            if (item !== "") {
+                liensPhotosFiltres.push(item)
+            }
+        })
         fetch("/api/commentaire-site", {
             method: "PUT",
             headers: {
@@ -64,7 +70,7 @@ const FormCommentaire = ({ site }) => {
                 properties: {
                     description: champs.description,
                     annee: champs.annee,
-                    photos: champs.photos,
+                    photos: liensPhotosFiltres,
                     type: site.properties.type
                 },
                 contributeur: {
@@ -197,6 +203,7 @@ const AjImage = styled.div`
         display: flex;
         flex-direction: column;
         gap: 5px;
+        padding: 10px 0;
         input {
             max-width: 350px;
         }

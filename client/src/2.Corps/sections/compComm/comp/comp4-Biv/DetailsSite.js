@@ -25,7 +25,7 @@ const DetailsSite = ({ site, fermerSite }) => {
                     <p>{ReactHtmlParser(site.properties.description)}</p>
                     {
                         site.properties.annee &&
-                        <p>Visité en {site.properties.annee}</p>
+                        <Ital>Visité en {site.properties.annee}</Ital>
                     }
                 </Description>
                 {
@@ -63,8 +63,8 @@ const Banniere = styled.div`
     align-items: center;
     background-color: var(--c6);
     display: flex;
-    justify-content: space-evenly;
-    padding: 10px 0;
+    justify-content: space-between;
+    padding: 10px 20px;
     position: sticky;
     top: -10px;
     h3 {
@@ -93,9 +93,10 @@ const Description = styled.div`
     margin: 10px;
     padding: 10px;
     word-wrap: break-word;
-    p:last-child {
-        font-style: italic;
-    }
+`
+
+const Ital = styled.p`
+    font-style: italic;
 `
 
 export default DetailsSite;

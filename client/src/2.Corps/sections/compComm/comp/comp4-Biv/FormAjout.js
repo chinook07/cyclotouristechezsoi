@@ -18,6 +18,7 @@ const FormAjout = () => {
         description: "",
         annee: anneeCourante,
         photos: [],
+        fichiers: [],
         nom: "",
         courriel: "",
         type: "",
@@ -39,6 +40,10 @@ const FormAjout = () => {
     const mAJNom = (e) => setChamps(prec => ({ ...prec, nom: e.target.value }));
     const mAJCourriel = (e) => setChamps(prec => ({ ...prec, courriel: e.target.value }));
     const mAJType = (e) => setChamps(prec => ({ ...prec, type: e.target.value }));
+    const mAJFichiers = (e) => {
+        console.log(e.target.files);
+        setChamps(prec => ({ ...prec, fichiers: e.target.files }))
+    };
     const mAJPhotos = (e, index) => {
         let copiePhotos = champs.photos;
         copiePhotos[index] = e.target.value;
@@ -64,10 +69,37 @@ const FormAjout = () => {
         );
     }
 
-    const ajoutSite = (e) => {
+    const handleUploads = () => {
+        console.log("téléversement");
+        const formData = new FormData();
+        for (let i = 0; i < champs.fichiers.length; i++) {
+            formData.append("fichiers", champs.fichiers[i]);
+        }
+        console.log(formData);
+        fetch("/api/telev-photos", {
+            method: "POST",
+            body: formData,
+        })
+        .then(res => {
+            if (res.status === 201) {
+                console.log("Bravo!");
+            } else {
+                console.log("Failed to upload files.");
+            }
+        })
+        .catch(err => console.log(err));
+    }
+
+    const ajoutSite = async (e) => {
         e.preventDefault()
-        if (coordAjout.lat) {
-            fetch("/api/nouveau-site", {
+        let liensPhotosFiltres = [];
+        champs.photos.forEach(item => {
+            if (item !== "") {
+                liensPhotosFiltres.push(item)
+            }
+        })
+        try {
+            const response = await fetch("/api/nouveau-site", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -79,7 +111,7 @@ const FormAjout = () => {
                         name: champs.name,
                         description: champs.description,
                         annee: champs.annee,
-                        photos: champs.photos,
+                        photos: liensPhotosFiltres,
                         type: champs.type
                     },
                     geometry: {
@@ -91,26 +123,68 @@ const FormAjout = () => {
                         courriel: champs.courriel
                     }
                 })
-            })
-                .then(res => {
-                    res.json()
-                    setConfirmation(true)
-                })
-                .catch(err => console.log(err))
-        } else {
-            console.log("non");
+            });
+
+            if (response.status === 201) {
+                // Assuming the response is JSON, you need to await res.json() here.
+                const result = await response.json();
+                setConfirmation(true);
+
+                if (champs.fichiers.length > 0) {
+                    await handleUploads();
+                }
+            } else {
+                // Handle the response status if it's not 201.
+                console.log("Failed to create a new site.");
+            }
+        } catch (err) {
+            console.log(err);
         }
+        // fetch("/api/nouveau-site", {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //         "Accept": "application/json"
+        //     },
+        //     body: JSON.stringify({
+        //         type: "Feature",
+        //         properties: {
+        //             name: champs.name,
+        //             description: champs.description,
+        //             annee: champs.annee,
+        //             photos: liensPhotosFiltres,
+        //             type: champs.type
+        //         },
+        //         geometry: {
+        //             type: "Point",
+        //             coordinates: [coordAjout.lng, coordAjout.lat]
+        //         },
+        //         contributeur: {
+        //             nom: champs.nom,
+        //             courriel: champs.courriel
+        //         }
+        //     })
+        // })
+        //     .then(res => {
+        //         res.json()
+        //         setConfirmation(true)
+        //     })
+        //     .then(() => {
+        //         if (champs.fichiers.length > 0) handleUploads()
+        //     })
+        //     .catch(err => console.log(err))
     }
     
     return (
         // <Wrapper onSubmit={ajoutSite} encType="multipart/form-data">
         <Wrapper onSubmit={ajoutSite}
+            encType="multipart/form-data"
             // action="https://formspree.io/f/mvodrepv"
             // method="POST"
         >
             <fieldset>
                 <legend>Ajout d'un site de camping</legend>
-                <p>Cliquez sur la carte pour définir l'emplacement du terrain. Si vous faites une erreur, cliquez de nouveau. Un marqueur apparaitra au bon endroit.</p>
+                <p>Choisissez l'emplacement du terrain sur la carte. Si vous faites une erreur, cliquez de nouveau.</p>
                 <CarteAjout />
                 {
                     coordAjout.lat &&
@@ -166,6 +240,14 @@ const FormAjout = () => {
                     <div>{liens}</div>
                     <button onClick={ajoutPhoto} type="button">Ajouter une photo</button>
                 </LiensImg>
+                <TelevPhotos>
+                    <input
+                        multiple
+                        name="fichiers"
+                        onChange={mAJFichiers}
+                        type="file"
+                    />
+                </TelevPhotos>
                 <TypeDeSite mAJType={mAJType} />
                 <AnneeVisite>
                     <label htmlFor="anneeVisite">Année visitée : </label>
@@ -280,6 +362,10 @@ const LiensImg = styled.div`
         padding: 10px;
         width: 150px;
     }
+`
+
+const TelevPhotos = styled.div`
+
 `
 
 const AnneeVisite = styled.div`

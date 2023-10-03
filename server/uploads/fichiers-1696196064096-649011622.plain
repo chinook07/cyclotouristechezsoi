@@ -1,0 +1,8 @@
+Bonjour,
+Ma conjointe étant une personne cœliaque, j'ai récemment réussi à la convaincre de garder ses reçus pour pouvoir déclarer les aliments sans gluten aux impôts. Plutôt que d'en faire un fichier Excel, j'en ai profité pour bâtir une appli web facile à utiliser. Je me suis dis que ça serait une belle façon de mettre en pratique ce que j'ai appris durant ma formation en développement web, tout en faisant quelque chose d'utile.
+Maintenant que les impôts pour 2022 sont envoyés, je me suis dis que ça pourrait servir à d'autres personnes. Je voulais savoir si Cœliaque Québec aimerait acheter mon produit pour l'offrir à ses membres, ou si un partenariat quelconque pourrait vous intéresser.
+Fonctionnalités :
+- Ajouter un reçu.
+- Choisir le prix de base d'un aliment (avec gluten) pour la comparaison.
+- Consulter tous les reçus d'une année, ou seulement les 5 derniers
+- Supprimer 

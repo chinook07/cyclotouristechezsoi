@@ -2,6 +2,8 @@ const { MongoClient } = require("mongodb");
 require("dotenv").config();
 const { MONGO_URI } = process.env;
 
+const path = require('path');
+
 const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -44,12 +46,32 @@ const nouveauSite = async (req, res) => {
     await openSesame();
     const sites = await db.collection(properties.type).find().toArray();
     const nombre = parseInt(sites[sites.length - 1]._id) + 1;
-    let resultat = integrerPhotos(properties.description, properties.photos);
-    properties.description = resultat;
-    await db.collection(properties.type).insertOne({ _id: nombre, type, properties, geometry });
-    await db.collection("contributeurs").insertOne({ _id: nombre, contributeur })
+    if (properties.photos.length > 0) {
+        let resultat = integrerPhotos(properties.description, properties.photos);
+        properties.description = resultat;
+    }
+    // await db.collection(properties.type).insertOne({ _id: nombre, type, properties, geometry });
+    // await db.collection("contributeurs").insertOne({ _id: nombre, contributeur })
     await closeSesame();
     return res.status(201).json({ status: 201, message: `nouveau site` })
+}
+
+const televPhotos = async (req, res) => {
+    // ne fonctionne que si multiples photos
+    console.log(req.files.fichiers[0]);
+    const fichier1 = req.files.fichiers[0];
+    const sentier = path.join(__dirname, 'uploads', fichier1.name);
+    console.log(sentier);
+    try {
+        await fichier1.mv(sentier);
+        console.log("succès");
+        await openSesame();
+        // associer noms de fichiers à Mongo
+        await closeSesame();
+        res.status(201).json({ status: 201, message: 'File uploaded!' });
+    } catch (err) {
+        res.status(500).send(err);
+    }
 }
 
 const commentaireSite = async (req, res) => {
@@ -132,6 +154,7 @@ const tousSites = async (req, res) => {
 
 module.exports = {
     nouveauSite,
+    televPhotos,
     tousSites,
     commentaireSite
 }

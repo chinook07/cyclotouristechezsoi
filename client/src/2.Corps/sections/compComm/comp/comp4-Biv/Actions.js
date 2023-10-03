@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import FormCorrection from "./FormCorrection";
 import FormCommentaire from "./FormCommentaire";
@@ -9,8 +8,12 @@ const Actions = ({ site }) => {
 
     const [action, setAction] = useState();
 
-    const rapport = (action) => {
-        setAction(action);
+    const rapport = (actionAFaire) => {
+        if (action === actionAFaire) {
+            setAction(undefined)
+        } else {
+            setAction(actionAFaire);
+        }
     }
     
     return (

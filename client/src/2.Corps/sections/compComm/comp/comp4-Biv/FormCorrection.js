@@ -1,17 +1,21 @@
 import styled from "styled-components";
+import { useState } from "react";
 
 const FormCorrection = ({ site }) => {
 
-    console.log(site._id);
+    const [confirmation, setConfirmation] = useState(false);
 
     const envoyerRapport = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
-        const response = await fetch("https://formspree.io/f/xoqopjyn", {
+        await fetch("https://formspree.io/f/xoqopjyn", {
             method: "POST",
+            mode: "no-cors",
             body: formData,
-        });
-        console.log("envoyé");
+        })
+            .then(() => setConfirmation(true))
+            .catch(err => console.log(err))
+        
     }
     
     return (
@@ -47,6 +51,10 @@ const FormCorrection = ({ site }) => {
                 </Validation>
                 <button type="submit">Envoyer</button>
             </fieldset>
+            {
+                confirmation &&
+                <Confirm>Merci d'avoir contribué à la carte! L'administrateur prendra les actions pour corriger la carte si nécessaire.</Confirm>
+            }
         </Wrapper>
     )
 }
@@ -81,5 +89,10 @@ const Wrapper = styled.form`
 `
 
 const Validation = styled.div``
+
+const Confirm = styled.p`
+    font-weight: bold;
+    text-align: center;
+`
 
 export default FormCorrection;
