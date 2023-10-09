@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { useState } from "react";
 
+import TelevPhotos from "./TelevPhotos";
+
 const FormCommentaire = ({ site }) => {
 
     const anneeCourante = new Date().getFullYear();
@@ -25,6 +27,10 @@ const FormCommentaire = ({ site }) => {
     };
 
     const mAJDescription = (e) => setChamps(prec => ({ ...prec, description: e.target.value }));
+    const mAJFichiers = (e) => {
+        console.log(e.target.files);
+        setChamps(prec => ({ ...prec, fichiers: e.target.files }))
+    };
     const mAJAnnee = (e) => setChamps(prec => ({ ...prec, annee: e.target.value }));
     const mAJCourriel = (e) => setChamps(prec => ({ ...prec, courriel: e.target.value }));
     const mAJPhotos = (e, index) => {
@@ -51,7 +57,30 @@ const FormCommentaire = ({ site }) => {
         );
     }
 
-    const ajoutCommentaire = (e) => {
+    const handleUploads = async ({ result }) => {
+        console.log(result);
+        const formData = new FormData();
+        formData.append("type", champs.type);
+        formData.append("id", site._id)
+        for (let i = 0; i < champs.fichiers.length; i++) {
+            formData.append("fichiers", champs.fichiers[i]);
+        }
+        console.log(formData);
+        fetch("/api/commentaires-photos", {
+            method: "POST",
+            body: formData,
+        })
+        .then(res => {
+            if (res.status === 201) {
+                console.log("Bravo!");
+            } else {
+                console.log("Failed to upload files.");
+            }
+        })
+        .catch(err => console.log(err));
+    }
+
+    const ajoutCommentaire = async (e) => {
         e.preventDefault()
         let liensPhotosFiltres = [];
         champs.photos.forEach(item => {
@@ -59,30 +88,37 @@ const FormCommentaire = ({ site }) => {
                 liensPhotosFiltres.push(item)
             }
         })
-        fetch("/api/commentaire-site", {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({
-                _id: site._id,
-                properties: {
-                    description: champs.description,
-                    annee: champs.annee,
-                    photos: liensPhotosFiltres,
-                    type: site.properties.type
+        try {
+            const response = await fetch("/api/commentaire-site", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
                 },
-                contributeur: {
-                    courriel: champs.courriel
-                }
+                body: JSON.stringify({
+                    _id: site._id,
+                    properties: {
+                        description: champs.description,
+                        annee: champs.annee,
+                        photos: liensPhotosFiltres,
+                        type: site.properties.type
+                    },
+                    contributeur: {
+                        courriel: champs.courriel
+                    }
+                })
             })
-        })
-            .then(res => {
-                res.json()
+            if (response.status === 200) {
+                const result = await response.json();
+                console.log(result);
                 setConfirmation(true)
-            })
-            .catch(err => console.log(err))
+                if (champs.fichiers.length > 0) {
+                    await handleUploads(result);
+                }
+            }
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     return (
@@ -129,6 +165,7 @@ const FormCommentaire = ({ site }) => {
                     <div>{liens}</div>
                     <button onClick={ajoutPhoto} type="button" >Ajouter une photo</button>
                 </AjImage>
+                <TelevPhotos mAJFichiers={mAJFichiers} />
                 <label htmlFor="courrielComm">L'adresse courriel ne sera utilisée que pour vous permettre de modifier ultérieurement les informations que vous avez soumises.</label>
                 <input
                     id="courrielComm"

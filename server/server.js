@@ -8,7 +8,8 @@ const {
     nouveauSite,
     televPhotos,
     tousSites,
-    commentaireSite
+    commentaireSite,
+    commentairesPhotos
 } = require("./handlers")
 
 express()
@@ -20,6 +21,7 @@ express()
     .get("/api/tous-sites", tousSites)
     .post("/api/nouveau-site", nouveauSite)
     .post("/api/telev-photos", televPhotos)
+    .post("/api/commentaires-photos", commentairesPhotos)
     .put("/api/commentaire-site", commentaireSite)
     .get("*", (req, res) => {
         res.status(404).json({

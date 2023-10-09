@@ -14,7 +14,7 @@
         "lienRegion": "bellechasse",
         "couleur": "#808080",
         "police": "#000",
-        "texte": "Une nouvelle piste cyclable reliera la Véloroute de la Chaudière à la Cycloroute de Bellechasse. La piste cyclable Dorchester devrait être terminée au printemps 2023.",
+        "texte": "Une nouvelle piste cyclable reliera la Véloroute de la Chaudière à la Cycloroute de Bellechasse. La piste cyclable Dorchester devait être terminée au printemps 2023. Aucune nouvelle information depuis.",
         "lien": "Beauce Média",
         "url": "https://www.beaucemedia.ca/actualites/la-piste-cyclable-dorchester-sera-completee-au-printemps/",
         "complet": false
@@ -34,7 +34,7 @@
         "lienRegion": "laurentides",
         "couleur": "#f00",
         "police": "#000",
-        "texte": "Le tronçon de 18 km entre Ste-Agathe-des-Monts et Mont-Blanc sera asphalté en 2023. Il ne restera que deux tronçons en poussière de pierre, totalisant 47 km.",
+        "texte": "Le tronçon de 18 km entre Ste-Agathe-des-Monts et Mont-Blanc a été asphalté en 2023. Il ne restera que deux tronçons en poussière de pierre, totalisant 47 km.",
         "lien": "Ville de Mont-Tremblant",
         "url": "https://www.villedemont-tremblant.qc.ca/fr/nouvelles/travaux-refection-ptit-train-du-nord",
         "complet": false
@@ -44,7 +44,7 @@
         "lienRegion": "montreal-quebec-sud",
         "couleur": "#5fe25f",
         "police": "#000",
-        "texte": "La parachèvement de la Route verte entre St-Isidore et St-Constant sur l'ancienne emprise ferroviaire devrait être terminé d'ici le printemps 2024. La construction est enfin entamée!",
+        "texte": "La parachèvement de la Route verte entre Ste-Martine et St-Constant par l'ancienne emprise ferroviaire devrait être terminé d'ici le printemps 2024. Le tronçon entre Ste-Martine et le rang St-Régis Nord est maintenant complété.",
         "lien": "Le Reflet",
         "url": "https://www.lereflet.qc.ca/la-construction-de-la-piste-cyclable-dans-les-champs-est-lancee",
         "complet": false

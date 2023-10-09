@@ -1,9 +1,12 @@
 import styled from "styled-components";
 import { useState, useContext } from "react";
+import { format } from 'date-fns'
+import { frCA } from 'date-fns/locale'
 
 import CarteAjout from "./CarteAjout";
 import { CycloContext } from "../../../../../CycloContext";
 import TypeDeSite from "./TypeDeSite";
+import TelevPhotos from "./TelevPhotos";
 import Contributeur from "./Contributeur";
 import { ExternalLink } from "react-external-link";
 
@@ -12,6 +15,9 @@ const FormAjout = () => {
     const { coordAjout } = useContext(CycloContext);
 
     const anneeCourante = new Date().getFullYear();
+    const dateAuj = format(new Date(), "dd-MMM-yyyy");
+
+    console.log(dateAuj);
 
     const [champs, setChamps] = useState({
         name: "",
@@ -70,7 +76,6 @@ const FormAjout = () => {
     }
 
     const handleUploads = (result) => {
-        console.log(result.id);
         const formData = new FormData();
         formData.append("type", champs.type);
         formData.append("id", result.id)
@@ -114,7 +119,8 @@ const FormAjout = () => {
                         description: champs.description,
                         annee: champs.annee,
                         photos: [],
-                        type: champs.type
+                        type: champs.type,
+                        dateAuj
                     },
                     geometry: {
                         type: "Point",
@@ -128,15 +134,12 @@ const FormAjout = () => {
             });
 
             if (response.status === 201) {
-                // Assuming the response is JSON, you need to await res.json() here.
                 const result = await response.json();
                 setConfirmation(true);
-                await console.log(result);
                 if (champs.fichiers.length > 0) {
                     await handleUploads(result);
                 }
             } else {
-                // Handle the response status if it's not 201.
                 console.log("Failed to create a new site.");
             }
         } catch (err) {
@@ -193,30 +196,24 @@ const FormAjout = () => {
                     required
                     value={champs.description}
                 />
-                <p>Il est fortement suggéré d'ajouter des photos de l'emplacement, dans le but de bâtir un répertoire de qualité. Pour ce faire, les images doivent être stockées, le temps de les ajouter manuellement à la carte, sur un site ou une page publique, ou dont l'auteur de ce site y a accès. Exemple :</p>
-                <ul>
+                <p>Il est fortement suggéré d'ajouter des photos de l'emplacement, dans le but de bâtir un répertoire de qualité.</p>
+                {/* <p>Il est fortement suggéré d'ajouter des photos de l'emplacement, dans le but de bâtir un répertoire de qualité. Pour ce faire, les images doivent être stockées, le temps de les ajouter manuellement à la carte, sur un site ou une page publique, ou dont l'auteur de ce site y a accès. Exemple :</p> */}
+                {/* <ul>
                     <li>Une publication publique dans les réseaux sociaux</li>
                     <li>Un groupe public sur Facebook</li>
                     <li>Le <ExternalLink href="https://www.facebook.com/groups/539103319550016">groupe Cyclotourisme Québec</ExternalLink> sur Facebook</li>
                     <li>Dans <ExternalLink href="https://c.gmx.fr/@942516742939220237/Qfd4yoXUR4mKUmxUGFJqeg">ce dossier nuagique partagé</ExternalLink>, tout en utilisant le mot de passe <em>cyclotouriste</em></li>
                     <li>Une page web personnel</li>
-                </ul>
-                <LiensImg>
+                </ul> */}
+                {/* <LiensImg>
                     <label
                         htmlFor="lienimg"
                         name="liens"
                     >Veuillez lister les liens url vers vos images ci-dessous.</label>
                     <div>{liens}</div>
                     <button onClick={ajoutPhoto} type="button">Ajouter une photo</button>
-                </LiensImg>
-                <TelevPhotos>
-                    <input
-                        multiple
-                        name="fichiers"
-                        onChange={mAJFichiers}
-                        type="file"
-                    />
-                </TelevPhotos>
+                </LiensImg> */}
+                <TelevPhotos mAJFichiers={mAJFichiers} />
                 <TypeDeSite mAJType={mAJType} />
                 <AnneeVisite>
                     <label htmlFor="anneeVisite">Année visitée : </label>
@@ -331,10 +328,6 @@ const LiensImg = styled.div`
         padding: 10px;
         width: 150px;
     }
-`
-
-const TelevPhotos = styled.div`
-
 `
 
 const AnneeVisite = styled.div`

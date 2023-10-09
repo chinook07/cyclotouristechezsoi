@@ -50,8 +50,8 @@ const nouveauSite = async (req, res) => {
         let resultat = integrerPhotos(properties.description, properties.photos);
         properties.description = resultat;
     }
-    await db.collection(properties.type).insertOne({ _id: nombre, type, properties, geometry });
-    await db.collection("contributeurs").insertOne({ _id: nombre, contributeur })
+    // await db.collection(properties.type).insertOne({ _id: nombre, type, properties, geometry });
+    // await db.collection("contributeurs").insertOne({ _id: nombre, contributeur })
     await closeSesame();
     return res.status(201).json({ status: 201, message: `nouveau site`, id: nombre })
 }
@@ -59,33 +59,28 @@ const nouveauSite = async (req, res) => {
 const televPhotos = async (req, res) => {
     const dbAChercher = req.body.type;
     const idAChercher = parseInt(req.body.id);
-    let connecte = false;
     if (req.files.fichiers.constructor === Array) {
-        await openSesame();
-        connecte = true;
+        let updatePromises = [];
         try {
-            
+            await openSesame();
             req.files.fichiers.forEach(item => {
                 let nomDeFichier = Math.round(1e4 * Math.random()).toString().concat("-", item.name);
                 let sentier = path.join(__dirname, 'uploads', nomDeFichier);
                 item.mv(sentier);
-                console.log("tassé", nomDeFichier);
-                db.collection(dbAChercher).updateOne(
-                    { _id: idAChercher },
-                    { $push: { "properties.photos": nomDeFichier } }
+                updatePromises.push(
+                    db.collection(dbAChercher).updateOne(
+                        { _id: idAChercher },
+                        { $push: { "properties.photos": nomDeFichier } }
+                    )
                 );
-                console.log("associé");
-            })
-            if (connecte) {
-                console.log("temps de fermer");
-                await closeSesame();
-            }
-            res.status(201).json({ status: 201, message: 'File uploaded!' });
-        } catch (err) {
-            res.status(500).send(err);
+            });
+            await Promise.all(updatePromises);
             await closeSesame();
+            res.status(201).json({ status: 201, message: 'Photos téléversés!' });
+        } catch (err) {
+            console.error(err);
+            res.status(500).send(err);
         }
-        
     } else {
         const fichier = req.files.fichiers;
         const nomDeFichier = Math.round(1e4 * Math.random()).toString().concat("-", fichier.name)
@@ -98,7 +93,54 @@ const televPhotos = async (req, res) => {
                 { $push: { "properties.photos": nomDeFichier } }
             );
             await closeSesame();
-            res.status(201).json({ status: 201, message: 'Fichier téléversé!' });
+            res.status(201).json({ status: 201, message: 'Une photo téléversée!' });
+        } catch (err) {
+            res.status(500).send(err);
+        }
+    }
+}
+
+const commentairesPhotos = async (req, res) => {
+    const dbAChercher = req.body.type;
+    const idAChercher = parseInt(req.body.id);
+    if (req.files.fichiers.constructor === Array) {
+        let updatePromises = [];
+        try {
+            await openSesame();
+            req.files.fichiers.forEach(item => {
+                let nomDeFichier = Math.round(1e4 * Math.random()).toString().concat("-", item.name);
+                let sentier = path.join(__dirname, 'uploads', nomDeFichier);
+                item.mv(sentier);
+                // photo au bon commentaire?
+                updatePromises.push(
+                    db.collection(dbAChercher).updateOne(
+                        { _id: idAChercher },
+                        { $push: { "properties.commentaires[0]": nomDeFichier } }
+                    )
+                );
+            });
+            await Promise.all(updatePromises);
+            await closeSesame();
+            res.status(201).json({ status: 201, message: 'Photos téléversés!' });
+        } catch (err) {
+            console.error(err);
+            res.status(500).send(err);
+        }
+    } else {
+        const fichier = req.files.fichiers;
+        const nomDeFichier = Math.round(1e4 * Math.random()).toString().concat("-", fichier.name)
+        const sentier = path.join(__dirname, 'uploads', nomDeFichier);
+        try {
+            await fichier.mv(sentier);
+            await openSesame();
+            const aModif = await db.collection(dbAChercher).findOne({ _id: idAChercher }).toArray();
+            console.log(aModif);
+            // await db.collection(dbAChercher).updateOne(
+            //     { _id: idAChercher },
+            //     { $push: { "properties.commentaires[0]": nomDeFichier } }
+            // );
+            await closeSesame();
+            res.status(201).json({ status: 201, message: 'Une photo téléversée!' });
         } catch (err) {
             res.status(500).send(err);
         }
@@ -152,22 +194,24 @@ const commentaireSite = async (req, res) => {
     await openSesame();
     const found = await db.collection(dbAChercher).findOne({ _id: _id });
     console.log(found, "found");
-    await db.collection(dbAChercher).updateOne(
-        { _id: _id },
-        {
-            $push: {
-                "properties.commentaires": {
-                    description: resultat,
-                    annee: properties.annee
-                }
-            }
-        }
-    );
+    // await db.collection(dbAChercher).updateOne(
+    //     { _id: _id },
+    //     {
+    //         $push: {
+    //             "properties.commentaires": {
+    //                 description: resultat,
+    //                 annee: properties.annee
+    //             }
+    //         }
+    //     }
+    // );
     await closeSesame();
-    return res.status(200).json({ status: 200, message: `commentaire ajouté` })
+    console.log(properties.commentaires.length);
+    return res.status(200).json({ status: 200, message: `commentaire ajouté`, nDeCommentaires: properties.commentaires.length })
 }
 
 const tousSites = async (req, res) => {
+    console.log("initiate protocol");
     await openSesame();
     const sites_a = await db.collection("s_non_officiels").find().toArray();
     const sites_b = await db.collection("s_officiels").find().toArray();
@@ -187,5 +231,6 @@ module.exports = {
     nouveauSite,
     televPhotos,
     tousSites,
+    commentairesPhotos,
     commentaireSite
 }

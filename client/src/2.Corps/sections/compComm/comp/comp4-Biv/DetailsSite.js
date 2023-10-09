@@ -30,8 +30,8 @@ const DetailsSite = ({ site, fermerSite }) => {
                 <p>{ReactHtmlParser(site.properties.description)}</p>
                 {
                     site.properties.photos &&
-                    site.properties.photos.forEach((photo, index) => {
-                        if (index > 0) return <img src={`http://serveur.touristechezsoi.ca/uploads/` + photo} alt="" />
+                    site.properties.photos.map((photo, index) => {
+                        if (index > 0) return <img key={index} src={`http://serveur.touristechezsoi.ca/uploads/` + photo} alt="" />
                     })
                 }
                 {
