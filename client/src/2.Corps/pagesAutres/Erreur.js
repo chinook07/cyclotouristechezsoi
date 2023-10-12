@@ -25,7 +25,7 @@ const Erreur = () => {
                 }
             </Photos>
             <h1>Erreur 404</h1>
-            <p>Désolé. Cette page n'existe plus. <span onClick={retour}>Faites demi-tour</span> ou <Link to="/">retournez à l'accueil</Link>!</p>
+            <p>Désolé. Cette page n'existe plus. <span onClick={retour} role="link" title="page précédente" tabIndex={0}>Faites demi-tour</span> ou <Link to="/">retournez à l'accueil</Link>!</p>
         </Wrapper>
     )
 }

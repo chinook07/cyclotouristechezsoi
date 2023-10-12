@@ -373,7 +373,7 @@
         "icone": [
             1,
             5,
-            8
+            9
         ],
         "transporteur": "REM",
         "trajet": "REM A1 entre Montréal et Brossard",
@@ -416,7 +416,7 @@
             10
         ],
         "transporteur": "exo",
-        "trajet": "Circuit 300 – Autobus entre Montréal, Mont-Saint-Hilaire et Saint-Hyacinthe.",
+        "trajet": "Circuit 300 – Autobus entre Brossard, Mont-Saint-Hilaire et Saint-Hyacinthe.",
         "heures": "sur semaine seulement, principalement à l'heure de pointe."
     },
     "140": {
