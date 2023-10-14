@@ -5,6 +5,7 @@ import trainCharlevoix1 from "./images/train-charlevoix-1.jpg"
 import trainCharlevoix2 from "./images/train-charlevoix-2.jpg"
 
 import TableauRegions from "./comp/TableauRegions";
+import navettes from "./donnees/navettes.json";
 
 const TrRegional = () => {
 
@@ -38,11 +39,13 @@ const TrRegional = () => {
                 <h2>Les navettes pour cyclistes</h2>
                 <p>Il existe dans certaines régions des navettes exprès pour cyclistes. C'est une excellente façon de sauter d'un bout à l'autre avant ou après avoir roulé sur la véloroute du début à la fin. Le transport à bord de celles-ci doit normalement être réservé, peut couter plus cher qu'un billet d'autocar, mais le service vient avec une certitude que le vélo peut accompagner le voyageur. Dans d'autres cas, un transfert de bagages ou de déplacement de véhicule y est offert. L'un ou l'autre de ces services existent aux endroits suivants :</p>
                 <ul>
-                    <li><ExternalLink href="https://www.voyageravelo.com/">Montrérégie, Centre-du-Québec, le long du lac Ontario et le fleuve St-Laurent de Toronto à Matane, Montréal–Sherbrooke</ExternalLink></li>
-                    <li><ExternalLink href="https://www.autobuslepetittraindunord.com/">Parc linéaire le P'tit train du Nord</ExternalLink></li>
-                    <li><ExternalLink href="https://navettesdufjord.com/fr/trajets/veloroute-du-fjord-du-saguenay">Véloroute du Fjord</ExternalLink></li>
-                    <li><ExternalLink href="https://www.veloroute-des-baleines.ca/services-aux-cyclistes">Véloroute des Baleines</ExternalLink></li>
-                    <li><ExternalLink href="https://fr.veloroutedesbleuets.com/navette-de-bagages">Véloroute des Bleuets</ExternalLink></li>
+                    {
+                        navettes.map((item, index) => {
+                            return (
+                                <li key={index}><ExternalLink href={item.lien}>{item.regions}</ExternalLink></li>
+                            )
+                        })
+                    }
                 </ul>
             </section>
             <section>

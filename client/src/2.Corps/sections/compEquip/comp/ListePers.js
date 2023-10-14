@@ -10,6 +10,7 @@ const ListePers = () => {
     const [entreePers, setEntreePers] = useState("");
     const [persPacked, setPersPacked] = useState([]);
     const [f5, setF5] = useState(0);
+    const [erreurEntree, setErreurEntree] = useState(false);
 
     useEffect(() => {
         const enMemoirePers = localStorage.getItem("pers");
@@ -20,22 +21,31 @@ const ListePers = () => {
             setPersPacked(enMemoirePersPacked.split(",").map(item => item));
     }, [])
 
-    const mettreEntreeAJour = (terme) => setEntreePers(terme);
+    const mettreEntreeAJour = (terme) => {
+        setErreurEntree(false);
+        setEntreePers(terme);
+    };
 
     const ajouterItemPers = (e) => {
         e.preventDefault();
-        setBagagesPers((prev) => [...prev, entreePers]);
-        localStorage.setItem("pers", [...bagagesPers, entreePers]);
-        setEntreePers("");
+        if (entreePers !== "") {
+            setBagagesPers((prev) => [...prev, entreePers]);
+            localStorage.setItem("pers", [...bagagesPers, entreePers]);
+            setEntreePers("");
+        } else {
+            setErreurEntree(true);
+        }
     }
 
     const viderListePers = () => {
+        setErreurEntree(false);
         setBagagesPers([])
         localStorage.removeItem("pers");
         localStorage.removeItem("packedPers");
     };
 
     const enleverItem = (item) => {
+        setErreurEntree(false);
         let nouvelleListe = bagagesPers;
         nouvelleListe.splice(nouvelleListe.indexOf(item), 1);
         setF5(f5 + 1);
@@ -62,7 +72,10 @@ const ListePers = () => {
                     <FontAwesomeIcon icon={faList} />
                     <span> Liste personnalisée</span>
                 </h2>
-                <button onClick={viderListePers} aria-label="vider liste personnalisée">
+                <button onClick={viderListePers}
+                    aria-label="vider liste personnalisée"
+                    title="vider liste"
+                >
                     <FontAwesomeIcon icon={faTrash} />
                 </button>
             </Controle>
@@ -108,6 +121,10 @@ const ListePers = () => {
                         />
                         <button type="submit">Ajouter</button>
                     </div>
+                    {
+                        erreurEntree &&
+                        <Err>Que souhaitez-vous ajouter sur votre liste?</Err>
+                    }
                 </form>
             </Reste>
         </Wrapper>
@@ -139,6 +156,7 @@ const Reste = styled.div`
         flex-wrap: wrap;
         gap: 12px;
         > div {
+            align-items: center;
             display: flex;
             gap: 12px;
             input {
@@ -177,6 +195,11 @@ const ChosePers = styled.div`
     svg {
         margin: 0 12px;
     }
+`
+
+const Err = styled.p`
+    color: var(--c6);
+    margin: 0;
 `
 
 export default ListePers;
