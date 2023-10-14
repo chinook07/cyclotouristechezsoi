@@ -6,8 +6,6 @@ import Verso from "./Verso";
 
 const Voyage = ({ index, item }) => {
     const [montrerVerso, setMontrerVerso] = useState(false);
-    // const retournerCarte = () => setMontrerVerso(true);
-    // const retourCarte2 = () => setMontrerVerso(false);
     const changerCarte = () => montrerVerso ? setMontrerVerso(false) : setMontrerVerso(true);
 
     return (

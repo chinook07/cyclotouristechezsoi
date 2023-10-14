@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Contact = () => {
 
-    const regions = ["Québec", "Canada (hors-Québec)", "France", "États-Unis (USA)", "Allemagne (Deutschland)", "Ailleurs"]
+    const regions = ["Québec", "Canada (hors-Québec)", "France", "États-Unis (USA)", "Allemagne (Deutschland)", "Ailleurs (Other)"]
 
     return (
         <Wrapper

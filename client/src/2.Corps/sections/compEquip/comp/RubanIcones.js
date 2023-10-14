@@ -6,7 +6,7 @@ import { faBicycle, faTools, faWineGlassAlt, faPizzaSlice, faFlag, faSurprise, f
 const RubanIcones = ({changerRubrique, montrerRubrique}) => {
 
     const icones = [faBicycle, faTools, faWineGlassAlt, faPizzaSlice, faFlag, faSurprise, faHatCowboy, faHeadSideMask, faBath, faPuzzlePiece, faPlug, faPlus, faGlobe];
-    const aria = ["vélo", "outils", "hydratation", "nourriture", "camping", "surprises", "vêtements", "santé", "hygiène", "loisirs", "électronique", "autres", "international"];
+    const aria = ["vélo", "outils", "hydratation", "nourriture", "camping", "imprévus", "vêtements", "santé", "hygiène", "loisirs", "électronique", "autres", "international"];
 
     return (
         <Wrapper>
@@ -18,6 +18,7 @@ const RubanIcones = ({changerRubrique, montrerRubrique}) => {
                             className={montrerRubrique === index ? "actif" : ""}
                             key={index}
                             onClick={() => changerRubrique(index)}
+                            title={aria[index]}
                         >
                             <FontAwesomeIcon icon={item} size="2x" />
                         </button>

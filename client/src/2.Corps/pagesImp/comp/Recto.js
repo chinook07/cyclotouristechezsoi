@@ -52,8 +52,14 @@ const Intro = styled.p`
     margin: 0;
 `
 
-const Renverser = styled.span`
+const Renverser = styled.button`
+    background: none;
+    border: none;
+    color: var(--c11);
     cursor: pointer;
+    font-family: "Trebuchet MS",Helvetica,sans-serif;
+    font-size: medium;
+    padding: 0;
     text-decoration: underline;
     &:hover {
         color: var(--c1);

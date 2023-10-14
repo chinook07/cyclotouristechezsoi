@@ -20,15 +20,15 @@ const Verso = ({ item, index, changerCarte }) => {
             <Diff>
                 <p>Dénivelé positif : {item.denivele}</p>
                 <p>Ratio : {item.ratio}</p>
-                <p>
-                    <span>Difficulté de 1 à 5 : </span>
-                    <Cachee>{ item.difficulte }</Cachee>
+                <div>
+                    <p>Difficulté de 1 à 5 : </p>
+                    <Cachee aria-disabled>{ item.difficulte }</Cachee>
                     <Montagnes>
                         {
                             [...Array(item.difficulte)].map((e, i) => <FaMountain key={i} />)
                         }
                     </Montagnes>
-                </p>
+                </div>
             </Diff>
             <VillesTrav>
                 {
@@ -82,8 +82,14 @@ const Intro = styled.p`
     margin: 0;
 `
 
-const Renverser = styled.span`
+const Renverser = styled.button`
+    background: none;
+    border: none;
+    color: var(--c6);
     cursor: pointer;
+    font-family: "Trebuchet MS",Helvetica,sans-serif;
+    font-size: medium;
+    padding: 0;
     text-decoration: underline;
     &:hover {
         color: var(--c5);
@@ -102,7 +108,7 @@ const Diff = styled.div`
     }
 `
 
-const Montagnes = styled.span`
+const Montagnes = styled.p`
     display: block;
 `
 

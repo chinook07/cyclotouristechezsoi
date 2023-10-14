@@ -62,8 +62,6 @@ const DormirGratuitement = () => {
                     <img src={campingLaPatrie} alt="tente sous les arbres près d'une rivière" />
                     <figcaption>Parfois, on trouve de vrais joyaux sur le domaine public.</figcaption>
                 </figure>
-                
-
             </section>
             <section>
                 <h2>C'est quoi le principe du Sans trace?</h2>
