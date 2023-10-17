@@ -45,7 +45,6 @@ const DetailsDuTrajet = ({ itineraire, changerTrajet }) => {
 			<h3>Carte</h3>
 			<CarteUMap>
 				<iframe
-					frameBorder="0"
 					allowFullScreen
 					title="Carte du Québec cyclable"
 					src={`//umap.openstreetmap.fr/fr/map/carte-generale-cyclotouristechezsoi_584684?scaleControl=true&miniMap=false&scrollWheelZoom=true&zoomControl=true&allowEdit=false&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=true&onLoadPanel=undefined&captionBar=false#${details.carteURL}`}
@@ -87,6 +86,7 @@ const CarteUMap = styled.div`
     width: 100%;
     iframe {
         box-shadow: var(--c3) 5px 5px 5px 5px;
+        border: 0;
         display: block;
         height: 100%;
         width: 100%;

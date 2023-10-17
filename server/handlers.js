@@ -43,6 +43,7 @@ const integrerPhotos = (description, liens) => {
 
 const nouveauSite = async (req, res) => {
     const { type, properties, geometry, contributeur } = req.body;
+    console.log(properties);
     await openSesame();
     const sites = await db.collection(properties.type).find().toArray();
     const nombre = parseInt(sites[sites.length - 1]._id) + 1;
@@ -211,7 +212,6 @@ const commentaireSite = async (req, res) => {
 }
 
 const tousSites = async (req, res) => {
-    console.log("initiate protocol");
     await openSesame();
     const sites_a = await db.collection("s_non_officiels").find().toArray();
     const sites_b = await db.collection("s_officiels").find().toArray();

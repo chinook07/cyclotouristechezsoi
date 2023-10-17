@@ -8,22 +8,20 @@ import { CycloContext } from "../../../../../CycloContext";
 import TypeDeSite from "./TypeDeSite";
 import TelevPhotos from "./TelevPhotos";
 import Contributeur from "./Contributeur";
-import { ExternalLink } from "react-external-link";
+// import LiensImgDESUET from "./LiensImgDESUET";
 
 const FormAjout = () => {
     
     const { coordAjout } = useContext(CycloContext);
 
     const anneeCourante = new Date().getFullYear();
-    const dateAuj = format(new Date(), "dd-MMM-yyyy");
-
-    console.log(dateAuj);
+    const dateAuj = format(new Date(), "dd-MMM-yyyy", { locale: frCA });
 
     const [champs, setChamps] = useState({
         name: "",
         description: "",
         annee: anneeCourante,
-        photos: [],
+        // photos: [],
         fichiers: [],
         nom: "",
         courriel: "",
@@ -31,14 +29,14 @@ const FormAjout = () => {
         legit: false
     });
     const [confirmation, setConfirmation] = useState(false);
-    const [qtePhotos, setQtePhotos] = useState(0);
+    // const [qtePhotos, setQtePhotos] = useState(0);
 
-    const ajoutPhoto = () => {
-        setQtePhotos(qtePhotos + 1);
-        let photosActuels = champs.photos;
-        photosActuels.push("");
-        setChamps(prec => ({ ...prec, photos: photosActuels }));
-    };
+    // const ajoutPhoto = () => {
+    //     setQtePhotos(qtePhotos + 1);
+    //     let photosActuels = champs.photos;
+    //     photosActuels.push("");
+    //     setChamps(prec => ({ ...prec, photos: photosActuels }));
+    // };
 
     const mAJName = (e) => setChamps(prec => ({ ...prec, name: e.target.value }));
     const mAJDescription = (e) => setChamps(prec => ({ ...prec, description: e.target.value }));
@@ -50,11 +48,11 @@ const FormAjout = () => {
         console.log(e.target.files);
         setChamps(prec => ({ ...prec, fichiers: e.target.files }))
     };
-    const mAJPhotos = (e, index) => {
-        let copiePhotos = champs.photos;
-        copiePhotos[index] = e.target.value;
-        setChamps(prec => ({ ...prec, photos: copiePhotos }));
-    }
+    // const mAJPhotos = (e, index) => {
+    //     let copiePhotos = champs.photos;
+    //     copiePhotos[index] = e.target.value;
+    //     setChamps(prec => ({ ...prec, photos: copiePhotos }));
+    // }
 
     const annees = [];
     for (let i = 2020; i <= anneeCourante; i++) {
@@ -63,17 +61,17 @@ const FormAjout = () => {
 
     const mAJLegit = (e) => setChamps(prec => ({ ...prec, legit: e.target.checked }));
 
-    const liens = [];
-    for (let index = 0; index < qtePhotos; index++) {
-        liens.push(
-            <input
-                key={index}
-                onChange={(e) => mAJPhotos(e, index)}
-                type="url"
-                value={champs.photos[index]}
-            />
-        );
-    }
+    // const liens = [];
+    // for (let index = 0; index < qtePhotos; index++) {
+    //     liens.push(
+    //         <input
+    //             key={index}
+    //             onChange={(e) => mAJPhotos(e, index)}
+    //             type="url"
+    //             value={champs.photos[index]}
+    //         />
+    //     );
+    // }
 
     const handleUploads = (result) => {
         const formData = new FormData();
@@ -99,12 +97,12 @@ const FormAjout = () => {
 
     const ajoutSite = async (e) => {
         e.preventDefault()
-        let liensPhotosFiltres = [];
-        champs.photos.forEach(item => {
-            if (item !== "") {
-                liensPhotosFiltres.push(item)
-            }
-        })
+        // let liensPhotosFiltres = [];
+        // champs.photos.forEach(item => {
+        //     if (item !== "") {
+        //         liensPhotosFiltres.push(item)
+        //     }
+        // })
         try {
             const response = await fetch("/api/nouveau-site", {
                 method: "POST",
@@ -196,24 +194,9 @@ const FormAjout = () => {
                     required
                     value={champs.description}
                 />
-                {/* <p>Il est fortement suggéré d'ajouter des photos de l'emplacement, dans le but de bâtir un répertoire de qualité.</p> */}
-                <p>Il est fortement suggéré d'ajouter des photos de l'emplacement, dans le but de bâtir un répertoire de qualité. Pour ce faire, les images doivent être stockées, le temps de les ajouter manuellement à la carte, sur un site ou une page publique, ou dont l'auteur de ce site y a accès. Exemple :</p>
-                <ul>
-                    <li>Une publication publique dans les réseaux sociaux</li>
-                    <li>Un groupe public sur Facebook</li>
-                    <li>Le <ExternalLink href="https://www.facebook.com/groups/539103319550016">groupe Cyclotourisme Québec</ExternalLink> sur Facebook</li>
-                    <li>Dans <ExternalLink href="https://c.gmx.fr/@942516742939220237/Qfd4yoXUR4mKUmxUGFJqeg">ce dossier nuagique partagé</ExternalLink>, tout en utilisant le mot de passe <em>cyclotouriste</em></li>
-                    <li>Une page web personnel</li>
-                </ul>
-                <LiensImg>
-                    <label
-                        htmlFor="lienimg"
-                        name="liens"
-                    >Veuillez lister les liens url vers vos images ci-dessous.</label>
-                    <div>{liens}</div>
-                    <button onClick={ajoutPhoto} type="button">Ajouter une photo</button>
-                </LiensImg>
-                {/* <TelevPhotos mAJFichiers={mAJFichiers} /> */}
+                <p>Il est fortement suggéré d'ajouter des photos de l'emplacement, dans le but de bâtir un répertoire de qualité.</p>
+                {/* <LiensImgDESUET ajoutPhoto={ajoutPhoto} liens={liens} /> */}
+                <TelevPhotos mAJFichiers={mAJFichiers} />
                 <TypeDeSite mAJType={mAJType} />
                 <AnneeVisite>
                     <label htmlFor="anneeVisite">Année visitée : </label>
@@ -304,30 +287,6 @@ const Description = styled.textarea`
     margin: 10px 0;
     padding: 10px;
     width: 100%;
-`
-
-const LiensImg = styled.div`
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    justify-content: center;
-    textarea {
-        border-radius: 5px;
-        height: 80px;
-        margin: 0 auto;
-        max-width: 500px;
-        padding: 10px;
-        width: 100%;
-    }
-    button {
-        cursor: pointer;
-        display: block;
-        border-radius: 5px;
-        margin: 0 auto 15px;
-        padding: 10px;
-        width: 150px;
-    }
 `
 
 const AnneeVisite = styled.div`
