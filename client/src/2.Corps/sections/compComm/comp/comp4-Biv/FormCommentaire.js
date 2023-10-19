@@ -1,30 +1,25 @@
 import styled from "styled-components";
 import { useState } from "react";
+import { format } from 'date-fns';
 
 import TelevPhotos from "./TelevPhotos";
+import { frCA } from 'date-fns/locale';
 
 const FormCommentaire = ({ site }) => {
 
     const anneeCourante = new Date().getFullYear();
+    const dateAuj = format(new Date(), "dd-MMM-yyyy", { locale: frCA });
 
     const [champs, setChamps] = useState({
         description: "",
         annee: anneeCourante,
-        photos: [],
+        fichiers: [],
         nom: "",
         courriel: "",
         type: site.properties.type,
         legit: false
     });
     const [confirmation, setConfirmation] = useState(false);
-    const [qtePhotos, setQtePhotos] = useState(0);
-
-    const ajoutPhoto = () => {
-        setQtePhotos(qtePhotos + 1);
-        let photosActuels = champs.photos;
-        photosActuels.push("");
-        setChamps(prec => ({ ...prec, photos: photosActuels }));
-    };
 
     const mAJDescription = (e) => setChamps(prec => ({ ...prec, description: e.target.value }));
     const mAJFichiers = (e) => {
@@ -33,28 +28,11 @@ const FormCommentaire = ({ site }) => {
     };
     const mAJAnnee = (e) => setChamps(prec => ({ ...prec, annee: e.target.value }));
     const mAJCourriel = (e) => setChamps(prec => ({ ...prec, courriel: e.target.value }));
-    const mAJPhotos = (e, index) => {
-        let copiePhotos = champs.photos;
-        copiePhotos[index] = e.target.value;
-        setChamps(prec => ({ ...prec, photos: copiePhotos }));
-    }
     const mAJLegit = (e) => setChamps(prec => ({ ...prec, legit: e.target.checked }));
 
     const annees = [];
     for (let i = 2020; i <= anneeCourante; i++) {
         annees.push(i)
-    }
-
-    const liens = [];
-    for (let index = 0; index < qtePhotos; index++) {
-        liens.push(
-            <input
-                key={index}
-                onChange={(e) => mAJPhotos(e, index)}
-                type="url"
-                value={champs.photos[index]}
-            />
-        );
     }
 
     const handleUploads = async ({ result }) => {
@@ -82,12 +60,6 @@ const FormCommentaire = ({ site }) => {
 
     const ajoutCommentaire = async (e) => {
         e.preventDefault()
-        let liensPhotosFiltres = [];
-        champs.photos.forEach(item => {
-            if (item !== "") {
-                liensPhotosFiltres.push(item)
-            }
-        })
         try {
             const response = await fetch("/api/commentaire-site", {
                 method: "PUT",
@@ -100,8 +72,8 @@ const FormCommentaire = ({ site }) => {
                     properties: {
                         description: champs.description,
                         annee: champs.annee,
-                        photos: liensPhotosFiltres,
-                        type: site.properties.type
+                        type: site.properties.type,
+                        dateAuj
                     },
                     contributeur: {
                         courriel: champs.courriel
@@ -154,17 +126,7 @@ const FormCommentaire = ({ site }) => {
                         }
                     </select>
                 </AnneeVisite>
-                <AjImage>
-                    <p>Il est fortement suggéré d'ajouter des photos de l'emplacement, dans le but de bâtir un répertoire de qualité. Pour ce faire, les images doivent être stockées sur un site ou une page publique. Exemple :</p>
-                    <ul>
-                        <li>Une publication publique dans les réseaux sociaux</li>
-                        <li>Un groupe public sur Facebook</li>
-                        <li>Dans ce dossier nuagique partagé, tout en utilisant le mot de passe <span>cyclotouriste</span></li>
-                        <li>Une page web personnel</li>
-                    </ul>
-                    <div>{liens}</div>
-                    <button onClick={ajoutPhoto} type="button" >Ajouter une photo</button>
-                </AjImage>
+                <p>Il est fortement suggéré d'ajouter des photos de l'emplacement, dans le but de bâtir un répertoire de qualité.</p>
                 <TelevPhotos mAJFichiers={mAJFichiers} />
                 <label htmlFor="courrielComm">L'adresse courriel ne sera utilisée que pour vous permettre de modifier ultérieurement les informations que vous avez soumises.</label>
                 <input
@@ -232,18 +194,6 @@ const AnneeVisite = styled.div`
     select {
         border-radius: 5px;
         padding: 5px;
-    }
-`
-
-const AjImage = styled.div`
-    > div {
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-        padding: 10px 0;
-        input {
-            max-width: 350px;
-        }
     }
 `
 

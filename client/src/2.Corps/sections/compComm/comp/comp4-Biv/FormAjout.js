@@ -1,17 +1,17 @@
 import styled from "styled-components";
 import { useState, useContext } from "react";
-import { format } from 'date-fns'
-import { frCA } from 'date-fns/locale'
+import { format } from 'date-fns';
 
 import CarteAjout from "./CarteAjout";
 import { CycloContext } from "../../../../../CycloContext";
 import TypeDeSite from "./TypeDeSite";
 import TelevPhotos from "./TelevPhotos";
 import Contributeur from "./Contributeur";
+import { frCA } from 'date-fns/locale';
 // import LiensImgDESUET from "./LiensImgDESUET";
 
-const FormAjout = () => {
-    
+const FormAjout = ({ confirmation, setConfirmation }) => {
+        
     const { coordAjout } = useContext(CycloContext);
 
     const anneeCourante = new Date().getFullYear();
@@ -28,7 +28,7 @@ const FormAjout = () => {
         type: "",
         legit: false
     });
-    const [confirmation, setConfirmation] = useState(false);
+    
     // const [qtePhotos, setQtePhotos] = useState(0);
 
     // const ajoutPhoto = () => {
@@ -116,7 +116,6 @@ const FormAjout = () => {
                         name: champs.name,
                         description: champs.description,
                         annee: champs.annee,
-                        photos: [],
                         type: champs.type,
                         dateAuj
                     },

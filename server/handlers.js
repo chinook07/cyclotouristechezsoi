@@ -47,12 +47,12 @@ const nouveauSite = async (req, res) => {
     await openSesame();
     const sites = await db.collection(properties.type).find().toArray();
     const nombre = parseInt(sites[sites.length - 1]._id) + 1;
-    if (properties.photos.length > 0) {
-        let resultat = integrerPhotos(properties.description, properties.photos);
-        properties.description = resultat;
-    }
-    // await db.collection(properties.type).insertOne({ _id: nombre, type, properties, geometry });
-    // await db.collection("contributeurs").insertOne({ _id: nombre, contributeur })
+    // if (properties.photos.length > 0) {
+    //     let resultat = integrerPhotos(properties.description, properties.photos);
+    //     properties.description = resultat;
+    // }
+    await db.collection(properties.type).insertOne({ _id: nombre, type, properties, geometry });
+    await db.collection("contributeurs").insertOne({ _id: nombre, contributeur })
     await closeSesame();
     return res.status(201).json({ status: 201, message: `nouveau site`, id: nombre })
 }
@@ -151,18 +151,18 @@ const commentairesPhotos = async (req, res) => {
 const commentaireSite = async (req, res) => {
     const { _id, properties, contributeur } = req.body;
     console.log(properties);
-    let photosATraiter = false;
-    properties.photos.forEach(item => {
-        if (item !== "") {
-            photosATraiter = true;
-        }
-    })
-    let resultat;
-    if (photosATraiter) {
-        resultat = integrerPhotos(properties.description, properties.photos);
-    } else {
-        resultat = properties.description;
-    }
+    // let photosATraiter = false;
+    // properties.photos.forEach(item => {
+    //     if (item !== "") {
+    //         photosATraiter = true;
+    //     }
+    // })
+    // let resultat;
+    // if (photosATraiter) {
+    //     resultat = integrerPhotos(properties.description, properties.photos);
+    // } else {
+    //     resultat = properties.description;
+    // }
     let nDeCommentaires;
     if (properties.commentaires) {
         nDeCommentaires = properties.commentaires.length;
@@ -200,7 +200,7 @@ const commentaireSite = async (req, res) => {
     //     {
     //         $push: {
     //             "properties.commentaires": {
-    //                 description: resultat,
+    //                 description: properties.description,
     //                 annee: properties.annee
     //             }
     //         }

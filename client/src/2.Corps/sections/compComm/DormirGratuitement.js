@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ExternalLink } from "react-external-link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -12,7 +12,8 @@ import FormAjout from "./comp/comp4-Biv/FormAjout";
 import campingLaPatrie from "./images/camping-la-patrie.jpg"
 
 const DormirGratuitement = () => {
-	const [montrerAjoutCarte, setMontrerAjoutCarte] = useState(false);
+    const [montrerAjoutCarte, setMontrerAjoutCarte] = useState(false);
+    const [confirmation, setConfirmation] = useState(false);
 
 	const alternerFormulaire = () =>
 		montrerAjoutCarte
@@ -26,12 +27,14 @@ const DormirGratuitement = () => {
                 <p>Cette carte est le fruit du travail de plusieurs cyclotouristes ayant ajouté des sites recommandés pour le bivouac. Il incombe à l'usager d'être responsable de ses actions, de respecter les règlements en vigueur, et bien sûr de laisser l'endroit propre pour les autres utilisateurs. <span>Le cyclotourisme a un nombre très limité d'adeptes, encore moins si on ne compte que ceux et celles dormant dans leurs tentes. Pour éviter que ces endroits de repos deviennent surutilisés, veuillez ne pas partager le lien de cette page librement sur les réseaux sociaux. Aidons-nous à conserver ces sites pour les générations futures!</span></p>
                 <p><strong>Cette carte sera améliorée dans les prochains mois.</strong></p>
                 {/* <CarteGoogle title="carte des campings gratuits" src="https://www.google.com/maps/d/u/0/embed?mid=1obdd8oU_9xShpHUY-L29RT6OwxerfCGI&ehbc=2E312F"></CarteGoogle> */}
-                <CarteCampings />
+                <CarteCampings confirmation={confirmation} />
             </section>
             <section>
                 <h2>Comment ajouter un emplacement de camping?</h2>
                 <p>Vous pouvez maintenant ajouter un site directement sur la carte <CommeUnLien onClick={alternerFormulaire} tabIndex="0">par ce court formulaire</CommeUnLien>, sans délai et sans devoir apprendre à utiliser Google My Maps.</p>
-                {montrerAjoutCarte && <FormAjout />}
+                {
+                    montrerAjoutCarte && <FormAjout confirmation={confirmation} setConfirmation={setConfirmation} />
+                }
             </section>
             <section>
                 <h2>Est-ce que c'est permis?</h2>

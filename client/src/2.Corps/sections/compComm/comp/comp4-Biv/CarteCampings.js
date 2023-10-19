@@ -9,8 +9,8 @@ import { MapContainer, TileLayer, ScaleControl, GeoJSON, Circle, LayersControl, 
 import L from "leaflet";
 // import Logo from "../../../../../images/icones/logo.png"
 
-const CarteCampings = () => {
-
+const CarteCampings = ({ confirmation }) => {
+    
     const icone1 = process.env.PUBLIC_URL + '/carteCampings/marqueur-vert.png';
     const icone2 = process.env.PUBLIC_URL + '/carteCampings/marqueur-orange.png';
     const icone3 = process.env.PUBLIC_URL + '/carteCampings/marqueur-rouge.png';
@@ -140,7 +140,7 @@ const CarteCampings = () => {
                 rendreCompatible(donnees.collections);
             })
             .then(() => setCartePrete(true))
-    }, [])
+    }, [confirmation])
 
     return (
         <CarteComplete>
