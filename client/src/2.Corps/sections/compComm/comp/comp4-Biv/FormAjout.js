@@ -1,3 +1,5 @@
+// formulaire pour ajouter un site de camping à la carte
+
 import styled from "styled-components";
 import { useState, useContext } from "react";
 import { format } from 'date-fns';
@@ -8,9 +10,8 @@ import TypeDeSite from "./TypeDeSite";
 import TelevPhotos from "./TelevPhotos";
 import Contributeur from "./Contributeur";
 import { frCA } from 'date-fns/locale';
-// import LiensImgDESUET from "./LiensImgDESUET";
 
-const FormAjout = ({ confirmation, setConfirmation }) => {
+const FormAjout = ({ setConfirmation, setMontrerAjoutCarte, ajoutsFaits, setAjoutsFaits }) => {
         
     const { coordAjout } = useContext(CycloContext);
 
@@ -21,22 +22,12 @@ const FormAjout = ({ confirmation, setConfirmation }) => {
         name: "",
         description: "",
         annee: anneeCourante,
-        // photos: [],
         fichiers: [],
         nom: "",
         courriel: "",
         type: "",
         legit: false
     });
-    
-    // const [qtePhotos, setQtePhotos] = useState(0);
-
-    // const ajoutPhoto = () => {
-    //     setQtePhotos(qtePhotos + 1);
-    //     let photosActuels = champs.photos;
-    //     photosActuels.push("");
-    //     setChamps(prec => ({ ...prec, photos: photosActuels }));
-    // };
 
     const mAJName = (e) => setChamps(prec => ({ ...prec, name: e.target.value }));
     const mAJDescription = (e) => setChamps(prec => ({ ...prec, description: e.target.value }));
@@ -48,11 +39,6 @@ const FormAjout = ({ confirmation, setConfirmation }) => {
         console.log(e.target.files);
         setChamps(prec => ({ ...prec, fichiers: e.target.files }))
     };
-    // const mAJPhotos = (e, index) => {
-    //     let copiePhotos = champs.photos;
-    //     copiePhotos[index] = e.target.value;
-    //     setChamps(prec => ({ ...prec, photos: copiePhotos }));
-    // }
 
     const annees = [];
     for (let i = 2020; i <= anneeCourante; i++) {
@@ -60,18 +46,6 @@ const FormAjout = ({ confirmation, setConfirmation }) => {
     }
 
     const mAJLegit = (e) => setChamps(prec => ({ ...prec, legit: e.target.checked }));
-
-    // const liens = [];
-    // for (let index = 0; index < qtePhotos; index++) {
-    //     liens.push(
-    //         <input
-    //             key={index}
-    //             onChange={(e) => mAJPhotos(e, index)}
-    //             type="url"
-    //             value={champs.photos[index]}
-    //         />
-    //     );
-    // }
 
     const handleUploads = (result) => {
         const formData = new FormData();
@@ -97,12 +71,6 @@ const FormAjout = ({ confirmation, setConfirmation }) => {
 
     const ajoutSite = async (e) => {
         e.preventDefault()
-        // let liensPhotosFiltres = [];
-        // champs.photos.forEach(item => {
-        //     if (item !== "") {
-        //         liensPhotosFiltres.push(item)
-        //     }
-        // })
         try {
             const response = await fetch("/api/nouveau-site", {
                 method: "POST",
@@ -136,6 +104,9 @@ const FormAjout = ({ confirmation, setConfirmation }) => {
                 if (champs.fichiers.length > 0) {
                     await handleUploads(result);
                 }
+                setMontrerAjoutCarte(false);
+                let x = ajoutsFaits;
+                setAjoutsFaits(x + 1);
             } else {
                 console.log("Failed to create a new site.");
             }
@@ -230,10 +201,6 @@ const FormAjout = ({ confirmation, setConfirmation }) => {
                 </Legit>
                 <Envoyer type="submit">Ajouter</Envoyer>
             </fieldset>
-            {
-                confirmation &&
-                <Confirm>Merci d'avoir contribué à la carte!</Confirm>
-            }
         </Wrapper>
     )
 }
@@ -313,11 +280,6 @@ const Envoyer = styled.button`
     &:hover {
         box-shadow: 1px 1px var(--c6);
     }
-`
-
-const Confirm = styled.p`
-    font-weight: bold;
-    text-align: center;
 `
 
 export default FormAjout;

@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import CampingInterdit from "./comp/comp4-Biv/CampingInterdit";
 import interditParDefault from "./donnees/interditParDefault.json";
-import { faAngleRight, faAnglesRight } from "@fortawesome/free-solid-svg-icons";
+import { faAngleRight, faAnglesRight, faClose } from "@fortawesome/free-solid-svg-icons";
 import CarteCampings from "./comp/comp4-Biv/CarteCampings";
 import DemandeEdition from "./comp/comp4-Biv/DemandeEdition";
 import FormAjout from "./comp/comp4-Biv/FormAjout";
@@ -14,11 +14,24 @@ import campingLaPatrie from "./images/camping-la-patrie.jpg"
 const DormirGratuitement = () => {
     const [montrerAjoutCarte, setMontrerAjoutCarte] = useState(false);
     const [confirmation, setConfirmation] = useState(false);
+    const [ajoutsFaits, setAjoutsFaits] = useState(0)
 
-	const alternerFormulaire = () =>
-		montrerAjoutCarte
-			? setMontrerAjoutCarte(false)
-			: setMontrerAjoutCarte(true);
+    const alternerFormulaire = () => {
+        if (montrerAjoutCarte) {
+            setMontrerAjoutCarte(false)
+            console.log("fermer", ajoutsFaits);
+            let x = ajoutsFaits;
+            setAjoutsFaits(x + 1); // F5 la carte quand tu fermes le formulaire
+        } else {
+            setMontrerAjoutCarte(true)
+            console.log("ouvrir");
+        }
+    }
+
+    const fermerMerci = () => {
+        console.log("fermer");
+        // setConfirmation(false);
+    }
 
 	return (
         <Wrapper>
@@ -27,13 +40,27 @@ const DormirGratuitement = () => {
                 <p>Cette carte est le fruit du travail de plusieurs cyclotouristes ayant ajouté des sites recommandés pour le bivouac. Il incombe à l'usager d'être responsable de ses actions, de respecter les règlements en vigueur, et bien sûr de laisser l'endroit propre pour les autres utilisateurs. <span>Le cyclotourisme a un nombre très limité d'adeptes, encore moins si on ne compte que ceux et celles dormant dans leurs tentes. Pour éviter que ces endroits de repos deviennent surutilisés, veuillez ne pas partager le lien de cette page librement sur les réseaux sociaux. Aidons-nous à conserver ces sites pour les générations futures!</span></p>
                 <p><strong>Cette carte sera améliorée dans les prochains mois.</strong></p>
                 {/* <CarteGoogle title="carte des campings gratuits" src="https://www.google.com/maps/d/u/0/embed?mid=1obdd8oU_9xShpHUY-L29RT6OwxerfCGI&ehbc=2E312F"></CarteGoogle> */}
-                <CarteCampings confirmation={confirmation} />
+                <CarteCampings ajoutsFaits={ajoutsFaits} />
             </section>
             <section>
                 <h2>Comment ajouter un emplacement de camping?</h2>
                 <p>Vous pouvez maintenant ajouter un site directement sur la carte <CommeUnLien onClick={alternerFormulaire} tabIndex="0">par ce court formulaire</CommeUnLien>, sans délai et sans devoir apprendre à utiliser Google My Maps.</p>
                 {
-                    montrerAjoutCarte && <FormAjout confirmation={confirmation} setConfirmation={setConfirmation} />
+                    montrerAjoutCarte &&
+                    <FormAjout
+                        confirmation={confirmation}
+                        setConfirmation={setConfirmation}
+                        setMontrerAjoutCarte={setMontrerAjoutCarte}
+                        ajoutsFaits={ajoutsFaits}
+                        setAjoutsFaits={setAjoutsFaits}
+                    />
+                }
+                {
+                    confirmation &&
+                    <Confirm>
+                            <p>Merci d'avoir contribué à la carte!</p>
+                            <button onClick={fermerMerci}><FontAwesomeIcon icon={faClose} /></button>
+                        </Confirm>
                 }
             </section>
             <section>
@@ -114,6 +141,30 @@ const CarteGoogle = styled.iframe`
     height: 500px;
     max-height: 80vh;
     width: 100%;
+`
+
+const Confirm = styled.div`
+    background-color: var(--c6);
+    border-radius: 10px;
+    display: flex;
+    gap: 10px;
+    /* justify-content: space-evenly; */
+    /* left: 50%; */
+    margin: 0 auto;
+    padding: 10px;
+    /* position: absolute; */
+    /* top: 50%; */
+    /* transform: translate(-50%, -50%); */
+    width: fit-content;
+    p {
+        color: var(--c11);
+        font-weight: bold;
+        margin: 0;
+        text-align: center;
+    }
+    button {
+        cursor: pointer;
+    }
 `
 
 const IllegalParDefault = styled.div`

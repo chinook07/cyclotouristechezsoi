@@ -9,7 +9,7 @@ import { MapContainer, TileLayer, ScaleControl, GeoJSON, Circle, LayersControl, 
 import L from "leaflet";
 // import Logo from "../../../../../images/icones/logo.png"
 
-const CarteCampings = ({ confirmation }) => {
+const CarteCampings = ({ ajoutsFaits }) => {
     
     const icone1 = process.env.PUBLIC_URL + '/carteCampings/marqueur-vert.png';
     const icone2 = process.env.PUBLIC_URL + '/carteCampings/marqueur-orange.png';
@@ -137,10 +137,13 @@ const CarteCampings = ({ confirmation }) => {
         fetch("/api/tous-sites")
             .then(res => res.json())
             .then(donnees => {
+                console.log("fetch");
                 rendreCompatible(donnees.collections);
             })
             .then(() => setCartePrete(true))
-    }, [confirmation])
+    }, [ajoutsFaits])
+
+    console.log("fetch again");
 
     return (
         <CarteComplete>
@@ -178,9 +181,9 @@ const CarteCampings = ({ confirmation }) => {
                             cartePrete &&
                             <>
                                 <LayersControl.Overlay name="Sites non-officiels" checked>
-                                    {
-                                        lesSitesA.features.length &&
-                                            <Sites data={lesSitesA} onEachFeature={(feature, layer) => {
+                                        {
+                                            lesSitesA.features.length &&
+                                            <Sites data={lesSitesA} key={`sitesA-${ajoutsFaits}`} onEachFeature={(feature, layer) => {
                                                 surChaque(feature, layer)
                                                 layer.on('click', () => choisirSite(feature));
                                             }
@@ -190,7 +193,7 @@ const CarteCampings = ({ confirmation }) => {
                                 <LayersControl.Overlay name="Sites pour cyclistes seulement OU à faible cout / gratuits" checked>
                                     {
                                         lesSitesB.features.length &&
-                                            <Sites data={lesSitesB} onEachFeature={(feature, layer) => {
+                                            <Sites data={lesSitesB} key={`sitesB-${ajoutsFaits}`} onEachFeature={(feature, layer) => {
                                                 surChaque(feature, layer)
                                                 layer.on('click', () => choisirSite(feature));
                                             }
@@ -200,7 +203,7 @@ const CarteCampings = ({ confirmation }) => {
                                 <LayersControl.Overlay name="Sites offerts par un propriétaire" checked>
                                     {
                                         lesSitesC.features.length &&
-                                            <Sites data={lesSitesC} onEachFeature={(feature, layer) => {
+                                            <Sites data={lesSitesC} key={`sitesC-${ajoutsFaits}`} onEachFeature={(feature, layer) => {
                                                 surChaque(feature, layer)
                                                 layer.on('click', () => choisirSite(feature));
                                             }
@@ -210,7 +213,7 @@ const CarteCampings = ({ confirmation }) => {
                                 <LayersControl.Overlay name="autres" checked>
                                     {
                                         lesSitesZ.features.length &&
-                                            <Sites data={lesSitesZ} onEachFeature={(feature, layer) => {
+                                            <Sites data={lesSitesZ} key={`sitesZ-${ajoutsFaits}`} onEachFeature={(feature, layer) => {
                                                 surChaque(feature, layer)
                                                 layer.on('click', () => choisirSite(feature));
                                             }
