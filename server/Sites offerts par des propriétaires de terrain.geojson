@@ -1,0 +1,173 @@
+{
+    "features": [
+        {
+            "geometry": {
+                "coordinates": [
+                    -70.80693,
+                    46.537417
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "<img src=\"https://lh3.googleusercontent.com/umsh/AD1GIHPCzl3bHnL_d7K3yMd9WBWb_ZxwcPg_zJI6rEgTUmdpnzqrx1bCB-0pCZCOG4w62rtLcKBmyjf8Ws-JAeCx1wfCRYYvhUmrZKzjv7qX5gYVTPzmptXbYrc8p18w6yReX33L4OxbWfOfPH0waV-KC-96j39eUuVU5WURMcYIRT717efeuNtiItYhge1ZDTYoePCJ-aH36GTQa5lb09gp5VKrFYOqQBYBRfgpnHU6n26jd0DbZ9wXTijHFKXY6ewf-3lJWMYfHd3r5Xbcr1qe5Qp_DbS_TnAw5MznHQv6h9S4JgrcmoGaTMGstSmdP0bqQKe4PYRGEhk2zLsXKxv4YUQ5cz3LiUZvjQIlNV_14bRfo2rdr1NF1dyr3UdCVPL7h4bkO4JopTEu6ozAgGipebJHwfW_38tNo9FtdB3uccg57bkc5Z7A6YNnLHvqwdAqLxF1P43DDE20Wbvl_rSX-LSjIhMzrkpj4xogNiW-2N86ezVK2_kAVEoolq9ZW1-1EKhRuQZgQ1TqD6dHlEpzvXNHv38wiqxzPl-Sy1-Xjj0qqj3vtjAGUd5MyLLJ6espoQmXLt9HilDwi_ovOKXViYp0krnMG1PTVmeWU8VqNVV4LNiv5xzEKKi_q-PpK0gW3ikrYAYJAPkMvfXqsFLgNQT7y7auxkVTrPRph3ZWxjHTmhNnFZ3iy4tKhJOY3UKcFc82VK1OJXmLb2odYttcB0P1sNP12niDIjQS836HU2ku1Lp1BF4MpQEZiM5hLv1lJwlyh4H8-xFgxvdhb8pGbmtukiUdpD9LaJktCjhX3Yrf9fOzZ9CJXbW1uzhJqP9dJsFlqu89BKvbuLNuASWlT6AUj2zHCqvMkHiH6zAI59V4MWa1K3t0dk-NvAWpAjY9QETHDoIRcY-mS27Eqk_7RwCn-Hsy3CXdrEmHgJbqV2ceusfF9q5BJAxDuJ5AjoE8OrPdihYezfklS77yUjOk35nzVIo8nat0Z8UmMPpwbyXoEzSQNW69joAnMDUFFN9eAaIXxgkrkBFUKBloGywyJcptp04wdZPQKknJ3IE\" height=\"200\" width=\"auto\" /><br><br>Le camping est fermé mais le proprio accepte que l'on s'installe pour une nuit. Table à pique-nique, emplacement pour feu. Il y a un abri avec table et toilette sèche habituellement mais ce n'était pas encore ouvert il y a 2 semaines.<br>***<br>Ancien camping de Saint-Malachie. Il y a une halte vélo avec abris, tables toilette.<br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/tfggnsqtadgcjcsmjumoi2ja40/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivItMnE66h7p19Z-CL9zUJdP8HeuEh_MWVCVA2wOB4hGJc32vDqf5Zkl1YsPIe9YuxsO-P09jrR0ZWnhCrak6TaD1iFwqpo4rz9nmMDFrKi2Rigc_7LF7IJG1QcVom4nsFX4ylCt0S2cEkrdcMoaWxMEcZeppKfTpQN9nlEqu2JJ9kBa1Uya1VOG8sw_OCQN9U?session=0&fife\" height=\"200\" width=\"auto\" />",
+                "name": "Ancien camping saint-Malachie"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -65.48198,
+                    48.03765
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Après un souper ici, le propriétaire du café nous a proposé de nous y installer en arrière pour la nuit. Quel accueil chaleureux! <br>Les repas sont goûteux et les croissants trop délicieux!",
+                "name": "Café des Acadiens"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -76.460893,
+                    49.403251
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "<img src=\"https://lh3.googleusercontent.com/umsh/AD1GIHOAi_7kh0v7X5y_nCkYwMasCq-O3SBSkzpzZQALOvJksyaC1TdL4zR2cUTgZLSmoRybe6e1l2qCFRKAIU60MG5ZH8KoDTVmrjZ0viKO139go98TGqa-SnxAUjsfZHaOz18Rn8pf4D7xKU3idNXtuWJYcHPrjdw0akcAEWMf2EkYCwiuQP8pJD9VhrCU6Fjt0acdlTAu_4iqh5AUf6-LDEGFQw8jUZgdd04Kg76-nfnSaJPpXtygs4Tk5sT5_Hzv7goClMX0tfnJZFQPMrVmvJxXnZm8LIwkew9e2pqlLDDIHLBTt3QI8B_jtgTWMKrIkTBLh0yjx4sF8H7vFsswa17MZJxOwxxev_FS3GKQXMR538I6LbseQUxVlVoJ4smxpZgmxDPeACWUQei50BMkR4Ar3q73S_mxNJcMAvL7CN_z8nooRYJgrUAYAB_MacIy0SDc9enihufdUj5h9k_ul5Zugop-WZp9bwxRYVu7XcLwTFbWqcWca3xKTUT9XYh_g7kb2zc5NlKpXXGs7eSQVFJawc-m7tAZ0NOoRlGt7UN9uv55s0UBpgm9uJ_W4nA3zw4jd-EjvrsfqNejcDFZqQ\" height=\"200\" width=\"auto\" /><br><br>Pourvoirie Miquelon, sur la pointe du Lac Pusticamica, dans le hameau de Miquelon<br><br>Le propriétaire permet gentiment aux cyclo-voyageurs de camper une nuit sur un terrain sous les arbres, à proximité du lac.  Espace plat, suffisamment grand pour plusieurs tentes.<br>Nous avons campé ici avec la gang de Echo Explora le 22 août 2020.<br><br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br><img src=\"https://lh3.googleusercontent.com/umsh/AD1GIHNlavGCY45fbjupz__3VKYHQoo3LdSqOkywDcqUInoZ3yE1ywZM40ef6tSO07x0tGMDeaVy8i7fwQRUnAVgRQSy8DutHpfcDqkqquiwaoNE-YpTCdjO1J8SsA3jDatZxiqkn4uOeesq4seNtL2c2F9NMwEOYzufgAvU2WcpEXWD_Iwe90rkthG4fEoB7nmF-G5qQZjvoKFjPBdYvYtMCv3hvbCxfJ4PAvXQd6gBXOywILCRqADN6aFUc6oAnq4rmO9awNSRZyjUi3Bz_xJwK8RVOh7jvHEHXdM3O1ZLiadYrXA9Ir8LyQVHeFB8IS-65uHqUjMhYlGYMc0x2AnIehziFKDqOwRoIXoeJICGCVAuE8WfB_pC9R0s8tO1ICDDBG1sjIMQNGasfocXZUWVbe2uA7QoJ6cRVvaY1SzP5CZRIxocqLFt57hRNxViyZVdRevTewPXdJeCrLLVK5RZZNbV8B2BXNB8WoIxrqyh9VHJmCuXf3-afJ_rzAl0PnowYCBsqfoRBSpXVfCQGyUuBQn3zEd3HawKljr3hPFCEr6GKzhua-KWgB6j_b3O7e4gUtgaQq0ayO6KSfJeUvfw\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://lh3.googleusercontent.com/umsh/AD1GIHMLppujJuAjLnqtpQ0GCG0lnGLkCmhd2k7j-0_qTWrIz3F2dxUr8FrYAsiOp0WSOLERXkwOxMe0w8WXAynpnBbHDKUiBkmOyWnxj7uQVtK8SQn4itLW92g-Jcwjw44MxaKOXmrOhFzTqTfslN7PlLAMcZ92vmTZewXF1uHtBXcq3njCPQC6FcSwyUijntKtxR-CxGSv2i-FQ3gM_-CySHrONlSLRqgHPLExDljnVwf1wBotNilwzh5WO_SKZhuri-s2aPbgOsbkQS_1xyYACNR99uZRCOAi3HqvdXwZRwAssYBPx1Y2YOP1s3GnzZZyVnI0-kn42WwRiWdlYq3nDkFyyKle5PnkoByYmV9yhPuG_-4kRU03gwSahUwbI0ZVTpbcPqc_svbw5fv6XiQv-e7uXYVGIMxsg87SMeNBysfsmJixcomdenZzETyRLxodiyubt__b56llxqgCUL5KDp0gmG3kT618REBU-6XzXGTtJB2cb4AbTF24leUR1pN1k4V_ZEGglbImUBvK8Mi9vPkcp3Naw1FUBU9nvBBUNtTwPyxAPmzrEiCl50fNQ6jdcf45yigOUQR1QEH3NIeLag\" height=\"200\" width=\"auto\" />",
+                "name": "Pourvoirie Miquelon"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -73.242832,
+                    45.550787
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "<img src=\"https://lh3.googleusercontent.com/umsh/AD1GIHO75AzkL8ik5YPIb2f6zksx1mBBvpfLM6Dd4-bEX0ZYimxdXtYSVbKOlzTXJ_grjSmUNXIL_OHBVf5C-o8N3y_lGyyj7xnfxwX50mCKjeG53qucAakGHRu4QcNamymiWiFrtGCYTx_AWQ37imi3q_RqwfQTn_7QPG7DwmvhAp1KqZXreSiTf_-ekxkY_naA-NK2gObLXQRbjnUuNC1vr8d4p-lvilrfcTSSKE05FopwcoiAIfAlI7prLCm-r7a-VJmq31ZgqFTdEBQPJXtQgqqxjSplDrLgcjqTWDs0GqJpN1e2PoIbFfLpQM7pF0D8gxob_Rwd4VCfpDNDVdpgzmzVH4dYJWq12jXHegUaUmmol8az9yC9Z2m7KK1_Bbzya51VnqDlmpb6Jx9D13iPdpBAG98d9-lpl1SCYqciteT29k3SmGHo0Bt5gvAFBrJJnXlWR8jFQ7ZedrrsHJchAlHrJSrHmzWV6i-EpZYXOkVLARNgXDbhYT8ZbO6M7TFU5XZBrt4AcJpmkQ6b9Jy7q9zVIKI0twMI_G1kv0dhl6Mb5HwfFH3aDQXs29p_8O26gEfxev-D74Z3qlHzT7A5vA\" height=\"200\" width=\"auto\" /><br><br>812 rue Albert-Leal, McMasterville. <br>Contactez nous par notre page Facebook.<br>Bienvenues cyclotouristes! Résidence avec piscine, spa, douche, garage pour ranger les vélos, cabane pouvant coucher 4 personnes, terrain pouvant accueillir tente et bien sûr eau et hospitalité!",
+                "name": "La famille aux 10 roues"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -70.977199,
+                    47.008613
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Note de l'admin : merci de mettre plus de détails!",
+                "name": "Point 7"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -71.384272,
+                    46.675512
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Maison de campagne situé à St-Nicolas (rive sud de Québec) à 2 minutes de la pisciculture Bernieres... vaste terrain près d'une forêt, jardin d'eau, grand potager, accès à une piscine (non-chauffée) petits animaux de ferme, accès à de l'eau potable et douche si désirée.<br>14 km des ponts de Québec<br>8 km de l'accès à une plage au fleuve à marée basse<br>Contactez : janieblefebvre@gmail.com",
+                "name": "Maison de campagne"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -72.683238,
+                    45.388266
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Grand terrain où on accepte tous les cyclovoyageurs de passage. <br>Idéalement appelez-nous : 438 725 3787<br>On offre eau, terrain pour camper, piscine, garage pour ranger les vélos au besoin - et idéalement on se partage un bon repas sur la terrasse si c'est possible.<br><br>On ne peut accueillir du monde dans la maison jusqu'au 12 septembre - mais vous êtes les bienvenus pour planter votre tente.",
+                "name": "Chez Yan et Laura"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -67.453608,
+                    48.863914
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Petit Matane viens piqué ta tente chez moi 819 919 6595 par contribution volontaires",
+                "name": "Point 224"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -71.6372832,
+                    45.7257903
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Maison ancestrale avec grand terrain, table à pique-nique, emplacement pour feu, toilette à compost, étang, belle nature. Nous sommes aussi sur Warmshowers (Hildegund Janzing et Michel Bachelet) et accueillons avec plaisir les cyclistes de passage. Vous pouvez nous contacter avant pour un accueil plus \"organisé\" (avec repas partagé, si ça adonne!), mais vous pouvez aussi simplement vous arrêter au passage et planter votre tente, même si nous sommes absents.<br>Contact: hildejanzing@gmail.com; 819-828-0518.",
+                "name": "Maison ancestrale à Ham-Sud\n"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -70.694796,
+                    46.9437501
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/2epvilvtvetu1ld0ig0rug5ucc/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivT3E9XcdE_q3ouj48YbyECMZpgPdSsV0Pwn4Q-oirWvfhVZxvjRbBvUU23fUPRc5Y_W3E6oJaP9gdhOv_pQO4utfUQntpgyheXIlSSSq_QRNi9iCWU_hQFkr6l5beDm3MEeYvSvsYMkgctc3nf4wkRYdtfQaaMzoMf_o0vkUn3PmQ-5CCITmMfn97WXXzk5ro?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Voir image.",
+                "name": "Bord du fleuve\n"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -72.8797445,
+                    45.4352974
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/3n1v862hb4rmdr3qm3abgdifks/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuWJXGsAU1d_WyYAmCR4zgTyeMYx4Nn6dJixklY6sol5lK7YbaVoxfkCMt9Y6tyRVXBwaLUkfToNMZ4zoXaDOgZJ9Bh42uCoGkyoAHHURRMgvx0c0B3BjeVeUC3LOYH8qyoj4UTMTEfjFJzsPRlrGmOpxmrsmBEQUzGUiKjwhOXL9KYTPNv73Ay4fBMDql1vmpy?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>La ville de Saint-Paul-D'Abbotsford offre depuis 2020 des plaques de bois pour les cyclotouristes qui veulent y installer leur tente. En 2020, le projet avait été reporté, mais je crois que les plaques sont installés maintenant. Le parc est bien équipé pour le camping (point d'eau, toilettes, abri avec tables) et le dépanneur est juste sur la rue principale. Un bel endroit!",
+                "name": "Plateformes dans le parc "
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -70.8286741,
+                    46.890043
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/a2i0m16b6l1jarmjhvlq7usdbo/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pis0XmypLBju_OQQDsH1kQtAp-Hr2P8IAWP5odxR2hoSypQ67kJel-8t7rbHK66KV3rgjp0p5t1AxIsJ3kBmvTmDhu5R9xn4t_CR2gcO1vGWLt_hVtlwL9MDNXLQ3217cujNL1ogQPlQl7_YBjlM9ExJaoObwqWEAELf9XxIAWarSQD96o9Nn5iBFkyEnG75iEOK3EdK6HsEdMb6CLloDqDCNelu1S48Kgg_9vlr1y_ZfzDGoA?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>On a un beau site de camping (sans services, sans traces svp), chez nous à St-Vallier dans Bellechasse, sur la route verte. Site privé, ombragé, tranquilité assurée, toilette sèche, rond de feu, plage sur le fleuve et en bonus très peu ou pas de moustique!<br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/56f6gcr4do01cckbf2tfl3akhg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitkBFTzX9XA8DyQDsLmOn9TOVuRdclTIcAZ-XFDqBIw_fmHcqfqK2hkciIpdnsD9y2wAd2dkiVw86VrE6alz9qudRbIIsBClmyB7ybTPjmo03zLHu6uzLJFzC5-WbhJ_L-GVhFwzB-lrAM2xwzrBkrIytHlT064-uyTyMI9opeL4AH29vF1RaOuROSFA0KFdQ6YUaPw0V-PCsam0JB2HRmfQ5h4AL6LwNaa0Rxdm5KuGZWk8g?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/5qf9ek0ik6oudi6pdbt9nfe6r8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitIdmQzH0Td_TXr1EeG3wQ231dlt56iXyBnqNYCKbAKKGsARXUqoF3uz4OgPKpz9zX5mUiOuC68WnM8LXof8rw5woQlqgFHMSZJirWHDlf37HX0Pt654BuwGSxLvYi1GxQkyuLZTGeUmK2s1n7s6UwsciL4CHFGcozSGR4PClXojsAVF-0Ygm2t3hXygzHL0Wk3UHGVwIv7xIxjdPeY9bl6JghXm52C6_7XpfHuoeVZU2X6lA?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/0dnoh0kgdkk40vgg1t801e033k/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiukvhD2DGiMzf1Zk5NPLIx3Hr0vT2d2jYYUDD3A7W4H8Fum5PbS2BeV05_9Z2_R-dl4nYpreGAsXU32uq2N5xhXzlB29DiUcAVfTru0IcFPjNVK_DMbrWm-x-C0RZAaBWT_qB6eRRR8hrUrV3JLe-sXv1Xr_mt40mRWYp3QeX8n_Teo0EpH_gCNZXh_4VJ8pS5z565j9xafbNm5mozJmzXxUVJAIWJ40dK8gR_cVHD_HSih9w?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/g09upgot25pe0no9kdkcd3ure4/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pitf_oQGsQrx8cdhaxTBkfy_Xca5FanyWlkk75S-dFZK-PbgXx3wJssuYKjcI41WyGuxB3zFPg006aL_r9s614ZIclDDGmFTOD0rqlluvjkGrGps4QEAd-Evd5YhCHwpKmF_FBsOqY1FzKzBa87OLT25F-lzwh7bWsYuieFmZcNAIB3SsyvvcgH5JPWNbHpZwnOHlAQkUuXC-sgAgMJxSOr0Ae05aP_kFHzYOKHOG_MxQi74Kg?session=0&fife\" height=\"200\" width=\"auto\" />",
+                "name": "St-Vallier"
+            },
+            "type": "Feature"
+        }
+    ],
+    "type": "FeatureCollection"
+}

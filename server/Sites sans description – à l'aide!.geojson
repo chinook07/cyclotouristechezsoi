@@ -1,0 +1,215 @@
+{
+    "features": [
+        {
+            "geometry": {
+                "coordinates": [
+                    -77.800771,
+                    46.366273
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Point 239",
+                "name": "Point 239"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -67.7277519,
+                    49.3619126
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Point 216",
+                "name": "Point 216"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -70.3037424,
+                    47.183955
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Point 200",
+                "name": "Point 200"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -72.6465046,
+                    45.6725884
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Point 191",
+                "name": "Point 191"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -79.4498549,
+                    48.6889606
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Point 158",
+                "name": "Point 158"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -79.2984488,
+                    48.5163693
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Point 155",
+                "name": "Point 155"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -79.2956858,
+                    48.604115
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Point 157",
+                "name": "Point 157"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -72.3897948,
+                    48.9944938
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Point 121",
+                "name": "Point 121"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -66.060374,
+                    48.7987605
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Point 102",
+                "name": "Point 102"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -70.6444069,
+                    45.8533559
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Point 62",
+                "name": "Point 62"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -73.92716,
+                    45.7224121
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Info ajoutée par utilisateur inconnu",
+                "name": "Camping sauvage sans eau\n"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -69.8945809,
+                    45.608836
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Point 47",
+                "name": "Point 47"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -65.6563,
+                    44.150983
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Point 42",
+                "name": "Point 42"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -65.788136,
+                    44.1825056
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Point 41",
+                "name": "Point 41"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -61.6220074,
+                    47.4413845
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Point 244",
+                "name": "Point 244"
+            },
+            "type": "Feature"
+        }
+    ],
+    "type": "FeatureCollection"
+}

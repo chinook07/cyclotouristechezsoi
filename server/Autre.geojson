@@ -1,0 +1,75 @@
+{
+    "features": [
+        {
+            "geometry": {
+                "coordinates": [
+                    -72.6140398,
+                    45.1127559
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Point d'eau 100 Rue Pleasant",
+                "name": "Point d'eau 100 Rue Pleasant"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -62.8061091,
+                    50.2894102
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/nfqgb87c3gt9vui3vut50prev8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pittken36HopbW-K8IuL8sVOYJn9S-Ec1OMkuFdtn7mQWzKiPSn7f-fk7BJ_cHEDNYmezO0qqOIpILozEd2HsDpfHsb6AHwJqVgYpsL7B5z59w6VWwYRCPN5H0cWmKk5OfoZdcDYieL5S4cTWMeinae8KIURQ6VeZmD9m1KZn8liUWGKVkPm2XK98un8sVTnTJZw?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Chambre et dortoir, cuisine communautaire, possibilité de faire son lavage (demander à l'hôte). Hôtes très sympathiques. Odeur de moisi au dortoir.",
+                "name": "Auberge de jeunesse\n"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -65.5065723,
+                    50.287713
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "A compter des spots de camping à l'est du pont de la Rivière au Bouleau, il faut compter environs 200 mètres vers l'est. C'est un petit ruisseau en pente du coté nord de la route 138, on entend couler l'eau assez fort quand on approche.<br>L'eau est claire et nous ne l'avions pas filtré.<br>Site visité le 7 juillet 2020<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPIonMaritimes2020",
+                "name": "Point d'eau, ruisseau en retrait de la route 138"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -68.4927945,
+                    48.4917208
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Point d'eau",
+                "name": "Point d'eau"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -72.1591626,
+                    45.2670085
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Douches à l'intérieur du bloc sanitaire derrière le resto Petit Taco. Utile quand on voyage en mode camping sauvage.<br>Utilisé en 2021.<br>https://ioverlander.com/places/95188-shower<br>-admin",
+                "name": "Douche"
+            },
+            "type": "Feature"
+        }
+    ],
+    "type": "FeatureCollection"
+}

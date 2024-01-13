@@ -1,4402 +1,4402 @@
+// Exporter la carte GMM → KML, une couche à la fois
 // Pour la conversion KML → GEOJSON : https://anyconv.com/kml-to-geojson-converter/
+// Créer const tableaux non_officiels, officiels, proprios et autres.
+// Dans chaque tableau, coller le GeoJSON, plus particulièrement remplacer le tableau vide par le tableau à l'intérieur de features.
+// Si on recommence de zéro, supprimer les collections dans la BD. Attention, supprimer toutes les collections supprime la BD aussi!
+// Aller dans terminal, cd server, et faire node BatchImport.js
 
 const non_officiels = [
-        {
-            "geometry": {
-                "coordinates": [
-                    -74.6712716,
-                    45.938938
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/n7fqefoj480g295be42446662c/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6vVPFfrmtjNRJqyvM9Wm1QeX_aH8ndRmjeHhhCgvJ398uueNRehvpskdRiY9QFdrb_lmFcfvUHan8PDQkfYqnH6fC4mYUPawyc6W1rzZB3wKmihKPdoRWFcEcDr5ycXjz4CDbpBoYtpoVV9JW4SIRGb3t0mrdid3d-yZbtBTzYeS9yk1NftJT9j2EgLAenurSF?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Accès par un petit sentier près du pont du Corridor Aérobique. Techniquement privé mais sur la carte-guide pour les canoteurs en tant que site de groupe. La plage est immense.<br><br>2018.08 : nuitée tranquille, canot-campeurs respectueux à l'autre bout de la plage.<br><br>*** Note de l'admin :<br><br>2021.08 : un cyclotouriste s'est fait avertir par un ami du propriétaire de ce terrain que le sentier accédant à la plage est privé. Il lui a laissé camper là après une bonne discussion mais c'est à vos risques. Le canot-camping est légal car la plage est publique, mais la personne en question qui surveillait le terrain déteste les cyclocampeurs.<br><br>*** Suivi :<br><br>2021.08 : J'ai campé là récemment. Il y a effectivement des gens de l'association des résidents du chemin Courte (à qui appartient le terrain) qui patrouillent régulièrement. Quelqu'un a tenté de m'expulser. J'ai joué la carte de l'ignorance, des problèmes mécaniques et du fait que je suis mal pris pour lui convaincre de me laisser passer la nuit. Je déconseille ce site! :(",
-                "name": "Plage sur la rivière Rouge – ATTENTION : lire l'avertissement!\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -71.8547962,
-                    46.8868945
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/vgvpd8fhvsormnfkiojt4962es/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5b2lBpVxc8ATYyJPShIHN8EhFO62_0COwdWdXXbY99jOvzgJlFo4m_-neofZZIViCvKBKXVbTx6DSxJeCJyj3IwmD-ddNDDZANqg6y2Xwue44gtM8NYQDDL96m5BoCAgBv33m7fcCO-xo2Oy2x5AzTK_WStY9uv6rsjNXi5MMx2Gfs57PpNCqvEOTmO0j64Fjc?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Accès direct par la Route verte. Aucun panneau d'interdiction à cette entrée. Pas de toilettes sèches (contrairement à ce qui est indiqué sur la carte).<br><br>2019.08 : nuitée très tranquille au premier point d'observation.<br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/8nvum4vrj3h22rptoehnsv8rdc/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5fTVhvJgC7PHF4VL_dY_aYv80z0pZa3xaBlkZQKnVtCYYSuoSV5Rfpc0bhmsE9eqC89tJz7YB3Paclf65-97OzmZvmuRutl6rK8YpUotiK0bnZW86CcNmSQsNRCUc0FUu8-lVQBYVzhsi2VLiXYpxaAghfnATZebdtF1P5i2cFgzJeT3hrOz4uJNRXqsK9bt2V?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Parc de la rivière Ste-Anne"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.8016545,
-                    47.0143466
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/8drtj9e4iurbah2tk5aqilcht8/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4FY0b8BfFdv4yzKZzCtAt_22xPdUuKDDu8MGE19Aw9d5U174K2ic7tqODGkgYfMscUbbRvDz2QHq7tfUfTCwGhxpdziNytKzFyEiK2xZQNyWoto2BHqwO_vkByN1qFKX1DtDz11SdhmQ_cWJd38R8Yf72Zt6vC24fKpP5XeSR5dMEveuRhX2gDSUOx_OsoBztB?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Accès via le ch. de l'Anse-Verte (privé), puis il faut faire passer son vélo par-dessus quelques grosses roches et pousser son vélo à travers le sable et le gravier pour trouver un endroit tranquille. Situé à côté du camping des scouts. Toilettes sèches et point d'eau à courte distance dans la forêt. Super beau lever de soleil. ATTENTION à la marée montante!<br><br>2019.07 : nuitée tranquille, quelques passants.<br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/fel8c9jl7ej268797flbnnh8j4/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7nba-b-diRLXBPh0OE8kq--aOQ9cnXVPMv4vDgWSesrN51VHzA6dEm2N64rPX7rqYZ9I-cTwgxpRxggmQweQjx46TBn89bkkyofVYHgs8CLtPnjHABJZYZbXG15LCF6E6-aQvfdgN-72j_3KT-HDFuRqR5-iXGpo0sxW8F1dUowp72p4VAvXjQM4KmhrgPN1PF?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Pointe d'Argentenay"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -69.8799424,
-                    47.2550238
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Accès: Route Drapeau Sud (très important!) passé le 1er ponceau, jusqu'à une fourche 6 km plus loin où vous prenez le chemin D'Ixworth à droite. Roulez un autre ~4,5 km, puis traversez le ponceau à gauche, pour ensuite garder votre droite sur le ch. D'Ixworth. Au \"carrefour\" triangulaire en pente avec plantation de conifères au centre, montez la côte (au lieu de prendre la droite vers le pont enjambant la rivière). Une fois la côte gravie, le petit cul-de-sac à votre droite mène au point de vue sur la chute, d'où vous pourrez aisément trouver un endroit pour installer votre tente.<br><br>Chute: Les rapides en amont se transforment en une triple chute tonitruante. Un 1er grand bassin pour nager baigne à son pied, à peine connu des gens du patelin.<br><br>L'on peut accéder à son 2e bassin qui le domine d'un mètre de dénivelé en nageant à contre-courant, puis en rampant tel un lézard sur des roches mouillées. Avertissement: faites gaffe de ne point glisser puis chuter: l'endroit est situé à au moins 12 km de la plus proche localité!<br><br>Un véritable paradis sur Terre vous attend dans cette grande cuve rocheuse, où l'on peut se faire masser le dos par la grande chute, mesurant environ 4 m. Un 3e bassin la surplombe, auquel il est aisé d'accéder via une courte marche sur le sentier. Suite à de fortes pluies, le courant pourrait vous empêcher d'accéder au 2e bassin, ou rendre la baignade dans le 3e périlleuse. Le 1er bassin (en bas) demeure sécuritaire peu importe la force du courant pour quiconque sait nager.<br><br>Il y a d'autres petits bassins peu profonds pour se baigner en amont et en aval, dont certains légèrement moins \"sportifs\" d'accès.<br><br>www.facebook.com/francsoisd",
-                "name": "St-Onésime-d'Ixworth, chute de la rivière Ouelle"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -66.3817809,
-                    49.1667185
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Accès via la rue Du Havre, environ 7-8 km à l'est du \"centre-ville\" de Ste-Anne-des-Monts.<br><br>C'est la rue des petites maisons des pêcheurs du coin, avec vue imprenable sur la \"mer\" et ses rochers, où fourmille la faune aquatique même à marée basse.<br><br>Ne vous étonnez pas que des pêcheurs viennent \"sentir\" votre campement aux aurores, vous saluer, puis vous jaser leur vie si jamais vous étiez lève-tôt. Immersion gaspésienne garantie! :)<br><br>www.facebook.com/francsoisd",
-                "name": "Ste-Anne-des-Monts (Petite-Tourelle), rue de la Grève"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -66.0637353,
-                    48.8059421
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Situé à plus de 400 m d'altitude, et à seulement quelques kms au sud du magnifique parc de la Gaspésie via la route 299, ce site de camping est fichtrement sauvage et n'a rien à envier à la SÉPAQ!<br><br>Situé peu après le 2e km du chemin de gravier menant à la ville-fantôme de Murdochville, sur votre gauche juste avant le premier pont.<br><br>Superbe lac au rivage de sable fin pour le bain du matin, quai pour canot / kayak. Micro stationnement à éviter pour le camping, sauf près des arbres ou dans les herbes: les pêcheurs matinaux peuvent y rentrer plutôt rapidement avec leur 'pick-up'.<br><br>www.facebook.com/francsoisd",
-                "name": "Lac Ste-Anne, sud du parc de la Gaspésie"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.8195034,
-                    47.054272
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Pas de services. Une patch de gazon et deux tables à pique nique, un abreuvoir. OK pour passer la nuit si on arrive en fin de journée avant d'attaquer les côtes de Charlevoix. Voir https://www.google.com/maps/@47.0539377,-70.817702,3a,75y,161.23h,76.75t/data=!3m6!1e1!3m4!1sPve5v7776HX_AGhVkQOSWg!2e0!7i13312!8i6656",
-                "name": "Halte routière en bordure de route"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.8164411,
-                    47.0534826
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Mini stationnement avec table de pique-nique.<br><br>Coin très tranquille de nuit, mais pouvant recevoir nombre de visiteurs à partir de 7-8h.<br><br>www.facebook.com/francsoisd",
-                "name": "Cap-Tourmente, marais des Graves"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -69.9894195,
-                    47.738395
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "2820, boul. Malcom-Fraser, La Malbaie, secteur Saint-Fidèle.<br><br>Nous avions campé sur la pelouse plus bas sur le terrain après la fermeture du centre, puis démonté les tentes avant l'ouverture.<br><br>Tables à pique-nique, casse-croûte et  quelques commerces à proximité immédiate.<br><br>www.facebook.com/francsoisd",
-                "name": "La Malbaie, St-Fidèle, poste d'info parc marin Saguenay-St-Laurent"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -69.8267274,
-                    47.9959193
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Nous n'y avions pas dormi, mais il y a certes moyen de trouver un coin retiré pour y planter une tente.<br><br>Tables de pique-nique et majestueux lac. <br><br>Avis: bouchons d'oreilles requis si vous aviez le sommeil léger, car la route 138 étant la seule reliant la Haute et la Basse-Côte-Nord au reste du Qc, le camionnage y est sporadique à toute heure (et comme le lieu forme une cuvette, il peut y avoir réverbération, et donc amplification des sons).<br><br>www.facebook.com/francsoisd",
-                "name": "Deuxième lac du séminaire, halte-routière"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -68.8693493,
-                    48.3107302
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Stationnement du belvédère où il est assez aisé de \"camper en pirate\" à proximité, de préférence en bivouac ou à la belle étoile (l'endroit est tellement paradisiaque pour ça, avec la vue, puis l'omniprésence de la flore et la faune!)<br><br>Il importe simplement de ne pas camper trop tôt ni décamper trop tard. Bien que le site soit situé hors des limites du parc, les gens de la SÉPAQ pourraient théoriquement passer puis vous exiger un paiement pour passage quotidien, ce qui est relativement peu pour un tel lieu.<br><br>www.facebook.com/francsoisd",
-                "name": "St-Fabien-sur-Mer, belvédère Raoul-Roy (* parc du Bic, SÉPAQ)"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -73.9873712,
-                    45.1244781
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/guku8lcs8682pmu9gc85ahpo1k/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5-YEfyBWee6xWAB_qbMN4idC79Wy2RSxwZToeUB6W7ISUH7bu5u1EZvOp0xy8DpzQRTXowiA0KopaReGMH_CoxzeY-n3tTDxpx3YL2Jq7wyYbyW20XjtziTZZcKcJhAl380MxHmfhWYJ7fNA0jQDsNCHQMP56PL3Dy8C_DBYIMwHzMXp8-PpgkVNnwqEm88_F9?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Idyllique sur la rive de la petite rivière Chateauguay, abrité par de gros arbres matures. Au bout des terrains de soccer. <br>Pas de table de pique-nique, pas d'eau courante.  (mais le village est tout près)<br>Bruyant très tôt le matin, car beaucoup de faune près de la rivireè, et la route 138 est tout près.<br>Nous y avons campé avec bonheur le 25 mai 2020<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/luar38n71jt6db87d2d5l7226o/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet78zblxm70QodJ523KuYuZURmnj7xz3w5ziWyu6YmpupcvRyw2oLGg0iVhtKeJrRWYTw1JvCIqAJZ8QYueYjpVkrAndroZsnVie4ueO2mpCHbmGKxpYM9LWH7v9G6owi5oTrHd4CkkxfGnZj1cu8zXCNRsONfKt1lfuVmO4_J69uWJTuhyfeFUAcUOp9QsxgQiE?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/1ej7dit1l10drg2hjbpiojqpi8/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4Z-9pBwFEgCJQU2H_mqYigcVinhyHYKLxq8q740ll5mS186UTIsOtSkhD2K62xw7PbMvuFeTM6vu8tc_yziBYVlJ9pDcEWdk__nVmJsiCIvxCmXYayWQVMbgHpNVmn3ZM0u85z-HNvtuvGRGi8dBy-sjVENJzI9Rg0Erg6v3Ppr6pmSTxbCqLsIVKVl2m1cljl?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/3qcs70344a5l0588mbai91u6i0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet58_zSX8Fjzzfl_xwB0SHmfJmuciwaqsv-suZHOe2iFElvO0HRgSJ6i9jKarNoL2_29x_F43AGWWF5CQLViq2pGKlz1QQu9EnEaI3CjLCpWRHZCu-1MrqrBHe5e0m_Qt6r_lHaPOxZIjjOSfTnAsqSw_wT0ItpwSSDi53ib0LYYBsw5Mr3_uR4iKR_nxP7KKJXQ?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Parc Municipal, Village de Ormstown"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -73.2138214,
-                    45.0620392
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Adjacent aux bâtiments municipaux, le terrain est en verdure et comprend quelques arbres procurant de l'ombre. Table de pique-nique disponible, pas d'eau courante.<br>Nous sommes passés à vélo le 28 mai, mais nous avons dormi à Venise ce soir-là ((La Cache du Lac Champlain, Hotel)",
-                "name": "Clarenceville-Est, Halte municipale"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.3035707,
-                    47.183955
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Halte routière à côté de la 132<br>Aucune interdiction de camper seulement ramasser vos déchet.<br>Toilette disponible",
-                "name": "Halte des pilliers"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.3077252,
-                    46.999186
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Accès: Route 285, tournez à droite sur chemin Lessard Ouest, après le tronçon rectiligne de ~3,75 km vous aurez approximativement un autre km sinueux à parcourir. La grande clairière servant de stationnement le jour est l'une des entrées vers les chutes et rapides.<br><br>Camping: Il est aisé de trouver des sites de camping plus en retrait des sentiers, ce que je recommanderais notamment les fins de semaine estivales: je ne serais pas étonné que des fêtard.e.s visitent les chutes jusque tard en soirée.<br><br>Chutes: Situées au fond d'un petit canyon rocheux, elles sont par ailleurs reconnues localement pour le naturisme, alors les morceaux de textiles sont optionnels autour de l'eau.<br><br>www.facebook.com/francsoisd",
-                "name": "Ste-Cyrille-de-Lessard, chutes Les Portes-de-l'enfer"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -69.775264,
-                    48.5950264
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Camper au sommet d'une dune de 50-60 m de hauteur vous parle? Go! et ce n'est pas l'espace qui manque pour le camping sauvage!<br><br>Par contre il ne faut pas être trop frileux pour la baignade sur la jolie place à son pied: la température de l'eau de l'estuaire du St-Laurent n'y monte que rarement en haut de 6 à 8°C en plein été!<br><br>www.facebook.com/francsoisd<br><br>Caroline ajoute en 2020 : il y a maintenant un règlement municipal qui interdit le camping sur dune, il y a même des polices/agents de la ville qui circulaient cet été, mais peut-être que les cyclo sont toléré.es!",
-                "name": "Tadoussac, grande dune"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -65.3363063,
-                    48.0027099
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Accès: Au bout de la rue Church, après avoir traversé la voie ferrée. C'est à quelques coups de pédale du village, mais l'on s'y sent en pleine campagne.<br><br>www.facebook.com/francsoisd",
-                "name": "New Carlisle, plage Green"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -64.3821417,
-                    48.7823928
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Les gens du coin sont habitués de voir des campeur.euse.s, mais on vous rappellera possiblement de ramasser vos trucs!<br><br>Faites gaffe à la marée; montez votre tente sur les points les plus élevés!<br><br>www.facebook.com/francsoisd",
-                "name": "Gaspé, plage de Haldimand"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -64.4044577,
-                    48.8203696
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Plage naturiste.<br><br>www.facebook.com/francsoisd",
-                "name": "Gaspé, plage Boom défense"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -64.3811117,
-                    48.77685
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Plus tranquille que du côté nord du pont ferroviaire.<br><br>Faites gaffe à la marée; montez votre tente sur les points les plus élevés!<br><br>www.facebook.com/francsoisd",
-                "name": "Gaspé, Douglastown"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -61.873654,
-                    47.422612
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Faites gaffe à la marée; montez votre tente sur les points les plus élevés!<br><br>www.facebook.com/francsoisd",
-                "name": "Îles-de-la-Madeleine, dune du Nord (Cap-aux-Meules)"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -61.9499574,
-                    47.3421793
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Faites gaffe à la marée; montez votre tente sur les points les plus élevés!<br><br>www.facebook.com/francsoisd",
-                "name": "Îles-de-la-Madeleine, dune de l'Ouest"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -61.9340788,
-                    47.3328728
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "À l'abri des vents de l'ouest.<br><br>Faites gaffe à la marée; montez votre tente sur les points les plus élevés!<br><br>www.facebook.com/francsoisd",
-                "name": "Îles-de-la-Madeleine, plage de la Martinique"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -61.8243442,
-                    47.2252639
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Faites gaffe à la marée; montez votre tente sur les points les plus élevés!<br><br>www.facebook.com/francsoisd",
-                "name": "Îles-de-la-Madeleine, dune Sandy hook"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -64.2919988,
-                    48.5822538
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Magnifique plage de sable et galets quasi-déserte. Aucun service.<br><br>Faites gaffe à la marée; montez votre tente sur les points les plus élevés!<br><br>www.facebook.com/francsoisd",
-                "name": "Percé, plage de Rang-St-Paul"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -64.3474454,
-                    48.5760643
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Camper en retrait de la carrière, surtout les fins de semaine, car c'est le festival du pick-up jusque tard en soirée!<br><br>La chute vaut vraiment le déplacement!<br><br>www.facebook.com/francsoisd",
-                "name": "Percé, chute de la rivière Aux Émeraudes"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -69.0843157,
-                    48.7040987
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/h6vqoffj05p93lgaal4ck6g7pk/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7L3BMl1aJuM_CzMaw0WxI3HuOJJaSi6YuPmhYlY7lSO3EYcupWvrWWwID7dEr0_8LYj1PqlftHiKurRtJ1R3LZw0LkiI68FFGNwdEzZm-D2wuOy-UAfa2P3VDSsH70Fez9yPnmYtWq4_BePpecaoWhRQH3Xc1FGTLe8gnsA3ZhhRebIuXU5UMe2ihCUythLCeU?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Un coup de coeur en hauteur au dessus du fleuve, sur une partie peu fréquentée de la route Verte #5, au sud de Forrestville.  Personne n'est passé là entre 6PM et 9AM le 27 août 2018!<br><br>Table de pique-nique avec toit, fruits sauvages autour (mûres), pas d'eau, pas de toilette.<br>Coup de coeur au Québec!<br><br>Nous y avons campé avec bonheur le 27 août 2018<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br>Caroline ajoute septembre 2020 : Partie de la route verte fermée à cause de travaux d'Hydro-Québec. J'y ai quand même campé une nuit, le lever du soleil est magnifique, mais attendez-vous à voir des ours! Soyez bruyants et rangez votre nourriture loin de votre tente. Des voitures ont aussi passées sur la piste cyclable pendant la nuit.<br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/mdavihrklvrfbpk7bp4julqs68/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6sGirdJfEGXq6PwITdkXp8GoTlFRq_ShERGVyKvqPPH3TJFeVJEggKM5RJHC3WfSIM7Jmb3dxyVVbyanWQ1hietJvtbtrLtzUYki18YJRK-QEXEb9rp_SBpeymgSvdNa_8PeETGyvCZukqG5jP7XzRhg_nQlo78316hpEGRAYommgOXBx3eKI6E2D9tmVw41lZ?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/5o2rv7hq0u7lteuiodo90hrd4c/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7qKbHheihVQ8YFV07tmBaj-3R19irymuBoicAKqsOiMe8WkLRJa8JOvJ9BfQ6mj34icncywTBB1_wezvd5SkQIgiDnEdL_eB_eZbR_vElIHr6h275ZG9fuG5yvFgfpULw5IDnC2SXx_X1P9-XxbW6GlxikaRpJys41-4_xrHgXTe567QATGuTzAESwTwCLX6Q9?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Forestville, Route Verte #5"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.9770536,
-                    45.28593
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/qfobmd4s8ngh6i3egj7qflnkmg/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7z1uO8dINN3Atxw3XLo5NKjcWn6zaqe-raHJHgPH3-aWynlQdoEJ0964kH5UI1cvr-p1enyBjokG6YsAopZp-KQht7J4B0Q-xcfx17ZwSMhDWl7_WuvVBxRt3iCuHYi3Zck8NA1V3M6T2iBa-dRxtjDq1IPZEhQ6uobukE4UuHXPIfJXeIU5650dRi7HpA1aAw?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Ce parc adjacent à la très fréquentée piste cyclable Granby-Farnham (Route Verte #1) est incroyablement bien située; Toilettes et eau courante, tables de pique-nique, jeux pour les enfants, beau gazon, terrain plat.<br>Le hic étant l'achalandage ... et la tolérance incertaine des autorités en période de pointe.<br><br>A Farnham, il y a une autre une autre option intéressante , de l'autre coté de la rivière Yamaska, dans le Parc municipal dit: \"Centre de la Nature\". Un secteur boisé, joli sur le bord de la rivière, beaux terrains plats et gazonnés, table de pique-nique.  Plus discret, mais de service (eau, toilette ...)<br>Nous y avons campé avec bonheur en 2010 avec nos enfants (tous à vélo), au retour de 10 jours de cyclotourisme au Vermont.<br><br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020",
-                "name": "Farnham, Parc Municipal Conrad-Blain\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.9608018,
-                    45.280935
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Parc municipal à Farnham, dans un secteur boisé, avec tables de pique-nique, mais sans eau et sans toilette.  Nous n'y avons pas campé, mais nous y avons installé 2 fois des familles françaises venues découvrir le Québec à vélo, que nous avions hébergé la veille via le réseau Warmshowers.org<br><br><br><br>A Farnham, il y a une autre une autre option intéressante , de l'autre coté de la rivière Yamaska, dans le Parc municipal dit: \"Centre de la Nature\". Un secteur boisé, joli sur le bord de la rivière, beaux terrains plats et gazonnés, table de pique-nique. Plus discret, mais de service (eau, toilette ...)<br>2020/06 : nuit très tranquille, ne pas hésiter à emprunter les chemins du centre de la nature pour se trouver un spot tranquille<br><br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020",
-                "name": "Centre de la nature"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -65.5073826,
-                    50.2843003
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/ub9306tegl8r81sk4g846lj21s/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet77IQCnCsUOrAnBJs80Zh-A2WXwj8MF60y7j4XAjLYXJbz6fpUU7qSCfI32faBgEgwgCXSKeIHwYANEjmMFyTx4b6r4rsyyWc4hYjPRxGzqgDod6Z0nj2NmtkHYr4rj5-JX5E26ctbwNLaav0tju1jJ1hS_5nBD62482CdbbM5MiRGs238nuE32-xYtjzNLB29_?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Quelques emplacements pour tente avec rond de feu. On m'avait dit qu'il y a une source d'eau mais je ne l'ai pas trouvée. À côté de la route mais avec un bon couvert d'arbres pour protéger des regards. Pendant que j'étais là, une famille a arrêté prendre une pause, un VTT est passé et une personne faisait du surf. Relativement tranquille. Aucun service.<br><br>Ajout du 6 juillet 2020, NPion et HGiguère<br>Un premier emplacement juste avant le pont de la Rivière au Bouleau (avec un drapeau du Québec) est un stationnement surtout fréquenté par les gros RV et autres Winnibagos.<br><br>De l'autre coté du pont, les emplacements sont plus jolis, plus boisés et plus en retrait de la route 138. Directement adjacent à une plage immense et au Golfe du St-Laurent.  Un coup de coeur pour nous!<br>La source d'eau est de l'autre coté de la route 138, moins de 200 mètres à l'est de l'entrée du campement.  C'est un ruisseau bien alimenté, nous n'avons pas filtré l'eau.<br>Nous avons campé sur ce site avec bonheur le 6 juillet 2020.<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPIonMaritimes2020<br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/j6m2fijcg3r1pubq1pgj9gtb0k/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7JFWZTz9pJJ3ipKGbl7UbL7JgUY3MRIEYfAphNHq1yiIe5YWFl3EUoBr0SOkFvm3Ek1xKJnkWBSzh-twVVKul0dlttjnS25etv0QSmwYr90drQAT_MRkuOleXVpmC5XFtsuquEBF6wMJCR2XzbMe6DOiRe0w14KkfLxABZb6UBJ4ePRd6SjUTJLSVswSbYxkRM?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/a49poeinimts182d7gpvvvkhs0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4a6cx_SGVOQlg9otyuQjXqWDYXfQ5XsZFnd4FDdG4RWcCmA-ExI9IuQM-vj1lfmr2_6XvT4giZW7RRc1_wiyFhfib34lcl_b91uVeL7COv6gnuNEsd32GdQETxLbggXGXCbXoeBY9IEHvPA3Y4Zr2N24bAKiEywGyDEDr4XQkqzSjlXltveRwxyup_16yhwg1B?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Sites rustiques Rivière-au-bouleau\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -62.8099823,
-                    50.2859896
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/ef03n501mnst0gqmiulvr2cl1s/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5HL71G5QE0z6_tXFzLy1ISr7rTRACc9kcxdwkTouoYTJ35qaBrPCIqdWqfI5zKMDwcgX1C-YwDGWa2auzxSK2jaOIpVWgMcJ95xGHyKMGbyBU604O__K1hxZT98wgap75eVvBqLg80xVPBQmGHPbCa5dz3gg8TR4e-TjLeecFBj3H_HAO0K-Orp7xd9ADg8bt8?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Camping sauvage sur le bord du fleuve. Je n'y suis pas allée mais j'y ai vu une tente et un campeur. Aucun service.<br>Anonyme ...<br>Ajout, 10 juillet 2020, Pion-Giguère<br>Le site est magnifique et comprend une dizaine d'espaces aménagés pour les tentes (carrés de gravier tapé)), autant de table de pique-nique et des toilettes sèches.  Site officiel mais gratuit.<br>Eau potable à l'information touristique à l'entrée du village; Petit marché d'alimentation au village, incluant café et SAQ!<br>Venteux, moustiques ... mais magnifique!<br>Nous y avons campé avec bonheur le 10 juillet 2020, nous y étions 6 (3 tentes)<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/fkedo254bg40n76omd2p86f8g0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4GzTY6QYutEmp-bkWuyqbDmDl5qt2tY7_DQyYfA8h92K8KTAbvJH6NBf-9KHUDfBZqO5-owSXOnDMFczfQ9lcSdF6mg6wLBfo1lrLhh3U4ZGq85gh3bhiyGbfM-LkdKUUaGiTHq_ZK9t1SMLD_Eupib95SLef2YgPLRxudJe688-8t4ERHf_1KCJQK5WBqepWG?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/141sevifpmoo9fbo17luk8meok/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7yACWpg3t2MdeQeYNsYz2PUszwiDU5JuMoASfrMMeM5MlUPBwz3g4-V9by6Ek7ctsLO5T4LjVn_Lrm0Rj0D52RBb3xosEULuwpTFWcpowOfqTCYnKzNnTVv8GtDrzb1OkUz5A4fpZaIJ28j-iKNGZ_Z9mctlRPslXi4eliLl4oSlk-nbQYCELnJcZB-yK1F8Fy?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/u7t6h3abpeeav25mam4v0q5ue8/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7ru4cnvxEw1g9N5VVfM_Yt2ixZsNdQjMOSRPh6n_EZLetX0Ylc1TdVC5lAzT2xfHG2N3kwrtU72H4pwQwbmoZprJU4hTj7RJ8POrbbFBGgtc3skh00-ooIEWgtRnhZ_m83osQ85c_8Osk8VWbhUsVPD0MkGCMbI7Luq8hUI2gxqYR0zFuY567BgowEuzTaZsI0?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Baie-Johan-Beetz\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -66.3030353,
-                    50.2052236
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/kj61cno7d301d45mgs12o3ccsg/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7WYBu5j5ScIp9c2p8rNcNDErfWonT9leEm_U2hMOVY4Qe3UJZW_bvHhDktWNr51cmyFfoCrP6V_SDO7edDBpwzXr4L0BuBSz0eJVjZVh_71aPxSTsYJI-DsVN8HyoJWMrb1qxDWRAB65P5Y9QbI5c_gWAjY_rlTb05Kpz_LmaQQeewt1N_6arxWTkb7AoE7-Sn?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Camping sauvage sur la plage, L'entrée #1 a un grand stationnement et des toilettes sèches. C'est un endroit très fréquenté par la population locale donc il est préférable de décamper tôt le matin. C'était très tranquille la nuit quand j'y étais mais je suppose que ce ne serait pas un bon endroit pour camper la fin de semaine. Trajet sur piste cyclable pour s'y rendre de Sept-Iles.",
-                "name": "Plage Sept-Iles Entrée #1\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.4776463,
-                    46.5776322
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/s3ee431fnt9044j58asqr9dkt8/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6U4CJ5IIYc6Vc4mO3Oz9y2-OvCqMhJQFEu3JMj_h038u3VWUuykWo5717qc69zdfLDfzQk1UnmNbh5PAjb_KX2nyP9MiAAh4siwKSAnYDFF8VCoE2MaBrLZUoSyx6GfyiQs1bkf2mucybSJl8cwvlPfHNGE8eq-iXp8asQXd6f8P1-7wn9BaneMcyo5VRPeW3Q?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Abri aménagé par le club de 4-roues de Bellechasse mais qui ferait un bon \"spot\" de camping par mauvais temps. Beau panorama en prime. Pas de point d'eau.",
-                "name": "Parc éolien du Massif du sud"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -65.1514646,
-                    50.289012
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/ruh7iqj9shqj26obmpgf8ltlu4/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4k--nBykPFPqGqYxWIlWcKJhNJCrHf7rl80-JrRbAVvdS6LxJHSJmOTXv9dAbkVngJLgPSD-_TwZJgq5tlRYvEAheqxlVabCXDpwLdtdnNKObSLSsxWzSTRg0lxK_KkLUVWjU_Q0FD6el-05gUoeegNEp91lcLCGs1WorPTRM4DITLS8szGnBwoDJQGoZC7W0?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Accès sur une route de terre du côté ouest de la rivière à la chaloupe depuis la 138, la route tourne à 90 degrés vers l'ouest et longue une vaste zone aride pleine de bleuets et de plaquebières. Il faut manoeuvrer le vélo vers la mer depuis ce point sur un sentier de 4 roues en sable pour enfin descendre la pente et se rendre à la plage. Visiteurs occasionnels en 4 roues. Beaucoup de fruits en août, mouches au rendez-vous. Belle tranquillité, horizon immense sauvage, sans eau, sans services. Halte touristique de rivière Manitou, eau et bécosses à quelques kilomètres à l'ouest.<br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/0ri0kic0kod86ldnmsvbrp3fu8/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet44svPkpu-AmwexdINxgqQgBHHrh6IPIhYB2_UkVxulwGDsreYscuy0QtpYMrtQRittNEJxCIFBF8QIkuV-0TPQI-7oSGuEX8A_eSAgI1sXBrnnD8uEJLxTiwaxHH3sAn05fuZ_7TfgsNABIkZoyGYQayebnDZrJkuAgdArUgZGOMMBczJRZlS0Ou2PYi73jcQ?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Rivière à la chaloupe"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.2845597,
-                    45.178884
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/v0keqlvbuurba6lis8ksoonf0c/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5-62gDfw1YNge_44EUMNhEVSiPzRuvMyAtA-ZOBpqqRlEH-8A7PAEdqtoskSpqgEqBlwJDEVHlDQfg16vbx1ph5fX_mnwGbaZSOF4OFK9Fr0SVTR6TAcgTrrHezygbOs6t9f8-tv90CGfNYgbIo3qsp5FLoQOX4Ea7vfi3x-5KS5A2yT5TEEjgB_DhMxEB7rFV?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>en face de l'Hotel de Ville de Austin, à 200 mètres en retrait de la route principale, beau parc municipal, avec terrain de baseball et patinoire extérieure. Beaucoup d'espace pour y monter une tente, relativement à l'abri des regards. Tranquille en ces temps de pandémie. Personne n'y est venu entre 7PM et 10AM.<br>Nous y avons campé avec bonheur le 2 juin 2020<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/fggacsaov3ubqaemdlogkrbb80/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4ScYMbxHCZ3fJ6l5P6k8gtzF0Wzvn-cdFna3tieE4USCj_cpszkPw370sH1XcAsRqOnINgU0qyV85R25x5JfOWacOKVZgo7zfGnAa5hN_zz7RKk9IQ3-XuRjfhjX1vVV_djuDyxxknxyc8CbatoDuwkybrBhOfB_IFUWlB_yj8i7rV49pnoDH957KV5-Xx7TsO?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Austin: Parc municipal"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -71.5012515,
-                    45.1984153
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/79t9haikclbcgerv6r07s10qqg/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4uMEJ_oCHUe6qCcRG-w6QG0NVFM3zA_JrLBgyKu-sJY_2GqhkAzb0gqYxzUWEw3Vto35E010mU3UxhbKsgfL6UoWCHtT3Ac17eiq3YuE35KNbW1JlabgLxbGuey0VeiOS6BeAD3E9JVVkqoAye1hMA7fHKwFExTf602OSWrfJTnYoE5NUkdbesRA4FZnNlxDsB?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Un extraordinaire spot pour camper, dans le joli village de St-Malo: Abri avec toit, 4 tables de pique-nique, toilette et eau chaude!, Wifi ouvert!!!<br>beau terrain gazonné, endroit magique!<br><br>Un peu bruyant tôt le matin (camions).<br><br>Nous y avons campé avec bonheur le 4 juin 2020, avec 2 amis cyclistes.<br><br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br>***<br><br>Juillet 2021. Je passe par là pour remplir mes bouteilles mais l'eau est non potable. Au dépanneur en face, j'en ai demandé le plus gentillement possible, mais elle a d'abord refusé, « à cause de la COVID ». J'ai dû rappeler à la préposée qu'en mettant un papier essuie-tout autour de ma bouteille, il n'y avait aucun risque pour elle.<br><br>Nicola Z.<br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/5flke816kuleu5nnelml34tjjg/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6Y4WkaZ2IiNOQbg1_AEePjUAxDFE-oxeygTEhz-ADj_trcHGzV_AhQ19g50BVzDg_uiZmxXMd30K5NIA6aIsSU2JexuR03kyFaTvbRAHQgpmdo1LLkF_P-ygswB-rvw4_hesZGMLnaPRo3Gi4TlEPMmEWlIv0vq2nnwqA_bVv6469wNWwTq4A5ah2ytUn6eN52?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/a0jadj61acddpi5aa47vhdf1nk/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4PaIH6eQsvumN9t7YtmY92K1ALrlz2ijY74PW8gdskm6Ug3uzxTJEu59J9pPe2M0p-I2nQPOgHP4ZgbwyOhA458vJz3n74vLnpeAn72sOyJSvj-brQkwIFsi5a7mm0uq7XS9ZvdCbHhG5ZPnwSu4fzxP1fu5sZxstkOFnUUhVKtNsm7c2cUaHuKilfIgdZcydq?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Village de St-Malo: Halte municipale"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -71.4895278,
-                    45.200223
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/vh34dpioiufs0e97apouiddes4/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4Ngnzv4Mf0FwwCnuiUUNYO9g5flzE4aHYFejNxHKCX7jG93Zarc-OOdJuQvHNI2A4RIK86xW2WR2SkME0r7lLasYU76j4cyrDJRG9E_9erU-pTiMiZmsqIcQiISw55PD65Gsx2LSbL7vmuoHrOmqTPN6f2pzajr1SXzY0V6BL3PRPlHlysKszI4vlYx7ZzWAL2?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Aucun panneau d'interdiction sur place. Je me suis installé derrière les arbres pour être le moins visible possible à partir de la route. Voir autres notes laissées par Normand et Hélène.<br><br>J'ai campé là en juillet 2021 sans problème.<br>-Nicola, l'administrateur de la carte<br><br>******<br><br>en visitant le village, nous avons trouvé ce spot encore plus beau, avec vue sur toute la région. Table de pique-nique, toilette, beau gazon, totalement isolé en haut du village. Mais pas d'électricité, pas de wifi, pas d'eau(voir voisin en façon) plus une côte majeure à monter pour s'y rendre 😅.<br>Si c'était à refaire, nous sommes presque unanimes à vouloir nous installer en haut!<br><br>Site visité le 5 juin 2020 (nous venions de camper la veille dans le village de St-Malo, à la halte municipale).<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/kk4rkg0en9qi5m1hdjptmcthro/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4fX8tiIbecSP7jHU8FQzCI0EwIIgSw8O4xxRVxA0UdFAKvIpBpqcaoiJetuWasOiApYQf8VCEeNVu08ZOMq00fEmYfnZNiIpKMl7SV8_ur8K4QigDYnmTEndiJsqr6zGzdc9SqyVLOu7YjgwcGuLIlW_4SyDLhOQsTvmsXmWBUVi_zd9KfWQC0tJ7n0_4rd7_U?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "St-Malo: Observatoire au sommet du village"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.7846292,
-                    45.3751144
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "On peut facilement trouver un coin tranquille quelque part par là. Pas d'eau ni toilette, mais Granby n'est pas loin pour un ravitaillement.",
-                "name": "Montérégiade"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.8235562,
-                    46.5139996
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Champ tranquille. Discrétion svp.<br>.... oubliez ça, maison en construction (printemps 2021) Le site est maintenant occupé par des maisons, mais à peine un peu à l'ouest, une entrée d'un autre champ avec une forêt un peu rocailleuse à côté. Pour mal pris.",
-                "name": "St-Boniface"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -67.1937496,
-                    48.9370761
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Espace en gravier/pelouse tranquille, possibilité de faire feux et en bordure du fleuve à 500 mètre de la maison la plus proche. 2018",
-                "name": "Spot Grosses-Roches. "
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -75.28572,
-                    46.53368
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Un abri sur le bord de la piste cyclable avec des tables de pic-nic autour et plein d'espace pour installer une tente.",
-                "name": "Camping sauvage Lac Boyd, sans eau"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -75.63889,
-                    46.30701
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Dans le boisé à l'ouest de chemin H. Bondu, on peut y installer plusieurs tentes.",
-                "name": "Camping sauvage dans le boisé, sans eau"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -73.165967,
-                    45.0660682
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/smkj31ej79qaic2u62or7td3ns/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4r1f4VnTTck1oWolKu33HHvoVoLFQ8Je9zFUxQZ_JiQQImw0QIzUM_MFGojCk-zGytL7pt6KsfY-z0-QRvRH77q5w-SzkZV1Q9eSV7wlIwaf9HLzGZRAr4CiHEkYvKnvzsbPZDgwqwBO8CYRJ_8f-sOuqwVtliYqjQ8suHBscnpz2R9nlJHiBuBESbuFqgXsD9?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Sentier pédestre aménagé, bon spot pour tente un peu en retrait de la route côté nord, toilette sèche , table de pique nique à l’entrée Du sentier.<br><br>***<br><br>Campé là en juillet 2020, mais un peu plus loin sur le sentier. Pas vu personne. Chalet ouvert le soir et tôt le matin (toute la nuit aussi?) avec une distributrice d'eau.<br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/s84u6kc40km3jqh6qknr58lu78/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6hYWjgVGTh4EYpQpyo3h1D_6LyqcKOrOJM_wGMZkukOpaNMx3pZqP6hNYJ_vJsxConwNQSu4yoWhDnzIB-jJ7PXBrT8EkPL5vAe6X_djOu7nowZhuIp-zMu2Kh2poQytpKfojK3AG5-a4bRC5Y4KH2uHMoL266358GvKzXDCiGQMe0EUx-4UrHIonINp9FMrYx?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Réserve naturelle de la Tourbière de Venise Ouest"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -74.4006399,
-                    45.0087443
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/v3k3t9fmm61fe17ngi8cqatb4c/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7OPS_7Y4m8Zr3ZpsI0mtgO-pV0ftKVLIyKuDxr6ra5E3TxR6WrwjFUoGL6yyqq5ewaIXqxRk1-xK4rnzNeaLo2e2r2zvQCwh7IskP5lKjonXt7FaloKAbtp7AlV3Q8kMXrlAF-X9015K4IawOKWJckvqQQDWTKX6HuuOR9vPUisUHmY0GSjOkaivFO6-jmAkdQ?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Dans le minuscule village de Ste-Agnès de Dundee, un joli parc de village, tranquille à souhait.<br>2 tables de pique-nique. Toilette sèche au bout du terrain de baseball; Pas d'eau courante sur le site, mais possible de demander aux voisins (et en même temps, aviser de votre présence pour la nuit, par courtoisie)<br>Terrain avec beau gazon et arbres matures. Il y a un peu de pente, mais nous avons trouvé facilement à nous y installer.<br>Endroit tranquille, aucun traffic en soirée ou tôt le matin<br><br>Nous y avons campé avec bonheur le 26 mai 2020<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/o79k6secp2abomjpj0pdh5fbsg/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6TyXj9YniSx7PRAKsSAA7ygxYhw3FGn1dlFQLYKsTPJWnJdXvLthj-x0BACoiUJluY1-rakIkkMEBtZ_mgpXLrugW0yudxUqjSPgpF-V4ihIWhb5YTSgLPGMBFbxlUzLBm8cX9O1XCeXQJF3A6iX1c2bDZywtEA3JqdgJ7d75QOCkRv-hQqkCs4vT2MMnK3D_Y?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/p265t90vllu7cai1snb6uabac8/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7Uvcgsd_gkcaJfXOV2jX1laTNDyyOKPkcyBVA9Tys4NE2-eGtXXYnt5wApAo8atOZ2yYbozq7li_OmfziC4KDHkGyy2SbhrPF3SJaIPTL6qGWco05aFt3UiIE1xCpQDthSky3EfapDwp_NbEuFXR1JHUOKVziKSktk1xqaedhXetmGW1sIg7YkfP1xRZVJY5zV?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Ste-Agnès de Dundee, Parc municipal"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -71.0617054,
-                    45.3907644
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/h3aovh8o9gmptsfoc6c4ctc6h0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6XnU4gzMntcapfI6Ddyi94HN_mwOleh5f0NFnOJ4wN354b07sxrIzGpMT6nAy_iq8swjOAt1jBQunCYAFlPp-BfJhGPr1JPDt19ouU-2zoiUkIFq30R7gMVEzSz-uMOXGx9vX4T5tTHtLrW-u3EgW9clCamEuUw3gcFzfPdEmhGnRxlJ7iL-UtmsXkyiVVPpcw?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>En retrait de la route 212, à la sortie est du village (à la fin d'une dure montée!), cette halte municipale située en hauteur permet un panorama fameux sur le ciel étoilé et sur le Mont Mégantic.<br>Toilette sèche, tables de pique-nique avec abri, beaucoup de verdure.  Pas d'eau sur place. Très beau site!  Visité le 12 juin 2020<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/90v2defd8gt2n0o7saqbsq61mc/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6AdPRfKYYV32X2d4cqo2ZEy4S2X0kpwTaOmq0l3WtRdl71Gd6MlSPfWz-Br5OVkNEgRDejbIoMncS1_r125Jruhi_ZKBfxZkB-GZzN7qv0McbeDuDkdddP8q92gnRVERSFZ40ym_wEaNMwkf-sKQgJ3c0G5dBkI-iDbVqXQloIxwVO8_ck2vyV6hDMoa-_O17n?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/b8v235a410agav7opmsacrbftk/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6jvIt2E2MRTQnfsV0VtuSuk5unQmIb1LP9xVlt6F3xPJg4c1tGOj5KT6PcKQx_0rf_IGMxjm9VYrM293Fvjr3M7WMzoF7Z-N8tBDq4-B8ARCkr3--VNOLcXYVy__LhLx5X1UN40PK5TRUYDvgTgZ8B_XZESd6d_pa9c7V_jHx-5d-eiDWbxhLNT3F_X7w1N5jL?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/ajellrmcolfpgeh137b78hci9s/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5zgyK69Xqkbnig0GB4svJh_F7b5g9Y_zG8JTuveojJln8Hb0F8xHQ_39BwskL3OMaLc1TiU0EN91p2W3S7lhrzkWVdnZn0LMUSqXIDMicrLjBdgp0phc90FhDDmAjIfQlaw1WFgrOQM1X2H7C_CdBDJEzGOtWhWABSYGVu-UJMlqX39S4oHQxFR2XdptNEBzHk?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/1ln8j0jaocsg44ld9l1tk79f90/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet52eN6lta_qmAzW9WuCywwzYLVCg8oSYONTraUwOqOZR8ZqeYlKKpxE67rUrHxtfS4GtH2vn0Tk74ET86pm31Lg9S4eqWsViypWfYRvN1l8UzmReQbcL0djpYwP7gKMMkjarFd-IjZsUkhDBuNcoX9aGqXVXeoVw92q30x4uclkx9fT6_hNxVxm7LV79nndikFR?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Halte municipale de Notre-Dame-des-Bois"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.8713967,
-                    45.4138866
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/qqh7m0m52j8ifuqnsd1almjl5c/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7jyE1HDuppEnkS3F4U7KdYT4rU4QVOPZr3kidEClJZj8nd4juiZDQ5djrFtqLrjCedJlvbARck617wdhMNxXewCH-0NoE8qRWc6wOm2kYA8DtewCM1TdRI0gYH4S9l750HyJ29CCtL7Ej1SrPJy_5vIkme8vY6g48-IcVghrvzOhJCFua9EtPErZhG20CcYIbv?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>A la pointe sud du Lac Mégantic, sur le circuit cycliste faisant le tour du lac, un parc municipal est aménagé à la croisée des routes 161 et 263. <br>Assez vaste, pas mal de verdure, quelques tables de pique-nique abrité par un toit, toilette sèche, pas d'eau sur place.<br>Nous avons visité le site le 12 juin 2020<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020",
-                "name": "Lac Mégantic: Halte routière Joseph-Alfred Fontaine"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.8719229,
-                    45.4853683
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/enak0kefo52ojn2cflam6k9cr0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5f7QoflLNGMaGAt88eeiWfLpjLTS3xxBAMsSWAyJcL6pxRuyiLBci5pQQ7u0RyoS8y3eO8kVeP_bfJQp_Uxfiy__TvsMvPjCjJjCoE-tyVCcWzvS2MpOu1RFZQS1wgukmgfqe1htbsScnTi0XmKVVILNuo1WvvF7jTmSDKR9yEwdfEzaRlFPsn2c8ie5CFwZ3C?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>sur la rive est du Lac Mégantic, en face de Piéopolis, ce parc municipal dispose de quelques tables de pique-nique abritées par un toit, prise électrique, beaucoup d'espaces verts et des arbres matures, et un accès au lac où il serait même possible d'y camper.  Pas d'eau sur place, accès aux toilettes fermé en soirée.<br><br>Nous avons visité ce site le 12 juin 2020<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/abnjmtauujvdnr67kd197i6go8/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6Rb6alw6Ef6xvp2komfxu4NsPjo0SxGKPvwihMUmHEtbAOLPHsA5v3xp-7Yleu4XHBt5VOHr2JweX5s5UXc7vuEyj5bfnSNz5enKTNl2_hohlEiA0tOoBowsNM3turwnmX6T21qmhh8bDgEsAy28D3TRpgz-Hdtd3RR1ScMll1_jyboAxyahWnXdq_wF7RI2Yh?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/ojfelsd7ij3jgvvp9m314gk2t4/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7xB6bCjc8eiXTL5IlkrDfZWCPeOhYzt9ftRrT0bGDPSLRISk3bGDDjnfni1_YZhVktXzpM_ce0ecuIRitOWqpFS8Jpc6ytjOJhIeZUvebX-bgqFGRLtS9Prk04-B8inGhfFVjOsocH8GAxdu98G4rvuQCQFkjD_DeWMI2BNJXnhiqOBplbW5DUhf5kTA4dauuK?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/a6mhs814s2eq07i40itqbp7vbk/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6eh8AacRMzsRWLjky9n7dSGgC35FRibu1USRhMQcOQlvXHj6_D0H0gOrpUzc58Hx5jLd7aXN1-fu6oHndL1kxrkmx92hZ6d-wbbAw2XcIJX6YMwNK8ga5e12Ru7EaKU10gaA8SiKg5WkZ68f_xIOAFyttMZjtfbUdLzJPVMYeYDvq6EPMIB4c_zvb6bipZLRre?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/okilncog0rqpd9to5vntcjc740/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6vPCIKsyPPYC-GXq2MaWWgEhkRKP1-Txgd-K0hWaAcxSiFByqgT5OoYbcd8e-AVA4aZIgch8G4chgoRUyYNy9I6WUxCR6negtwNLjG64bzjbqTh3DEV-1mepjUDxgGNX9NnaqaOBQCQJwC1b6VTHRGpXjgNnFa9Up-rh6NhsFofCmfXJYh01Idm7MIA5mHYEPA?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "sur la rive est du Lac Mégantic, "
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.8693459,
-                    45.5033688
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/p2c3kbjijbn5o1dq46f2u92ugo/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4TGgaTa-NPtfwiQmYfRD9RvJ-nGIzG90bHo94xB2FrmUwPHpPgyvRnYFdqaQQgZxLdtf5eqpbgO2yBJgAcXWsdeYW-igwB-fSquQ3C5pSE_jzfEFiJbk851YlGmAniGQZxCx2lfKpSgW_dyc9UiJRqHfqbfqjfOzXs4Kr5gPvNSd1NDx98e8I4FqN-ftoRVZrw?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>sur le site d'une tour d'observation qui surplombe le Lac Mégantic,  quelques beaux spots pour monter sa tente en soirée.  Quelques tables de pique-nique abritée d'un toit.<br><br>Nous avons visité le site le 12 juin 2000<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020",
-                "name": "Terrain municipal face au Lac Mégantic"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.6444069,
-                    45.8533559
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/6kvf9kltks0vk81dfeug96uo04/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7ZM1H-ABQ1xkZOzXjWjCmWYRllS4dxPa978f49j3OF8qOEuPpMMOwMZFrmv25SA9SX6TaxSvuiSAXxuoNfBoh1rz2TUQbZnZa3YjRfH6ELz0OHlIBsYhHt8PpFJeQ-WNr4sczEdmTb673sUaWHpkPxXTNxoppYYLnkTzKwHFGxTliC-G5Bmm_rDT_MAsKOFhJb?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Beau site en bas du village, derrière l'aéra Marcel-Dutil.  Sur la rive de la rivière Chaudière .  Il y a quelques tables de pique-nique dans le parc municipal voisin.  <br>Nous y avons séjourné une nuit le 13 juin 2020<br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/3vq4c4o95v6qe5csj8ekp1rnd8/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4B07iCwbkLbf8w7ZtgrOzvmav8Cxfvh4_ZK7UoTqRVzHoITwOFu6EEckCt5GKe13NeKSeZXQiq7Uh7kWVjoaKdw_kbjacTJICyInfhqXm2sRkj4-xYQWNhea6L5hjKgPrSNCIwdcqMyVTkZ4AFMEHY4YQ__tc7_L3NrTSykBL3iytA_DmHW5Z_npS7CeShof5L?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/97m2lnn62pa8g2kc18p6aejqe0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7uC8N9UTcYEefNLqFy19plGHESmN3tOfuTVRC5FZTtoqKg9uctsID8tUoDjxOXhkCdFuOptmmLT1ztQZgUViG3Pm8Q46qs8kEeXdczfBTVfT2TVkyUG7VA9WroXxMceGQJ5n-56JUyxyzHxuGHPRjeweRSEp6_4Nl3kJdTo53fitUO55o0eDxMEP_bWC690pwY?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/uhvhln5u5k7o6it6l5qr26qu4c/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6Zx-BuJFR2MGo3aBGDceRRWPrvhqSQVzZ8dpEA7XLKuvD9Tk3RnX6gsrEUjrPKAzftPS8DgyUF49ZWA9g0z9ogpmqBpjCCDXrmPcxSlcZTbzSi3wo4qOZ5OJxNv5W31LPXWGi2KrSq8fst_4Z70ABxbgkwrcx0UK-aPFrsdctLjA7gDo5U6HPYDkBSXB94IGGx?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "St-Gédéon: Parc municipal"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -73.3710994,
-                    45.455555
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Apparemment des terres de la couronne. Aucun service. Utilisé au printemps 2020. Bruits d'autoroutes pas loin...",
-                "name": "Secteur boisé\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -74.0199306,
-                    46.2476616
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/uiimrel4748rp70bkpgsmrtkhg/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7aznFui7SMejirJWK3SYWj9_IXJtJ-meZEihuwY-pG1E8fQu4tJqXchRJgB0SDrthMNLuqr5nBnZH9RJ1VIgAFGCuvdy31_6iH14aafcwdiNhQ8_qPZm0UqNkzO1iLsoJDajjyIyRaqnkWlXBu4iAje-4p7rO5pMKM-vEx8dGvzVDGLQKck-d29Xdn37_DbJoM?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>En descendant de la route, passer le petit pont, à droit il y a un petit sentier. Facile de trouver un coin sur le bord de la rivière.<br>***<br>Il y avait peu de place à droite, mais à gauche (est), il y avait une belle place, par contre pas à l'abri des regards et avec un beau panneau camping interdit! J'ai quand même passé une nuit de repos en aout 2020 avec un décor fabuleux. À mon arrivée, il y avait des gens qui profitaient de la rivière mais ils sont partis assez vite. Pas de dérangement.<br>Possibilité de filtrer l'eau de la rivière. Pas de toilettes.<br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/nvrhr8v9v78md7j680p5tp0b0k/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7NN97Qpjuapbj9la_ugr2DvLQNcCEv9ye47VyjIH0gWnoB7kppmLNo92dOmSd8IMqETlE3UBWDYg3lJ6NfRINEGuBwb3mrU7y8MOkrsc7xjqyNF_Rsq-Gt-mEjrvoHBynkxKS1XygQ1KpiH8y4g7G_FRwQt63RFvFESWP37PfseEC4J-DzSc_7gYblBRf4z8cD?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Point 60"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -69.81255,
-                    47.953837
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Détour de la 138 qui peut vraiment valoir la peine. <br>Possibilité de planter la tente sur le bord de la route au bout. Les sentiers sont magnifiques, et on peut aussi camper sur les plages. <br><br>Dans mon souvenir, y'a des toilettes. Une rivière aussi.",
-                "name": "Baie-des-Rocher"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -69.898255,
-                    46.8658309
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/8i48oit866jdfmhahdm0fee3h0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7vG_3KYCGL7Aoc-sjzx1akl_GLDHVp77WSdlPwEBcwepoZUX7JXq3PUAMkx9UVyoVNrp51fpYT-GTtnnY4E1aEC_zkFvbbsrgOjXVd8avQXm-RGr3KO_jKFCYadBJN3k4TX31FzAWFLvsyR3PWnI6XNB_2ZoC6At8OJoqTUfGiRK6yCicC_maseMFx1O6vDWcJ?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Avec la permission de M.le Maire M. René Laverdure (sa maison est juste en face de l'église, en haut du village), nous avons pu monter notre tente dans le petit parc ombragé adjacent au cimetière, à coté de l'église.  Eau potable à l'extérieur du bâtiment municipal (aussi à coté de l'église). Wifi possible au restaurant O sommet des Délices (ouvert du jeudi au dimanche).<br>Nous y avons campé avec bonheur le 16 juin 2020<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/2h5h9cgb11me5f37sm1dtlfg8g/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5XBJTyAi4a4TARbkSDOugGeozib8EhePP2WuxOLCgmRVX0HztCB0buVcRh4XWxXzZkZR2d14D6IwFCtPyW4wSFcvt2xq9acu64enqIGrAlmepEw8FmB_VkOG3aAQibVPRYoxUKU0WH_0d5t3IsRcRi_e2_6uz0kVSZ7EZBqqOhBWXhYoNo5zhrSBSlb7DkjiNy?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/lrc4ng65gl58mtqatoook2ff1k/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6dvw3Lco9a1z_E3Sl25dRnbwyzVnK0m7P5U9zERmSru4svbwrb-an3dP17r9RErBi47t7qsuNR21QzB1FMjD3ubvciYS4K5th9dmBP_Xx70dBkYgrj1iyBUVtxh-e30rd1dY_lHSBlx0gbtPHb9FkoS0bHtBAyutGEt5k-lmdgdJFlqIx7hi9uRjXf29f67YKn?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Village de St-Adalbert: Parc municipal"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.3210012,
-                    46.4382471
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/8j413ijn2uq3o38q4f5vq1tc20/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet42N2-Aw51qOjHHKvRfTs8zuxjP76D7cqseFgRsJnga5B92wzOxLZvAjoWUG4spwllOjgzcaJu-hZOfTg8C53ZH_yRqBbmvRqNyLl83oLBaLc0t5Krk7z9K6ddGw2Nxqaohs9hc4EKUnNLlMIa-oo8eLKWYk1nqjZMRiMxFxp0NTNyis2zBO1N1Cpq9eEHKnnDX?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Vaste terrain tout en verdure, en retrait de la route (300 mètres); Tour d'observation, tables de pique-nique et abri si pluie.<br>Site visité le 16 juin 2020<br>Nous y avons campé avec bonheur le 25 mai 2020<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/gtmqkoo8qo60p64orb16cnub7s/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet51USO4DVlTsGho-sB122NiGBmevZX4qHc3ItOEIxVE2J4kt6wwf110VOlV4yCp72WIsnChY7PRZzMtSnn9-nfcPG1pHHUYGVKc89fHNwJ-MQXt23tg9gGdm4qv-OKTYf8TaId8MnIz9Jcd7vAIdQlLGyFeNVcSiiS8eCsPN0kLBgofcO0AkrkqLKVzArCLXEzM?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/c9acqn1p6b77p81h1j8cee5c4c/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet78qKgN_9LeEpYNgJBOdWFQlwlckRYoXifyXzSQFoG9ghd0WrdTyIdcoDrhVxb3d3R1UNVoQK1Qzh1gXMrWa26SuKMWrRoduVVq0AoynUMatj3joMKm5P75bygKd3mKSqnp8oPzEBV2Ef0Y1ZAcyqnnUfP09Lo5sxm8-5chKKF7CHQ2RFCoMfZCz_07Vkbn5zT3?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/om8bhn4tc0qfelnmsuie70548c/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6W1NLZ2QYzYcd9071boFI-DZwHGhgrhR76Ta_q5ylUqtOLBwhMHd2PEP5tGcZfJGhOgjVnOqWIoN8lzMNRYivIztm3Vr8qHd8kh9xNNEOzzEN5EsB4lrYf0zn70ybGKkyH3WD1nv6RQ7kliLDLp50y2Qb426NkincFf4kl5HCXXLerSFCcn-y9smVvU9IkaPgd?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Ste-Justine: Site historique des Pères Trappistes est situé au 700, Route 204 Est, à Sainte-Justine."
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.0052421,
-                    47.1086996
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/7kckvjvf28und7d41cq654dnc4/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6s9JLcWx-_JIzW9wLGc7eU9gm-VeqXGDU93aRVuau4gEuBXQvl8Y5USf-Hfa1fymHHe56Zy6ujVEhCOe9SmsZPiuuzLwLn_l_J-JP360RvNay_ruxfzS3rmHvJkllbGsp7XUZgWeFV3VvRFEX9rNCLZwzG7FS8epXo9CelapmvqAlr7q1GLBEkcEloLaW6pHlU?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Plusieurs tables de pique-nique, dont certaines avec un toit, amplement d'espaces pour y monter une tente (ou plusieurs), jolie randonnée en forêt et en tourbière.<br>Site visité le 17 juin 2020<br><br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/8v0vt8sqdkmd4pkjn2s6vb3oa4/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet48zCjPfXeEFtxZy77MzMn8Onwj-l2Bc7xI7tonDZiKEtdwb8RlI_LE2xyPOkXUfiy3_1Hwi4aaeK1BYJZYmJExIEr9WUhRTOKSsSxeRVm7FmnC5QrubjkhGp1Oi-kmDmUgOQVd4NWwDj8A3iG2eFrPkSt9ABuU05L4BBfPtP9KuAj7oBGYtyu29JzPh0gqihAd?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/15kosodvt201amkk9kmsaqu7q8/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7RXEEaDQLl8bIVDgczd3qqyHGp8cZ4eY1V2xxrPP7ogUN6sa45wCjCcVw9qoHqlTCMePj0Su6iUQh81Hj3V1iF7EbMo3Hf2e0WJdzr91Ki8CGhl073XKuhLFwpxg-lx4vYuGV1kQiuszK9wY3H10-FT90HqOSX8tkS7-JgD1QsoucqA-CmZ0TO52wOXla8xRnC?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Tourville: Parc ornithologique du Lac Noir"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.4846667,
-                    45.9367665
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/l56r8rh1iiomo0vqshisfbn6eg/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5FAkQrnS8t6vpbnFZVfvx3jc5n4TRD4ko7p0xwhaebmI2L2tyVoKggS6nl5sQff2LOKS_K15oAph7ECSQI21l2JNt57cg3UgGCwlQo7XXbM_7t8osWQoY1zRR1Nqh3PqhC87CyrCVZBbhvDhJFaDW9pjzjtHYtU5mADgNj_XgSVeFGugfns65z_zZ-lOgOrq6L?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Jolie halte municipale dans le village perché de St-Théophile; Beaux arbres matures, beaucoup de verdure, tables de pique-nique, gazebo couvert en cas de pluie.  Petit marché d'alimentation tout près.<br>Site visité lors de notre passage le 14 juin 2020<br><br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/u19huqrsqe08nhmt25j1impfo0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4gfcAcprhF-FmiTZF7V28mUGmchp-gJxRqEdQZzy47OiVnNhqwEWGkO-NKngekXgoyywzZp3uTcMPjOUzbMkyJr-zlJhMugKWNzhFUWX__F6AurUsFKN9_sZxlNSrrSHz2LruBT8CvyjQVInNL9gbx9T9x8XT-FTTloCGw4YOM0yqIsQ2L4QqdmDBM1wlB1xD5?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/dkn8bp4sk668cgaf7kvaajtgtk/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet74oHuHwQm_XXa8Jm0HeDR9hFFmpN_NKlEaYpoFQANpu-KPLBuYQEbeg-BlRCzy_LJoZbK0SR6Bfo6qoPaGaOX4PW0svO1yKcALdV0rWpia3tWhTSpI7aTvHcP1WzoRS-MUcNS0j8_pdE6NZU3FcPnZ4o6Ak4NPlxcCMkUXdChFwWq9Ft8X9Tpz7bcHyaOoHJv0?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "St-Théophile: Halte municipale"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -69.4183379,
-                    48.0309322
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/4uksuc3sf3d1136der82qucqe4/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6Ogq2cCtGLyqtSWlt1rFQDd7xDm7YSJyDEAFep8RgB1zMQrvk9eT-87an-gj889jZPHNuvSI1XNIhdcKxl2JjrXSjRMO522B17f0vZwEQoFWaoC1OGSeKG4O77_vMZHzonsqHIe5uB1z9cu2m45PuFK02_7SVNkwYx2i2jCTOGugSSQb5eF0Djk1sSxumbzqby?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>juste derrière le Musée du Squelette, un petit sentier vous amène sur les berges de l'ile face au continent. Le lieu est identifié Parc du Portage et semble \"publique\".  2 tables de pique-nique, toilette sèche, terrain plat en verdure, arbres matures autour, vue sur le fleuve. Un beau spot sur Isle Verte.<br>Eau potable au village, 4 km plus loin.<br>Nous y avons campé avec bonheur le 21 juin 2020.<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/nlasavfs41m0s838do0le24njk/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5mmufhYRGtTetrosV4qbD4012Y1JoHh3-3fib2XB1Kgz_-nPd_zhWLNXT9wf3gD90Hmva4msftP7xRFm518ehw1NEq-gYpNrjLCm3MqyKndXgZzMoYl8sVK4SQDC9vOEwuS4dTayx0V0JMvjhfZvBiPI2MRV8A_ulikYsx7R1vCLggfSzidWfRVnda1S-XOqS_?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/6ul3fkp3dbdm4ubucajmdfvt2g/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6k8kXCQHTRwe92saWZlB7nxjTVBiEHJbbhaV301SuDESHrNqu_WsL_jLLKjuEepneMh6Wux4aF4s9LltXiR6t4gy-rDaZg308Z8hp1iaw6K_nQJYzA7rdOjEAcPIDw-8tDVIzB-y77dknbegvxXWPwhd5FSMJonY27Jb72aBTE9NR8tVsF0JQ3L3tvybz1LIYt?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/jb38ou2khu2vvo9aa77hnjm75o/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4-SzB0tXNm4DJ9RgtfOISmNsEPFgFCdQGOWUbbtFGWYqd5kKD8bzViiMulzGXY3mqCr7wRYUyoKSfBSGIeB-qfudoLPiDOAdbkcZ9GhFeEJeNYnglF46YGlW-H4YFF0GcBCFO88BDpC6WLVWodmNJeZU0xF0Nw0xe5HreNqtYhJpjbLEicv4majcmkvNXkD0zC?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/aqbtmessuvoq8in5s5gdap0rh4/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7f0H6epHxlmtZdGlF4Z6rayK-pL-khkbuW7p9fpzIifZmKzle9vbwyxMGhbpOFcXgzD60tnyJ9DjYhEMXh53il19m7cE7iw1KY6KGvfR3HoK-w7gy76vDrHfEk7hsfOaKy9vxbF6i4qFaLJ4lbnt8tY-K0KDH1I-wAhuu6siD4jt8nk6IPGQyYTeq6gW2bh722?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Parc du Portage"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -69.4448772,
-                    48.017302
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/qirgqtf512m249l9ci436j7p3s/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4fYl5AWczNgPgxVCYlA0nH9MbMNzYVq2lrgAfkK_pn4nu-TKZLrdQaqxoaqF6um1VIffYx3yQEAqpIvRamOrBe0cFtHOX0KOm3bA3ArFTHEDORCO-0NtOjXiP1jJYKyikN7relRplxigcVf00lrPZu-a7eDt6RLDf3MJjCfVf6HrcwhuxlpH21CvO9pUi3o4OJ?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Grand terrain en verdure, plusieurs tables de pique-nique, toilette publique, eau courante, wifi ouvert.<br><br>Préférable d'obtenir une permission officieuse (ou \"spéciale\") auprès du maire, si le bureau municipal est ouvert.<br><br>Site visité les 20 et 21 juin 2020, mais nous avions précédemment repéré le Parc du Portage, face au fleuve et plus discret.<br><br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020",
-                "name": "Halte municipale, Notre-Dame-des-Sept-Douleurs"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -69.410919,
-                    48.0416418
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Premier site de bivouac en arrivant sur l'ile, mais pas le meilleur.  Conviendra si vous arrivez tard, êtes fatigués ou s'il pleut trop pour continuer ...<br>Possible de monter la tente derrière le bâtiment. En verdure; Pas de toilette; Le robinet d'eau était fermé  quand nous avons visité le site le 20 juin 2020.<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020",
-                "name": "Ecole du Milieu (halte touristique)"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -69.4230461,
-                    48.0518691
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/ehi6u50nqoaf79b302c3fhul88/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4j3k5pg40OLDbFeWfuQngqekXfv9wk54qLCtiVKf7G8nGlAw-c25GAhaLZ9xp8A17nbCqAupjiHwOQtwijxHNr3PkLptGYfXwp2RUJ3Zbqo8xSgKoXzwwxlJOPCoSIdzSgFf1qw5C8misAWccBmhNl5wPp74IIc_tmg6NY4rCHdE0V4A2JmkycGaVBpDCiF320?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Le Phare est le principal site touristique de l'ile, et pourra être assez fréquenté durant la journée. Il faut donc venir vous y installer qu'en début de soirée, et quitter tôt en matinée.<br>Quelques tables de pique-nique, superbe vue face au fleuve.  Pas d'eau potable, , toilettes pas accessibles quand nous avons visité le site le 21 juin.<br>Quelques maisons servaient de gites aux touristes jusqu'à tout récemment, mais ne sont pas disponibles en 2020.  Il n'y a donc personne à qui demander la permission, contrairement aux étés précédents<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/rh7ql78u3etma9pb7fc56aq958/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7esI7JAOcYmIWWBiLYtjsrxY2M0-mIwR98Dp1_A01vbvWO_4eFl5VaBe4nIlafU4aOj-HcYiNGSCrYpdL7VBayqs2e3VREGBU-UKxajaMiOJneR0ZCB99-QvBJxYc9tTNyDThnK-mDq2NKq58AeMLsDjGRN2hFMhxiQ0F5gGGKBcsWa7TEsuoHXb8Dwto3WqVF?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/n427pm3niuueb7pmc2ojcnkpd0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5C52g15ksAY-zajYIreiKpRz5WHGNxktVquUjLnID403I5uyXjBNDDxJOr9N2xOe0_YDn6tHxCD4QqYKgWtkz72kQF2dgmts5klOYi0-WfLbItCl7xBfvEVOpGDt0pizwMzw-xh48vd6kGmckSt6NYCvavcIv0JdUWAJ2DBmvKhqOtQWi-wW4pQ8WyXIdToBa_?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/r6n7chabju96tc4sqfgobjeqs4/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet71dnHTe7H3zb08j4kg5hvhw7PfHKJpRp9xIPSt376CZa82-x0NwvzRvKRGBTLMjtCLWIqQqYv0279qY9ye_Kh9AmenqVVghbbBj0ND2C4wdBhjkGSNZWX0NSUtIT4qFTCd-OyqcZUyyOUp5BMMJC2LB5AA8N57i3EfN8EvVEengNHjJdx6R9-3vBzzUwBF5R3L?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Phare de l'Isle Verte: terrain aménagé face au fleuve"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -68.315291,
-                    49.1880166
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/9ec070memahn5i8g1hrqu8eo40/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7NlMb51RyGOZXe2j7G2fikkjTMcO0Ym7tT_TZoFgpghbeK7OfTk49TCKiTqwb2458i6LbR-7QIQkQstyXjvCvHmc74_9qmfrXxg26ogkk0CEe-1k_bki3YKp6bpBx2af3PPCHFezbKymklr8xbttshH6TDbdR64YEkVWL2xfny344sP6gNr_sj-lz3F6pWQ32L?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Dans le secteur Hauterive, en retrait de la route 138 et de la piste cyclable,  un site magnifique sur la rive est de la Rivière Manicouagan, près de son embouchure avec le fleuve St-Laurent.<br>Le site est assez fréquenté par les locaux, qui viennent pêcher au bout des rochers ou voir le coucher de soleil, et le stationnement est sans doute bruyant les soirs de week-end.  Mais juste magnifique pour camper!<br><br>Nous y avons campé avec bonheur le 30 juin 2020<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/4k3q4h5euup80elvalo8fflkdg/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6jXkTtjREcSuFcDCMyT4rMjDBMtlNVUFiorITAZ8A1gZDSttyIgTM2hVZxH8z11JiDTHkN9z5qQ2hL83Wbx6hWxaoKFcsJeimUBVuYH-WhBDKO27NM6lk5pnfwh_5HWt2OlnV3e2CBlKekn_Ch0oJzssG9Emr_OcCWXOL_DO_gmMOKydRlySSubJ2-pdnTArSJ?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/gimon098ijmlg1mm3jshi50em4/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5TJIg_Oo2pN8cFBjtDQz376a-gnHbIXb86dXvZr0DRu1G2ZhGUaTA3D4pP4FvX4dZmMGb8a_lSBDfba9hyspicsDUN6O2rv73Croc28__2jP5Zoz2m1uMCP-oibqkdv6oCYorbi8MuaGhfBxMf_6rUJNNyGmwMN-z5Ws1csd8ukXIAZLx1uZ58Gvv9Ga38nuM7?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Rivière Manicouagan, embouchure du Fleuve St-Laurent"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -67.2987013,
-                    49.4222765
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/m02mt4urnc7td2hnb1irfc2od0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4XIdDR2xytuj4-jxZlug3bpjZxw-XYbIJtacerJgtbtsJaBU8CHNrRSq_97ek7iruOWGnqNSaiZ2Ewsc5ctO8tc5qXhVivOR0BjJK4-TunhBQ-NWbDLYRhs2AqxR7a0fPiguJuG8Prepv1hEwsQM-m8mRhidSIWJ8snuxGzW9deF8SoJ9azvcLbOIeyUp5_p45?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Très beau site, directement sur le fleuve, avec verdure, tables de pique-nique.  <br>Toilettes et eau courante sur le site.  Aussi possible de recharger les appareils au bâtiment des toilettes. <br>Nous avons visité le site 2 juillet 2020, et nous campé  à notre retour de la Côte-Nord l2 21 juillet.<br><br><br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/ic5p2sls88fu3ueupbu5pv0a8k/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7Bz9nifMttLAIAtKtzd7yj-bTS_ziMLo6xwT0GpPxjbqgfj39yCXVaUsXRSp85P284cro36q8o-JwH08yyhppvSpREtQDKiC6Ykr0sKrHVLAtYPqTo-1jJK9hxqhiCnnMvZuWKSXmCI37sn74eJx-ua6o8j4WWNVMcpoq3y2EAi3CuwtfqtmqIEZY0GEWUti3l?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/emuiaqb4kemd9v162mhmq61vh8/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet63nC62WQ4GW84rGfyBj7O2r30DsZn9Y-LApdwD87D6BhInziPTl1F0s5oAuPt7VTmqmx6_XbBk0sv6bu7yHU7JIOU5jnXtVDZBQCSpfi_JxA8tb21YQR2Kr3AG5Qs6E5oT6dCPnK3b_lnbvfxQSzIa8nZnD6Gb67wyOYX3K4EogQo97b1CkS_jDXg525OUsf3D?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Baie Trinité: Halte municipale"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -66.8709774,
-                    50.0187582
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/91a7m24hqaf8ofrt60b5lk89fo/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5v_kvZUX5aMvlIUP_QvqEDQOzK1jO2y6lvvprZQTOD34G5_x9KuFqNUTYFyhtaUfZu4SsfQvD_AvKcLZqE2eaR4MXutaQAxwdBlwCdVptv0qeNeb6vhxkKxdm0IMfCDQyBA8RxY5tixK9znf_A_9Ir_mzSkES-f8u3-pu9kBm79gmnMOPQRZ_-owkWlYgVfPb4?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>en retrait du Chemin des Iles, tout au bout de l'Ile Patterson, nous avons trouvé ce site magnifique face au Golfe St-Laurent.  Belle verdure, tables de pique-nique, toilette sèche, pas d'eau.  Approvisionnement en eau: possible à  la Mairie juste en face (de l'autre coté de la baie, environs 1.5 km !)<br>Site visité à vélo le 3 juillet 2020; De retour le 20 juillet, nous y avons campé avec bonheur!<br>C'était tranquille le 3 juillet, mais plusieurs winnibagos parqués autour le 20 juillet.<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPIonMaritimes2020<br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/6dih35ecc6dn3gvencnj135tq4/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet67t_zBjFsOCHuYBmp-wCoik0IHe0fkTJ2GrCxgFSEKGNWyYGCALdgsEy6x4hORtqzso1MGNw1qzvAzRs4ZwQA1lRoRhu9bNjG8ur5U5OXKSZ6ztH114L2j3o4D16SZLWLnO9iDrDfWz9Bdkz4FMM9B-ljJQz8uR2x9Bw2-GPRxpe9E46dEshgvHhRgMDG7oEH1?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/slat5uqppd7u297o6ueilbce0k/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5IDTB4URYwHPzeo6RdlXB_ifevaLg_Kk_aYIVmI8EeiCp9KdtdsvfOHMIrZTDZbAEUsXayxM3qeCXACBLFbPX2SFSNAtGZCLyj2pFcU7C5vXFfc7PKUZVBIhVxMPDyUQxK8bBZfI16hP7bm4m1a5TETtSlta2TR9GETjEztC8zocoUVM-Oj21fCgSD5mhLvCRt?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/4do67ip4nmbdj15h20fmjif68c/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5Cixm4MvsD9WS4HvRQQ99MHT1lThH2P1JC-G1fkJYuI9zJuwazFCWZWbmaY6Dr_noVmW30ptvi7b1B39tdnYphvnCrFZcv70kgvjUmcZE2HqGis5jTB6pMeqObOItRLAUS8EnHltmYTg32n1jTykTWN0H-0ZuNT6feoTql0-8-jAZwSPLpt8jchTKXo3VDXy9J?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Port-Cartier - Halte municipale / Ile Patterson"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -66.6960964,
-                    50.1093327
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/cc7afubqkr7gvfr74h9uersj9c/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7N3YYKjdHJxgSldTLTdw7jEnEYdMtjQLP3Ge-Rw1AzGYnZx65WrJUCJvBlaJdcZF5wU7BlMvH3pxdUhpc4rP2xq4bJEFwspnjmS_P0XR0PniMaUyi8BuvPnAvo49QBvtVcSiwSur3sWKFEqn40Sb_J8iu-LyOpYygJP0VzgbReA9UH0JbumBML58YZIYbSOHE_?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Halte municipale et site d'observation des marais salants.<br>Bel endroit isolé, à l'embouchure des marais et du Golfe St-Laurent.  Quelques tables de pique-nique, toilette sèches, gazebo semi-abrité en cas de pluie.  Possible de camper sur l'herbe en retrait du stationnement, ou sur le sable et la plage face au fleuve.  Un site magnifique!<br>Visité le 3 juillet 2020<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPIonMaritimes2020<br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/0v8mgnjm2roevke1d4po7ovi5k/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4S_yuD8OUeIpROIMtuKIy4R6wHES5pgPJeT4igs1Bd53-500I-DRArPac35MIU6pKXKoT-EsIccTG7eb6o3Ix_Mfo3iELV4CMrwgZKOuqZ56QjeWUzMOTocQzNlvQVK5m29lIbm-09qy5yVEfhjM8cvPGeT3XTxH41wDoHb1JeItMo7WveWeXpDrbg0XInSAbK?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/eegffcrlfav7pr6ki54fql21tg/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6r_mo4xYQS5ZxkFoac41iWf-3BuhDbARi2Lj4Vp9_EFBAdKt19C0gih-5pgOL2EmtSYuLd-14pP4o9OHVUB1FqK8SrYkrURGChmZEKF6585izsdLWjAQvQnx2CcuQ_tUGqZijsaZnT-RKKix2IBxsqr4L8tNNJq6YGzj5CTp1x9Bhqh6gmcDslAqVoEOre1wqd?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/lnq9jo4t05c4ie4cdmp7btgihc/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4WNImLrPd2zylR3XFJXWva7Y0GWCvOuLNpw68g_bXtGobfybsLQahuyhy2KHCszNLXh2vS1g5ANlKvDwu9RaN9Mc1nDNVoYIX43DpkT2tpwzHLrJvbXufOCf-QjxVNbB06f_h17dd8he4GXr7aRb6iUw513n0PXOZRiRqFHY98B6etGi1tQ4IJWuo-B-Dn7t_N?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/m3djbi1g5onnf5sevpp50ogri8/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5wUUQTArVIFBj_OzDyuL8ul8RBWR4h3xXssxURDOlTH_Y6OfU8n1WhG224Ww0z2NTbQ4rTOM4KSMpuPd_4pV_lB1MozPGAbfu6SBQD2aCoqRFUC0REw1-kToli0Apc5x0c9ACFczovB8Q7J2IOW9FVArKcDUzRB466JHGY82YA7Gx9Ex6g1w1_o8puPXsBTcXh?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Gallix: Site d'observation des marais salants"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -66.4489656,
-                    50.2663137
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/ocqjj6d72e0d4ujfhcsdt5cvu0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6JbSwz9Eh651sxMpN4LJSqgVm9n7fsZvQgZemi31GECmhvPSy6wrMk5fTujQdJhc4PcKBaccrF5aEXIVQ11F3PE0BjZ57EmhgPN0XdLD0u4v7-sVJouZE1a4peQn8WvADVroxaIXNBqlKG2lSMWxPosj26JyzweqqCv9yxV_lvVr8edP1hw7g7gCRtqFR5-dwF?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Beau site en forêt, adjacent à la Baie de Sept-Iles. Avec tables de pique-nique, tour d'observation, toilette sèche, pas d'eau.  <br>Accessible à vélo seulement, par une jolie piste cyclable au milieu d'une forêt dense.<br>Site visité le 3 juillet 2020<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPIonMaritimes2020<br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/6sdm15agk8hpcu25rlf5ceh0jk/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet53qMuWc3q1syBqV-jeNVQbfVkDELlNnPR0fbCUFcmyxDISCq1Ee4Y1iNpjaiHedh-tkUvqxUzPXF7RLd4GZou_4iMQg1LgQIZsT8cqRBtkeHLH3Be3Fpout7iWUhtzl-C69mwYWKwpjSP_V3T57XY-HlUz1yU1OhW3_l-7g4u52f-icy54UDEA_Rv9AzGgzowT?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/vtf8k21kmnb082uhcoh6dar89k/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7G1MP684sdQLCgHc5KvrKnTTNSum8HZUlKY-TWP3TJwj7sx5EHb9LX0aSdJoMqcdTmN9pBMLpeobmVeooCHfkZVAFS_-6MntEbotO9UZhF55V-VrN9tgbf_q8qK9elFH0tW8PpCFiPD07t2FZz__1UAovIQRpZ0hifPtaqhPKWkpunKwfFUdBMuzxcQj71RMBt?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/f8g5f73b3v0mo4q16je5c6uf6g/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7-Ef3WEm_zcSzAt-ot2ls2RqLGuUJRSJR0_fZWs62TfBFId-0uv0Qxd_05FU_WvVVXte8yEfFzfPHal2rvEgB2-N3hkq_oOh6D99ulUyw96EF_ErHrORSnzWbFa-lsk1xjkmSJ5UkB6lMzJOIPTeI0BC_wU0iBdNnoRrrfzS87VTHpfnAyPdA6JdrLuUJmIbs9?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Parc Aylmer Whittom, Sept-Iles"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -77.2687139,
-                    47.6930712
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Guérite rouillée. Emplacement sur gravier et roc, difficile de planter des piquets. Un km et demi au nord, petite rivière avec pont de bois du club de motoneige (attention, le pont est vieux et cède) où se procurer de l'eau.",
-                "name": "Point 79"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -77.2718898,
-                    47.7026454
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Petite rivière pour eau (à traiter)",
-                "name": "Point 80"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -66.2974125,
-                    50.2051706
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/lp9q0qjf95mq64d04vjolc6ee4/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4yHxxeK4Ot3-L7haQ7fQfRwB-85LCvUomIMx3yBVyB9yag59ZBycPMmuowqs5K-aUsgoPJqd9K9ULlHlRex5vzfje9C7DzVP8LIk4QUPGo7f4zo1COwPWRDhKpBDfRkKjIn2ZjJF5fiGhl_3kJdzUDrOit6u6NXLoLt1sJOMrJ4IRM-n8IwfWDWo60SWWntQFA?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Toilettes puliques avec eau courante. Possibilité de camper sur la plage.  Pas de table de pique-nique, aucun service.<br>Très jolie piste cyclable pour s'y rendre depuis Sept-Iles<br>Site visité le 6 juillet 2020<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPIonMaritimes2020<br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/ti57ldqd95s555egjf7h3u387s/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet646_0tiSXvCa4qfxBoCFWrYmOaSInZz5sRsnWcatftDoC4ZDwabYXISAWCQBCTITJyaGxEKw7NpR-IGpemkJXclJbq2vWQ-d6HD1b1BX8Cc207wLwWqIwnY5cVmQOz-q9WqIpJvyeyEF_LKEixL19KUweJ0yfXHV2qXyj04nl3rEUNy6ecQ2vtyR367pdjlDIW?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Plage municipale de Sept-Iles, 2e stationnement"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -64.9130279,
-                    50.2697876
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/ejl0e1jjnqlufmfe1pr08ekisk/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4s-VgYHS8IiXEZi5RXoidWkkiKqDnAtmNY1XXJ3vicZCJB4F44kZXJtiiVC-aY2sl4s5oX8gwGvOMDD6gixNvFOO67YeqQ9g0FE6x056I87-L5j1uCIwajrI6zleBejbf8w91AXyZlxcqPKkQlV2D_0fQGecPhdZRyF-zofOrGYCkMb32Sdq8vgCAXpEKBydwA?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Beau site surplombant la mer coté sud et la rivière coté nord, juste avant le village de Sheldrake.  Sur une petit sentier  en haut de la route 138.<br>Avec table de pique-nique ; pas de toilette, pas d'eau.  Aucune ombre. Un beau bivouac tranquille, avec magnifique point de vue.<br>Site visité lors de notre passage le 7 juillet 2020<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPIonMaritimes2020<br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/m5dp7tt1nfmmojp2s8fqkqbfvc/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5JpIDYhqDERBgLB7FhciCw3U7akgWIhc9ifdZ4uDkT_nqBl6s4kYvqHPjzvHFSQ9wFUDRANd3sgistaRgDqfRn97Hp3rxZSMWpmU76WJM8p9i6uLaMQaDJIhbnUgfL2iWRshZ4Iru6_j0_LCHqjPBvS3cQ4UYH_NxB1AxY9jxnN1cts5ZY5mSXumphdqAboS17?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/9ejk0481qos132r9sesrmuv4f0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4zKYayKRHkbv4NCt3tLXgyrezf_ODYmosdaLeZwohzWyxvEYdK_Y2Cl2je__DWTxGoxsYIA1Tx4u55YlE_pvRpkmDhX3Hau79lnGzcjnHbysh5lYsrZOu-HmxvyAH0JdoO1NAUr4V7oY89CWB4g_eHNI4zGGZwYGR4UX2j9XWaEbuVEeCiZaPDFw5WhxHFzAPB?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/dpcvrtdp1f0e3gaq53ebfg4pik/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6Ch62PHo7P0M2-iKEUOhIF3Qu_uqc2OJJtAO3ZDRHD3sSnBdmmwo9R37RYoVW1VF2pWbDi6Y_aMMZgKYGwB0yj6G0VHL1kW0CF0Yhoea71ld6gEDFGR2ka_JhBfrydLBGgwTplZEX_19CK_-FHl-JE8o0NmkD4DNWkNR3bIEgDhHF2t3UyJGw86fSoPHr-hfi8?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Croix de chemin, village de Sheldrake"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -64.8548534,
-                    50.2645768
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/7lkungblfnp75883plo6c7vktk/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet622ZK973VLxEc6OJnV69SKFEgHy_8iORcNPP16BiulwToWb8tVua85YSEBu9ftGK0Po5TAWT--pVA9r67dq4CGcpsQJZxhsdStUNGeSUW9-4z64QVrqwJk9QI37Mx7ga-7-ZMLTYRp-tPyW88tp4O-F-fTRkchOYMMHr2lce1VWVHTIeSRnI9efIbD6tiNFCpM?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>En retrait de la route 138 face au Golfe St-Laurent, vis-à-vis l'Anse du Ouest, une halte municipale  avec tables de pique-nique et suffisamment de verdure pour plusieurs tentes. Belle vue sur la mer.<br>Pas d'eau, pas de service.<br>Site visité lors de notre passage à vélo le 7 juillet 2020.<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPIonMaritimes2020<br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/ihkq58nkf93hqeccdlog8pn7bc/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4LjFzssksOF1d_2gxp6AR224G2jmQCHBZqRFW3sIcVBnNNZfKbvRfP9W7HnrnVqvWacaCrBtL-HLFPuWuPB8LOIIyv8fWla0LJYy4Mv2jUOVRzIN8y1vg0HpBuHUtgZyyOrhs0P-vmiJh4_mGcXr8NLYDAUVb26IrsrXNMB5cLXcKuV3ddMhPoLn32mhFOhY_Z?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Halte municipale, Village de Sheldrake"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.8193321079016,
-                    45.0392663048165
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/fsn7q8798c4trj0jisu0j4kpb0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4ORadXS-4jkinDkryC_R0Q-Kp4PIn24YLBakpleVw89gTVxJ7-lOwEt1AjLHq4veNAUekavNi21p77Nw9OU8w80DfhkhkY3mb-8Q6Owc8-W7T3pGWsdy7CWpRa78_FlSQhr5jbFjXWT4Nl60K3B_5Guglh0kCgF-gJYt4jjLNJ4SbR2ldtdKbz_ocWrlQk4yXs?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Aucune interdiction affichée. Sentier large menant à quelques bons emplacements près de la rivière. J'ai choisi le plus éloigné, entouré de jolis arbres avec un accès à la rivière. 1,5 km du stationnement, où il y a une toilette sèche, des tables et un petit abri. Campé là en juillet 2020, croisé seulement un couple de randonneurs. Aucun problème.<br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/5ukt65srnjrhd24h86o638gq4c/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6_ojN0-MG0qtgljnaMpzExDvEGFJlKKjZ9VOoZIFi5vV8FQK-h2I7SeVP_Sf2qA4PlGf9xtZqSdJ8i5ki3kZ4bYHiYU8EYpXlyG4qd2rswPuW_aj5YJFlPxM0QQ3Xnkf9lg04Xi5Lt2bHvBe4KErTk8M8rErDYyfUs8SIe5LKJZzLxwnacbwhWbMwPJWgOjkMg?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/trrle5bc6p3tvk4d2ckrd4a9eg/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4pV3XpdDMeAvWr2Sh9nb8VP0qOWbnfJOUTCkzWUgr2n4VyWotqJCoEEr6c61H9Iz_1ZZauHafsV4GK3W8GeNpKqTSEBrZEUhkUguFCaJM8HbxFjXfPxExI7LlNCae0O9QOsRA_e6w4n9NBDfVRlWV1-S2cUXvkyaEsOztXVU_x3XV5AB6bOQXqxm2XyJ_h0Bvs?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Parc municipal de Frelighsburg"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -74.0485529601574,
-                    45.2151429522149
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/34hoej6ddhls59f5u6c6lil9m8/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet73P9s6RsYjIQPZx5tQa2OSCQJmJSOnOaq8n8kYd9kDOx-_nxsgfqHmKkZ_QojvQa-YEjIdScmru6WBR5GTRcq2UbTXM0o7X4dHQja8qslxQKo7F3dw5_9PtKLkXB16AhhQuG6_YpSiGTNO0phazMf621K9YCdgSW66O-CbNfbNypoIjtzQmhtDru3s4YDR6ChF?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Sur le bord de la piste. Toilette compost et accès au canal, ainsi que plusieurs tables sous abris. Techniquement interdit, sauf pour les bateaux accostés au quai. Passé une nuit là en juillet 2020. Il y avait 3 bateaux de familles qui ont passé la nuit aussi. Nuit plutôt tranquille. D'autres micro-haltes entre le pont de la R201 et l'extrémité ouest sont plus discrets, mais sans toilettes.<br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/fmej66b0ss1imgda194emqlado/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet71RGXo-czdDsw7tB5ZQQJ7cW8yct-MTIGUYpxx98s2QPZNZhcGmZrkLY7cvFTPQz7QNeUEqQlY8yGTZgA0x6M933Ota-HDdng4YirHE_B18iCSiW1eFGPAvIuuPsp47Awomm5d3GGMSisURN5N194VNWUX7W3Xs0HeMmIghSC4v1bSI0yScut6-KAcZuM25dUR?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Halte de la Presqu'île"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -64.7439428,
-                    50.2701814
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/sbvbfi777subn4sus9plpdb2fc/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5OCtA00TvP4EZkS23TFLBjvidErr61N5_2zdh6PmFR7j3WLHZifSdI6iTAXS7Rws9MqGcWrJjltkiR_3VHCFJt1VWB5XW0xOA2t9Y59pRlzZaNUsSd08XdTuJgiebk0z80ij8MhAzlb69JEv7u6IiXgL_B-KipT9kE786lz31Unfr9Er4CNgqkKc1xk2TtaauD?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Fabuleux site de bivouac reféré par les locaux!<br>Pour s'y rendre, quitter Rivière au Tonnerre vers l'est par la rue du Vieux Quai.  Quand cette rue finit en cul de sac, suivre le sentier herbacé qui continue le long des plages à travers champs.<br>Quand vous serez vis-à-vis la tour de communication (elle sera sur votre gauche près de la 138, en hauteur), vous verrez une petite anse sablonneuse sur votre droite.  Vous pouvez y monter votre tente, ou encore monter sur le cap pour une vue plus aérienne. <br>Pas d'eau, pas de table, pas de service, mais site splendide!<br>Nous avons visité ce site le 9 juillet 2020. <br>Pamela et Nicolas, un jeune couple de<br>Drummondville y avait passé la nuit, venu en auto.<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/hgn3qleuvj56rq74jmv2f84h5o/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4fX3Y-Ir1ZoP9qxFYO3_Y8utO5L2NvoISgKvdMk5cSYc6C8D8-4jy_FaoQQoUMra8V5l1_jCbFobumhU3PPSd7L-4Ez9uFnQOHY7m28-qKHlCUPev2mFdeCNUff0BV8ZghCVE7R0VmuNs9K-MxJcCZR64gJPmsslD45RWXE6dSo0HLADzgAkqG5GZm7vq2cqWy?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/lfis3j9nqu0199mdn372c8okjo/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6QVMnGHijdU6K3DPRTgGw7YWgAnXykElu5I42612WUlK2hxNjfs_qvTKFc9HaPunc59LI2zJQ4_gC2o5-0Rm9RC2F67IQW_wqOchn0Vpc47407YOiA4nt2rsHudS-voObpxrB4pvKAjlmoSMyPCZq_I9tEZe6iadOA-uHLCdlcxuSFqS5OgmXasszTh_tp8QMr?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/hgbisaj567snbkljbe2povf82o/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4Ph-Z-O04_lSOuOho6u8EAPZCzdi1QtwQGb37coBjxhrhiXNp6eCIwDnDVkAzpTzNN7sYr_OtmsAsCDTZtgWBD220IEd3LT-nw-qsxlp5uPVq4KvYNIHTEn9uITtsvgtFzJsWtu6kF3sDWqPqWMviEUQbeyM056EtuV35Yrxbm1Fj5UggCqLD6jf0szR-9kk_U?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/rlt307d9474a1p1u81hvi8nbjk/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7XV8SlYKVVx088yXTR22lf1VIiCUTkh-8bEML2Z9CbBqSSLmyxnay-UZ-YBY3C0hZaj7mUHZYLTmSKrhegC1J6qkJ_Kx-6amJ9zbGWzdOkzLhakTv6JMPyrBTa-1OEuXDPQ1SJaXO3UOWPzbJWtx4iuTxrATCG4bNDungxzcxVwKK5hVXk-fXOGsMdN9mteY4u?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/lec7nq17rdnq4p0trfs7ar9208/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6vPf2I1VDNnVBy3za3hLrR1ZJAdCClMc9eZycasCjHExIteA_Xi1iB2HzmPR2sGO07dcVs6-SXXtLZ1pV3TofBPyU8CNlso9g-HOUYaBIDXFBcivRDJHdJmJVdg9wD_j1QYySSa5up1u2oZ5UZaoxUKDxrC0BmbUNOJeWicCmbkzgnNQtvOUfCFbz1R2l71mgz?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "En contrebas de la tour de communication, à l'est de Rivière au Tonnerre"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -63.5747986,
-                    50.2503133
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Au bout du village voisin du camping municipal (était complet et dispendieux quand nous l'avons visité), quelques sites en contrebas d'un petit stationnement, juste au dessus de la plage, en partie dans l'herbe longue.<br>Il y avait un robinet d'eau mais pas de table.<br>3 tentes installées ici, lors de notre passage le 9 juillet 2020<br><br>p.s.: pas le plus beau spot, mais près de la ville.  <br>Un bien plus beau site plus loin à l'est sur la route 138, environs 5 kms.  Décrit plus loin dans une inscription distincte.<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020",
-                "name": "Camping sauvage près de la plage, Havre St-Pierre"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -63.550794,
-                    50.2573092
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/speho9uhnqgt8mo1qlnr3uk9fc/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6-NNjBLrX4wBG4buSXu4A-SwW4Oi_SJHgO-wmid9mOXC_nZ4x5VJ7UIg2OfB0Pq1HkeeM2BCLCGZAoN27KlDzFSNaZVdnFGcEP1qnnyd2cd7ntI7_pbyCafryTRVxxLkHh1tRdfpJyLbGhQgJJlxLvcu11twgzUTOf5sHhNlseEejMuY6kDMHqm1blVeQk6Bsy?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>A 6.5 km du centre de Havre St-Pierre sur la route 138 vers l'est, c'est une halte routière gazonnée surplombant le Golfe; Quelques tables de pique-nique, pas d'eau, verdure mais pas d'ombre.<br>Site visité lors de notre passage le 10  juillet 2020<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/s6g7e8tr1m1rkdfgajoj86ro3c/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7c04Vi_4isthiUrB_7_31A4xLumAnzpf0hn5em-6oI6U-BX6wvw4TGU7Q8gM2U9W61_P26qi-jyK4udwVwNvpj9BHum5T5ONfDvFTegKH0aKUf5aPg5vn2QeBZ3uj8MvYpAbw4cuauNojH0Q9BPwwgf5Oxtu42e1DYu31ymVXNYTsT7ZRzonzLyswBFxeX8VDF?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Halte routière et belvédère, Route 138 à l'est de Havre St-Pierre"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -62.8061197,
-                    50.2867647
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/qfjr2uk17qols5s3g88pqoonhk/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4KCkWXxOLUesd_RR3vdrudonY-r7J1XYCu0_P0LYcNgNU05ExbQIgoc-H15elbM1rInszJvNNmd5yAqn42z2TGGzixcXc6Iic9U4TEOPyJqADRmOV4GOxW0IpFlfmIjkFaDrgiIAepXFVLtjSlMuFSqTcYeLzP39JofFcRin7fKEX304FTBmlNU-ENRIiHliw6?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Accessible par la route 138 via un trottoir en bois (aussi possible de rouler sur les roches plates au fond de la rivière, par marée basse), c'est un beau parc municipal directement face à la mer.  <br>Pas d'herbe et pas de terre pour ancrer les piquets de tente (que des rochers plats), mais il y a un gazebo couvert assez grand pour y monter 2 petites tentes.  Quelques tables de pique-nique. Prise électrique dans le gazebo. Eau potable accessible à l'information touristique, à 100 mètres.<br>Site assez venteux, mais abrité en partie dans le gazebo.<br>Site visité lors de notre passage le 10 juillet 2020. Nous y avons campé à notre retour le 14 juillet.<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/oallj1mgujjvc2kr0e397ufd7s/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7uBeMm88BdiDeRYgVx3QSzat5g3hIiueqWNuuNf4CHw83Mi7S8DGeGKPeq4weK4h5GrQzy_YhU_IEUNP0_nW0lWv7RuwJuAfFX0bQdJHOIhE5dW1VVcVoOh9e-viU312PA_p-9VcvY320LZaTjrq6ao_QFoZy71LGzyC-a685YqYfCDhDA30I9-tCeWX6_hHBJ?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/krpnlpr03p4h4p6gknlgpljmq8/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6VeBLoCfT-5Mxl2ufvjI1MBebv8KeVyyTdZ4jjEJSH--9Ve3Zn7mzG3fg5VjE5zdTgLwqPnz3dsHf-Kw2eJNkNbBAT2J4aQviRYrja1LPoRYqZB34CkpY-339D7yuAE2d8v7F6wh8mWRdU_UuUmUbvONJ5Iuf6dSa6uT3zbpe8-i2z9MSoWbxzW0qmXUubH1ye?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/p8l9fre809bt9clg79s759frh0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5gMdXqd5tYl75-WwsF1TxXND7-7RNdzNYUEOTUiwwQN3SHS99Efxt6lulHVP9a_NWOWEINL_NKRBAgTkrUhr85QfaLBZrEtuXzgvl4FEB26ywrLAUWRKzw5RLJp70DyJCvgb4o0LD82q0mx0KctNXngBvzjfK7DCXGjaIk9MYTr3zt1LHiUkylAEohc5eIdydN?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/lmma37mdd4g01qjke0e1mdumcg/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5bK9izYtHDm6lNagXGJCYdjtyrqlTrzIkfiNkUoE_j3KWz1uZ6Ma4IOzmY4YkkgxQ8icb-E0uUYA1zlZnVa-ujP_4BC217X6AJXVsXJpTdk1q5rUP9A3HcPbHIW5OXmf_4ovXaYsXWTg8yPQTormlqMHT9lY-xc3mXXesTkUO08y-lWrtQX2blKSpPAkuG7K7U?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Baie Johan Beetz, Parc Municipal"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -62.5524765,
-                    50.2816048
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/lqstjvlqg6fh6rhf617sehponc/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5GtQnElcURaKS_fjcDenAsCbc81oW7d0q_Zr0ZHVVGMp1eUlR40Z2Ms8HRYGXJeLWlmRqqryWqqJDzWK7j4RmHQYusUpY_Vee7IHZDS29TfUifz_vo_WSQX2Qe7c-OkCA4hXyN-DfNvO37E7bnthUKe6svcl12drDLs-uiCtwH_OwAjP1mvmz6uWfQHn2JurTT?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Directement sur la 138, quelques tables de pique-nique, terrain gazonné et plat mais pas d'ombre et pas d'eau.  Jolie plage en contrebas.  Tranquille, mais prévoir la présence des moustiques!<br>Site visité lors de notre passage le 10 juillet 2020<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/gdpp1v6oud4oquhh05s0il8fko/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7MbO3JdIXixyH-opgPL8B3nY1xsqysWoS4xS0FLPjYZ1abVo0BupZtmaL9lYKcE4mHRx_Ki_pAnWR64EhnZVbVa-PrQeD64Sk4F1U706RIypFRDuekfIwAks2C8ueAJZzT_tBOOrDqYix2hfcEIh1fyu-73xXk9rTkPAafyb6IYqIU1CigQ1nWFrNqC9ZcS1gl?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/6163i48kia9bv0h0rsi9md8374/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7fDBPwgpXMXKRPmz9Hzti-2XQX6DwM7DR1XBilhQV9bLFBma0U0r8f5Rfix-H2f0tV-08IBaFiArJQ6JEgRLdZMxU4dDI52wHYMWvRlbo85sl2nuUx6M3MUCbbOGlFzfBReEyAm2k2LUTcBzc29zKVUetWLEeRxyBDiJ9DXmpHMU-n8S-nbefVma4HqBOBUxtg?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Halte routière et Belvédère, Baie Pontbriand, route 138"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -62.1062603,
-                    50.2281068
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/9lu26g6h5nsv5gl0vd7faes3g0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4sBZ7IMjYvFEanaeEONHmY2pzV63yHk-FKf_yXjRbZqnm-U77yLbLEUxCemTuOXavk_yuDIi4qG4xuF6dMzSxkB8120EagLI78UFrruVTZ4coTwp7-1_D8dgiuBVYMKX6CCWEgesEucNwoXm8EfublTxSxvDWOZ5k9eZ5CHqx38vf8vLLdFZM6uICwWP3jgPYo?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Terrain plat face à l'embouchure de la Rivière Aguanish, à l'entrée du village.  Table de pique-nique, chaises longues.  Suffisamment d'espaces pour y monter 2 petites tentes, mais très près de la route 138, cependant très peu achalandée ici.<br>Site qui conviendra si vous êtes pressé de vous installer et qu'il est tard.  Autrement, de plus beaux sites pourront être repérés en face, de l'autre coté de la rivière.<br>Site visité lors de notre passage le 10 juillet 2020<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/50e3mv3htjo97v3holfr8k5j1o/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4VK5dJTOPcZLOVqUOPqmsTkmye3BsXIM4v831Hn1uLROUKUlptDiM__zRHC_b5bD4Zx6ZrduwWgOnXxHduzJmeI7Sv_W3RHVINUdsPFuk19IeiLVdX3HnxIMmJ1dt9okq_13pYLUNHT8BLEQXpH0cneznu8gFaskhDbcgm6EgvburlOhUhWLW8ROX6tJN0CbD_?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/avd72jpl8btfab817u4ik0iohs/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet73iS5Ko0gl38Wo982NIrDvOUsDMZZGXgaFLbBSISF34Oyfrq2ode6mzYLQzBwKaXRjvsoQ1YugOuW6W4-A98_ZO3YZBMa_izDnbwdnHuoLS7cEMhf2s9X6eeaDbVA0o2vcIWHG61Lc8nMnVNskOOqoIl1ciR6bodw7tN6zlW4kKanOrodl1C6W4GjIRN2HbiHV?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Village de Aguanish"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -61.8189163,
-                    50.1810058
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "un peu en retrait du village, au delà du Café l'Echourerie, plusieurs endroits où monter votre tente. Terrain sans service<br>Site visité lors de notre passage le 12 juillet 2020.<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020",
-                "name": "Natashquan, plage ou dunes"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -61.2530683,
-                    50.1968634
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/jbmkdha2gb1i6tma0oa03ttg40/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7iQBHZQXNr6ZQhx-ohxN00hpubgpY8Qh8c3DU06ZlRBT4C-dAGfRabrO-QEuIXLcQOwXcXNRIvRfnbe3ETF2u7Ef4RsyY1sNsMlsmVbsu980SoghH4AlJOod44m8MG8iZlyQArNR4dyTQMvj4S2kMfSNpgj_cIjwPFQi_BJa2K1FF4xSgv3HxrV1ciH36i9FrM?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Prendre à gauche à l'entrée du village de Kegaska et suivre le chemin puis le sentier jusqu'à ce qu'il descende sur la plage. <br>Vaste plage tout le long de la baie qui fait face au village, vue magnifique; Très agréable promenade sur les rochers qui longe le Golfe.  <br>Pas d'eau, pas de table, pas de service ...<br>Nous avons visité ce site lors de notre passsage le 13 juillet 2020, mais nous n'y avons pas campé<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>Caroline ajout septembre 2020 : c'est proche de la dompte du village, une habitante m'a recommandée de ne PAS y dormir, puisque loups et ours y sont attirés. Il y un endroit magnifique au bout du village.<br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/2t4rbhe0h9j8tl9ntb466mntbg/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet63Kyo1aOWZOhN1kWn1Tvx4E2r2eCDue54NIoaii_xU2-q2zkVFX0VnYNHGRG-kTuUGvFPdIMq2ea8TASs9byiivp3w2Xyi59Nnm1u06OCibxpthNvKGCSCOOxLL49znIBGxIoDlrbIEWIWS5P60IdP4Cf6Xq14i1pOstfWL5l83UgWrgZ5dOAncwlTxO6IM0L3?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/0gc65kp7jmjb93ukskpim1ea1k/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6TbqPHX0Nt4BZ7yqL0OoZAKgKqHUKCpAw0j86EV_brgBLySf3T6A2D8ITKwg9GcSz8YKjeiO3oxu6CuTyp1DcUVgw6chVFpAcRD-qo9w8fL-Rf9W0gtPPoJt0RKv1naKU4fn4fx_UCjNWEpWafF-8GWWrW2b4JS5KeSOuQXAd_5qP7w6-BkxzdkeiWL88zDqgf?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/is6n56n8ql835fa6blk9ju3dnc/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6ISEOSlXIVXQQX5ft6Gn-pF5nSyfXOokTux5rOltfSyx9kwaFcrkngJvhqTPnzLNRMWrPsLvlrE6D4k8mD3zKvhTgYZq5rHhQZDUYDTXxhbEKjbzVH4q7NTRTHTS4fvIH8ejFKSRsUtcP7X3Y-S9mzFwk_Fl3EN9rsD2t_OGMTMieBGxp465iaOi8PqM3xElnh?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Kegaska: Au bout de la route 138!"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -62.0409395,
-                    50.2282166
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/a4fd5i9cnboiiglf7nu5cv3pm4/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6VNzRfyxkOH6JgCRWZCT9pmjreIwgwVV1o770q9Sh2lmvmGk2ZsEHglEUARQIgOSjhq99MXB_amsAcMJlX4qNToONXowirMy-J97YcrXFPc6t9LTS4qKGuzRzyiHbh4HMfsAlbUe5m4xU7sF67QFdl6KrzNbNauJ-i8AnsgGBzJetPTTyGuyEJKeCxD1FNO2BO?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>en bordure de la route 138.<br>Beau belvédère surplombant les iles, entre Aguanish et L'Ile-Michon. <br>Au delà du stationnement et du gazebo avec toit (possibilité de s'y abriter en cas de mauvais temps), un petit sentier de 50 mètres mène à un 2e point de vue, caché en retrait de la route.  Emplacement pour 2 petites tentes, à vélo seulement.  Table de pique-nique, mais pas d'eau et pas de toilette.<br>N.B.:  le premier belvédère adjacent à la route 138 est indiqué \"No camping\", et s'adresse aux autos et et aux winnibagos.  Celui en retrait  s'adresse aux cyclistes, et n'a aucune restriction affichée. Néanmoins, nous suggérons d'attendre la brunante pour monter votre tente, et de la défaire avant 8AM le lendemain.<br>Site visité les 11 et 14 juillet 2020.<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/a34sa71jgv4b7nnigf8fi5op9s/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7pB1pWMIAhkTNI9dpIwoMP4-Ke3kNq3IMn_N7T_EB-g8IvvqlPFzsbvPlhXkQ33lUog5tLEtj9xeq7vmr0uDoQxzbYGTsNgc0QRL19ioYP9eXyhKKwTzIOohIz3s-W3j9NTW711KPm2i_uunnvGv-LaKd1yK-gTmGsBLIc5Uv2WlOXZYVyea-N3OfZl9m0aEfm?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/v135itih9269f9tig3icdma96g/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5o5Oz-gm8OiOblLOpWiYZguKodPWMkL7sC_lQvYcrvOmzeupRbOh6kBvJ4Lh-AU7WK4cXDS7D_UotaZxYD7ajaXLOU00KLEE-a-m6lMnAwA6O8igPAi9XufrCnYoO486tORjhIo-dqRSUm5MMZqwAIKK_uFtmH0gf9pjkUHqeWoLYNGnbZwFma72KX4cWcnttU?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Aguanish: Belvédère et Halte Municipale"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -64.3431687,
-                    50.2849144
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/f6dhfpjta504c6vjs63pnk0ee8/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5ELwDTNvT8l0uCvB9tthvhKX9CJXjMTinYhbSjOP8GtIm6S4e6GkrchtojlqjQA62RsY_cSeQbAdc4PcJzNRRv71MfhoVjuV8UEUz-4GtrnIOx1HLEQkybic0yiUDzuaUS3IkQERLjEllru5qekaryPxvS_ck44r_GLWi97STGvEE7e0HXe9-tdDhc0ftscgYN?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Un de nos plus beaux bivouacs au Québec, tous voyages confondus!<br>Pour s'y rendre, en partant du village de Rivière St-Jean:<br>- en direction ouest, traverser le pont de la rivière St-Jean et monter la côte jusqu'au sommet.<br>- prendre à gauche sur une rue pavée, environs 300 mètres depuis la fin du pont.<br>- au T, environs 200 mètres de la route 138, tourner à droite et aller au bout (50 mètres?)<br>- A votre gauche, un petit chemin de gravier descend jusqu'au Golfe.  Environs 150 mètres.<br><br>C'est là que sont les spots pour camper; il y en a une dizaine, tout au long de la falaise qui surplombe la plage en contrebas.<br><br>Pas de table, pas de toilette, pas d'eau.<br>Pour l'eau, approvisionnement possible à la mairie au village; Robinet extérieur à l'arrière du bâtiment, près du parc pour enfants<br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/gpls4oi769lp911i3io6d7n0tg/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5C0WuvdnYVxARtL88Ozs1UdC7JeDLHYP4spCZlbV7LC6IkFbQSPu4Z87fNBDRRMLVm5gu0weTSgQ2Bpc8SI6kQyVwfp3InZOHOZuOJrhY-VcwDVj6v779myFQVUvTb4yLn6rEwo4iJQ1wRWnZZlEu3WT0KZWBlKLX_tIQDh6dSf5n8rbwQdip2-jWBZbxAawkg?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/bbun9rsenr35jhep82lp8em18s/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet67GRLO-k2fAiAtuyDybhgGKukLXOIEvK-OhtmxFsca6n8x3jTixq9U9l9CASRv5AN63c1aF_O3WgLX_X0weCVA2f1Ipzit-GskAlkIo5ma_AAebCGGJM4MxCgL4r8SAJyT9ZJhlsFSXCTFbnT2HAhPuDBzON87HEpU5kz-p-zfvODzZOJb1jX_MRrBWbpL9KYQ?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Rivière St-Jean: camping sauvage"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -65.4187,
-                    49.25239
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Petit sentier du côté nord de la route avec terrain à vendre abandonné. Plus loin sur le sentier, il y a un endroit avec assez d'espace pour installer une tente.<br>Pas d'eau à proximité, ni de toilettes.",
-                "name": "Camping sauvage Manche-d'Épée"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -64.74358,
-                    49.13838
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Camping autorisé pour cyclistes uniquement. Assez d'espace pour plusieures tentes. Excellent endroit pour baignade. Table de pic-nic, eau douce à 600m, mais pas de toilette.",
-                "name": "Camping sauvage Anse-de-l'Étang"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -64.38788,
-                    48.80425
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Sur le bord de la piste cyclable, plusieurs emplacement de bivouac : des tables de pic-nic et abrit, ainsi que de la place pour installer des tentes. Pas de toilettes, ni eau potable.",
-                "name": "Camping sauvage près de Gaspé"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -66.12085,
-                    48.10038
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Il est possible de s'y installer au fond du parc en restant moins visible du stationnement.<br>Il y a un abrit pour cuisiner et des toilettes avec eau potable.",
-                "name": "Camping sauvage Carleton-sur-Mer"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -67.13133,
-                    48.10954
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Endroit idéal près de la rivière pour passer la nuit en bivouac. Pas de toilettes, ni d'eau potable sans filtration.",
-                "name": "Camping sauvage belvédère d'Assemetquagan"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -67.41416,
-                    48.71979
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Excellent endroit pour s'installer en bivouac. Table de pic-nic avec chapeau. Pas de toilettes, ni eau potable.",
-                "name": "Halte du Pont-Couvert"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.3641893,
-                    46.4567403
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Petite station d'eau du village de Champlain. Il y a un sentier. La route est passante, mais ça fait le travail. Le village est à deux km en bas.",
-                "name": "Point 103"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -71.2410274,
-                    46.6501339
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Il y a une aire de dépôt de bois accessible par la 175. Dépanneur à 2 km au nord. On entend l'autoroute, mais pour une nuit, ça va.",
-                "name": "Point 104"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -67.16472,
-                    49.7812327
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/up8tuq5n77r5pc3jchp8kkm2cc/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6xxk_B5kZDnS9V7lip_IzayokQu6E0oqYyJOQrH29fsjrFto-mOcEzEYyPU8Lv75-Y1PHrc1sWYlkv0TZtgQuuMLYz91d1o9GJyQ_bNxbrQrYrXr1s0EEqDxtEW5ly6CFY1ItrupP0zvZAjJ1OgqxAS_rmKPdyO9FeSNaq1UP4Bm5mEOHeI2sOJd6l76cQI-GR?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Terrain aménagé avec quelques tables de pique-nique, face à la rivière Pentecôte et aux iles. Officiellement fermé (pas de douche, pas d'eau courante, pas de toilettes), mais tolérance probable en choisissant un site discrêt sous les arbres.  Bel endroit, bucolique.<br>Site visité lors de notre passage le 21 juillet 2020.<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/hcjl5ip21l8etb62tqalbmilbg/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5v0tIo5mRWSpaFUBvk8AjF_Yukor_SOwTztzwMhfX-Fgu_i0WrRrp6As43eo8dh9nCqpU4-YURYE7vyz-OsOCwrAghWKK_3oPA_Zkj_5k9QLxoFroOxR3zbQbOVUvPnPJOhqm7HxmflX0-uAWLXtuv4jJNqo0ey5q_J3owbkMYkIhwc0BVK5Xv0s7_n7n60YDO?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/cr7fsj56ii0gqmmehqlqn61elg/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5CqNExWE8xyNWO9iTqV9a82vcRXIWPghprCXSXc6TGIbwXEJ478XXPNpFMPWTZskeUyBuwkWS4okojmGHKBtC0kIN038C2v2eOJByRdkTThbyTc4yegSR2EGLn-3wUmoRvFSHNZNeHjoaYu67vpn2lZqFwK2eq-Vv6pda0gugjU33StwCK6TiN9gajRDwk_qvx?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/3vifqpccuio8l696s5b7g8uups/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4fhru3MUGx31m7OWZvxmNMzreUYDUcSHUj3uobNnmRzP6Kb18shSXq60EsgkqMWynC0_M_X1qO2vCJKWbs30f1pAbYWMgrJNibnYVdCfWZ7aMf5WGlPl0Exfk0nJIQrJZCQBcXgwMzH_3_hYsi1Yn8mvHmYwOiUQjjy2J2UpObWP7Qb8g8qVXTp2kJJ-8X1L0b?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Rivière Pentecôte: ancien camping municipal"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -68.55314,
-                    49.57399
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Du côté ouest de la route, il y a assez de place pour installer des tentes. Une rivière procure de l'eau à côté.",
-                "name": "Camping sauvage 389 - 4"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -68.58292,
-                    49.5963
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Sur le bord de la route du côté nord un grand espace pour installer des tentes avec accès au lac.",
-                "name": "Camping sauvage 389 - 1"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -68.76905,
-                    50.28504
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "A l'ouest de la 389, une sortie mène vers un endroit près de l'eau où on peut installer plusieures tentes.<br>Il y a aussi un endroit aménagé pour faire un feu.",
-                "name": "Camping sauvage 389 - 2"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -68.3273143,
-                    49.089693
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/1m7uuok3cq70tf9gq8memod2t8/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7pff86n1Ac23Hu1X2pI6wivhR9j-MMS7_h4PiawT7Kgpg3r7EcDjbMR7hyK8vH74gh_I54BjqX-Whz8hzfKeQ25NTrSg6ehNDiE_81isYophBloX6cYePpuvLHbYfMcVMlUJ5DETBvn_etN_6w9nsL5YMGgdbqxyHHOtiH-CBwoXmWeN5xqNl-WN1GuzMuC0wC?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Joli parc au dessus d'une falaise surplombant le fleuve. Quelques tables de pique-nique, quelques arbres matures permettant de l'ombre, vue magnifique.  Pas d'eau,  pas de toilette (sera remise en place après le COVID).<br>Bain de glaise sur la plage en bas des escaliers, sur la droite.<br><br>N.B.:  La piste cyclable permet maintenant de relier Pointe Lebel à Pointe aux Outardes, et donc de faire le tour de la péninsule. La halte est sur ce trajet<br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/iq5hpe1nuqs1dpjjhbgbldtue4/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6P1ZuPSZBOjMIL6BsfkQUQ0wS4m24BAwjQUCOyzheH-hJLPN_MQRfs0msqv1uzXp1Q3JWckp7ylu1tYC0xpaIkrfJLTxS4bMr9czEqws8cqGTYfkUY-e0rWXih5EHwJzZKtaMljBPFljq16Md7hkR18POfdWy6naGZfXjIh61YDbxqZDHSk5VFJuUv7YKpWT3K?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/58us49sufratihqhocamsmcq6o/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4r64oOv4bRGEAWOAhljCyCp1LMYQIefzuJINprUw-S4cqoe0Fja-mDZB2EG0Yi-90YirdHweBU3e7RiEHhqcx7CkewReWIaNppiSSSSqJ3C7INKJl6CNbJw6RFzaoB-ebgnb-x4ek9uteAintQKeWMIzcuz8iDy6xhuT0AwP5CjDq86zd_b9MJOTSPlE9SmIg-?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/73q3lbn0ssbu1btep4nnvfmd5s/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5dOUpqdmMLwZb0pJDmIexLEmGTs0fyPObbSg0iZZKJQCX32YPoMiIV4wyjRbw8WDRQqgkdBdcAuLtPj0GZpZoVztVoR_4j13qA10FuU6UrmD4kRXU3vl2ByVVawSJWgyjssQLLr-AdEgC24K2qDQr_vSGpY1hDaAtq_vgDcugmH2qxIGd4nnN5EI6Kus5er3Da?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Baie St-Ludger: Halte municipale"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -74.9256169,
-                    45.654466
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Suivre le chemin de fer sur quelques dizaines de mètre. Piquer vers le bois par les foins (attention à la marche et à la possible accumulation d'eau en cas de pluie). Sous les cèdres et les sapins, il y a des endroits plats confortables. Montebello et son épicerie à moins de deux km.",
-                "name": "Point 110"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -71.78013,
-                    48.49132
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "En arrière des arbres, près de la piste cyclable, il y a un endroit assez caché pour s'installer en bivouac. Il y a des bancs et un gazebo dans le parc.",
-                "name": "Camping sauvage Microbrasserie du Lac"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -71.46616,
-                    48.57472
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Super emplacement sur le bord de la route pour installer plusieures tentes. Une fois installés, on n'est pas visibles de la route. <br>Pas d'eau ni toilettes.<br>C'est un terrain privé, alors restez très discrets et ne laissez aucune trace!",
-                "name": "Camping sauvage Saint-Nazaire"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -73.4737275,
-                    49.0809576
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/tjd6tv3dsefp7hh2oc4ohqfhqs/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5weZBIh91Mnoayedj-uzfVU5hFiKtdQm4tfzudGwus-IXNasvzNbjPrny8PYGksYKrNRG0F3xS9gEuqZ1OiFHJrSw6dSEGmNWmb6BdbYR_0F5a_JOBUyN0MdI912ralnOY2pQXd28pcusPL4-AD7RVyppLxGqy3Pi3ZPGgjlB4OKxzJ9ygwa3VmjpgDr8aAIPP?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>en bordure de la route 167; Avec toilettes publiques, eau chaude, prises électriques, tables de pique-nique; Un peu de verdure près du bâtiment;  Pas d'eau froide, mais nous en avons obtenu auprès des ambulancières, dans le bâtiment de l'autre coté du stationnement .<br><br>Aussi possible de monter la tente près du petit lac en contrebas, plus  tranquille et moins bruyant, et sans les lampadaires du stationnement.<br><br>Nous y avons campé avec bonheur le 15 août 2020<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/7bqbbg095b0scf111r566cvb14/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5xyX5BJS_zJW5KpRnezautw3GJbD47a95yzWR8ch_mLuLddv-R0DBksaXNaMI2B7fdDbK40y-tYEq9rC8HKGucOj1Yqba2Wpkyi19x51DNceAO_ny5n0_kFYB7RH1F9bQ4i8BQpZJtmBbaGPzx8Zr42fy3D-evsmOswDY8b6Qx0cC80sQmD84TGChOjyYjQBHg?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/bobkdru6e520565pn6elttfb00/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet577yId8S99o2KDp-2wjtmd_kTdGxoOxFMDWUIsJmjWOJTGMdBPfROdcDi9fDSzjW4AQVHsHtuq6oImNbK93Z7tUkcrPeQkTz4OD3NkB4d7NTVaxOwEJSHBODVXzuhFRRqL3GolJYvdP_pfAH_GFOlna5t5BPmcfBcwcCFds4HIYtJ2QPO9hx1U4jfg0GczFdoG?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/92bliebmon841n9hm8bqala8vs/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7z3nKE2xSDDwNOLBTRCWw8J8r9XngcqsHh1J7CwY0d0lDC_dBHNQ9Kldy17YffyW7zl-3svLj3SVYzk0ZAow-BHtfC3n4uP6FWGA4dscEAEdkcwFdsIPBos0VIpUb6otuZzFRLN5EsofOH7SUUmYNHkUhePovtY5qvF27wOGlW963OTVMVOYKakQbFsyXQpqGx?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Halte Routière Route 167 vers Chibougamau (près du Lac Chigoubiche)"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.5910712,
-                    48.7755763
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/53rkem6m44dip06c9d9gr9sgh0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5BB5DyNQNkKcgwyIQMuPCS0yqsseoIuC7FASLMujofnGXyKWbjU8YymxWPr9sU7gXwTAIDZEAiyPoWIJWDV6ygWKSkuE_YheJHGlFjDdor5H_jpI9dOTNKuZq4dN5Yb7Ml17V4c-wyOLr26j3NWt0b9Tb7WR7Z9wHEzDwrx1Zep5CR5axl1Xkg6isZLQhLQmaY?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Situé entre Normandin et La Doré sur notre route vers Chibougamau, en bordure de la rivière Ashuapmushuan, un site enchanteur face aux rapides.  Avec tables de pique-nique, plusieurs beaux coins de verdure, et arbres matures procurant ombre et intimité.<br>Eau facilement accessible par la rivière. <br><br>Site visité le 15 août 2020, sur notre route vers Chibougamau<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/dbi42h2kpfs5pta987fs9nljp4/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6tzDKPD8qxO9_Izn2V0SuMxUDtPiwqagWbN6ec5HjwX2EkgRjMnQNqnOe8ZH5EJr7nXSa0wlrls1bnK3y7lv-8Diz53GZ-B8XRlI1URN2ejpUsy9MMq3YxiP64ULX_XK2HRmRXYL0CUKP60CROJ1WjsftdHDcVN5rV48ks60d-QFuNxumN50B0-9Hxvmo2rNS1?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/esspgqkqq30pid0ik8rdvkrjdg/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6J0CdTK6pN5BW_Js5KNOqavzG9HMVrQsMcpOPMlHfXj0jd6Mbyn6UsOROJ2-2CRvGZhxSgdBuOuyHD8YW3orqYxErpMXVYfFVSZsMeCoNRTE_KMCp4aTFAaXayfBBohnG-qtThbDgE316vks9XWShAmPPAMrP1xr0ofXr9gX0z6bI9wXzTRjvHJTKmhyqIUkY-?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/0lmcpvj7ac2ldp6aisf55nv5ts/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7OFXeuWNoS5LeMPp8aFMNuqkYPbfsCI_Tgu0v7ca17-QSroV5Bs9rRBAHRlhrw6Vq5nLj3D6VNj-km8hSLTWkb_ZaJPr_m-bce654EeXNYrE7mb-EoeLsfYYidcvLYtWAihYhkN7pcK-gV6zgogOYfFO-kY3ZQBFc7ZKukgclOp8YaYL984NUtAnXYibG93NYI?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/furfoa3a9o73jnd82a7bh3i7hs/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7TmyEKipDTssw_jIQSPKUhxO1OGA4TJ0RGUHur06_331Dj2aw4OmIflgmiHG8Kwn7ys0duqYql-jHSUJIa-mY57U9g0Nb47AukNPnVQOPt-Ls4uQhOT4C1kpUpzcIkLSCcwwsBWjo5CiRabadwBOq7Ir0v405Tkg65RhFHyMazUxdnxyuv6lP1K1e6Sw35xgX5?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Chûte à l'Ours, Rivière Ashuapmushuan"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -71.6453994,
-                    48.5513596
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/1970tkipadtev96vq85t3tled0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6doL5uulJXqGi0qYJwOOBm9NgOkZlYvPs_OpwVqefy8fbDSIH0ArJBHmieBePQ7HiCvq4afj0wnH14usBLskWr5uRi5DgxjSkwMubzo1_0IhB4i7e3S2inFcVrStUkmGSlPGY0QWAddlxXe4yFyVjYDHkBmeHQFMkj-JTW3X956DXeSiSb3lw7BvtKsqU6SwVG?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>A Alma, dans ce parc municipal surplombant la Rivière Petite Décharge.<br>Tables de pique-nique, mais ni eau ni électricité.  Quelques passants, jusqu'à tard en soirée, et tôt en matinée.<br>Assez joli.<br>Nous y avons campé avec bonheur le 8 août 2020<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br>Situé en plein cœur du centre-ville d’Alma, le Parc Falaise propose un sentier de randonnée pédestre de 2 kilomètres en nature. Le sentier permet de découvrir plusieurs sculptures monumentales qui furent créées lors des symposiums internationaux de 1965 et 1966 tenus à Alma. Profitez d’une promenade en soirée pour admirer la passerelle du 150e illuminée qui traverse les rapides de la rivière Petite Décharge.<br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/ftndt48qkdj3q3n7qmpq7tt0io/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5eb2cW8u5E8FYk58Alr37x_hgBBpS4V55095s88KeHBGOMQDg_ACKhgtUOQB5apakKfJ8GC4DWkHeMgczD2hp8LrjCpW9moQ6bvKmucx6ZxZAkWNo8sQ3ZOgM_abzZOsOkLD1NnLPbOPV27kH_swiXDKCw_hdGukg-wghgRnq8jF51D3ovj9_fMMpzwu1Xykn0?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/f65c50q8n6oas6jvfm1f464mbo/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6pb4-rzb2SKsynN2hPAV1F28d9IQeMkYLkHZ79omHf2qrPNbnG-ZHP4xEDR5G6x113adE-RQHfJaVIDZdwzrUf8oUols_ctTkeJU8khJe3Am67lWGpxrUulRHuusiU-I7BTosseVO476q1Eg7bdPKnr2_nKFLEffYFIrN3yNORVJCzmqMQM0WSdkCWtfKmZ4lk?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/crsieps7fj3a9h471hde7qls58/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4ul5JvA9PFuORw19MlekQpxvzNKqQ1Xx171pDUBadjm8gA4bqrQc2nUgk_gHbyAkqHIIcI_xTK4YUTRa3cZ6xiCyE3nPMstQ1TzeOvev31hx7LlZX2tYjcat5bd00WcVXo8UePInm_PceayZNCWKwOeEw5iAKJgFn6Wc0hDgTbOimV28VOA5fS0ipi5L2aLlIO?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Parc des Falaises, Alma"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -71.9620844,
-                    48.4205804
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/hncfnnrn9gprdpsrvhlis92qpg/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5w4SvXgZhia6DKR8pbliyIHlY3KDj4LJjkKIwS3Xsd1rBfHIctzDdUrMk_ufL-P1TS17rnM70ePSDCKyPCklKRNQOc--p-cr___NMFrs339zEWdxfPpslrkVvu9f2JpCrX3YD37_vTH4-hiy4h37C2TkhNg7Sb7LuMMJfoEu507juS5jFvA4v7OESmuJaPQ9hg?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Joli parc, avez gazebo couvert et tables de pique-nique,  directement sur la rive sud du Lac St-Jean près de Desbiens.<br>Aussi répertorié sur iOverlander, ce site est aussi fréquenté par les campeurs motorisés, mais néanmoins tranquille.  Les policiers sont venus en soirée, sans intervention, anlors que notre tente était déjà montée.<br>Avons filtré l'eau du Lac pour notre consommation. Pas d'électricité ni toilette, ni eau courante.<br>Nous y avons campé avec bonheur le 6 août 2020<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/2t674if0ajg7lpmauhv7ep6kj4/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7D7TfIj0Aa533A_M071EFLcMzvLdZEpKrREyfHNiTiG7nNhPVaUSZzLEgLWaKDc5zTcqP-bGu1Lm8ZJfn_bJkBsb9EfjuwrLwWmOOvS4EpMyFO_wVyIkP1b376XamUvs-leXHF99hf7C6SuzOHT_00D72d8DzJvloezf9_jXxCBtLmVM_TThmQazwJX3rynChC?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Halte Municipale à Desbiens, en bordure de la Véloroute des Bleuets"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -69.3900782,
-                    48.3461954
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Adjacent au Port d'embarquement du traversier à Les Escoumins, quelques spots pour y monter notre tente, directement face au fleuve.<br>Tous les sites étaient occupés, notamment par des campeurs motorisés, quand nous y sommes venus le 31 juillet 2020.<br>Autres possibilités le long de la piste cyclable menant au village, et mieux encore dans un parc municipal de l'autre coté de la Baie (voir autre inscription)<br>Nous y avons campé avec bonheur le 27 août 2018<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020",
-                "name": "Traversier Les Escoumins"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -69.3990471,
-                    48.3529113
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/b3imvme5fvgroh96k408qvdh60/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6OiTLAsFAWpuOG_3h8P7TKuf2KZhdF6UMPXPsFhVbkuh5n4rkJBXcMKLXoqXoubVV5shOD9_JLGBu9AXMh0NOH-SnP6Qj_GOuVPRgyA2-26GghoYrzY5ASVursc2HVhxpndeu5CLRVquVNjEuty3N1vbCCxBVdlFbPauEVcNcoP5k5ynblHZyFxcbfmWEbx-TG?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Parc municipal, Village les Escoumins, aux coins des rues Labrie et .Beaulieu.  Très beau, directement face au fleuve sur la Baie St-Onge.  Table de pique-nique sur le site, toilettes publiques et eau courante à 300 mètres au centre du village.<br><br>Nous y avons campé avec bonheur le 31 juillet 2020<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/s1nvvabt43kmg3qc7r2to28fm8/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4DbfZfgcrcZGuToK0X11auCRvTmFKHUZZA57FNZ3gq2PkQcPvXy3c77lDh5V_X2d9oPXM48CJtzj3RcjC5L8ZfM-8dsDPskzn8lCQsBb1h9uh9grZnfYvtTgUJA69JAFtI0uhCk6vnAcwHzek_l6Althd6SjgFLfRDkVgnzYFhpIQON4ise99iKyo_ziBiKpf7?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/ue72sapa97maoca1s2g9b5v7no/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet58EWwfDXXjEk0_BE7_gfFibefxY4H9xM3-8JYXZEnC8nD-Z7I3XQ2n9pM2beanPcNrH91XyBNv2D3DFZBSu-5dmH7w6NNm5vJ3TJMRmhmi230TPDky1T1h4Z4ZQtu9yLO0F82Wb984e7CXo27KIRpAsc06nir84gBRF9J1NJoIERY0xnN5vZ93TBF3vb32hXaz?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/trk2rppfk1v5v1i6r5b0m66kb0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6Ob-to33PuLGLtdDdNSnhOYIvYmZMz-08xluBw1u2W7tjAdr9XBIfsRmji78GH6ipbCZTIKqU8wer2HGgQrFr1fkIxPctCkSbEsECgp5a66TrxtqZv9KERxbfxyszkToV-ITEW_zkr_Zm8pmV54VSByR46AmzI6qNrC8iTF5QFC6pDBwtE7a1ZTq8tEZiG2EY3?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Parc municipal, Village les Escoumins"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -69.0972163,
-                    48.626314
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/5tqh6hi6gegtl7rjbuu7a5js6g/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7qkXOjTqWYLSU_T8i9G2WUQWaGxzw2jCm70loBHoQpZf_9OMPaZSVXB89e4R2AE6zMg1Lce_D2teJJdpu7ZcvzOdoYy-gJt_8tPPrhoCCTqvMWNl3JTFIaFFvXjlw4qZ7fonCfnVXvX_BEgdcZDfUT2dA2601x-JLAoKp76t1EQlSUf_FnbnzGE8PLOf1SyU2j?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Halte municipale dans le village de Portneuf-sur-mer, en face des battures et du Fleuve St-Laurent.<br>Incluant un gazebo couvert, table de pique-nique et verdure pour y monter la tente.  Joli.<br>Site visité lors de notre passage à vélo le 31 juillet 2020.<br><br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/jigics6l17t4fh9tnhh3qoea5o/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet49fHffiog0RQYguVVpZFqp-djlMnkAjk3tRX9xF2PCREbOHPWBdJgMK1ZZ9BG5zhiNzD-x_1VV7-ByAaGzoAZgpGHv6LIw2xe5TFuWE2u6xx9hTURHRGwaajtP9_tUHN_yA7o9Tm6rRsRYlab8lQDUjETTfDZ06oUdcVBbHcIcE5cSz0aRKWLX2ZYcTiNBVF3P?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/n542anntg454hl0utdqk2ipaj0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7dfSdd_q_sgGZ173d3lVRHGhfp15_T5O5rJFekY51ujslsEEKNVw67gAZGLxYpKGMkPExdsCu_jF3Xh3xe4Cil4Lygh2LroxCAAVvgPqVdZS_AHCCwGyKqUT1XpAHtHc_29xuRPkrD9ZYeearhhsqqtF321yjaTRV7Ig8K_xMHc0LiXdhyPu0BAASjH9g91CCZ?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/dlk6f23qjve8d4lctg6tsqjmes/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4CEs4ybogf8SqDpcgMRQe5rm4pbJyGwd5eEhMJankf_TlZmxf_VhPDOx_aUIFMT60VXxrBiFZb_qiC70BdL0sdsQ0KTFk5718hvJrLq83n-ArlBmgvw6pu8Z-2_Qxd3MrFafqneI5OJjG-yyi_bYf0Nq-ke2oNSFx2afo0tXh2oSeJsYJ-_b7N54OmJSrJTqED?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Halte du Grand Héron"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.3897948,
-                    48.9944938
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Parc Régional des Grandes Rivières du Lac St-Jean, Secteur Albanel;  En face des chûtes <br><br>belvédère de la 9e Chute.***<br><br>Deux emplacements de camping sauvage sont disponibles dans ce secteur. Chacun est situé au bord de la rivière Mistassini, sur plateforme de bois avec foyer, table de pique-nique et est accessible à pied par les sentiers aménagés à partir du stationnement. Des équipements de poubelle et de recyclage ainsi que des toilettes sèches sont présentes dans le secteur. Seules les tentes sont admises et les chiens sont permis.",
-                "name": "Parc Régional des Grandes Rivières du Lac St-Jean, Secteur Albanel\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.4156675,
-                    48.9935136
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/6sooes7122jjh0p224rq7o52ts/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5MUR9AieRKbK7s3loz12YWDR6AU_gaL6mQoSNBr9Ri1ivbh8jk0acPyIMpS9azrxSNagJJQ9xw6Gbz7p7AgKalqpA6ILLBI_0IvUies1vMeVHn9AYosjhFrTxvPzxupKarpAsWzNU6fldafbDOr8dFUMz-kxsy_7Jq62SsyfkcSEfr6rv-YP-L9_bWQ9HGOsgL?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>à 200 mètres en retrait du  sentier cyclable du Parc Régional des Grandes Rivières du Lac St-Jean,  face à la Rivière Mistassini, un abri couvert avec tables de pique-nique, et suffisamment d'espace pour y monter 2-3 tentes.<br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/50l0saueqhmtcn52vn7craab3s/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5I8MZLKKJ1KT_lkIjNGVr7NYSvIPtOTs8gH6GCiyKyZQKpWLtWO0TrOwRx91e7zHxClJOTxrVfZGvo__97D7B2yrNxTFDzzA20gGs-9NF8CcIWvim6UoAnPe3lNHTKyx662mOaYi4VxXtqW0tI3hQOIKEqsLkcs7_CaHYwuXvni2I3lSA_2HKtdeBulbX7JxuD?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/i60jurmhfku7bpsdsb74kubnr8/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5bzvs2Tp80AkWcbH-86BPMt695ZFOxZgpNiGZHajHOXMh631g5Fr5fAL2BeHSBLHJQrwtJ1g62gCNh-yt5sVIj8UnxjruUqPtfQkuET0d6rc3Jip1joC22o5VAMtfINKRKw_F-q65QA3b030oI58H8sQ_itnUOI6yyTKF_bjKdAy3jrXytjaWT9JlAV1xig0_N?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Rivière Mistassini près de Girardville"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.3016057,
-                    46.8879824
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Poursuivez quelques dizaines de mètres après l'entrée du Parc des chutes de Montauban. Vous verrez un 2e stationnement pour la Pointe aux canotiers. Prenez le petit chemin et descendez le long de la rivière. Vous trouverez quelques emplacements de camping à faire rêver, en bordure du sentier national., tables de pique-nique en granit, toilette sèche, rivière! Pas d'eau courante. En pleine saison touristique, nous étions les seuls campeurs.",
-                "name": "Pointe aux canotiers"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -67.2320597,
-                    49.5960365
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/536ujd3uqh4thnvo5b72t4ium4/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5P7T-zLcyZwyDgq6wlnrHi_zp4lP1n2KW-_vxT9fzTHf2md-B1GLGD5qubou8tzZMI4v_Wbe6nvrBt0Z76vbig1vuKataZ6MOwp_jNR9jM2tO9iN_7xuJtWDdv3xbF6qkeSvrg3t03-sviJK-SZ-WVw7s5AsCX4P6B8jh5CStkmd9Dy8ExRKDA0fM81qo80oqz?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Camping sur la plage. Entrée juste après le pont de la rivière du Calument sur la droite (direction Est).<br><br>Plusieurs espaces sous-bois, ou sur la plage. Un chemin de 4 roues sur la gauche permet d'accéder à d'autres options.<br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/ikjj9ti27e3ecog2nnacah1jc4/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4xWpmQzHdK66EDf-dJyQLafal-yi63YpAoCnD2FGN1ecivG3w-EhwQLSKMQRu9Z5Q_l8xQ6jYcF0UsmEGnIMdJpJt2rh2IClNNY2Wi2L52Vy-XIfn2F2n--BdsPhKS8HtZcECForWfuLn96qapQYdMGNHhEATZsVJ60oQgAzJ8TRQWefoJvNVDFoey3fnNNwWR?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Camping sur la plage\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -74.3239362,
-                    49.9150597
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/gjvu96p9ll5103jsbrej5rcva4/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5RrsXLwz38McohTKV2BFGqo6OJqFbUaaqQ4GrfS6wEKSuH_tP0y6-PW_wcT0ghBziuZIRbcZMG1qkk16HlEd0zJZ0KaJsQuQ0QssZkRjHKRX0xi0u9UsWtlQKBOA4p3VSs2FPBU7Jy0xzrGZ5dV7Y3a70wgFtH2STPmsFBgl3HuyXXC8h_xGcyZQBPQjqqOa7l?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Parc régional Obalski, à Chibougamau, autour du Lac Guilmain: une bonne dizaine de sites très beaux pour le camping sauvage: tranquille, sur le bord du lac, avec tables de pique-nique et et contenants d'acier contre les ours; Certains ont des toilettes sèches, d'autres avec gazebos couverts, ou même avec une cabane fermée.  Coup de coeur assuré!  Le tour du lac à vélo est de toute beauté.  Grande abondance de bleuets!<br><br>Sites visités à vélo avec grand bonheur le 18 août 2020<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/0g2a6s5k354d8aqvv5ag5limqg/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6dPfwQ8RCwVDWKeCUhqCzIsYdb1JV6rna1bIFH3Yir0vMu7b4QquLPUgr7e2bf6LTViqBBlY2AH18qdLC2Odka56Uf2OSWEuiNcfMrWMO2ZpAKuA7S0Vyczk2RFiqlEVTy994XMGo66pW-85dr0nO0SGD0sW879xt30A5WQyFcuhJqZvCcwN5XwvTg5jsZa9fk?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/8gnel5j0fpakmtnbhd8l31cdj4/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet61fRs5aHFlgIbOOeyxq1M7mEBWjJRAESN8xCxdVfmfrISqyEPRD1E7N_P4yrAZNnoonlS2WRZJpAtg0s0QS6DmGPm_0XMrhQRZXqdlO_Pg8rtrTK6JNz755ABQzvOL21icZyxaLFHhg1IiuPtk3v4AuwElWGAo2MzxYxt8aLR32nNHz8UVyav6BtfXQamvYtxo?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Parc régional Obalski - Chibougamau\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -62.2232999,
-                    50.2338645
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/o1a2gsi9nsjivobjhnptgbjrfk/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4SeAPyzmQ3O5K--8gyidmD2DxhPv15za7W1LkK8g95xEmC17V1BULQmVYjvwXGbbUYJNfqySW0J82N40kTvIEiLuivHzGJwGA-RtxcbO6K3YLaiwxkmjcekxKcxUapzpApzw1Dhmtk0QoTDjkbDx9tHON4IwdaRC6xy2p9lwrN8ll9nw8PkDpSeCJcOXuBfC2D?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Prendre à droite dans le chemin de gravelle 200m avant la rivière Aguanish. Une grande prairie donnant sur une plage de sable avec plein d'endroits pour camper. Paix magistrale et brûme sur la rivière le matin si vous vous levez assez tôt. Pas de services.<br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/c4kfgea6e5eb30nb2ej7o1gfac/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7hqZWngop--f3kK8pfygP1GiALoutK2T4SFLieKm5OL8b2J_tImQ95dqdDm9S5qNrIp9b0jqwZgqSxTkU1GiX8CiZCnBh92qDLnjNPAXajCxPJuv0erCHU63byD1CODXqySsxlcC5fxYGPs69Gi0PRp81Ya9vAC71amE3zwU1wMBmZIUfxbNjts9ff7nsWUAGZ?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Au bord de la rivière Aguanish.\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -74.3547545,
-                    49.9125895
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/qnff01hogh3rit9d7nujl4boh4/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7gOTPBU3pq02GbbXzviKO_t6ry4VALJ-K6coRhYQ1HTfK2f-TtKtJh0VXTM3cwEwpJ-lb7nffT-Za6ssMoc3KUG8IqIdjQLm8WSuXNbG_y8stM_1b8mBeI8LOr00QxGBHp1eFFzK4viHt1IoV4rstMLyxwIeB0yBIDzdKcn0DpyLi3iY4_UmzwxvTf_jcUc_bY?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Parc régional Obalski, à Chibougamau, autour du Lac Guilmain: une bonne dizaine de sites très beaux pour le camping sauvage: tranquille, sur le bord du lac, avec tables de pique-nique et et contenants d'acier contre les ours; Certains ont des toilettes sèches, d'autres avec gazebos couverts, ou même avec une cabane fermée. Coup de coeur assuré! Le tour du lac à vélo est de toute beauté. Grande abondance de bleuets!<br><br>Sites visités à vélo avec grand bonheur le 18 août 2020<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/prkk324rqj6eg3c6p6c10stt20/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5xTEUBFG3RMSjapkrH4xGK5ocjDAD0x-I3BwCSmchOxsBD8lALdXq2GSqLFxxXgDyLTGblFmtYNVCtg6vl7nY_6DIyQF3Ue2gLLPSzvS2iP6AFg-qmxCOpP3qVV_Q729guEr04DTkQeHVbR7TcG4PDnuGkFdhbbKBpvHiLJkqQfrNEJNeXZ0JwgA-fPzgM1ndG?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/vh1p2r3mq4ser2921umdu6v99s/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6vtOewGiTr70eAIUPZQGnp-dt0GB9OiPZclsXWkxP1K-CS4eaiiO5D6lUpVaGxJ20-SuCmqrkVQvI9LVOwity2lxJ01bDGK1qIw2jNg81yxmuQi7AdSOHlKwcx_7Lg9rp7xCgC6e2nKC-THg2i0dvr8JkRF0Zu-uiLUFpCqAAfCaXnw6QfdTH0QxbBH50jT5mG?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Quai municipal et Parc Kiwanis"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -63.4502962,
-                    50.2055725
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/5baj7nfb9b5k2rt1j2s4unnl7c/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5M6P9PIRm3lJ5EA3O0imOYvaS3CSh3un1qIo8kf__eeyqnV6lqNLt_C6qE99OrmvrGxROUArNvxVMhmjKwbcEzYqQh2RUjSgempEz3gIEYcQAo-KAMXVLOaxsaYbr2k6hmlvhGjn0aJXoB_7o0epDKmOwfimJBzCvImYxnCBluW1UAbuGVH2TKLh3sARDE4pzj?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Il vous faudra des pneus qui passent dans la gravelle pour atteindre ce bijou. Tournez vers la mer au km 1232. La plage au bout est dans la continuité de l'archipel de Mingan, avec des monolithes et un coucher de soleil spectaculaire, si vous n'avez pas le temps de prendre la croisière c'est une alternative solide.<br><br>Pas de services, mais il y a des maison pas loin.<br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/sg8b57qpj6hdecouu46vam4r54/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4I_csTqx1-xVntZogt85mphSPbRpWQ5CaKiKinCI8Gg5ULVIeBa0sArSiRIfvm3LM4Lo5B4IvP_C34uPh9r4Yv8ULR6SBpVn3PdQK5nsSqAqQrdWKfzwcNdmbuf1jh7xYQNZjcJHeu-Q0HwdUV0fWG6sCiYHiG32leWiHjkMudPLNWMktZb2xUtQNX0M3fkPlq?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/7n30ulkv6psvak196ondioocpk/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6u-IFxNO0DB1ewABlbOIFfrLpbgQxAB4A_Qbz9lvvGee0HwXCkfVYTvGrkWtv923mMk7DykmHz7FTpSX83ITwWtf49nWM9nxlH0QuWNEt7BpFQE61XArajbhPEeyVkfsWcgy8eV6_SXnZhPLJqsXx2kYH-v4daljCfdOczWvi80rq0yjryL_b61ssZ3U1StMQe?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/4vh8cgnsipoapr0pjdms7fki38/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet64lBPV8Xkx3OLMs00sMe1vTifGqo-yXzeOlP0B_bU36Betfm-xlnIESoEKjFarz26M5Vgi5Tf59g2n-2lRbm2ghqGEnkZrq2bT9gbUGw1Xcej-1Op3qDO1xgzfQM-1O2Y5kkXyuiSHKYvxUNk7PijVhxbQKHRWXkCJxnlSKliqrSwYOYS9-7tZ4TaAafKcPROu?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Plage de Pointe Ferré\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -74.3242632,
-                    49.9118157
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/9f2f8ok088o0amegam4r1incmk/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5vry5z57TqUEFe6JGlsirFWUIYATJVF8Xp0dQYxPwkrqeFejLO4sUwM2f7grZa005bhBy377Ygi8CZBU4_y1aauxMo_SDSpLoq78Inx70Z-CL_g-PZhG0wO3mS4O06dCQHZ-BtfoYyzSbU0GPMTV3IBnJSsto9nnDvbwU_FoTE-VCudJ0PpXaMo2zCjyf_KCXB?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Parc régional Obalski, à Chibougamau, autour du Lac Guilmain: une bonne dizaine de sites très beaux pour le camping sauvage: tranquille, sur le bord du lac, avec tables de pique-nique et et contenants d'acier contre les ours; Certains ont des toilettes sèches, d'autres avec gazebos couverts, ou même avec une cabane fermée. Coup de coeur assuré! Le tour du lac à vélo est de toute beauté. Grande abondance de bleuets!<br><br>Sites visités à vélo avec grand bonheur le 18 août 2020<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/t24iau5r2dkhv48irite5rgdbc/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4k6LAvrgO09KV8gZEC3swwSk2-PuK2LX3F-hyFOPf1doWxAt2dR-Ow--n0uUBmgPJRgTLuVMA9FDSiEmKkAaZ12v3C-MDenP5hx-m8_ICpQ4gZM_JXbvpt8jApiloUlmxd60qAftQTkwN0MS7qfK-2aZaTyVQR8sPO_AGkk2nZhG-6snzx8fk_zduWxzhmyCZQ?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Parc Régional Obalski, Chibougamau"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -74.3369335,
-                    49.9066547
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/kg7n9f1oon6fo5f310hlqat3dg/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4K7gzx8XVSnXEd7zu3OQGeT_96cOfAcDagpva_dmAE4nN-BSSiq_Kx69ldKqPdMOcnx_8thUVyJ81MsTVKP0doAbSEA5faMZoeRDuj4oG5mgqngn3a7mrZU0clV115GAk-wpltK1HHUgHfRrDTWLzhcjLT0j1v5jijrY-S1TQUUiopEg_HYSoY9Y7pz4ZEPpVY?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Parc régional Obalski, à Chibougamau, autour du Lac Guilmain: une bonne dizaine de sites très beaux pour le camping sauvage: tranquille, sur le bord du lac, avec tables de pique-nique et et contenants d'acier contre les ours; Certains ont des toilettes sèches, d'autres avec gazebos couverts, ou même avec une cabane fermée. Coup de coeur assuré! Le tour du lac à vélo est de toute beauté. Grande abondance de bleuets!<br><br>Sites visités à vélo avec grand bonheur le 18 août 2020<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/d41k581r1v1vplrenpmbmqisp0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7wxHmapjJvSube3Y2KT0iDebDYrGmCswquqx5kZh_ptH381kRs1xMa4gLqDRwDcV8KuOTVK81PmMmQQy4ovxiFFopKHAlwErrAPhJUnBHKwWQWU67rJ5e-rv0k8atKC-18EWBfjxRfyz-1GFy0Rvc0MLSAW7eJqqZ6DzObWz6mFhO9OUanwfbdfA6VRhOgYHSq?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Parc Régional Obalski, Chibougamau"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -74.3539215,
-                    49.89924
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/h7s3md85q0m7fsts99vv5vb6lk/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5eZ170RHEHYhJCNtugh8IUFg7GSNejwxT-Es_nGLQYDpYVGn-b3k5OyxpfzaAAuWbstbiH2SYuVcIsusBtHkot_PvZXo-ouHD4qB-F4smo50_Jwsem81ZjHFhmmNg-SSRJM7hIaYyZjczA9_NIpEC086NKoZaHBpNWGE4vkqgIsSWI7znBG4lLyCqilXbMt3NR?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Parc régional Obalski, à Chibougamau, autour du Lac Guilmain: une bonne dizaine de sites très beaux pour le camping sauvage: tranquille, sur le bord du lac, avec tables de pique-nique et et contenants d'acier contre les ours; Certains ont des toilettes sèches, d'autres avec gazebos couverts, ou même avec une cabane fermée. Coup de coeur assuré! Le tour du lac à vélo est de toute beauté. Grande abondance de bleuets!<br><br>Sites visités à vélo avec grand bonheur le 18 août 2020<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/qv9sqq1evies6su3i9e081te54/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7iMJgf-rrI-HoTnXjd68iaTjkEW8Ntdl4eQnVumQWqs8sZCCLLhpuIjNrAMAXLCDrsq_bZHrV2iBbF_-BALh2ZBzbEXXNlnGKL-d-hurIhLTbm-ZG9mrehrauJOrYSIEJtTgHvXSSIMIMJZLBpb8yOTcA8zosykQLmkUdy005foouSwGPdzJ-EV1mUvOv_WIqf?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/grqg5u2dma1kq4e0v7egt3t5a8/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4CNA7Fjfhum_D7CLY7JM0sC5xTPtqSRGTwhDbkzph6QShe7HAMZdDQ5awK0l2Kd8xofbjsEc6oZ9wjp9yc5AzKgJWxVFUM6skaVBjZYiOzMflHHSurIB3n3ji3GMSlGc269v4qLfyHTHJIZNBgp-8oBBVnDQoTAiDkYxyqNp6JuUmKeTz3KSAVipAC1PT3ybtc?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Parc Régional Obalski, Chibougamau"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -64.8790254,
-                    50.2623584
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Plusieurs endreoits pour camper avec rond de feu. L'eau dans la rivière est assez chaude pour se baigner (pas vérifié si elle est salée).<br><br>Pas de services, mais quelques tables à pique nique.",
-                "name": "Hâvre à Couture\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -69.67607,
-                    47.71482
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Halte routière avec tables, toilette, mais pas d'eau. Beaucoup d'espace pour installer des tentes.",
-                "name": "Camping Halte 51"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.46985,
-                    47.03149
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Halte routière avec tables, toilette et eau. Beaucoup d'espace pour installer des tentes.",
-                "name": "Camping Cap-Saint-Ignace"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -69.88814,
-                    47.82991
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Halte routière où on peut s'installer en bivouac à vélo. Il est écrit que le camping est interdit, mais c'est toléré en vélo.<br>Toilettes et eau à proximité.",
-                "name": "Camping sauvage Saint-Siméon"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.33063,
-                    47.47254
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Halte routière avec tables, toilette et eau. Beaucoup d'espace pour installer des tentes.<br>Une superbe vue sur l'île aux Coudres.",
-                "name": "Camping belvédère des Éboulements"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.54941,
-                    47.40665
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Halte routière avec tables. Toilette et eau seulement lorsque le centre d'information est ouvert. Beaucoup d'espace pour installer des tentes.",
-                "name": "Camping halte Lévantine"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -69.8179498,
-                    47.5929708
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Plage discrète. <br>Aucun service. Pas d'eau. <br>Exposée au vent, mais beau spot !",
-                "name": "Route de la Grève"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -71.7558605,
-                    48.5674419
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "accès à l'eau. <br>Possibilité de rentrer un peu dans le bois jusqu'à la ligne électrique pour plus de discrétion (mais peu de place)",
-                "name": "Proche Déversoir #7"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -71.8526625,
-                    48.5506167
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Note de l'admin : SVP ne pas camper sur le lac ou vous allez vous noyez!<br><br>Aucun service, mais bien protégé du vent",
-                "name": "Bord de piste cyclable"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.2170569,
-                    48.8907641
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Accessible par le camping. Discrétion exigée",
-                "name": "Île municipale"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.3912032,
-                    48.9085422
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Toilettes avec eau potable + tables au chalet d'accueil",
-                "name": "Possibilités à explorer autour du chalet d'accueil"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -77.1141462,
-                    48.79121
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Halte routière en bordure de la rivière, avec rampe de mise à l'eau pour les bateaux.<br><br>Plusieurs tables de pique-nique dont certaines avec un toit; Toilettes publiques.  Très grand terrain.<br><br>N.B.:  Un panneau indicatif précise \"Camping défendu\".  Nous sommes d'avis que la clientèle visée sont les gros campers qui voudraient s'installer ici pour plusieurs jours, notamment pour la pêche.  <br>Nos conseils:  vous installer ici pour souper et ne monter votre tente qu'en début de soirée, un peu avant la noirceur.  Démonter la tente avant 8AM le lendemain; Pas d'urgence ensuite pour reprendre la route.  <br>Nous avons visité ce site lors de notre passage à vélo le 25 août 2020, en compagnie des 5 jeunes du groupe Echo Explora.<br>Normand Pion y Hélène Giguère<br>127 des Chênes, Ste-Anne des Lacs, Qc  J0R 1B0<br>514-668-9772<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook:  https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
-                "name": "Halte de Bartouille, Senneterre\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -77.3446776,
-                    48.4009199
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/tmhjqnpp05jj1snukrmnjqmh9c/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6WOUQdwss9sb9c8ailzOhlTYpz0GX4dneiDbivmQXc7OxTF9cfExMsRRasdZaU4y5kvAJCk2Ts7vQZYy0Qn8DpQO0y2L-m5eYX1svNNXDwYJa-MxMuclNhpehkT2PdBiGN0QEmtSQAe4hYvN93LtLDY2Ho04YNGnv-zxnKjUi9Ods7hUUb2MrKCf2-aYEJTYEk?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Sur la route 386 en arrivant de Senneterre, petite halte municipale avec tables de pique-nique et espace vert pour y monter vos tentes.<br>Village à proximité immédiate (eau, dépanneur)<br>Site visité lors de notre voyage à vélo le 26 août 2020, en compagnie des 5 jeunes du Groupe Echo Explora<br>Normand Pion y Hélène Giguère<br>127 des Chênes, Ste-Anne des Lacs, Qc  J0R 1B0<br>514-668-9772<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook:  https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/e81poncknmsrm1kulc809duqho/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet73CDThWoRYReH46GtGWqP8LEgbt0G9vwx7i9TTDMKAq2JMLhTCYkXIeGb3tmSevT0FvxNsC-5q5VyKp28ay9odgKA146bucC2xhjV5VeLY5kRtvTg2nm5JdreCwttwuhnJJ7nr-Z-JxslOAzSHTNwaYCM4WwAN_cUlPb_M5liIiSZoQOqxFKrlsDbHUHWQUBLU?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Halte municipale, Village de Belcourt"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -78.1286673,
-                    48.3906468
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/3dgvgj7df5l0f2g7o63a9qaods/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7fe0dP0gcsTUTnfBaoxRJcxt3IyObtqqPKLHzlOJQ6FomlNX-ZbbXz9oEvscRDYlvCKIcRcej1btkmUWbxCVd13XI20ivV4PQc0D7e528Cd99zwt6nO9kVarviYVRN6yUQWQ9l8GqsWgpamtoQ-9kEXseyb6du9aq6uMO6oqQaNKD6efrxCGdg38wf5PsH8dnT?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Il y a 2 spots permettant un bivouac potable sur la route 109, entre Malartic et Amos.<br>Le premier étant à la croisée de la route qui mène au village de La Motte, et le 2e étant quelques kilomètres plus loin au nord.<br><br>Les deux ont une table de pique-nique et de l'espace pour monter la tente.  Le premier nous a semblé plus joli et plus lumineux, mais n'a pas de toilette ni eau.<br>Le 2e est plus en forêt (mais à proximité de la route et facilement accessible), avec toilette sèche.  Propreté discutable lors de notre visite le 27 aout 2020.<br>Normand Pion y Hélène Giguère<br>127 des Chênes, Ste-Anne des Lacs, Qc  J0R 1B0<br>514-668-9772<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook:  https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
-                "name": "Halte municipale La Motte (2e)"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -78.1330989,
-                    48.3565397
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Il y a 2 spots permettant un bivouac potable sur la route 109, entre Malartic et Amos.<br>Le premier étant à la croisée de la route qui mène au village de La Motte, et le 2e étant quelques kilomètres plus loin au nord.<br><br>Les deux ont une table de pique-nique et de l'espace pour monter la tente. Le premier nous a semblé plus joli et plus lumineux, mais n'a pas de toilette ni eau.<br>Le 2e est plus en forêt (mais à proximité de la route et facilement accessible), avec toilette sèche. Propreté discutable lors de notre visite le 27 aout 2020.<br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc J0R 1B0<br><br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
-                "name": "Halte municipale La Motte (1er)"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -78.1899809,
-                    48.5813097
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/bv0389hcqoqof8du31bae7pt98/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6jcrE3W_PfwqAbHbrrxUHdTgMNXeRbunBP3ikNp02z3l2bUTLEVO4bb9fiO48ph_D0gsAjYHXrd7_PAtqnSQtaEfFwcbZbWaBcTyERUmEOxLIVlXrZE7-VE3P2KNJT5nLT61xzJ8KaHxawT91KHNtdHrfgNCFB8vb9Y3d_uTkPQT_bqyBJ8z_6cR1XfrU7qUcj?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Sur la très jolie piste cyclable à l'ouest de la ville de Amos, une halte aménagée en bordure d'un plan d'eau, mi-lac, mi-marécage; Avec table de pique-nique, espace vert permettant d'y monter votre tente, au coeur de la forêt boréale .<br>Site visité à vélo le 28 août 2020, guidés par nos hôtes à Amos André Plante et Andrée Naud<br>Normand Pion y Hélène Giguère<br>514-668-9772<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook:  https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/5471vah70r48m91o8m43a18v4o/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4dbZynHriElkMqyctJmp5Ws-ZEzCP1DtM72lZ1RscS_xc-2vhoSYLB8XvG7py_20St6vjINF0irny84rqFa9VRqFstXeYMDe4gGjQtB0rP8SNJvsocGkWv9WhFVg9S3dkmJLtN72Njtf-Ke1F8GSfHZyxlRsXjwIyAic47a8jnvBhrlpQzYutshq-XQnoTHNyv?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/4radvode6n001j66kdlfo8d00o/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet670Fm2jw0O-gJ35n7dMwDEGNcKzDVyI_K1z9lfNqtwqhxnnVHrblMl9v8Q4zamUv85AYaDW30lVGJ8Ot8KfbuP_kp6tthJBjDi7SZDLq4tasON0lxcfJSVhEo4q4KumkSr4Ak0Pyf--TcVCb4EIWdyS0VekW_RI_z6ZLYnqJwSuyKM-_P0DmK4kUzCqlWt9yMr?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/bqml4hld6k1p64ta98kal81gpk/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7X_za1yni6ujOI3mDcfTQ19ZDhrxn5TcprPVSn7dfO7yTqZd3cl2M6-_QPSBjWpaDJoQqeDZsKW-zHysp611_ceNU3R2e9qWNT-QO9aUdwxhiNzHu8g_7Igg05Oli36_Z2mvkBzHwIoEZJC8DkIAUe4v7Us6TI7jmctcCDpOBiIE5wZptYGP0vZCDtSAUY9jU9?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Halte municipale, Piste cyclable de Amos"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -78.9724517,
-                    48.6711092
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/7gbvsrclebc1r96kqkj0liegkc/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet54yrmdLazhYBpJBzvsyuKXu0IOdV5V8M-lB7BSAKGRFKtrbtSw_uEylRg-ojRlCDD47Xtq3OdKoKhmpWamuHFlwdQdzLxBtNdr90YIPha_kYifLHKzPHBN-WP1eDmwDZKQcg4KLk85LtDqhFbV0WkLaLY1U72cj8ol8JWY_b8d9Z3zcGEor2w6esdBFdwteMpy?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Sur la route 101 vers Macamic, juste après la sortie du village de Ste-Rose de Poularies, une halte municiplae en bordure de rivière, avec tables de pique-nique, toilettes publiques, verdure pour monter vos tentes et arbres matures. Joli site, visité le 30 aout 2020",
-                "name": "Halte municipale de Poularies"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -73.2010487,
-                    45.2988849
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Passé la halte du gros arbre, on peut trouver une jeune forêt très dégagée du bas où se tenter.",
-                "name": "Point 153"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -79.2758099,
-                    48.1833623
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/cnlm98togp0g34ju1q458ccq38/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6FeEUcPcYOzvwMoAKQI5L16e39hcfvddc8DjgM1VcKWWnCMUoEhaZToaOF75TQoWL9d00R8I4Dab8g3P6avpWSzArMiSrUt--U1mn6WfYW8ol-M3uubXn-Naf5KEe4DeDhtv7eOkTRxlwekFBuRV19_BuMWI6brE0hN5JR0BhuVIhIPaB_SWWR0luYTBlCqFrD?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Halte routière en bordure du Lac Renault, à la croisée des routes 117 et 101<br><br>Plusieurs tables de pique-nique ; Toilettes publiques, eau courante. Très grand terrain.<br><br>N.B.: Un panneau indicatif précise \"Camping défendu\". Nous sommes d'avis que la clientèle visée sont les gros campers qui voudraient s'installer ici pour plusieurs jours.<br>Nos conseils: vous installer ici pour souper et ne monter votre tente qu'en début de soirée, un peu avant la noirceur. Démonter la tente avant 8AM le lendemain; Pas d'urgence ensuite pour reprendre la route. <br>Nous avons visité ce site lors de notre passage à vélo le 8 septembre  2020, <br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc<br>514-668-9772<br>rikimiki@me.com<br><br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/r50l6u0b0ihukbcv40mo749gv8/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7ip1uPCe5_t-_ntYAJWtaDW2oW57LdKlSgETMr-vCDxTW93rpBLMn7yTu-ZLl_jPMYSBCQDdH5E-X60hkUZokcHkQE6v8IcPOwAQuEOIKz3z-MZZ4QZC6AqRWhBLhf5cUy4uTyOKMgmVPvE7570oh5O99zDYedAdbrViigKjzY64zbxxQnvLuPz7yeDDoQipet?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/4jofjgv3schd78hubngpd1nf7k/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5R59eXrzM2XxKkMTphuePJDdXhgzG_CGozeyPk86aj-Dzof00Qn8jIEE8JX5NvKrI9yYFFi8dKZ8JLdplcgl4QPOLhh5EKZ8miAeTR-l9zlK-sWsUeZgUBy-YqsazLBVI4mq5uNMqNI2MvucyqqM3RxnpJH18vIzX-1GUbznxOZibcaaj08azY1KIG0zGwzBhJ?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Halte routière, croisée des routes 117 et 101"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -79.2411738,
-                    47.9174756
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Halte Municipale  à la croisée des routes 391 et 101<br><br>Quelques  tables de pique-nique ; Toilettes publiques,  terrain gazonné, quelques arbres<br><br>Nous avons visité ce site lors de notre passage à vélo le 9 septembre 2020, <br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc<br>514-668-9772<br>rikimiki@me.com<br><br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
-                "name": "Halte municipale, Hameau de Rollet"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -79.4864606,
-                    47.5901212
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/7ca0ig69al4m12hg8iqqn29eh0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5zOOM-5ViMZgFkwA-Q8pmmIUl1nDKPsT7Fkni2gnBuELAwCygnBHduxbZS7iSNTM41oBrv6-NLhChWPmqpXSzpOKiu3oSEjlrtY4NSovKePrY7qUnN3fQk7_urmQ1KvkSpXSD8txB0QWQoKg4gdnh1XsLH9sN3p5lzjYCqJFn9c-6OFsfThVRYWbDg4Wv8rH3m?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Halte Municipale en bordure de la Rivière des Outaouais sur la route 101 en sortant du village de Notre-Dame du Nord<br><br>Quelques tables de pique-nique ; terrain gazonné  sous les arbres<br><br><br>Nos conseils: vous installer ici pour souper et ne monter votre tente qu'en début de soirée, un peu avant la noirceur. Démonter la tente avant 8AM le lendemain; Pas d'urgence ensuite pour reprendre la route. <br>Nous avons visité ce site lors de notre passage à vélo le 9 septembre 2020, <br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc<br>514-668-9772<br>rikimiki@me.com<br><br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
-                "name": "Halte municipale, Village de Notre-dame du Nord"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -79.4249801,
-                    47.6887905
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Halte routière dans le village de Nedelec, en retrait de la route 101<br><br>Plusieurs tables de pique-nique ; Toilettes publiques, eau courante. Très grand terrain gazonné, arbres matures<br><br><br>Nos conseils: vous installer ici pour souper et ne monter votre tente qu'en début de soirée, un peu avant la noirceur. Démonter la tente avant 8AM le lendemain; Pas d'urgence ensuite pour reprendre la route. <br>Nous avons visité ce site lors de notre passage à vélo le 9 septembre 2020, <br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc<br>514-668-9772<br>rikimiki@me.com<br><br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
-                "name": "Halte municipale, Village de Nedelec"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -79.436973,
-                    47.5583343
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/jjp0un3sd2a2vm9l3br7mog9fg/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5DmqsBBP7xmKI7fQfxey1fVR-K10ayuFXxDggrkEYGsb0gFRhUr1q5eyo2NikXxMrFdpX5rcOD9qQMP5aU-PNf3QMpbLLeqXm_-YBTbg1kHOrKbz3VO9fDhd2mam0tEc_2HYv0coba9SKmrmA8el42qcbAFaz9HMBvpABH-K4sp1Eovt3EM-Vk32eZgQq-V7nw?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Halte routière en bordure de la route 101, entre les villages de Notre-Dame du Nord et St-Bruno de Guigues<br><br>Plusieurs tables de pique-nique ; Toilettes publiques, eau courante. Très grand terrain.<br><br>N.B.: Un panneau indicatif précise \"Camping défendu\". Nous sommes d'avis que la clientèle visée sont les gros campers qui voudraient s'installer ici pour plusieurs jours.<br>Nos conseils: vous installer ici pour souper et ne monter votre tente qu'en début de soirée, un peu avant la noirceur. Démonter la tente avant 8AM le lendemain; Pas d'urgence ensuite pour reprendre la route. <br>Nous avons visité ce site lors de notre passage à vélo le 9 septembre 2020, <br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc<br>514-668-9772<br>rikimiki@me.com<br><br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
-                "name": "Halte routière St-Bruno de Guigues"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -79.4605787,
-                    47.2888167
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/qlqkjck59u5f1qrd6oij1hjvms/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7Wkvvt5RGQWHdkYEK1FzcWqD825OyL8QVdZdT_N8yMbQPJuZG4_AzkNEXL2SaMGDzola9Z4jhMiTbDsR0sgNCbuVmOWN29gCmmwajHDu3sBtgSHbCzU5aIQCXwQn_RrNpOZTmYOQGUXaMYuNH5U9pdK7N-MIlCjzpB86TY_t0X20A-j433piXdh9THHeSIXkop?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Fort-Témiscamingue, lieu historique géré par Parcs Canada:<br><br>Plusieurs tables de pique-nique ; Toilettes publiques, eau courante. Très grand terrain gazonné et nombreux arbres matures; Site magnifique et très intéressant à visiter!<br><br>Pas officiellement un camping de Parcs Canada, mais la Directrice Josée Latraverse est une ancienne cyclo-voyageuse avec quelques longs parcours, en Gaspésie et en Europe, et elle est particulièrement sympathique aux cyclistes lourdement chargés!  Vos chances sont bonnes, sauf peut-être en période de fort achalandage.<br><br><br>Nous avons visité ce site lors de notre passage à vélo le 10 septembre 2020, <br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc<br>514-668-9772<br>rikimiki@me.com<br><br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/vkn2cpus1omi4oibkqs0pc8gko/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet78BnSpkiGmeOIrIl5hTWTGffE2v78CnTeLftGXk3cjmZ6y6KK78TaP9lxHGylfRCP_ohfsXifaa3NqsKqnsJ6OD5tEA9FfwnjjoG64mzFJyKNp3ijxhIwwEscMu2IyCm5D9DAYV2GxhmD6JMei9X6SqUbKbN6KZkNEGzrsnxI9zOLfmPrbrCgCGLbjwxTuKpTL?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Fort-Témiscamingue, Lieu Historique (Parcs Canada)"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -79.4020598,
-                    47.2507907
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Halte routière en bordure du Lac Témiscamingue Près de la route 101; Entre Ville-Marie et St-Edouard de Fabre<br><br>Plusieurs tables de pique-nique ; Toilettes publiques, eau courante. Beau terrain gazonné, arbres matures.<br><br>N.B.: Un panneau indicatif précise \"Camping défendu\". Nous sommes d'avis que la clientèle visée sont les gros campers qui voudraient s'installer ici pour plusieurs jours.<br>Nos conseils: vous installer ici pour souper et ne monter votre tente qu'en début de soirée, un peu avant la noirceur. Démonter la tente avant 8AM le lendemain; Pas d'urgence ensuite pour reprendre la route. <br>Nous avons visité ce site lors de notre passage à vélo le 10 septembre 2020, <br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc<br><br>rikimiki@me.com<br><br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
-                "name": "Halte routière du Témiscamingue"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -79.2714657,
-                    47.049882
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/5ct938ag9cikd7ipb81e1htmgg/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6GDKNTagxIj13V3EsDcjHsMWHZZj0z6W5Bs6hPqmIoLQA_bLZ64qN8ZqZodytsend46kLYOjfeVlp6ukiN2pXIBs9xfMOLBh1CTNYoi-QOL-3oWhxvB7_UJ1u5ZbultXEq_rwcKr25ndfxe-_y8JO4kCaJkVtYu7zWpi6jWavh5xoL1oL6Jy6c0oUO7U-PHfRZ?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Halte routière en bordure du Lac Kipawa  en retrait de la route 101<br><br>Quelques tables de pique-nique ; Toilettes publiques, eau courante. Gazebo couvert en cas de pluie.<br><br>N.B.: Un panneau indicatif précise \"Camping défendu\". Nous sommes d'avis que la clientèle visée sont les gros campers qui voudraient s'installer ici pour plusieurs jours. (NB : en réalité, une partie du terrain appartient à un camping, et l'autre à la municipalité. Il semble y avoir un litige).<br>Nos conseils: vous installer ici pour souper et ne monter votre tente qu'en début de soirée, un peu avant la noirceur. Démonter la tente avant 8AM le lendemain; Pas d'urgence ensuite pour reprendre la route. <br>Nous avons visité ce site lors de notre passage à vélo le 10 septembre 2020, <br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc<br>514-668-9772<br>rikimiki@me.com<br><br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
-                "name": "Halte Municipale, Village de Laniel"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -79.1801403,
-                    46.8524109
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/nc8tklphqr7hq27ia8sg694lsg/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5Vk8muN1CXMy5xHLsb324Xtk9zomu1Y0u8Ct7IR6gGyAo-qr63bBs07XcgSkPqmTyVLh1WKLExDxYqKXZJO2jyChqkeKIovJ3BkD3Bvie9WMzXWB6J1meMze56Hud7cz8wLiP5-5U0zftYyeqYC0QDhzZtWkNbA1eEDaE9SuqZ-P890FUqvAMVQGgC7I87LhhY?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Halte routière Opémica,  en bordure de la route 101 (15 km au nord de la ville de Témiscaming)<br><br>Plusieurs tables de pique-nique ; Toilettes publiques, eau courante. Très grand terrain gazonné, nombreux arbres matures.<br><br>N.B.: Un panneau indicatif précise \"Camping défendu\". Nous sommes d'avis que la clientèle visée sont les gros campers qui voudraient s'installer ici pour plusieurs jours.<br>Nos conseils: vous installer ici pour souper et ne monter votre tente qu'en début de soirée, un peu avant la noirceur. Démonter la tente avant 8AM le lendemain; Pas d'urgence ensuite pour reprendre la route. <br>Nous avons visité ce site lors de notre passage à vélo le 12 septembre 2020, <br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc<br>514-668-9772<br>rikimiki@me.com<br><br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/s2blc1ikcie98b79a0mdae118o/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6JEaNc_6FMPH_v9GqrblUgSqwpuntPlAUOyg0fpGPqkobkRe6Aa6DHuJQ0RDIZEkzZKBuk8QESKW-8HIguqaNbeY9z9n9UfLHmyfuTJ-e0s9iJM_DGr3syWS6z3F8xIFLo4cx5ny0OyXkuIcmks15rI5SLqRPJXBxRqpifmR_lxQ8WDHRPKP-UUGRrptD937SW?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Halte Routière Opimica, Témiscaming"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -79.0951029,
-                    46.7189047
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/gtsuvqb6ipbuj8u53vt1auce10/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7trsPvr17-V3iTnjRMu08o3PfrPpT1MYoWpzIG-RXjI9wuSkfi0ldpbr-gsGz5v9wS7aZ7v1RLiu5H_RVIulcZtAV2r6p0RBUXl6F1eNGIdaTW5hStMTn98mcyKjx0AulhH_ROZHtnT2-EUJKdT5xLckSrUKNakkXjYqgnogR_Oet36qisCvHH0FHIrt6W-Iax?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Aire de pique-nique en bordure des chûtes et du Ruisseau Gordon.<br>01<br><br>Quelques tables de pique-nique ; Pas d'eau, pas de toilette, mais le village est tout près<br><br><br>Nos conseils: vous installer ici pour souper et ne monter votre tente qu'en début de soirée, un peu avant la noirceur. Démonter la tente avant 8AM le lendemain; Pas d'urgence ensuite pour reprendre la route. <br>Nous avons visité ce site lors de notre passage à vélo le 12 septembre 2020, <br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc<br>514-668-9772<br>rikimiki@me.com<br><br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
-                "name": "Piste cyclable de Témiscaming"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -79.1712077,
-                    46.6125358
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/vrd64r5s10m45c8qtoqpgj9ui8/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4D3ON468KRnRSmrcoi3Jjq14EaxYs2Xlmb6i4XYo-R3IecBab3AhjXYZbJvQ1MDr-pEP-3KbHbiT3bsnbSF4UWxSAyeXCoMytUVxQfx71rAmQhg30qnWJEgtJcQUjf9jLBEQTz99hl4ji-Fxwha-t3Q0xE0IejaupXVzb6ftWJjY_E3eNofzu3iW2vNpxajm2w?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Halte routière en bordure de la Highway 63, entre Témiscaming et North Bay<br>Plusieurs tables de pique-nique ; Toilettes publiques, eau courante.  grand terrain gazonné, quelques arbres matures.<br><br>Nos conseils: vous installer ici pour souper et ne monter votre tente qu'en début de soirée, un peu avant la noirceur. Démonter la tente avant 8AM le lendemain; Pas d'urgence ensuite pour reprendre la route. <br>Nous avons visité ce site lors de notre passage à vélo le 11 septembre 2020, <br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc<br>514-668-9772<br>rikimiki@me.com<br><br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/fkfei1657vm8kldio4ren0irik/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5xCc6GyLgAJHeSnCuRaMMwqlqQOxoqm5Xzh86au_Uaq_-KR0XwT24BET_Iffst_KZ5Tk0usgdNrIFgoAJhWHq5u-eMDsrR9fiuMY3NKIBCfqdVIAjNAorSIPV8c78NCkoh_fk4bhQL1mULOO8YP5bl3_-pYJqw9I7fL2QOZj9XIEpdV3yHq2i-HgcF9W1CKRzD?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/tu988dmerv7ksrm8arumbsfk8c/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5HG0smTP--vAKrHvWYw5-DEw0AnwrsUbaU_v9zZdPEsS8Un6NRT21tJ1oYdBUyXEOiDsiqTORjjETw-ujf-ZcwfyrSrSFVtvUIe0HSVsAbYaid32QxCz3egt_CEorEbx5k2Y-dNVANFi6t6o39YFqrIVyuvXFTmenQXnWvVNzTxBIWisrUCYKjELar835UpOTJ?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Aire de Pique-nique, Jocko Rivers Provincial Park (Ontario)"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -79.5537727,
-                    46.3387176
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/e5hsr4u5dql9olar958fflgefg/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7Kgm9tE4EP3F_7bnlyBXW4w4cpnB8mYqoBBqDXIbcCGBYwCqAVfBYUbTqF960IOwXbyzAV-rbE3A_taywRyNJ_GrRD0Fk_XS0KNpsmW6SURJXh_rssTK9jbG7H__ubTfCLCR-NmIROxh3MLPXD5iLQ0ZsjduLgFJGMNpXE-lE6R57owlTY1LX4dh4GNZzDgEYF?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Halte routière et aire de pique-nique surplombant le Lac Nipissing, en bordure de la TransCanadienne (Highway 17) entre North Bay et Sturgeon Falls<br><br><br><br>Quelques tables de pique-nique ; <br>Site bruyant (autoroute voisine)<br><br><br>Nos conseils: vous installer ici pour souper et ne monter votre tente qu'en début de soirée, un peu avant la noirceur. Démonter la tente avant 8AM le lendemain; Pas d'urgence ensuite pour reprendre la route. <br>Nous avons visité ce site lors de notre passage à vélo le 12 septembre 2020, <br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc<br>514-668-9772<br>rikimiki@me.com<br><br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/8c5no6kkpo5ms7bqs6932oqp8g/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6EStr7tqelKdpKldCN3-y9BiZxrkfv0JKl60_CPoscVO9KHNMj2WOGSfi60DOkhBYBiLs0Jpplefl7u1c3ZhhB9bixrv2vZZKjDYYuB5Z6ZztZfCvm6ABDRESjrIZ99yILF7tUKPsgqWWH2JMqMHobxBb9aPv30dTnx8NUb-0HFe81znvHSOcjOEQ5zZkVzB0q?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Belvedere, Lac Nipissing"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -80.1709737,
-                    46.3231574
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/07qcvptv10q4so41d4fo1qigpg/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4URy81nTqPt_oe592OWgi30Rgr_13Z2lmyWYzRL4td4bjK-qFE7bWuHbGOShMRmVYrXPIadn4aCa4y0lTieo69WRF40ZOGc5prwJlT-78okVnfIgx0WZWPDGY9SAI9MLeGiUL1ZsMz8CoKlSkQSZ6soVHWxSjHDgZHFIElWfXTqolzbHVkF9rvTUTU6yHp16nf?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Quelques tables de pique-nique ; Pas de  Toilettes ni  eau courante, mais lac Nipissing à vos pieds. Beau terrain gazonné, arbres matures. Très beau site!<br><br><br>Nos conseils: vous installer ici pour souper et ne monter votre tente qu'en début de soirée, un peu avant la noirceur. Démonter la tente avant 8AM le lendemain; Pas d'urgence ensuite pour reprendre la route. <br>Nous avons visité ce site lors de notre passage à vélo le 12 septembre 2020, <br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc<br>rikimiki@me.com<br><br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/gqulv845kvp2q7abcc1aqdkkmc/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7rY2DgGyD3Tm1HHKRlqn-WaPu2VGnhROytDAt8Xj6IWhGQBhozgNWNvy7hkAP0ljjWbndfYyLSGb0xGwICXxJnCixL1MNP8loCV0nydh2F4RhtV_n4lYM0IDeiMlUswDe_j_z0cFKHoQBmjvzBZ0q6DApAjDrGHXvfJoVDYOR7IE64BnQgRTOTe_7lryfJu8Ji?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Aire de pique-nique et quai, village de Lavigne (Ontario)"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -73.5123844,
-                    45.4170996
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Endroit accessible seulement en vélo, parfait pour camper à 30min de Mtl. Endroits plats pour tente, pas d'eau ni toilette, baignade possible. Commerces les plus proches: Île-des-Soeurs (dépanneur/épicerie).",
-                "name": "Plage le long de la voie maritime\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -76.9145914,
-                    45.9085432
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/9hi2qtgb7rr23459c937cpa338/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet69XdltppaG4LnRFwQftq1ffepazwYHHgiR0cM25q2lfzt734_r40725QCU_BoixSz1hCx2O3eRuyaQH2rLQSrNNmlJR0Z2GKSf5njbZj4_JMtlalKCYwzwAuA6EkvlavrXqkhv0397rIoiYkd_ArxWe4ynw6-JmSLIm150Ut6aCnxdZDZKZO9u4gp_DvOIgsJJ?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Entre l'église et le parc, adjacent à la Route Vrte #1, un joli parc municipal avec tables de pique-nique (avec toit), station de réparations vélo avec outils.  Pas vu de toilette ni eau courante, mais vous trouverez facilement dans le village.<br><br>Nous avons visité ce site lors de notre passage à vélo le 30 septembre  2020,<br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc J0R 1B0<br>514-668-9772<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
-                "name": "Chaltham, Parc Municipal"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -76.9464342,
-                    45.8539063
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Halte cycliste en bordure de la Route Verte #1, près de la frontière de l'Ontario à Pembroke.  Table de pique-nique, un peu d'espace pour mettre votre tente, mais pas d'eau ni toilette.  Secteur retiré et tranquille.<br><br>Nous avons visité ce site lors de notre passage à vélo le 30 septembre 2020,<br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc J0R 1B0<br><br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
-                "name": "Halte cycliste, Ile aux Allumettes"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -77.3647379,
-                    45.5984822
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/7djbt85hj3dn7n9rp3u499g3dc/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5V0iggnxLdAha8KYk0csewjlCndtPh5clDW5UMWG9vevnqZ-JjQmwcLUGBWtPs3qYCtTLBH0hU5ugMN1-K6ZiyLHUfwpsMwGs_STAvarGFLaSK24Bx68OvePY1qEibL-fd2e51S1GVp-Pj9ln6nmcawMEwx5pgFQ3wgxfA0mH2v1AsTZzMk0BTb69YMORfvLAE?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>en bordure du joli Golden Lake, sur le bord de la Highway 60,  cette halte comprend des tables de pique-nique abritées, du gazon très vaste face au lac pour y monter votre tente, des toilettes publiques.<br>Nous avons visité ce site lors de notre passage à vélo le 29 septembre 2020.<br><br>N.B.: Un panneau indicatif précise \"Camping défendu\". Nous sommes d'avis que la clientèle visée sont les gros campers qui voudraient s'installer ici pour plusieurs jours, notamment pour la pêche. <br>Nos conseils: vous installer ici pour souper et ne monter votre tente qu'en début de soirée, un peu avant la noirceur. Démonter la tente avant 8AM le lendemain; Pas d'urgence ensuite pour reprendre la route.  <br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc J0R 1B0<br><br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
-                "name": "Halte Routière, Village  de Deacon (Golden Lake)"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -78.6522545,
-                    44.7791871
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/eiodk3077soj9j9t3h3hvcji38/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5ME0gaqvc3fUIbCouYQjJ7-DAA0hn0cfx-va9YtMJ7McF8qX48H89ZWukPwYI4vvRnw446P-YuVQc3pQivG_mxznr0e7ZcFhPEyI0fC1Ypd9pSNRaS8c1_6oQ1bR2VgemjPh5C0k-MzphNDD6T8u3CtMx_tja2tYldSQfXAqX0P7xatkOjQnPxHi01Fj9gViZK?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Site magnifique et tranquille, en bordure de la piste cyclable et de la rivière, , cette halte comprend des tables de pique-nique abritées, du gazon très vaste pour y monter votre tente, des toilettes publiques (ouvertes de 7AM à 9PM)<br>Nous avons campé sur ce site lors de notre passage à vélo le 26 septembre 2020.<br><br>Nos conseils: vous installer ici pour souper et ne monter votre tente qu'en début de soirée, un peu avant la noirceur. Démonter la tente avant 8AM le lendemain; Pas d'urgence ensuite pour reprendre la route. <br>Normand Pion y Hélène Giguère<br>Ste-Anne des Lacs, Qc J0R 1B0<br><br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/86he8ckjt9tl630s1ct1vg84gk/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4ruv1Pn1KJBE8vNk8Va0FQ1wxt066S6Nr1DTzrrIx9y5CB9hNkgnPYlgpVWNjZP-KIwCN2j54wCGZqwcdREb8-g4e23iGawkuyqrDxgZJYledXrKYGtX-AASdQ_mzpGWGqhy1rAF5QnutFXApV8ysR0tYaT7vd6wo9jHIeT6xt3k3ufkglstSCbFd4nkOh_C_J?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Kinmount Ont: Parc Municipal"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.7598837,
-                    45.1828603
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Chemin en développement. Le boisé est agréable quoi qu'un peu rocailleux.",
-                "name": "Point 176"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.5755987,
-                    46.7279009
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Le site est utilisé lors du festival western de la ville. J'ai rencontré des gens qui faisaient des réparations et j'ai demandé si je pouvais tenter. Sans problème. J'imagine qu'on peut le faire discrètement. Métro à côté, une aubaine.",
-                "name": "Point 177"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -76.6864302,
-                    45.8198149
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/1dvn32lk9a6dq6kgpvs97aqpvs/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4IAhaOSBc9cpsk8YXvnyOCNqNPdwa1n-76pPjRpQTJfazrlsa0fXCTdT8Y9_uy4sCMfMV0GwtuncpA863gQ6GU4dWIXZyPjEQaSlmPRlZnigoVFDZhf_AHzqsuaaz0zRLBHNdqvttWyAsBWAhXiEfC7XCUS61lAdmH-ijmeCl-l1XA_VOLUTgaX5oc6oHQ0TMg?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>en bordure de la Route Verte #1, environs 8 km au sud-est de Fort-Coulonge, une jolie halte cycliste, avec tables de pique-nique, abri pour la pluie, toilette; Super tranquille!<br>Site visité lors de notre passage à vélo le 3 octobre 2020.<br>Hélène and Normand<br>Sainte-Anne des Lacs, Québec - Canada<br>rikimiki@me.com<br>tandemetcie.comhttps://www.crazyguyonabike.com/doc/?o=1ni&doc_id=15622&v=26l<br>+<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
-                "name": "Fort Coulonge: halte cycliste"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -69.5479278,
-                    48.2300621
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/hak6rv2u3e9ng60opoa3cbjp0s/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6kAO21gDlUcyUDCIyMPihh_ocXGgTeJTthkREqXO0mczf0Q4URkzA-zoPIu_LMyDLk8uMufu75HOZzdEGU1l_de04V6tv_ikvmiD3DIZ5UUh1zPNRpvYYGzGcW4nL34iEy4WuVLlox51UCWPzhlzJvnLHurd_2It2jseBvNPogLrPBJi-S9DBL7tSiUC5vTgS9?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Caroline : Endroit où même les VR peuvent camper gratuitement. Toilette chimique à côté de la plage, on peut trouver de l'eau dans les commerces ou chez des gens dans le village. Plus loin en descendant vers la plage, il y a possibilité de dormir sur la plage si les marées le permettent!",
-                "name": "Point 180 Camping gratuit"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -69.2546236,
-                    48.5395945
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/is7nc7j0ddah7p05del1i7dn7o/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet47M-w9asKLkX0KoJGJXgOhMo22D0NijoXJKdoYkcBa0rDjnPqX09zlPfPrjdnrTHJpFZSp60QBNMDXP7mN79ijP6zRIoV2CK-u2PEFhIgJYkGRFIir9piQOFZuhXv3eptbaxZ30qgU9LqB3Jr6IOBTvYtS2yX6XDpGQFAFUZ81j4WHCi59W9lBAfwq7NMwJna0?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Caroline septembre 2020 : halte routière avec tables de pique-nique, toilettes et eau potable de jour. Probablement possible de dormir là pour une nuit en vélo! Prenez le temps d'aller faire le sentier et de voir la chute et les vestiges de transport de pitounes!",
-                "name": "Point 181 Halte Sault au mouton"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -69.0940875,
-                    48.6348513
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/rgmr58djae3gfg37fskdlbntb4/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6cJ5xoSzpHKfxwycPVdpczVspd_IngAEspb1Z2EU8tzdS9-MNTg5caMZc4cNS1_Fzg4glAo-2wkR9eT-7mDDeBp92cjTX3h8WXB7uMBfStdhG0wsadGGwmlJasy9Ku969b9_lbqn9gg3c3oJP6oMdelDAIx1U8RphEm9Fyd7tIpAD34_2nAOxfcvFqHLWeMJDd?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Caroline septembre 2020 : il était écrit camping interdit à côté du stationnement de la halte, mais si vous êtes motivé.es à pousser votre vélo ou à traîner vos bagages, c'est probablement toléré pour les cyclo de dormir une nuit à la Pointe. Il y a même un gazebo pour la pluie! Sinon allez au moins vous y promener!",
-                "name": "Point 182 Halte touristique et parc de la Pointe des Fortin"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -68.8790816,
-                    48.824012
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/i3jsv5ddolkvn7ifg6m4hs2acs/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5ED16Gl-vg-FyhsyS371Jq6Kj_qIgQ37nsDRe3tFEWxl4tpMxdmSl8_Dw_1VShdDH2gcEiFbQB5ZhSeEm-sopHb9UZeEqG0gkBgX8DbiRwx-dNjJ4h96LJBshg5z9gh1T1hqkUbZk5ufWlWQPGZwy_DRHtcuWBUqtpUPmkONmQBH-rFFfgMIQfCmJadhPJvcWR?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Caroline septembre 2020 : Plateforme en bois en haut d'un cap rocheux, vue incroyable, endroit trouvé sur un site de hiking pour voir les baleines, mais peu connu des touristes. Aucun service. Pour y camper vous aurez un sentier de moins de 1 km dans le bois/la boue à faire pour vous y rendre. Je n'y ai pas dormi, mais j'ai passé deux heures là-bas sans croiser personne, sauf les habitant.es de Cap-Colombier sur le chemin principal.",
-                "name": "Point 183 Point d'observation de baleines de Cap-Colombier"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -68.8633746,
-                    48.8405522
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/fgnuqsooust2mmatsp8tmdfjos/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7G5BQHiKc-Hv681USvu9v-HYN_akInA1cTAYbUmrA_NKfqNUeh4iZi4YFPn7p_FcTW5zzbV3vsBaXSwyegtxi-mUq02l1yGWlOFdol3xGQS3-xt-tyTB0-gP54W-SEvkCYXbhtTS-3QWIhmv7SlbDWWqtLI7PZabRPHS20DwOe8NTaEX50Q2d4GYbA2vejZAJt?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Caroline septembre 2020 : tables à pique-nique et endroits pour mettre une tente sur le gazon (ne dormez pas sur la plage, la marée monte haut!). Pas de toilettes, pas d'eau. Beaucoup de VR cet été y étaient dans le stationnement plus haut, mais il n'y avait personne quand j'y étais en septembre. Il y a aussi des sentiers pédestres qui partent de là!",
-                "name": "Point 184 Halte routière Cap-Colombier"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -68.7908906,
-                    48.8804465
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/efubcq50gfc10n3ctqjavs3f40/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6nfTYY8bbpZkzT6LqQTaOFA6rNrrIngyz5qQZZBAmQSIzrO8baQYYG9TsA0DiuG6WPj777PRpIiTtv-Ys4D9UiLTQD-pZNcU3TdVidQePmqdnWJ_fyxSMNE9RZ-cP-iM3yS3AtC_gUH8YA9UaF2UoSY-zvbUkaDtCHKeuTZuXFDB6fcfRQhRS-6YJHYoyeHN8N?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Caroline septembre 2020 : Endroit souvent mentionné où dormir sur la plage ou les ilets (entourés d'eau à marée haute). C'est par contre un endroit avec beaucoup d'érosion et les visiteurs sont invité.es à faire attention en marchant. Je n'y camperais pas. Il y a aussi un site de camping qui est un endroit de pèlerinage innu. J'ai préféré m'installer proche de la cantine, et le gérant m'a dit que j'étais la bienvenue à dormir à l'abri où il y avait les tables de pique-nique (pas sur les photos). Il fait une marche tous les soirs, peut-être vous pourrez le croiser et entendre parler de l'histoire du village! Toilettes et cantine fermées début septembre. J'ai mangé sur la plateforme d'observation, la vue  était magnifique.<br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/aogos82kci2euuuocpmhpihkbk/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5ga_IftUEq88gOcNBHHvPdFVVXuS7ixUNqSXc6BrM77jxDDiCrZtJM4HvIkJYdeKzEd7MjCU4G-CzX6fSeo-sAnKbqEB3gVrg9riz3MWIIEZxvrj4HhvD2YQFT5qB7bAPp1IKlb3YDiKWK-zIg0nppZpkexthJtLz-_XCGWAynfIbAyhsaR1Bh923M0QkCayS5?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Point 185 Ilets-Jérémie"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -68.2555217,
-                    49.1033217
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/8io5f19nj8qdvg81t5geaijku0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4w3_VgjWC-fAORWYbVvCX-dr7spsFFAxaZMljzYj8s_Y25QOxCNgKy_p1t6ru6eTP_lVHw-iStdJGmcmsy_vQYmVc26-AD9xrtF3IhSKJokCD394xGM2E17y-KUzD_Mlvd7wWElN-sifcU-64nMHb3mO3MRae5m-OOBWB0xFEuBKM44XMj536c9SVaAI8pyZi7?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Caroline septembre 2020 : Piste cyclable magnifique perdue au milieu du bois. Il y a une grande table à pique-nique couverte où il est probablement possible d'y dormir à mi-chemin. Territoire de chasse et d'ours noirs! Sinon il y a une belle halte municipale plus loin, voir sur la carte :)",
-                "name": "Point 187 Halte sur la piste cyclable"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -64.0963506,
-                    53.8942864
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/m7m7mssk6r0pga0m6peajscr60/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7oZ0V8kEDjVMsg6-waU8eIPKcQCWF91ohLzdaTMOvUxqnQOFv3LvIHP3A_Y8pdodgWRONjH6IVwKwgsB3GUOJD7Tb3LMSDTgXRY01xWUkNv362C9x4IJmmHZhQlCf8SW4ZgpBrl__bFq7I_uldTnPRr3JPdmfViOuphqBDBS8VvO03671iYa_JhL2B2Q_pDqPB?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Caroline septembre 2020 : Ancien site de randonnées pédestres et de refuges. Possibilité de camper sur un des belvédères après une petite randonnée sur escaliers et ponts de bois. Bancs et abri 3 murs. Pas de toilette pas d'eau. Faudrait laisser le vélo barré quelque part en bas durant la nuit. Vue magnifique. <br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/8fcukmondv4v0fbli1kbc34ekc/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6mpxDG1ZOL9XrNe1nauc8jzMC86sbQ0YXhAnEP34oxoicYhtcxDeTrfjLPul_VxWNdJV_CcECC90DNgBEbb356fK3bgfDx4BD7DPW6K4LFu0RDOd-_O-heePQ0mHBzs7op3Kj_2tBtdIvw11XSJ-1niT5AIy3Ox6-fTaiV-bYX4wB5aNOUOUzwPVkiRFOhfYbE?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Point 188 Belvédère du Fjard St-Pancrace"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -65.2455145,
-                    50.3156449
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/vdrijhvhkdmr8hp32lk5qjq4s8/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5S01Xk3ouEnydfzbTd_ZkyWQE5gu2Rmwx2-wQ2_H-EpQuHRgQEnYT8WZ5sv-QnDHhrT2eBvRvEFmK8fsy5vdQ5tgOUiVfKbBWhijzc1mthgMhD7u2FxGTb09l7zroU52Zsed98Y-SQqy6pUMqjadZaGCtz-r2n-KefsMnhAXbNL_Ax2X_u6JctnUXNjWShfi-2?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Caroline septembre 2020 : Tables de pique-nique, WIFI, toilettes et eau non potable sur site. C'est ouvert 3 mois par année jusque mi-septembre normalement, mais j'y ai dormi la dernière journée d'ouverture le 2 octobre. Endroit relativement bruyant à cause de l'écho de la 138, mais calme et peu fréquenté un samedi soir pluvieux d'automne. Si vous êtes motivé.es vous pouvez sûrement descendre dormir en bas sur la première plage le long du sentier vers la Chute! C'est beauuu!<br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/6kg48prncjemdlne8arkpdjtm4/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7JBiywRHK8_5aGs3yS_5ivwwnRMLoZCod51zP8Z_MDEwaJd8vMB9MIq8lhCFG9a4u-6UwD9j0BmLsJ7S6TQNCaaP_WTVzR9tSIDWcZSncuz97fVKC8jqOSuyryRj4vp35F3FlPqtNJyiQx8stYDMihge3IxxfIDbqzzOCiOf9Yz2L4KcnglMr0099MFroGZ-GM?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Point 189 Halte touristique Manitou"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -74.3351411,
-                    45.5667151
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/ect98e2ujn75qjoma3t5c0duco/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5QAZW2UPhT-i7GNTJK1_pihqzrNLjUWkHt227b2ZYw7-w3WUKYx9fSU8OTBLgYcJzcH9r4XS4NQBSAblnIMGrVtG5vcGoj5RrZ3ROQK9xh2GffR9uppZclg1vF0xgr4_Ef5CjUEaXY1meNeSxcrDKJf2xATADB6fAx7KUuwbJWw3-jbDS9gK2tKEmebT6spFTJ?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Très jolie halte municipale, en bordure de la Rivière du Nord, face à un petit rapide.  Avec tables de pique-nique, verdure, arbres matures.<br>Dans le village de St-André, en bordure de la Route Verte #1<br> Site visité le 6 octobre 2020, à notre dernier jour de voyage en 2020!<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020",
-                "name": "St-André d'Argenteuil, Halte municipale"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -75.1039521,
-                    45.6052238
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/1boi83uh78e8e0c5e906islf0c/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5GwlmFk1_U2MFnLQbUAQG1B9cfx22OJ_iVnoNTyIsds3b6KUDK59U_wb-6ocWIalBxtr33-Abo5UezfCE9Tk5qlibkAgDLtwMTy7bkpXeq3xgVKCDxGNhM1Wm3lpA6ghl4t8w1hsauKD8TikqGJePF7Z3P5h6jIjuadIJ7TFgDIC7JOiYqfH5cWUuQVbAmgH6G?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Très jolie halte municipale, en bordure de la Rivière des Outaouais,.  Avec tables de pique-nique, verdure, arbres matures.<br>Un peu en retrait du village,  en bordure de la Route Verte #1<br> Site visité le 5 octobre 2020, à notre avant-dernier jour de voyage en 2020!<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020",
-                "name": "Plaisance, Halte municipale"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -73.94251,
-                    45.72891
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Passer la clôture de la piste cyclable, de l'autre côté du chemin de fer. Près du sentier de VTT. L'accès est plus au Sud (porte sur la clôture).",
-                "name": "Camping sauvage sans eau"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -74.8656,
-                    46.40133
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Une table de pic-nic du côté Nord-Est de la piste cyclable et un espace plus au fond assez large pou installer une tente 3 places.",
-                "name": "Camping sauvage Rivière Rouge"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -74.3751547,
-                    45.5660381
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/ou02fetldi62l3rq129b9kqbbc/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet744VdSZxitAigZOxbiCppGII1l58mCMX6flJFysXGWrcZG09GP_V_2albHhyw5uKWRNzPi58fIu0xTFesv5r6HaRDnCnr7VdEnuag6eZvxzVFbMKeDqYcyh2fzDiejEMRXLDMDYrShhSjjYbSwrGgO0DmUBhRqFoSiX2rw4Bp4YyUcdP9nSHcHzSRHY_vyVZg?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Derrière l'église et la maison adjacente, le terrain délimité appartient au gouvernement (Parcs Canada) et fait partie du Lieu historique du Canal-de-Carillon. Le terrain est en pente descendante et assez bien caché à partir de la rue, donc idéal pour passer inaperçu.  J'ai jasé avec le résident de la maison le lendemain matin, il avait l'air habitué de voir du monde passer la nuit là. Casse-croûte à proximité. 22 août 2020.",
-                "name": "Canal-de-Carillon"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -74.8965644,
-                    46.0060802
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/qc89qo1u08g0ilmrbi7vh87g38/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet77hAHwYYp2X0VPXjLPsngWxrlsL3603_6mtlASoV4zu9riuETX8U15Sa0wTicdmztVRB2cmTECPIvhDVbIgB4ZlSCL3rq_2XTJvThluFWEi3169nSvgiL3wr97QCP9q0KuHmj9Q1c7_rCjSHNo56Z-qLtjcnfZYooCQfYN-EZ8LK2PzF4y2lQrF5slxdZhCF99?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Si vous ne voulez pas payer le plein prix pour un terrain au camping (40$+ tax en 2020), une alternative ici: petit boisé sur terrain privé, mais non occupé (pas de maison). Facile de se trouver un spot discret dans le bois. Commodités à proximité au camping: douche, casse-croûte, etc. Juste à faire semblant que vous êtes un client du camping qui revient d'une ride de vélo! 21 août 2020.",
-                "name": "Alternative au camping Lac-des-plages"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.38732,
-                    48.70419
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Beaucoup de place pour installer des tentes. Camping seulement pour les vélos. <br>Toilettes et eau disponibles.",
-                "name": "Halte routière des Pionniers"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.9565435,
-                    46.6215854
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Sol inégal et un peu de bruit de l'usine. Aucun service. <br>Pour dépanner.",
-                "name": "Espace semi-discret en contrebas de la piste"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -68.80396,
-                    50.20128
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "A l'ouest de la 389, un terrain près du lac près où on peut installer plusieures tentes.<br>Il y a aussi un endroit aménagé pour faire un feu.<br>Un accès au lac permet de se baigner.",
-                "name": "Camping sauvage 389 - 3"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.9461512,
-                    46.6202301
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Camping officiellement interdit. Notre tente, montée tard, a été tolérée par les employés municipaux du matin (aout 2020). <br><br>Toilette sèche, tables de pique-nique. <br><br>Possible d'aller un peu dans le bois vers l'ouest pour plus de tranquillité et discrétion. Il y a notamment un espace correct à proximité d'une cabane à sucre non visible sur google maps.",
-                "name": "Parc des chutes Rouillard"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -66.54567,
-                    48.07663
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Il est possible de s'y installer en bivouac lorsqu'on est en vélo.",
-                "name": "Halte d'Escuminac"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -74.5357739,
-                    45.9365454
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/n16j2mv8rnlhv13cqlu34r1qok/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5Ao5DvnVLbkff9vgx_HYAJkMoY4CNCXQiIWdq98lslbIZxhTTEpdW0C3NtiQQZOPCpT_cKd9SYo4piGSwBtSxlgAnesfwnHDJLQ1unxtlVa1HQyATw9j2IGYFdr9cGRtKImVjzowSuHuRrghJLMtmU_sLNvz1cpODttXAW5CRQOz-ertgnSHl1HcerodsgAwTq?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Sur le Corridor aérobique, environs 1 km avant le village de Weir, cette halte cyclable en face du Lac des Rats serait un bon endroit pour le voyageur fatigué.  Table de pique-nique, toilette sèche, eau du lac à filtrer, espace plat sur petit gravier.  Secteur peu fréquenté par les cyclistes, car loin des villages plus achalandés.<br>Site visité le 12 mai 2021<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br>http://www.crazyguyonabike.com/rikimiki<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://tandemetcie.com<br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/rom21cbvtib9iuqfoukm2etu3g/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5jzpOgYov9yR2ErCzseH2BpWsrZbkOAeH1jyfazCPMmbgkE17ikodyC03Z95NYJvENc7wttwyVnlrlq4GZcI0rFPMbumYnMxb_NZMnJ45Urno2NIT6JWWKbg4YqxwBffV0-gLe5tAa-HDwbDwIYJEBlCFQ4ezFEeq6MOh_wg5x7Kge1FH1aucfNZz84dX0IWYr?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Halte cyclable près de Weir"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -74.6187724,
-                    45.9684311
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/sme6tfps8jp4oenf5h42ja38pk/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5BJQTaQGLOSSLgYsaz32OaS-hcL1eAJbkfNXAt-PRKQ5AW-vJWMGwiaMovxYxMasaoigIZP61hd9phdzavb37DqNSOYVOjFbEP7IcVlQyFigp0V5NZ7gs7l_Vb2OXfu4V777qZwOiYa8shVFxh4WW1LFW0Bs4G3KSEeeyhDmCb7f3kfZ9Bbw4M76iElDOWfZUJ?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Près de la croisée des routes 327 et 364,  le village expose quelques pièces de collection de l'époque ferroviaire, à l'extérieur de l'ancienne gare, qui est maintenant occupée par le Bureau de Postes local.<br>Il y a autour suffisamment de verdure et d'espaces  plats pour y monter discrètement votre tente en début de soirée, après  les heures d'affaires.<br>Site visité le 12 mai 2021<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br>http://www.crazyguyonabike.com/rikimiki<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://tandemetcie.com<br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/51di8bq80bdrvi8mr6ljfbglj0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7_gbxrmuqpX_xilgSIZjCTLZsb8kEVcM7kP6OfeebAo4nilNTM4ad0YwVWdXTBZQe7fNI8NfqfxlnbhVSlK2DT_DlzLO6_0u9eBu-HuO5_GO1F4LkR_Mb446qArD5Xob2ciPVPlsN2Uj-y44245fNtZ7aRK0_lSOlxtgVCqYZR8PU97d_WosVeTParLvqR7oTm?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/16rsth3tmu74ukrrio41ubdnq4/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7-bl3mK3y15C2Jt7HiKALH01BGgIPKWorsNFuNwDkggJhGmBAj-Y-UuOEYfxXMicuemiLDvEYpZaLJOqDFhtGAZikjUqzrjcE0_c5KdGKpC3Wu4AXETzjgjiqZyiXfrhzX1XuzF44Of9iU1gmh3Mp9ylf2aaerWVfuXxBcAuoZ_0stxjI56lhKRqflJaP2QgwF?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/lrmb2d2kat2rbbf0m0cs8a0sbo/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6L0brIpzMC-tPfjizFlA2mH3ZqodWsnWryFsfyV_xB4ze8dnYCPAyAG-E11w0R-eIHV5g_92SsztCsqFLIio--zDBHT3whAA6btEPkznM6WahlMmBsNJIajchkXGE9-S6qjmnDfPH9I5bwjC2_VfQHwJBDyKxgurT3L8AseLkPX0fDA1ireBJ7OF0yhd2v7CJY?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Ancienne Gare, Village de Arundel"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -74.6334994,
-                    45.9750146
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/ooibsfl4icpponec20800sjun0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6SNWtVq0q6_jfU2ziUo0Nb-5o-gSnnWawj18an8luZG9zs_Rb8qiWIrLhqsknvQBvqSVwRgG_L8DHuZjjEzFXQscbXZfIl8MOzCOmIG-8IZkBqiHEdukZnBWxh1Wwd4u5-xeWUs_zD4dQ1FVVl7qpwLTnZGvVA0YEK9SUaDTd2vIfxhyIEgH-D2932vHPmXwcl?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Ce parc municipal aménagé juste en face de la mairie est fort joli, en surplomb de la rivière Rouge.  Quelques tables de pique-nique, un peu d'espace plat sous les pins, gros arbres faisant ombrage.<br>L'endroit est public, il importe de ne pas y monter votre tente avant la brunante, ce qui ne vous empêche pas d'y préparer votre souper en attendant.<br>Il  y des toilettes publiques à 100 mètres de l'autre coté de la rue.  Un marché Richelieu est aussi tout près.<br>Le pont de la route 364 tout près pourrait être parfoisvbruyant, mais le bruit des rapides atténue grandement cet inconfort.<br>Nous y avons campé le 12 mai 2021, sans y être importuné ni questionné. Un bel endroit donc, avec un peu d'audace.<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br>http://www.crazyguyonabike.com/rikimiki<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://tandemetcie.com<br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/hae5tholm4n7t5imm6ik4ftk7c/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6qJzac4e59lJtZZVoUBEIrmtQ-MAV0uhO1PsPD2jdpBPymEP0EPdtAqaToWBKc_WGKNrL58zxU42S-tHL9-JyoiynlhThmJ7_qP-UTt2XxctIZ7xC-DdolzxJ4Z-DbhrDTZG7MjWKJcfONxH7r_0JMfO2hcilL1ZEhjMClrDxDgOkvAWuX6J-FdE5f0i3Dj2Ko?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/cufk24f05f7nevovjtdhavnb3s/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5_PBIOy8svLZXqLaboRtlP7ODWdh9lDhjB_o7KMwac6NdTQ7ZlHruB-bUbqFM11cIc_Or6MY1keKP3ZzeAn25uLneHFy3PUtD4JK3_eDjRA9HehD6Zq2YjU7EL1kGUPLRHwMETqFMNgZ26CahTtbyW6U2zQwc8qJKJZQX7TZatd9Q3B5A-DFUB_9eWd3eQ5xNh?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/mko3ttpob4f49bhkpsimbns11c/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6MKl7nPc5rav8eEpvfmqnRcNW06MfdrTntyaRdvoByXoCDSfRMmBJrPjUNHHozCBVMh7HYJrQAjru2NxYAeuIBL_FPc0fT3L5MzARa9YBZxuX0jyWmzGfuCHULyfQgoi0Y4nvJnDpOOuoY9j_mM86Ie8MrNuozrK02ya6MjgnjV7J_uIcIncTOcIOPR86sezVU?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/pajd519h0mo5f8j96qq4f0g4sg/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6dMdTuptBIYAf_iZ0Kx_bsqazdUdkziL3MMAH2-5tgobMZFIDb9Tfbc-_TuStQRU0TCEtDB-VYqm5aoFzaScj3MIoHQSPXoiINrk4FZ3JffwJN5TICjA7H5LIxFtt-G-3Afk_TxOZKhejjrXXMDZFZYrXrJdF3P-XiiI1PTR7SuV1c1FZlC6u7VrulmC3R1MnX?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/8e032ppaqhinon9vhqr0kfktd0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7TKHErjVhiMQe2gYkmhwT3KVP2_9ZFOC8efLww-snSQw2jXplvYLfb7Xc-p4L5SHQfEJKwyA4E6aI1yachMTghQXtJg0CF1WtrZOf-8LuiXMmmvHmVxtkdskEyZM00Z1W4Wy1irtU70DX6zabACDRhztta3f4kv0OP6zl63SGbOqrdgWquierfKx9s1MU3KDUd?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Parc Ghislaine-et-Frederic-Back; Village de Huberdeau"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -74.6404543,
-                    45.9923967
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/7faaaq82jue46re53aq1l70ngo/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5PqPODxJkWYNZ7_NPtfeGoyzj07bgxoRjcMSaD9aQprvBijIWX7ONW9w1VkVJA0E7QyyqZaz9d4Lz915mglagIEV64367PCtyZmQoeHQJZZZDUHf41DyhL7OMWe3UfCDQHLdISiN4JvKTrrpk9k8VxFJZ7Xhpmx9dkMsoEoBY-JiZD4u6WMWAiE17nJwkIwjms?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>A la croisée des chemins vers le Lac-à-la-Loutre et celui de la Rivière Rouge, ce petit parc est équipé de quelques tables de pique-nique et de grands espaces assurant une certaine intimité si vous attendez la tombée de la nuit pour y monter votre tente. <br>A 1 km du village.  Pas d'eau, pas de toilette.<br>Site visité le 13 mai 2021<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br>http://www.crazyguyonabike.com/rikimiki<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://tandemetcie.com",
-                "name": "Huberdeau, petit parc municipal"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -74.6727063,
-                    46.0756233
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/k78kegb7jtdrktb3lp33fj912c/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet578LDlkb6H34q3JmKRrOlZq7GSCuQjhj4PjA1GFusy-3aOW7SZUVjMKjNdEuuK__EPuQjlBVW0Lypt3j13Ik6oOiw-ao0QnPdiR9feQPdUKOOizNTE8JDZcpRg12bYOiZHEzNVG2L6DoUV2TvLUYOR9Xth0RPANm5OYyReqaM5okHaSg6rZorWQcuFpmsCJdux?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Au milieu du village, en face du petit marché d'alimentation et voisin de la Caisse Pop.<br>Abreuvoir sur place, toilettes à proximité.<br>Quelques tables de pique-nique installées sous un gazebo avec toit, prise électrique, arbres matures et gazon sur terrain plat. Y monter votre tente discrètement à la tombée de la nuit.<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>Site visité le 13 mai 2021<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br>http://www.crazyguyonabike.com/rikimiki<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://tandemetcie.com<br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/v4ghh2vu7bc3rufqvk0k5egqus/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7udqaMZey8nUixV_8FV95E9hP0TvaZDM1rCStovHdwafl81KpQpnTgX4nrA3ZCgr6p0QboF2eorQJshGiDvosGBTtTXvbeRbQAQX21qZiL3l_knp8nz4J7YECrThjSIBabqrR5NhxoT9CzN0Sa53Q3FoiBWiZQvpgLZdXJsLEiPf7NhkmnP-wGevr0eccnX4M-?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/3p03j86nq8r8dl77a68g8ir7ro/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet52b4TFTnuAC4EXbuhxOOzXZ0yDiHkOQZgjmaqSQaUY4LdktK1Zt-N34LbpnBwUgdYi2HcGkNmub9E0iQEV7SQW4VHd5cUAqSlevASZ_3oAHO13jo-4BZGzt91YLtX5myeeX8kwr1P9d-wPuzVSZjcbKu2wJOHakb1bG6UyTNuYJoT4EbXHlXBlYByDwl6ETOVy?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Village de Brébeuf, parc municipal"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -74.685516,
-                    46.2039588
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "En bordure de la piste cyclable Ptit Train du Nord. Le bâtiment est ouvert au public, et contient une toilette sèche, mais pas d'eau. Pas mal d'espace autour pour monter votre tente, mais aucun service (pas de table, pas d'eau)<br>Site visité lors de notre passage le 13 mai 2021<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br>http://www.crazyguyonabike.com/rikimiki<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://tandemetcie.com",
-                "name": "Ancienne gare, La Conception Station"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -74.707267,
-                    46.1784243
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/9p9pdp3puf19upcpdhipq77o0k/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6kwYyEOGSpzMrt8zd54xdZzG3YMEwpg6j2OQHlYZ2-Ahy2VB1qLyKrWNvpKpxEcVRZEKxryLoMfVIptvzgGnsXWiIt8Rt3ZANGXd7bsnYbFVzPfu_ecxWi8ct6HrnOMWKyQyWmkxH11l_bgNxIlbJEijd_vKjHRRhamr-u9mpLzhFQdIIkRK-4jU7jDw1pBZ7G?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Joli parc aménagé à la campagne, en surplomb d'un méandre de la Rivière Rouge.  Très bel endroit pour camper en fin de journée, quand l'achalandage de la journée est terminé. Grands espaces, plusieurs tables de pique-nique, toilette sèche. Pas d'eau, mais possible de filtrer l'eau de la rivière. Assez d'espaces pour y mettre plusieurs tentes, tout en restant discrèts pour ne pas déranger les voisins et ne pas \"bruler \"le spot.  <br>Visite seulement faire le 13 mai 2021, mais nous planifions revenir ici pour y camper au débu octobre.<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br>http://www.crazyguyonabike.com/rikimiki<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://tandemetcie.com<br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/vh195kro8dcrce2st3maccud34/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4MZGGMynP0i9LQOgtMctla-4C1CR0Gn9rSsMXJrb5wMQBh0ZW_aabditRON-56riIoVqpdYPZTzmivin7KRRB2OdER_xHAsA_R0bzk80haO02NqqyZrgOTfMAOGTN2UMQbb-9dUFKAJ2nhaKR26idSq8ICY8fx3SQh_0e9V8uRc5R3Oq9dyea8Eql1j8N2DcTB?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/nh03hu7saqave94cnb2ai4igak/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6M6RJ2tpKs49XPVjxRN_MtoBBVecksLTTaEVmnDKwwFCLBKn4WMBUD4o9CQF-oqByZq7sNrZxtGSVbbUPfNVu08G5YaVLdQgJwiF71ezWI0tDQ2fmtkbVwYIJGYC1vOJAbmkavoPUNGIInzzX2D_3MR60hnUJameFeXppuP8qoGomPnvpnTSR0dYK7gFDk5nsM?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/bsk8opk1al5nrd9rt1ik2pucms/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet58ZX6cujIowJjfzPCw8fhlUqwg9lvNUmBgKB0vK9m-LG4LWI9urs45TldBcPMsQm9-hJHbDq9vXjnC80nhFtDYuINCxcwYFQ3CP4WZBNyFnEfCvRzJDgDyvSnpxaBMig3gg7GMmN6BIEvggY-uNFG6E71Pl8891GJO2TvIkBtzkCuo142WT8zsTb6H7j_lgYqY?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/v131h9ndo4s8b7ura0vpmu2n88/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5y-Pecy-ACu-kkMANbDVmP_-oGCO2nsHPnCMoU2Fw2SRBVREtLX__nrfIbDA-TqgefAejjQAgyhkCW1P7vuba9MmcCBLxGhE2vu2DwJgi-gAI9HhIrKppP-5Ifzhvy-iWvszeQaRMHF0ZYegbGPxHQYMaw9dGlyv1_000eYy_U0HMfwDTLP1jQNOvT8NMv7eUF?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Parc municipal, Village de La Conception"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -73.8121267,
-                    46.5579886
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/ppd8p0khj90r265lmof6fjtvg8/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4N5XYnM1j1zDeOI2m5K3nydGAaG0utw3WzbI288luWgSYg9OtTPHvbdyFNfmewZQF-mKGDOjk3QGpgvCsuQZt-nHXmuVgzzKDn6prtvyPRxQf6pIY9SVPj8dFmIkxflQOZkPWhQhhNrevMSQuhYnaJ-HpKzaSLAGZzXcqHM-1HSH0AXViqk8TyIrYmSgs27geN?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Ce n'est pas un spot officiel. Mais on peut se mettre un peu à l'abri derrière la haie d'arbres",
-                "name": "Point 199 Cimetiere de St Zenon\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.810113,
-                    46.2655877
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Réserve naturelle sur le bord du lac Saint-Pierre. Sanctuaire d'oiseaux (et de maringouins). Peut être assez marécageux, mais il y a moyen de se trouver un endroit sec et presque privé pour sa tente. C'est assez peu fréquenté, je dirais une vingtaine de personnes par jour. J'y suis resté une semaine à l'été 2019.<br><br>Note de l'admin : j'y suis allé faire de la randonnée deux fois en 2020. En entrant dans la réserve, on peut tourner à la droite pour la passerelle ou encore continuer tout droit pour longer la rivière. C'est plus tranquille par ce dernier sentier. À la toute fin du sentier, il y a une grande plage de sable, par contre, il faut couper à travers la forêt (difficile avec un vélo) à la gauche lorsque le sentier devient inutilisable.",
-                "name": "Réserve naturelle de Pointe-Yamachiche\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -73.2560664,
-                    45.395042
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Juste en bordure de la piste cyclable, il y a un petit boisé avec des sentiers non-balisés (Au sud du point). De mémoire, il y a une pancarte 'camping interdit', mais on y a campé sans problème 3-4 jours en 2020. C'est fréquenté par des promeneurs et promeneuses durant la journée, et des gens qui font des feux le soir, mais on s'était trouvé un spot bien privé en retrait. Possibilité de se baigner dans la rivière. Pas de point d'eau connu à proximité, il y a un dépanneur sur l'île habitée juste un peu au Sud. Google maps nomme Fryer l'île plus au sud, mais c'est une erreur je crois bien.",
-                "name": "Île Fryer \n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -75.0836254,
-                    45.8008737
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/visgfsbl1j2v1cscbkra71sijk/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet72ZWwLxJ9rrJ0yyWv2DYfrbxHKaQ4jLGHTH76MdquNeFz21hdaf3HFBuk9KSpUKE8d59rlqZgB8sRH8FUwpud9Rb4pkmNOw1BvH8tgZ5vERq1Rl7b1q7pYNG6XiYmyBcHxJfJpDb7jgfTlcBatU7isRitorajzsZjbBXljBwwOAhNqdAuaWhYjYRdLseX7HYv3?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>En bordure de la riviere et à proximité immédiate des chûtes, joli parc aménagé à 2 km du village.  Vaste, plat, verdure et arbres; Toilettes sèches, tables de pique-nique.<br><br>Site visité lors de notre voyage à vélo dans Petite Nation le 15 mai 2021<br>Pion et Giguère, tandémistes et cyclo-voyageurs<br>Rikimiki@me.com<br>http://www.crazyguyonabike.com/rikimiki<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://tandemetcie.com<br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/bu1idplcu0ljf91eaop5ojqt2c/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7nvg9ueqdoIIEzE7ly3JHM2o_hMjFlSvbCB_UqFED5pNrlBD7rftRhU2qQrWNlRQY1PC_28JLQ8Qj3PdN9M2meNJrhc17yNY0jwsVXWNi9L4nQRAtynp5lLThGCchzhbPMbev9BpE28arbQZ_AT8TIQSEcrMLK_NGG4gAMD7Y7A6Ek-mEnEwc4GJWsc2UaVR3d?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/bed46k9bclisb3hp52cl1ce1gc/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4mA7AjMlqz4fNF4AkFJMwUMhvMJu2xg4OiQcHaFx5KwNQiQRFgTAdvQ9zByrCZImBe7E2tI2xVJN52MvyLhSmSLgZ51dZ24zZbbm47ttH2ybwLUUWtQYAK7cKtG6yRUSeWVOweBlQxdi13wJbf6OUQB1fTkTu4OrFeAOiARkZoXqI8xQ-CYzam5SDg9BTodcla?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/ajavirl06560k5rei250auaqp4/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6XDRqpV7QYRdEhoTY4sxcz4n7HvFyAEW4uiChCI8Nhd4tJBXOJEvQZT5_2P60eLUW9qax1O_rsf41ypfjgGTHFSFeevj076rhK6mqhXAo_nQ6evIE5K9_VrDSoJJfBBBTLR17fcbs64Gw82uxXL9czm5Beetvhq50nXauK81ClQyCk3LSsbN8AbdGhfJFaWYx_?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Ripon, Parc Municipal (Halte des chûtes de Ripon)"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -75.0749256,
-                    45.7401073
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/l7afdh3pp9u8ev95746pr4kja8/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4Ld_GIu7Jl_kgP0SFqhvCvzh5meIGj2id83bA-U7GYTM4-ooKjW2X2wGqN1ZIQYKxqzf3tM7lOD0VZLgetsPjjJN_660GpIWKiqQ421q5O8793B4-Wxh7t3recpo2G6QAQDThE17KYCBhKt2VnRAWTOmdd3c5y4RmmGHs_qscG3Bkf-Oz6IrMnkD51Io4luJi9?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Environs 1 km avant l'entrée du village, sur la route 321.  Quelques tables de pique-nique, verdure, arbres matures. Pas d'eau, pas de toilettes<br>Site visité lors de notre voyage à vélo dans Petite Nation le 15 mai 2021<br>Pion et Giguère, tandémistes et cyclo-voyageurs<br>Rikimiki@me.com<br>http://www.crazyguyonabike.com/rikimiki<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://tandemetcie.com",
-                "name": "St-André Avellin, Halte routière"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.1015606,
-                    46.9190362
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/sccmd1ftc19mkde1tc9cp4svdk/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4TmKc48yy8g501SrenTtnPkhwgSdmVkdz4FcWvffsurYqdm_H2ZYhcDK3tw6KZwB0xpZdy0zJp9YMsoC6q-t2QMfGS64QvbWgpqQf6UYhPrGCOjUbmC-N52s-d0u0g36ODb0srhpNhs-gkWP-CXpD1lGYmv8336pwdx8BZmhRRpDaH7n3BDyjTI0k2wyFiODee?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Il y a une table sous un petit abri et beaucoup de moustiques!<br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/gd0lgg4qit4mcb91deupo9tsac/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6vWOmBsg4Wv-70vPS-40WHhX_dqw7iLmPd2QtpFPySutqHT5t7EkKu06FnDfrNlbf4OxMMcfxlM9r_KZOdSYHAMtrH_4sy2yiWLPGW7d6zrQFb7QtFpBene_N6AjDnAeXWpn_QHysgAsrQbxnxdc97jJcBt_tYfz7pU3EZK77EBN0mLpJJ58rts2LGs3VorcoH?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/k1qujhrokmri9dosbllpibmsdc/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5QEwBbwl3KeFTO4PqJ2C16bWBlskmIIQM1Xc2AnyHQ9VKsM1I4UsUkARZOcSt2zKE3gygHgwQPvZoE1oLYbFbqpadxu1AZ6-vV90uPe0YB2pjVgka1fgj803JkXVj8gOH1KX9Bq4dr_AlICLAtjRY7VZRjxJV47gLCeF46Qi9LQA1DGKAAtVgNqu6aQbiMM7Fs?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/7fjr21o4uj3gi6c3rgvsqi0eig/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4pgG6h2YOWCE9LOccXgvuXsfEKUAnyhZP9NoiAy86DAwdC2FSZT7pieOCWsQmUQ8zFr7K8R1MxrLlQygfoFNesvXrR3W82uGFu7koGbL-NlgIvOjC1eShckFk-YG4RZwQv1-e8voS6-bAkaolXfDvp7bzl0O-zU9G73VkO-_Yd_UI4sGslpzrGr-yTSnn0pgI6?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Lac St-Père\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -74.4740605,
-                    45.4388006
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/07prfhvjf339mn4vnvdtgrjv90/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7ppKkSaM0IEnMDAYZzt9Fvnw8E4UDft2kS_RtFAFb8q40W6xRWAZjZiXyS6AmEVGsJsQSIFbN9WZ1TEvUTIUO6_uKgzw5TefSELMBP4HdAFp3m_o7flUFZEGlgIbNTIEj-4XoCzZkgFfD3XFobnHMriFN1R0sMNgrdCsXB-pdOVMNsRff2QoiHZPnM00MrSStt?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Un peu en retrait du village sur la concession #14, un parc de village avec quelques tables de pique-nique abritées par un toit, du gazon, quelques arbres maturs. Pas vu de toilettes ni eau potable , mais le village est tout près.<br><br>Site visité le 19 mai 2021<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br>http://www.crazyguyonabike.com/rikimiki<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://tandemetcie.com<br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/ar9u4li8175ubevdh8c5v4lc1g/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4MF3_G9yuRt_0MgFHUb-9zhbCCwoM-cN8azbJcLjkWuLkFpOkVs1kHi3UNa-Gy1z5yRj_nhVwl7bGRjGvcFerNMHqIbNK4haRPHzHyClq0khoJtXVS-rFVPd-7r183r8GCubHzAtIWb-xpKjplxSJwuQ5KCMxedFCMZ55vadtIdnpk4i3L2BnHzlGr-tz6gw7d?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Ste-Anne de Prescott, parc municipal"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -73.0595997,
-                    45.8265639
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/6npiptepreac8eg999e53gq9ao/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4Vyp0euiPX2J58g3DwbHJVJ1HEX-POf27qZyZUQ01OBXI7pxEtOK29eso2d2fXXU1nAiYZJKxueztDu8GyYTQmCobCDtd1e5e6D0dI_V-X_Zls6c6tokM7f8D-PcCrdUxe-sjKltwqvDqWUrWSKHpe0t8he9QlfhzFHvOj93CTVnbvNwZ474nwOobJDoaJJcFf?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Nous avons une prédilection certaine pour les parcs municipaux des petits villages du Québec! Ici à Michaudville, le parc FX Desrosiers est joliment amenagé, avec 2 tables de pique-nique couvertes, des toilettes sèches, de la verdure et de gros arbres faisant ombrage. Site visité lors de notre passage à vélo le 24 mai 2021<br><br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br>http://www.crazyguyonabike.com/rikimiki<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://tandemetcie.com<br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/tm33nlrtrh9jolbekaisb01880/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4L7xB4RYAv7IpRpHaqoOE5suWlN69wbHzmT1YXgdA3jDO4VqxWzcYadEOSkLU0qm8QPqVDIen8hN46xySNdgO7CG_gaz4FhNoyAC5k13XqunhHOcnELUauMYC67GoN0qQbh0iJoHvJVmxyx5A7nY1haY-Dvn4gApl6yAxcJE5IMam1XlQnltp7jNiL9WgdwMbo?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/dk20kvkqd0m03h505ng8ef540c/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5blx8UxvWELyxK1Kd4clsz-JVvXHmVG_5fgZ3ik4OGU0c5tiX9uiozC-sWCibqVJ-ukz1cYQ2TpoaianMr0WUXaP12wPvt0hSXFn-6vArcuA6YBzpKaiGXcITs5xdH5vCw8QzyUCu9DMHvNwbeQzwPcMYwtXFkRftzgNO-cv_Ei8gvzbtR_btDvB9c1oJ_j1-n?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "St-Bernard-de-Michaudville, parc municipal"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.8557018,
-                    45.790891
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/irtcead621vp9a51r2qcs5cql0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5anv9NBuN-ebCs7ivtcuf0FpqvdxOUOEttOCEZR7-i2neyVSB-rRxnVVIp6zdu7AvESaovzb6yisB6SNp2rD1upW16jbyRkC21xoSo5zpyUSyX_Ds3C9S1MC_Zm0dUH4kyKaDJT48-CECFPtVoBuvZ9c5ELwS5XJPQhs1esAMaIoGY1PJ_lBZSyvQPo0A-ggF5?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Nous avons une prédilection certaine pour les parcs municipaux des petits villages du Québec! Ici à St-Hugues, le parc FX Desrosiers est joliment amenagé, avec plusieurs de pique-nique couvertes, des toilettes sèches, de la verdure et de gros arbres faisant ombrage. Site visité lors de notre passage à vélo le 24 mai 2021<br><br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br>http://www.crazyguyonabike.com/rikimiki<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://tandemetcie.com<br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/g08v7qmbgjqo99t71r637ackrc/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5ygY2Z6bnnedMZYmLcjCuRZxAQH5lsgM8pF5ydv5PE5sKrI3WCuvInYpjoqzdfNgRBp8iuSrnUdcDyLCHJAgFISgHOEXccdQdgjO4eiaVNiBJA63B7jeKqdNqAMympgdYRM6mUguE7bEPN1_GM7NCZOmpHYK8UHvD-mREIi9OHxg8L7NzM1zPt8KUNRop88I4D?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/40d4jp96s85gkc2ka1ib2so8fs/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6yXJ8jEBnVZqSR4Gh35MV2iDTPj4Q7xb80VSycPY9BXHIxY0ssbkmRqoHPHh5hHaz3F8haSFKy9PfSvk2FoC89z41LiPf1ObAT9j8ZYJbnREN7N8qlGM8XJYjbdjKiiBEOJ90HXqqNb4AREbSPp-pF_ZPq-41msy-gSPal3pCc_bqEPxTMUugupgU59zDMZi91?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "St-Hugues, Parc Municipal"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.5260866,
-                    45.5758449
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/rpjrme5la4srnv5fs5mu5f3vq4/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7zy2S3AeH3Aw2XpOLr9juYtdUkCeTEO31AholbCnGzMRxGktjysbVprsPOXSxurPPIDVsAWgTsapneCQ8il3OsHvdzRCpbjm8YEgvjK5EfjHCdSZqPsPeSVfk6ZGeS4txVI0_js7pznYzVRwul0RUq8BtH7fGC2-68DK1I02s0qDFfAdUNS4j4DEtDOtCa-owB?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>A l'entrée du joli village de Roxton Falls, une halte cycliste en bordure du sentier la Campagnarde, surplombant les rapides de la rivière en contrebas.<br>Amenagé, avec 2 tables de pique-nique couvertes, des toilettes sèches, de la verdure et de gros arbres faisant ombrage. Site visité lors de notre passage à vélo le 25 mai 2021<br><br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br>http://www.crazyguyonabike.com/rikimiki<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://tandemetcie.com<br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/5vb0t7v97fmaj2h2bvmq8llhg0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5sLtJygKMoZscanik03kJdg1-L5T9H67bi7EtkDkLL2kbmenRV3eFYkdCwM0OZpAUvhWiEOz6TOC1elRbF01VwHeZKTfJZ8gN3nCRdKQogHicl-bJH8dLduWDNZj1tkpwNu9brg4paMVYssjuQjj9aGrNc6pimdcTeubUxHMQVJANaeEUEjrya7XORwWaJucpZ?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/gjrf47bm5b8mg9s0l1ohikbte0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7jf59N7UNp_PeyIIjBa8pvcYXbYlmoQhRviwptVv3bRmaddZBDkIalGTPWeNQ34iUzdxhMLDhBrWTcoGZO5NsGDxErOuMbwix9f0XO2zjrZ_ubJ0AeLnrNfMeF96oMjFPP_zviKrXv8ou_m4WfWEvg9dFKG4AduACyU7V5xswSLGM-89QWCr7ZCEafYaY7qOkb?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Halte cycliste, Roxton Falls"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.1703214,
-                    45.668485
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/of0q5rdro0kshfl48phg1lioa0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7-xdSeD12q4wF_I2iLuUCbAx-8yJv-ECEhOBrZsv333Lf77pEqvW-l12mFMM7FVtWrVlQVoHxdreZlaKOh9-hK8rFR_uP7ZY8E6LwAY5XgZCPXSj9rtLyET3tPdapuuT-6bLxUA40dfDb2oCanoA5xbLpUqMmGEMyMCXUwj2WWvxZ7NZxbYXJY_iU7tbZVZiL-?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>A l'entrée du joli village de Melbourne, une halte routière en bordure de la route 143,  surplombant  la rivière St-François en contrebas.<br>Amenagé, avec plusieurs tables de pique-nique couvertes, des toilettes sèches, de la verdure et de gros arbres faisant ombrage. Site visité lors de notre passage à vélo le 30 mai 2021<br><br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br>http://www.crazyguyonabike.com/rikimiki<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
-                "name": "Parc de la Rivière, Melbourne"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.0902093,
-                    45.6143588
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/c9bei3nc1f3b3dn1nj5a585j0o/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7fUImt1Fjw8p8V0IR7PK_IewOuM6zInRgwo31KaHpuH1rs-4_RDxVuHNuujPmUPvd-_gFNpDtHnwQOgVYwj4ckMgwaozFc6zkUhzMvhtYaHpjPtgk2AQ_cdOdWtrrLrUeanqdxYvbhnXgVcvKTVUTL2yt_NQ8aquNuzyZVDpezn0DzYnBBvL442KQN3Uk4SqHv?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>J'ai campé là en aout 2023. Il y a maintenant une belle toilette sèche!<br>Il y avait des pêcheurs en soirée et tôt le matin, mais assez loin sur les rochers. Il faut quand même marcher ou rouler 2 km du stationnement le plus proche, donc je n'ose pas imaginer qu'il y a toujours des gens ici.<br>-admin<br><br>******************<br><br>Dans un secteur isolé le long de la rivière St-François, un très joli parc, en bordure de la rivière.<br> 2 tables de pique-nique dont une couverte, de la verdure et de gros arbres faisant ombrage. Pas de toilette; Eau de la rivière, à filtrer au besoin.<br>Site visité lors de notre passage à vélo le 29 mai 2021.  <br><br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br>http://www.crazyguyonabike.com/rikimiki<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/h7rpucsdhigdbih4fln55e3j3s/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6NDYqjCJel9nzZGeOMCM5OFsI4c30YN0nO8PSwGRBZNAQPVknEJ_506Ww7eD1pujhrW7oJ-9-rFxzGXzoKCSDmVXPuxa52IIrug2UzvcQCVbTPxPlYOhsJ1Msa1MdXpZAMB0vRSjmhMiBbOKBJA4vz8rsNs-tSxqL2EMxUOTVZajnp4_MTTgVjCMFCTpqlcApH?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/j4hu473gdp1oje8ef3ve40d7ik/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6fJZOozKLPv2R8DEHxpqw9wodtUk3vubIlSEZz8umJRiuaSaUSka6BYEAu3Vc47VJPfepMdWaNnmU8_mq4q_D0FIRvr_CwJtSgUHUjSdE5Ck4nDU_4AfxM_vFkJ7Nnt0FKFF_FEsJMBWjOwnT5Qd1gJ5t1-cT6kCB68bcCFHvoGRja7NyuJKFHOXa-W2pkmJE9?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/8ruqj2580b1ki9ps5raqpckleg/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4_MNkrT1vyS_9Fjb81tP_jE-vGj9Yda3DHGZ28FS1FUA2oxoiNFGAjgtJJFHV1t9PSv8CbME25OyzPyKDW6viparOVBNoMMBuZW03473XmBavY4YWlskQ_5HVMafKZA2VjLl2lFOOiaF4-nZPTNZgxef4lNSuawkrv2gQ_fNaaHrPzVpf7wghdmshO3Or4LZir?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/2g1rfnmcm2bdqefn7g1510vsno/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5_eyoTq7IXD8tM9_fIS0giNI4ADMikHnqhyOzR_dXCwdg4jJYXnJVM7LN5A-haEpEYFNnWw4vU8ergK-TlHc0qAPkswYJBhKZa_cG4TuEaaT54puoSS2oN4akfxDz6DKE6r7LXZFmz4yRm54k1GAxpJvV2zEgCdgEiIJjEASHVS6hI-PWS2owuyMGjuaRwK5_I9T86J7ApRc-5-KDKngG6h5Kvxlsa4XjsqmFGYHPgP8RlFA?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/jialhat8ueqbjja06c50ndig9k/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5DgtvHGt7hB6UMsoL7_u2f3s3CAH4UYEJarzxVUIdkGX7ne1W8IgLJg9h5ey2Jho3W3xzl3tjyqfG08zWoKNkKOdPPqH3hQXk_iVSTKbO0qmrjTAF0WVfQjV49Tea5FAj_Mv025wgOPlw2I_MXqzJkNYakaGMJR7F88JPfHQHxm0t74a5voTWNGDVKj-7HzWw3yTNPNR6r2E2e3n-S3g_TIPd75M2g_5VAawXLdNXm0uEsjQ?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/unbfpnpebnrho7jig6sp00nj54/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet49nyzBnFYp3PnA6SdjPQJDpxcn5LcYQCso3FkE0lLWd8SxgtYnzUHUDvRMwTD3Ms1s3kRbp83keA2fLFbOBYdUfEELRGIiHRTv1hXqv2HUQo9qzdyqr-jzsJpsCKwQYWLMsnlFtVu2kf9BGw5pZkBrQ-GqDD1rSadKI_JVVAZOAqFtobtkXgQDJwU6aCN53lpHZ4ZmxMNHoHb2Z2-sGfUJ-Nv-rexMIksvjhVMBMQcwyigRA?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Halte cycliste sur la Route Verte #1, entre Windsor et Melbourne"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.0252616,
-                    46.7384761
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Derrière le bureau de poste. Sur place il y a un bloc sanitaire, toilettes, eau potable, douches, laveuse/sécheuse",
-                "name": "Ste-Lucie-de-Beauregard"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -69.0343286,
-                    47.4471043
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Halte municipale, bloc sanitaire toilettes et eau potable, tables de pique-nique, abris couverts",
-                "name": "Rivière-Bleue"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.1410578,
-                    46.6541006
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Dans ce petit parc, on peut tenter. C'est indiqué. Éloignez-vous des lampadaires au sodium qui auront l'impression de vous faire dormir en plein jour (eh, merde...) C'est gratuit. Ah, St-Casimir. Microbrasserie à l'est sur Tessier et Marché Richlelieu sur la 363 nord.",
-                "name": "Point 214"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -71.2768744,
-                    48.3820156
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/n8he60u98ittmm8dhl2apgjh00/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet54bjxshCeSW2w0VhesxdRBPO1zJsISRV2XeZfrrvenSkWev1B03X7jK4p_xENogGmnm1r7bU6IWP0Ugu7YGMwos_UDkPFD4vU3aOm1tel-ueBIFAr80Ts_Cv8l85vP7Z5ZFdSOrX1BsyKQzXl7QkX_DcoDgwUu5fj-TSwRN4_x0LDQvrHr6XCMbAsF0zioljVB?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>en bordure de la piste cyclable, directement face à la rivière des Sables dans un secteur tranquille .<br>Site avec verdure, table de pique-nique, sans service. <br>Site visité lors de notre passage à vélo le 6 août 2020.<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/arj7q5o42gtvoao0fev3jk07bs/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4WOkaGqxLRXAznujy-A7sbNfde0VS_hVElFYzDL2oJZUsx0KUdq6RXpgtvKjtLqbQIO3aYBTZHZT11MNtaMhlbUY8LfrpltC6GrRdZJlvl8gAi0eAFYEJx4T83pBblxqRvvN_xTuYEKSVJSe5pSUBCNZQGtec9jhWE8Ea5RqptaAAAetIP1jtJxmEcDbobmVGW?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/2hp349afm5fkhke0c5o3qd5rcc/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6aUS3K3KGOxQy_hHJ6ofOGJBsbiI_BQgEOUn03iTRzOTHfAWOqNbWKtBv4q0h0Intw85SUQZl_69fl1XrS0PLZZ8bAkimALsm_DWlLJ6YZ7Ckle6vPj5i6GTRJYf8yDYIFl7qZ2noQ5tWq2uMYO7RrxsH5CJusxRi9Qy0WslGmE7_RaS7T7iJ_R4qMHZwqSC4D?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/iuh1fgajai1neubm0qqo57m6qc/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6ImfIz7xZ4AJbraUlAYdwAhvwnEYxXTfzLRVAJFBUrh5LPPxtLwW7A5nurFKLr6Ff7CHP7k79bFUDBVDS1cgGwfZg5dOVFqR4j--FubHiZnr8eKpGy_SPYaXQLuE-HhVZRb2cr8FD9l8YgI224QavZHmwM6Sr1aWVI52eHqcPNF45gHBAeSGiWN2qD5JonQqWd?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/b9ajq7su088f65astcdasft104/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5lyW5pFu-ZA6cDnwxzYpB7Ci7ZYSh9Ra9ekvXSTk8sA7RBA8iJKkpAhkZeqGpryYDAdJ0CjdviEGXJTXGPHdPD7GJZSqhzQP6054HVWA3iPAJtl7y2GR-m4kH4zfNydGtdxSMRZf5byrvFtNV1VhaGGnhJ7N0zoWdH4oOlTkdXKsZQqNGY5u6JyKDdaRitHI_E?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Halte cycliste, piste cyclable à Jonquière"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -68.4644492,
-                    48.1906363
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Halte municipale, toilette sèche, pas d'eau potable, table de pique-nique, site en bordure de la rivière Rimouski. Possibilité de se baigner et puiser de l'eau pour la traiter.",
-                "name": "La-Trinité-des-Monts"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -71.2480855,
-                    46.6052742
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/52atnel8prgvd1cimgbnk9h1fc/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet70kNK9fzg8om2Eeye6n7wICe8OL-1ADVzIw6Xd-E6v-3dFC9kq7kyw3BU1rjFFfDyeK0_zhcjs2vXLLmf29RNMRnzFbc-6QXio3t5iaRezabGzzVIvxwXFk3g9sH3u0p08r7QQ8VYO7uMn_onKvo4vSqg-h_b9D1VEAY4_ZprYt8he0fXK8GhEzi1AdhXxnRXq?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Joli parc régional en bordure de la Rivière Chaudière, coté sud face à un rapide.<br>Quelques tables de pique-nique, toilette sèche, beaucoup de verdure.  Très vaste, incluant plusieurs endroits retirés et discrets, notamment sur la rive en contrebas.<br>Site visité le 11 juin 2021 lors de notre voyage à vélo 2021.<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/s2bh1groubk8ifga0bl6eed5o8/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7-fWZzJ92H1Ddiwl1Dl8iaAN0OYCb4uQbYlSrYUVsAhTTfo7EERucn67CScPjAS4T2OZ6_QjD4SyHSHg0Y5Ro1kVpc5CrpLwkEA4m36A0rS9JS04Vh5gTFvpzmkJZcRd_tPsHbFxxF98M6SaC-YIivo3-dq0lkpYi0Q-DqUqK2uhBMUYuH4mJXCNlzZDczuX4P?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/4fd08s3bg0mf2jbj2a9vn9hdlc/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5l3ISrYfKUhF1qyLWrz6OoVGdUVbHyg8zpE8Dzdi1TRTlIHeB_2qPddnEmNW7hdk4m12sLlemLAJ0WEVwPpRuEXQ6wzqYRyBzcbY1-7FK7D1CTzPphcAd_PZfeaFpdT4q5vG_lzIqOntKrvSbwW-QUHfQdSbJ69YSIXg51EPME4A-NjHLf0dWkgLbo95JrGgLE?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/6ske0mk0uofgub3sf2lt7heg4k/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7VIjWN6zHCGAhPsr79cHANOoBG_8dpin2HAoetOK30C0UOMljyMK8goNMiq4lNGRkB_eEfjR68Rw_jdntiJswyYp6GaXeKPp2yh4GfCB1QKfwFueTJzlvTMzxHK_VVGOCD5n7-DbilGs5AKYmn_l6rqrdUWmwV0nERdCyZruhoc-eU9Di-U6vL2UNEM2sJYXwr?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Parc régional, entre St-Lambert et St-Etienne "
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.9889188,
-                    46.4131405
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/qae9s6ajb87jqdnqefhba5e1h0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7usBm4F5dKm3sfMysdMx6ZUQ72EvH3ZQT_GeVu7yHSMjYiLNGH8G5DPfY6gSfikqYzm_BHosl8UwKJgrISiCcwH53j5GtWEjEt_m2XIu91jzpCqn0UyKk3jhoEBbBJh9DDifGP8ytQYG_Kpz3YENj9K-3hVij5XQLUJwOLy8AqqKx15iy3yt0X-GdHdrliwYjU?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Jolie halte en bordure de la piste cyclable.<br>Quelques tables de pique-nique, pas mal de verdure, quelques arbres matures faisant ombrage.  Site assez joli, avec la rivière Chaudière en contrebas.<br>Site visité le 10 juin 2021 lors de notre voyage à vélo autour du Québec.<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/iptv39vj8isuekss3bprbt1gbk/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4YsuJWjjPOIy5P5_5nVBG4spzGNJrNN33I2RXvoPcwj_6wAN9q2894crkPsmFIYo8id70lGDv4Dk1T__x8MgtetaXD8LCGWKJYjwLov-l6KELYGjB84Z-8pD8-p8vFXLbS7IhTY9t8l_tFYNWc2GUrXgvYO7a-JPx6hY02UaoPtnUxKHgKZWwBqbSCKR_LxMN5?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/934r1eai32msbfbme4bk15hc68/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5dkVc7Aq8QWarXMTS1G5b3e7Gq_pnoG5KDUOlUBkohv5mnYrr58LK2TtsRDDFnSGbVqZe2hDYJvYn8kSJ8cevGGuAnwmIpUlL10YLsotrH8Kf9b-gzWUuJG4sgcAk5umY1vSu5uzuKhLBAU_lSqaRc2MWJ6p50BErBbsFcLrlN55maCjsHBCL06zudUqvS2Fg5?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/cui396l5l6k1fhhfi0lcl95l18/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6pbGw0Hexho80m0WnccFPL_Hqbv6uf3CA4xvch1aUlaubmTFyKzVwfOXRPQAfHDgQimBFfYHMbFmet47bSDeXr1Si7AC4M6_EaKzCW7mrRSS2J0fvhGuJLkupLRIKTQaEd_d7EjPGAI65EysdQ4c8nUXTzEm-rxY33hN_sWS8aS_SQUj9rqnWn8T4W73Sd-2b4?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Halte Cyclable, Route Verte près de Ste-Marie de Beauce"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.7183502,
-                    46.1817486
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/uh4041eoap59ieg3gp6pjg0poo/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6cHpfyjHd-VgH89V_faIQKAKo3pAe37VLpvD3_BgIe08Ef3dMiQShJIE0JRNaa4xDgE9EpcWTvIx_Wo0i3NYBdmdGPm4of3qMABFkHHwT7ZpcspxcxO9dIjAp1sY15ZPK-11Rr1r4Tpi42v4rASPFUksYSQRMSmDu5njUF9Y6ePUij7YZGzjpD904VVPCdERkU?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Halte cyclable en bordure de la Rivière Chaudière, face au pont couvert, du coté sud de la rivière.<br>Comme le pont est maintenant fermé aux vélos, ce parc n'est plus fréquenté et est donc bien plus tranquille que le parc municipal à Notre-Dame des Pins.<br>Quelques tables de pique-nique, verdure, arbres matures faisant ombrage; Très bel endroit!<br><br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/lebu9f4titda6ru9ru09scabe0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7hcsK7JbDJqYkg5sbBkTYxQyiOKgWrpPacSteWth8hXDtCt7f5ODAfScrPgsDn5rYQUvhCFANUEh1m3LqgCyLmKWBW70b8ROZpJtzuf_aAMRRuAhTJuGLRDGCzRH8iF6nloFfrEuJhYpIAEhvwHxKkUyKpQXLHjY1HKC2-_VvWUcU1RjSxanshNh9hjq4tNMCf?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Halte cyclable en face du pont couvert, coté sud de la rivière Chaudière"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.7151361,
-                    46.181756
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/1s5add62hc7819p962ih1m4emc/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7q7nW-QMPrVYsLznUtEjDJbEkCUNIl-oTAPz0KN_auSyfLuw10JVJd-N8SCXd0dgSBAUeSBba4Xgr-vWjF0dxQtNohYzLCTflxWAN6fkGAlMiaXs25xq9n0fA5v_j6YifwYlPXjYgE5YCz-mEZI_3LzNJalc-ejJBZaKQiL-CPqAd4yc8_h-8rkvnu-WQSB0qj?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Joli parc municipal du coté nord de la rivière Chaudière. Nombreuses tables de pique-nique, verdure, arbres matures, très vaste. En bordure de la piste cyclable.<br>Assez achalandé durant la journée, sans doute plus tranquille en soirée.<br>Voir aussi la halte de l'autre coté du pont couvert (coté sud de la rivière), aussi joli mais bien plus tranquille.<br>Site visité  le 10 juin 2021 lors de notre voyage à vélo au Québec<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/3m76ubbk7064v2bl1jlhct9gbo/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6nUIRfGqrNgFnPPjnkr9ozZVvrFkUhbmL_KzWFA76mNSCpBQ4994cMd5gg_uLaIaBok-Un5X5lL5Sa6lNfzox4CEqLePEgEz1o215HT4sLukrCgyb2oB1pGVTwEfjTSynKmkSvHBbxWLFGQSNfXsKrGuFmG2syVuiGinx9Fg_aJDdeh8oaIRpneIAvk09zXGfN?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/q8kh1nsf97rfmj1tl6fagmnb0k/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7VfrKDwXYO7EwMjc9QcFqgQZqWvOUqTuIbxoT29Xzr-2TzN-Ga0YmBo2N6jVicOiTrRXMqorBIeqxz68eKRwgWGWf1xjhTqTFExG-zlGDp3CaCUkFJrRJ3oTJYXb0cmoqvSe4nRzvJ5TP9QNh7cjmbkZrEHvRE9mZjS1JjjG3ciYSWfIQD5kPxR3rutDthNZH3?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/ndoe9qg1ou4cc65t97rjtqoe44/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6WwLBos9WkRJbGfOoTuBPsGuzCnUYRQFRZyyGm4vCVSwqg-kLq7XIYC0YIA3XoeSA9AOsfnkZcXocz_6BDVNx9Cc6HonFsge5ZltTxxeRqMKi9hfpwc-ZuRF7DEVkhkBdetlOJwcL1W0E9nXY7ipbxj1shoJ4_eV2s2cdidtVTgq9bOzC0orDiK_dMqkWkNQ5r?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Halte du Pont Couvert, Parc municipal de Notre-Dame des Pins"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.8287128,
-                    45.9607705
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/d1pqqmunltkdt38hp2hqfld25o/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6j38i2xIFc1yQzt-Zws3Tl0YHx9t-l2VTG83O9sHqLaBX4YYvsFy6clTj3zY4bVto6k85EHSIOUksQfXou6aP93sxBGFw4P_XVMoQf2yVSHpg8J3vX6YbfMcwUOmXCouoMhjrp1pOMtgcWK3WF_7Gbw66h3SeJPRu91-T5wrillerLfsPVwJ-YRUtPiaE6NQPC?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Au coeur du village, voisin de l'épicerie, ce parc joliment aménagé: tables de pique-nique, verdure, ombrage des arbres matures;  Un coin plus discret à l'arrière permettrait d'y monter votre tente, si vous attendez la tombée de la nuit pour vous installer.<br>Site visité le 9 juin 2021 lors de notre voyage à vélo au Québec<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/2fbmbljl5cvb31949an5v5gc48/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4-msd_GGV6wTHCajOeqcGXn9oXQbgUDWbcw3dH95ejZ3_VmHsojI5YTs4IyF2sqy0EXewhASzGIKOfdhSycJzor8DPSLL6jwIRm7JFXiEWi4gMM9-lh16_eJ6vM8fYEsWuK3gOLTYReFEy4hEyPrj7TMWTXBrSM_Ixd89sy7iWzY66j0-R6go3l3XvZ4iWbMeP?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/67dvj5aicq6bd3lkt2d6vjmukc/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7TXnjYLPRbdz4lf2-1xHtISEfFpogaMLlcq19VIsFhVkmwUsxxmmJBotm9Et0cBod5uOmeVqwGoW0eWPrnmu6NRjmfWA7Z29T8fhn31MI37ilOywD8wrn4P9V_rduhtq_ujmsKI7XsVtQvgL0K9E4OmacY874jCq-Xf4P1wsFZSBZ10Rw5na0IW5k0oakOgRS6?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Parc municipal Emélie-Allaire, St-Honoré de Shenley"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.5563704,
-                    45.9726315
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/eoehrb04jnjbjs8uddoekus488/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7oqDkEjXnEr50YVGUZwCdOeNGTpAMdRsPgJmlcXLWxaHbO17w_fHfTlC-jQ6ujS8ZaU0J8WoBTNugMdvnIAvx-buyU5v9f_cJWUA_AFw-Vhwr2is5H_V3kMv5qo60w2WJIYE7uxPnFD0TlLu5cnH-vukNcl2WTY9j3QvtUo0DUZ990zY9QFCsSBUAkCYqIppuQ?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>en bordure de la Rivière St-François, entre Drummondville et Pierreville sur la Route Verte #4.  Il faut quitter le sentier principal sur environs 800 mètres (aller-retour). Quelques tables, arbres matures, bord de rivière, jolies vues sur la rivière. Endroit isolé et tranquille, loin des villages.<br>Site visité lors de notre voyage à vélo au Québec, le 4 juin 2021.<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/f20m83vrah76qtuakh1qmnusf4/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5kE8NdnkKbGZjGzVm6NnvDDet31fzzIRRYc3D5fWjcaZ6-V9pcT49SuULKEmei-D0hxiEGHq-gi5UpCxNnZCPmrGtlWOXiOJvUtnFMdb697NT5QkeGH6pqbzSOTqFzEee1roBy3pl-Vb3NbT2zmdT7GS6TUV1o_OtlHv6aKXd9vkEQDIS72m6wHOd3aC-1zFQr?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/2kdirlqle567eo3hnlqe2itnak/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet44tqQC6_ltTdEdbi_-jNyB8orj3Oj9A1vDFd6Mrk2oAAscSkkNzzfbOBkIXSGjx0qeCfdfkiu8c66kPA3-mDExWt5oc1GmdL2H6XP9spUcdkaEDdS2h_agDFOIH9lzVDyG1V2HUwd1qNjpHOI4LEuYoCAIY91IcYvZ2iaVEsuicGCPicY8AshYOr4z3cdVv6sR?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/rvogvtuhh1p759a7ebdjvlftig/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6yMJcfUraNsPLQqDibUCyg3P7OfRNqnI2BlYF_JEyBYApfrqsJSj5gXYGTHt6kFvYuBBlrKnPWLHrGA22Vr7O3fTyAURSiqY7VMhmbscvX0sDmC7LkhbcYbRLJocGchAR4CzxRRNj71slaPOovAjXl5bEtHpO2nyxC_pPPZ-IfmaqRNdBxPz1Yqf1jFZfKHbUY?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Halte cycliste sur la Route Verte #4"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -65.2503352,
-                    50.3181372
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Halte municipale / kiosque d'information touristique. Ouvert de la mi-juin à la mi-septembre de 8h à 17h. Les toilettes sont barrées en dehors des heures d'ouverture. Bloc sanitaire avec eau non potable, tables à pique-nique. À proximité des magnifiques chutes Manitou. Visité le 25 juin 2021. Infesté de moustiques et mouches noires.",
-                "name": "Halte municipale Chutes Manitou"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -71.2385936,
-                    46.7817328
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "À 2 pas de la piste cyclable, trouver le trou dans la clôture pour y avoir accès!",
-                "name": "Plage"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.7013098,
-                    47.4839555
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/0o98jvgqqbb6s8urct12hh5v2c/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4RYCGuDcUbF_QZFODylsO2lg6wouyEzf7Jktc4E0buDDJOmgiAz8gw6V7EfIjY2FO2-E4qkoLkipEoXxDpKCcWNvBiEmEDUIqZwl-V4KTM2qxyG9mbF6lzziGXlql-n2Uu08g2SzdmXoSum4xPRDqXo5yb-9Cbfnno60lSR7-h36heATwtUboXPft_nZWa5bED?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>S'y rendre par les rangs Sud-Est ou des Pionnier, selon que vous y arrivez depuis le Lac St-Jean ou depuis La Tuque.  Cette route magnifique et tranquille vous évitera une vingtaine de kilomètres sur la trop achalandée route 155, de l'autre coté de la rivière.<br>Sur la halte routière: quelques tables de pique-nique, verdure et arbres matures, et la rivière à vos pieds! Un site enchanteur et tranquille!<br><br>Site visité lors de notre passage à vélo le 25 juin 2021.Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/nrp0hev1u8s9nm4i21ddt19dvg/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7zfPxBjknBeSFT6GOXzf1xpHcMIVvsF9aPphv-UzPONQqdpwzuJ2jodTQRvjFnRKMJ0rZToRF3i13zSL6jqkrk5XYnYZUKFMk0sqAbNZB8PCOIy3yhye_3zdccJQKpuN6_aOR4Fvt3SWj-WhnoAWiVinWzx4lP_-t3NdUkjh-oc1pkeJ3FGhtCsfVvTwVO58Jt?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/ne61qbnl91pk9klj0v3tifin90/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet46OhS6nToU8DUpLEgQCLwDGicwmfYuwTtibw9pU9dfcmP-jWP7uH7qWoGySMkWeSRw_Fz5AG_b61r6khQTpiId5aPqlTrU3oi-NBJaAMHJ-mXG1OZXW2VgpjuNH1LC93mCRfmRop9qg-bnVGGMc2BeraAxlQlpUsUCkn9jzj-HmnY5tsxQFX8JiNH9XIOGNS6a?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Halte routière, en bordure de la Rivière la Bostonnais"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.6913159,
-                    46.9201119
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/rij3in4g3ne6g096q94d1du97o/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6Rq4RBjAyO4z68ZzOncE87b8A0eJmM-pGGbCaI4e7GZZiajgMX0xK39J2EeqMX5SnHuJ0wStpRHLhGLNWHBqeQW5iUQAx931AGmhrdoSncsCXRrED2oZSXbmNmCunBAhani7uU9VwtgJZAqxPw-9EQ9qdyg1u6FGkBrvykKm8SqDsySZbQNzUU0lus8spmZGR-?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>La route qui relie le Lac Mékinac à la route 155 est un pur plaisir!  Pavage neuf, achalandage très limité, beaux paysages, et plusieurs beaux vallons qui rendent le trajet sportif.  L'aller-retour vaut la peine pour tout voyageur qui privilégie le plaisir de rouler à vélo avant tout.<br><br>Méki est un parc municipal en bordure du village.  Joliment aménagé: quelques tables de pique-nique, beaucoup de verdure et d'espace, et comble du bonheur, des toilettes et eau courante .  Le village est petit et tranquille, vous y aurez la sainte paix!<br>Site visité lors de notre passage à vélo les 23 et 24 juin 2021.<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/i9glgor6mpgorvoqe2cn0fbdsc/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6yIuCb__35AFloiVku45dI8lqgHP_id_w4yH_EeDXMgIQ5bDQWhLuoKcS5VI7OQv49cyFKl1kGbdhWRv3S2WXFrOp9IJ0ayQ2l9-kcSebl1Dnx_N1qtF0RMEPfJ_mcM7jrWElM9KRyS721zj9ci7FmCP8s1f_Ix2QwOlcW8g9oQCdMVZHchnIQG6-oaT4M8Rpj?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/3u0bq8ofdgrpo3bcfr52sqevgk/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet753R5koVvt-cD-sCjKnRLKPJhroq_HobA8jUskWto3i9BBV0eLLTs1mrQZFlJxnMIkcmdru5cRU0gb2JYIlu94BwX79ibvkpQA0Fn0ks8gNt8051AfyIwoGT_mzRBcwy9COOIiKSo1Hmq4ELM0AaGxgNuFX3GW9obPFyKwtyG1EnyahE_9ZdssaDcbVHALM_bv?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/9d46n2h77ba7d0ii6mppu6npjo/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet48R-UMayRYWXDo3pwkL-wpL5sXozPV0R9CeiV3D35BSYFJhqP8XLGZbCtyeM7DcRF3BZ_xA3g5XLHNZcr6sFqu-gYL6FTNeRBDz2YKm90ZKgBXB18BmEnay0sp93jkxqMFDRwD3gNK-ymT_jdXGb3aG9L2xk39KNuIho7DuSnx6Zjil5UpLSrVSIsphDkn1cia?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Parc Municipal le Méki, à St-Joseph-de-Mékinac"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.7606721,
-                    46.7393768
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/hu6vljh3bps6a85r34a8pv3vt8/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6bM5r9plZtdrWs0kOpavhfKbU84S5ehSjS2IZF84DnIHRK3iJJ7anL3RNQc89b28jfZhYvfiizsZ0TZyjZAjesoaRx67VXzTjazRlVxUpBYY9DkizhR8S44sj80DMIFURzNDSZA_QO5L1lltvipDPhD3O7_iqEh_mOYi8vjt4HJGnS45UsTrhk7e0KQd1SLECO?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Un peu passé une halte routière très achalandée de la route 155, quelques kilomètres au nord de Grandes Piles, vous trouverez ici 2 courtes routes en retrait de la 155, permettant au cycliste épuisé d'y passer la nuit.  La proximité de la route 155 rendra sans doute l'endroit bruyant jusqu'à tard en soirée, mais vous y serez à l'abri des regards.  Eau à filtrer sur le site; Pas de table, pas de toilette, mais la halte routière est disponible à quelques centaines de mètres vers Grandes Piles.<br>Vous verrez un 2e endroit juste un peu plus loin sur la droite, aussi en retrait; Le premier nous semblait plus joli.<br><br>Site visité lors de notre passage à vélo le 24 juin 2021.<br><br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/3d1c5nj5kkqt69o43fu0og0nao/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7rnYLoau5K1lwaUJhnmkKYgPoRaZSiW6BspbMDjT9XoLbos25G9h7-rpC8XjE9u23cRM3Ar4kkf8UxKvwPScE_sVmuB8Yfh3ytHt5dFi_75cvAdb_qrzIDjEJgt2KyPByZBLwAIh3-KW2KZaWAU880yU6fNY60aI6Fxo79SbBQ6JaXcLq8iWzsHWkc7iOu55U6?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/dbre1tmqub8jenshc3acpn6ff0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5O0Cexae4jjO4xRIdsirrMFloyZH1v7o83l6nsxe7XW95WuKDELffeV_BNX3w7k06qPvYyBJI7vS_o-YnXJQiqTTvoxuUfEJ4_O7LgdLJnehYy0zHIdHO48xOvCSyjGkuYP0AIpTcBOf9m391-kyyFiXZzUezc1PW6RYHtaQwX4YulsnkOV0zbkRc0R8WZn6qR?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/o4pvunch092hifiao7767lk31k/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4yn7nN_SKTii5lIwVvVzd52KVw3toF0Bv4JbRKTxVRQyJkvo6eg46TQuOIWE_rTXKwJrEdi4LC6eqCzKS9dfvhRDln9trJ9yxT63vTWoasXYtNKwHJaGf8gg4fT-gjnp5m6-Lr6eSKnoVOFI8W5RHAQcY3nAUI-JCf5cuFv_Je3mZZ83fXlEQljkCRJcnvqpqP?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "En retrait de la route 155 (a)"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.767668,
-                    46.7437735
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Un peu passé une halte routière très achalandée de la route 155, quelques kilomètres au nord de Grandes Piles, vous trouverez ici 2 courtes routes en retrait de la 155, permettant au cycliste épuisé d'y passer la nuit. La proximité de la route 155 rendra sans doute l'endroit bruyant jusqu'à tard en soirée, mais vous y serez à l'abri des regards. Eau à filtrer sur le site; Pas de table, pas de toilette, mais la halte routière est disponible à quelques centaines de mètres vers Grandes Piles.<br>Vous verrez un 1er endroit, aussi sur la droite, aussi en retrait; Le premier nous semblait plus joli. Voir les photos mises sur le premier emplacement.<br><br>Site visité lors de notre passage à vélo le 24 juin 2021.<br><br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
-                "name": "En retrait de la route 155 (b)"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.8278512,
-                    46.5047906
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/vbjcbq9cd709cuu7m57ic72joo/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4VDrluGUBBWbyMzKr40CiN_MhrI0ekkAyVGIwkyVaG3ovddGdceuTeATYOVZBn042UBO7OkLtiQtmW4VyU-Yv6tKmpYHQhXCR-JdpeGhOOby9Zb8NGf806kuzH9tCvlC1ehGJFShM5jhce0Q-UvYHsiHovVK2xIT9HXIZANsONoye_ANC4JL8zN15bsTQ8vwrH?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Pas pu résister à vous partager ce petit bijou, au coeur du village de St-Boniface.  Magnifique parc tout en verdure et sous le couvert d'arbres matures;  Suffisamment vaste pour y monter votre tente à l'abri des regards une fois la nuit tombée.  <br>A éviter toutefois les soirs de fête, comme par exemple à la St-Jean-Baptiste ...<br><br>Site visité lors de notre passage à vélo le 23 juin 2021.<br><br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
-                "name": "Parc Municipal, Village de St-Boniface"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.0072607,
-                    47.4930154
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Wow! Y'a une bécosse et des coucher de soleil incroyable.",
-                "name": "Plage de Rivière Ouelle"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.1324231,
-                    47.279648
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Au bout du stationnement vous serez tranquille. À 2 pas du dépanneur.",
-                "name": "Salle communautaire"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.1187403,
-                    47.3299064
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "À 800m du début de la piste cyclable. Ancien site de peche a l'anguille avec bâtiment débarré. Terrain gazonné parfait pour y poser votre tente.  Ca se peut bien que ca soit venteux mais vous aurez les pieds dans le fleuve",
-                "name": "Pointe Rouge"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.14901,
-                    47.2952681
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "À 2 km de St roch des Aulnaies. Il y a un ruisseau et c'est très tranquille.",
-                "name": "Le méandre"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -75.8756183,
-                    49.7569389
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/7l0pgdt21ddap482hogto9gcq4/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet58ifnLx5_VzTlvdi4GstdW_7lUhLuglj9fnUKGrXSfnZoI3DyCw_HLjdGgAxhXF6DU59G9ztV_R_a1oPEYfPOebfHMqju7hYPxf3c1Vi0wbV6XbICtPbgOvwBFF0Xtc2nLWXEf2UcuZa8FP8CiInKkWEGqeVseIJe-YCzo02GN1KfTDWZG1KcTCnv9O3bNLLz4?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>En bordure de la route 113, sur un coteau la suplombant, clairière dégagée et plate assez grande pour plusieurs tentes.<br>Point d'eau (décharge du Lac Renault) à 300 mètres.<br>Attacher vos sacs de nourriture suspendue au pont au dessus de la rivière.<br><br>Nous avons campé ici le 21 août 2020, en compagnie des 5 de Echo Explora<br><br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br>49.89924, -74.35392<br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/verfciv21t1ic842ccs3fv0g44/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7tePEHywKKWb8vd_-bwpsiwSbCaJUafN6uw7AVdFvxoqHwfX9SQxVM3nWnoXNXhauzNjM7WnT7XCU8MQAz-8ivVL3kpbZuYXzWN_qIIQFWO72ddqaD5waMwW-_nJ4ahGS_QnvvIor_a_86BKQqZ-Y-4MlnyOrYLYCo3_4ATsXbdPa_N0ao7vqdsbiwSUYzB_uP?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/qdit559l18oqntccfi5lb2k3ss/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7ZT7U7FVfDmxeVslSwrf8EraYSNhEyr-SVuGsAKJFxI5cFuKrrHz3Yse7M83wN4RcH39_3IHbrI73AkiAaTHmhk_U7tg1fr2urZCyzyE0wHhqyFBZUwTvzHzwUQC1J_Z7ist6GR62RB_2znpNiCP9tutBFy5FUm1O1J0FJNafTnPboRI6F4FxqEBbjHcZDOV73?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/rdhqk8cjl8s2o7u62deda6qtn0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4HpgWKP3yfuJywSVwSUZM9pMGmhRlmM1xA4N-VqYBLGDPtBWEugP-Zl0VBcMpdUvuhyuODmej4xNbFYBMKtJPW2tLvoUdVfzb1quUVi1VLCdDy_BeytrILAL9dMFOiayhWWc5jl1qLP9Z8Yu9JNgRUvHM5ydjRAKLXjY3KXI5C74_o7sBDZXBkn1UpMJXQ6XPD?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Réserve Waswanipi, près du Lac Renault"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.6812974,
-                    47.5188611
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Caroline été 2021 : Possibilité de piquer sa tente proche de la rivière sur le gazon. Des affiches permettent le camping rustique temporaire. Toilettes, eau potable et tables sur place. Plein de sculptures d'oiseaux en plus ;)",
-                "name": "Point 236 Parc Ducharme"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.7812044,
-                    47.3825815
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Caroline été 2021 : Il y a des affiches interdisant le camping, mais plusieurs VR y ont passé la nuit. Très grand parc, j'ai mis ma tente loin du stationnement, sous un toit à l'abris de la pluie. Très tranquille sauf pour le bruit des chutes ;) <br><br>Aucun service de soir/nuit, les installations sont par contre probablement ouvertes en journée.",
-                "name": "Point 237 Parc des Chutes"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -68.358928,
-                    47.4031677
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/gq1jd6aqvjhsdpnaase3d6pt94/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4jANwL3Gl2XevYAFH5vvQ_uXShGktW2Hajh4ZxmcadcSJthoP5wAHGRSfnheXD3G_A44qasBUQUDkR-jQAdWkTaOP6JEs0JN0cPDq1QI9xEok1U--O22iT9S33mxzTCeBzBvjD-5FGBTIekcUAeZZG66ofdBimYjFV6zwTDOXMWBayxCU2hHHQqQFtmDQ1GFQJ?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>En arrivant de Dégélis par le Petit Témis, la piste cyclable va longer la Rivière Madawaska en entrant à Edmunston. A cet endroit précis, vous trouverez une table de pique-nique, des arbres matures et suffisamment de gazon abrité des regards pour y monter votre tente pour la nuit. Un beau spot!<br>Site visité lors de notre passage à vélo le 7 juillet 2021.<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
-                "name": "Halte cyclable, sentier trans-canadien, Edmunston NB"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -67.0096332,
-                    45.7304723
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Joli parc municipal, juste un peu en retrait du village. Avec table de pique-nique abritée (toit et plateforme de ciment), un peu de terrain plat en verdure.  Un ruisseau à 50 mètres en forêt pour se laver ou pour cuisiner.  Epicerie à 300 mètres au centre du village.<br>Comme d'habitude si vous campez sans permission dans les lieux publics, attendre la tombée de la nuit pour monter votre tente.<br><br>Nous avons campé sur ce site le 11 juillet 2021 lors de notre tour du Nouveau-Brunswick à vélo.<br><br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
-                "name": "Harvey Lakeside Trail, Harvey Station NB"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.2547455,
-                    48.0695562
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/6p2ojp969jve2h21cuk8rmo2h4/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4NSUlGkyQR9hMHYUncoFVSG1OoGvchv_bfjMLA4F3oh3sRLoUo6U-IUASvdc17WNr7I1ZCcTCswNWlW0NquslHAeyP2O1GCynMf1_c65S6DWcCBBJMMu3GNp1m-IC0TZ8KHWu_qukv0AY32k1dUlqVOPm-l0Q2paPQF0QnbnlTXhhYTxStQREvGRA9D-gnCpC4?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Beau spot avec verdure et terrain plat, en bordure de la petite rivière des Commissaires, juste un peu en retrait de la route 155.<br>Site visité lors de notre passage à vélo le 25 juin 2021.Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br><br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/ramjjvt1ednuhhr38trthu9p9o/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6mAeCN0XlBGD7Uvn08vJf7yVIfbbG5X23f8ZNR0lqI5pJfnzW2j_IgRi9hLmGTVDHQ80fx63ww0rFa1Yrfv8aVravnam6GmEzbCCY4jZ0bSvdvLJULx_xDy5yxXWu-y_4AuBscRNNL5HAvWTSC_ds36b2wdz8ZJboMf_JbhNtrYz9MwfitMHeKCfdKJb4Sth7q?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Bord de la Rivière des Commissaires, Route 155"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -67.1585337,
-                    45.3938653
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/4f640e17nnb1njn4pkabr79ih8/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7nyx1NnfVryNEclVuNguEmD4apEb-YxDZA31XXe5WjmnH7IA--CzVDJuWWAw5oqXNXf5pKhLgTXBLVxhxFIltyHVNSA1R7njxbbEf466JyC_1jBaWzlHSgvKk6gSYSkgGpC50sWbShEkFM7rRIoGniliHl7yq4j4vXZJKvDueMZPYnF45XimXMWdRg1gtIjGVA?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Sur une portion de l'ancienne route, où coule un ruisseau tonitruant, beau spot pour diner ou pour camper. Site visité lors de notre tour du Nouveau-Brunswick, le 12 juillet 2021<br><br>Site visité lors de notre passage à vélo le 25 juin 2021.Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
-                "name": "Route 127, près du Lieu-Dit \"Dumbarton\""
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -66.3404385,
-                    45.1805696
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/lgvnv4scdqbc1cpcr55kngbdpo/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet71bZgd8fyK2hlFkYbEXtF6Euf9_7NGrGgSAzjMLyQDfhbXv9RcpTZzoLdAq_iHxu1G01n5HmRHthNGD6bLbYP-1-mUVov92I49Lb3RhVqgykE1SFPue8VO-Inxc9eMotUVfJUQ4-nYwMxp-fhXCqlgwLuZLul-eJ6l7OTzuyEJ2GGJIusDoPxoQ2CVW1GDmeye?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Table à pique-nique abritée, face à la rivière sur l'ancienne route, face au pont détruit.  Eau de la rivière accessible, un peu d'espace pour monter vos tentes (gravier, asphalte, peu de verdure). Tranquille, en retrait de la route 790.    Site visité lors de notre passage à vélo le 15 juillet 2021.<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
-                "name": "Parc Municipal, Village de Musquash"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -66.8304905,
-                    45.1304286
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/1agg0hfvch9ji14418f83daj8g/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet79d-Bv_2pF1RHjoGz3j8QJZerXqKIAP_XXbn5LisNPbmkDi8SVcoPHj3q0wgttp-FOWAX8xZVxbt6rOF5zZqIIe68QR2VdGEyoiv3Qhv78a4BYDLyOJnHrHvyRwJmQQviB1YYzj_CG8vxSJR9dm9AlzUxrlJLkYRdefan2ipN1iknyeOsQbswnVYfPqs4NL-pL?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Il y a 2 excellents spots de camping sauvage dans le village de St-Georges!  Le premier est à l'arrière du magasin coop (c'est aussi l'Information touristique), qui est aménagé avec quelques tables, une toilette (demander la clé au magasin) et un joli sentier dans les marais.  Face à la rivière.  Simplement demander la permission de camper sur le site, avant de monter votre tente.      Site visité lors de notre passage à vélo le 14 juillet 2021.<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
-                "name": "Face au sentier des Marais, village de St-Georges"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -66.8287568,
-                    45.1297202
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/u4ctiee5bv83a778jckp1v72vs/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6MB_qTIUtdLTIQqMeTnf_-DoQqrhTiv-KP5vOj4LAIlBfRW8Aq6KXV9rT80H9jr3eNr1Gzg5vALY585qhOqIFCc0NtbmrpNDbupn-8oSE56bLuoXs_uvvfvTtg90fjXwHUjXt9hdNjrjaHuJ3xAYkXUsTW6Wjgy1DQj8yvU6dfCQMVsIneCrKm1v4NvpZl66Vo?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Il y a 2 excellents spots de camping sauvage dans le village de St-Georges! Le 2e  est adjacent aux chûtes, en retrait de Brunswick St. ; c'est un petit parc avec quelques tables de pique-nique.  Tout au fond, belle verdure et arbres matures permettent d'y monter votre tente à l'abri des regards et du bruit.  Site visité lors de notre passage à vélo le 14 juillet 2021.<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
-                "name": "Halte routière, Village de St-Georges"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -65.6992733,
-                    45.6371353
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/5b22l1k38tprb2dstd0djq44ag/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5Sbs8fHc67Q96OJTiFaiXknvwBzQj9Ge9d9iypOpnnAstMQ1349aAy0KMSm52ZNg5Grmlr5Bw4XpDQdG4I0eQenLjQZz-yLXiAhNdPYRInH-APo-v_dB6VxnrZnf9ctrpVFR5cTdKRMeopyfPhrrergGzPU5Jp6VdCqc7hkIxdO5dbS-WsiFIVTZp7NI3_IBct?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Sur un beau terrain gazonné sur le bord de la rivière, avec des arbres matures, des tables de pique-nique, et même un gazebo en cas de pluie.   Site visité lors de notre passage à vélo le 16 juillet 2021.<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/f65h8qosc4gvbfcm70n4bbhj7o/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5E2KO41rtCkdZHhVnNPhsPF8NjEeHmledIla3rRbp7lV9M9M91hODdQNSOeDfXZ5OuoXmt7WzHqWZOSXH7F9OUuJFmq_NxKXGJy0rBy7Vy5Bim4y3sAebbQlLOmPjLOs2ix00KkuF5hSGxvOr-6nkxXTg6VmEsjx5r4-DjFIb3JZdGbEXwBTvb4ljGSngSbPIf?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Parc municipal, Village de Norton"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -68.73631,
-                    50.64229
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Il est possible d'installer des tentes à ce belvédère. La vue sur le barrage de nuit est magnifique!<br>Pas de toilettes, ni eau potable.",
-                "name": "Camping sauvage belvédère Manic 5"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.3671091,
-                    48.2438991
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Très bel endroit avec eau potable et toilettes. Il y a plusieurs endroits pour piquer une tente.",
-                "name": "Parc des artistes"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.8721567,
-                    45.3318241
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/3ikkf8m5l0dnl3g3j70u7j6i8k/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet79HCJnr1Cr3mFW7zt0pLCS2OfvgnyMW7Lrnu6EbrmGwSLQznhdlZS6PZVzUel-I300uMIDT9rTlyHrZ19LT6VYP6Qdy--Ac3VRRtPXTky8x4UnABwVxQejyNTdesdd3TM_n4Lm-HdfeWYgoIrFVjRtMiCuaBTR7wayJF2Lit7IsLgS5SD44xiY4Y5L03-VAbh5?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Beau site, très facile à manquer, en haut de la piste cyclable, côté nord.<br>Aucun service, mais les toilettes ne sont vraiment pas loin (≈1 à 2 km) en direction de Granby. On peut percevoir le bruit de l'autoroute au loin, mais ce n'est pas très dérangeant.<br>Je n'ai vu aucun panneau d'interdiction.<br><br>J'ai campé là en juillet 2021, en route vers les Cantons-de-l'Est.<br>-Nicola, l'administrateur de la carte.<br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/etpo4hf32edffn1cnst8t968d0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet79sMhkThgqOAdtNIVByldVh3kQ7nZ93-Ab6_uq1af59S3czizosyWQA-FjDCMJXhrSKzWAtxTMR7u37-qxSCDO8ATxyuF7JZOzEklmT5KPSY921q9XSdGmuXbze8C6Y6IcCtJiL0LeD31n1og9omdrga8jOZ5U7ZvDBIeKnHHPgIB7NLAH1jCTN-TR1N3wMgGs?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/klc4tahe1vb2lvun57sdi2ek5g/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet44TGwNqEWg4aLNdgn1qASzCUGoPzMWk1zoR2f1zpNyWmkBTphdD9eoz4Gz8Nj7wh3MSNzUXZbfzuHdzfUvsGb_zMioZkQ5G2XkWKFjzdlD_L0YqE_8VehbWJ335upiKbZHi2T6jQ33dtXflqzhbETELF66r88Z3n5Ik3C7gmdtV16QnoOk1VpztoQ_hhkRFECe?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Montérégiade (Ange-Gardien)\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -71.0561762,
-                    45.3304579
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/ktdfc7jce3f5krp0lqlrip10ns/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6tm4xgb6-MN2Tj64cTr9J9AJpUw_xhVRpSgZI92hMPMqHl9lQuJYramf4zoUvV_aeknkpFv2E6PTbr13nMV2ZT0--IA3AgMRFNQzPzR_fBY8_jGxBtZjP5mcflezkYM5EDu1skhR2Sde5R_ZoE9sGSs7H91SqlK7-X7O8TGso8RwLnZftL-poSdDZpeTwUxwI?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Il y a un lean to (abri 3 coté) sur le bord du parking de la montagne de marbre. Il y en aussi un 2 ei dans le bois (Voir photo), accessible par le parking, la rivieres est juste a coté pour filtrer de l'eau, Il y a aussi une toilette seche. Le parking est animer le jour, mais le soir ben tranquille. Pas de wifi, mais il y a du réseau cellulaire. pas de poubelle non plus.",
-                "name": "Lean To de la Montagne de Marbre (parking)"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.3577555,
-                    45.2073661
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/imj8sb5utgm4pt59dvnm9947q0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4xNR-S7aUOmU7KKbVEgvM1DQP2Pah5YzuXyg4zTRqNUifl19zxW7TpvwBRKGVMOlX2KclxhLE3fVVA2WAfGUz25pe4NkMBsZGx_aji42Ov2kvBH0-hAQSMQNSWzX1kJt6XS2sZq-DUcs3l6MaMXiRkSkxZzeORfTEXCFxQkJkd7Ok_qU8At35ibsQ_cFe9B77G?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Je n'ai pas l'habitude de camper dans les parcs de village, mais j'ai tenté ma chance ici derrière ces arbres. Il y a manière de s'installer sans être trop visible, par contre la surface n'est pas plate à 100 %. Un samedi soir de juillet, c'était calme, mis à part un groupe de jeunes qui jouaient au basketball entre environ 21 h et 22 h. Il y a des toilettes sèches près de l'entrée du parc, mais pas d'eau.<br>Attention : le parc est officiellement fermé de nuit. Il faut donc être discret.<br><br>J'ai campé là en juillet 2021 sans problème.<br>-Nicola, l'administrateur de la carte.",
-                "name": "Bolton-Est – Parc Terrio\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.135324,
-                    45.0545713
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/fk4o8h05a9c168btn6b8ugmmac/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6vy6JqsYgdaJ-35EN2y3PS-OR0HJ38PCh56t09ocKjjU3lh2xOiC5LvyhjKV8vKv0YR3W7UHEuLWN-FuuizZJxeNa0uATFz8SNQrBQ_o6syZfYnICQlTcAX_3L1SRaNKzy7lYyZfSOO3NM6wtO1LlmBqwnFt2refkkVOPpDNrmXCIASmNa-p3bQrh5tehfSLcY?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Site 5 étoiles près des cascades, en bas du sentier Tomifobia. Pas de toilettes, ni de poubelles. Il n'y a qu'un seul petit banc. Il y a juste assez d'espace pour installer sa tente et dormir paisiblement au son des cascades.<br>Officiellement, il est interdit de camper sur le bord de ce sentier.<br>Possibilité de se baigner, et de filtrer l'eau de la rivière.<br><br>J'ai campé ici sans problème en juillet 2021.<br>-Nicola, l'administrateur de la carte",
-                "name": "Sentier Tomifobia – rivière et cascades\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -71.1604251,
-                    45.3612858
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/qn2lo2mge9f81snlvc2g538ppg/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5xviOB1Za5z39jpHIT02YNz5_I34zOTGZ6pVooy0h7VHBKVkj7dJYOpLs4ycNcFfEiaHujHPJIryVxHpGApn795H1Lrwk4bQfsx1a8FmKYjhqEYM5kJhrxV4NI2YCCXRAm2Ch3hqNqyHvIe8KvjLOCZxlweESUteCHvWiwuw5BiEgYB4TkB_bqs064C7vyzAkl?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Site 5 étoiles isolé et à ma connaissance légal sur le bord des cascades / chutes de la rivière au Saumon. Aucun service, mais il y a une toilette sèche à quelques centaines de mètres au sud-est, au camping officiel pour les randonneurs.<br>Ici, on dort au son des cascades et il est possible de se baigner. Je n'ai pas vu personne de la nuit. Pas de réseau cellulaire.<br><br>Campé là en juillet 2021 et passé une très belle nuit.<br>-Nicola, l'administrateur de la carte<br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/856ijg331mltkmh7s63cbncgvo/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet52EwwXpbQ6XmMjreuG4ZD3Hraub_i2EQNC1qZa-TqS8-gbCyF5OXrZ747Pr0yqV9sATNYtCN9QCsE3vkFitkgip59tLUiM45LAazeUtfrUgUp51HrLrKVr-a30HVtXf1Dxs7UcYhwULUnCf8fJoeH_VKhwqD7AST4V_3XB54Ban7xBmkRXMUmbf59ktVwuU6Tk?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/f9tqipuk4fkk8hfinbfotq0hg4/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6OA2kDzvGsql8pL0y9RdXx3UCRWqp0AmMwve8E4i5aRvGR8dDzL_mQ5HGiYAQboP4625LV4L_BYndiAJe87_esOf0c9XbFw3tY_j3-yQFwE9IY3lPdTkUt_rJ6T-t8eDkMySVDKjc6uR5aPxR5Peq_Pqg0AfyTEe6eREPUikioIPQzFltWU-EE04Zp8Pl33-FG?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Chutes de la rivière au Saumon\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.0544342,
-                    45.7130642
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/ue9n5romj24h9jkpuee666k1v0/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet55ihSDnQT4Y6fJn9R-dtq0njMluVngCpVwquXB2_d5QPPT9mH0IJ8XCPrU46B3f-ij88zRbB5UUcoOZ9-tej488p3TXRpKNMjVUNdzGVJian9nk-M1Y9ql4Z5b-2Pbx7L3b_UwkglZUc79fg0a2k_OkfwjlTSUJ3xoMxWi1DRv54Ugdu5feCBw5IurtSShutCT?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Halte cycliste assez spacieuse avec de l'espace pour s'installer à l'abri du regards des automobilistes passant sur le chemin, et si les moustiques nous dérangent pas, à l'abri des utilisateurs de la piste cyclable aussi. Par contre, je n'ai pas vu de panneau d'interdiction, donc je ne me suis pas trop trop caché. Seuls quelques passants sympathiques sont venus durant l'heure du souper, et un couple fumant et écoutant de la musique à tue-tête sur leur cyclomoteur électrique, mais ils ne m'ont pas vraiment dérangé.<br>Toilettes sèches, poubelle et recyclage, tables, mais pas d'eau potable.<br><br>Campé là en juillet 2021 sans problème.<br>-Nicola, l'administrateur de la carte",
-                "name": "Halte St-Cyr\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.3221976,
-                    45.3921741
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/phbk5vmthn64j8re7653lvjvvk/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5XaD2np9CbFXq9yuS1qWpmdiRA0SyJHIaMKu-6anrujGj7fjTxsPZIzp3clRGKEL8weDaF4AjhjDQ63HI-RXzXNCpGSRGzfX68EW5B6MqpdCVgT2q7ctb0-qZhLiX77UK9AZ4KC-y1BBqcbX0KkQs14HapKyExx-FmhGgLocmFXcAHkWVO-Nuru049d0HPvCaQ?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Site de dernier recours à déconseiller. Trop de moustiques, pas d'accès à l'eau (stagnante) de la rivière sans risque se casser les jambes, et surtout, juste en face d'une mine (de quartz?). Réveil brutal à l'aube, mais heureusement, la machinerie lourde est partie après 5 ou 10 longues minutes. C'était suivi par seulement du va-et-vient, mais au moins j'ai pu dormir. Pas vu de panneau d'interdiction.<br>Pas de services.<br><br>Campé là en juillet 2021.<br>-Nicola, l'administrateur de la carte.",
-                "name": "En face d'une mine\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -64.6973446,
-                    45.7352519
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/ev86deo49pndlk0rf585cgqrek/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6lx5YeEBeTZ7Fn_m2VJ4Br7EmKdUPQrhXn7OthYQvu9Xd5YuOJacwNFy6sfDpEVTVGIdhac6kt7EPQ71TuC-IHMUhqE1NcJ5wU5F8_baC7O8mLBU6a-HyyvwZ9DQKKaKY7_BVLh1Hl0cep-FBVumI3PeuSwNNJemSfKGOhWkXzUwQCmA6E8dJH0dXwBK2PPbpn?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Un superbe site de camping sauvage, sur un ancien phare aménagé en parc.  Au milieu des marais, tout près de la Baie de Fundy.  Site visité lors de notre passage à vélo le 18 juillet 2021.<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/5uk5lkhoij64f6a3a7961a86e8/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5hbM4e2fFVA2MmIeKVWoBFEV-2EegK40m5rogli5DUxPNlCsuRipO8hQBYlqYXLi08X7mFFIK__zHzfVp1M48YAseZEE63bNkcqpcERwXaBgRKGEbBqh1Tx4NSF4o5lHsK88M1LJKUiVeh7iYERuvOs3IbqrzrmkHdI1i1u-5uKa2spHjWrcsPW_jLL5tANCA7?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/ji7e6sks0cqrj7assbbojvkalc/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5ToJ57Yh22e0xgiYZuHlikdnPLtd0JMxDoygFFF5Sduzl0gw67cxfWS7gkbqzfIb5JzObE3XRKe-m0-5xJPcyGCXNrDnRDg80L7Lv8HQnFjcZh7QbNKRCI6KnN9L4K4EfpKYQhuv_KdeHcuoLBOScNKE1x09DQl3HkMa23DonzYcBzE-6TTTGfhFy7C3-QcyTb?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Anderson Hollow Lighthouse"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.567078,
-                    45.3695124
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Une halte routière avec un chemin qui fait une boucle, avec plusieurs espaces de stationnement avec tables à pique-nique. Il n'y a pas d'affiche qui indique que nous n'avons pas le droit de camper. Nous y sommes installé.e.s au coucher du soleil et sommes parti.e.s le lendemain matin. Les citoyen.ne.s que nous avons croisé.e.s étaient très courtois.e.s. Avec toilettes, eau (non potable), grand abris (pratique pour faire sécher la tente le lendemain matin!) et prises électriques. Route un peu bruyante, avec des bouchons c'est parfait! Situé à une distance parfaite de la microbrasserie La Ferme ;) <br><br>17 juillet 2021; Charlie et Maude",
-                "name": "Parc de la mairie Shefford"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.6103204,
-                    45.1092557
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "La cour d'école est super grande, et le fond de la cour est à la lisière d'un bois. Pas visible d'aucune rue. Par contre il n'y a pas de toilettes ni d'eau (mais ravitaillement possible à de multiples endroits autour), et bien sûr il faut être discret et respectueux du lieu. Et se timer avec les vacances scolaires, sinon le réveil sera brutal ;) On y a croisé personne - c'était parfait pour dépanner. <br><br>18 juillet 2021 - Charlie et Maude",
-                "name": "School Sutton"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.9961944444444,
-                    45.2343333333333
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "On était en route vers le camping, quand on a vu ce sentier municipal le long de la voie ferrée. Quelques spots tranquilles pour mettre sa tente le long du sentier. Toilette sèche à l'entrée et petit abris avec bancs de parc. Pas de point d'eau, mais comme il n'y a rien autour, nous avons demandé au camping le lendemain matin et ils nous ont laissé remplir nos gourdes :) On a même eu droit à un concert de ouaouarons! <br>45°14'03.6\"N 72°59'46.3\"W<br><br>19 juin 2021 - Charlie et Brigitte",
-                "name": "Sentier municipal de Sainte-Sabine"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -71.8936944444444,
-                    45.3205
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "On y a pas camper, mais on a vu de beaux spots dans ce coin-là pour tenter au bord de la rivière. Parfait pour l'approvisionnement en eau si on traite l'eau. On a vu une tente aussi dans le coin.<br><br>45°19'13.8\"N 71°53'37.3\"W<br>Juillet 2021 - Charlie et Maude",
-                "name": "Piste North Hatley - Lennoxville"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -64.7356814,
-                    46.0806965
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/1jhr7l7000qmajqjiibfioovm4/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5rxCMhp-4WVkDO_fzi2k-YvAo3BXM5BN45aFJiqvV_8xQuHlzgrKyOnn0OgXwjaIr_utRKH-60Lj9mShJXzLD8av55hhsG3fO8Im8hgf26GY3Uu12INtuEI08ekloPAom2_eq0lxLXxB5sM3eSiAcq8Ht3Nw_hkDTin67KauJjMO_eRwSPaB9nLHvX1EteoImt?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>En retrait de la piste cyclable, peu après avoir quitté Moncton et Dieppe en direction sud, cette halte cyclable dispose de tables de pique-nique, de toilette sèche, et de verdure suffisante pour y monter vos tentes. Pas d'eau courante, ,ais commerces à proximité Subway, Tim Horton, etc).  Moustiques présents, car voisin de la lagune en bordure de la rivière Petit Codiac.  Site assez joli et tranquille, néanmoins   Site visité lors de notre passage à vélo le 21 juillet 2021.<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/ec13trppir69djv5240vggaihc/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5UtnM1-7zuAZ85A3j_SXrKvbvQQSSgMEH7fjWnkBCIisYNpZh9dgsuhH5V_Tp2209SrdJpAGEspt6UdFiOE8xAh1_tmA8d9NOtmuVCiwVLf2a_V7sH2gyEm59X_0VedVrakwq2lEox1CinB1bUr110mmGxT0Z6T7QCXTKQhzQ1M55TKinhSEeg7YSWR0sxVnNp?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/7o9rdih8q70ob5908f438v7qak/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet43MXfQfiwtAt51zh1GeeI1T-UPc_QQNxm-Kl-E6JBvW61KO5gvAv5Ys5jaynudzQ8FrItc-X4K7FKxc5_WVMMPv0ynqQjpa3vCF3DPrfm3prYTxf-_ZljGn0CRGecRAM6sMVP_jjxavLMeOm2wQbqVGtAgC_3Eejsjut5WvHlUfW4JrzPnGU0jIYLIM_3rucVD?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Halte cyclable, Route du littoral de Fundy"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -73.8742665,
-                    46.1750154
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/obobcrkfng63aos577h9p892ok/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5WysnIJZZZB_S6XQ-vnLHTUvbai4FQQzMVb-1nC3k6hfdhT_6M6QoJQFbWEOlS_yGchgOwKAonXMdJ2NHInIr90sDf30-MoDGjM-pW6no-_DyVMp24Jo5l34SSYvLm8vDzP4ArBwYGcbtgamVoS8r1gPx6FQKh38cAt9sYAvy-M3D56DjndJTAjJSimm9KY1yT?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Plusieurs beaux emplacements avec accès à la rivière. Les chemins sont accidentés dans ce coin et prisés des quads et autres 4X4. Le spot commence à être connu mais tranquille et sympathique malgré tout. J'ai passé 2 nuits, soit un vendredi et samedi soir 17-18 juillet 2021. Possibilité de baignade et de faire un feu de camp. Guillaume F.",
-                "name": "En bordure de la rivière Ouareau"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -61.4993872,
-                    47.5618641
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/keil11hq4174rpcukb12lva5fo/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5Sux9zSRbx4FidayO2T8uw6zyI1CALcD6fOQxx58DaTf-SrNibPyTxn4QSjJ1AZVF_9rTy_EAUfg2cnzaz2YUPebM5IoMVyCCbQAOnIm3FxM8JC7R9UDBfR10v5M3721S8T01geTSBlokK0h3uDD729tZfstNo0sAeNyd5bBT0tecjgLRvol2Yyr6dLnzQZSDi?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Pas d'eau - pas de toilette<br>Blocs sanitaires disponibles entre 10h et 19h à la plage de la grande échouerie à quelques km au nord, ainsi que près du port de Grande Entrée.<br>Plage bien à l'abri du vent ouest ou nord<br>Juste assez d'espace pour une tente au-dessus de la ligne de marée.<br>Accès par le chemin du Bassin Est<br>Plage connue mais relativement peu fréquentée (en pleine saison touristique, on n'a vu personne entre 20h et 8h du matin).",
-                "name": "Plage du bassin est"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -71.8658843,
-                    48.7376303
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Très tranquille, il y avait un peu de gens, mais personne est venu nous déranger. Pas de toilettes, d'électricité et d'eau potable. On s'est installé dans le coin à gauche du quai, c'était très discret.",
-                "name": "Quai de Sainte-Monique"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -74.3685062,
-                    46.1032488
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/iq616ekmtk190m1f30ands5cf8/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6cN4gegbnmEtld1ZLEYoQ0ncSfJdBS4VZw8l_uJgCS9VIST1HPFuo5QY0soeAUHE52-JxdgF-mM9Gw10AQUavWBM21oMcqFqSj6JlH_P1K40QURJ8j2ZnA-RPDhSh9Hl0B76tYMB7pukmxEtX7cEUac5JMnydoMHdV1DrOPemCab-cKyIWdtIqUxcBBfgFwzM?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Porte en métal avec un cadenas rouillé sur le côté Sud du Petit Train du Nord. La clôture juste à côté de la porte est enlevée et on peut y passer facilement avec les vélos. Une belle plage de sable à côté du lac et plein d'espace pour des tentes.<br><br>*****<br><br>Couché là le 20 août 2020. Vraiment un beau spot, tranquille et belle baignade dans le petit lac. Update avec photo.<br><br>*****<br><br>Couché là en 2021, exactement comme décrit. Un peu trop près de la route, on entend les voitures, mais avec des bouchons c'est correct. Endroit magnifique. Attention, cet endroit est sur un terrain privé, mais aucune maison dans les environs. Soyez discrets! :)<br>- admin",
-                "name": "Camping sauvage petit lac"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -57.1282525,
-                    51.4286513
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Camping rustique avec toilette sèche. Tables de pique-nique, gazon, plateforme en bois. Pas d’eau, mais village est tout près. Les campeurs y sont expressément bienvenus 😊. Visité le 5 sept 2021; Pion et Giguère, Cyclo-voyageurs.  our blog:Normand_Pion@yahoo.ca<br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br>+<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br>+<br>tandemetcie.com",
-                "name": "Parc municipal Blanc-Sablon"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -56.8600094,
-                    51.4607005
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Au bout de la route! Spot extraordinaire face au Détroit de Belle-Isle;  Baleines et mammifères marins sous vos yeux, icebergs si vous y êtes en début de saison.  Terrain gazonné, moyennement abrité ( peux être trop venteux pour tente légère si tempête annoncée …) mais vue fabuleuse! Toilette et eau potable durant les heures de visite, mais bâtiment fermé après 5pm; Présence tolérée ( de fait , j’y ai été plus que bien accueilli!); J’ai campé ici le 6 sept 2021.Site visité lors de notre passage à vélo le 25 juin 2021.Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
-                "name": "Phare historique de Anse-Amour"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -57.5341735,
-                    50.3382778
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Bel espace aménagé sur la falaise surplombant le village; La mer est à vos pieds! Tables de pique-nique, gazebo, terrain gazonné et plat, abrité du vent du large par un gros buisson ( insuffisant en cas de tempête!  VÉRIFIER la météo avant de camper ici!!! Pas de toilette; un petit ruisseau au pied de la falaise ( accessible sous le pont qui donne accès au village) procurera l’eau  nécessaire . Mon plus beaux spot de camping sauvage en 2021!  Camping lors de mon passage à vélo le 12 sept 2021.              <br>                 Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
-                "name": "Village de Bellburns, parc municipal "
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -53.3471862,
-                    48.3633483
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Beau terrain gazonné surplombant la falaise côté est de la route. Le phare est á 200 mètres. Le joli village de Trinity de l’autre côté de la baie; Fantastiques paysages au lever du soleil! Relativement bien abrité du vent du large par de gros buisson. Néanmoins à Terre-Neuve il est toujours prudent de vérifier la météo et s’abstenir quand de forts vents sont prévus … Pas de toilette, pas d’eau à proximité; prévoir vos réserves d’eau á Dunfield ( plus rien après le village!).      J’ai campé dur ce site fabuleux  le 16 sept  2021.Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
-                "name": "Phare historique de Pointe-Trinity"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -73.1646553,
-                    46.0843009
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/vv7or3n3jjs2ur602r7ff64gp8/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7Rb9OStxEQjIbK6OMcsDZiGaEjZ6kl5QPxkZzpxVdVBrCc1dItGA3oHhi7ObY-2lTgmQJ56wQdO-iYEQod731-mhBQwXUReoBLzcgM3-UrzbUF5YMpO2Xi3iJQKfsG3Ed4QapSb9micB75ECZBCnPFO_lRuSVXb4Qj12aBiFB7xX6c1aMHurZ4uURmealF0Cjk?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Très beau site avec toit, tables de picnic, bac de recyclage et poubelle. À l'entrée des sentiers des îles de Berthier.",
-                "name": "Point 251"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -67.1420445,
-                    48.1483433
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Section de l'ancienne route 132. Place pour feu et de l'eau accessible.",
-                "name": "Ancienne route 132\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -71.9322013,
-                    46.6182355
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Il y a un grand bâtiment municipal et des emplacements pour faire des feux. N'en faites pas, tentez-vous tranquilos et profiter du fleuve. Je me suis baigné dans le fleuve à marée basse à l'été 2021 et c'était très agréable.",
-                "name": "Point 253"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.2056338,
-                    46.505
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "À la quantité de VR cordés là, il semble permis de s'y installer. Toilette chimique derrière l'église et boyau d'arrosage pour l'eau.",
-                "name": "Point 254"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.4944937,
-                    45.2557379
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "À 5.5 km du village, petit espace où il est permis de camper. Sur le bord du lac.",
-                "name": "Point 255"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.6200374,
-                    46.2261848
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Derrière le point d'informations touristiques, prendre le bas vers la rivière, à gauche, il y a un grand espace vert où on peut tenter sans problème. Tranquille la nuit malgré le pont.",
-                "name": "Point 256"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.9724183,
-                    45.8499286
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "On trouvera sans doute un coin agréable près du parc récréatif ou le long de la \"rue du Parc\" qui se poursuit en \"piste cyclable\" non-asphaltée.",
-                "name": "Point 257"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.2069164,
-                    46.9590859
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "C'est une halte dite municipale, mais qui porte aussi un autre nom. Aménagement : toilettes sèches, tables de pique-nique en granite. Village à 2 km. Les gens s'arrêtent et repartent. Probablement plus achalandé pendant les vacances ?",
-                "name": "Point 258"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.6923379,
-                    46.9192702
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "J'aime personnellement mieux les endroits plus discrets que les parcs, alors je me suis rabattu sur le côté de l'église (le cimetière est sur une butte) où il y a de grands arbres.",
-                "name": "Point 259"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.0356671,
-                    46.9126758
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Quand vous êtes sur la piste cyclable, un panneau indique le pont de pierre. Le sentier se rend jusqu'à la route qui borde un parc. Je n'hésiterais pas à m'y tenter un soir de semaine en basse saison.",
-                "name": "Point 260"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -75.0746963,
-                    46.0219764
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/5emmh5lknu5o44cmc5rrsfklro/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet67Od7Bs-iA2t6yCT2scgAZoODc7kjKZQvC1yqxQSHImMHdPuu3bVDZyepPESZc9aNXFW56i1tWocVyGy2ueoSSKRHFdxHj_JymPcNkAEviKCFwMCXt3TjLCVZsy3SQWfrNtSjz9SntITRP3fYspQBeL3zBkJebxeUg4jMe4HZElJgyW8i7m-hFH5r266nWHHdL?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>J'ai passé une nuit de vendredi à samedi ici en aout 2022, sous les pins et au son des chutes (et des voisins). Aucune interdiction affichée. Pas d'eau potable. Toilette sèche « hors service » mais débarrée et assez propre à mon passage. Il y a des passants durant la journée (descente de kayaks et de tubes) mais sinon c'est plus tranquille quand on s'éloigne du stationnement. Accès facile à la rivière. Deux dépanneurs à proximité.<br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/i2k15ftqhbmh4n3ps2bktae5l4/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet56ao3YYl8w1RaMgW390XB4NJLIc9beQXbQpVWkh2qfUQB_pdpofSQ78VdI5KuA9RvYalUz0neQHPeqQ0szMYXDMxWUG6cLAm6tchMJVDkcqduc2_Xe5n1_sDgkf-A-yPwhi0vT76h9aABQAKhof7iq6RYN3T3DRz_PywIpTyF7yobmRfLwv59-TAWy7X6DE2Bc?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Duhamel – halte routière\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -75.0909011,
-                    46.0520992
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/3rpvh1jhi24rqdi9vcgbshdceg/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4UyH1RCUjO6vf31X2XEQcSunFl7oqT_vBmoVQ0RV3yqcf33VApNmXVv8Qc2UvF0geQCMcpXrjtnBnoM6aLnMkgCboKYKdvxmskYbuuwFIb2t7-g_eZbhN9DXDwhUhgZzUXBHW_TwXturRT8_D30F0TTZMFMmmMcLpJ6F2PTNwPy3ebaBrag9yrq5zQLgAPGK1Q?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>À quelques pas de la piste cyclable, non accessible en voiture, il y a une halte cycliste sur le bord de l'eau. Je n'ai pas campé là, n'ayant pas vu l'emplacement sur la carte avant que j'étais déjà campé à la halte routière plus au sud.<br>Table à pique-nique. Pas de toilettes, ni d'eau potable, mais accès à la rivière. Un peu plus à l'est, un autre site, avec une grande table.<br>Pas de panneaux d'interdiction.<br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/5mbeok0etbqbonj9thseh96u2c/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4ZeOo1DSjcwUaLmcD1WaAnysTdbnVNrm3gBhISih2Qwv44Fa44wN2Ebj5WU97GXxDGdlhHyhijsfFLB5jnEbA5hF8gv03-pK4OcpRcSwKbugHLKQm6v8J6UwR3ra1y0eXtAIzYIqoVRNCKHbcCjuezJD5LZisuLg_HQOcDOB6mIrQIM0Ry6bHQxUm085WGXcJH?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Duhamel – bord de l'eau tranquille\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -74.8468228,
-                    46.1316674
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/6o9j09gdn61jhhl1l3jci03bdo/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet62tM442VunGSA-QbRv0J7wTxPwkhvooaZTvrqBWVFu9uWowN_geGiUHA31m27Q_ek4PxuyXxeNaSnwWYKKmrWkg9OTASfGfVEYcDpDJXTba1L4kl2OFKYcJDCepKO7MDtLP34Uz4_KwJjsJqyoaCLSFELJwKuGhTDebN-uv6fjoYYDDxYc1HuYtw16bVV9SqTL?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Très bel endroit pour camper. Il y a plusieurs choix. Il y a l'emplacement principal, gazonné, tables à pique-nique, toilette sèche, entouré d'arbres, mais j'avais choisi lors de mes 2 passages en aout 2022 un petit emplacement sur le bord de l'eau près des rapides, immédiatement à l'est. Plus loin à l'est, il y a d'autres accès sous les arbres avec l'accès à l'eau aussi.<br>Lors de mon 2e passage un samedi soir, c'était assez achalandé. Mais bon, aucun panneau d'interdiction, et c'est un espace public.",
-                "name": "Rivière Maskinongé\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -64.8980354,
-                    47.4174291
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/pac2shf3shrk0ngs2fopg369dk/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4QYHAdbB88_wIHiwB47w3hoRyb7OPrVt_Bd0TXn3XzzUb9TvzFLUCInRH3Ihn8Yh1IjcYUJOCuCMSBI5hzDytMo9aBbWPXtX3ODKt4XPYXNZpAdqSAfIi0yXh71vQsH5_OuqMHFvERdHpaEmc7APtxRG5mNJHHFDT9Y0BBWcMiJAhMLiTLlygo9ngVl6o7C5B1?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Campé là en juin 2022. Tranquille, puisque le stationnement principal est situé plus loin au nord. Quelques pêcheurs à mon passage. Aucun panneau d'interdiction. Pas de toilettes, pas d'eau potable, pas d'ombre!<br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/3ssl7c6lpb7jsvjmp25h56juak/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet46NLuwApHQKmU8gTQ5t4tOmBEmT-mYhxxnApcBkO-1Uzb3DtevgR-wxXvFMWBV5C-zzlEE6x6X67LX_AuAknyAuMPmG5Ke6KFiOU9lX80B8CNySkEIgMAkKd62VR0xnyLQalgxebHUPfN6I4og98IRIZkxkBtnR7GguFWqSlzW4PB6C_f3yB2ZqCTxQzQ6H486?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/rnn1jje19ulsjck9k5pcc27i3c/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4TZPoU0sMGPHyhzbepp8oyLaA0dE2eRVnd0f4hK5scIMMmu38eLpR7-i3_RYJ4eCxc5nc_1YRHhHJeOzqJgF88eIy-XBzp_dOJoKKi8L4_KLpeLcotLVif5A8YCwc9nM_y-UxkYGRCryRiYX_tlyJUvvmIr0nl8eSSWoYb4Pe5OsI1njLVIWt4g5MXtnHhoCLt?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Plage immense\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -73.2130568,
-                    45.5443792
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "On indique que le parc est ouvert de 8 h à minuit, mais j'y ai vu des VR passer la nuit. Derrière le bâtiment sanitaire, il y a une place avec des tables parfait pour une tente. Pas d'interdiction de camper. Sinon, voir en face :",
-                "name": "Point 265"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -73.2131319,
-                    45.5438589
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Je préfère de loin les endroits discrets : juste devant la pancarte d'interdiction de stationnement, il y a les vestiges d'une ancienne maison. Ça donne sur le grand parc. Le couvert forestier est vaste, le sol est dégagé. L'endroit parfait. La route peut être bruyante, mais pas trop la nuit.",
-                "name": "Point 266"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -79.2992364,
-                    48.5523825
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "À côté de l'église de Rapide-Danseur, j'ai rencontré un gars de Vélo-Québec encore dans sa tente. Il m'a dit que le maire du village (qui habite à côté de l'église) lui a permis de s'installer là.",
-                "name": "Point 267"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -64.810275,
-                    46.9874492
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Quelques touristes sur la plage en fin de journée et calme durant la nuit. Pas de toilettes ni d'eau potable. Bel emplacement pour une nuit.",
-                "name": "Pointe-Sapin"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -60.800022,
-                    46.8306766
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Superbe plage où l'on a pu dormir à la belle étoile en août 2023. Il y a quelques vans qui s'y stationnent aussi pour la nuit. Pas d'eau potable ni de toilettes.",
-                "name": "Pleasant Bay\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -73.3228528,
-                    45.1608161
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/b7n3d5k27l0tccpbn5mqe30jlk/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4SsWi02e7i5VGfgYbHxyxQtBwfnmJFE8tCTS7iMn4JpQ9g53EKgbrtVsPTtI-nppizlPxU_eXjAjW_T2vZWmq1fvRoXfpmcxZUxGX-Usw_yzPlrAz5TBUgwnZXMq8djaKMtsKtnBxzNCRIHzvv58cC1Toqep13H9NYB6GHRiuV-NuJLWMR0kBMFKDqX4Yz5OCXOMVOKRhGMf4MorA83CwiyVUhIn1InT8TWdqoUqJrAF4Y7A?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Joli spot de fin de journée, en bordure de Route Verte #2, entre St-Valentin et St-Blaise.<br><br>Il s'agit d'un parc municipal au milieu des champs, à la croisée du Rang St-Joseph et Montée du Petit Rang; Quelques bancs, mais pas de table de pique-nique, PAS DE TOILETTE, et pas d'eau courante.<br><br>Prévoir vos réserves d'eau pour la nuit dans le village de St-Blaise si vous arrivez par le nord (8 km avant), ou dans le village de St-Valentin si vous arrivez par le sud.  (4 km avant)<br><br>Pion et Giguère, tandémistes et Cyclo-Voyageurs<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br>http://www.crazyguyonabike.com/rikimiki<br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/o6j4cs6b0gt5eu5hl4c4nlkris/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4UFQH2qWeAS_7IRqiVn7lqYG5aXmA2AiWe2Tx4PQszPdBd6M5BBXiN5rc3dKwi9G7FgXCPx6pPlfZPrwgYIr7PZajln43tkeo427dArNAei8OTvrPVAHcskmAudB93de-MY6Fj9RB2FF0xg7RT_BlFlHlq3IDCpbGxD7Lm4zniSog3FmckHdvba2WgByG5HoNy-AXmwkOzADv27-D1n4OlYmhrstM_5XMKIIwS_7tagecl4g?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Point 270 Parc Municipal St-Valentin"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -73.4289984,
-                    45.5319644
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/euctocd76sbtp7222n7f5ahdig/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5jMR6rt191dlXzJB8gk3bx06bSBzuGvSASUrfDfi7yLWPJFth-wJ5wPCYp6Rv7XEn5SqlcQKra_TFFLB1Mi4OPUEQaHe16aczCratniEcCOaJv_KY9bfRzKXQUEgyzTC-f2wRMGwdg08FSpH32GB9xYLVGMba_67TVJFRjazKQX2BCGs3oVtVyAgPYULWUgx3iHfJWHUJ1pM2hzW80D8QCs2196xXC2lLijHC1QSumm_fjJQ?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Entrée sud-est du Parc, dans un  secteur peu fréquenté.  Verdure, tables de pique-nique, toilette sèche.  Pas d'eau, mais commerces de proximité à 500 mètres.  <br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/a75il2oqj3uc20img6g52dj3jg/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5dxyBvw1k-Q8skj2ZNbqYgRVKF37Lz4I5ECsienWfzE-whFDU7TLXGbdgsFJ1sdQAwsr3EyhDbb8EDYCnpRgd4W5fIM_6ksyuXqGR-HiDni2Y9x9iKuowFCKHt-vhgjS5RCRHZJyoGq6JKULAjXFdgFMBRGldwWNBNwUdXtGpdg7YpVrNLZewy5uj3eg1x8p55gKpe_RQ6l3fQOV3aZiMNbugd81Sofh19jcUbmRU4VgOe4w?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/1e3irjsta4r1kujoub9plqnu7k/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5golrihkGobxMqdETZUa5hDmt0VGBusRvj_hHO-ZECQGy9R4bJscn0Tzsk5H8-zDXZ2M1gDuo5VSnlKkZBYqqb_bjOfimwQVG62O_y1NGqEj5GSwXxGTd_uh4bKjwMHFMzS7IUYTncdCAaPvrQ2AahV-naGJXXHISxt_am5gWMthciL19-KcrnooZGvAY-LvjIbCXXS3dA7dZirYedWooBmcTkRmgPy1jX103gQ2NSoMesdA?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Boisé du Tremblay"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.5466842,
-                    45.6771617
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/fs29lcin10fbiu6fg96nfn3h1o/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet799dfZD88wM0zdu-ODfxQSEZNArLbNH7warvR6CwK07rIWcv7nG1KMIv69-JrPAlIS5mlMjipjO7AUT7PDkbyF_bzAq0A4XxQo1pIjABdllT9aMbt4NhEaUtB0qWnlwEo7MWjOMAeh_sXTIGFYeHGDoKhwYLSTjTQO8N9eZrpN1LBAntGSeuLwf-lEtCPS1F1qGccw7eTanRgc2xPnlldpb1hEeh71Lw1Z3UBR8wX0lIPj_A?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Halte cycliste quelques km au nord d'Acton Vale. Pas de toilettes ni d'eau potable. Possibilité pour une petite tente (2 places) d'être montée sous l'abri, sinon un peu plus de place à côté. Un beau mur pour protéger des vents de l'ouest! Eau potable et toilettes à Acton Vale, à côté de l'information touristique.<br>On entend un peu la circulation automobile de la R139, mais c'est juste assez loin pour pas que ça devienne trop incommodant.<br>Aucun panneau d'interdiction sur place, par contre, il y a des panneaux discrets aux intersections, donc techniquement, le camping est illégal sur la piste dans sa portion de la MRC d'Acton.<br>-admin",
-                "name": "Halte cycliste Acton Vale\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.5308996,
-                    45.7094201
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/dpt8i2efamvq9pjnltb2ijdlag/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4fH3yshC7nrJgc0e8V5k-5IH5qOmCHmpJRLC8yoBXVocJxvo84tcb3_e0rr8zsCObCjBEytzbJsHvxWzKUGhoHgyuLl0tzA-gMb7WX-MnkY0hDM9PW6DlmFE4ohQmE1ycR1oBuNqXGZ0w2MINky3tKq7Uoad7J8Z-qCelbwTojkzmxFVNl04qvfmw039Q5G525aBVmwlkhantTPcSTIpzjBJwJHr8hVGNVKkJyq1qgBah2Vg?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Alternative pas mal identique à la halte un peu plus au sud. Je n'ai pas campé là, ayant campé à la halte plus au sud.<br>Aucun panneau d'interdiction sur place, par contre, il y a des panneaux discrets aux intersections, donc techniquement, le camping est illégal sur la piste dans sa portion de la MRC d'Acton.",
-                "name": "Halte cycliste sur la Campagnarde\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.4900707,
-                    45.7822
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/p7krji15d3sqbejscr0uaj8f2g/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5Z7Ebk3QkgYOxeovcvBUNKlWNC6ddG4l9lrfRDAt1hn9-Dw6i5wwTrHcYCCl9qBqLAjzcLJUcdVLBMiEsVqD4Ny1PSAy_PH_o3uDTtT-XO-7sX2MZhwR5RECLGTGk1mVh7Hx2Cu_xAn3iCtgRSpC_jCWswWLnKP-wVV9UCVNfff6A-jZ1hV07iwLHNa0XNHzgSwneDkpCKsmS7flQZtG06-YmeNf1rWwjb7-ek06JPc5nBEQ?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Sûrement un bel endroit pour installer sa tente. Je n'ai vu aucun panneau d'interdiction. Je n'ai pas campé là puisque j'y suis passé en matinée, malheureusement!<br>Pas de toilettes. Belle rivière avec de l'eau à filtrer. Par contre, quand même près de Wickham et Drummondville, donc ça risque d'être achalandé. Il faut toutefois noter que cet endroit est à une bonne centaine de mètres de la halte cyclistes, donc pas visible de la piste.<br>-admin<br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/41ev0bfgifn0ni2od8cqv7do94/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7PY3G5zFLzMEVS6sG-gOW1Mfb0-OzngBe9Scy28Q8RruiPaoxWQUTe1xvDAWivNa8QSsoLhz1jo-a-BD3XHaRubUkFgJOzAtlUeacdxpXDi_6AMxW2bYZEcM05cR09YiTfDbdptyowgHfgVAJvHIenO1KiimRQpd2OvTFU-qwzsPPu_AqJ6QiqC8fBihsCy6OyBifwHEX7X6PO5oZoPopd4KrHk164Hk6KaDDRigEKlESj5Q?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Site potentiel près de la rivière St-Germain\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.3031623,
-                    45.7796864
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/a9ldlpauas7uutvc7la2kudecs/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6wiCHjdxzBx_7JPIyhTTNpFRjYzc-PRORbG0RJJf2QPGXpVY15g5_AJN2gj3_vnSvFgyL204berOO3EheqxTQwc9IEC4THTqTYKLuPCHCwFzaHMXzG5MFd5CQPvHNt_7ArzJGaRYA2zLhK0PV-ESlusLcDiOzaIJEE4pYjHJZSc-iseV29VlKXDY3WUM0ZI8QEJZjn36EvB2zuuPFLvnkc7IcN2-h7jrE7n0-mao3RwbKcxA?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>C'est bien le nom du ruisseau. Il y aurait probablement moyen d'y camper sans problème sur un des deux bords des ponts, à cette halte le long de cette courte mais bucolique piste cyclable qui mène au village de l'Avenir.<br>J'y suis passé, mais je n'y ai pas campé, puisque c'était l'après-midi. Aucune toilette, pas d'eau, mais une rivière si on a un filtre.<br>-admin<br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/pthqbn53rv9ooaqot75m9kbma4/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6plTFiMMnmjkksm8Xn5tuPQ9QNvCz0T6PdJUQ-6KOGTGpDaAgToNSahitawYFr_OJmfRjnVouMj8ilcawC4t55HPpxraI1-XlmrnbTc0aTCGu1J1OGS885bzUgP-NyPMDc48aiuSnm0oPwuJI54w9JLe-wd4wtQg3GF2MuNJz3CPeVxEDIekvOXNyslO8YY0E6mVV54gplOUa-Bv9K0rx3jlcuW1naRXBRHkM6nNvMycrf3w?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Sur le bord du Grand Ruisseau\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.5924754,
-                    45.469872
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Une belle alternative à la SÉPAQ. Halte presque identique à celle au nord d'Acton Vale, avec un beau toit et un mur pour se protéger contrer les vents de l'ouest. Je m'y suis réfugié pendant une heure en matinée pour laisser passer un orage mais je n'y ai pas passé la nuit.<br>Aucun panneau d'interdiction, contrairement aux haltes dans la MRC d'Acton.<br>-admin",
-                "name": "Halte cycliste près du parc de la Yamaska\n"
-            },
-            "type": "Feature"
-        },
-        {
-            "geometry": {
-                "coordinates": [
-                    -75.9296386,
-                    46.5906834
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/ivq4e6c93gku54evmv554t4m6c/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5S-2-mJoSyjMUqd4UtjMpov4hqH7JEUrEEmbAEqe5TiNSr1TsrQSzpo6Cn1n8zWgyd6ZJj7tyualjaxLEKewVF1uRI6BMOOnEtBCHLmd69tq48ASJgxAIuJMkiy_17JlQA8cFJpU-0PCvM0FIN1gxHZSaUv8uLD5EQ5HN6vJw7Jmn6Iiv2tvmXLMgU3XnIibFbaTKr7Y1A_Rdojo-rGGfzEmFsJQnDU1A7AVZRUIiKwpFpAw?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Aire de gazon en contrebas du pont couvert de Grand Remous. Accès à la plateforme d'observation par des escaliers. Possibilité de descendre le talus.<br><br>PAS de toilette sur place. Poubelle au niveau de la route. Accès à la rivière (attention au courant) pour la vaisselle ou se rincer. Dépanneur ouvert tôt et tard à quelques kilomètres sur la 117 (toilettes). Possibilité de se mettre à l'abri sous le pont.<br><br>Lieu très tranquille. Quelques habitations à proximité.<br><br>Circulation sur le pont interdite aux véhicules à moteur, passage possible à vélo [août 2023].<br><br>La rivière fait beaucoup de bruit<br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/a92psa22jcm009q88o2u8cf138/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet60t4JJHxh-KC6K-zCmTLi5fBIARBgCXl58k5nXAs5lkwIcc0MQVFnUjInZFBoMOfOho51li-E93E4CCqTzKfC5r09WgjAmI8xcZyEPsoKphQixvHJyxexzCib6PaDuO3mMI__GXAW7LTsgBF0b2nQ5h6X-f3M8SiHYXPqWfedChZARZ2c_kAwlXPkcxgPKdiwT-ml9RYajraFmuRJIajXwpPQ8b2oYmRGOPMaeeOlyLDuyYQ?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/o002gleq25tv4aipbjsmo1fsec/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4BHXyD_g0P35JVoihsvSQBVrCZVKzOjtnUmY06yl3WsXoX3RjcogCZo3U5_nZJX4x1Jel1jayriq1fCaynmtiuWQlp-zLWeBR3HvqEWGIdIkd9aFxsQS0CxA1ni2I8xA-r8wzxrHg6laOZbcLxGzLbDcaHxEd1xpkpP3UpSPdDA04iBchj9QDu_uVpquapuVFAsTnYYZmEkU7rEWKfaGXk6fmp8h_fA_IF6gLHeULYHyYRmw?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Pont couvert\n"
-            },
-            "type": "Feature"
-        }
+    {
+        "geometry": {
+            "coordinates": [
+                -74.6712716,
+                45.938938
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/s2kf8d9gnq5tlgjm7i2mivt16s/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisAWs7wxqTynJMcYGXs4c-M1KaK5ReJAgdZcwicnzNyFfrt6zpaI4Y2ZI5MWJ73PBpoNTz-YgyriplLlPMg6R-4ZqBHl9pdrpajNq-58hzjdlUXL3san9vYxDJOEeIS495j6M2v5GvqtWnQGX-9GWGevZ8VNcYaQ6A7EpsnaChcNTrMk7moxDvUUivRw6r7svoQ?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Accès par un petit sentier près du pont du Corridor Aérobique. Techniquement privé mais sur la carte-guide pour les canoteurs en tant que site de groupe. La plage est immense.<br><br>2018.08 : nuitée tranquille, canot-campeurs respectueux à l'autre bout de la plage.<br><br>*** Note de l'admin :<br><br>2021.08 : un cyclotouriste s'est fait avertir par un ami du propriétaire de ce terrain que le sentier accédant à la plage est privé. Il lui a laissé camper là après une bonne discussion mais c'est à vos risques. Le canot-camping est légal car la plage est publique, mais la personne en question qui surveillait le terrain déteste les cyclocampeurs.<br><br>*** Suivi :<br><br>2021.08 : J'ai campé là récemment. Il y a effectivement des gens de l'association des résidents du chemin Courte (à qui appartient le terrain) qui patrouillent régulièrement. Quelqu'un a tenté de m'expulser. J'ai joué la carte de l'ignorance, des problèmes mécaniques et du fait que je suis mal pris pour lui convaincre de me laisser passer la nuit. Je déconseille ce site! :(",
+            "name": "Plage sur la rivière Rouge – ATTENTION : lire l'avertissement!\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -71.8547962,
+                46.8868945
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/uakra51o0nj6h97vsh2tpi3edg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisW1BUrlBPoPQbRvi_hT6xYs82OdOHi_tvMSB3WOoNQvj0NkdejvIRbPMQeLZqw-VN3kFZp83Oh3Rr9lM6DmP7D2RuxusXc1capLszlUg2XEDTThQl1z9WzH8EsWWn1d7qSMCY1_889ITuN9VM4_VvQmBdAYg2ZuUwNIVQT_SE_xh00FeM6Gv9cGZPyNWJxT7OB?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Accès direct par la Route verte. Aucun panneau d'interdiction à cette entrée. Pas de toilettes sèches (contrairement à ce qui est indiqué sur la carte).<br><br>2019.08 : nuitée très tranquille au premier point d'observation.<br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/hbf8sjjotf62hd9sesphr57mos/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisDYghEyaIxAya-GvG45wjFfQ8TH5ZRksHYrxEM4IZIV9IH1h-Ab69zEYd6WJis9abY_OpsH_gcynVjGavIMdQCecjqoOpMEZ4t09zDR3cZ772m_AaFQm_RvOCVAyij_kiWiR_iYZ6sjJ8ej6qWsYyjnShGEwPYGq-HiVQ9qKqf9l2RvwSLoqJXdFfFbDzk44Rv?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Parc de la rivière Ste-Anne"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -70.8016545,
+                47.0143466
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/nms62s84nf4g7o91jgqkih9brc/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piu5sqiODz057R0EN1CePVurRzaB5E7jPa69LCJzJk30iDOzZk9JFk2CqsZ5p945hpSA3ljleDqy64-B4AlrYCTaL-S7R9GiDZ8F_19lBCyOEwWusrH9uRPixv_mOc2Rf_OV2pSINAD2edpjs1ONSBpU9xUIDnpjbDCXLS6D6yDHTY7UFPdiaMIN_dtuzUqsWjiB?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Accès via le ch. de l'Anse-Verte (privé), puis il faut faire passer son vélo par-dessus quelques grosses roches et pousser son vélo à travers le sable et le gravier pour trouver un endroit tranquille. Situé à côté du camping des scouts. Toilettes sèches et point d'eau à courte distance dans la forêt. Super beau lever de soleil. ATTENTION à la marée montante!<br><br>2019.07 : nuitée tranquille, quelques passants.<br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/dhtge17om5u7pul74q7l5p8lkk/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisQixbsc0wJDzhP_npzztJosuluLTzf7SgkBlxNrV4RyM2_M_3RMe_3Oz2daB02Nh3unxupjQxMtS14ytPl92eNobmKoeIDGOt9dfpjjvX2R0Nd5pEm_N2LeIoemwNxm01qMK-z_BwW5q9VjbGc7jVi-S-GT--tTKWjMj13imG53nDU7s1EPD9hz1tMr3_rl05q?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Pointe d'Argentenay"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -69.8799424,
+                47.2550238
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Accès: Route Drapeau Sud (très important!) passé le 1er ponceau, jusqu'à une fourche 6 km plus loin où vous prenez le chemin D'Ixworth à droite. Roulez un autre ~4,5 km, puis traversez le ponceau à gauche, pour ensuite garder votre droite sur le ch. D'Ixworth. Au \"carrefour\" triangulaire en pente avec plantation de conifères au centre, montez la côte (au lieu de prendre la droite vers le pont enjambant la rivière). Une fois la côte gravie, le petit cul-de-sac à votre droite mène au point de vue sur la chute, d'où vous pourrez aisément trouver un endroit pour installer votre tente.<br><br>Chute: Les rapides en amont se transforment en une triple chute tonitruante. Un 1er grand bassin pour nager baigne à son pied, à peine connu des gens du patelin.<br><br>L'on peut accéder à son 2e bassin qui le domine d'un mètre de dénivelé en nageant à contre-courant, puis en rampant tel un lézard sur des roches mouillées. Avertissement: faites gaffe de ne point glisser puis chuter: l'endroit est situé à au moins 12 km de la plus proche localité!<br><br>Un véritable paradis sur Terre vous attend dans cette grande cuve rocheuse, où l'on peut se faire masser le dos par la grande chute, mesurant environ 4 m. Un 3e bassin la surplombe, auquel il est aisé d'accéder via une courte marche sur le sentier. Suite à de fortes pluies, le courant pourrait vous empêcher d'accéder au 2e bassin, ou rendre la baignade dans le 3e périlleuse. Le 1er bassin (en bas) demeure sécuritaire peu importe la force du courant pour quiconque sait nager.<br><br>Il y a d'autres petits bassins peu profonds pour se baigner en amont et en aval, dont certains légèrement moins \"sportifs\" d'accès.<br><br>www.facebook.com/francsoisd",
+            "name": "St-Onésime-d'Ixworth, chute de la rivière Ouelle"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -66.3817809,
+                49.1667185
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Accès via la rue Du Havre, environ 7-8 km à l'est du \"centre-ville\" de Ste-Anne-des-Monts.<br><br>C'est la rue des petites maisons des pêcheurs du coin, avec vue imprenable sur la \"mer\" et ses rochers, où fourmille la faune aquatique même à marée basse.<br><br>Ne vous étonnez pas que des pêcheurs viennent \"sentir\" votre campement aux aurores, vous saluer, puis vous jaser leur vie si jamais vous étiez lève-tôt. Immersion gaspésienne garantie! :)<br><br>www.facebook.com/francsoisd",
+            "name": "Ste-Anne-des-Monts (Petite-Tourelle), rue de la Grève"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -66.0637353,
+                48.8059421
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Situé à plus de 400 m d'altitude, et à seulement quelques kms au sud du magnifique parc de la Gaspésie via la route 299, ce site de camping est fichtrement sauvage et n'a rien à envier à la SÉPAQ!<br><br>Situé peu après le 2e km du chemin de gravier menant à la ville-fantôme de Murdochville, sur votre gauche juste avant le premier pont.<br><br>Superbe lac au rivage de sable fin pour le bain du matin, quai pour canot / kayak. Micro stationnement à éviter pour le camping, sauf près des arbres ou dans les herbes: les pêcheurs matinaux peuvent y rentrer plutôt rapidement avec leur 'pick-up'.<br><br>www.facebook.com/francsoisd",
+            "name": "Lac Ste-Anne, sud du parc de la Gaspésie"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -70.8195034,
+                47.054272
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Pas de services. Une patch de gazon et deux tables à pique nique, un abreuvoir. OK pour passer la nuit si on arrive en fin de journée avant d'attaquer les côtes de Charlevoix. Voir https://www.google.com/maps/@47.0539377,-70.817702,3a,75y,161.23h,76.75t/data=!3m6!1e1!3m4!1sPve5v7776HX_AGhVkQOSWg!2e0!7i13312!8i6656",
+            "name": "Halte routière en bordure de route"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -70.8164411,
+                47.0534826
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Mini stationnement avec table de pique-nique.<br><br>Coin très tranquille de nuit, mais pouvant recevoir nombre de visiteurs à partir de 7-8h.<br><br>www.facebook.com/francsoisd",
+            "name": "Cap-Tourmente, marais des Graves"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -69.9894195,
+                47.738395
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "2820, boul. Malcom-Fraser, La Malbaie, secteur Saint-Fidèle.<br><br>Nous avions campé sur la pelouse plus bas sur le terrain après la fermeture du centre, puis démonté les tentes avant l'ouverture.<br><br>Tables à pique-nique, casse-croûte et  quelques commerces à proximité immédiate.<br><br>www.facebook.com/francsoisd",
+            "name": "La Malbaie, St-Fidèle, poste d'info parc marin Saguenay-St-Laurent"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -69.8267274,
+                47.9959193
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Nous n'y avions pas dormi, mais il y a certes moyen de trouver un coin retiré pour y planter une tente.<br><br>Tables de pique-nique et majestueux lac. <br><br>Avis: bouchons d'oreilles requis si vous aviez le sommeil léger, car la route 138 étant la seule reliant la Haute et la Basse-Côte-Nord au reste du Qc, le camionnage y est sporadique à toute heure (et comme le lieu forme une cuvette, il peut y avoir réverbération, et donc amplification des sons).<br><br>www.facebook.com/francsoisd",
+            "name": "Deuxième lac du séminaire, halte-routière"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -68.8693493,
+                48.3107302
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Stationnement du belvédère où il est assez aisé de \"camper en pirate\" à proximité, de préférence en bivouac ou à la belle étoile (l'endroit est tellement paradisiaque pour ça, avec la vue, puis l'omniprésence de la flore et la faune!)<br><br>Il importe simplement de ne pas camper trop tôt ni décamper trop tard. Bien que le site soit situé hors des limites du parc, les gens de la SÉPAQ pourraient théoriquement passer puis vous exiger un paiement pour passage quotidien, ce qui est relativement peu pour un tel lieu.<br><br>www.facebook.com/francsoisd",
+            "name": "St-Fabien-sur-Mer, belvédère Raoul-Roy (* parc du Bic, SÉPAQ)"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -73.9873712,
+                45.1244781
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/pmf39hlh79e01qb0lruljfnh3c/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PismsEYkRnlBKR4j1lnHk9XdNJP9qkC77siNHuYcGemJP2EP2W0LGYyJ8yXCtf5GFNP2bCXmzfeJtYvnODJzu4bxJmpQY0622YoBDiLki4CwHC8MzQ3Z_tJeq5mgS5k0BwSGZ1DgvqgLpTVuxx4P4GcKgCTrxTJnbENoDlu_jbWrISvGhMCUuk-XQYgtfa_1Cl71?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Idyllique sur la rive de la petite rivière Chateauguay, abrité par de gros arbres matures. Au bout des terrains de soccer. <br>Pas de table de pique-nique, pas d'eau courante.  (mais le village est tout près)<br>Bruyant très tôt le matin, car beaucoup de faune près de la rivireè, et la route 138 est tout près.<br>Nous y avons campé avec bonheur le 25 mai 2020<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/g5l65jbag0ndlmv6h7r9ct9j6k/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuQtIBDBfQQJK8pS6IMxOhn2DpH6dQGfRydkQmBswE5xSaVG0fudCJAPOuptzxqvwzdGhZoxqiZg0EKsmo1kZECldiL4Go4gw-Rp7fculkug79PoWeZEyBX-76QFRk7NMCxWOGSBS0LELHglABbso77saszQAI9drmurojJDPgiM4uIZNGi7f_KYt1tPYvUUjPR?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/5hstffr8p2f9q4vf80uk13u718/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piseq00dR3gZ9ZP33GFA_S7vsMeaQpYpyy3EFtAi6WaZibzzy1wdcHuhGHUzWYbG6N69Pj0ymGcYM3juMtMjfXLLASuAn6qU6TFWAXibQ8qgBH5CaUpduvpOzy7IkbxmTZnfHZaKAL89OPvu2GOOj8MQFhq5t0dnWlE0hOcpEskRMv_WKtBXfwnqUzhpLXIGuVeH?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/0pbp22hls90uk7942vlbdfrbf4/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piudhhepc3fDHajB4BK_l0rI2Y9fhhO9Gk-mQ-owwFXxfvTerrEcA2JXTW79yucviwbgc-M-T6x2dmAYHYFzyLD9YP03km6UqO2ejmW5kc-6IeqKUzlevkJF2-gAO1C8vtl6ofnHdlAPQZUGYrY9CYM-gaD-V7JEaAC3rJRgR6P9HwovthF02movwljH3yvYV3uu?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Parc Municipal, Village de Ormstown"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -73.2138214,
+                45.0620392
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Adjacent aux bâtiments municipaux, le terrain est en verdure et comprend quelques arbres procurant de l'ombre. Table de pique-nique disponible, pas d'eau courante.<br>Nous sommes passés à vélo le 28 mai, mais nous avons dormi à Venise ce soir-là ((La Cache du Lac Champlain, Hotel)",
+            "name": "Clarenceville-Est, Halte municipale"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -70.3035707,
+                47.183955
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Halte routière à côté de la 132<br>Aucune interdiction de camper seulement ramasser vos déchet.<br>Toilette disponible",
+            "name": "Halte des pilliers"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -70.3077252,
+                46.999186
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Accès: Route 285, tournez à droite sur chemin Lessard Ouest, après le tronçon rectiligne de ~3,75 km vous aurez approximativement un autre km sinueux à parcourir. La grande clairière servant de stationnement le jour est l'une des entrées vers les chutes et rapides.<br><br>Camping: Il est aisé de trouver des sites de camping plus en retrait des sentiers, ce que je recommanderais notamment les fins de semaine estivales: je ne serais pas étonné que des fêtard.e.s visitent les chutes jusque tard en soirée.<br><br>Chutes: Situées au fond d'un petit canyon rocheux, elles sont par ailleurs reconnues localement pour le naturisme, alors les morceaux de textiles sont optionnels autour de l'eau.<br><br>www.facebook.com/francsoisd",
+            "name": "Ste-Cyrille-de-Lessard, chutes Les Portes-de-l'enfer"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -69.775264,
+                48.5950264
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Camper au sommet d'une dune de 50-60 m de hauteur vous parle? Go! et ce n'est pas l'espace qui manque pour le camping sauvage!<br><br>Par contre il ne faut pas être trop frileux pour la baignade sur la jolie place à son pied: la température de l'eau de l'estuaire du St-Laurent n'y monte que rarement en haut de 6 à 8°C en plein été!<br><br>www.facebook.com/francsoisd<br><br>Caroline ajoute en 2020 : il y a maintenant un règlement municipal qui interdit le camping sur dune, il y a même des polices/agents de la ville qui circulaient cet été, mais peut-être que les cyclo sont toléré.es!",
+            "name": "Tadoussac, grande dune"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -65.3363063,
+                48.0027099
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Accès: Au bout de la rue Church, après avoir traversé la voie ferrée. C'est à quelques coups de pédale du village, mais l'on s'y sent en pleine campagne.<br><br>www.facebook.com/francsoisd",
+            "name": "New Carlisle, plage Green"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -64.3821417,
+                48.7823928
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Les gens du coin sont habitués de voir des campeur.euse.s, mais on vous rappellera possiblement de ramasser vos trucs!<br><br>Faites gaffe à la marée; montez votre tente sur les points les plus élevés!<br><br>www.facebook.com/francsoisd",
+            "name": "Gaspé, plage de Haldimand"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -64.4044577,
+                48.8203696
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Plage naturiste.<br><br>www.facebook.com/francsoisd",
+            "name": "Gaspé, plage Boom défense"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -64.3811117,
+                48.77685
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Plus tranquille que du côté nord du pont ferroviaire.<br><br>Faites gaffe à la marée; montez votre tente sur les points les plus élevés!<br><br>www.facebook.com/francsoisd",
+            "name": "Gaspé, Douglastown"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -61.873654,
+                47.422612
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Faites gaffe à la marée; montez votre tente sur les points les plus élevés!<br><br>www.facebook.com/francsoisd",
+            "name": "Îles-de-la-Madeleine, dune du Nord (Cap-aux-Meules)"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -61.9499574,
+                47.3421793
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Faites gaffe à la marée; montez votre tente sur les points les plus élevés!<br><br>www.facebook.com/francsoisd",
+            "name": "Îles-de-la-Madeleine, dune de l'Ouest"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -61.9340788,
+                47.3328728
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "À l'abri des vents de l'ouest.<br><br>Faites gaffe à la marée; montez votre tente sur les points les plus élevés!<br><br>www.facebook.com/francsoisd",
+            "name": "Îles-de-la-Madeleine, plage de la Martinique"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -61.8243442,
+                47.2252639
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Faites gaffe à la marée; montez votre tente sur les points les plus élevés!<br><br>www.facebook.com/francsoisd",
+            "name": "Îles-de-la-Madeleine, dune Sandy hook"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -64.2919988,
+                48.5822538
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Magnifique plage de sable et galets quasi-déserte. Aucun service.<br><br>Faites gaffe à la marée; montez votre tente sur les points les plus élevés!<br><br>www.facebook.com/francsoisd",
+            "name": "Percé, plage de Rang-St-Paul"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -64.3474454,
+                48.5760643
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Camper en retrait de la carrière, surtout les fins de semaine, car c'est le festival du pick-up jusque tard en soirée!<br><br>La chute vaut vraiment le déplacement!<br><br>www.facebook.com/francsoisd",
+            "name": "Percé, chute de la rivière Aux Émeraudes"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -69.0843157,
+                48.7040987
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/6ifqh8s1fbsmhung3h2s7ska54/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitaSnPNXZfuhzUdhzbPryyCESodCRO1LkzgO5GLmmNSJsGkGvh87ePSPGSzro-FiO1HYR5xj2WgBeCXK2Cxku5ffrzl0yZBf677zIsN5WI-jZcJ1FU2HLLusZ9RoUdkwtsmFSSKs3OAXEcIsSTT2CgKjMjgoKxN-H3jEIpFJeWlB4ePFF6iqYCM7YcHULjMxB43?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Un coup de coeur en hauteur au dessus du fleuve, sur une partie peu fréquentée de la route Verte #5, au sud de Forrestville.  Personne n'est passé là entre 6PM et 9AM le 27 août 2018!<br><br>Table de pique-nique avec toit, fruits sauvages autour (mûres), pas d'eau, pas de toilette.<br>Coup de coeur au Québec!<br><br>Nous y avons campé avec bonheur le 27 août 2018<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br>Caroline ajoute septembre 2020 : Partie de la route verte fermée à cause de travaux d'Hydro-Québec. J'y ai quand même campé une nuit, le lever du soleil est magnifique, mais attendez-vous à voir des ours! Soyez bruyants et rangez votre nourriture loin de votre tente. Des voitures ont aussi passées sur la piste cyclable pendant la nuit.<br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/ono7r80mq5opssagl7kqk0k7ro/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pit0l5iBuI47go4VQa1rcMfqWxxMTMQLrs0SLPZwqqdF6UZLGisUqblJ-AbJOJhTUPR3_Ocn4dwi1MuFvnFEaCG6RvYdrzaS99GoorDijneFGI6tG6tRNoJtHIQXj9p3JM2t-pOhmfqp9E-5-zkxSXP7TLbJKTN45lU8vhwL-sxDWn0d9iJUSKNoBmtP21tM6nSD?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/j2e821cj04ofed6cb2v048ke5c/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisxvQ3utX5B6bq5-emGUiq1z6X7rcocf-3tUYbi19vtf2CxgGLSvTJJJ1kCSg3A0mntXVxnyCrKKZFtSa6i3Pt_emGvoX0tgFNluCtPoiq3CbhBI1-UpN2Mb0YpV63mQplZErix8kDzyNXmjFYuYGS3Haga0IPAsn1KxdMyN1ZeL5jaLhJ3lsacR459DdWwbv8U?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Forestville, Route Verte #5"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.9770536,
+                45.28593
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/0hvi267kmtj30t2kffckr5ssio/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitjCgtZ67w2ttXTrXLp-IWQhB_8-oR9T39WaG1blD0WVc4aRrZ0JVDBXyaIpbv3T_SsjGOsR4a6Oj4pchFk_5AbZFzxl_qriVyi0xMv7lqlbRZMyG3D_quYAm5rwVDunbDNNQKdQX1w_teiHK4pfiVz_5kpHqFkvnl3AC4Vn0Sh-pEIWgNjgyF3Et0cRS4vx0rQ?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Ce parc adjacent à la très fréquentée piste cyclable Granby-Farnham (Route Verte #1) est incroyablement bien située; Toilettes et eau courante, tables de pique-nique, jeux pour les enfants, beau gazon, terrain plat.<br>Le hic étant l'achalandage ... et la tolérance incertaine des autorités en période de pointe.<br><br>A Farnham, il y a une autre une autre option intéressante , de l'autre coté de la rivière Yamaska, dans le Parc municipal dit: \"Centre de la Nature\". Un secteur boisé, joli sur le bord de la rivière, beaux terrains plats et gazonnés, table de pique-nique.  Plus discret, mais de service (eau, toilette ...)<br>Nous y avons campé avec bonheur en 2010 avec nos enfants (tous à vélo), au retour de 10 jours de cyclotourisme au Vermont.<br><br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020",
+            "name": "Farnham, Parc Municipal Conrad-Blain\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.9608018,
+                45.280935
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Parc municipal à Farnham, dans un secteur boisé, avec tables de pique-nique, mais sans eau et sans toilette.  Nous n'y avons pas campé, mais nous y avons installé 2 fois des familles françaises venues découvrir le Québec à vélo, que nous avions hébergé la veille via le réseau Warmshowers.org<br><br><br><br>A Farnham, il y a une autre une autre option intéressante , de l'autre coté de la rivière Yamaska, dans le Parc municipal dit: \"Centre de la Nature\". Un secteur boisé, joli sur le bord de la rivière, beaux terrains plats et gazonnés, table de pique-nique. Plus discret, mais de service (eau, toilette ...)<br>2020/06 : nuit très tranquille, ne pas hésiter à emprunter les chemins du centre de la nature pour se trouver un spot tranquille<br><br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020",
+            "name": "Centre de la nature"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -65.5073826,
+                50.2843003
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/61qmj94tsn6u5lq2nmtqnonf28/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PityJhCWkLnpaf0mNG6QxFw71A6yRx8UGE3bbv-FImcUTPsuxtSCBJyd3Pevly9eVsGUnUSVhH9Ie68w_hvqCr2Eaar4hIWzefZba1SVx8qc7lZrNdyxk5swEmCQlr7AJgZAyblyimUs59av6fH1_GfufC37aplAJ4OoY3PzC1E529FdVUIyZPUVLAZ1r1B93yWm?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Quelques emplacements pour tente avec rond de feu. On m'avait dit qu'il y a une source d'eau mais je ne l'ai pas trouvée. À côté de la route mais avec un bon couvert d'arbres pour protéger des regards. Pendant que j'étais là, une famille a arrêté prendre une pause, un VTT est passé et une personne faisait du surf. Relativement tranquille. Aucun service.<br><br>Ajout du 6 juillet 2020, NPion et HGiguère<br>Un premier emplacement juste avant le pont de la Rivière au Bouleau (avec un drapeau du Québec) est un stationnement surtout fréquenté par les gros RV et autres Winnibagos.<br><br>De l'autre coté du pont, les emplacements sont plus jolis, plus boisés et plus en retrait de la route 138. Directement adjacent à une plage immense et au Golfe du St-Laurent.  Un coup de coeur pour nous!<br>La source d'eau est de l'autre coté de la route 138, moins de 200 mètres à l'est de l'entrée du campement.  C'est un ruisseau bien alimenté, nous n'avons pas filtré l'eau.<br>Nous avons campé sur ce site avec bonheur le 6 juillet 2020.<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPIonMaritimes2020<br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/8338t565qc5vr6uun9lugtjne4/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pium-_x0tXyR4nXXQwQwL9XAUNEFfaqEIwNacATTmjTcjyfKB2Ksde-NuEt9UDK_msdNGqxJW-d6Xjf24oXBDXKkfBP4v9lqi0ToEoBU4IcZl6IrXCwyZ834N_0s5FO0Os29sftCDaHYy4uVF064tI6vybQkES7o4n_hrdGKiTKUzH6PUau56Fj2fK3JpkxYcpVP?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/f4u1nsuohgid5f1belb4o8jbe0/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuL1TD1l1NDtew6hvi6aNWTlDk-YzlQm28ENxvvp_guncVaOtdJkBaHBEubZby9wTmgTpH4P920feDzULKk1Owbg1r22juqsfTv4VrldSFX_iLjRZESkGDc_tOHyL237yjM1DcHwgUFcemwpy733YeLv1nyeTjl3GZpH9xndZP9pxZCAprJDg2rZHuEKTTusrAx?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Sites rustiques Rivière-au-bouleau\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -62.8099823,
+                50.2859896
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/32ss6d5cmrkoh859nv2oqc97b4/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivMdqKJ4lssCUzblM7GXW1HvIdbYtiu8z4Ta5B51DH0Z851eu1T3r-Bk7L3R2apgfFF-Y3x9KvhC9QjFRbaZJzoiRkG-t8GmYqRSwbUmzwnHzM11jMv7F_vK3bz_-f48v-SK2JbecTb4bHEkPgH9nJ442GkES62-VSUIO12k-jtMnqPzBB7tLT9X1Pm9wMuQVp7?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Camping sauvage sur le bord du fleuve. Je n'y suis pas allée mais j'y ai vu une tente et un campeur. Aucun service.<br>Anonyme ...<br>Ajout, 10 juillet 2020, Pion-Giguère<br>Le site est magnifique et comprend une dizaine d'espaces aménagés pour les tentes (carrés de gravier tapé)), autant de table de pique-nique et des toilettes sèches.  Site officiel mais gratuit.<br>Eau potable à l'information touristique à l'entrée du village; Petit marché d'alimentation au village, incluant café et SAQ!<br>Venteux, moustiques ... mais magnifique!<br>Nous y avons campé avec bonheur le 10 juillet 2020, nous y étions 6 (3 tentes)<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/pfafdsne7hanfh8ag995b7ggb8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pit-oCyiNez8njWfDeySQMEb_B8XBVaO-cNxuu0XmvDtcBCaPgA6tPROzmMFxhH8DLiDsfT_RLZmpRJcwtosaqm6J0AshE6qCsMHQR0jBT85ci9gm-ecKt-he9MoGTgMYMEyrQwAG1euSlvv7kC0bu4kAoD5z9eB8aGZ2O6KzIg496HnJpcSCP4PYR1oQovFh5zY?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/fulkksne1e0uq8h77pkh84klso/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pisvf6X7sg88u2-aoL48wCT0HxIfV1LThqz-tFwLukfc3dolUeVZuosa-mb2I8DB-r-E2uqyBnSYE3dPS7MDfl5AAyggVNNCbNZl7i1E5-ZTsWvGN7d13wkcWZ6yKACDylEmlhihFqcwdaNPzrWltuairhzpQBUfPoSYD3e2c6rBb9E6u04jnoCzC7mzOxo3Vaco?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/gr6nt8n30j2ns87kf80mbuc20o/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisYuwCKZsjrg2D-TbFwJsca1Hu47ruor8RzHa5IUuSCyFwzuEWRDIwEfjbV2FIU4Ch-dn8msQ4bRW_L4eYG3UyfwF26_cttcinjdnl_-lZejHEauMbuwbKJOaSIYx6pITNi0rbsYGPCrOe9Rfzo8YHxDmg5KsoMQ2Bv-tdqFWNoAbLVrL4N7XeT0qbAyXCXNfeK?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Baie-Johan-Beetz\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -66.3030353,
+                50.2052236
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/2ubat87a9583nnh6huc1gomkdc/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivHhudB5kDofOnoEw8inao3-GCNZYfZBh94RaZl_RgKbbsA6fnMtLdLiMd8ogRu9Vx-tBa50OmzzE1PPn2xczUo-UddMXZvBbOwFq9Yjq0sSmmk2q6DQAYhdY49RhhQ6egc2URmyRwL0Qpy7MVPgHzRva_Jt-1LtrzpPfN3I1HBoic6pdkA9kIb1uTsR6JKSqe8?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Camping sauvage sur la plage, L'entrée #1 a un grand stationnement et des toilettes sèches. C'est un endroit très fréquenté par la population locale donc il est préférable de décamper tôt le matin. C'était très tranquille la nuit quand j'y étais mais je suppose que ce ne serait pas un bon endroit pour camper la fin de semaine. Trajet sur piste cyclable pour s'y rendre de Sept-Iles.",
+            "name": "Plage Sept-Iles Entrée #1\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -70.4776463,
+                46.5776322
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/t93v9hck7mquc2653f4rk0gvjg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piv6yGWEolM8TQnJA_ouM23DxkiowxHxJhU9jHjVhr6krzEbzAMwm2FzsEN_-GBAVkzdthxl1gHHRxfdbtpYbuwMuciCVBi_s99RzrQfsDyrHUOTBUWoqkpcS5s0fFCrBmrsZpoQtpaFe_sKn2IPsCXLf1BtYREZV4GzKx_f0hRp2QNDGnzlbQ3LQXhFpx6e-2qC?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Abri aménagé par le club de 4-roues de Bellechasse mais qui ferait un bon \"spot\" de camping par mauvais temps. Beau panorama en prime. Pas de point d'eau.",
+            "name": "Parc éolien du Massif du sud"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -65.1514646,
+                50.289012
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/fjte1e9qbuackdrl8vr7hh18c4/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pit5wwkrZXYnDElTpjyJwUAfG0z95PxjKK7MYW9QiztvZ0TMdEQYWetIFOQGn0ImG5CgvWLoAlAqwvXpdVjRbm0eGnmDadlb_KmzKNen4O0A53UTkhelrJynytkkdiscavqYeYHEAqXUvq24YHJO5hcxSY3RGbHJepjQ8HYa2AgDoDX_o8HzXR_uJnvBBxffFxY?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Accès sur une route de terre du côté ouest de la rivière à la chaloupe depuis la 138, la route tourne à 90 degrés vers l'ouest et longue une vaste zone aride pleine de bleuets et de plaquebières. Il faut manoeuvrer le vélo vers la mer depuis ce point sur un sentier de 4 roues en sable pour enfin descendre la pente et se rendre à la plage. Visiteurs occasionnels en 4 roues. Beaucoup de fruits en août, mouches au rendez-vous. Belle tranquillité, horizon immense sauvage, sans eau, sans services. Halte touristique de rivière Manitou, eau et bécosses à quelques kilomètres à l'ouest.<br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/vte800so9ai64tbmioteerefqo/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pisp-b4m0uQ9_ss2ApYLAlB8SmXPJSRofa4tsLamqZOXyCYCG2PY2X5ByGQsK6JtdnAaELVU0SRvVY6qsM7tC6r-sg9Qd286aUN8od0mv1QAalNeXKfmcIm-EmEixelr9Ch6Jw_aJLj9pda298hnO0cW3PPujJSFeu9_ugOe-ENxse8Y4R89_TbeUsdlM4BNrlY?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Rivière à la chaloupe"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.2845597,
+                45.178884
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/2v612mvoas611cq7t99vssem7k/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pit3ue4B7N2sMO2IB66ciOTNXRhV3lj6nUBKuh6AelujLPwijEVLQofQOchLbFcJALQGWsq8RNSwBIbxTt67nKecDilRUSrgAyE0R28p6ZRl7z29Od-LHpqYtpBQdvejwFvJyw6YphfeEw3rb9QDQpKcoMJJJRE1vX5y4nBfCVfHsxDGj-fPUNTF2ZTYDc4PgkTx?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>en face de l'Hotel de Ville de Austin, à 200 mètres en retrait de la route principale, beau parc municipal, avec terrain de baseball et patinoire extérieure. Beaucoup d'espace pour y monter une tente, relativement à l'abri des regards. Tranquille en ces temps de pandémie. Personne n'y est venu entre 7PM et 10AM.<br>Nous y avons campé avec bonheur le 2 juin 2020<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/fe2kuabllh4d37qqi5adul4h30/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pit2z8EqCXFJ6jxu9SCVInbE23mrVb7G4ywP9L3ZjDNJuS0YZO8NrLWA0snPVW6v4atZz_kK9OTQgGoEYp-l12O1fbqtBpx-C0iWq26pqGQW7SdytpYR1Yos_714k1BdJTd9sFsiSO7RZuWgzHyGSDmmLdBbFhTziFDBrJHWDr8BuEHU5OIJmED0BZRFX6NEQZz6?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Austin: Parc municipal"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -71.5012515,
+                45.1984153
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/hpsrplnlmf3u9rt8ie2ijbo9b8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piv82tCjsjwQfqU0mBJC6B-VLxHIBg9xKGjbTZxGEToIJlh67ystqvah2m_TiP1PjlPw5ZeiIDXP5lICXvWC3jFh8x5HsA4Z3JhxpEIelH_lXd-qzEtSNoV80XrZkTuaKLv8FMolkF66GeF3e21ypRqEKupez78SkKBQDxSwnFlkkB7mM3JEb6Tjp5kddUCP5yCW?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Un extraordinaire spot pour camper, dans le joli village de St-Malo: Abri avec toit, 4 tables de pique-nique, toilette et eau chaude!, Wifi ouvert!!!<br>beau terrain gazonné, endroit magique!<br><br>Un peu bruyant tôt le matin (camions).<br><br>Nous y avons campé avec bonheur le 4 juin 2020, avec 2 amis cyclistes.<br><br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br>***<br><br>Juillet 2021. Je passe par là pour remplir mes bouteilles mais l'eau est non potable. Au dépanneur en face, j'en ai demandé le plus gentillement possible, mais elle a d'abord refusé, « à cause de la COVID ». J'ai dû rappeler à la préposée qu'en mettant un papier essuie-tout autour de ma bouteille, il n'y avait aucun risque pour elle.<br><br>Nicola Z.<br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/b73jd7olsh364b8c9tj2iq2h4c/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivEBl3nBB9uJ7wLgNOQogaho0_ycapWpNZAoRkUJ0S93LquH37KvPo2YldJ4r3rhUD37ENGiGdrNpz_IUBB75AK6WeA-i7WWCi1CSmSS6s__qVge_VaGEtUFuunOTCr4mlYw7O6GtK4eLwlK2BTo2fXX0hqbbWckuehPikGHaOCICKjPvGXFL4CqmT0VSzWQd5Y?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/ord5fgnrbgpja85bj0q4t7qsjs/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitogxWqpq-u_6MfJCAey4TlMe8mTVlPu3r1BcbZuuyqEQnJgqootWDi86Ya-zW3fM_YqK-Q0U4T_iwz1w_6iPMOKnAAGxQW-zU0-zw1-_CFI2wGJ6_ippoOAn1SNWLdeAJICTZxEEhzPKy0MmMTnTesMpKXZ76W8prz2wiLVXumkxkocm7s2NMCky-m1TTYYnfx?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Village de St-Malo: Halte municipale"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -71.4895278,
+                45.200223
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/3vv29en02r7mknubf1k3600b20/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuXGhEYESI5zULJ8aQ4PMJpIPLFIQp8wjd5qqJNXjytExLGbEZs0D1FKjJwRWSbIFWhjT3ITUtQPfsV1ZQ-MjSHAlEQ-LqB6u6kC56AXdmsjisgdhH6XuG7SfZP8NplraWn7wGm5rx298kM0PNzOmjCgGMdKu-OakDjfBdM5ZIilekTER8X5hhNJqTZsbWDBt3K?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Aucun panneau d'interdiction sur place. Je me suis installé derrière les arbres pour être le moins visible possible à partir de la route. Voir autres notes laissées par Normand et Hélène.<br><br>J'ai campé là en juillet 2021 sans problème.<br>-Nicola, l'administrateur de la carte<br><br>******<br><br>en visitant le village, nous avons trouvé ce spot encore plus beau, avec vue sur toute la région. Table de pique-nique, toilette, beau gazon, totalement isolé en haut du village. Mais pas d'électricité, pas de wifi, pas d'eau(voir voisin en façon) plus une côte majeure à monter pour s'y rendre 😅.<br>Si c'était à refaire, nous sommes presque unanimes à vouloir nous installer en haut!<br><br>Site visité le 5 juin 2020 (nous venions de camper la veille dans le village de St-Malo, à la halte municipale).<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/g71i4aqulmn0oq64dfn7boctc0/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitgcaTV_Ml6i_TwBj4BGYrQgUYLvhU9YbaBHwakUR2jhelQBXQBbqq45u0womN3nI8Fw2a9q-7ild0MCYizlGcltNpYCQ9btddr16fa_zvnuxwMA-I_ObAvfjzDh9UYGSnYO3IwttH4zBiadVKlJMURyyi7urrkZYEWx-olW7p7f2a3N6Wc3wlAPt6YtRvtBZcY?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "St-Malo: Observatoire au sommet du village"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.7846292,
+                45.3751144
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "On peut facilement trouver un coin tranquille quelque part par là. Pas d'eau ni toilette, mais Granby n'est pas loin pour un ravitaillement.",
+            "name": "Montérégiade"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.8235562,
+                46.5139996
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Champ tranquille. Discrétion svp.<br>.... oubliez ça, maison en construction (printemps 2021) Le site est maintenant occupé par des maisons, mais à peine un peu à l'ouest, une entrée d'un autre champ avec une forêt un peu rocailleuse à côté. Pour mal pris.",
+            "name": "St-Boniface"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -67.1937496,
+                48.9370761
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Espace en gravier/pelouse tranquille, possibilité de faire feux et en bordure du fleuve à 500 mètre de la maison la plus proche. 2018",
+            "name": "Spot Grosses-Roches. "
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -75.28572,
+                46.53368
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Un abri sur le bord de la piste cyclable avec des tables de pic-nic autour et plein d'espace pour installer une tente.",
+            "name": "Camping sauvage Lac Boyd, sans eau"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -75.63889,
+                46.30701
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Dans le boisé à l'ouest de chemin H. Bondu, on peut y installer plusieurs tentes.",
+            "name": "Camping sauvage dans le boisé, sans eau"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -73.165967,
+                45.0660682
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/u0i8enlj4ht0mhmhjvmokm0egg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piv8fum4g1s_TDUYPispeVT-2k7T-8bYOv8x0QKqerOISThjbQIqjplabucLpFswlA301WI4a8xYD13rybGj9x8EtvK0dMPjWibEcfFar5Ti-jYUo7ttgpdyC310OualMR8yUiAwhucqrQo4AseY_mzEwc_UeP2-Ay_3hoGl1-I_k-1nZGL6w7xFNlXfk7FYWu-i?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Sentier pédestre aménagé, bon spot pour tente un peu en retrait de la route côté nord, toilette sèche , table de pique nique à l’entrée Du sentier.<br><br>***<br><br>Campé là en juillet 2020, mais un peu plus loin sur le sentier. Pas vu personne. Chalet ouvert le soir et tôt le matin (toute la nuit aussi?) avec une distributrice d'eau.<br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/jmbsq3ep8ucrdo1tcsmuhf8gdo/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivVtkc30IkjYq4ZCWbpN2OIQ52NWQP70eXpIS4Eez0o3Zhqn3T1zlLauCEksysGjuJGLoWCFWm3bbDXo8i7j9tIdx44xv6tNlxt-HmdLwL_6SOQK2JfWaLr1eEea3chsld1DWMRkQlx6Czf6-ARpP01ued8aTm4Il6PoaJyot1l2Re67-CfIFyfEDdJL0LgP_37?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Réserve naturelle de la Tourbière de Venise Ouest"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -74.4006399,
+                45.0087443
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/jt3qqs5k6c4m3rdkev2gfr03gg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivXCjh7atShRnl5kDRexwOAflttNC1t19MZj0C7wSQ6K6sAb_PxJevT9jgtNeL_0kF4GmgjlKGeZ0khCITCubzxX6Bg7KXlqgBIcBg6pNnHeJHmquvr55wKEv28MMeYm2nzLMjQ1a3TRRD2o11EzpAcLG_ggeDaqS0do7ynbiMrk-1QMNCiByWwYaELH31tlUqs?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Dans le minuscule village de Ste-Agnès de Dundee, un joli parc de village, tranquille à souhait.<br>2 tables de pique-nique. Toilette sèche au bout du terrain de baseball; Pas d'eau courante sur le site, mais possible de demander aux voisins (et en même temps, aviser de votre présence pour la nuit, par courtoisie)<br>Terrain avec beau gazon et arbres matures. Il y a un peu de pente, mais nous avons trouvé facilement à nous y installer.<br>Endroit tranquille, aucun traffic en soirée ou tôt le matin<br><br>Nous y avons campé avec bonheur le 26 mai 2020<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/fsnk8moss2jtk8gk4sn8t7su8g/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pitw-WZ7G9_x4S44zEJIvlFEhf5pw1etQKOfNVCxasl1PPDQlQajeMmY7OEPgI-GDQ1Y052hN-JJO5sjE38iErUxlo-qQAwBqp2OZsCwaJNvsfcTMswE3N6QhPOCsYFuFnzAu1bNxpdXyWV7Eex58HirSYvykHv3efawMERVMyExqjB0aaVt1638xukP9x0fLZmQ?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/fiq3ebllnma414c6cq7snsdo10/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitSwI0hGoN5HibehK49k-VGt33RHoyIo26XFdGzS6coTmqwyhtUTi3pG71l5dW3SEialrvl74E0ew65vvDae4NC0xr6mNHyhPU8UPIaFz-EfktPHJt4I54hxkpIZ8-I0_l4rRbNNJvvK3Gq5SyRH0oxsGBEPI-y6O6SyHCA0W1TbJEkhr8VG2TFpgeq25CJpK8K?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Ste-Agnès de Dundee, Parc municipal"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -71.0617054,
+                45.3907644
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/arugqqqmds041bnbuqp3gadua4/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pis-03ekcLila9IXXSblhDfD7vmUYtDsS4QCWsQGfQNFRtPK6pmulaV4JZCI6NzPRnLjlJafvHA2VOJ2spj_c-ZtPZNcz7jNQvWBEzvG6aKJ3-7pN7PcPfzh_lboBy7_crnUZig6yndelqvteaSVaJziqmmHOTlF5WDdKP0ziWR7UC1epCuuyrC6Jzn_R7MiZeBs?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>En retrait de la route 212, à la sortie est du village (à la fin d'une dure montée!), cette halte municipale située en hauteur permet un panorama fameux sur le ciel étoilé et sur le Mont Mégantic.<br>Toilette sèche, tables de pique-nique avec abri, beaucoup de verdure.  Pas d'eau sur place. Très beau site!  Visité le 12 juin 2020<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/5imm2adqhh2f31ibrq9ulc5qs8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitthoAaaze8NEG_m0GKI0P2JI4WaYlE7WsFqea-p5Y38kNt-E9mK_MwzaGCv9E41KNLqxQEI3M2QVtZw1uzoAQLKg74-Xbx-JheMBUs0d_hznCkjKdnLrmtXges5wCBkj5qwVkAMo9oyDqsY36wb2EXqYVd0Tf4AadWEDGrTB0sYbuJHitm9Q5mxOH_zcpRhRkw?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/r6s73vet030t00p4864v6l5d28/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisXEjIPnvtUGhJm_jZEM1dgsjBm_lpPuH3UxSXyQE7FNbvbm3FwjBOmzmKjx8jSLtWXY7PTJYMEX5kD1NhFAXEdm8b5XcDEtlWqDlMlXiZM6z3E0oEjOAOWVGZr5PfvEKtJx3GlabPZI8KHcp0PGOchNyUZ96h-IILLshz_5oGZZk9r7Q4asDB1hlBdTLp-1kgA?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/4pdqcrs5nr07s6rm5roq9sju6s/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuqT1nS5vouKt51YYrq30HQcsXIXLuS1CRTCOpWxYY_z4vJztRJg62kWWG3n2HcTPV7izWI9GQKn2jY2UGuxMfN4eYCH1Do3MCRmMOVPO0A55mmMvomews-VMfc5b_ByvWZPxnTclQj2iG2UjyvznTTogcKw-Ej7ivSOS1B4SGCBdVesxnI1siVz_qTmbMrU4pT?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/si1557osqhff2ifg6dc3dk3ukg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piv_cFGrMGrewTOrGNYjpJyWxf1ydl_ApRroNSfeau_zkcvc1XZEBbv7Om58IxqE7kETs8mRzdTmU2ylywbyKg0K6k0E5FgIyQMhpDrMbONRbWJQHF2fVMUZ-XQmLDNVLwNBIwOlRUtlEyTXORdoj9ikoaVEu_97Z8mS0P7frUkkIdlkZefK_lAia6TwiwQkxgUX?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Halte municipale de Notre-Dame-des-Bois"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -70.8713967,
+                45.4138866
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/glvh6gjghuq3605behjl23pgg8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisSWchU4-aKqsMrF6zXEBB0chAHYqTizXQV-aXnLUJ2xNL4j55Rln28Qo9g2ExgznwBigslzgvdoQlfMZ4DGrn0DYS3r-aKrvQNSVqhkwE2iAYebrEhURyfNnwDvww6YxQ49OH9RoJl-iuOPRaKijAsrymJ4fazDzMag1MxMrOF2HSlDnc-AiDK-lqJj7XwwKuA?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>A la pointe sud du Lac Mégantic, sur le circuit cycliste faisant le tour du lac, un parc municipal est aménagé à la croisée des routes 161 et 263. <br>Assez vaste, pas mal de verdure, quelques tables de pique-nique abrité par un toit, toilette sèche, pas d'eau sur place.<br>Nous avons visité le site le 12 juin 2020<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020",
+            "name": "Lac Mégantic: Halte routière Joseph-Alfred Fontaine"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -70.8719229,
+                45.4853683
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/8aes6cfc46017hdbptii50i0bc/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisFThp_GnmziK-1KTwf_UM5YesrSkm4KCFPM0D47yaa3qYR9z076hmGvLI5J8EwoF6t97LKZXaY-GsJ9nk1Daa4s0ZUwKaMYI4Jn6s2HEq3vmTDDBtZTGettjKxSm7gEWT7D7nd7vllK3ZMSw-nBWwauUfY0hxDlmlEBApHEWLn0vy2DmaLa1p7YSJHX9TJkV5q?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>sur la rive est du Lac Mégantic, en face de Piéopolis, ce parc municipal dispose de quelques tables de pique-nique abritées par un toit, prise électrique, beaucoup d'espaces verts et des arbres matures, et un accès au lac où il serait même possible d'y camper.  Pas d'eau sur place, accès aux toilettes fermé en soirée.<br><br>Nous avons visité ce site le 12 juin 2020<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/2r4k2954tsmi2ueptsk90i16hc/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piso0-LbJvn3i5PBpfh67zkgx-ejg9N5SUH7NaGeho_P476vEzdHoX9iVeITeIOpJF8-a3H8GuRSpBYmqBryiZM8MHYbLvBDkxEygtPuNfS-hvmvNDy89eRlzw1TNRwQo3DqTWE6sL12JEHBN_mOAPfKJT83eLeNBfDYzu3MAGAIFNl9Z3yzbp3FC6LpbcR8yvg7?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/sdv4fm5il2nai1j83kgn29mikc/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivJyY-KiPszTGAv2NlEsrVOV0dzOW1QkWC46blQGQuhVSxEhzezFIo2rHsFB7XfS9v5YD0jUGjIPDtBnrKHnOeMRpJbgtYNcwXyhIq3wqg1esu5yuVzfPUX7ogngbyKhwt4kFK4yVtXVkrCVBDcaKx-Gojf2MInyXWG5EtfsTCdRjGhpHt8ymf9sEFPuOLAaPNT?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/ns1ar2ejdvcvqpn8sbm42nb91o/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitQu49ZvXLEaHLPQRlue7EcaLc1WT-eKlqT5qbhok-bC2ZlfkXja8DkWSdN6J5SO8CrlNZgFe2suBBGYd8-YZDxbk8pALMyTNmQKExwgSHOpr7KFc4BzOxN4UhyCzRj_JZsK2YXfSWVw4Ugl4pDwvsbiI4mRadLqqKBqDHArRqONxZCvLYM5LT7I86J7rcOAnnw?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/mrtp1j0u1i0h5nn7mqcgv9q14g/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisZOubJNP-5zXlbXzmyn6bo5AZpPLrKypmKZQWXme03FTIz05fFMRdLBH59TNxfl63wC8m6Qgn8eG0cGxOmVewga0_2r91p2etfkjhKGnl7RcYwgoCmAhxNsO8PCPwk5GbQhP9vlGmSDrWXJN2fTb_Yb3vqBoLwJOmifrbja2KqkNzbusz6NAYRxxSNQSXeMZ6Q?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "sur la rive est du Lac Mégantic, "
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -70.8693459,
+                45.5033688
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/1u6bfdquda2qda9747j9cu6j40/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivN4WCKCVhm6NYtoqMForRKTm0LWe8xA_iUhiop4QPKAcpAwWyPZPSu4M4Ht3_U5F-I_lB1hs8dFGhCtQjvewtD4f9zdOraamIYUIzdr5RFcRi_tuWcy24IvV9QY736L_m6Cgbt-Zihmb6ClBIE8N4UrBHo8x71HQM7bVpKjQbKLNcnWxR-B4zG5qwc7NokXHvT?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>sur le site d'une tour d'observation qui surplombe le Lac Mégantic,  quelques beaux spots pour monter sa tente en soirée.  Quelques tables de pique-nique abritée d'un toit.<br><br>Nous avons visité le site le 12 juin 2000<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020",
+            "name": "Terrain municipal face au Lac Mégantic"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -70.6444069,
+                45.8533559
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/d1q6c34vc7shk758hm0sltq4vg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitZFgKCeQ66cFRCJ7p0yRKxMOKwjyd-mVOsfJgPAkyTTjXAjnsLNc-vFd2PyspCBEyERFuWjnD15-etkk17dnMNTxx3zffNRNkzxWR5AWA3E0F5ddtgrbi4Z1ns3fFBYogGqI-qnuvadCNsHZbIkckzwQuCIGKy2thIwbNwYFqWeaGkIaSkzeI213Hu3TkweQmP?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Beau site en bas du village, derrière l'aéra Marcel-Dutil.  Sur la rive de la rivière Chaudière .  Il y a quelques tables de pique-nique dans le parc municipal voisin.  <br>Nous y avons séjourné une nuit le 13 juin 2020<br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/t0cj4fjteicvl34nhdqpu8da4k/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pit8AnUlDKvMe9dhWXnDyUo6jGIMA8K2lxynMIWD4gat_pZ_Y7GZGtIfcGsFC66Men7eNhFfnEpfEFNDA2em6ZeSzdIdy-SYySzGaE7S8upjdeJ4fYWLVY09wWxGQ2GThfqgWAVETkM88vs-f81eQljRmErN03Vkxo7NT0GfaM3nmLFgBiWJlAK_vIonOjSeM6A0?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/eaa08j21bnefnb01ehuvmvbsos/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pivoajoy5PvAik7-OXeQtuSjjfQlmflAOY2ZtYeyX-LgFGi5zG1illZsL5cn4xfMGAl9AgtxcHGRXuk4yttvVlk7nW5Cs7-QheRE6z_7V3AO3KqPfp5jD3eAG0rls95Ioj2rBjnUZPcr_1E_pYiNu-IAM6wZVz7_cIPmkqo7qBijaQtKH9oZy5rHQU_a3dir-rsH?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/t2cqu0m7c5jf2le9qpsgeut8sk/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pis-K3hf_G_Dr5AGbTIxQNUh2p8zak7mv4x1S-tUOFNFq-IuSMuPZBNoUYTuu5NvrazTAlLuZVQRqo3uFviuuQqTfTNxMM6NZmPW-M0VMQ8ZtDdt4th54gduf5XkYTISXB0VjaPloPra45BeTusthaHFHcLz1QONqZHNGgC2IiWQ6pj-JSoywn1ynhcvVYfcwPLk?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "St-Gédéon: Parc municipal"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -73.3710994,
+                45.455555
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Apparemment des terres de la couronne. Aucun service. Utilisé au printemps 2020. Bruits d'autoroutes pas loin...",
+            "name": "Secteur boisé\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -74.0199306,
+                46.2476616
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/ut91d0n0980mimhnbaq2trusuk/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivMnV0RATorDtOoPBvZvxhUFoRBHQsksGsVB8dNhEHDFfvslMn6IY9hIVQ2Anb53akp7ckgvuiFrTghIOk2go9Qau0mhGblvX55j3yhJ5UZOou6_OJJEq_NaqIWQr5X-Ru3oDE2jnZwJFckoAlgKgujorEGXuTqzpgMNDxAQOLpXIadv_frxBXqVJErqoHtP2Up?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>En descendant de la route, passer le petit pont, à droit il y a un petit sentier. Facile de trouver un coin sur le bord de la rivière.<br>***<br>Il y avait peu de place à droite, mais à gauche (est), il y avait une belle place, par contre pas à l'abri des regards et avec un beau panneau camping interdit! J'ai quand même passé une nuit de repos en aout 2020 avec un décor fabuleux. À mon arrivée, il y avait des gens qui profitaient de la rivière mais ils sont partis assez vite. Pas de dérangement.<br>Possibilité de filtrer l'eau de la rivière. Pas de toilettes.<br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/sepk71tre7hgqh84m7cevpgro0/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivHxvU-sH4SPQ4JmaGkDTy_0YTLavFTgWRV3F_wQOs872_4bDGvJk5u0t9vEchW4iqMIkhpTV6bwFqZpYc3XuJlz-kM-ZRAEAuLUr0y6NPuWcmqWdJwOGcMyCeHdtIrlPL_dVBcEZIRjo0rR3KRiYCdrfdj8urVB4jwK2F9rQq_Z_J1J84Dm1MF564qsWLIi0C1?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Point 60"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -69.81255,
+                47.953837
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Détour de la 138 qui peut vraiment valoir la peine. <br>Possibilité de planter la tente sur le bord de la route au bout. Les sentiers sont magnifiques, et on peut aussi camper sur les plages. <br><br>Dans mon souvenir, y'a des toilettes. Une rivière aussi.",
+            "name": "Baie-des-Rocher"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -69.898255,
+                46.8658309
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/nvr4pi3stqgabuverbdmsaajnc/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pis8azonIDrwENmDMm_bR2CeYYDE9CF4Yyou7_3_Wer8eokZUIl-V3W5vVpL6-I8hUq6mNASPsDXg1-TLeL3qmN_n2vigpA4HfwIftDHmSOD2MtZngYxGGjlQp8y6HmQoyJ_ELZtTvVCGNGYVct5hLLaZvpg8n3mX1JxVbdbuuRn-WdPDxPcndEiT_qYMwUtMQHD?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Avec la permission de M.le Maire M. René Laverdure (sa maison est juste en face de l'église, en haut du village), nous avons pu monter notre tente dans le petit parc ombragé adjacent au cimetière, à coté de l'église.  Eau potable à l'extérieur du bâtiment municipal (aussi à coté de l'église). Wifi possible au restaurant O sommet des Délices (ouvert du jeudi au dimanche).<br>Nous y avons campé avec bonheur le 16 juin 2020<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/ro60gu93ogfk0icnnm2796uksc/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisrjfzLCa-uZfwPXl8xQQq6J709FUSFLPsUslQrzBZ1CiWK0Xh9-A29jVRytI9TN9fVM-Mx-QQELv-aOkRDbN_FOhJskMM0pwloZg9QAxd-eY06kDNykE5CMKHgyHH6fSZ713bJG2lLi18MrovhlI0b-KFQ67-qGfL2WagbjAquhRt2QSu8CoDl6lksPxbncZN0?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/lca8sq4otgn8ebn4fvfho57t34/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivG-izsU0Nyl6lb7_MeJ4Iz3vMLxf7fA3HUxvwFcHKe47nSGpDDa15yg7U_IZ8w4vZUsNZkeD-byBbuNJ2MMqwBP1bIBoq1389gDuSaGK8ccj-Ht3jRPIdvZB-uobo39BaV9rk914W4Gpzgl-p03pyO3u7kZ9VNcS3w_DJ_VrHGqsjQy4EDkKZteT2eInAcR3Vk?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Village de St-Adalbert: Parc municipal"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -70.3210012,
+                46.4382471
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/vi06lh6cndteangl7101mtic6k/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivDbv2SQfN79iwLZJbTNnaIxeFWfb4rXU_8WC8UNKZR7jRb7Ot9sNKWoAPLjZRwog_UTitfGj00J6RcPWzPFGPk31Z9Ic56ixrBCgYCp00pG0zawzIYYO7NTKqd-nRNT6QdxR0KxV_ScunOD_6yEUjUuIluQb5rma4aFtfm5EmRa-HarsEssBOGMseGEQgQI5c7?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Vaste terrain tout en verdure, en retrait de la route (300 mètres); Tour d'observation, tables de pique-nique et abri si pluie.<br>Site visité le 16 juin 2020<br>Nous y avons campé avec bonheur le 25 mai 2020<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/q7rth9shapidf06tthm5dl1p40/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuVKzD9jURtlUF211k-1oCa0K7nBGyfE_FSGyfz2TETcRpfVF1_Mq-3VP-Gch7FwuRM-JtMgsxzp32j3q3aTPGwrfI9jOOGeqrnsW0Rds13seg47MmZPn-o_MXDfBQs14oe6QZfu4uTdWcQp02kZzbfvXicdrgZni_9pwXYTyQvWCUmFAB9PdglKlr6UeCm9FO9?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/86lo3m2crhhir5167qnko18qu8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piv2QRlE_Llrm1ETb3yGZE1TYqtzmWyj2qzOrWnVlmRFUzeb7QAUKCtEpidTLBLkC9BdT-zWQq0sbwFvXgNj-F2xiH0hTzTBtnILO3XXCVy5xAbuYaQ3APmuKYU2_liX5FNMNLEohhroQtPGiQqatVNYn1_DD23PVgBG06X21P9IxbZgU3UWqHTyumhXNLVc_9hh?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/3n21ovqttsp31qm2qs0gl3sq1s/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitJkrFu0StrtBfB8N6eGApAw-eQSqjeGuG4Y7APqgysnWOeXOZ9kES4yKOgu_1JhHHkuFuB72pMiPMUglbjHyS7eNC8WQWF-3Ef7pSa5G9ptTaiKgFz86Xn2PT8PccOPgwk6RazV2K9FLebChdwvUM9MzjJKl1BhlDch6tlcXAmBhmoPVRMatRC36rcwI7MdcCW?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Ste-Justine: Site historique des Pères Trappistes est situé au 700, Route 204 Est, à Sainte-Justine."
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -70.0052421,
+                47.1086996
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/46342n1u6e9v1gm82ud6vof0hs/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuAmIuut4qC80cU6VwYBXBS8mYfbzTQY1xYBfwK6eXjEVU5JOUH5lpJ0lFuQfKnRe9QG6xihVHQaKg_3GSfts5rwWmNHF5y-Qefv6o-NPQ0vBBiVWkkEaWwCcYrGb81641ZKr3sVJug-Fon3r9y-TgbPgtBPXqpTeSw89vfI-7MaaoyN-cD2CyNWBfHhDf3zFJ7?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Plusieurs tables de pique-nique, dont certaines avec un toit, amplement d'espaces pour y monter une tente (ou plusieurs), jolie randonnée en forêt et en tourbière.<br>Site visité le 17 juin 2020<br><br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/rarlulv568p989jk03emhikr1o/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piv3Rkee--e4K4dF-2bf67HFJpoWly5CawHgOM0LCMEO4ciN5OnjTDb7zAuP9zAIdcI6f7UM7INrCVlGaAYKu0hyvGA9wMgNtL2fmBBgOti7FcY4CC9WpSOMFulN2-kdCUe1hJcetxYjoVlbwnqlrox1rgVXp9Ln4ntYiSSnb2A6CKqddYrTzxuIMqacpF4Aea_5?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/qln05mg70h40no2m185sikcih8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuaVUxkySO4ykwRIL74yZN0b_8aV84_wsihqhqAvtv_DWUzItR3y0w9QulzAcLg3KAUWlMq7SdA4EazjhX5ZEEGb_W14Gi9GdiRDTYn-k4hN86Y8dGWKLc4A4ERd2zMtPTn7FzS96ueswhrY9ltC7S33mQGqFCp6ncynBZ3ZOAYLGpOsAYzNF8IyrjPqqMsj2d1?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Tourville: Parc ornithologique du Lac Noir"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -70.4846667,
+                45.9367665
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/d8lnjapm92ps7n48jqsm1f6fl4/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuGA-WXhmj6yzXJliFwm7X1aI3f3V3czizoHlYSOURdpANSo4okjqyXrTI9Jc3py1PC4CIw5h2pk5ajuKD0ICIP8RSioMKoDbJJJaXhxusUngpdEa7QNMZAa4AbRT0WSToh5yUr2w960gV1IFOdlYNCghV9NcjXmNbQGKBHhEpEUcDsxMWk5E3rYxZgWR1oQAIo?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Jolie halte municipale dans le village perché de St-Théophile; Beaux arbres matures, beaucoup de verdure, tables de pique-nique, gazebo couvert en cas de pluie.  Petit marché d'alimentation tout près.<br>Site visité lors de notre passage le 14 juin 2020<br><br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/d3qqukvu421jmb5msqj2vmnnas/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pisuvv27K7fI6LWs3jbdqlqKnyi-7giCxe0ASKjSDPO-Zr8HF_k4TpJ6hgkH41yFY5LI_IY251B2gdMzJNEWMTLhoE9FbbCXF_xxUkR__RTqKBnxUVqZB48friocHLATNkgs_ih-FzOl6bXSMBjpDEc-tFAhOjkYz3qans5Vh0TQp6O07BTr1Ql8Ce1PRqxAZcWs?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/8usohjlo6i1e3o40fn759djtj4/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisSuMLlZD4nw5h9cOBxDlxULR9__Xj4-6Vyqwy_sUxI2U_K-t4WMW3CPcPSq_9G5PsoQ0VUUj34_Bax4Nuhw2BOF7nAIJCbaUD3M_Gjs6MnaGOYzBT640_EOtBvJvZUgj4mN5eObconm06-bvWy6OmfsPpOuu851Zt_70IlWVfugeJ_Tng5rGYMQ6LUqPmwhNKn?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "St-Théophile: Halte municipale"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -69.4183379,
+                48.0309322
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/dem7a6pg6b5jfkajuppn9tpva0/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pis9BHiGPiK1xZUqQyCZq5hp8e4hGPCxxSafT_-jVRHg7q7CytS_6qPFyFC4IHPfdX0_WIQJEs9wQAyRqKpUX00M4UOJlQWK4ZyRY7PGzEwyrOJ680CMWrRKMBD-efHyImkcSyti7Uu4-i-peYntI_814w9RgxROO10GfsytQ-M00HLYPrInuraBztfcbpCy47vz?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>juste derrière le Musée du Squelette, un petit sentier vous amène sur les berges de l'ile face au continent. Le lieu est identifié Parc du Portage et semble \"publique\".  2 tables de pique-nique, toilette sèche, terrain plat en verdure, arbres matures autour, vue sur le fleuve. Un beau spot sur Isle Verte.<br>Eau potable au village, 4 km plus loin.<br>Nous y avons campé avec bonheur le 21 juin 2020.<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/gcshqt44hmro6d367j0plhgf8k/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitJ1shGcWT5M2pJn9HWSFPBJgb6cx7iA1qtO0vD9c0eonj5PQJZ6E3MtHbXalgoaim9NNlZdDuW_rv833mX3V1a63wHzgl7vyfYiq30NqlOc6WXPgZkYh4l1tPU9HwjWvTJ76LuNmm-sM5rx6-wctKoz5NwNekgZdYZ06dIcfJv74yImzuFUL9_YWtObuG_X2XI?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/10ovc9a644qfuf8rfr0r1d45p4/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivN614KHSQCF3xeQk60FoB0bj2bbCpUO9jgL9Elof6NwndM6s_xIpEYrWwjs1ZGZOSCSKomGyA7ceqfZ9L4u_YbxVeRt8d6zbz2r1YiW53s-oGQh3Gwuow2kFq7kBKHJlQTNbRiBCnxEP-kN1ongBKfFwKwE9Qa4KHPRg3oFRWzSnuc0lnzcPl5f5G1g-rpTgM9?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/htjrgvoc51sp8mfprvgfom90b4/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pitgtv6pDfCFV5k1wFUfUh7QuR-bm4Zp9-YY2MybfpQCq3b-QGwoc-7FWNkTZni81-tM-QCB9E6eJFq6J_c52zcn5Xam1sWO1w5vPJ4vKaMM5xvTIEFM54iT4204Jiq5lzYFaGUmAR__FBrFSZNmJfWNaBhQPllwcfZivsXdDvX4Gwpz3jrHPfQ2u46JAXW8V2yT?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/br2tpasvusljtdtn7lgj0h2i6k/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitYqJ7xlDVyxq8IPvDHk9kuvmMIC75fFFxU49wZHCwBQtcxNLxOSuegTPcneC48YiBV01ePkEpEbXWAEUF852ZLWy0BVHgrQx_rGG3n2DiwWkiePB54_f5i8iNG0mVIVXcjqeHHLTPWNe8hcqmchVHuwHoxpKuv-9tfq7JGPqIA6DSVeriIKfQ0IVWyFBtmqyNU?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Parc du Portage"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -69.4448772,
+                48.017302
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/0ktki6spqc0q00pfpre76805q4/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuoBYlI31M6OG7b1kJAz9B0QpkWTaEGx6ZlYnEQuLpahjMAym5Y5Dia98hTCIZvTNhpPL_MTXwndQ4lHEPgSHIkCXehdjhztgfpUXkkHOokEdIdcJjIPA1Y0ozgY8pAbf7ISxS8bN-RfY7csBnsuXf30Y4M7bbHioRpwel7J9DWKYOxJoRpIC0LhLk3HP9gmPY1?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Grand terrain en verdure, plusieurs tables de pique-nique, toilette publique, eau courante, wifi ouvert.<br><br>Préférable d'obtenir une permission officieuse (ou \"spéciale\") auprès du maire, si le bureau municipal est ouvert.<br><br>Site visité les 20 et 21 juin 2020, mais nous avions précédemment repéré le Parc du Portage, face au fleuve et plus discret.<br><br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020",
+            "name": "Halte municipale, Notre-Dame-des-Sept-Douleurs"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -69.410919,
+                48.0416418
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Premier site de bivouac en arrivant sur l'ile, mais pas le meilleur.  Conviendra si vous arrivez tard, êtes fatigués ou s'il pleut trop pour continuer ...<br>Possible de monter la tente derrière le bâtiment. En verdure; Pas de toilette; Le robinet d'eau était fermé  quand nous avons visité le site le 20 juin 2020.<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020",
+            "name": "Ecole du Milieu (halte touristique)"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -69.4230461,
+                48.0518691
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/6m7feabad21v9jb9gvuk5grdhk/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piu7Z6nuZDtXciOohGdGr98hNg32PtXenlm1ovUX8_xGjF16SZ4Fh7i-ZfS1g-sg3ooshAHC-4cGIypPx3efkol83xHDqchlHk820Jqweu9jk7NiWlrFDXi_rl3JWNcOwELDfpi6lLRdtb5cSEg_-i_-WYFhRdRhXY1aU0KVruG7GKL9yY2gMoOOpPOfG5JmDjbX?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Le Phare est le principal site touristique de l'ile, et pourra être assez fréquenté durant la journée. Il faut donc venir vous y installer qu'en début de soirée, et quitter tôt en matinée.<br>Quelques tables de pique-nique, superbe vue face au fleuve.  Pas d'eau potable, , toilettes pas accessibles quand nous avons visité le site le 21 juin.<br>Quelques maisons servaient de gites aux touristes jusqu'à tout récemment, mais ne sont pas disponibles en 2020.  Il n'y a donc personne à qui demander la permission, contrairement aux étés précédents<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/fn5u7hmdbrj67rugmgjjpq0fpg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisqBSFbqsyrzJ0ueTXYI6vdF3rHmIPj34FiqlD8bTusk7AwgKPO41OSHJ6W4riWwLQk-q1ov15mibuAvGrrGSYDOge9e7CEA7r9DMRttIP8AubM3pQ47DZ_hOuhxFUvs8rDJXwxYrIYplNA9vDMXDwxA6ua-6X7y2l2Rx9mSb2bPoafz_D2hyg7yvzonjTe9cDP?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/nhlqm5la2j0t3dc3rv5nlqfj1g/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitOBD2ksY8fdmmipm6xRjt-FrudgLO0AnaXWmn8dMTXFrXbAlnGUymQhrSEWcge7vJb0MaaDcazVwkIpBJSRax1AZMQxA4ru09dbBmXPMbcCAGicXhvKADzResHAqGiE3JsI4ge5xssnn21ylxzdGYN3Jr8KGSRB5yu896A_InRc8kTruZbVehL8Jcuq-S5Y7s7?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/vr0cg70i7s2qeapud3pmiidpag/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuuxwlUQx0r9axxj6TqEGUDwT2FTXononfs3fveox6zfWJVbKB19sXD-w1ZqZFA8zmnc4lEE_DAjDY_kdUuquber5G7IgMTLwwjjvCI1gNoYOV0RIx-BjwfpcqAfcgXUDJExtFlPkvt1BWiLkXSmSI9zIR59pcitx8AAgmhUmdC5Ki_YlZoV9TKy-XfwGNV2UGm?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Phare de l'Isle Verte: terrain aménagé face au fleuve"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -68.315291,
+                49.1880166
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/9il5iuvm2q32g2plv0b1jh8utc/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitQVxJybiPWP0ACuY-tHlICEsLjRbDrJKVjtTeRr5WqdTYTXcUP9aYqC1mw8OmQNNsHMkidd8mzlWU41bbu5VtZ9ZrEsw3UkMt8gXqFT8V3RhjW-7OTxrLWOfJRjH42pHWDg14fNTl85Hj3aJKljrhQw2D1TQM4o8uEi4hw7kWZjlcH-t1g8d4Jz4arJ7mvCUbj?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Dans le secteur Hauterive, en retrait de la route 138 et de la piste cyclable,  un site magnifique sur la rive est de la Rivière Manicouagan, près de son embouchure avec le fleuve St-Laurent.<br>Le site est assez fréquenté par les locaux, qui viennent pêcher au bout des rochers ou voir le coucher de soleil, et le stationnement est sans doute bruyant les soirs de week-end.  Mais juste magnifique pour camper!<br><br>Nous y avons campé avec bonheur le 30 juin 2020<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/val1eisu962203pn6o017kilog/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piv1UBOk-n2u_VV41rbv1UmvAaHI-EONUZzxFo1ywi7TRQ4RccbYyRjWJvWWm-DxbsTb6ykHwF84h3-58ju_-UbQgHlIJX6mB9gJG4i_QCVEeiaNtNYaveY-62DCJDmifeYCDRBv7t_4dmRBKWscTL-Rw5gBe3nOXaCShm5ind-1vbcgUSFYBmoIMc6r4GEqP1RT?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/2ol9g3i1jtnoqi4vn3opnnur5k/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pitmn6QCuf4bRZFEKUVYzl6wWiahwHU14l_TlV52BeXDba8a2o0J1vaC3B0B1kku-wbINd93y0GJn_AvyOPzoHeNZuiCib6AhGYcyVn7twokBSPpViqHPLa_nfSkmKMDnA7XvXzHD-6pQNyaI1eDjPXwjyN8CdUHnWFSX0AF1-UhPWUARh4UPOSRWSyw6I2niaun?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Rivière Manicouagan, embouchure du Fleuve St-Laurent"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -67.2987013,
+                49.4222765
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/dte65vhugacpgujd61msuka4p4/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisYq-_UXNJuIP6BmE7TfTu_Jvy6lNqXIR4uuAYGC5Qk_2vlchLGcFpQdiLx00AtzfpjPoPI5I6uTjVY3Ols-ezg1IdFx_zEKybR74drW3xpMYsjMR7Vutqqy-wxzOn7R58fsspDoYnzs4veqVn8_XftzDrvTelHzo1IgrTJYWhM8aBaTYuZYM1jVdNQ-ehk3QR8?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Très beau site, directement sur le fleuve, avec verdure, tables de pique-nique.  <br>Toilettes et eau courante sur le site.  Aussi possible de recharger les appareils au bâtiment des toilettes. <br>Nous avons visité le site 2 juillet 2020, et nous campé  à notre retour de la Côte-Nord l2 21 juillet.<br><br><br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/4uuskd2lvkfakqs1dvi016u2ls/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuWUZf0GQRUl9S5Hpf_LDFWgj9_bnHbNLkmdufTSlqz3F_YQjfukWMvxb455qmXsYi6GXp0oF80-CVyEdsVa7ubu3zgevb5lG0NTzKtau4SMjP14R28jIkMJ6mXH8S7-Oq6LTbhyITwUrv3wP-un18oFnGkt88GriR5SgZokVZjmM2Wr20XTYlmZyS-9VKsl9H7?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/k7m8umqn48bo8oadf0dnojck7c/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piuu30REaJpYf7ZhkMLJpSUf7R74i0_URpdaYf9GOZsmcTuzKyVYC4vqT1ZHmZAsAgyvzP3l5zGcacLNHXBFV7GNIICH0HTUKa3iQd8WJH0Oisa1veZcxCFforZkphstfuzgmWvYaoUvYUBU6Yw-HYdU1zC30u4IVo1AAATomcM0z_InBQzESK4cZS2aM8Nx3LcH?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Baie Trinité: Halte municipale"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -66.8709774,
+                50.0187582
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/95ubqj8r4alc9vvmbqlmvj6288/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuKaklkblrhV3dM6z8eqbxJ6j6lJzWpYiHVQqPkLE4ZBSMugxLFlMCH0WQt92Z0ReXJMNjT9DFXz_p2M62W_V61pTkVIhpVITvyLV-3XHElzbsIOM7mFvedGV5EsVw5JUis5-4sxvwxWYOq6it7P6GxQ5PfjG1XegUsAAnRey7QTfEW7DQbKqm6k6JpBu4G5ZGL?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>en retrait du Chemin des Iles, tout au bout de l'Ile Patterson, nous avons trouvé ce site magnifique face au Golfe St-Laurent.  Belle verdure, tables de pique-nique, toilette sèche, pas d'eau.  Approvisionnement en eau: possible à  la Mairie juste en face (de l'autre coté de la baie, environs 1.5 km !)<br>Site visité à vélo le 3 juillet 2020; De retour le 20 juillet, nous y avons campé avec bonheur!<br>C'était tranquille le 3 juillet, mais plusieurs winnibagos parqués autour le 20 juillet.<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPIonMaritimes2020<br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/l1qfm0dgk11nf6tjk8uh337jfo/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitnuKDTmLu1EbeOtQ9yFOETGJJCr9IApnVQSpvSoFy9pJ1rQS463NvdesHI8dYeqiFYkl2dtSYZGFQFn6KCVuevL-VnRhH-NYasNr75NNUzu2vCeeVkvAV5-hXuRvtwmZLwCHGTtS--d0lzqt9W6qM4kLrQ2snKEA5HiSqt33xNqLDo3PdUDcBOlCxWL5PzWO-p?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/4nse1jjcnsbrsec0k458k3l1fk/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pithxoiadhc7nZ5alnPQdy5-BMWE6H9FpDRkG1YZg8Ufi5BLcihgy6zi6U0k2dov_n5r3aYaxLvpUVP2JD6s04UocFT6IAMt7eqe0CwzNLRJTQHhvvrNBacMzgoYarNgkL7LVkVDkoA2V6XEok_qBqykqP7mQDyCVeFHCTcVyfjwSuQ06NG6olo61ah3itN28T6I?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/vir9d1siplmo97n1pl2bqhcpn0/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisqnxjQddgETes1p96QrtJRm_BboRP4IqDHep59zEUHK1-D1lV2Y8h6BJXt42KJGGYORlhXpkJNC_iCqEq_eHqLjinQ05qbGTQjHUv1AZobVRKv4Wuluvsegcn7mNF-qtKcjXLFe08xV2XQFX0dMHc9KP_e0ARBDLl0Z3dBHChgWDoiF4Rh4d_8SwBC5aaqdTk9?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Port-Cartier - Halte municipale / Ile Patterson"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -66.6960964,
+                50.1093327
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/r8ecu5hg0ifg5r7nt62eptfn0g/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pivwoe0GAAeRsJ7Gku64J3zwR3Ej8FaYnxrJllx_0GbhgIC9ptQ7KIGz2DNAJRnfai7Kvst7JhUVJAO83ZsuFlhcRHRyTPAnZAFt5j78nJ7GYH8NLP2Ox944Fv-tObCmQUwMT5yp3s23NxDGVIOVZUoEjI_NUCk1KZTFQzvtuZaXceAKQDgJHH7oGUd5GvQrt5Bp?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Halte municipale et site d'observation des marais salants.<br>Bel endroit isolé, à l'embouchure des marais et du Golfe St-Laurent.  Quelques tables de pique-nique, toilette sèches, gazebo semi-abrité en cas de pluie.  Possible de camper sur l'herbe en retrait du stationnement, ou sur le sable et la plage face au fleuve.  Un site magnifique!<br>Visité le 3 juillet 2020<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPIonMaritimes2020<br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/6h3dj75g5fjmpe4es0k365sl88/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pis6mLAXNN3umzGp2JUAgdW49-uCsYS31A1IbA_4sJasn1JtdwCk9g3-RtkQxi2CMa4w8w4S3Sz1jl0fLhvyGSAZzvwb9d63QkP6vUkcPtKxvuKyaaC5T0-9psw0niJWYjcGwFT56yUYxuWWhMi-TF4RFEnXQy9B72izVUeuXN9tAgLNi6LIZUm-dKqi8u-cSxbZ?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/qkc8cck8l2qtea4ui99813ulcc/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piul1Qldoh4Rpgs7cu0buGonn1C3d82Q2ieN5-eFH8J-071E5lWfBCySmC4F_75S4wR5AIuJXP3n-27PNFsxOTCKiNN6wai9WWggixVbTvHJie8NcYqPCfR4EMiHLbToSMRVzJz6EgR4XGG0TPS0L96JCL-WaGH2rlVMJPKFgbnQxgQr9nf-u120xwjfsP_POrEQ?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/lf6sodkan7bsbqguipldlrnk58/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitRrH2z0HBtBiGXlCmTio5u9ag9Z74XgNpT6cv4xrATNf5fjrWh6r79rkUJmIE-3yYO0hkYsk1sj9HCueXBFibZy9GPxAF7o8mfxPsAigu4FLuHTpyacCgMXUksK-eCDa62wIZ5VQ8P9zrGiewjVzY9JKIlFAVvZaTHl-Exjox5UylP97r_u8dEqsJYnUmQHKvw?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/0h2s4spgu0gcbvltd4k7c4nk8k/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuhaFvQGyDkcKWNhPNp1nSAiuWD2Rt_vDXoiIyf60psmbJuDEp7p98HREFpBwCdw9U_Yxt-1r4GZHLeW1J-HqYeotGyBsDTC10BVtW9aoJsYE6l5F5sJF_bTJTNPeLDcszI8Y9MJLp1_2Ydc8AySmp2f0B0dCuT1Hj_wxWL4n10bCA_arrp7fFrEvICMS2xkU_z?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Gallix: Site d'observation des marais salants"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -66.4489656,
+                50.2663137
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/f35gf9pqbocde2i4bbe10c4m6c/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivlsxZnL4p8XKtO-G5GVCcJH91Jy3cThpmU1_Fniz0d244wZFhoA3C2DhLOCcwESPHQ2q-HZSqZ9eapMpDrFxbUOBQ9IxH1V5WV_EGuRERy0AHPBFcs78io8bJL9rgbGchW_vW8oE1tkmH4GmLZh2hzQUb6p-JxZjoDS0qeGV3xX7htwb3fdQaAWI1O0b4KEPFP?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Beau site en forêt, adjacent à la Baie de Sept-Iles. Avec tables de pique-nique, tour d'observation, toilette sèche, pas d'eau.  <br>Accessible à vélo seulement, par une jolie piste cyclable au milieu d'une forêt dense.<br>Site visité le 3 juillet 2020<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPIonMaritimes2020<br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/83knohlrfhfbl4dp4e38j1j70k/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitUyHEjsXZqCXRJW9rchf_1SPMM-9IwMMvtZRzpX76VsSuuK1awsXKtAc7Be17_u1VOX5Quk3xuIAewpUp-GJKV189oFeUEq3eHGl7K-utZAmWNWDsWj7jz7hEOQQDFNe3eGxX4RKWRmgBb7PNBZW_5pfk4NTEZQqC-CCn4BKH0VZJa5ydKF7PCpnDNA7coG85V?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/oqb9ad706pmifhep5lq3k2da48/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitLcCaTBPIsxO2i7K7c30Do7KEz3aCB4NLyg73eWj56qfkTWv65yLngHy9vIU8ZpRjhUi-qX5QwbV8M6YRY6oZbWjn5376y6lpHS18B1vYO-3A7qyOGPmEUHPrWwhUDrq2sYMYi9l1LVAMNHlyVhhdjMS5BE0iuYMdrkPUAENdOJaIQRUcmcte9a7gocYrfYWCx?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/plbs4o1jppnc3kqvcgs5mc4am8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pis7i1F5zEyTE268IJ4xmV-AQir-6WvQyLvzVvf7B2EEI1V50anyHIaL0VCIe6PB4RzoxFAaT1GmILedbBVt6R9683lNkVnaFeQmeQquXZcp0hXA1HzPzD_Xl8J_DPyiBQfIeJy4276-MzuLYANZr9XEGEE2aoZgU52AfvQfiGhVBV-qgLDlndwhbrEJkPDBs261?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Parc Aylmer Whittom, Sept-Iles"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -77.2687139,
+                47.6930712
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Guérite rouillée. Emplacement sur gravier et roc, difficile de planter des piquets. Un km et demi au nord, petite rivière avec pont de bois du club de motoneige (attention, le pont est vieux et cède) où se procurer de l'eau.",
+            "name": "Point 79"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -77.2718898,
+                47.7026454
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Petite rivière pour eau (à traiter)",
+            "name": "Point 80"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -66.2974125,
+                50.2051706
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/693c8v7k3tpea9svgn5blccfv0/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivfY1J7puk5b7eye0G2D2HZ0BMVf3XGvXzKCnViabQ2k20tgacWBj9SCQDGukdGxkgZD4CGTY3wQ5x_4SOFzYidAIgYK4s5t2CcBCJWmOYQxQk0BY100ryF_CrDOzyk8p9H6-yFh3qYmtTvIgWetLqyqNucbhJuHkyChNBaUC8lGnhfmrRm5dzYjCiL7Zyj8iW7?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Toilettes puliques avec eau courante. Possibilité de camper sur la plage.  Pas de table de pique-nique, aucun service.<br>Très jolie piste cyclable pour s'y rendre depuis Sept-Iles<br>Site visité le 6 juillet 2020<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPIonMaritimes2020<br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/qrt91c5j796gm570v6764st7ds/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piv11tCuvtAi7g9N8SJPwMSLHgn7QavKATZgPqK_2PR9Fhs8cxYNYdFHwihKlhsI6QaeX-nlhQilH-lai0o9xFYj0dEkMQYRJKum6UpUDhKofhleXUPvwDOuGj5lG4asDZr7cFSW5cCfM8wjS0T0Qyp4fqFpa5w2oxL0cIjMJmENolE0Wjt18ZZgKcgTAyC3aHpV?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Plage municipale de Sept-Iles, 2e stationnement"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -64.9130279,
+                50.2697876
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/ko4kmeqrmmfl40429cn7mlq2h0/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiswwngWHuA_WdoxTvIxwsGqznrx8eX-KUfTllYZ9ebTGYBDP5whDr9r-ofwTM1s3lN5KZkTS2CTOb8f2lsAs4NFZaI0f2lyKtcOPLqMNt9OACDa2r09OQGPvffaDbrHgeGmpvVks5J3a90j2OW_71zBh503tGWxY6aWsI56jO8a_IkyyeVzSKXzYrcPUZSgT5Kc?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Beau site surplombant la mer coté sud et la rivière coté nord, juste avant le village de Sheldrake.  Sur une petit sentier  en haut de la route 138.<br>Avec table de pique-nique ; pas de toilette, pas d'eau.  Aucune ombre. Un beau bivouac tranquille, avec magnifique point de vue.<br>Site visité lors de notre passage le 7 juillet 2020<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPIonMaritimes2020<br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/dek97h6aeqps34kmqc5v629lmo/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitR6UjwNXVtkQJu_9Tt5SVp2MDLMKcGN9dQnJYNRpcD0HzRBClQuySFkjhSB9jqNSzo05ri1U8nU4tE9SvtcxlUY2pTYMMYNbXARh7EyB9f6snNj1qkLe2WIJx9M8n0mtMXM7xZnZ8xoEHoCw16h_TTmdc263y7HPG3BYPNo5uXGQBDKV_FaLWi8nQAndUyKiV3?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/p085c0fc11oc919edk608slr3c/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitVzqnT49g-tp2kvOePYFh11OC74KJ3oUVKtiSgtZIyraqWkp4pBU3-p6NSHRYfiaDt8YYdeiOZLR_OFVrTj29Y8bzMvXzATeSSBl41JI74alkYo40Gev4OJXXWGrALTJvMhKiiJj5fzxit6jkY_3gDYSPmJMP2hVK-lT-nDqbH6cgvKQtI7y4Hiw_TtOIF3CmV?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/j7818dgt45lch139ecle0koleg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisnsW6ynFFyMr4Suun0PmQWQV4kGe5XHTHv8i0Tn7vW8gbpcGWuA6GPtmxXvMPYpLtKCqmWOddyNYzz8AfU6JLw96sx3lrF9qFW_9NJeWVY7PNZAlHfmxRIDYSZMuanMcJgiELTiffPaz27Tv140tyNfxjzyu9IlCpCwZsQ-nw3sJXio0XvY8rRFDldcbiiCXuU?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Croix de chemin, village de Sheldrake"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -64.8548534,
+                50.2645768
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/9a10g6agq5dlpvnofigcache2o/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivLICL9eMzi5tE_nT1RbB9ZhmXd4MxBT4iHEwFkSF6ErdetQTyz0x6oIRrwpEzlelp2KhtkZ9wJGsk8R3RJkvG1zPR79uRUHc7R7JRFwqIWA3F7s1iA4k4nS4XdP6QzAojCU3QVwSuBNbdt4gonwX7VuE6fX0Q2nk4UyUEUZsGy02h91rGNeVdvcnlDnxtq30lu?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>En retrait de la route 138 face au Golfe St-Laurent, vis-à-vis l'Anse du Ouest, une halte municipale  avec tables de pique-nique et suffisamment de verdure pour plusieurs tentes. Belle vue sur la mer.<br>Pas d'eau, pas de service.<br>Site visité lors de notre passage à vélo le 7 juillet 2020.<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPIonMaritimes2020<br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/3pndfmihh47n0i6h6g65hohm8k/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiskpDGez4qEXUwgxAxoKUWn9_P2ERIXUNK_pT0E1xIy-F9wi4stLWqq6DeXtlxZtMuPR8atRl-iZ9lzVypLqFxqESrIwr_vDtFq7yGu5eASLcZXBOjksix30wwEs81AZRdS3WEdEx2gMOXGsEqczcNAS2W-F9UBsPaw3k3EBn3LxSRTNokm29fN56N40-PN5KpI?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Halte municipale, Village de Sheldrake"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.8193321079016,
+                45.0392663048165
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/vesh0k6h9tjaqf6nddn915it58/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piu5ILVFECLx1sokjj-qSNDrAqTezKmr-hW4Qmu8G5M5lld4_xPhC_VEAVn8j2ELmgFIMNfcSnYe6Fc3ZLpeCpBYC2WXuiGVXaJ2gGCH-ZCOO9bcoAEVvXm019Yt56zgFwV3rQ4ACZkX1QdwLgZqokGtDE2dgMvow1AwRph5pc5tNhX5pq1_HMDYUAkLf83qwbp7?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Aucune interdiction affichée. Sentier large menant à quelques bons emplacements près de la rivière. J'ai choisi le plus éloigné, entouré de jolis arbres avec un accès à la rivière. 1,5 km du stationnement, où il y a une toilette sèche, des tables et un petit abri. Campé là en juillet 2020, croisé seulement un couple de randonneurs. Aucun problème.<br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/9d1i755b4vhvol73dtkkheuuu0/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisPV9rOdEDWBdN2g2A5vP2niptppXasjyGgE1Cw_6e_mnZ5jpwCL1DzPgm4tueWNf8p4aP2jm320pDHD_amzhwk3oTDm1muJJc7wCA22zBsVpJrGPA_owt9_MrzmKva_CyFxUzwfBd38j0smESyGswBKeSfxK-C0Lr-rl4ZZU5oHo0S8iiKI3S8g0DV99Y2g4H8?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/htmlr9q99km72dp708fla7b3ok/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pisv23yTvLg1S2fvkRbaASOTbqt3Z85dZdIh02i_bVImlg7R5kbj1SN-BjztwAhX4V4X-IW1IIX7ytnHZ5breJlsnmYkid_dzrqjF-3OJgHrJ7oZSMEU-pqOiOegDFbAZKd6X8-JgWe08AF8BQI0v_qydzwMEimAi44GpBVqf6JNtL3J_YQR2klk-7Bjf2GVqQM5?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Parc municipal de Frelighsburg"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -74.0485529601574,
+                45.2151429522149
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/2re3vmollhdgtm8lc7e0qvl5p8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivepFtfDM6CtjxQqsqGYgh76WW9KHqwEF1HLeCDHIrWCH5FWh6El_QQxeRFSaLGbkMh1WNTAvI24ebnW46Zh1Uz_HI2DC5JdrF-XGG16vSy8XrW1IekFVExDOtOgwDCUqLkcq1liyFutZEosRTFhIa1TK_rfxxdgJJl1ATGo20QWNgO2kp0u5HZfMDnrweWe2O4?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Sur le bord de la piste. Toilette compost et accès au canal, ainsi que plusieurs tables sous abris. Techniquement interdit, sauf pour les bateaux accostés au quai. Passé une nuit là en juillet 2020. Il y avait 3 bateaux de familles qui ont passé la nuit aussi. Nuit plutôt tranquille. D'autres micro-haltes entre le pont de la R201 et l'extrémité ouest sont plus discrets, mais sans toilettes.<br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/el5gqiofea964qvl59tbs45at8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitL89jPykRN_CRX0URui7qYIkI33kqR3R7_CtN6XZ1sGHpUeFR39aocytzxSYlDzDxUULiWGZjdbNRPE28Ntx4e89aXtZVtAlWFcHw5HyIgbWbc6KULo4MdDJ3geHXgrDhecmqnLuI96AM0P2Rb3TLW3vDOJBXTEB1bkB6UkLIsPAHLpuJAY3ua2Pe6h-F66QLK?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Halte de la Presqu'île"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -64.7439428,
+                50.2701814
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/02i3f7ma85sbebhkv2ocj33e78/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiscbTMkyevUrpJ_8iKSZGfKBR_SNolcHQKE2ulWbMHPQsqEqg0b9-8B9GIkJjW0jXd1B5wIKIEDvhAV2OYQRzhfjFvNqF-pEXw2_i12uyGivxeQj0fE8-n8R_EUwhM5ylX6ZgRu2CWyOZ0e_CoL78_Z85GUxatNmG6HH06OL8grXUlTwLyCwiOd5jXTPECntKVx?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Fabuleux site de bivouac reféré par les locaux!<br>Pour s'y rendre, quitter Rivière au Tonnerre vers l'est par la rue du Vieux Quai.  Quand cette rue finit en cul de sac, suivre le sentier herbacé qui continue le long des plages à travers champs.<br>Quand vous serez vis-à-vis la tour de communication (elle sera sur votre gauche près de la 138, en hauteur), vous verrez une petite anse sablonneuse sur votre droite.  Vous pouvez y monter votre tente, ou encore monter sur le cap pour une vue plus aérienne. <br>Pas d'eau, pas de table, pas de service, mais site splendide!<br>Nous avons visité ce site le 9 juillet 2020. <br>Pamela et Nicolas, un jeune couple de<br>Drummondville y avait passé la nuit, venu en auto.<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/a612hbf4ah4dchjdt03ra4g380/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivNH-9VP9RayPWEVBI8drK4sfpR4_8GL3sjZrvwBzUQEwo1lw7Gwy3d1P1-KzUsQ8wlaK4P2ZUMyfFzzZTLEW6uEWpkh4rVQrv2TjWpNZ7L8z8eEfWHK7KrcEa2X3iCabWbbQGNeWuTb5Z7gSG9fxF7b0TpeKGMJBKCCl3x7jD8T2S8V74rGAL46H8oKEtVdKW4?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/djsn6e3ib1ppbndp5f360126tg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pis2vd-fdtGi3TUcl9eBbHD_CTMWnCfiQEHcCNwB_5JI9NQJV1B5pKv4pWB53i4Yho7gAnJ9x3DNpJxfuujtc1w7nb9cTM-pkEt36TctdatVNFTjM6FPNhlZgQv4gJa1SfuC1k8Sf89dKDwOLAFgJeG4HOvUQ2tUvEXnxKsihLNjTNqg8VlZGnFPO2inLGX0IAln?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/7nc79r3pup5sp0phnbj9lkuobk/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivhjxC2B6prH-OOfncEX4oKw73uabDTickmaaqdmG-rlQ9b52Xilrj8G6WeUWp355d3yydYL_REE-L5ons6Xq3f6RAD04vrawYCoIcT7arjp4nYG4R2EdXXwddya026agQ63LBHgwjKkQztxeLdXVJDajuZSrTD_-8nqjyW-H5Q4QNsMbbtStrpQWGr7fx2O1TW?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/kr6i2se1bpk842tv3h147mahr8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitDZit_2xlL25R45YlH7xNBozdtDL4Hb_apabDqZrpi8H-SQX6f7pzZiA31YFevZ1R4_4VLMEGhU1f4wTFCw7id6kwrCSrRjgwbakCdEfWJ9CVIizU9uurOWAh63_wQK43sbXATZRC5s2vSKOKC2hCkJJCFdMpe_UWU36p1pQRWQxz0mjMAz0a16x8HlIAAQQRT?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/biv3e4i5jkeu8re66k3ha9dmbo/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivigxBZ8-07sBPGwplLHTPd4SEbRiAIg9lo_F-VuYBAyVE_kqG99nVmjOkSITzd4VxM9n528Ijuh8kX4r4_hoeXsaYzwWz-3TNxVZJ6MqBvE3S16FrfDIIPDyrO_jqc6jiewwkeIbygMklwGJrgvVdRuPsPAWa8JweRFjZjjAznqXRk9Jt9wqgBRrYDqDNXLO1q?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "En contrebas de la tour de communication, à l'est de Rivière au Tonnerre"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -63.5747986,
+                50.2503133
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Au bout du village voisin du camping municipal (était complet et dispendieux quand nous l'avons visité), quelques sites en contrebas d'un petit stationnement, juste au dessus de la plage, en partie dans l'herbe longue.<br>Il y avait un robinet d'eau mais pas de table.<br>3 tentes installées ici, lors de notre passage le 9 juillet 2020<br><br>p.s.: pas le plus beau spot, mais près de la ville.  <br>Un bien plus beau site plus loin à l'est sur la route 138, environs 5 kms.  Décrit plus loin dans une inscription distincte.<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020",
+            "name": "Camping sauvage près de la plage, Havre St-Pierre"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -63.550794,
+                50.2573092
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/rmngbldu7mlk66g4g1o5u6nq4o/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitgF9eJnEucLgUOUI_osKsQetVQWKNGjBjfoQMncIHohDxfikrCdcrVfW02Ckoc0Q__N1g9ghUd3O0MtU52X61h7tqpp1ncdcEZ4wd69My7BdtIv4gO-4CupX98GhIY31KSjrukjdXP7mX4FhX8_J5Gp7om7hs2BTdBbfVRZissrsydL23p7mE3CDC5HFOVeXjW?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>A 6.5 km du centre de Havre St-Pierre sur la route 138 vers l'est, c'est une halte routière gazonnée surplombant le Golfe; Quelques tables de pique-nique, pas d'eau, verdure mais pas d'ombre.<br>Site visité lors de notre passage le 10  juillet 2020<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/hig18u37n4v5am8t7qcfkionpg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pisw98RXQKUuSGhoMeT2sgf6UuCHW0K8OnlUCFsU2syEcPE1M8gjVAsueWd0_DzzJG-jnzHg4RBMZEj27LDb2ycubZlRMkhc78UVFClLMH0q77wd7cEg5ByR2YDYlcsicXY1OePFWpjipSzoRbUhzB4kBJ8Zl_LfwQ9-RpnwvXV-j2hmsZ59LK7CYHVb0j0xMm95?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Halte routière et belvédère, Route 138 à l'est de Havre St-Pierre"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -62.8061197,
+                50.2867647
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/tjb8pofet03g0i0p5vddnci4rg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisCHADF1hGZtRB1PstJ4SEi0hUjQ10Efl2XCMN8JKIqWNAUgn-G9I9rh5Qg_ftgOb4_6pCse1GwV3dwbxUeoi5pjQVU1unOZff1XEwN90Rlrw49Fvxhos8iK7Qp35Dml7scGmnt6VFKhvqkZ1qaZYJVY5OaabNYVcCNTHgGN9KWvPcmFs3gzr7Fbo2d-g1hQO7N?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Accessible par la route 138 via un trottoir en bois (aussi possible de rouler sur les roches plates au fond de la rivière, par marée basse), c'est un beau parc municipal directement face à la mer.  <br>Pas d'herbe et pas de terre pour ancrer les piquets de tente (que des rochers plats), mais il y a un gazebo couvert assez grand pour y monter 2 petites tentes.  Quelques tables de pique-nique. Prise électrique dans le gazebo. Eau potable accessible à l'information touristique, à 100 mètres.<br>Site assez venteux, mais abrité en partie dans le gazebo.<br>Site visité lors de notre passage le 10 juillet 2020. Nous y avons campé à notre retour le 14 juillet.<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/g4b2smuslh22fmufa0c8j0ph9c/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitAQ-RaaXsiCR3U3veHPgpvHmOJsZboUIeCuKmXhtWcO-bNuUIeEd65DyBDG1NXF7P5FuzL9PMaPR1iqxFDKLgvz_CggxAXPk-cgCFlTSZghY_87p1_09ZSskPeES2uKgipht4dA6LrIzsokj5u5tpT8p6nENfc9F89gDSrFXdi-X6ofPFZalJ-MtOrKO99CNM8?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/4ih1jup4de413vfh9b3cko058c/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pis6QNTk4-0ZIc0hMcg4NvNCVCCoLSaAOwNr_INO4utsuHwE5CXsOOiyHzf7n6db-sxulVcRrMZZRxn74Lr3GoBknN8d5muQCOdXqyNutIRMvaXrWkzR17xCJFM31xua7BAJa1LFwf80imqh4HZLAWHvUpvNni5Gm97cyjejRjtusKP98A4uHm8D8YEIw1tcZ_UB?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/l8i82crvbe7csufc5g8fbipff0/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pis5UDTvVib5-Xx92yciDLPtrt8adEhHOIi4Kg0nUxjSch-pb-O1I9IwWLsgWxVQL_yBPkgCgaIaPUUvP_NqeGKHk1rxBGMBWNGQpl_kY02PNRsqbsyBGk74v2BPBREbSy8FQTJLSOBw8LsFuNHz3_syu7D52KnkI_ecgz9I4HoLqCZ1VVXMHdUOeyttJteflM6x?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/4kf8r9a17et4cooknkrj37ck2o/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisWuCRQU7b7d-FRVXLBLDe9a6u_EXcEK9NBk5GSIapsaBuuiGh9TB1vFvVXsqQW0NM3OiWTWmzBo5NQiXfJHw9BQQYmb1tg6OgtKtm-yg4XHDaCXfoZwMVkneSLgY8RdF5Pcd3Yg1TQQ-75YOj5GCzbCh1liQ2zDspJkW34CLTrkh0Yahtfi_7fpBavhCCnhEnE?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Baie Johan Beetz, Parc Municipal"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -62.5524765,
+                50.2816048
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/53t2rlqlqm1och4r2bfqh84ejs/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piscxbb8GrgagrqPAiiHGyZkDMFx2J2qe2cgBjUH_utClX-LnLDOGpAJCscHnN2qEXHisozNzXd9-Wg9i-eyZ_0D7lqCU7Xe2EyzsksCfprue1MuypRoj_EbmoYzRwXyWRv-7sRGkl4PQgHV8qETPzneSgWWF5VLUvbWY6GE6wzbOFEfUNVuBLd-vRPeJSA4zFJj?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Directement sur la 138, quelques tables de pique-nique, terrain gazonné et plat mais pas d'ombre et pas d'eau.  Jolie plage en contrebas.  Tranquille, mais prévoir la présence des moustiques!<br>Site visité lors de notre passage le 10 juillet 2020<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/9be31fq8nhmgru72j1iifcuj2o/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuPwQYPJ1sAzFeHc2f7MUpvwLWEjACQYejNDH2lHrSoPiTeN0xvZb2_NSaYdQqjGMLZS88TwUt5xEIQPGuvU6c-aUkUkZwE-96Es92n8PaokmxRSKfFI9U1kts0ovxqjd05c2lKRvjOJXQYPjYp4neSEFoC5sS1ksY2TuO3wGeLEWcTbatyrLmdeicXE7OUGwoA?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/d1h8q92qm7nid24id0uffvs364/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuJCEVswyLUBSrn4Pqb_YQipRs3p5fsjb9m_LJILTVSfaSdxvfLZT5ek91IY8IQQgvMieIzt66vczmGIQzJwA7rZMdYZxiMuSxwr5sWwCLSTsOI96wu4nFdF6n47yx5dLWpzteqHG12T9r_swzfqSrkEblCaC_yX7QYUWT3FMDYg7MItuDdbfBgjC0kC3ovfWPA?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Halte routière et Belvédère, Baie Pontbriand, route 138"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -62.1062603,
+                50.2281068
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/q1mgfvk2q5s8v51kss4c93nv3g/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivRwiCXGyBq-VbmSo2mTpe595oGo4ycY1cmz0FszYXS4szPZnF58_S7NNHtVRN7S9A4pXk_ZCoCX5DUlmO9arbnaD2gblOYTCE6HCdHlPYZlrxkY7FCLIaVkB4xmRBmWfRAguNN7nHYpoL-ioYl7ZI5TAlOo-23wsUjieQIX5EC0Fikn82BmqamaRRBJM30IDP7?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Terrain plat face à l'embouchure de la Rivière Aguanish, à l'entrée du village.  Table de pique-nique, chaises longues.  Suffisamment d'espaces pour y monter 2 petites tentes, mais très près de la route 138, cependant très peu achalandée ici.<br>Site qui conviendra si vous êtes pressé de vous installer et qu'il est tard.  Autrement, de plus beaux sites pourront être repérés en face, de l'autre coté de la rivière.<br>Site visité lors de notre passage le 10 juillet 2020<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/76tv5deoafe3a6afu96eq4mrvk/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiviDVO2Dk1sEFmAZpWnbPbYBxafu8s4gzj08L_fawW_q1qmj4C0gRLKtscrZrvDmETsMbeN7S59KBds5F8kwxt-C2MaAEkD9zfHjcJ10fh_2iVfHqEPJ5aesUEL994pXqWBOrSo4-8pWm_C1Xmy9zkaL4lEVw9aIcRq-o9PMyKtE4mfsaJ9DMzOBJM7mWhRAbmX?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/dg08232bu3rv30rp028bqn83k0/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisJZXpk3YXxreB8HAXf6M1ZMeE5Bxq83xBT0Jlq7agol5Wu_WvUVkzFmTUo_Bp6sMw0ewR9fiMS3BrvVxKVfIvt_V1BXRn6-dS-9SHmqDSMTp__NSM3ew4bsdyAD_j_IuMrMv266Nk9uiMyAuKfeEeYTdXusSKtTGj5QTb713nt4S12QPPhqTFrb3BlJ3TwOMQt?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Village de Aguanish"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -61.8189163,
+                50.1810058
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "un peu en retrait du village, au delà du Café l'Echourerie, plusieurs endroits où monter votre tente. Terrain sans service<br>Site visité lors de notre passage le 12 juillet 2020.<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020",
+            "name": "Natashquan, plage ou dunes"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -61.2530683,
+                50.1968634
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/oejv1aji2uvs4perrpqljs22tk/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuOpzRpnm6AfPTgKL95_RXsHUMfH1G9rTYQw14mKmXmwSd9wGBxwc7aOdn7s4wIvixsEUdg1-LKVKdOUmyZXDxl6cq4mgSk43rot6t6JPIMf_-Tj70Xus0KAU8nFaydoynjHaNJf-Q01GMIX9QVpR1M6kohG9pxnQcn4pifqraY_gvQ3quN-5SxTLq3s-2lRpPK?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Prendre à gauche à l'entrée du village de Kegaska et suivre le chemin puis le sentier jusqu'à ce qu'il descende sur la plage. <br>Vaste plage tout le long de la baie qui fait face au village, vue magnifique; Très agréable promenade sur les rochers qui longe le Golfe.  <br>Pas d'eau, pas de table, pas de service ...<br>Nous avons visité ce site lors de notre passsage le 13 juillet 2020, mais nous n'y avons pas campé<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>Caroline ajout septembre 2020 : c'est proche de la dompte du village, une habitante m'a recommandée de ne PAS y dormir, puisque loups et ours y sont attirés. Il y un endroit magnifique au bout du village.<br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/qckhjtnkdclid1e1sfopnn6e94/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PishSIvqTmZQSdJ6CXoM79yfPgfMIGd_6v7JZyMSHt6OyvlW_CNoUnloVRXOfyas1HwVFgS_Oc3GAC5D2XnjEpNCyeRFmCvJiQuFNBQdyXjdgoqDn1BP-UigRAhTDjw137VyVe-oAi5jJzVlSTrbJSTTg4fiv3byCu-OHcWBlLke14gVaKstfIC0jQH7xGWxdjVr?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/a774erorioto6cjj0v8r0c0mrg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivRiPnX9xQsP-lW37TZHgOMy32Q_XAv3StyoI6IaLMCzyE_Dz8N2NxMfWmJH1EE9MfOP7XBYW1T-OR_LqBL6gWIJj5nEYa50l2nsOzI-tbf6sNd4P-y7xXBcRTJwdIcN07Ro_7BQ1pvTK6R0aRhB4IDxSvLr8vgFuqGAbtMCLE19DgnEFvZ4-PS6l-kIxV04AF0?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/d8uql3ao6ac9jdb56vil37b3go/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piu7qbtwu1w-V-FUxbmMpG6GobKW71gLO4WYpRkry_K4W8h_PAVMtSJXZWVW4x4q0vztocEjX-T1dSphdM1lhgnSpkvMjROg28ghaHTavOOwcqBUa-Rioh-cewZw4WhNLYeO2_kTZ6aDjdvX4koCBYG0Sq9G5PtEHOODRFXbnTU2pYvmuyBZEeS7fhx2LHONXAxj?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Kegaska: Au bout de la route 138!"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -62.0409395,
+                50.2282166
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/bhv2bt3ilu9lv45b577fc9giqg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piu3ZJhuljID89XRBbm3CYxc54gLhE5wReiHdZlG1X62gMUAeQtKijnG4-HdKIDtE1SkoU9Wz6ydtu3u5046SmdrKlMMFc_c28hElD9__AqEa9cIvXerhIWgqFF8Kq5aBoF7gSBvl9-pXbm5YZAJ1hcyqM2FIT7StnC3EB8YR0GGLeyIW-DTu3fKvqE-7sryTNIQ?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>en bordure de la route 138.<br>Beau belvédère surplombant les iles, entre Aguanish et L'Ile-Michon. <br>Au delà du stationnement et du gazebo avec toit (possibilité de s'y abriter en cas de mauvais temps), un petit sentier de 50 mètres mène à un 2e point de vue, caché en retrait de la route.  Emplacement pour 2 petites tentes, à vélo seulement.  Table de pique-nique, mais pas d'eau et pas de toilette.<br>N.B.:  le premier belvédère adjacent à la route 138 est indiqué \"No camping\", et s'adresse aux autos et et aux winnibagos.  Celui en retrait  s'adresse aux cyclistes, et n'a aucune restriction affichée. Néanmoins, nous suggérons d'attendre la brunante pour monter votre tente, et de la défaire avant 8AM le lendemain.<br>Site visité les 11 et 14 juillet 2020.<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/ja8nrgtngk5rqji4l7gas50u2c/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivV-JyCNmTtdWHI-8DUm8ay9WL101ku2VBCYR7Inlhids2EZloEOTxX2HBZgH8J63fV3bR0kGELLZ7pcxxFiHgFAixQA8A6yr1c8Qp01aCylBl1ojx5Mos77odXJwgJrzxA-n5PyOU-MbzbnfFjHVDs5xGN11XJQ47V1WLo_leO1gROPwKSfDZNedzSCI2xieRi?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/2eats56ug1bel00v67kkfj4gl8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivzImwG90KuKQQuEuyqJ-XouqEkTWz8RLgZyCuJtM_oqwF-q69HaeYtMiNXRXhLrEhRa-YpKqECLmB7VP3JZB4ixNWxqUNvnJmOGW9YxxH0EM-0iz7NryB8TsPtABg96DL5JnaigwteCewVu0uKMHpFdu_hBEaDQpEou0SGLNFh8YXoYd6JZS42c3XruuD-Nwmd?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Aguanish: Belvédère et Halte Municipale"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -64.3431687,
+                50.2849144
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/352c5goe58gksp37gck234pljs/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivczB-HKUyvY7I9lsR9WGLGoZxKRHP4IDjGhJ9BY7HWnB6sG2mJGg41vU_RtfLhbAqW9AYabuEMfYPduOyYuTuuKrhYJgvQ2OkidAOaVpGlm7G198jG4u9Q4K27HCDyVJ4vBTUQ4bPVrIWrKVCAcINj0TLUgjVAFuQuSD2zlfcyFzvzP7HJGDiSyflzLxt5MGf9?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Un de nos plus beaux bivouacs au Québec, tous voyages confondus!<br>Pour s'y rendre, en partant du village de Rivière St-Jean:<br>- en direction ouest, traverser le pont de la rivière St-Jean et monter la côte jusqu'au sommet.<br>- prendre à gauche sur une rue pavée, environs 300 mètres depuis la fin du pont.<br>- au T, environs 200 mètres de la route 138, tourner à droite et aller au bout (50 mètres?)<br>- A votre gauche, un petit chemin de gravier descend jusqu'au Golfe.  Environs 150 mètres.<br><br>C'est là que sont les spots pour camper; il y en a une dizaine, tout au long de la falaise qui surplombe la plage en contrebas.<br><br>Pas de table, pas de toilette, pas d'eau.<br>Pour l'eau, approvisionnement possible à la mairie au village; Robinet extérieur à l'arrière du bâtiment, près du parc pour enfants<br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/8uv23lt8d2etiaac8u343m6hto/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivuIVL9NZO3154OVupr3q11ExHVRfpE-CfXog38IbaN3WjEHZak1IQQ8ywbqPKBX4FbJOaIDgaYL-_GIASiVhzn7lFfima6iBj_XKDAe08g8JzYXGe1Vu5_wlNk3vSxxbNPZZTe_PVDk5Z0MYQtGAZbZ6dC1n4Af0yj7cLOHGrK5Mla4mcVh6dsmgx4vSmza4m1?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/rvemar0afgsrarrpi85fsuipkk/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisG34QNipMK_U2Skkvtd1y0O7eScFyFh-z5-zEiK7P_e13E3bP5F0LlkP5n8Oez9xiItQ7ZEdMWvyulAn_Ax2fLa4kO2y5JxyOTRN1XM_1gWr674HbaPEKfCryvtEXgRG3hF-KqLyFas02ueCNoPF8SEgwssLeSygYLzHHk_1XouaxygeGMaFJSsLUkUbSjEDGd?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Rivière St-Jean: camping sauvage"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -65.4187,
+                49.25239
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Petit sentier du côté nord de la route avec terrain à vendre abandonné. Plus loin sur le sentier, il y a un endroit avec assez d'espace pour installer une tente.<br>Pas d'eau à proximité, ni de toilettes.",
+            "name": "Camping sauvage Manche-d'Épée"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -64.74358,
+                49.13838
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Camping autorisé pour cyclistes uniquement. Assez d'espace pour plusieures tentes. Excellent endroit pour baignade. Table de pic-nic, eau douce à 600m, mais pas de toilette.",
+            "name": "Camping sauvage Anse-de-l'Étang"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -64.38788,
+                48.80425
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Sur le bord de la piste cyclable, plusieurs emplacement de bivouac : des tables de pic-nic et abrit, ainsi que de la place pour installer des tentes. Pas de toilettes, ni eau potable.",
+            "name": "Camping sauvage près de Gaspé"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -66.12085,
+                48.10038
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Il est possible de s'y installer au fond du parc en restant moins visible du stationnement.<br>Il y a un abrit pour cuisiner et des toilettes avec eau potable.",
+            "name": "Camping sauvage Carleton-sur-Mer"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -67.13133,
+                48.10954
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Endroit idéal près de la rivière pour passer la nuit en bivouac. Pas de toilettes, ni d'eau potable sans filtration.",
+            "name": "Camping sauvage belvédère d'Assemetquagan"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -67.41416,
+                48.71979
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Excellent endroit pour s'installer en bivouac. Table de pic-nic avec chapeau. Pas de toilettes, ni eau potable.",
+            "name": "Halte du Pont-Couvert"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.3641893,
+                46.4567403
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Petite station d'eau du village de Champlain. Il y a un sentier. La route est passante, mais ça fait le travail. Le village est à deux km en bas.",
+            "name": "Point 103"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -71.2410274,
+                46.6501339
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Il y a une aire de dépôt de bois accessible par la 175. Dépanneur à 2 km au nord. On entend l'autoroute, mais pour une nuit, ça va.",
+            "name": "Point 104"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -67.16472,
+                49.7812327
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/v0pmt79rfdk0uose4fh6k6culs/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivDG355EY-nyOii1WPvHDL_h61gTicFGVPSNSL91ORKlmIDcTghStKg7xkARgTfJOdvbQY-N_c5vAUo-tCOUWxF8N1DGU97eTq0kTjbcVK8BpRtvU0oLjabolf79YC53mzL4WnknIb3S7WcG1IkpySUfGm8jOFMeRQFh7BOAZLsII_6pMVt_Bha0U4zomsWwbZa?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Terrain aménagé avec quelques tables de pique-nique, face à la rivière Pentecôte et aux iles. Officiellement fermé (pas de douche, pas d'eau courante, pas de toilettes), mais tolérance probable en choisissant un site discrêt sous les arbres.  Bel endroit, bucolique.<br>Site visité lors de notre passage le 21 juillet 2020.<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/givorsfa2cip0o30m16ao0st8s/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pis8Kx5vmVKOH40gyCCHwcbcGzYWcrnsOSUSK9wjVGdVne695ODwbwYRuyDJvIuFdt02RQo9WjWCwkXLqpsqg_4Mj8dY_-OqWyJ1Jnnz0tsTI7ipQO26zlZu8YWtRJWXMVUZpkiQjllZM8b4EbBqblW7udmpCaaOAx-7bk6tC1TId4Y3IgNa3A2g2-a9C3JyrVF0?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/r41m2sp60d5tbvmhov61aik64g/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivRUiKPTrD4ewkiJhOcvzwdhhTdbO0p_0WeHe41cxvSi8SDrDPjLPmi0T3cnyf8a7IqZosGShqAGBYHaR0zqYEg0vZ8OyOQhKOKa7SDPU2f1opnsXAsPfYO4PQRJjjqs6th2A7TlYLfJ4XFEP3oscze7qtrXh3mD9ArXOzaQrotxr_Om7OMlsNSQXwzTyUKefxq?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/73go4e75jn2c8l1mjanvvgb8is/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitbOBlA2tyEfbABzZhCPYu8QPF3QBIYt-2qBhgPnQoX2aruThT03F_Kso8oycNQmqllbFGKRNeqV9oI02POEVJeo4TG0ipeJ73XCmaCRhApaJYA6_Em6iyFx2VhW1q5lVezBD3T4vQVO5DSLRilbNdCB3n-MGCkj2NGnrgU50IxMc9ImAwaVyqs8neObRdBTUf5?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Rivière Pentecôte: ancien camping municipal"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -68.55314,
+                49.57399
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Du côté ouest de la route, il y a assez de place pour installer des tentes. Une rivière procure de l'eau à côté.",
+            "name": "Camping sauvage 389 - 4"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -68.58292,
+                49.5963
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Sur le bord de la route du côté nord un grand espace pour installer des tentes avec accès au lac.",
+            "name": "Camping sauvage 389 - 1"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -68.76905,
+                50.28504
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "A l'ouest de la 389, une sortie mène vers un endroit près de l'eau où on peut installer plusieures tentes.<br>Il y a aussi un endroit aménagé pour faire un feu.",
+            "name": "Camping sauvage 389 - 2"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -68.3273143,
+                49.089693
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/vq8q2v6h9fiforgr7ffrj0qch4/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuBL1sjiFu0b56pJbSLR7SNm8V0TqoK9YTfPwn4txKrFG3dAJIM-nsUZXERjYpmA4YN_5bC8VjSklVswnSc77B6a7FHAWgg_HyGly4vzmxr8vpzWxrVf5xdFDt6H_BIqfEyV_3PvU8aLCSJ7fQfM9SDF0GNHjPM8UjAJMp1cDJIaDJ0qh14d2qp7w5B4yjxaBED?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Joli parc au dessus d'une falaise surplombant le fleuve. Quelques tables de pique-nique, quelques arbres matures permettant de l'ombre, vue magnifique.  Pas d'eau,  pas de toilette (sera remise en place après le COVID).<br>Bain de glaise sur la plage en bas des escaliers, sur la droite.<br><br>N.B.:  La piste cyclable permet maintenant de relier Pointe Lebel à Pointe aux Outardes, et donc de faire le tour de la péninsule. La halte est sur ce trajet<br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/snejm7jcir5uvnd5mj96po63ps/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piv6IVGMb25qeHh4T_3A94rE_fNTABMVXexPRN5K7UMbk3hR5j0XAKdItOPB4KOQd2jeFyrsYrg5DLKiyI0OXV5LUbkNIbBZ8c1hc01gEfbOxUK784x-Rq75xvPvAuaANWecGtVpyWBatNXGCa50jRq_td93T0T50ipyeb-a8KbvFFjAkfgU64N7CJT0tibiqVqh?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/2ls1f9g9bqvv0kpmhakfa7td4c/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisDhA6oKn7uwbUFMfjOoUZDOvEUq4s3pEZBD3qeLzzE-Etve4HovevXZ14faKlX8g9WjEVIvRxXdgmw6C0uaxbhlP5xEA28Td3rzWX19PmQn8PGki9pqidk9KCKWF3KWou2vZbXn4Spzc_Td4KjI40uMT9iLzskP6KUw5xszvRsANf-3FcvVarS9u2wnYphpddG?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/0dfsplu4h9lvur7jqrtpj25pcs/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pis2a3Fq9LpV_46vJuULLsM3ErF-4WKGyKNeZr47HfsuoYFvVnZdHFhemCtnFjuiCZbxTK76BmmV3ldUbQ1vqSew-nZ-rMQV_mk7eZjgC-rHcjk2HEaFsGwO7nW1VaGzmPRxCDel9XlEEIWsEJV4tAB1zfHzHWty493E4uasSz9SCuG5oFSVSdgSwaTT79i2anvm?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Baie St-Ludger: Halte municipale"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -74.9256169,
+                45.654466
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Suivre le chemin de fer sur quelques dizaines de mètre. Piquer vers le bois par les foins (attention à la marche et à la possible accumulation d'eau en cas de pluie). Sous les cèdres et les sapins, il y a des endroits plats confortables. Montebello et son épicerie à moins de deux km.",
+            "name": "Point 110"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -71.78013,
+                48.49132
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "En arrière des arbres, près de la piste cyclable, il y a un endroit assez caché pour s'installer en bivouac. Il y a des bancs et un gazebo dans le parc.",
+            "name": "Camping sauvage Microbrasserie du Lac"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -71.46616,
+                48.57472
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Super emplacement sur le bord de la route pour installer plusieures tentes. Une fois installés, on n'est pas visibles de la route. <br>Pas d'eau ni toilettes.<br>C'est un terrain privé, alors restez très discrets et ne laissez aucune trace!",
+            "name": "Camping sauvage Saint-Nazaire"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -73.4737275,
+                49.0809576
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/n1l9tsp5dja1qq5h608b684b58/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuNBZGuCR4oMlFazHagrOkbkQ4pK6mMybzB4iVqDyPP0NimoeoIoODpYiL-zEVR_5W--aXRbXN6fQwY-BlZKdyPvlbOAYGp1wScBzLoGAYwqfTToAfxOzy4a7JRY6oNDkcPD2ObrT8QMXnegEV0I-MLVUCDfpFydiz2hHLQyS8FjSxusi0BbEN8388dZ22-ieQe?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>en bordure de la route 167; Avec toilettes publiques, eau chaude, prises électriques, tables de pique-nique; Un peu de verdure près du bâtiment;  Pas d'eau froide, mais nous en avons obtenu auprès des ambulancières, dans le bâtiment de l'autre coté du stationnement .<br><br>Aussi possible de monter la tente près du petit lac en contrebas, plus  tranquille et moins bruyant, et sans les lampadaires du stationnement.<br><br>Nous y avons campé avec bonheur le 15 août 2020<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/uq0ulj996bm6uf42qdgob0c5jo/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivBZdo8_Fh5d766a_K2Sp3-4GFBbG-ArOAdv4qRMWWWVh_wBmkKVB1y41tEBVJ91SCjTJxRBIg9IyrzW0eDfKVD2MIxYfMviZ85D-0MdcCny7oN2DaSyCpO7H4HCmWHQqqXm8UauOwUL60O8ufjaut0tOjswGkViDTACIkV5-d9EH75OyyuEZkaHMNcPeh2pw-R?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/ajejlaejl2720kaf0lat1ngo20/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pit53Kf64dUNSJQhK01kWrGfTnrV9htF3hJWG2G94JfEpw0iqmXkrrtjVUkMedkIgDEQEoFdJw2_k40YPnA-XdxdQe6QaqSDhxaJ1vOytZ6qTLtREZ89326xLYkN7aSJ39BQCfkoB7NqZg8yIPqVRUmmkCIJ9VQU3fLIXzVSKcvgFpoWxi5-QDA94cgqna_Ub1qJ?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/is8huc3e3btq8vq1c0v9skjapg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiscZWH_HILrIJvGGUR1JLsRtFoaZB_Ai0FFB9OQRRbw8JbDj_ESC_JH2abCc9cBgMNalekJWPSRFWAOkaKJe0dKGm3RlPzWilcLUIRmf07kHSnepBtsDG40_7aF7m6QbPk8WhcHn18XmSeJLsXpjKzxkYEhl1hAKW5Wz6qB0ePU5qOC9Fm-zL3zIfxHNzLi4ZVP?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Halte Routière Route 167 vers Chibougamau (près du Lac Chigoubiche)"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.5910712,
+                48.7755763
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/i81he0gnqmpp1ph4jqn0cpko6k/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pit6QAALpQew5XpwQi5aBQqWDM1m664EVa-EK9esOsHvbseY2xlnKZp_Z-GixUSmx5QwpzXBr-5HwYL8YaHGz1A94QexEY-MkGcSjpF32Lvxc8ve0hg69BsPdEKGCmn5ckZFN4yJb9lR7UrvyR22-INUF3AUSxPHPu6KdWEvjhxxym4TD4CiHu9yNQcPiABhiM14?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Situé entre Normandin et La Doré sur notre route vers Chibougamau, en bordure de la rivière Ashuapmushuan, un site enchanteur face aux rapides.  Avec tables de pique-nique, plusieurs beaux coins de verdure, et arbres matures procurant ombre et intimité.<br>Eau facilement accessible par la rivière. <br><br>Site visité le 15 août 2020, sur notre route vers Chibougamau<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/or5s04pre6ue7bb98oj61usibk/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivRvd4PDsVseJRr0rffdMRafyPBAMVkuSclZ8prte42fE931D7O7UjOJ7G0q2dp1oo7HeOU140LnQnsjgugl2tZiORGf72hxUab8d3U3aA9XMtriX6myBucYBNeLxc8M_jq4E0sYUVEXeepEM6uz2rITtysuXLicZ2r6ik5JS61xgGX91buOJOaXuttOQEB2bZ5?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/uak5ckl80v61rccth63ntrmuqg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitEvfweKuUI-3mbg0eYrqeCckn3q85PhDaUdpYZLWDmDRa5svaxUvohnqqrvKSYrQZRsbr9YDaRx_VV03ahtk5wr55uqq0WPK8KOtKLHI6rJI0CxxlXZbVGcH3llKmM8pSLZMCMXQeUHjul90KQyN1forokM8Z_zYDh_aCvbZPkzKQhn7BXskM211bLi1GROCB9?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/llvjlpha3coe2s06pl17t8d18s/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitsoL84mI3jPXd4zJUrTORWIFCNaXYioJ1sYlre6wdCYHXjLwn5sEPtcb8uaGlmWsY1R7CY33_q6BgHz4CKSnK88hIhzKzmyaTm3v2jRHhIrq_wSiguFokCnN8qzPlsW3QixWp9aAYTEPuYc9f2hjrEVa_1viB1ztzo1lEWs9HkP6ydjfnWNaIH68sjZFZTSUlK?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/j9752drtmgkmrt1urkjb7h26k0/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivWacjFMz_4VJwUAXxlMnFIJVQMz_odI1UBWAFwuL7zbbqFmGZ2ytFa_s_mW4R4W8bF7SLBWk2SYsGJE3Nyol009DO9Oo-wAi_y0eAMu86R4lhcSQbHCE-0WLLiLNmc1UpNq3kZbeZkIzkjdw6uLSoW3jVx10Fh5I2rnmKhKWVl80pP8dVgyTkV05wlGakbGs_l?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Chûte à l'Ours, Rivière Ashuapmushuan"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -71.6453994,
+                48.5513596
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/fibukblfbjinevdd32mitnjokg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisAPL6f9F4K0AXn9ckvnn0_A6iOQ9JRJZNDbIHhq6FIqFDe6HLiPtd7ZL35zw4RUmfaiC3H4gZLu5JsXPqGwBkJGCCNRSOf7rXH_JElA8CBoVHkRAArijQeNRq_MsDuAN6ffTWUGGBv56g1pxaW2HFxXgAKIounvvK6X9gXxMsXSQY4jS9DwNO_s55KwSCIPlJu?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>A Alma, dans ce parc municipal surplombant la Rivière Petite Décharge.<br>Tables de pique-nique, mais ni eau ni électricité.  Quelques passants, jusqu'à tard en soirée, et tôt en matinée.<br>Assez joli.<br>Nous y avons campé avec bonheur le 8 août 2020<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br>Situé en plein cœur du centre-ville d’Alma, le Parc Falaise propose un sentier de randonnée pédestre de 2 kilomètres en nature. Le sentier permet de découvrir plusieurs sculptures monumentales qui furent créées lors des symposiums internationaux de 1965 et 1966 tenus à Alma. Profitez d’une promenade en soirée pour admirer la passerelle du 150e illuminée qui traverse les rapides de la rivière Petite Décharge.<br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/scrveisivi1b8bdqipb665c7eg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piv7-bFSLVY7rA357aLKobGF66nEG0EyqkUSsQz9uHOincOYBnKAytssM4zMfAnKSFTvqFsxu7G66KC23iwgNVd_AQvhZRdpN3cBvDTq74QxB8_ShpZSXQIiBSTseBFu34_fzA1Xtm_oInkY5SOp39u5-7Z4YmfFZGuZF2Nx3IXsy6Am35yH7QmdLDf05ZhXBIG3?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/rk6mmooeo1sfmoqm7of90re1g0/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitcgYPvbYtPZ1QyPaE5JPRASgszd1_BvcxX-lZDNsPcRqOobHKqo7xF7xOz4TzXzWUyPr7qqKiA9wklsYOgW4-w07dYsnSUzokfh8FZq87qJxnnqVmhE1UrjQsIN5aZY8MBO8A-M3z4RyZEaeILhAoUFPbAg6qJBoLaAQIyS4AIL0bLkES5cVyDuN9NYdcngek9?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/hsanbf4elsn2n1e20l9nkqcnmc/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivxHojPgmRJeFz625KBOXr6fHHhOHs9be_bqCC3VFmkWBcKbfCIVJbyLj49e5mbLSa8RIpaDz2wiAPD1sE1hmzmRG2UzmhusXIgzqZ3aAT1eWczGXD6kw4lUHEeaIsKZgCVXEwCrYzNqCKY11Z3OHSBjdjgPFkBykBFrOw_dA0_0-tYd8Edw802jO3IrLhA_jrr?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Parc des Falaises, Alma"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -71.9620844,
+                48.4205804
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/sm509ric2i2fum0vc28ueilkk8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivNNmrELlFVsoOlHTUi8rCpbIO9n0evCAjzaSdTjWKd6QV3tFI19jECvrZOu3fWVdEQm_6JvesGxsGzOS9yRMSAChWOMkstR5St9HdEJWcXDdzcZMEYp-S_QG1Bi9dndj7RwqCEbgGCfZ4XQcrhWHxUzbYr0x_feonyjBjRR3q0JZabbPKDBXnwIMo2KpILMIOa?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Joli parc, avez gazebo couvert et tables de pique-nique,  directement sur la rive sud du Lac St-Jean près de Desbiens.<br>Aussi répertorié sur iOverlander, ce site est aussi fréquenté par les campeurs motorisés, mais néanmoins tranquille.  Les policiers sont venus en soirée, sans intervention, anlors que notre tente était déjà montée.<br>Avons filtré l'eau du Lac pour notre consommation. Pas d'électricité ni toilette, ni eau courante.<br>Nous y avons campé avec bonheur le 6 août 2020<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/klh0jbf3dukv99u8u9ujkvsfag/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitFHqo6R-D8fgtxcz4NPgf41DUVdVrX2d95B5KDxIZW6wn4gifR9UE0sNtLpA7IF5H8i-ByzWxzaMCvmGjsPBg24_ITTtN3io_ofmIQzdvVJYZ05ILvyQOPfwjLkDc7B_u78SnPHg0HwPrFMmjE-Vwb_KxPHL-v1Wd01otsJ9R4Ci6xIfMh5znHymaFGmKeFD8-?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Halte Municipale à Desbiens, en bordure de la Véloroute des Bleuets"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -69.3900782,
+                48.3461954
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Adjacent au Port d'embarquement du traversier à Les Escoumins, quelques spots pour y monter notre tente, directement face au fleuve.<br>Tous les sites étaient occupés, notamment par des campeurs motorisés, quand nous y sommes venus le 31 juillet 2020.<br>Autres possibilités le long de la piste cyclable menant au village, et mieux encore dans un parc municipal de l'autre coté de la Baie (voir autre inscription)<br>Nous y avons campé avec bonheur le 27 août 2018<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020",
+            "name": "Traversier Les Escoumins"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -69.3990471,
+                48.3529113
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/nef3t54q3h9qt7mc3dtpoj7c6o/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitS5oRC_o1Akba4u-GzgXFyceCsz4XebZv3WPDWBu4iJsYEIlaLWxtcL6n6D4c99Ivb6-ejl9lsWW6ryrfByQ2iRrgvJvHalcELJuCDGtinrK3S4IO1i0k6aIhxzawqMEjlbc7_T-buSmF3QaR7DxeMRhCcZZI4UwoQ9yc8J27HoL56ustJ19dvMq5slbOWJibq?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Parc municipal, Village les Escoumins, aux coins des rues Labrie et .Beaulieu.  Très beau, directement face au fleuve sur la Baie St-Onge.  Table de pique-nique sur le site, toilettes publiques et eau courante à 300 mètres au centre du village.<br><br>Nous y avons campé avec bonheur le 31 juillet 2020<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/27ar90c33pvslauqaspb15nvvg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivCkqkw0waHjJUhZwBQTZi266hWFiJBfULBA6BbvHI_73YHXpFyR4EmlukQfwmAnS4B99KEeqgzWLKnHVN7eRs68tQ5ZHpUqYWXoVG_XlMXMu2zJov_F3ZKL1OpeTjgmIjQ-ZWePe3X4I-h1ypOGFNtfgi-qJuOow8h5ix2WgNCtJbz83kCY_hH0nODKvPRlnfD?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/a94mp9js69vovbm4dnjte53nus/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitwsNw0Ekuivr_Oq0kG8nVJjpD7dPbP58l8HDLilsqXGOnpA-9WOm6tkh1CX2piZlIPPZIA-aY3uzi2EjVsyCxCX_HB3zE9qwIE8N5pdyAT4oy_3txUBlaWOaxjIo1KfLgMoRQolSs3BAv4SnIRF1FwyG_9irtVCVc4JCfBzKvKid2Com_Az-NEQAVeRMiZiZ1y?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/on9nlcpv808uu2vreg1op5m420/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivQhqz_f4bRd0VwLHNO2hGfV3eL7kZANZFqZDpSNfd7vMJfauqRp0zj1Y9MHuKm3MEAf1m6RsUZ1z6uWmyWY3Cx05ynWN6mYDpNFVXen2cBI-tmfNgAnNz6d5HHBfrkB9ZxClnBZcpiuro5O555iOxJ1kIffNmIPVO-YwsLAik4jUPwNISaunXHCYZVpr6msNmD?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Parc municipal, Village les Escoumins"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -69.0972163,
+                48.626314
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/a9ppmmnmjm769k337ob866h3a8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pitk4vteI5TprU16-w5SP16nzoIVVddpAy32BBsRSrd_FGuFJv7F3hK5atgKqSo8xrOfJC-4sssDsEEXWTEbBwcB_ZepyBwOYhGN98c5nhLQoKErEAg6U7g19_V2CniaENtF5dm7jShmJJiTj2bESR9_iVtPfeZ3NHdOV3uZH06afORb8LS8dGQRYIKyumGmYEL6?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Halte municipale dans le village de Portneuf-sur-mer, en face des battures et du Fleuve St-Laurent.<br>Incluant un gazebo couvert, table de pique-nique et verdure pour y monter la tente.  Joli.<br>Site visité lors de notre passage à vélo le 31 juillet 2020.<br><br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/nlgt8jtfc78b39nm5gs71326t8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiubS-jjlqdQZsyMcwyRZ-J0whHmNX-G2SZ5fewqT2CFB6e3l5Nm926uUxsd17FkTOoFvhZVHvLFyll-kpPH5uV7sNSnvpGu_wJKOD2VHc1GJrCFH34TVTUMAO0KyoqtXO75nXL-XaR3_Vz4g6a0Z8YjviCpk5-4yFhHvvfAU3j1JOF2RTgmEqCeQtJkP8xyazPW?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/ee82k1h6vd7mu9p0mus523hteg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivrCp6ClVpXMloawDKgZP8zStGG1uOlr-ndXC3MgAjQxxuC2q9Q2RWGLCA_RnWiO4MJh790Z2Dx4rLfQkE9sqQacfT32SYaM55Vz9pLXTAqh6PaVH7k9kNwq7mXJ_W-SAxJ3XXW3ZeRGAPEe-evyErICSmjA3oYszStw6aPHbtfRZaVb732_lKKFX0e4pd4Xo-B?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/63gl8tb2ore61s08o55rj1arqk/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivylTYWdgsfsdbp-oZWIxYfDOFNI01-OLpO7drZifHQF2M8KsSOuWEGYRMq_JyLzG3YO0NIUTRZAkUp3dfkyhBG0QyGHpgUrQbYWHRr6c61Z6_AZGnXtooTKn43A_i1QL0uSynMTX5XelYwVRux9LVDHu1IohdQRsfXJykfQKZFLnA-SRr19jJrY-T0RQh_umnM?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Halte du Grand Héron"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.3897948,
+                48.9944938
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Parc Régional des Grandes Rivières du Lac St-Jean, Secteur Albanel;  En face des chûtes <br><br>belvédère de la 9e Chute.***<br><br>Deux emplacements de camping sauvage sont disponibles dans ce secteur. Chacun est situé au bord de la rivière Mistassini, sur plateforme de bois avec foyer, table de pique-nique et est accessible à pied par les sentiers aménagés à partir du stationnement. Des équipements de poubelle et de recyclage ainsi que des toilettes sèches sont présentes dans le secteur. Seules les tentes sont admises et les chiens sont permis.",
+            "name": "Parc Régional des Grandes Rivières du Lac St-Jean, Secteur Albanel\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.4156675,
+                48.9935136
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/cg2m0h6mf6tg3hseiis9hdpn28/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuA1m_80GvjieKx6kwizMaDLBphQ2gdqRyL3J1Gv6B5u-geRrb5LRFUPW7cBfsDUpT-fUCWyo1sVskAIEw4nDbVYq92r8MqQa5U3KlFZqwsMdXqNDhd-JKbwHjm37xZsN4JQlD-SMEU_LaCVinHKJfTtuWXkP8p0PGFTzOSa55fgDQ7nAEenJb3Wlr4FIN0Pqzm?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>à 200 mètres en retrait du  sentier cyclable du Parc Régional des Grandes Rivières du Lac St-Jean,  face à la Rivière Mistassini, un abri couvert avec tables de pique-nique, et suffisamment d'espace pour y monter 2-3 tentes.<br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/ejqvsr9m8pd5pqd2627jt0t12g/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piu38C5PBlJV6IxpQBnHT1UG-Z5sVFzhOX6FrSMLoq4Ee5V7-8rN4u_-4ugO8DZtivfkFx3A3AiXKn8zDKY3rW9FVfdh-QYyNvR6l7Hk0vbWwdiwTyDP3tUdplMALbFwnMMXdJxaker83H1iZAQLNXrH-kZ5lheHB6mdOpOggVptUKBTJQrYkx-dRuOltK8I945R?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/nt6vqjesc673meh7u76gi0d4kc/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisGTgo1nsvyAwymfVsflwVQpUH3k1L31VBv73e72zZj-ng0aEnLtm84XSJb9qG_Jycn6Pk9F7aqHR9qNLhVp3sOJFto772m4HjOjcJwnul-MVkRqyzVVpR1NdOXp5fzekJcvfLhz4PMqQ3aOJZf1KSwQCVloeLdd2yZi91xgFE4Ouii45pgxogf8yH04ncM60ay?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Rivière Mistassini près de Girardville"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.3016057,
+                46.8879824
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Poursuivez quelques dizaines de mètres après l'entrée du Parc des chutes de Montauban. Vous verrez un 2e stationnement pour la Pointe aux canotiers. Prenez le petit chemin et descendez le long de la rivière. Vous trouverez quelques emplacements de camping à faire rêver, en bordure du sentier national., tables de pique-nique en granit, toilette sèche, rivière! Pas d'eau courante. En pleine saison touristique, nous étions les seuls campeurs.",
+            "name": "Pointe aux canotiers"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -67.2320597,
+                49.5960365
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/due2se9aqkc869pe2orvjfq74c/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivSzUgOCeikT-r17Z0f5x7NK--B-FsRPOR0a7DfP-wSDucBTxpfsWnmf8qhw3V_0D0VUQ1CerflwWboLrLGJEADocBRoG-93QJ-F5BkVOvCsrr1FkNbW5DR8Ek2GRzZVOrr-ssaSgOjtk8rNf1cc75BPSgY03OGnMQLaeca_enDzL5_mi0erCITYwHJ_PDIjyiw?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Camping sur la plage. Entrée juste après le pont de la rivière du Calument sur la droite (direction Est).<br><br>Plusieurs espaces sous-bois, ou sur la plage. Un chemin de 4 roues sur la gauche permet d'accéder à d'autres options.<br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/is267c0uenu7n413b6t3lgekrs/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiufEwIkj5uBIVVazZ3dJ8wknbVP7UonMJ0GfEYpBxack7qI9Fn9z6tey7uI2ckdjPFwfEFykZBly-R-j6_uxj8Vi9qV3rFfBSnqYRGlHFIuUZIbT-Tm0haxIMrFkD8vNgFDREJM46ZXTY23torAoCt4VJmZFe5QfgY82_fgFAcf-RWXTcI_lLrf9qCq_XptK-fs?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Camping sur la plage\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -74.3239362,
+                49.9150597
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/k70kputhad7st0dt4cidpd0290/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piv7lghd46JtFqdW8uOuriPv5x1OhArXPCl6YWe_Rfl__RGAELC4LgkIP6EYuNbQ54Ct0mlkvsrYTdQnAC0jBscgCPYGyGEHCavuC8J0wymglbrPW1c1YR7vxm53MbKHoX7EDChLaiHtKVNKkGYh0SDdrq3RSeXzLgbyzYVAPaf3ATwsEiLx7HOqx2b_RbWAHfcH?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Parc régional Obalski, à Chibougamau, autour du Lac Guilmain: une bonne dizaine de sites très beaux pour le camping sauvage: tranquille, sur le bord du lac, avec tables de pique-nique et et contenants d'acier contre les ours; Certains ont des toilettes sèches, d'autres avec gazebos couverts, ou même avec une cabane fermée.  Coup de coeur assuré!  Le tour du lac à vélo est de toute beauté.  Grande abondance de bleuets!<br><br>Sites visités à vélo avec grand bonheur le 18 août 2020<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/edr4ffajpbrldql30fn0pevr20/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisixidLB6BQFRhzHZC5OlTFCtJ0ozqvt-QnD5LK-b6NE5YL0ahvggpc8aJFRIzXklQrQaNaCbRIXTwzc-0ZB3QeDDhhDmNb5dKBcHcHWGHQcP2Ra46T7fG8twwTS-ZiIRUtNWSbXApMdIQomEuuIlEGwHy3HM6TOnUH3cJRdomfLm_7CU1AbuCaG-aERte1PtyA?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/he7rngjkcgovemt0ir6303njko/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivMN1tvIUQVqcbdpwzoOWJMLOgh27FTzjv8zSQ30PFynFh3gz7bdQ99xV799ZJ0TPYI8xtw3fRS0rXKi1bvGVTX8s5vAQm6yuy6xUvdTPJrDdHXa4DpvDtjvEY0a-kexrSpX-8wEb5SGN8pK2hzFzsC7Ubipd5FORn_6PzNzKh35x3ebqugmZwvmgKDQTWFLQH8?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Parc régional Obalski - Chibougamau\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -62.2232999,
+                50.2338645
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/i3lblmsnajmfe610mat59bq5f0/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitSQ_Wyz6UOSxhcnqGfAJHTmiWu1xB0Q4mv-hcVUcVjcL6HXia_rC2Ouetm5R9HZTPIKxDbn2QKheKjUrg2-_rlwIVsWsZn9_K6XgY-n1jmxiCS8s29vO5fEso9psJjmy7ZNP5eVzIsJ-54YCTbmbs8_x4Y4M19jB4NXyLB--izloJclwTiI-GP2PIAqlqO6HuP?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Prendre à droite dans le chemin de gravelle 200m avant la rivière Aguanish. Une grande prairie donnant sur une plage de sable avec plein d'endroits pour camper. Paix magistrale et brûme sur la rivière le matin si vous vous levez assez tôt. Pas de services.<br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/13quejjoua445h0et08qtga77k/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivEidhQHiMCzvUr2tYhm4PICI2VuK2B1oyUzwSBxDzMU06pCGkHRJiFPKIkQ7MtBvtXqB4An92limSavK037JZtwBGrxkW0ezSCb8YpgkMJWvGjHLjfsRmX1UgXMu6Wu-NNPjD0B7N69a1gAOPIWu3anVzmTSxjgDuYGsXi0KJEf6P0sui21w1V6ZFWl5Y0L-Pa?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Au bord de la rivière Aguanish.\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -74.3547545,
+                49.9125895
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/99u4dsd45jliat0m6ms8fkso2s/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piu5h49Jjcp-pwFBQ2xgOLrVugKGG8qy5TbPbrgJNXlkzFDFPIaDipvLbz1PYO7vKkI0LKX8LnNHOC9dkwYkiv4L8TdaSg5TfcTtZaUMojdJoQNyBPFmLxsit0BfWaNsYe-kJuRsWDiNLbPH8m7GvVF8EnhavegeLWNrM_EXfQLEXahfMgMNZO3u99nuP-sVCHX6?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Parc régional Obalski, à Chibougamau, autour du Lac Guilmain: une bonne dizaine de sites très beaux pour le camping sauvage: tranquille, sur le bord du lac, avec tables de pique-nique et et contenants d'acier contre les ours; Certains ont des toilettes sèches, d'autres avec gazebos couverts, ou même avec une cabane fermée. Coup de coeur assuré! Le tour du lac à vélo est de toute beauté. Grande abondance de bleuets!<br><br>Sites visités à vélo avec grand bonheur le 18 août 2020<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/vorjha3d8u8npm6p466du9je0o/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivPFO3x1s3WS0aV0Pg3hPXsXwH6i61RrcUIfEyJoTtct7KTK7a7cg9MzOqrDDl1Juu92URCnX30JYy5eNS7glavzyAK0MHxm_lv-meGiNt_z2O9IlOi1TJsPHxXaocH9y8AngCd4KJdTbKNyG8kIlovVeBH_jaIzjpzvj39k10vcWheJ0KJGi6BKxlXcVzdR4NQ?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/jbh1p5rhgif7dof3qoo2a0r33s/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuPxH7HP18uwHaCvfONcorvfv0pH82bcxXfuvWsI0Ktrd2kE8y6I0c08JIaDr5d-KtJOK6MTBf9QV_-TUWcuWvlaGU6OVICPyf2TL7z34Rk4mtWOhgnwo2gFwuABwhqXrB7oJ24oKV9hEse29mHk7ACLDI4nUooEWnwE2lp9UXnYlcRUAWE-UAXX2Q1EgfPW57M?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Quai municipal et Parc Kiwanis"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -63.4502962,
+                50.2055725
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/a87mv0eqai68e6qjpd84olueqg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivlZ90TyoemG750Lol_eLpQyABtpoBUiuoWBMTPxX4ZZzcLpRhSsUD0bqvWJGqv9Hb-Jf4tLxYbdaIZToBxM0auq1v7l5JQmVDzC7-ayWs8nxuzAt6NSnjVFko6-vOKvVFTKPf_7WI2pNC41GbX4anCRkAOfzrIKsjJmqCvC-M2T1ue2zbbcdpB55pMqw6NvHDk?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Il vous faudra des pneus qui passent dans la gravelle pour atteindre ce bijou. Tournez vers la mer au km 1232. La plage au bout est dans la continuité de l'archipel de Mingan, avec des monolithes et un coucher de soleil spectaculaire, si vous n'avez pas le temps de prendre la croisière c'est une alternative solide.<br><br>Pas de services, mais il y a des maison pas loin.<br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/nrfkoc043tre7r977kemnbrgmk/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivjDtEiEiZRUYUZOH1VmAdTdZUwmMqfRwyb5FRaZkxkGnoC8Z_t7yW0-Ly-cieUIC2oN47_t7YQ4Mv2ihU6LDT-gxSTDgxWDzd6tjH-t-UF5VUrgurJZzpp45aewHL1jdgpZInf3LrA7iEkM07EEJ_zbYXgy7ZMpEPVFWcFezsFMd-kLf6nyWXoNuCqjTwC0lvB?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/k928qvbuhe2e9qq2g6h69c1p1k/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuMJlHqJxVLcG8h_HH3MEwQovcqUHNJBXrq_MncNRDGAcburThkAZHKv7tvr_l8lVKmnfjFGUsVO5tiZzwyaLHTvq4wzLAse3vw5oPpRhlw9Qe3dFGE2lmMioPeYa1HH53RoAxUbupCwcipAJCoZm_ETgiJJi41s2xNysfREx2k58rhbV9fu2DgjVudIKx1DaEo?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/c3vr6h978e7hdugio984vh0prc/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pis2sZLpOnUUBuX5z2WOFEIz-0Idl0b37DenmRWN-t86IQWo7gmtKazFiMdiE0zH-hx8XKwSMTPM2gDPsPJePREY3L3v0lYORa4nX33YhkfhBaRVB0qwHI0VZrQGg_zrs2eYo5MRBJiJqkIcyMmniy3N54oouWdYje4ga-wxqi__sFA_USBHXI7BpILzz98snGlT?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Plage de Pointe Ferré\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -74.3242632,
+                49.9118157
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/3aaheub3e5u5gurdqu0n19mnp0/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisPLVfJ9vrDVhvxLb0icCVlg47gtOcQu-1q5qV5ed7FnqbmiJlmhT6Av7mzT_eoSwdVdTkZN-3eDJVnQtZhMYEK3VEvPF3V9p1efJQh-DmLT_wGyiFsxqsRmE14EGRiwXUAZzIqPmiHILV5gJUMEN7T0lqXrrtLqP5cX5oXKCm1tfRKGBq4q_YdPUnVCINy-PQg?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Parc régional Obalski, à Chibougamau, autour du Lac Guilmain: une bonne dizaine de sites très beaux pour le camping sauvage: tranquille, sur le bord du lac, avec tables de pique-nique et et contenants d'acier contre les ours; Certains ont des toilettes sèches, d'autres avec gazebos couverts, ou même avec une cabane fermée. Coup de coeur assuré! Le tour du lac à vélo est de toute beauté. Grande abondance de bleuets!<br><br>Sites visités à vélo avec grand bonheur le 18 août 2020<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/s9jfttr4k011okh36voojnuuhc/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisasUHOtDQdIyIxE_I-ef2pkEJ7VeA4sj3vwk1e9hSkYKMm4MpKtpnRax15FGyzdwtpOPP0yW5XEpyCvaYMYPr4Ybd6XwcFoc8gvShNPnbYBz-y6fh-9ApGmaXGY58iwfFwWqVH76aZISM-iL_BmvOto18rBsVr7O0qiwZXu_5OMa-D3oeaba1eBO-3jRugYyy-?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Parc Régional Obalski, Chibougamau"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -74.3369335,
+                49.9066547
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/pgd0nlhg8e2bpm4nm8ree4h4eg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivpJsAlKaDbKpXD_z3CMqZ_vqCNdc-AYpu2hYv4DKGm59yEHuhuJzfCp9YZTe1733ievR8VZrsM2NRt-QAB_wWHAPgfXATkGgIuoiXMivoF94mHdaNhF3rrFLAAlJsFCjKBcT8xlmRyM274tpRiM0ZhLHVD7WyMwImdgwqQmZMEPSq8rGxy-vtq22RHvXy9Ddox?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Parc régional Obalski, à Chibougamau, autour du Lac Guilmain: une bonne dizaine de sites très beaux pour le camping sauvage: tranquille, sur le bord du lac, avec tables de pique-nique et et contenants d'acier contre les ours; Certains ont des toilettes sèches, d'autres avec gazebos couverts, ou même avec une cabane fermée. Coup de coeur assuré! Le tour du lac à vélo est de toute beauté. Grande abondance de bleuets!<br><br>Sites visités à vélo avec grand bonheur le 18 août 2020<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/f5jgcc4mf6q6ms02mjceh9nuc4/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiurBqxQfJ8bwpmht3qAEC0bwCFtZNtRc3EpkdFpW-LE-Np3bsADnLh2mcl3MIybffMDckJDAaKLskMyHHagZcrzwDZnpMSEwzXt8XVhYfLr9o51UM-u0Y_5pHu2fo4bOZTCGuWbA0e1Seu63W0zmPXMnColO30ey1_9ejfcINAYKAfPn05a4SIL3xf_qfYyS0MC?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Parc Régional Obalski, Chibougamau"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -74.3539215,
+                49.89924
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/4ddkr2eo1nvr5qiuujgcq3uj54/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivlryICu8l2WdrKkyc7dgoiEL81r21bPEMWAznT-ZFsdDSCCCH36oULvW1UnzKhqOk0wCZOYaaFLGiYWUQFeA7yFIOaDBZuyFFze599A169k9Xwwyqj93LZ-3RHZrhmDYqH6uPDIJgHXxAp5YS2yZRj55EJ0CvcxPC4HrhE5ou9ccR225jgS6qfhDr_uhsi5Hj1?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Parc régional Obalski, à Chibougamau, autour du Lac Guilmain: une bonne dizaine de sites très beaux pour le camping sauvage: tranquille, sur le bord du lac, avec tables de pique-nique et et contenants d'acier contre les ours; Certains ont des toilettes sèches, d'autres avec gazebos couverts, ou même avec une cabane fermée. Coup de coeur assuré! Le tour du lac à vélo est de toute beauté. Grande abondance de bleuets!<br><br>Sites visités à vélo avec grand bonheur le 18 août 2020<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/hbdpfu663da5o911hesqamskr4/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pisx1JXyLlvUDBDsX4XIfr8RSSO3PfDJX4jU1FbpkTjPlgZ2-YnYVqyVEjW6ggTR8QLjP2HK84UcDBIJGwMKHvJjtz6EYJPzG6ZXCfOHN2Glt_MIGGxSN2_sDj77L_qcYk3HInHQn1vgFhRUT2zNpo3O-rHSXxbfA0JjqPp5ListG_-gthc5vrGlRXLJJ584lELC?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/gbk9qm50jlkm9ffv767smpjhcg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piu9M3xmZDGnGpY4XPcg2BZZ-zlAibleWdfWFUXJDX8oRXjkevnSk6gMMCtJ8Zc8cHZOUoaLUC1s_xY1jd_VJBytTBZQH88X2200iIjXO2sFqfbgi_dU3DnNMITAJkGZXE4lzprBD_0BajfV5f9W7trmaP-JMwoUt8U7m-u7eCBiVVSVJQqdem-YY-1LkRhXMLD8?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Parc Régional Obalski, Chibougamau"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -64.8790254,
+                50.2623584
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Plusieurs endreoits pour camper avec rond de feu. L'eau dans la rivière est assez chaude pour se baigner (pas vérifié si elle est salée).<br><br>Pas de services, mais quelques tables à pique nique.",
+            "name": "Hâvre à Couture\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -69.67607,
+                47.71482
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Halte routière avec tables, toilette, mais pas d'eau. Beaucoup d'espace pour installer des tentes.",
+            "name": "Camping Halte 51"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -70.46985,
+                47.03149
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Halte routière avec tables, toilette et eau. Beaucoup d'espace pour installer des tentes.",
+            "name": "Camping Cap-Saint-Ignace"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -69.88814,
+                47.82991
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Halte routière où on peut s'installer en bivouac à vélo. Il est écrit que le camping est interdit, mais c'est toléré en vélo.<br>Toilettes et eau à proximité.",
+            "name": "Camping sauvage Saint-Siméon"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -70.33063,
+                47.47254
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Halte routière avec tables, toilette et eau. Beaucoup d'espace pour installer des tentes.<br>Une superbe vue sur l'île aux Coudres.",
+            "name": "Camping belvédère des Éboulements"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -70.54941,
+                47.40665
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Halte routière avec tables. Toilette et eau seulement lorsque le centre d'information est ouvert. Beaucoup d'espace pour installer des tentes.",
+            "name": "Camping halte Lévantine"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -69.8179498,
+                47.5929708
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Plage discrète. <br>Aucun service. Pas d'eau. <br>Exposée au vent, mais beau spot !",
+            "name": "Route de la Grève"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -71.7558605,
+                48.5674419
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "accès à l'eau. <br>Possibilité de rentrer un peu dans le bois jusqu'à la ligne électrique pour plus de discrétion (mais peu de place)",
+            "name": "Proche Déversoir #7"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -71.8526625,
+                48.5506167
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Note de l'admin : SVP ne pas camper sur le lac ou vous allez vous noyez!<br><br>Aucun service, mais bien protégé du vent",
+            "name": "Bord de piste cyclable"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.2170569,
+                48.8907641
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Accessible par le camping. Discrétion exigée",
+            "name": "Île municipale"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.3912032,
+                48.9085422
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Toilettes avec eau potable + tables au chalet d'accueil",
+            "name": "Possibilités à explorer autour du chalet d'accueil"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -77.1141462,
+                48.79121
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Halte routière en bordure de la rivière, avec rampe de mise à l'eau pour les bateaux.<br><br>Plusieurs tables de pique-nique dont certaines avec un toit; Toilettes publiques.  Très grand terrain.<br><br>N.B.:  Un panneau indicatif précise \"Camping défendu\".  Nous sommes d'avis que la clientèle visée sont les gros campers qui voudraient s'installer ici pour plusieurs jours, notamment pour la pêche.  <br>Nos conseils:  vous installer ici pour souper et ne monter votre tente qu'en début de soirée, un peu avant la noirceur.  Démonter la tente avant 8AM le lendemain; Pas d'urgence ensuite pour reprendre la route.  <br>Nous avons visité ce site lors de notre passage à vélo le 25 août 2020, en compagnie des 5 jeunes du groupe Echo Explora.<br>Normand Pion y Hélène Giguère<br>127 des Chênes, Ste-Anne des Lacs, Qc  J0R 1B0<br>514-668-9772<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook:  https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
+            "name": "Halte de Bartouille, Senneterre\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -77.3446776,
+                48.4009199
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/94ls618ppna5k12s6b957j6ehg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisYuXEUP9YD7G5gAlxpzoagwLroH4ChQmi0iexcKHJDFnFiIa3f90stNnI2gUO8wTHCh5YxVa1cWK9_Bx_hpFcZP6Pl046Io6Gsx_rDdjh_RLvQOU8YRa5wJK0Ibo_8W_BIUdjmOMbU65DLj6sB2YiThFHAC0tndJqgijc53p163hcKVOezKuPYhpJcE0-E5Ggw?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Sur la route 386 en arrivant de Senneterre, petite halte municipale avec tables de pique-nique et espace vert pour y monter vos tentes.<br>Village à proximité immédiate (eau, dépanneur)<br>Site visité lors de notre voyage à vélo le 26 août 2020, en compagnie des 5 jeunes du Groupe Echo Explora<br>Normand Pion y Hélène Giguère<br>127 des Chênes, Ste-Anne des Lacs, Qc  J0R 1B0<br>514-668-9772<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook:  https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/rofik6evsvrc82iloicsvqn8ao/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pis1_NBregArWgqD-Kg1QlH9RWXHG3IsGUvZKBZlYpivSYxghMOjN5UTe7hC_bperYlmH0JViMhaAu7O-KBmb8NKXg4Qyo4j2459icMpBWjMZNNtLdyaS5g5cLzMj7QUAK21jibggCPSmqjGoX-9rw-Xr6aIjpPjzqPxX5tZ8oJLp0gdt3BE4mWTftGub8G9_4_d?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Halte municipale, Village de Belcourt"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -78.1286673,
+                48.3906468
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/lr42stu2u61nlid1o46l14ifp8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivXTs6VncOarnG7lpR-YhKjXz5cMrpB1RmrxGVJgWo4sKn8RTFi17i06kdGA3RGNN1Kb624tPx35GPLoQ6Gvgsvx7iioSNAO_A25MsB3lRBzTVhqZM9K7Gg76eGiwSFb69oSpdLkaLks2ifApt-I96DfbhP7Vdt8wkRrSAELJOtlkdE7XpCfjKOSR06t-tJbEAs?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Il y a 2 spots permettant un bivouac potable sur la route 109, entre Malartic et Amos.<br>Le premier étant à la croisée de la route qui mène au village de La Motte, et le 2e étant quelques kilomètres plus loin au nord.<br><br>Les deux ont une table de pique-nique et de l'espace pour monter la tente.  Le premier nous a semblé plus joli et plus lumineux, mais n'a pas de toilette ni eau.<br>Le 2e est plus en forêt (mais à proximité de la route et facilement accessible), avec toilette sèche.  Propreté discutable lors de notre visite le 27 aout 2020.<br>Normand Pion y Hélène Giguère<br>127 des Chênes, Ste-Anne des Lacs, Qc  J0R 1B0<br>514-668-9772<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook:  https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
+            "name": "Halte municipale La Motte (2e)"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -78.1330989,
+                48.3565397
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Il y a 2 spots permettant un bivouac potable sur la route 109, entre Malartic et Amos.<br>Le premier étant à la croisée de la route qui mène au village de La Motte, et le 2e étant quelques kilomètres plus loin au nord.<br><br>Les deux ont une table de pique-nique et de l'espace pour monter la tente. Le premier nous a semblé plus joli et plus lumineux, mais n'a pas de toilette ni eau.<br>Le 2e est plus en forêt (mais à proximité de la route et facilement accessible), avec toilette sèche. Propreté discutable lors de notre visite le 27 aout 2020.<br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc J0R 1B0<br><br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
+            "name": "Halte municipale La Motte (1er)"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -78.1899809,
+                48.5813097
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/s31e9k0b3jqm4mqrs64gc53h58/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisIL2r59SvSL2VJ4qNGVh8Fzu6KPePEdtw-N52cGKHVC104xR6h0e5eXnNpgz4Mw_3wMpTe9BEyfnmgTK1njhdoLseCPWzngNyY_s_XIcwrZnPdbBZcGCQwM958DHrXhYqWF9JqM3I4MgOoWwin3reHK_QaMXGXIbjMdlIa7dxSUSBywDFZcb1GzLGUPnmUdc9c?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Sur la très jolie piste cyclable à l'ouest de la ville de Amos, une halte aménagée en bordure d'un plan d'eau, mi-lac, mi-marécage; Avec table de pique-nique, espace vert permettant d'y monter votre tente, au coeur de la forêt boréale .<br>Site visité à vélo le 28 août 2020, guidés par nos hôtes à Amos André Plante et Andrée Naud<br>Normand Pion y Hélène Giguère<br>514-668-9772<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook:  https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/lcs3n4jvar0kga6nlbt1tdfcd4/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitanJ4ptNvNjsesqb8Mpdg3WyZ6fnEx1GsxbBMJkq_OCVvECPvVjAnYDnLPU10xSVTS9ZuKmDP1eSSWBYaCYWHxVDzchoIefCauDrsre3-od2KDbc5yP-_ZiF116gGyHPn25NJQgb-oP8746Uqz8Sm2JksLu7mvv26OAV1Lvqkd_qlBcTo4LE6n1d7vcIMg2mJf?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/hfha52dkdv0lo9jmkfi7u1ok84/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitA90jpQLXaLI-YwOxWhf5g-yj5AeiJUMkYVLViuHmCbczFB29vElAaTMAccFah66yWdnz2zLe73ILs_n22hrtXwsrRQg1n9UMErBSbH_fxNdjEAQqr9XQhpKesO8MRFcxmg-5dBeg02Q9fBb7Hz6ElCwUXFr7eqi-1eb6mOsrWlyXNABOj4ForeKZOUxCh8Ly0?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/qa8p3f4hi72d54n7njic4jeiv0/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiulhJ9MJlgSIOYODfAEHVMue3JgWvrPXeYzhhnWVOXCsp_pVv_5iXYJpsZ-fT6-g1_sHCFJYDLy6_eRvZ0O-SXJghQp-XtbvT4kW5SJDHRXKdGvZzWvW4Rp6jfNOGZB6bRwfma5xz7kiaFAzsPZtMzaJ3PDwA4L5z4fORGEx5jpwewl7pumdrMn2NYxxFIO3-bQ?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Halte municipale, Piste cyclable de Amos"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -78.9724517,
+                48.6711092
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/00pp9s5atl5gs94nq4lfi79a1c/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitkgHyxikT4AyYJdllOT_ZTRQElZA-ofrBpCqZ9v7IELH66EiDekFf5vQ61k869CK769LXNDOGDYI5l83YYMONat0BlfnG1gssmevqiaEIHQQR2FEEpC_1GjmAMMlLWDxnE7ksBad-iKnFWG-8D3Ls0pWxxvHMPd445jtRmdWemFjYDzJV8oIlnlZ5I3h_L7f2d?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Sur la route 101 vers Macamic, juste après la sortie du village de Ste-Rose de Poularies, une halte municiplae en bordure de rivière, avec tables de pique-nique, toilettes publiques, verdure pour monter vos tentes et arbres matures. Joli site, visité le 30 aout 2020",
+            "name": "Halte municipale de Poularies"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -73.2010487,
+                45.2988849
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Passé la halte du gros arbre, on peut trouver une jeune forêt très dégagée du bas où se tenter.",
+            "name": "Point 153"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -79.2758099,
+                48.1833623
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/r5hvga5j4eqqpkkpfjhkspormc/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivTtNI0-k9kTyqLM7TG2vg3H8owlxz-gY7-gQhBgGqK0d8Q9ELbXFf4XFp45GpnsKugZPcO4Hf5fiocPaBxTLJ8yPOsu484GSYXycYFGqlJPpYeSy4_G3bjcBjT6KgSPPf69kNnShhdrkO750SVQ80aAzWlX86hTX6jrZaK5e0BvQji4ugfPe8Y9QDvlaK2c1Mg?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Halte routière en bordure du Lac Renault, à la croisée des routes 117 et 101<br><br>Plusieurs tables de pique-nique ; Toilettes publiques, eau courante. Très grand terrain.<br><br>N.B.: Un panneau indicatif précise \"Camping défendu\". Nous sommes d'avis que la clientèle visée sont les gros campers qui voudraient s'installer ici pour plusieurs jours.<br>Nos conseils: vous installer ici pour souper et ne monter votre tente qu'en début de soirée, un peu avant la noirceur. Démonter la tente avant 8AM le lendemain; Pas d'urgence ensuite pour reprendre la route. <br>Nous avons visité ce site lors de notre passage à vélo le 8 septembre  2020, <br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc<br>514-668-9772<br>rikimiki@me.com<br><br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/1baf0mptm75ase3qb1o7a20ims/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisSfIblfxFazeYf6g37HJ9GMTVXl3I8ewmgFCu-JaDtFGlLzAYKcuRfvsXFqq0NKjav44aFMHu8L9FYBRYf6FwRI1LjCEU-lFvgLSuwqA-SNxMcvlBRX2Dz3U73yYNpZqzxiM56uqz1aIlvcT_FoAbpt4Lb2S1e8CgKKv6c2ENQdiMS7TtUkBAfYMxdEUEFIw7P?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/fnihvl105anusaolr70q5ieqjc/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pivd36IK3zdSRWzdlr2YiwlpkSS8SwmbFeGAGQP-vGCAvaDZQ0Lasl8VOKWSD5-PZbxIurtwvBIx21EEWKkDJ6gzIji4A0uS_C-wUhBRb0xy3k480GfesQrPs3Ro1dfblb4xRVjnpCaln_reHgwqUH2-fX705bOLnb3LhWFBnmpWZGU402BqbwNiv5ybXuufpueZ?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Halte routière, croisée des routes 117 et 101"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -79.2411738,
+                47.9174756
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Halte Municipale  à la croisée des routes 391 et 101<br><br>Quelques  tables de pique-nique ; Toilettes publiques,  terrain gazonné, quelques arbres<br><br>Nous avons visité ce site lors de notre passage à vélo le 9 septembre 2020, <br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc<br>514-668-9772<br>rikimiki@me.com<br><br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
+            "name": "Halte municipale, Hameau de Rollet"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -79.4864606,
+                47.5901212
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/nppnqsf44voi7b3438mldhk1vk/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisYSb_IXK0SaghrSg42l-erYObqN76iwRlAGz2wXIF2zG1UsHqpe9R8exBu43aK9oWSzEHbjj6AlFm3BwzxFY6p7JN3WDjbBPKSEHK83J0qG5f9XJAxqh9gejFBNm3UImVXaYWKFr5Gm66O8R1wOAqIXWyCFA1OCb0YNU4gAbpfRVx37q7odxyZx42hUTAk6b5p?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Halte Municipale en bordure de la Rivière des Outaouais sur la route 101 en sortant du village de Notre-Dame du Nord<br><br>Quelques tables de pique-nique ; terrain gazonné  sous les arbres<br><br><br>Nos conseils: vous installer ici pour souper et ne monter votre tente qu'en début de soirée, un peu avant la noirceur. Démonter la tente avant 8AM le lendemain; Pas d'urgence ensuite pour reprendre la route. <br>Nous avons visité ce site lors de notre passage à vélo le 9 septembre 2020, <br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc<br>514-668-9772<br>rikimiki@me.com<br><br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
+            "name": "Halte municipale, Village de Notre-dame du Nord"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -79.4249801,
+                47.6887905
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Halte routière dans le village de Nedelec, en retrait de la route 101<br><br>Plusieurs tables de pique-nique ; Toilettes publiques, eau courante. Très grand terrain gazonné, arbres matures<br><br><br>Nos conseils: vous installer ici pour souper et ne monter votre tente qu'en début de soirée, un peu avant la noirceur. Démonter la tente avant 8AM le lendemain; Pas d'urgence ensuite pour reprendre la route. <br>Nous avons visité ce site lors de notre passage à vélo le 9 septembre 2020, <br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc<br>514-668-9772<br>rikimiki@me.com<br><br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
+            "name": "Halte municipale, Village de Nedelec"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -79.436973,
+                47.5583343
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/cgpl5024lu1o1tp95vkc9sfiis/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pisy3PKt8s3CVWe0X2KTXj7cNiRYOxdLr5WK5tSscDzUQXJjsY308BYnH-vC0t5Ibgl19nhNgY1XPwU0lHMFOQYABqdEpJsBS63kjWb0Gp0sESKwPWVR6_bTItO9gvRDw5ivRPqgiO2stNcgjuFtiJpLO7xpkhGo_Mihb_4NdyzeFJ47dc-AGm1ZrEUSURMA2Oa3?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Halte routière en bordure de la route 101, entre les villages de Notre-Dame du Nord et St-Bruno de Guigues<br><br>Plusieurs tables de pique-nique ; Toilettes publiques, eau courante. Très grand terrain.<br><br>N.B.: Un panneau indicatif précise \"Camping défendu\". Nous sommes d'avis que la clientèle visée sont les gros campers qui voudraient s'installer ici pour plusieurs jours.<br>Nos conseils: vous installer ici pour souper et ne monter votre tente qu'en début de soirée, un peu avant la noirceur. Démonter la tente avant 8AM le lendemain; Pas d'urgence ensuite pour reprendre la route. <br>Nous avons visité ce site lors de notre passage à vélo le 9 septembre 2020, <br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc<br>514-668-9772<br>rikimiki@me.com<br><br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
+            "name": "Halte routière St-Bruno de Guigues"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -79.4605787,
+                47.2888167
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/obn3f4oh1nq8lbs9admdfqg0co/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pivz_ogMLBknrsx-LsJS7oDIB67ynP1OQki5bW5oKi62KbLBhJr52aiFmnMas3zl9zjuoeMORwHu7eHgfjpY_FdMjGgRI2-6_PAnx8MqAph4rinR93z6wOqo7SifKmSrpoEVzF_1ay-ieZeekJbLcccjlavPSDfpQjBos3ZJj9jVLngJOJYn062UyR6IkR3HGRKQ?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Fort-Témiscamingue, lieu historique géré par Parcs Canada:<br><br>Plusieurs tables de pique-nique ; Toilettes publiques, eau courante. Très grand terrain gazonné et nombreux arbres matures; Site magnifique et très intéressant à visiter!<br><br>Pas officiellement un camping de Parcs Canada, mais la Directrice Josée Latraverse est une ancienne cyclo-voyageuse avec quelques longs parcours, en Gaspésie et en Europe, et elle est particulièrement sympathique aux cyclistes lourdement chargés!  Vos chances sont bonnes, sauf peut-être en période de fort achalandage.<br><br><br>Nous avons visité ce site lors de notre passage à vélo le 10 septembre 2020, <br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc<br>514-668-9772<br>rikimiki@me.com<br><br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/9ccrav6stenu1k442s7j1208m8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piv7Acu5T8xje46y9sr8-n03Tiv_B_Ds1jXo4ZIIB2Bjic0ckdSrSMFUTj8QQdEidl8KodZf6tql8DXrkWCmbKulZSapoUb_8hMv82WWLmL203U2vnQ2Z7zcBP7Pg19eJ-LwFHOIN6SE5kZEWBmO3wUK10Ba5tZZSrwwZ1n16eOJe6XDmcDZOZy7hjEDr4G7WjWa?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Fort-Témiscamingue, Lieu Historique (Parcs Canada)"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -79.4020598,
+                47.2507907
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Halte routière en bordure du Lac Témiscamingue Près de la route 101; Entre Ville-Marie et St-Edouard de Fabre<br><br>Plusieurs tables de pique-nique ; Toilettes publiques, eau courante. Beau terrain gazonné, arbres matures.<br><br>N.B.: Un panneau indicatif précise \"Camping défendu\". Nous sommes d'avis que la clientèle visée sont les gros campers qui voudraient s'installer ici pour plusieurs jours.<br>Nos conseils: vous installer ici pour souper et ne monter votre tente qu'en début de soirée, un peu avant la noirceur. Démonter la tente avant 8AM le lendemain; Pas d'urgence ensuite pour reprendre la route. <br>Nous avons visité ce site lors de notre passage à vélo le 10 septembre 2020, <br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc<br><br>rikimiki@me.com<br><br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
+            "name": "Halte routière du Témiscamingue"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -79.2714657,
+                47.049882
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/p71bq54gk0ir96ms9o0kckb19k/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivhTXwq-N_RRaIilnU9KdXgheFRvUmTwFT6wE-BjanC0o9R77dabpLXMoQ1Dwo4arIOIe1ZvjGKwsC9Q1hwNx8Jksy5K2RL5YdkT5SGcQIo6xkp_c_4BncIRBF20TwZxVU6DjbotDAxUYGLahCzHDppu_NtZbT-_X4HqsD5cYZuZVAQAi0YbVu2taby6usHss8l?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Halte routière en bordure du Lac Kipawa  en retrait de la route 101<br><br>Quelques tables de pique-nique ; Toilettes publiques, eau courante. Gazebo couvert en cas de pluie.<br><br>N.B.: Un panneau indicatif précise \"Camping défendu\". Nous sommes d'avis que la clientèle visée sont les gros campers qui voudraient s'installer ici pour plusieurs jours. (NB : en réalité, une partie du terrain appartient à un camping, et l'autre à la municipalité. Il semble y avoir un litige).<br>Nos conseils: vous installer ici pour souper et ne monter votre tente qu'en début de soirée, un peu avant la noirceur. Démonter la tente avant 8AM le lendemain; Pas d'urgence ensuite pour reprendre la route. <br>Nous avons visité ce site lors de notre passage à vélo le 10 septembre 2020, <br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc<br>514-668-9772<br>rikimiki@me.com<br><br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
+            "name": "Halte Municipale, Village de Laniel"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -79.1801403,
+                46.8524109
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/m58vupju96mqju86a53id7p1ec/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piugt4AdTIlPsNtifaBBx7j89BBygywa84tRiGM9Q1DE0_oLUi40x9Bz46mu5ji8KY0q-33Z0UtjNuLbZ_7bhen8GVWMeSepvU5O-QBHm1YbyV-mmToFJyrE5fuayEpPQiq1KmQSoEazHrASQSNtsU3HqNCuI_BYRq6vdeB2UBpjO_na242upy7xMm8oXeGdQYsR?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Halte routière Opémica,  en bordure de la route 101 (15 km au nord de la ville de Témiscaming)<br><br>Plusieurs tables de pique-nique ; Toilettes publiques, eau courante. Très grand terrain gazonné, nombreux arbres matures.<br><br>N.B.: Un panneau indicatif précise \"Camping défendu\". Nous sommes d'avis que la clientèle visée sont les gros campers qui voudraient s'installer ici pour plusieurs jours.<br>Nos conseils: vous installer ici pour souper et ne monter votre tente qu'en début de soirée, un peu avant la noirceur. Démonter la tente avant 8AM le lendemain; Pas d'urgence ensuite pour reprendre la route. <br>Nous avons visité ce site lors de notre passage à vélo le 12 septembre 2020, <br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc<br>514-668-9772<br>rikimiki@me.com<br><br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/6gquindl8dtb6u3gl8s5tmu9s4/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisnX71zeYgsKPluqiIDfbgVYVhOHxtC3Icl4xt_QXmo_fdtC7jLMeNlxxphrSa7oAm5e_ooiWICfNZLsFb6-0FU3_LyUox7CXg2zJH8l87X2pg0m2j90Zv3EJtnpgZfDC5FxRKZLp0BEwHbw_Y1MKxtiZFJZtFPT2zLqYi2CkCIidX3zHitShXy0FvB2OXVurPi?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Halte Routière Opimica, Témiscaming"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -79.0951029,
+                46.7189047
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/12nnsm808ee5dd765lo62l3j94/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuBVk4qJ_KVKhy8-2keWqM-ebSCxcJF2qOhYn4fSqJX50EXnPT8O794StBChnETvAhDE0_TdYdVz0Sb3n_8ny56-X1-9XbdSYOyRQZ1qQRuPlCTuOZh_0-t8oeTCr7exLQU9yH3yGjm5r4HS2tsI2vdKT7G1sU46XDujXbsxYKnaZeYgIvn06_KeGzYU_ZeROK9?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Aire de pique-nique en bordure des chûtes et du Ruisseau Gordon.<br>01<br><br>Quelques tables de pique-nique ; Pas d'eau, pas de toilette, mais le village est tout près<br><br><br>Nos conseils: vous installer ici pour souper et ne monter votre tente qu'en début de soirée, un peu avant la noirceur. Démonter la tente avant 8AM le lendemain; Pas d'urgence ensuite pour reprendre la route. <br>Nous avons visité ce site lors de notre passage à vélo le 12 septembre 2020, <br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc<br>514-668-9772<br>rikimiki@me.com<br><br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
+            "name": "Piste cyclable de Témiscaming"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -79.1712077,
+                46.6125358
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/ltm1ifvv5r9t5fcv2gofcb961o/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitSxQkzikB1ymjC4D6Yj_KAicAfOXyJiPyL0_8UYpJd-a4wT4jIH2c-q7nNR37ETtkD6msJrN40MCtc7KvE9qDOkzK_EbMaqUXXvDa6KCYftkZcwxXT3Ghaz_fM30Nemp-9-Y-ljgj7uM4-3MV1wqBbYvFgRMaw_HDA03iL-gmrzB82G0MHnSCodWJlqptRwk32?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Halte routière en bordure de la Highway 63, entre Témiscaming et North Bay<br>Plusieurs tables de pique-nique ; Toilettes publiques, eau courante.  grand terrain gazonné, quelques arbres matures.<br><br>Nos conseils: vous installer ici pour souper et ne monter votre tente qu'en début de soirée, un peu avant la noirceur. Démonter la tente avant 8AM le lendemain; Pas d'urgence ensuite pour reprendre la route. <br>Nous avons visité ce site lors de notre passage à vélo le 11 septembre 2020, <br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc<br>514-668-9772<br>rikimiki@me.com<br><br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/60qdhicrlj7a9ca7vust9oegps/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivUKCauSQmu5WAVGtCdVd3jvA9SdSJKWpaMuXoXYS7qW9o3JCrTD1qLkJiy76Fpm9sFQWFt-fvaZ8nxI0vyjYCZXa02s8yNb5be9VUhByFOAFIs-9lBI8JJ2HeMjwWwnYMqytuUa20RJrGn2urBXMStMARE2y30GZlKYgMz1HBMu81MincnrMwZaLXrna2BKeEp?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/2ef5vqfptd012qjenrkviun9ik/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiscFhDrhGbQBuc-bSTzfXZE5yG2hW_6-bjaY8qCrrRraHPtmJaWQawUe3wcsQaqdwK8dlqbBmE-nxeZ6GjoOfn0sa5vQxZtIFjjJdHfMK_fkD2m9M_2RfC5ni9Ngzts6hTAYtk0LPipVN_BdQEfezc8f1ptGGrDtOEM7JHWLExbzRvVCdz_O9Ij-oCpECrAIOkT?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Aire de Pique-nique, Jocko Rivers Provincial Park (Ontario)"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -79.5537727,
+                46.3387176
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/8fdjgrn9kcvu2meercnhbl1jc4/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piu8SXFmu7Xp7RgRTAHYLi9hIXqcuM_xGbZOIkMsrEaxlDqMjzECvVuiunIhP_PsKYhYBRASXXvALngbM_8771X_R1LGb3nM681Ciw1zS8gzyIAnuAOrG8LBmkoBSp3NCWdh-l6R9ZfEdnfaAIXb7e5qV7jBgQfcazR2mE1EEFgy9iXYmufpQxdy0GvNAbLirRco?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Halte routière et aire de pique-nique surplombant le Lac Nipissing, en bordure de la TransCanadienne (Highway 17) entre North Bay et Sturgeon Falls<br><br><br><br>Quelques tables de pique-nique ; <br>Site bruyant (autoroute voisine)<br><br><br>Nos conseils: vous installer ici pour souper et ne monter votre tente qu'en début de soirée, un peu avant la noirceur. Démonter la tente avant 8AM le lendemain; Pas d'urgence ensuite pour reprendre la route. <br>Nous avons visité ce site lors de notre passage à vélo le 12 septembre 2020, <br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc<br>514-668-9772<br>rikimiki@me.com<br><br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/c6k0ruahsanhba8beneslsa5js/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivT_0qjXlwUlVbxb2sOVcrch9kN2PfLz3JE1fhV4ceg7c7xdMV8C4ay7QpPHoxToe-KlZqMmD-PT3uBtNh88wEYLLA0TBaumYPfDjPT00SwpyaY09huCMY0HmiayGgqsOfbevlec_ynNxs7hvtWhcBQYTqQoRIFVePQst6AylVsPQmX9v8LODDKina9xd2Zh2f9?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Belvedere, Lac Nipissing"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -80.1709737,
+                46.3231574
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/9o8av3169l7g47ja3b70nhdvkg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivJPogUiVTT2HwzZ6__Z28oKyxmketyT2UqDTIJfb2ibxZh6MFOzEu09abMCCOWgskkOuiwqg95-Umu5ppgN_3PGhOkRQVqfNKuBVEGaUv1me4hRT1byqTPt2jpNCJ-w0QEeCKvRbIIBDqrCcOnW6Bioqkj949CwI7EOg4VtdDCSkV4xJeNYdUd6z6-H3NBryyY?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Quelques tables de pique-nique ; Pas de  Toilettes ni  eau courante, mais lac Nipissing à vos pieds. Beau terrain gazonné, arbres matures. Très beau site!<br><br><br>Nos conseils: vous installer ici pour souper et ne monter votre tente qu'en début de soirée, un peu avant la noirceur. Démonter la tente avant 8AM le lendemain; Pas d'urgence ensuite pour reprendre la route. <br>Nous avons visité ce site lors de notre passage à vélo le 12 septembre 2020, <br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc<br>rikimiki@me.com<br><br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/a23a24qslun89dov877v6ccp8g/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivDDE6WWrGMLN7GDVrsc1OgDXA1c2RmPqUf_KRoOgIKId2tK9FdMWk8xbjEQ16TBgEn0qpnQKAE0UUFhgp0c1VqJmWU0EmjTDzCAc04WoQGBYPFg24-XMIER6IWqYU-Qi7vQTqg34NIw-TuVGnlfE1Y4erZytX4uqgJ632kevsxzuvoGuZTHs90QwLruzrePjYf?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Aire de pique-nique et quai, village de Lavigne (Ontario)"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -73.5123844,
+                45.4170996
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Endroit accessible seulement en vélo, parfait pour camper à 30min de Mtl. Endroits plats pour tente, pas d'eau ni toilette, baignade possible. Commerces les plus proches: Île-des-Soeurs (dépanneur/épicerie).",
+            "name": "Plage le long de la voie maritime\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -76.9145914,
+                45.9085432
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/b4lqm7tafddi6u525rdsioh6h0/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piv2xTHdq20zHOAV3QMc3bLMuJ-KLXEIbviX4Usq97gq7PsNPegXxWfLQIL6oD3YSaxK3OwK1x4CsTVALQp6oDNTWalRTUaJ4CkOWxh-E9FwTL48TeQnX7v_DktE0n8ngCoEgPjCWnG09At_WHZYBqvFsi_khNXiZQ-TcBisfUbO06LHLY_zZhgzEFl3KwDkqXhA?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Entre l'église et le parc, adjacent à la Route Vrte #1, un joli parc municipal avec tables de pique-nique (avec toit), station de réparations vélo avec outils.  Pas vu de toilette ni eau courante, mais vous trouverez facilement dans le village.<br><br>Nous avons visité ce site lors de notre passage à vélo le 30 septembre  2020,<br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc J0R 1B0<br>514-668-9772<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
+            "name": "Chaltham, Parc Municipal"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -76.9464342,
+                45.8539063
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Halte cycliste en bordure de la Route Verte #1, près de la frontière de l'Ontario à Pembroke.  Table de pique-nique, un peu d'espace pour mettre votre tente, mais pas d'eau ni toilette.  Secteur retiré et tranquille.<br><br>Nous avons visité ce site lors de notre passage à vélo le 30 septembre 2020,<br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc J0R 1B0<br><br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
+            "name": "Halte cycliste, Ile aux Allumettes"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -77.3647379,
+                45.5984822
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/pbqikivg4bbcjcjtgkrnb2lmeg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisjiYFfBbIxblrK4FsLJmjXKBgF-vpSoIeZIhID8C2mZXwx9C7PWjkr-pZHcg8bcRHts1xvnWvy69JduTAG9NRlaUAzkKi2CWMUP9CtpvzLkBO64mBKeggB-6xLM89OaKshss6i07fOk2Lr4bjwmnRBi2OnuUShAIjnte16Fvg9m1BeVttvmuF9-bM3fy734DAP?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>en bordure du joli Golden Lake, sur le bord de la Highway 60,  cette halte comprend des tables de pique-nique abritées, du gazon très vaste face au lac pour y monter votre tente, des toilettes publiques.<br>Nous avons visité ce site lors de notre passage à vélo le 29 septembre 2020.<br><br>N.B.: Un panneau indicatif précise \"Camping défendu\". Nous sommes d'avis que la clientèle visée sont les gros campers qui voudraient s'installer ici pour plusieurs jours, notamment pour la pêche. <br>Nos conseils: vous installer ici pour souper et ne monter votre tente qu'en début de soirée, un peu avant la noirceur. Démonter la tente avant 8AM le lendemain; Pas d'urgence ensuite pour reprendre la route.  <br>Normand Pion y Hélène Giguère<br> Ste-Anne des Lacs, Qc J0R 1B0<br><br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
+            "name": "Halte Routière, Village  de Deacon (Golden Lake)"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -78.6522545,
+                44.7791871
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/ebdb516u1pn862p76gg7jbmbrc/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pitsx_r0OgekTZuVb0UN1ncCV1un67Pw8E035a7eIS39xb8njeuyt1xeRq77QmBsmfMHEFhdQEiSCr0VRV9gDEqm7FSqE5_eqgDZnIFIQeF1KrX7zOD8sYjJQhfOR6-XUiObyeihfFejIm8xBaWvauq9LlkryCboS63yL-stu-XI3koSc5-3z_yiIg8XkCX9wYF2?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Site magnifique et tranquille, en bordure de la piste cyclable et de la rivière, , cette halte comprend des tables de pique-nique abritées, du gazon très vaste pour y monter votre tente, des toilettes publiques (ouvertes de 7AM à 9PM)<br>Nous avons campé sur ce site lors de notre passage à vélo le 26 septembre 2020.<br><br>Nos conseils: vous installer ici pour souper et ne monter votre tente qu'en début de soirée, un peu avant la noirceur. Démonter la tente avant 8AM le lendemain; Pas d'urgence ensuite pour reprendre la route. <br>Normand Pion y Hélène Giguère<br>Ste-Anne des Lacs, Qc J0R 1B0<br><br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br>http://tandemetcie.com<br>sur Facebook: https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/4fhibb19q9us5vv40ac49mtrgo/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisCY9gxYAbYrfPEcsDCN1gPj71e-_m-oHzhdIa85ueejvbRspZiJke6FY63e5rIJQv9UXTgTIYXqrXHd2JhlZ8GMyxub-12Dfmb1s10UGKmuFH8_cMrUu2ZtHr_Ja0pnLA4Jwpwx8h3v8KYkLZaHhIHUiPJ1lFScdSDpsx1nrK_Luc6ePOTw1Y19QAR2MY1dr0t?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Kinmount Ont: Parc Municipal"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.7598837,
+                45.1828603
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Chemin en développement. Le boisé est agréable quoi qu'un peu rocailleux.",
+            "name": "Point 176"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.5755987,
+                46.7279009
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Le site est utilisé lors du festival western de la ville. J'ai rencontré des gens qui faisaient des réparations et j'ai demandé si je pouvais tenter. Sans problème. J'imagine qu'on peut le faire discrètement. Métro à côté, une aubaine.",
+            "name": "Point 177"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -76.6864302,
+                45.8198149
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/7dgffv5lnfhbg441231t2cd544/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pit9ZnoCjXPh0tfydLXDk59G2n9_avNAZn_cXFWxkvCtpMLWNaosDVy0452abIuoJsfOrw5WzLjQhppY13LspjmbuaUG6zkF1cIiOdMuwplNxF-i8G_jm_f06bRS7zM8R3YMvJeeAeZ4U2MsgU9r4Drxz3Zqfjy8P2dLU7s-ylWYGjkgFqNJa1F5fmtMqNd6w8SX?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>en bordure de la Route Verte #1, environs 8 km au sud-est de Fort-Coulonge, une jolie halte cycliste, avec tables de pique-nique, abri pour la pluie, toilette; Super tranquille!<br>Site visité lors de notre passage à vélo le 3 octobre 2020.<br>Hélène and Normand<br>Sainte-Anne des Lacs, Québec - Canada<br>rikimiki@me.com<br>tandemetcie.comhttps://www.crazyguyonabike.com/doc/?o=1ni&doc_id=15622&v=26l<br>+<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
+            "name": "Fort Coulonge: halte cycliste"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -69.5479278,
+                48.2300621
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/n4ce08db4j8rc1t9hcaq53304s/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivwmBP5MdA1nb-k8LqltvNHjptxZJ2FHKcihe-TBquShJyJhs8bpnpTJie012aaYruAasxC1nAaIwIozGVjTUaTy_udRqYui_JHWe0VKxD-BP6GastHKhAASgEzlimpfliIs9nphuRjXIX3p4U1vEVv-RZf7cwN82IQdkq9bZkkVutHZaGjTutoFZ_5A7uTMIZi?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Caroline : Endroit où même les VR peuvent camper gratuitement. Toilette chimique à côté de la plage, on peut trouver de l'eau dans les commerces ou chez des gens dans le village. Plus loin en descendant vers la plage, il y a possibilité de dormir sur la plage si les marées le permettent!",
+            "name": "Point 180 Camping gratuit"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -69.2546236,
+                48.5395945
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/5m9qfhbertajh5jq09u5oa2ato/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitBfU8THb5M3ct07PQUzslVWoGkgdpK4RKJQM2hcYcJeQX4e2fAvv8HNnqUosJAtPMmCDULrIqtLQtCKBWa5YmUX-X3ec46hK9lenoNghb0xmuEausqQLUCLSVMx4GumXjRN8FoftY9PUDHqQpvyzstgPoD0_1JYYnKSOtRCejOzCYn34zt1fd1Wk7wgzbX4oSg?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Caroline septembre 2020 : halte routière avec tables de pique-nique, toilettes et eau potable de jour. Probablement possible de dormir là pour une nuit en vélo! Prenez le temps d'aller faire le sentier et de voir la chute et les vestiges de transport de pitounes!",
+            "name": "Point 181 Halte Sault au mouton"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -69.0940875,
+                48.6348513
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/rm87e1dsptj5vf9kgbskfejek8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuJ5EZ7FvuycLFp0gd_ej6a6EtQfxZShVON6ljvnUGXo61RASMO2HrHrvwd9CynKyffS6Cn5nPFJx1-CqU5yttOwNoUhazxSWgRfyrX3_UtmHWHEL58NVvTMwngZs23A2tYvPrTTLHEB--AH7jm9MgN2wT2L1rRa5VRqRGTSo5VKWMGgLqpR50wKkZaUr7L1vlL?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Caroline septembre 2020 : il était écrit camping interdit à côté du stationnement de la halte, mais si vous êtes motivé.es à pousser votre vélo ou à traîner vos bagages, c'est probablement toléré pour les cyclo de dormir une nuit à la Pointe. Il y a même un gazebo pour la pluie! Sinon allez au moins vous y promener!",
+            "name": "Point 182 Halte touristique et parc de la Pointe des Fortin"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -68.8790816,
+                48.824012
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/eef9tmqvu3dn3vjci2lb2t36lg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitihLkzfdXjmk3SwL-iN6vcP1LNi4hdv2ggnGbme1HIiJ60gQ3YUUZ6lfCPxxuYDfmHOHNW5-qOI3772xQcPTmirZ0qrTiJoDBZAEmJ0PheEocXSq4KdDz4kYM2EEqqxTYlsymheh4ti2sL8flda2AKKo7QwM50e0pQ4crbPCzWZxvugSMzTVfr-vLBHkO_YhZO?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Caroline septembre 2020 : Plateforme en bois en haut d'un cap rocheux, vue incroyable, endroit trouvé sur un site de hiking pour voir les baleines, mais peu connu des touristes. Aucun service. Pour y camper vous aurez un sentier de moins de 1 km dans le bois/la boue à faire pour vous y rendre. Je n'y ai pas dormi, mais j'ai passé deux heures là-bas sans croiser personne, sauf les habitant.es de Cap-Colombier sur le chemin principal.",
+            "name": "Point 183 Point d'observation de baleines de Cap-Colombier"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -68.8633746,
+                48.8405522
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/og2qvmki0h087rcirfs569ipis/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivQWZydQti-EW9A5DtZlUkPjmJ6VgKu08tZnADphV_gxwgjxGJyvIVgZnQJfLehBe_4ad3PIpJwSMjZHpPNuh8fvjEWOG4PhVBFm5n2X1Za73kOKcKnlfrxvkf9FZK7lt-3O7oJ_KzzNYDuuJ4ItVTSEfQt_3zPbAD4ugfc0rS6_3B3AjIieMuG5cDYj4fSdzyF?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Caroline septembre 2020 : tables à pique-nique et endroits pour mettre une tente sur le gazon (ne dormez pas sur la plage, la marée monte haut!). Pas de toilettes, pas d'eau. Beaucoup de VR cet été y étaient dans le stationnement plus haut, mais il n'y avait personne quand j'y étais en septembre. Il y a aussi des sentiers pédestres qui partent de là!",
+            "name": "Point 184 Halte routière Cap-Colombier"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -68.7908906,
+                48.8804465
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/ltismjhivijqe0jeiah34nonlc/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuRH5upNjefbA8Lv06uZFmDPFGZk03WX6qzmLM-bc70IioYDAMJLqpKflWhVGqIayDy0SxHZmJNcRFEQ-z1oQR983PlFPjoGCej6K9zJ6ZRANQliv9KOfoqY3uJ-uwy1j9005CAovHDVdMmpt5TV49HZutpF5R0t_9t6ISoITW7uiMJMrTE_KxkL97w8e0BBpZz?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Caroline septembre 2020 : Endroit souvent mentionné où dormir sur la plage ou les ilets (entourés d'eau à marée haute). C'est par contre un endroit avec beaucoup d'érosion et les visiteurs sont invité.es à faire attention en marchant. Je n'y camperais pas. Il y a aussi un site de camping qui est un endroit de pèlerinage innu. J'ai préféré m'installer proche de la cantine, et le gérant m'a dit que j'étais la bienvenue à dormir à l'abri où il y avait les tables de pique-nique (pas sur les photos). Il fait une marche tous les soirs, peut-être vous pourrez le croiser et entendre parler de l'histoire du village! Toilettes et cantine fermées début septembre. J'ai mangé sur la plateforme d'observation, la vue  était magnifique.<br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/fdgiqpb8i5gkrmqigv68ne0c3g/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuYad8MOCQjD-JEb8EAXtLwXLPxOiytEYGd0KaSEorYgQJEftGncuJWif5rP1ZmKvOPpoNovYmlbvduWpIqDriRSa0-oPudQN_f6u7MPxb7NPgbhofpHCQeWreImQA8PCZUVhQEzakiu3C-SmbxQ7iuVjv3_VjQo7uGL3vu8Jeh8n5ZF9dFOURzO55EDf7Eas0R?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Point 185 Ilets-Jérémie"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -68.2555217,
+                49.1033217
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/lgjhdmsglpiiapc6qs65plcarc/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piv79-1W-yEcWg9DNUofBSEY5hRmqNCvWtlFtAG9KAaRaD1ayELtVGtEjP7LfIyLjV1MwirWwlZi9c5wnYTVnSuNNqa3UFhLgrUP0e_O4awuxCfqmqiEnyGPlbfiMkMr0q7guGkl9P-IBn3T6sEcvmHjUKYYp8s3DhH4AXcB9Uea7ng-s_ZKYpcNgbcig3d4Wiz7?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Caroline septembre 2020 : Piste cyclable magnifique perdue au milieu du bois. Il y a une grande table à pique-nique couverte où il est probablement possible d'y dormir à mi-chemin. Territoire de chasse et d'ours noirs! Sinon il y a une belle halte municipale plus loin, voir sur la carte :)",
+            "name": "Point 187 Halte sur la piste cyclable"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -64.0963506,
+                53.8942864
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/r6kd4au88nlkvqek4u3m4oelm4/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisonazVWCkLWe0AB3FMy-R4sikOqY3TUm26NNVuW6HleuKRkx-NjTBBJ89OkRVNR3r40Baj1Z4Czh18AACEIHKV97h6FXNuyyRBlNTeSiKj7kFlY5etIbZeK3VRC2fbnGfUoATSi_7N77DLuwOQ6mAFHeOVmRiwFaIExsF1cRnuDJbb4DG55-4ljruSI-PQ-apy?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Caroline septembre 2020 : Ancien site de randonnées pédestres et de refuges. Possibilité de camper sur un des belvédères après une petite randonnée sur escaliers et ponts de bois. Bancs et abri 3 murs. Pas de toilette pas d'eau. Faudrait laisser le vélo barré quelque part en bas durant la nuit. Vue magnifique. <br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/rtu59qgb5s3gu4s3h35oi5jl3o/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pis9xa9MGh2NlVVbIDVDpIJoXUHXNgQltjeNzJiumaGnXBc5JZdmqYy91Nd8TNsFjgMUFFCVhled1t07Ly7UAeaTmmW19p6pMRlcZ7SNyurg4Gi1GNf945jIfw-YZJ1KMWaNVlgtBZ2bJGbANz0ijsd1FIr5KZRIHDiPXL5VCUs4wqPa7yhDDXbpWZI0tVEVfDo-?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Point 188 Belvédère du Fjard St-Pancrace"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -65.2455145,
+                50.3156449
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/e47s0t2ho9j1tn3t0m4e1s3ni0/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivGQuJbG5vcafiWYTaoIZolca67L39s_2F9kDfO6Luwmvdp5tqggIDpWXdg_6iP9U8ajVGejGuQQ4_jHo8tuEDXmuPhlfQFWc7RxRqxErwabawbUrK7c_ALXS3qeVBpOgZETBse0qKwB2-qi8fJXMaYlW6YWJh1-aaq93Wgg06fB6FDAswyPC1nNRdc_0l7ZDRH?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Caroline septembre 2020 : Tables de pique-nique, WIFI, toilettes et eau non potable sur site. C'est ouvert 3 mois par année jusque mi-septembre normalement, mais j'y ai dormi la dernière journée d'ouverture le 2 octobre. Endroit relativement bruyant à cause de l'écho de la 138, mais calme et peu fréquenté un samedi soir pluvieux d'automne. Si vous êtes motivé.es vous pouvez sûrement descendre dormir en bas sur la première plage le long du sentier vers la Chute! C'est beauuu!<br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/dgiogqbejj0nuf8h74chcqle34/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuNnbUgZSua7imaRXb68fKHEz6e_gmegw2Ch1NCZLfQ69gNoX0qsoP6IeJqRwk3yIEC7SEVNzV0abHtfcY3xw8qhUwbQAYRc_PLPL4QPFBuMZ2lYwnG8iMldRTUqupywxRnvY_gmA6Sh620VUM5gWsvL45HUhEagRwGiwrRrDgCQb7Wa7sQYEXIgyH104zlpQi0?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Point 189 Halte touristique Manitou"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -74.3351411,
+                45.5667151
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/i9i3fpj6itn4svl7tjqar3oaps/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitU8lq3gaPh8knYtpxAVhfHyKki-V92IO5sJa1bxUjuTdTwbdEQgRdzOxh8j3VKsiaN4w_vizEWLgXEcWMvsoHN1Y23lE79BSge4hEMc98yNMtxpEjh_eLw4ReSib9D-upb3JiC4Il8CI7XqcaBYKPSeUMkalKdBvKYIpbkK-P9Om4FcLl4zVGXm7wk6uM3UY9c?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Très jolie halte municipale, en bordure de la Rivière du Nord, face à un petit rapide.  Avec tables de pique-nique, verdure, arbres matures.<br>Dans le village de St-André, en bordure de la Route Verte #1<br> Site visité le 6 octobre 2020, à notre dernier jour de voyage en 2020!<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020",
+            "name": "St-André d'Argenteuil, Halte municipale"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -75.1039521,
+                45.6052238
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/bkiqm9ljtlv7cad2lno10t8650/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivBDHoMg8TendXZBX_MF1IZQLJhmfmu_eWwJvLPJlj4XQsW7yZ2VIMTY2GpXuVxS82II2VmzJ04VODzcNW_UnlycEiJQV__Qf2UBQd9QDgcPaoBnSFx5Laz3BNZ3pkb5bpx1lGDR4BTW2MNQqN8L757DzAMjgbWbetb2a7Td9ZIZL7tR199YG85ncHRAGR7uSkC?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Très jolie halte municipale, en bordure de la Rivière des Outaouais,.  Avec tables de pique-nique, verdure, arbres matures.<br>Un peu en retrait du village,  en bordure de la Route Verte #1<br> Site visité le 5 octobre 2020, à notre avant-dernier jour de voyage en 2020!<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020",
+            "name": "Plaisance, Halte municipale"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -73.94251,
+                45.72891
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Passer la clôture de la piste cyclable, de l'autre côté du chemin de fer. Près du sentier de VTT. L'accès est plus au Sud (porte sur la clôture).",
+            "name": "Camping sauvage sans eau"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -74.8656,
+                46.40133
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Une table de pic-nic du côté Nord-Est de la piste cyclable et un espace plus au fond assez large pou installer une tente 3 places.",
+            "name": "Camping sauvage Rivière Rouge"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -74.3751547,
+                45.5660381
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/tk4iv53gciv12r8ba79pj8s1i0/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitaBVBfVDvXW6guEVLY2xeXFlz-VFlXOxPKWmjMTWodhjus84SszKnHVjOgrcsHIjAvgRmFqlIclnWq4W8F1vAL7sZ9tEg9ouphERdUbbmXiDUALtsymSbU_OX1OzQaOwjM80R-hNis0JiO7ID_DWC-x3Cdg8_OKX452XONmru-ZSXSzUntTjb6xe7pBs6JCIQ?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Derrière l'église et la maison adjacente, le terrain délimité appartient au gouvernement (Parcs Canada) et fait partie du Lieu historique du Canal-de-Carillon. Le terrain est en pente descendante et assez bien caché à partir de la rue, donc idéal pour passer inaperçu.  J'ai jasé avec le résident de la maison le lendemain matin, il avait l'air habitué de voir du monde passer la nuit là. Casse-croûte à proximité. 22 août 2020.",
+            "name": "Canal-de-Carillon"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -74.8965644,
+                46.0060802
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/8thcsn4u82dnv6iu8o76nldevs/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pis4Z-hg0wg2aTx0S1SXMrrzXLkxfz3w815UYO79OT1vgk_XThYAA8mQffIaK3C3xOb5DoF164h-JKLjWWG8iEX6lqN1aRHfwM8yUbJSimDXi8kwSr8N2kJSq1-GfasmjRnsY0nFaVpkcN4AtWKDOZujtqu-dNkcbz0-SB1JGM7oHv2kUxtsqkAydMMLGn9rPDIj?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Si vous ne voulez pas payer le plein prix pour un terrain au camping (40$+ tax en 2020), une alternative ici: petit boisé sur terrain privé, mais non occupé (pas de maison). Facile de se trouver un spot discret dans le bois. Commodités à proximité au camping: douche, casse-croûte, etc. Juste à faire semblant que vous êtes un client du camping qui revient d'une ride de vélo! 21 août 2020.",
+            "name": "Alternative au camping Lac-des-plages"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.38732,
+                48.70419
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Beaucoup de place pour installer des tentes. Camping seulement pour les vélos. <br>Toilettes et eau disponibles.",
+            "name": "Halte routière des Pionniers"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -70.9565435,
+                46.6215854
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Sol inégal et un peu de bruit de l'usine. Aucun service. <br>Pour dépanner.",
+            "name": "Espace semi-discret en contrebas de la piste"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -68.80396,
+                50.20128
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "A l'ouest de la 389, un terrain près du lac près où on peut installer plusieures tentes.<br>Il y a aussi un endroit aménagé pour faire un feu.<br>Un accès au lac permet de se baigner.",
+            "name": "Camping sauvage 389 - 3"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -70.9461512,
+                46.6202301
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Camping officiellement interdit. Notre tente, montée tard, a été tolérée par les employés municipaux du matin (aout 2020). <br><br>Toilette sèche, tables de pique-nique. <br><br>Possible d'aller un peu dans le bois vers l'ouest pour plus de tranquillité et discrétion. Il y a notamment un espace correct à proximité d'une cabane à sucre non visible sur google maps.",
+            "name": "Parc des chutes Rouillard"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -66.54567,
+                48.07663
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Il est possible de s'y installer en bivouac lorsqu'on est en vélo.",
+            "name": "Halte d'Escuminac"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -74.5357739,
+                45.9365454
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/dgnrf2i9f3gsvah5maug28vj4s/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisODw2mLMGexxFljDYCWrInmh9LNYe4a6RVqyUzd7CgMn7rH-7PR-qCiWpb2PP85NcFfDq6l_Zhwh5oDOaue2fy-SozsJDR6W-HjGKObpJ-0YAt5vM-QoH3w3bZWpq9V72WNK6MBIrbyV8lsWvv3S68cHJ7x2SYFCD5Scvr_6mmV1nmF0WDUHLkWNjyhRxVz9uL?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Sur le Corridor aérobique, environs 1 km avant le village de Weir, cette halte cyclable en face du Lac des Rats serait un bon endroit pour le voyageur fatigué.  Table de pique-nique, toilette sèche, eau du lac à filtrer, espace plat sur petit gravier.  Secteur peu fréquenté par les cyclistes, car loin des villages plus achalandés.<br>Site visité le 12 mai 2021<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br>http://www.crazyguyonabike.com/rikimiki<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://tandemetcie.com<br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/8sl76ar0c0u9np3179suh07ets/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitF0e9boq3ra2uvq4RP9w0iH_FGuPiyhaD_atUdRMVYQQDU9Px2rsXsRieJVPGpwg61ex7mICOUO-017qGOXZSAeW8xZQH_YoIyGY2kn-yUW_BRFNHS_UOivQqmNd8jfr09W35TREIV2jyg4GUY1uT6K4hiCYM-vLkbgIadWlwLYYVSMZl0z8C8594qhiLgmQbF?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Halte cyclable près de Weir"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -74.6187724,
+                45.9684311
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/uee1g0j7rgcc2fmikc72bed61k/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivYXatC3-7Ny9axZjDSK-wnOCwM3G0XAMaJPxfcLfYqsyCI1Adp7MCIPGM-lG7ewKM4LDBUyVaET5Mh37oGhdGepRbQLB1C4Ox7Wolsheyn5HpNIxbWEJayqErmLvNpKuA_0xiqeTYwoxpV9C31sgICdsEmzfwcs28V3lMDoYKaq01tNBR5cvj-6ZY_jbNl9-Wi?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Près de la croisée des routes 327 et 364,  le village expose quelques pièces de collection de l'époque ferroviaire, à l'extérieur de l'ancienne gare, qui est maintenant occupée par le Bureau de Postes local.<br>Il y a autour suffisamment de verdure et d'espaces  plats pour y monter discrètement votre tente en début de soirée, après  les heures d'affaires.<br>Site visité le 12 mai 2021<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br>http://www.crazyguyonabike.com/rikimiki<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://tandemetcie.com<br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/7uqpicbddpemdfb203h25hct4k/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivEFZ3s8knSAuH2tNCyLIF6hknEr1oQ14G50MACzMZ8550M5k_UrA-ajeMtBOCfHDhF3HQx7JXgS_SJTH2htPi9rmYy475lpiWBy3wpSRF3MpfNkZTpobVb_Kv7rC6MzRudTmSAmFp7DeODIv8onni4kKhAhfig2OIPhwCYenD4RJWzKJJ6NuLSOYpPx2QBBgHY?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/hatujsdlc08mb5ikp7buqgugq8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivvwEPFonsTbEdfZdfbl_CvcolKy1zE3kMDwTAZQ6zNwyY1LpV_pm9KDH1bxWCQ3a68xTyzEgh9A-vhULIaJzJLUOu1tWc3SxlyYGLQqKfhIkTRMqdtdfqhB8m10tAcgvimNEJVfAtAfknM3BMI5O6HkiLBQYcp4E9MRxR30C-1kgZLOhBxAYEi1PpOrx8Szdus?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/c0pvn1okfinagcomks55fdkqm8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisIEtJ7brEzyAdYSJ2CsAmydsgLpyJoVTXJKUpuHAYASiCiSXQ5xyWPFbjx3u1KXunenyC3enTCMrnX_laJhSKL2EmrTmXOG2TsnbBjgIV2dgbjoDJF-cgehOZB5Ouoe34n55LmikEug0Or3ack9x91UiwqMwdJwT2m8nvEun9rR3WNa3tHFCs-fhYaC1Gnento?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Ancienne Gare, Village de Arundel"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -74.6334994,
+                45.9750146
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/82eeg14nh326v0hjvs7ndoj4d0/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitjrhcPmmWHgJWGuIiP-0KQengm9-671n8usxZN5bxm029ZR5XEgs7N3e3gdPRbCNs5k5B6FwXILnW8K346CC4YaWNJcO_4-16wXQQ6KdTmm2j5GOZ4JPo8cSJ7WfwGu-6VqydvCSQOhk7aHm5IpslC1EsOdqUF26A5Rb0NX2RDqMURIz0akXqZa66qjOuvWcRY?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Ce parc municipal aménagé juste en face de la mairie est fort joli, en surplomb de la rivière Rouge.  Quelques tables de pique-nique, un peu d'espace plat sous les pins, gros arbres faisant ombrage.<br>L'endroit est public, il importe de ne pas y monter votre tente avant la brunante, ce qui ne vous empêche pas d'y préparer votre souper en attendant.<br>Il  y des toilettes publiques à 100 mètres de l'autre coté de la rue.  Un marché Richelieu est aussi tout près.<br>Le pont de la route 364 tout près pourrait être parfoisvbruyant, mais le bruit des rapides atténue grandement cet inconfort.<br>Nous y avons campé le 12 mai 2021, sans y être importuné ni questionné. Un bel endroit donc, avec un peu d'audace.<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br>http://www.crazyguyonabike.com/rikimiki<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://tandemetcie.com<br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/k2ccsdjp11226og82nvrme9jo8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuNsKxHdXaBcr3oKg2QqeBHcIsH8St_Maye4TvN3UK5h2hjL5p3peRTRkVqm8UWPUVWYzdx2rJY1DmC8IYQlAgDnPBSdZp3WmDcdiXyQzy7ZLprJnB2cM5q2A1ETtn4P0HESWkxS8Qt0mE0b0dKPDghP8EkBKgUx3GZxK558jwqlepwQ9M6VWAgmj_2DOKDPIzp?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/coi1md9403eo8qh1sh65emlgas/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivFatx35HDx_XS4shAyVAoDLSxPS6UvBPpUjes7s6smGBYEYPuZZrOTFD9TVd-tB2XbZZjS-8XibmpgNo49Ay8KQt1bVFCDdeSx5awclygFJcDaJAE0Wc5zo1WJGLsQ_Pg03Z7-_MgWYN8y5YAYQcu296c4cWbJLuFh1NaIEnd5XecksKQuwWrsLI9747bM8zgV?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/1fuo5cqt44989gcbh2eiqtbtpo/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuTnSk6mKLxWvbvY-b4wxYls2n-gcTtExVmPnoIhDVvt0CckHhZTZHlwa279oE_nuYDWLlyRRI_UA1ywVowI5M4Dkfzj6X3hhQvXB7iJ1VZTCKfgrLIEmi6AzCbH_RxizoAbNCwfjd1pQs2XMy6gT7Wz2gYG6BRRFO74pmUkZB4lDFv-YEUsadmpK7FDpniP1Zu?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/vp8drr84u8rnh6n3n9s98sge5g/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitlzuYimgZ-AAzX6szXiP-nin2_Wf8iiz6n9YMf2H45o9BATbbSZduh1YstZi01TyWS1SmHhVP2ryZVm9s4dhvrp3t0HWlkJqb33PiruzW52H2rTGboSzSbAFAi3400IN5k1MTGh3yXlk4FZIbag5-HeJmz8zacTKutH_bGPWB6VRdIDQHBXJfnd_s3LjbsEiuT?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/eerpsvb3cldd34q6ph4qk5kdrc/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivJwgu2ZH3hvR9CRHdTJgIrNTaLzbRkkQrVDbDfJ8aOIhAXkz-eb_K5PwCM7ZwyiPxOxJ7KkQiyZ51CJWQF1_IGlRL7vXZ6DxUeeqToDYXxI6bmBNe1n1ff7q9uBKOmUwYp88RC7U8vtsIqpkhC673d2Pn1Fc9ma8Z6GUJjKH3eQgeLjmEM-h47E5kLQRn-s7DT?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Parc Ghislaine-et-Frederic-Back; Village de Huberdeau"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -74.6404543,
+                45.9923967
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/if5oeu09f12astfpr4r0mqpa80/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuwKHVSaD_OL_JhdJ2fqQllWcRcDwS5Qf4YAF1jXBR_HI5gC4GeSE7xDhnWbP1afIAv4WRzj1VR8hNv1XD2B1QJgl1bHa-3ImbJpd0YIaUzKVn0S_CNmebtf_qhbmDBIINvH81VrleXe-DRhOcrt2B3aSRm835ki_yYr9Kr_XHh-doJIrW1k3HMQNhfKPVZ1-C9?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>A la croisée des chemins vers le Lac-à-la-Loutre et celui de la Rivière Rouge, ce petit parc est équipé de quelques tables de pique-nique et de grands espaces assurant une certaine intimité si vous attendez la tombée de la nuit pour y monter votre tente. <br>A 1 km du village.  Pas d'eau, pas de toilette.<br>Site visité le 13 mai 2021<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br>http://www.crazyguyonabike.com/rikimiki<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://tandemetcie.com",
+            "name": "Huberdeau, petit parc municipal"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -74.6727063,
+                46.0756233
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/o8skg2quu5m7j1thkuft2ev240/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pis0U9jfa5U9vdRMBPswAXu_luh74ict5JKlCwzHfsJaoDUkwK_LTgaIrMdLyDeUrfohCqdIIL1liTx4c7k4mIlfj7E-3gnxZLbP3bINcUTTOFSRkk31KmOhe8YMYu8QL9CFuciFtcHXAjA_ow9yju3DHBlP5rzb-jGC0pm-lIvB-00eiNQS6ZaX6yq8DGgdScEG?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Au milieu du village, en face du petit marché d'alimentation et voisin de la Caisse Pop.<br>Abreuvoir sur place, toilettes à proximité.<br>Quelques tables de pique-nique installées sous un gazebo avec toit, prise électrique, arbres matures et gazon sur terrain plat. Y monter votre tente discrètement à la tombée de la nuit.<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>Site visité le 13 mai 2021<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br>http://www.crazyguyonabike.com/rikimiki<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://tandemetcie.com<br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/api3d34guflbt3o2n9age4alc0/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PithHoGoJSyqAN9sA7Xe8Wju4B_O0bFEX40eEPH0T6bjXRuvgNyUn4RNhPXAPjwLI1Km4Raw0teKPTJp-snfiqNWOoQuhpoHHq9Fu_QFCzhv7fK8ljz8-VxUrctmUGa2n6_S7kmitoT12zG3LI2m4DUiwWtJwleNdC1WgrpFKvbSZ_3VJIBsqiL79SokDf4sehLe?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/vtrvvfb1sin2k4ju37mk67qk3k/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisGttAgzfW0AQgdYLYLq1_NgFxnNCmz8Vekvr2giicLFnDEPxhwk9SVvJWlBGq8CEOAlEx1dbFf3vuPDaF4aiR2fGdu4U4Qhxm0IEuZty3G3tw9ChmAq4_H-HhNi9ocf_oeQtSXmmLGUklZVyQ4O8ziHbzCKyMPjewmR79enubhHbAYxH2L2q0fXCw6C8aCyO5y?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Village de Brébeuf, parc municipal"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -74.685516,
+                46.2039588
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "En bordure de la piste cyclable Ptit Train du Nord. Le bâtiment est ouvert au public, et contient une toilette sèche, mais pas d'eau. Pas mal d'espace autour pour monter votre tente, mais aucun service (pas de table, pas d'eau)<br>Site visité lors de notre passage le 13 mai 2021<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br>http://www.crazyguyonabike.com/rikimiki<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://tandemetcie.com",
+            "name": "Ancienne gare, La Conception Station"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -74.707267,
+                46.1784243
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/1o26fubibg5ljv6anrsicdlo18/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitfWkEhsE48fm-2CQfPckIWGHQE1aZxx-_qf6beCwhwRTqKQmPvfz2Xfg4IPIprVM40Hgbu3uLC1tWanYhl0szzSay3t9ix1t8esjYeRfzi_IIUBSnv7deSmEsuB8s9c8SXvLCwH6QlFml-Mfour-Z85I1IVyb9g8EgmVWd3VxSIUqIsURcCL0rfNWZXlPLKUdQ?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Joli parc aménagé à la campagne, en surplomb d'un méandre de la Rivière Rouge.  Très bel endroit pour camper en fin de journée, quand l'achalandage de la journée est terminé. Grands espaces, plusieurs tables de pique-nique, toilette sèche. Pas d'eau, mais possible de filtrer l'eau de la rivière. Assez d'espaces pour y mettre plusieurs tentes, tout en restant discrèts pour ne pas déranger les voisins et ne pas \"bruler \"le spot.  <br>Visite seulement faire le 13 mai 2021, mais nous planifions revenir ici pour y camper au débu octobre.<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br>http://www.crazyguyonabike.com/rikimiki<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://tandemetcie.com<br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/pqq2rsag3d1pmurv6uqs8oim5g/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivDXRyBc1moMydrA2oh89UI7gGVzWABA7vUKXgzGpuxNSkFxE0MCigN4DepXJEaGaJFRwurm1jpHVBU9BgViFEbIvHpY8-5wKqnrByfAVDtWu7TUGpT4Jir0PDotGJg36JiHHAkjw4ejZF2r1rgbMdLTHfarlG-GhK3RwDKFB_DWPAklEiAMaf4r-g4AakzPVev?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/ujr3tadr1aeokefaioc2e9ud4o/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitXV4pDrvttlFb3Ns37CHReYioWm5VPqbN_EU0XCvs4qQwTb8GNyB2BFkdipUVVWEoAxWG3KLGveFWwMN42IHXs2rEOzAyc78KPs45Bq0bayiJ00m4RUib7_oWHkXu70m0IctKRar_1CClO0ot6yUMAM1SMMH56tXyik_vy2udP-S-72em2ayIVKuHTXMqXToub?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/p9sbdqv8hkul88s8onb47iderk/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piv867BhAQ9qHouJ41B684YTEYxGcL1jwPws5jbJqe-ev2OV8q-MYl5LF5MX-ElqWKnwZr1fXtbnnVdL-_uvTb2UCUPULKwJ9D6vVlkRHUd1dQR7ZKZ2pchulE5BPwAA9XF1eEONI6sh99ltwPd9iz-qx_SX4ce5VnZpAhXg8TG8H2KWVSsU7fVvlOzaYybGGwy-?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/vvel4kkc575cn3l4facfq780js/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitptanVo51-CMndMGGs3Xk2YJZzzooukQT7qm9ZO8yD-auna4V0HGaS3c0NCfVhLrhvNiZf3sa-d1Jk_4OKRH6SYq0gnvrcvH8-ebL1x4IotBl1J40d4Uka8VUDvPrPX4GzO2s1SjoXpW7NPO4yIVivYUWPebNzGgSIiivsfIi7_XXbNUtHZ5Rfh1tlS-Ep_995?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Parc municipal, Village de La Conception"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -73.8121267,
+                46.5579886
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/q2jr0eugolktpsqvqpnqvd61rc/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisfZ7PcYywFkDk8XWWQN1e4yV3Wspos3tT2kRUvCTIKLVJwvaKNkWhCUJMvtlTOrEir1Y2RE6r_lKpENEgpnTry4TFWf_B9Nm-HzJJ4VY2op8WTd6lV6QrDAVSt2Pb0d_H28lxYOCSAjQo_DxXbKbuy2vAVjQ7pI_c_JH7AQR4i_nEVvucO3B5WJZWPb1Qel3jK?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Ce n'est pas un spot officiel. Mais on peut se mettre un peu à l'abri derrière la haie d'arbres",
+            "name": "Point 199 Cimetiere de St Zenon\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.810113,
+                46.2655877
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Réserve naturelle sur le bord du lac Saint-Pierre. Sanctuaire d'oiseaux (et de maringouins). Peut être assez marécageux, mais il y a moyen de se trouver un endroit sec et presque privé pour sa tente. C'est assez peu fréquenté, je dirais une vingtaine de personnes par jour. J'y suis resté une semaine à l'été 2019.<br><br>Note de l'admin : j'y suis allé faire de la randonnée deux fois en 2020. En entrant dans la réserve, on peut tourner à la droite pour la passerelle ou encore continuer tout droit pour longer la rivière. C'est plus tranquille par ce dernier sentier. À la toute fin du sentier, il y a une grande plage de sable, par contre, il faut couper à travers la forêt (difficile avec un vélo) à la gauche lorsque le sentier devient inutilisable.",
+            "name": "Réserve naturelle de Pointe-Yamachiche\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -73.2560664,
+                45.395042
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Juste en bordure de la piste cyclable, il y a un petit boisé avec des sentiers non-balisés (Au sud du point). De mémoire, il y a une pancarte 'camping interdit', mais on y a campé sans problème 3-4 jours en 2020. C'est fréquenté par des promeneurs et promeneuses durant la journée, et des gens qui font des feux le soir, mais on s'était trouvé un spot bien privé en retrait. Possibilité de se baigner dans la rivière. Pas de point d'eau connu à proximité, il y a un dépanneur sur l'île habitée juste un peu au Sud. Google maps nomme Fryer l'île plus au sud, mais c'est une erreur je crois bien.",
+            "name": "Île Fryer \n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -75.0836254,
+                45.8008737
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/1lcr6rlh4eqdmvlbi5m2qrdk80/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piv7QlZ3taHFJRt8O4pJHOKuXVf7NxXYtP8vw1AWUokpZpeF8RK8IQpyjdW5o4z6VU5NraEb7N1SieU-FcOgcxH5P17t3tkV-KJ3rt43EKcsHvT399He05gFvSXUYJSdzO4xB87a84jgYrlHo1XEdq3BDcZ9_eUXO0wm-82idobGDMdOA0pL4OGgcD8h3ad6Q8f7?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>En bordure de la riviere et à proximité immédiate des chûtes, joli parc aménagé à 2 km du village.  Vaste, plat, verdure et arbres; Toilettes sèches, tables de pique-nique.<br><br>Site visité lors de notre voyage à vélo dans Petite Nation le 15 mai 2021<br>Pion et Giguère, tandémistes et cyclo-voyageurs<br>Rikimiki@me.com<br>http://www.crazyguyonabike.com/rikimiki<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://tandemetcie.com<br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/ctaa3ovctakee1ccdl4giau2n8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisMovAzMLV3pd5paQprE1ke6TSMuVfUfxtSVOtxu6NbqSq0hatzUujqRM4zCnl5Qx5VEj6qlMDLAYckLw7zvc6HIQLwTcUdDG9aPNvMpcOWoRMM8QmIoxTUxSvIbfQeuATWN9CRjo1qd-IWTZJyGbINtQ83I8I9KOQu-wW0Uq0Zt_vR5wwtAbWCYOIfznQNCSul?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/ndq080eit6o8se0rcj7sg698k8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piu9w8rwSJAccTEG2cGvPa1t23beH7x6OEUZYTL5hCjoHDS9fMVJVVaLCoDci3qK_QnyVNPc6YsgssYPjcM6M_RONA5LBgPEfFJhbFDLwQUuf8_UATwB8Qrulgdp19BxxoguHwU8dQqDTC_Nj5IvsG1gNrN34HhdFtetlnxRS6CuUaFs84Wy8nnmPckP4Cfxacd0?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/hfvn5vnd3v8olr9stsq2auqnis/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuCj_w2XLp_c-PdLD1AHJ2bhgG3od6DX1xDoO5YMIvrTHthZ2IgWwr-rGFa-MWRkPctydcj9g3BsTBxLvQ766UA8egmY4Z4fodvgqmCF51afEiY8UEiSw3SZWZOl5MPt9jJDQWnTxKUzMUOqo5uQSDTaVBiW6jUynaQQB2KR-mrje_mraLNgXpkQIls_MZwBIVX?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Ripon, Parc Municipal (Halte des chûtes de Ripon)"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -75.0749256,
+                45.7401073
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/3avoj3vjp2mflh5qf0dafi657o/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pitweiu_tEBQl7TS2oF3gNNyX-ycEYYp1HhJR4_wPHgKc6-EXoHpK99s4_bFgxAgdwKgv4OpwwTQBPxeWviTm1lFg0X8Bs2GfmK19A5USp97AFyDzrgTDTeFsRyOb-tD8kDqTYTU0f-BjR_Bdnf5fol9VKMgSp4YJ_IF-PJzHgUufkQ9_BQLlvmycs60nBGigwaJ?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Environs 1 km avant l'entrée du village, sur la route 321.  Quelques tables de pique-nique, verdure, arbres matures. Pas d'eau, pas de toilettes<br>Site visité lors de notre voyage à vélo dans Petite Nation le 15 mai 2021<br>Pion et Giguère, tandémistes et cyclo-voyageurs<br>Rikimiki@me.com<br>http://www.crazyguyonabike.com/rikimiki<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://tandemetcie.com",
+            "name": "St-André Avellin, Halte routière"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.1015606,
+                46.9190362
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/cve59rj1pb50cq7lk7krbcsnto/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitzfI5KLhiLr2GFFaKrbQ1zy26yodtdgQOaVZYaPR510g39_U_AjBqSow5PTgaaw3Jvls_NDvuoHW7K2XHtNwTSoRTA21n31iNrlJ35p_ZX-Z1aobY3eRyaO9LB-ucgAyQ9-rrKY896lJU30K7NdTKxwrV_IcF-tO91IQfZdVtbZ-VIz6edJpRI8T1A3SbDKyCJ?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Il y a une table sous un petit abri et beaucoup de moustiques!<br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/cj2b97ncsrcsdm5aluap32ae38/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pit2xak0WqIq6e5gElgUTrq0H4RDIJW_najESEjA20Wmshcq6Z7-iv9HRJGWTCwi9rUv04bMS3DrElzHFINCNtotfT3aFnfhcLL3oq_HQU5hlMya7hOmN5oJbgCLiV09jTu24_N0Ls1TRQsqz1kFr7_QlF3nfsnxCKYhv1j963qCsnigRcMs4eILZ3mv2Hm4UXW3?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/1nt0ch1e2t2m2du8bq9qj2pnps/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pis1LeGhF-LASQhYbsfpP7pPF83nz4JrDKILACx0Z1APKPltc-ro7iC3ih8vWeXhmKNLehklJcH7JLKoaKriBRAnlDkIjsM81ohbcaPyPccFtqndIyo-13NbMFF4ddAZXXTmneh9vNSSO0Ffu8EsfqzWXSjVp7va-ZOddwp8iDSU8jn2GXfif2fsmVnKz5HnfeQA?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/oko5pcb3affqak30dqul4a9mm8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuWnJYa8Vj7eRwBPI-IB415adVm9v915-31crkpyD3TECLX40E2rXGaBgEcHeJwnZFcUUM40UduC21qTmhetCLwFTcH78BR4IvgmGawj9tVDfzXXOfemv0HA2UM_R32u2G9SK3KYydZXGK6t-6AacxwPd-FCislLPoqbjOFsBPStxlIdneGwR4xZJexPV3r8pTT?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Lac St-Père\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -74.4740605,
+                45.4388006
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/9ro9d4qfcm5c1c6am333mpm5g0/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pisb_6_ExcIVlPjJLxW-zOcFVvHDgg0xnu2WxbyWgVOwOwYPdUY3t4LUYyk9MfERb7m7XnC6JmQrm4JIpyrAVFfVBd_GtMmxOtOYvz2SBTaLCa6QE_IH4vSeuA_Dubn_SaabLrriiOqyKitYymxwE_vjNuR-ubMXMGO0auM3V6SrFZbuyOTh5rSZEXdDvkYY47B0?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Un peu en retrait du village sur la concession #14, un parc de village avec quelques tables de pique-nique abritées par un toit, du gazon, quelques arbres maturs. Pas vu de toilettes ni eau potable , mais le village est tout près.<br><br>Site visité le 19 mai 2021<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br>http://www.crazyguyonabike.com/rikimiki<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://tandemetcie.com<br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/dekd3q21q4nclpoc1q1bss94a8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuBl3F_jEHGlCSuEvP2fBm46Nqz3ECVfQmDHwsG8HsHMIwuZ_LFmP6alBlmInAoqEpnJ49W7UnKVz6VbRN6bkyGikimaSWAc2YE5LWMmVMDyHkI1zl9nZKQvNkGMKrd7grZUP-5tOsmeE6vyMaFhDTok3gFVb63xBQLf0XIZvZsRmIxGnAFGNpkiqtgBt7Moh2S?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Ste-Anne de Prescott, parc municipal"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -73.0595997,
+                45.8265639
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/gtrehhsj76kao0qgtnl8gh5ecs/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pithjt4M9IeBhYxHTpfllV5IDo6Bo1mqlroPk_6YhBM9OoRR99czs37HqA8VmprvfYTUjpQVksbGrM0_QcbgIGZEB10vHrglWDTcH7CZHhBiwTdyc7O_9xXX9y97lQcYzFMgYeOPx5TblMh8EkWB1CBwRz-_1GvlNI70wgoiLvhsOF6O496TFHdYGUeVgki47PCX?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Nous avons une prédilection certaine pour les parcs municipaux des petits villages du Québec! Ici à Michaudville, le parc FX Desrosiers est joliment amenagé, avec 2 tables de pique-nique couvertes, des toilettes sèches, de la verdure et de gros arbres faisant ombrage. Site visité lors de notre passage à vélo le 24 mai 2021<br><br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br>http://www.crazyguyonabike.com/rikimiki<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://tandemetcie.com<br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/a4abqa618druigqhptg45eve78/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisJ3wgC-r1dn6iQsMXWTwsQXXcLMUdq4cgIA2L6urfU7aEBht-YmwJJ5fuURS2NEqUO8Q_sKYW8fSZLl9jbL7atCze99Gab1B4-yZThi9G_5RmYeAbk2W0jUHNqE0EAVytGrsdQghmERAcHXZZEmqDCeaNM-98kJ-hZh_PFHzNjiL3gIhMp3VPNPXIyBVwjtDsG?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/hn8p3mbfvkqmsjakm4h89o91v4/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuYfsMK_KkAfsXpgydWO0bgs7spaeA_KxC8mSOSWnxEjL36CfQ9xuzb6z6uu9-zUB9a00lvtlXLTP1ttII9WSxGO2rHYsANaiBQaJionqida8tumf4tvtMZqzcpjCDU41SEN1hhRwMjfrlwdQHF0TcpbK94STLROjCL5LUFbnZvjERHps4PPYNqw-o8NsqTyh7z?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "St-Bernard-de-Michaudville, parc municipal"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.8557018,
+                45.790891
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/4fgg7smdplcgrqimtbvno6d3bg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuFaoLctsV-39k8oWfG2LsjY1jaLQz-AS5iMSyfaDh6ApFPRuWlHkSJ-iaofcX6kk4OCL6RyqMzHKd3n58gP8_06uJEve4I85Oezv3JdS2szNTL29L9jg0unF8oq9FwjjYkV253YNNdksReAmu8gLzRzQkbN4D5QhKw06t3s5i7pLIt7zYIAIE2gtBHjtxn-wxj?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Nous avons une prédilection certaine pour les parcs municipaux des petits villages du Québec! Ici à St-Hugues, le parc FX Desrosiers est joliment amenagé, avec plusieurs de pique-nique couvertes, des toilettes sèches, de la verdure et de gros arbres faisant ombrage. Site visité lors de notre passage à vélo le 24 mai 2021<br><br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br>http://www.crazyguyonabike.com/rikimiki<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://tandemetcie.com<br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/9m1lbau7u652knnion8sm7dp9o/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piu87MZPIlnz1Kxzk0WpyKizPR5L0iZYVHwD5Q0d8tTMjoB-v4qT6TQCi0-gdcyxS0PaRJVyxF9YC8RsnFJgcwqAG4n8UWah2U37hkawSzMzXyYWjKtHBr9VOocGdn8tcbapzSgh7c8y6Xo2S6R_9Dcy96-BmWdR5pm0nZRnGtjLni_E2uK-AsF0oU4A849zvZmi?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/fncu61g3b535dhkok1q05pn01c/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitiVxkXl3kNE7H1Z7q9P760U05zysy7ldeI9PKX-k3LGmbHllFZHDrm06a_MoDCVUDZwrH3NtUvA1A5xoH77YYSV5FoISdS4i0WIHQR9do4_rtCUDhkihy7AHcO-BEEY3DxpCs6MJDt-SMw4VJocgdAzoCyhc-VYaLpX1Do3G0BMitUCs-x0xoJoMgNOKsHiCw-?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "St-Hugues, Parc Municipal"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.5260866,
+                45.5758449
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/cimsq3rs3126npkslksq0ljovg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivvY6VwLvFPDQuoOWH41iBI055emKZubo2pmCsh-Ir2BVpN2hERH5f635MTeVWV1ZwV4KuDp-TPXGz1arLEsP9XjmQ6GS8McL-tu7BzNY3uoEO2A4IEXmU6lRpQrXZ1j2rHnryGfiBbQybp680iyED-qF87rMnQiz0B9Qky9OpINb-crVHxvNq_5aiI1bkpMnIj?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>A l'entrée du joli village de Roxton Falls, une halte cycliste en bordure du sentier la Campagnarde, surplombant les rapides de la rivière en contrebas.<br>Amenagé, avec 2 tables de pique-nique couvertes, des toilettes sèches, de la verdure et de gros arbres faisant ombrage. Site visité lors de notre passage à vélo le 25 mai 2021<br><br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br>http://www.crazyguyonabike.com/rikimiki<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://tandemetcie.com<br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/r1g4r7al5rpf484hgr8okt68e8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pish7P_koVT9xU1vtUX89RXkxY1pUuf51sR4XSYfqw1X7iVGU3N6n8MzXwsRyWb2C6cgxkbDUq4sq8IWfIPJCyILHBcP87eb8rMFDrJ_uFMSe-APhDFgfZbLsfj4ISA24NSlWbiDCk1CpLwUhF4iXEu8JzZO-487rgA_XFJWSS3jNbtzWBOJSIjgL2frGT51iQMy?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/033kfc5d86b57dc4olgif67tos/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pisszv9ooD0w5cYrgxjqUy8tUNvAQO61BBT42T_Nmsvz91njHMmMvw8g4O_I4oil-xF1oe6M-0gDxVKu21Iky9GknA2cFdDtlgplIAYPm6izhz_CZ8bpDd1HY_pDjetGoNhMQOlBvvyIZFPzzwSrHdIEuAcuy43RjJ30S3GoepB7HXm5oowiKFrb2imIH6rz4Dtc?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Halte cycliste, Roxton Falls"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.1703214,
+                45.668485
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/0qpduqvv1ukso85ehmm5jefk9o/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuaQ8LfepU5uFrmpysk3tVQ7xFwFV8opScBQjRLTac-L7lqwiCJ9SFXjdCwXOyEtDAunOsuXmOOJQxBkAT2s2dP33PtDX02piI18tYBqeYFen7uSymsgus9hCrCBuO1TjucK5IdlDrEfyvlOnRAkXHESekfoCxR1esf0TMJLDbqzVdpPQnf70NFvxM9OyQWTXOV?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>A l'entrée du joli village de Melbourne, une halte routière en bordure de la route 143,  surplombant  la rivière St-François en contrebas.<br>Amenagé, avec plusieurs tables de pique-nique couvertes, des toilettes sèches, de la verdure et de gros arbres faisant ombrage. Site visité lors de notre passage à vélo le 30 mai 2021<br><br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br>http://www.crazyguyonabike.com/rikimiki<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
+            "name": "Parc de la Rivière, Melbourne"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.0902093,
+                45.6143588
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/k1c5jcldg600cd9voh20pnq19s/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisdhnZ8JcQ_ycKfJaKFzMZHu5dSHarb95jTiT6hEDjSltcwszn28DHdyAW51BgL5oUuH6DPPnCRUxjlSt9iYFkcttx1ozrB02Av2HmCciY8UK8xKwDSwaCeMS107q3632QN05pSbt9JE7oJ-6_s1uUuJwzn08XYeg3igcdBmJK4_4wzZzllwPzxWSvcfBY_T0t_?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>J'ai campé là en aout 2023. Il y a maintenant une belle toilette sèche!<br>Il y avait des pêcheurs en soirée et tôt le matin, mais assez loin sur les rochers. Il faut quand même marcher ou rouler 2 km du stationnement le plus proche, donc je n'ose pas imaginer qu'il y a toujours des gens ici.<br>-admin<br><br>******************<br><br>Dans un secteur isolé le long de la rivière St-François, un très joli parc, en bordure de la rivière.<br> 2 tables de pique-nique dont une couverte, de la verdure et de gros arbres faisant ombrage. Pas de toilette; Eau de la rivière, à filtrer au besoin.<br>Site visité lors de notre passage à vélo le 29 mai 2021.  <br><br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br>http://www.crazyguyonabike.com/rikimiki<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/dkna0824cseg34ddc3kd7qlv5c/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piu1dDyffmhWAoZGwZkHh75Cc-DdXdW_mbCPEEuFh_XGAGiDZpsg1yq7hXK65fpsmhYn72eO6gkwKUZsXSgfggegU3k4JFynvTJB-klC3aUs8AO7AAjDlqmd_zzpvYOORKPNg8VwfKSBrB3EA-HnLH83MpvpmCZlbCbVHusUfDijWA-zX5MJ_8NX6Nq9C_oREByj?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/d32rl0t4t0dfetgdealql0s3tk/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivU8F5rMIPqyCvId5PdpXtIQRzZ2jUMiNFfXzKU0o-4AYMu_dwhPXE8k5MX4pQMnGIRyM5l_aUcXR5QHoCMJOFBn59ZusM4hXKA3ofKB6v41gNwuASb5iCwy7MZFR0j_E8mXiV7tuD3zQ4_MmpCNuBziKyYOO_KgK-2Abrzv3htORqw6TY5d9i3V9bPr7Ugd5z1?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/m8abq0jirqapacbq4806ol9618/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pit5mdMXKUO-vQgZ4qVqPuX1izB62gV6F8FCDEykeNZs7ond5hoDW0oM_of9_9ptF6hbfkMP5s55lb0oPU_huSkvbR_6l2lwiy807Acu6IB1_xVLkD9v4eP986O4eSlJflW-MCN5J8EiNs2hyV9ZFo7o2m8KEZT1BaAfcn37IyRw7pjvLYxn5DbLEQourRKKElrl?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/l7ous8i15amu0ob45tvr45o9k0/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisUF4nkWdGlyn9xWV7RcPhVW4dymJLp-23Wi9GXc72Spw1kaTDxIcaHBbsMZ6iaC5hTJiwJsM7x7xcNA976--9wHq4JAReqywgVv71pGtUPnjWeGsBvqTkgwHS1F6oNR6xpuUzanXzi568PNsvPLU-pVHF8FbR6yg7_gi9ObLePlYH3punQuD4ZDCEKQUWy1Qa3Lahb4Nn1IdIXm-O-GtuuAq01bwzzXN31OVw0ouh1MIO5cQ?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/b0d9m8t7dq7kibp5jbhv3avdc8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pit2yiyv-FZgX_Jgvwx7YRPRZyakvC85Pxuxf92Vo2ALavUP-WpRrAAmxV9LZ75CTMQtgHqoCrjBfH1zwviHhkUTvlMTN6EbDMJoHP8JZxC_-jHhpLyAvKYwIzfbJQDCuRkfwenGXEMSI12nywOlVndjDuEWQj2g0kjyGno1vfU6WedDmCSo-3uxMkAGxqFfprIPTIYueRQX_rQCAcMh3vHLnr8Kv3jc__YtkWWx76fgcniFyg?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/eukcqkobihn7e1228hmn8q34m8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitiUuqndrG6tH-_CZHXCBoziFPSG5Y6VXAQfRehBjbdB8SQS4nQH3-9o0a_Uq90-kA4BXJqY2Eiykw29qVDMcV2pId6-FEwNr2U4PPPWfo2OlVvqmvDv81NhvNnoZvD-6UqfKqchtW7xDlO61h3Yrt3wrRYc12s_vYSPxXWPC74THCOHN2_D7BJ1JUlmA9FbOiCmHxNOXxByufONpHNV40zHqXEGk5RnGOZmpa9iRBarotzxQ?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Halte cycliste sur la Route Verte #1, entre Windsor et Melbourne"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -70.0252616,
+                46.7384761
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Derrière le bureau de poste. Sur place il y a un bloc sanitaire, toilettes, eau potable, douches, laveuse/sécheuse",
+            "name": "Ste-Lucie-de-Beauregard"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -69.0343286,
+                47.4471043
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Halte municipale, bloc sanitaire toilettes et eau potable, tables de pique-nique, abris couverts",
+            "name": "Rivière-Bleue"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.1410578,
+                46.6541006
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Dans ce petit parc, on peut tenter. C'est indiqué. Éloignez-vous des lampadaires au sodium qui auront l'impression de vous faire dormir en plein jour (eh, merde...) C'est gratuit. Ah, St-Casimir. Microbrasserie à l'est sur Tessier et Marché Richlelieu sur la 363 nord.",
+            "name": "Point 214"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -71.2768744,
+                48.3820156
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/q5a5vr64qch9pvuikgq7aosl20/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiupQ8zOki-55DQbmyLbnyRKFEIM1QWaQDXVjpE3oUHieirF7ONuWiAUpTceygMvOHQZ8LTVV7dNoYZxfEqGaSyg5mvbXyai3kQCLfmWnI6En5tXdnmWzcvlJ81DRK-SLmehaS9YS3b1X9MNwmcucAItMFNO8OFBe9Zwq_7r4j5fuahKKgCa1PvQo_l8UqIm2-R0?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>en bordure de la piste cyclable, directement face à la rivière des Sables dans un secteur tranquille .<br>Site avec verdure, table de pique-nique, sans service. <br>Site visité lors de notre passage à vélo le 6 août 2020.<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/qdnmeil8k0c3s80dgfajskki24/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pitlu4Axi6USdfN_A8PLOQIHOjoSF-BPvdL4npkr8EsHbYHbnsCYKaEMuB--eDcdQCUdLpmU1DphfDrdcvE1LuuHRbKn_Mzj7GSv3ynUGU-MiwjUTIHnT_60hnARyolsz5ATGV5KZgGxsM7eov3n14GFcoFid1SPaSpeMp04q1lF2VjyFEzRBLCXuo5zeoQq5S9R?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/92t2t5b3nbngcq7mdnann8vvec/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitrUgQuMxisPaPt6kxs-DpYWrlQRMyGD9XY0qCwNygpF-XOUkwd0ZJq_ZRAQIKClSYOMEpimtQhH5-vVhidCsdaYwckr-jc7EPnscOwQiyof05hdBQX3O6hTI0U9kgvR-OTSFSJwI0j1EfptF-UtawbhWSH8j1lNoVjyAcZfk2lOk2e9016ZO9sXrBlCrYWX01C?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/uo2omeqareklp1s8dvkgodnnsg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PislIpfJGs3dOmj0fPJqLSZg29VV3RMzhr0zNZT4v8iSDBKr0Kac07jA_NhtRg4WjBV3WjipmNpXJp0pyoLoyDBiW4Ed8-hSNGQFJJxFWIpLD-aqm1H7BE3755JvXsMHGh4FQueG3mstFNvX6FOnQjISOfcRmyAslBHEXpT3lGnf5qV0_amkeoofHcuQDtstjBW9?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/e9bggnnchb3dob9og51ose85to/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivHuCs9VCYAltm8H7a87uYy1XswYLs64WBC-y3rhlBo5Zpf0ekufC7u9pcQq_sKzPCiMN0l2K1k5mWpgaxLMLAPk6a8L00BGQPowTl7YEiVeMZnO1oInpuGRE31z5HS_jePqyQpGTCBtoEJRtXFY-jS_832XEtmF87j8a3Fke_W-41WGetuqthAcRuPLfK5BKKo?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Halte cycliste, piste cyclable à Jonquière"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -68.4644492,
+                48.1906363
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Halte municipale, toilette sèche, pas d'eau potable, table de pique-nique, site en bordure de la rivière Rimouski. Possibilité de se baigner et puiser de l'eau pour la traiter.",
+            "name": "La-Trinité-des-Monts"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -71.2480855,
+                46.6052742
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/8p4gp4jj2ffvo3h6j93otmj22k/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisaGrrlgv2tgq-gs-JxxPCLVfxu5_aKwqtKBJMKgp0Oxsxk18Aleyu4FTbCp_wzP68h4BMr6xFEUjKLqSmBOV11LjDAw4QUDJfvgO7YKky69PY4ptXFSzA--06oqEQBFazGr50qbwExpbRvygOefcUI6lbizkIxi4WeYrwZyNLZ4cG4syGCzyZRZQSRKuDbfw72?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Joli parc régional en bordure de la Rivière Chaudière, coté sud face à un rapide.<br>Quelques tables de pique-nique, toilette sèche, beaucoup de verdure.  Très vaste, incluant plusieurs endroits retirés et discrets, notamment sur la rive en contrebas.<br>Site visité le 11 juin 2021 lors de notre voyage à vélo 2021.<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/pbi776beekqi6mv4rrq2hrhl58/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piu9DJ692XpceGXppxso9G2D_hw82VTRph2a0oRb006G1Qg42_msttj7CH0uoiqBSVYgtMzTZQc_ZFCBWHroTHinshHbYZBQCMfpLtyPrLzeGfexG64iH56Jb7VoNlVxLB8HzTVgbA3cMd-jYoOD39uaXtMaXshBbjJgVgJO9MXRSIbVEW98l2H0iKLsWhIjLFOt?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/00ibk67alhguo35o1t2k1lutng/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pit3Grbmy-ngYo0BtvNMXOWbyktbc-BIOH1qz_GxwxRZoHKxGffJamRD2LlZqPzHHQP2yFmTuBUlxQWWD_Wq14xCV6VF8MZQDPUJJQefVtu7gb_nf-zbRG0yzLl_s91z8nbVYUr-HQgNB_F3cAQm58J-cqi3qdVxaJLLmAnYouFaa7H9ix39qL3dEk_17cFK63wc?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/kmicjn0c41veltq1b3hgu9rc9s/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pit-pe2IrIxnT7US-K0oQnaoNezUldko7Bn7-aTNO5yTX0NZ1lCJGivZmBTMpe82cg-qiBg18VIVFi2c7AV6iubQinY7lM4sorWah8cm0PVbPemHPkNX5xBbdEBYsb86LQ-yujhxCJeh7DRHKZd3HexirkMCcQUWwCTVS7UE2FtieJFUWgPzlnUxsMO00ShByKkm?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Parc régional, entre St-Lambert et St-Etienne "
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -70.9889188,
+                46.4131405
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/bofn4ulo6c107tgbnpi49n5d2g/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivW29zJoiHj6jt2qCVc41wTeyCT1kaEzqFqSFw-nMS9qKF_9rTeYXnhzeh1EgepunDk33yq9766ektSDPFqGwBl1IA8F3WH9N8CMNbWdPWvRRTbJSri-OHBie4aIi3ZfmPAtiofo5fP8tYS7ysoZo1pq8PqSEmc_QwGn8j8ufQ_N7rCktvU75U5hzqRa18ezUoD?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Jolie halte en bordure de la piste cyclable.<br>Quelques tables de pique-nique, pas mal de verdure, quelques arbres matures faisant ombrage.  Site assez joli, avec la rivière Chaudière en contrebas.<br>Site visité le 10 juin 2021 lors de notre voyage à vélo autour du Québec.<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/k7gna9t86n1pioqe1ki20u771o/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitItyfwhN_Nue2yGCTvmX82D8D9zCn1WHf_c0UwNB8BLjt94_U3atEJqir366QGav4ulvsppUtTplzg-sO1Sg3R0S-0yxjCqM_ZKqkM-eZVoDp7C7AHPH_iovQEN6-XYnamCHzEyvt3RDXSqVIE9NF7osP_8Os95zWAWDuq0zB3-RhLLFn1_rvRm6F1vPDQaD55?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/jobppc3o84ov85jbdj7osl7kv4/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pito8gy7fTOiHuBE9RVxAkbK2ygDPIdxfpbWsvXrhSk0uaATgq0ZuL3zMWdRaynL0BOvaMNrkt1LVXh0UejaB2ywQXHoLJ3SPC4S9JCFfDcv27KaFsgdL9dssY6WzjpcdZT4DKATFQkwxDzwxxOUHQuhJLqzTl9EF5vbtsy9dpKHpDXN5fdQ1xDyq-eDW30CM-t2?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/9tuers2rvcg2pn12f3g6ca7ko8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiudDdGxcOHewrjNkjHIWGB1BoCHcYtRFevGO5vcxIN-tSvwun-wieti-AN6Eflpw9QAgFBm2JBwwCb27k5OXyHFHK5LV3CJ-S74nbToZrLB8fxsR7oFQgEa9M4cFR8uPrAohy2KMtaohnYF4ukmMH8N_8anRR9oE_nqvf_eDePJSjKmWg0t0G8uXrwY8My5nDGn?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Halte Cyclable, Route Verte près de Ste-Marie de Beauce"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -70.7183502,
+                46.1817486
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/us63n256fkgjkrltmpi26o3qdc/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuMy9xtsSrb0QHsaXJtsT5xAz6HR2AS9ZfqLQHWZgGs8RXbLqUeo4p7If-6_ZSUbw1XTjQ7jrnqZCgzCWbes-A9w458Pcf_lp1JgMH7zWShaU8tBPfgu8CYaELA2XfOghZ9j8CQQ0xszGKWDVV3fUBQtkxtGG7qBlAJSnQ6Yxa0jhiBmjXsSurqC5moQiyBpbSz?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Halte cyclable en bordure de la Rivière Chaudière, face au pont couvert, du coté sud de la rivière.<br>Comme le pont est maintenant fermé aux vélos, ce parc n'est plus fréquenté et est donc bien plus tranquille que le parc municipal à Notre-Dame des Pins.<br>Quelques tables de pique-nique, verdure, arbres matures faisant ombrage; Très bel endroit!<br><br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/3f4c3qqs1t6ah95qo5bfi5ltdg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piu_ZEMbC_TS19xQoKzzM7MpBWZ5BWf76JrPMHbRiyr53JNmQTlUBxh1efIuWwmAG0f7ydyxDlKmh9TRk-gGdEdsa8OeEoWRKPBU7MuEJ3SGyRra6xmnLQtonr2G4tz0jDPjL5FEcJx-UP3DpalnVR8_v5BIYSBFr9QJ5T5kGz24VqGDgLe2ldgEYbWFvlJOwRF2?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Halte cyclable en face du pont couvert, coté sud de la rivière Chaudière"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -70.7151361,
+                46.181756
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/27p8gh9ie14o60sbfko9m7sv8c/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisD6kh5THEuFGGIJMzULl5CDSCQameW8lEHbjnphl5xI_7Xh8bRP-V9K-wcXtbE_wKjpx3uM2V6AiqBxfAR7uIqE0HlZl1HSkGXMj8jcL01B3QSrmU5sf_ArYAHYR8i2kmy-3WAhmsJuRuMCrA733Z0uxyqmCmd2CJIi1NCf2z5ZfpbN-22OH3pZR8GR8v-lN2H?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Joli parc municipal du coté nord de la rivière Chaudière. Nombreuses tables de pique-nique, verdure, arbres matures, très vaste. En bordure de la piste cyclable.<br>Assez achalandé durant la journée, sans doute plus tranquille en soirée.<br>Voir aussi la halte de l'autre coté du pont couvert (coté sud de la rivière), aussi joli mais bien plus tranquille.<br>Site visité  le 10 juin 2021 lors de notre voyage à vélo au Québec<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/qmbsi52lq8u8ll7rqejci8no1g/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivCe-NFdJ555dv76ldMpv2NFcu0JgdSBncGoXkzF8LQpOl2U2Oc9rLW0NUH1e8ik_At88Ugdvlr_8VT6UHiIdemiz7rtVgVXYWactp-5b4merjeh4VkNMt_TrSXXdlpE70bdt0D748MgFY6ATNtqsGNc9kR0EIH0QT18rarg12uVyHpgBnHQRYMnxKOWT_Fyy-b?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/5h98qb229vdsuf41u554d4no0o/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PispLQfLBiDWdV0l3NkMKc2-hzdTYsM3pqWWAZAXgrUPQXy8k2Nk9HKXj0fjchHW-TEldwZGz4ORg9n6VXOC5U--_M13qJymfOTB3bvy2spq1WucfXESxZ_SpuEz5-9LaKkEEHG5eL_Rd50dTgP18YbwYIYQC60rEIpkCiEBA7wXI4L1Wub26aFvlkfp6S-2l-E2?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/lvit98a79s2v81o2r7li4v60m8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisLaXfGhGI-lU1JubH79WzQBb0aVpvH5CdeeKemTrQWc2PqD1WdxFHEu9UA1Y-l3GsRE7N3uQlPVnmNkKYxdEG4Y2FWiFJWA8z4osNi0btTbyNrJBbBt0tMB_YpjhOOryQEGcxoqXfCxyWQygxLboX9GoGTuFFdMCrp_syxtb1T09Yg2TtgoZ-zFbtfI2-twza4?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Halte du Pont Couvert, Parc municipal de Notre-Dame des Pins"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -70.8287128,
+                45.9607705
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/jsic4tpcr413hbtog8gdi9ha2o/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitACOciCBx_yE6c492QyvhgjXRDkBsNsQ4hMbzAWKpPfIOWQCIk-EhkyOF9C6d9AGELFswg09T0s44rbRhHqOg9Q7OAJ2CtsybMD85dmUMKpKKPs_cnGCV2-NM2jJiBf3tNuDY_OHVQVAyel0gGMx8mAW1CfRtplMZiKzmLCv5UBAp93YIm3ti5nnHymXXYJaQa?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Au coeur du village, voisin de l'épicerie, ce parc joliment aménagé: tables de pique-nique, verdure, ombrage des arbres matures;  Un coin plus discret à l'arrière permettrait d'y monter votre tente, si vous attendez la tombée de la nuit pour vous installer.<br>Site visité le 9 juin 2021 lors de notre voyage à vélo au Québec<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/8jamio1o35ti0fcsmjh97nmass/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitvJgQiklqdL-qmBTtrQPm_VCCb9dkduXHh2hy48nyxZY1a4AyPBXfCkNbVw7v5O9O3gbDXcX3YVLQE059_tqAzsqGQzerNyNwCnTXEl8O7GWJES4mToyqsGPjznfhDy2gc7H90U4MeBtl-58CDkZ5v_xVkeuFVujxHv-jvFFH0t4F1nCinw_nqs9nHsaSW-xmy?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/pnmb1b2jg6sl88vss7cme2smo8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pitfam8aQzyJezATPl7_FxXgJv2wey0xcc-8cEyZrBQVrXlZfZXw33xwkfZRRR4Shj7VZjt9y97oPwMMgUQmmZBLPaoF_QkIxEHL7nitQ2cedfAfVfabxOm6Khg7CwAXueKaS6SJbESUT98HGcW_Xf1L1V-ne6kp36afcpogoDS4WLMyx5675WdaD2pIwenC_RLb?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Parc municipal Emélie-Allaire, St-Honoré de Shenley"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.5563704,
+                45.9726315
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/bimat532qar23it7nun18kc4r4/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiseS4nTTrttdJggDPKIpwamVNegqlBctbx5lwTd57vkx10CQPNBFqv_I0vxmEipGJIHWScGYFa49OdnM6mUDqqDADjCBLsIEE3Sjt23dUSTk9QmRsM8eklYefJsXesJIIQ5zqdQVksqy11enyGWs1uDpzFmwv1ElawZPcK-Pz5yTmcsamcx5HuIxVZ2kYra7DI5?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>en bordure de la Rivière St-François, entre Drummondville et Pierreville sur la Route Verte #4.  Il faut quitter le sentier principal sur environs 800 mètres (aller-retour). Quelques tables, arbres matures, bord de rivière, jolies vues sur la rivière. Endroit isolé et tranquille, loin des villages.<br>Site visité lors de notre voyage à vélo au Québec, le 4 juin 2021.<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/ph0n93ch6td05bb62me2gro2uk/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piu8fzbchByVpEC-cmyfQa2V1n32L90hw36BOsCak484zz2Xju7QDVemfP_dCIYh6ofJ61zOSVe_7LWn9OPaGe28Tf54QGLRv1SXD2JjXaPjPa1WvUMvUXaRQRvzZ4SmBniOxhpQPyocfOwYBnhiRAwoQPT-ljdxyI24nfDJOSDKnFIDYt1QLYkC_0Yl-BzW5OoQ?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/v1gtd8d6eefp1js0i2o8lkfpjo/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piv-8X4vZn_ULntSCUQgECWFek83xeIrPPI3ckebmrFZtCl4VPN9JOJz5Vty9tGsZr9LdZab7C3q45_loOgwKXPjScR1DShYtIRyLbOMouSVEp35bo1ubG-c0a7jMzaFaWykMyKj8b1JU-Hyx_R1rH6ykqXgZBEVTEk2OG95d3x4_Qpzi6Gy4E0CGtrY7OH-Eb7r?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/o05pg6orseaadnm0l08j117ff4/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisRgf3owX6J_iZJm1wilhG1WTcNl-w-R6cLMV0Y5w7z1P4yYjSfd1rQN8p1KXwR3sXfa7dbCwOSurqPrruEs2di4q7Gc41Xs7YQoAj8rAqmTK4k75bmHOyxTjWNnMyJ8fdEgxtY49NDvhnsGDzSfTmGe0_XgrPxPXRTiVPm0p6taN3G4WCuUzus6fdiWJZ4ppwF?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Halte cycliste sur la Route Verte #4"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -65.2503352,
+                50.3181372
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Halte municipale / kiosque d'information touristique. Ouvert de la mi-juin à la mi-septembre de 8h à 17h. Les toilettes sont barrées en dehors des heures d'ouverture. Bloc sanitaire avec eau non potable, tables à pique-nique. À proximité des magnifiques chutes Manitou. Visité le 25 juin 2021. Infesté de moustiques et mouches noires.",
+            "name": "Halte municipale Chutes Manitou"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -71.2385936,
+                46.7817328
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "À 2 pas de la piste cyclable, trouver le trou dans la clôture pour y avoir accès!",
+            "name": "Plage"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.7013098,
+                47.4839555
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/j6je4amd1ibl8i3f657a8jsucc/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PissVaJfgpb8XDtPb0grwGIO1x3amcpC1JNexUtDNVferTBhwxA288cl25JfMnf9IUcOyJmyiSB7eDY-r_46QgICYtWQRLTHnLBhKOLX_6zuLs_fVSwpKtbeI5tyTPzyeuAaWgZwuurcN2epUQs8vSd667ANkXm-Z2w2V_WYIY8XeKtzNgo1LDzyaLoj8w08zCu-?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>S'y rendre par les rangs Sud-Est ou des Pionnier, selon que vous y arrivez depuis le Lac St-Jean ou depuis La Tuque.  Cette route magnifique et tranquille vous évitera une vingtaine de kilomètres sur la trop achalandée route 155, de l'autre coté de la rivière.<br>Sur la halte routière: quelques tables de pique-nique, verdure et arbres matures, et la rivière à vos pieds! Un site enchanteur et tranquille!<br><br>Site visité lors de notre passage à vélo le 25 juin 2021.Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/ei5k4oh48nm3v5gamch8nm4nl4/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuJgz2CvIgNC-LLJio4njN1nAh6HpB-ytVETyi0JdxjY2bW9Ym1pmOp5XzzEjFw5ZB5Z6ckgkjO-0F86FwFRvc4lXZrmOJTkaH8Cf1Ah2sj5NR3hzjbwNpP_UlAlNNmy7Yx_sl8CvtmN4mmpI8HcJgPQ1x7k7EO_2qWRLDhpCuTUce8NGHtCTR5dLi9eqo_YvVw?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/ae3u7memi3m1q3cf3cl1blum7k/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pit9ApBvhrKrztO-RdAEQZ4mxs6tlmdTrHSz1MvUjW6XX5lQcFgMNkZFiLEYkkAu5Ry3bmsuRRFLwV7pgt1E3GSeHMrwVVvLDOv8VnvvwCv3KfR6rMMCF_AzVQZv0VgH0CctZjT3iRoV0x8s0XXwpXP41asldveIzkTU6-Aj16ZV9AL3FqwAUayWngttzCnqP90k?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Halte routière, en bordure de la Rivière la Bostonnais"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.6913159,
+                46.9201119
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/rjkcfcje5al3p25s3bdqdjqe24/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisWEVTLIzUvpuohi9r3BXvEi-Dz5BvseZfqsuGV1dXE5rfVKad0LWjZsOukVx_l_RDa8SxvPPniGMZ1e4_OWLan0DsVyzOluiFMlN4jC1BILsnh49h3X87Vp6Rs7WH_QbWtPpnnvu85NaSqHNdNNnHSJmCoCQvUq3tlyIu45qM6195WzIgsu1-MqNXLn_CsCPoA?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>La route qui relie le Lac Mékinac à la route 155 est un pur plaisir!  Pavage neuf, achalandage très limité, beaux paysages, et plusieurs beaux vallons qui rendent le trajet sportif.  L'aller-retour vaut la peine pour tout voyageur qui privilégie le plaisir de rouler à vélo avant tout.<br><br>Méki est un parc municipal en bordure du village.  Joliment aménagé: quelques tables de pique-nique, beaucoup de verdure et d'espace, et comble du bonheur, des toilettes et eau courante .  Le village est petit et tranquille, vous y aurez la sainte paix!<br>Site visité lors de notre passage à vélo les 23 et 24 juin 2021.<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/vjuonm0iph3ctu7ba0rhl21qsg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pit6v99XQ8N4ljFFxj2d_oqrT6G-_F2Z2gkyF_BjhFHJuxq5eLzz-PsMGMjnsC_llLRZzHM1jJr_UhJ9G7a1XRgwH0hb6lC46qC8qdMK7hD1N3JeCwmPBES33k9TImMmDb2cOMu-MgziJW6GqxkWEM5DduornbZiafG1s9XQZYYrugYAwxVlYD8v58uatCYIsJ6i?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/9hf3ahpsr6nrt63oskef64qcto/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivRMlXcL4RxwdTPVpnHiy8MlJ6EOzPhLDlco7A8CAqACAUQ3wjVDGKzCZKiS-sZnemohE0-k0W_yUoIuGoSfcXuRx6mdoR9X5dn-7TxqrABKszbn9ymoCxYh2amZjTx0A-sm7ek-VbaUUmu8tifhiwoH02MPd_oHmEJsZ7DDwbKlvqLErYgJ1aXsou89MnqbWFD?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/bg1h9hph81599i0h7ai64iv67g/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisM6A9Z2ez2GsUIGEx4trvM9bFxjnWo9e62-f5hyslQbrqyIAvkCmLr7nVmU6C5r_d5UMlVvk28wSdyqKG6OQ6OZAGrrZ9oIYr2al33T-nyyM_FL3KU_bNxqTLTs26BwBvTLoH5YvwLFzpL1ZrqNHnc9pBDj2-NoPhZRQRyMK2v9VxG-D44YQSmVMR0wWlIoJm-?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Parc Municipal le Méki, à St-Joseph-de-Mékinac"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.7606721,
+                46.7393768
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/17dha9j6mfdmq0hpmvi8if7jks/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitCLH8tMTbn_Diwnpyd3t2Ff4sIiprz7PsTyJbd3hrgfLTPFJC9LOLg21xetaiDxDdloMDt-eVQcx596cPMyZxNe_HZFWXsE9rz1OKAlYwuZa2XtUNP_IWRu3n5R1hdEgjqcXjGwU8IpmOlm0yYZbuU0hxVXYiQeyJXVspMQLD4KHxNS7CJ-8kFAB7kvENnORI0?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Un peu passé une halte routière très achalandée de la route 155, quelques kilomètres au nord de Grandes Piles, vous trouverez ici 2 courtes routes en retrait de la 155, permettant au cycliste épuisé d'y passer la nuit.  La proximité de la route 155 rendra sans doute l'endroit bruyant jusqu'à tard en soirée, mais vous y serez à l'abri des regards.  Eau à filtrer sur le site; Pas de table, pas de toilette, mais la halte routière est disponible à quelques centaines de mètres vers Grandes Piles.<br>Vous verrez un 2e endroit juste un peu plus loin sur la droite, aussi en retrait; Le premier nous semblait plus joli.<br><br>Site visité lors de notre passage à vélo le 24 juin 2021.<br><br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/vmsuou7rennpcdtj5iq0fe81a4/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivY_13mRKANmqYdcsU7q_QOgduEvXZLALeLrSy71Ioii4Q2IqdI2EMnCkbnrCWR2NHI-QmdHZlIkI1KuuUTlIyt0M2th_X4-sm6r4DpKvybUmRXOS1FD1Tr-_YWJGiVQKByroxZsUDpAkTE8HMLYJI-qiDHxz0dlSN8ESxXU0kN1QnYt6yrJv6P1p56twTb4l6C?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/80muemtvn5mp4k3akjmtn6qsqo/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitTGo_85F0lj1FAmpSG4k_FGx6pU7QGuDV8Bu87hS46M4Wi-PrflPUrLKJkdGiuuDdMmppdaIIBn9vqcoiQgmh6qEPb8KI5od4uIvgOBleZTAbm8Q56BUARrcMgLvg6hUkrVYYAhPfe8sRcdmno-jma8VcC0Qq9fItowVCCJgfi_XvmWEd2fg6gxX5VBtryST17?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/2klj8mdnrsl1jjes6v0kcgs03o/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuVaCnEQk8AVZm9WhXMqRbNAC1HScvdti-N0Ks1K9aFaXPRnXuM2dlfb6bRsUf6OqlawbSyv4kQhMPqR88wOl3L5SUdFUhbxc29ZzGyESci8-v1HEEINji8oYZU8kMl2TvUfs3b4d0XSn9HaCxpoZTyun5hvqZ_8KGHoXjg0wnr0yv6Co1QLgSrD0n8Skr3OyRM?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "En retrait de la route 155 (a)"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.767668,
+                46.7437735
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Un peu passé une halte routière très achalandée de la route 155, quelques kilomètres au nord de Grandes Piles, vous trouverez ici 2 courtes routes en retrait de la 155, permettant au cycliste épuisé d'y passer la nuit. La proximité de la route 155 rendra sans doute l'endroit bruyant jusqu'à tard en soirée, mais vous y serez à l'abri des regards. Eau à filtrer sur le site; Pas de table, pas de toilette, mais la halte routière est disponible à quelques centaines de mètres vers Grandes Piles.<br>Vous verrez un 1er endroit, aussi sur la droite, aussi en retrait; Le premier nous semblait plus joli. Voir les photos mises sur le premier emplacement.<br><br>Site visité lors de notre passage à vélo le 24 juin 2021.<br><br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
+            "name": "En retrait de la route 155 (b)"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.8278512,
+                46.5047906
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/35bnvltv7lkf067j19nqslkqmo/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisMWFR8nU6DtWFIgxpXK-Y05BHtKJsNQUUZwXltJE9813wNPFw7nXuSFKbv13HeL-GWwmZztffIYR9X0EqYmpuKMaJ7fdJtUCyabtEkte2C1vV6Za5mP-_diBzbZ0sDAaPqI1p7L0IuwN9Wr0bcclAgQKmpRRXpGviW1dAUhgMke04jl2rVn5ScoaLmIXotYsrY?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Pas pu résister à vous partager ce petit bijou, au coeur du village de St-Boniface.  Magnifique parc tout en verdure et sous le couvert d'arbres matures;  Suffisamment vaste pour y monter votre tente à l'abri des regards une fois la nuit tombée.  <br>A éviter toutefois les soirs de fête, comme par exemple à la St-Jean-Baptiste ...<br><br>Site visité lors de notre passage à vélo le 23 juin 2021.<br><br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
+            "name": "Parc Municipal, Village de St-Boniface"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -70.0072607,
+                47.4930154
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Wow! Y'a une bécosse et des coucher de soleil incroyable.",
+            "name": "Plage de Rivière Ouelle"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -70.1324231,
+                47.279648
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Au bout du stationnement vous serez tranquille. À 2 pas du dépanneur.",
+            "name": "Salle communautaire"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -70.1187403,
+                47.3299064
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "À 800m du début de la piste cyclable. Ancien site de peche a l'anguille avec bâtiment débarré. Terrain gazonné parfait pour y poser votre tente.  Ca se peut bien que ca soit venteux mais vous aurez les pieds dans le fleuve",
+            "name": "Pointe Rouge"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -70.14901,
+                47.2952681
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "À 2 km de St roch des Aulnaies. Il y a un ruisseau et c'est très tranquille.",
+            "name": "Le méandre"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -75.8756183,
+                49.7569389
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/8811g8un032529jpd5gg03rke4/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisFINruToIeMVDKpf6g4kcbR0FCpWcVavxY9LSuuKPOeODK3B9lesiuQnR8ESflQy3zww6LNtEE5hyv8eDcUe13KaNnWPpFiFp6cFfuQntwVJz_eiTGVd9rTOSDtcOMesrUx8QzZCmZh0dAAb7vCHIPDKlTWcXtbe2ifHYjWvuuv6QBxr52kaDyrW5qGHO-dKXm?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>En bordure de la route 113, sur un coteau la suplombant, clairière dégagée et plate assez grande pour plusieurs tentes.<br>Point d'eau (décharge du Lac Renault) à 300 mètres.<br>Attacher vos sacs de nourriture suspendue au pont au dessus de la rivière.<br><br>Nous avons campé ici le 21 août 2020, en compagnie des 5 de Echo Explora<br><br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br>49.89924, -74.35392<br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/infblbj1cmpb2qri8dmp8qchms/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisV_x_dutO5z3qP9ChFlkW9XWhjHTtiQeT5MPXQSgACRqbAf6ZPNd_2-qgjINbNsT3bF7UkiL56l1hRtw1_JaVKctlDsTZUJups9L5v8gQwd_5pmTu7oZnoRm2WjBNnk6aGoW-4EewTnXaof1RS-g0AcNIc46vGxANQzKUxXyK0goTy1drxSq0-OTwnAq_3gyWP?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/eu56onpeiqtvgnucso4jgk1g70/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piv-F0SvY6xEd38gMQ_3lL809KoBvd5fypCYm5CRJhWbHP5YOaNU98-8z8bwxHakC7HOk3aCzb2akAO1ymKgB5ou22XnQH_5JsozTkg4aYegSjzg8R53kXmCb0QSwsL82-_auxYiWIn4drFoysricZqrYIkVMRGUp1K7b3s-TvStyHiwgyEcBMunoWXYZQcRNT05?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/9a4hakmjbknar3dbaj64e1ah8k/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piv_kIQxSWMagFzpb6MlbSqS_iQCi0Fqh0UQZZsf8hprsejK1cZgWRrsYjEq8Q7y2apyWVXF4qCSCFrojOPwcyMO1lZ78PKF2bSODr32uznzT0F7UZkBrqjv8o5aCAdWLLEdI9hmteuYRFfYeaJQA8vVq-riZtWbwpI66NpecGKBToeKVPYpKDJHC8e9ELLM85Dz?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Réserve Waswanipi, près du Lac Renault"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.6812974,
+                47.5188611
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Caroline été 2021 : Possibilité de piquer sa tente proche de la rivière sur le gazon. Des affiches permettent le camping rustique temporaire. Toilettes, eau potable et tables sur place. Plein de sculptures d'oiseaux en plus ;)",
+            "name": "Point 236 Parc Ducharme"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.7812044,
+                47.3825815
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Caroline été 2021 : Il y a des affiches interdisant le camping, mais plusieurs VR y ont passé la nuit. Très grand parc, j'ai mis ma tente loin du stationnement, sous un toit à l'abris de la pluie. Très tranquille sauf pour le bruit des chutes ;) <br><br>Aucun service de soir/nuit, les installations sont par contre probablement ouvertes en journée.",
+            "name": "Point 237 Parc des Chutes"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -68.358928,
+                47.4031677
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/odu9lliic4tjr3t9u5lvcqp50g/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piu1pObqR_P-jEnv-4kS0bBuVkAjDmIP86h7IRqpBFmSzyrx74I_sG8cHai6_5J76mtsAQEA6T3W5MJlkpv7TjxIefdWdUc4n1GOf-WkZz04e97zX3dCjCAi-v25vo1CaZ4VTXXQ5gSDjrXUZ0OnIO92rAUgruIeColuutcFnz7r1Y-OEiDpK_9vvvW1P6AtfGr5?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>En arrivant de Dégélis par le Petit Témis, la piste cyclable va longer la Rivière Madawaska en entrant à Edmunston. A cet endroit précis, vous trouverez une table de pique-nique, des arbres matures et suffisamment de gazon abrité des regards pour y monter votre tente pour la nuit. Un beau spot!<br>Site visité lors de notre passage à vélo le 7 juillet 2021.<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
+            "name": "Halte cyclable, sentier trans-canadien, Edmunston NB"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -67.0096332,
+                45.7304723
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Joli parc municipal, juste un peu en retrait du village. Avec table de pique-nique abritée (toit et plateforme de ciment), un peu de terrain plat en verdure.  Un ruisseau à 50 mètres en forêt pour se laver ou pour cuisiner.  Epicerie à 300 mètres au centre du village.<br>Comme d'habitude si vous campez sans permission dans les lieux publics, attendre la tombée de la nuit pour monter votre tente.<br><br>Nous avons campé sur ce site le 11 juillet 2021 lors de notre tour du Nouveau-Brunswick à vélo.<br><br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
+            "name": "Harvey Lakeside Trail, Harvey Station NB"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.2547455,
+                48.0695562
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/ts0jej9ptl0v551jdts1oh4ugs/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piuf4iuEzkGBC8g5fk5SXZmhKW-hROSaOJI1fop5Fbsd8sYUWjYhUYDGuLnBFQ21ev7fQ-3-lkutGAzzCGlt1DjIF2Q2QZjvaLqKG5u1SzgtgD4VH9u4A5TPwL-Yta1gaHf0OMVwSdEP3i4RqDiCuga7nwYgrOoSHI0H-MpXcT4C_ogK71-IAF1PJIiXOy0ImCxe?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Beau spot avec verdure et terrain plat, en bordure de la petite rivière des Commissaires, juste un peu en retrait de la route 155.<br>Site visité lors de notre passage à vélo le 25 juin 2021.Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br><br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/tlhvhscjrvp0r6clhhu2khk49o/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piv5ccERRznHcSDnSPf__OFW-9_3fsWt4-Qib1i3T7ig9VQO0T8Kw6Ky84F8hTZ8EEgz-8H47LWsMcd-C_zhklw8rRCZES7MAw5vjTPYEH-RwtKX1IK7ckgJWeIgshonhsrGnx2hKhPI7tlUqs7zWDuQzdCUzDeXPzaRrIubnJKgCKBJG-VOcAziC3xaBjPfLv7h?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Bord de la Rivière des Commissaires, Route 155"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -67.1585337,
+                45.3938653
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/uuf24sig1nct4q84ms8drkdit0/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piu-Iae2xc72GHFgc1plQrc9ORXFfFr0r0B-5PkR6FPh81wuOqdsJGtxjG4jm8vtlrzLN0nr14lcjHGnAd5i-MinMEyPhouwotlJNapZn_tcXNoDu4FbeLVIzk-9qUN5X5WbG02IGdmySr3W0M-_w-I_x9wDxrObzexPhy6D7PnuMYmDicq7vM-knKEtT6HLUSJ4?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Sur une portion de l'ancienne route, où coule un ruisseau tonitruant, beau spot pour diner ou pour camper. Site visité lors de notre tour du Nouveau-Brunswick, le 12 juillet 2021<br><br>Site visité lors de notre passage à vélo le 25 juin 2021.Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
+            "name": "Route 127, près du Lieu-Dit \"Dumbarton\""
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -66.3404385,
+                45.1805696
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/avr9u9su44du4ucr5mansmbhag/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuJ7J1M53wuAK1ZAkXPaIhAtUxgvhBPqHBghcVHgBgYfdNBZ2tGiRA_-FoIf28h2XpTdg5OSjeslbiq4gM0RJaMGfupAS78GXwH6CZlqXB3XyFfXId24urVY-cxN9D_dcgNmQLITsRsqhUkSyLRssQY-jJm09x5uG2EfP1D2WJWBbI-DgHm7kyUG2DbYNPM_Vj5?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Table à pique-nique abritée, face à la rivière sur l'ancienne route, face au pont détruit.  Eau de la rivière accessible, un peu d'espace pour monter vos tentes (gravier, asphalte, peu de verdure). Tranquille, en retrait de la route 790.    Site visité lors de notre passage à vélo le 15 juillet 2021.<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
+            "name": "Parc Municipal, Village de Musquash"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -66.8304905,
+                45.1304286
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/dqj6tcqto3fi2hthn8fg94s0ac/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PismJM2RssK3dIPvswCNxH1vV5DZC8a1s-gYG2Gf6rmSpwoP5kQqP5UJSPiaqvSzdT5BzQ5aFSorYzeHI1HvXlyBrHHwJYx-ejHMNroEYU4TLfsw9lUxjIt1jfptREjIgmw6gfDfZ7szI7FNk_wVFx_TpnnocmGem6DCxAvUK6P6KwJiAPyq3joa3U96esG2_GKl?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Il y a 2 excellents spots de camping sauvage dans le village de St-Georges!  Le premier est à l'arrière du magasin coop (c'est aussi l'Information touristique), qui est aménagé avec quelques tables, une toilette (demander la clé au magasin) et un joli sentier dans les marais.  Face à la rivière.  Simplement demander la permission de camper sur le site, avant de monter votre tente.      Site visité lors de notre passage à vélo le 14 juillet 2021.<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
+            "name": "Face au sentier des Marais, village de St-Georges"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -66.8287568,
+                45.1297202
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/09hg3lnq0gj5susg6i7lerv5as/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pit1_8yfUUPmRbVY7DnVfimRrFr0uRAM2s4XTGKd3A2_H9fDwG8vw0DMEpUy8ZdXtKNWUIl9BMW9ZHzNSARYUBvaTtvJhmH0BCpmwdPGrRyaWAr4-Glb1VHkNYGvPrI9IkiwWeLjyZWNDqofm7N5UuIIhadjmX_B2O54OX4qEvfjUBTiKSxaENhJDsU16ihIvHu3?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Il y a 2 excellents spots de camping sauvage dans le village de St-Georges! Le 2e  est adjacent aux chûtes, en retrait de Brunswick St. ; c'est un petit parc avec quelques tables de pique-nique.  Tout au fond, belle verdure et arbres matures permettent d'y monter votre tente à l'abri des regards et du bruit.  Site visité lors de notre passage à vélo le 14 juillet 2021.<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
+            "name": "Halte routière, Village de St-Georges"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -65.6992733,
+                45.6371353
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/uro14lb8i6unrnkdt433du47ko/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivTGJ7WFti7_9L3OYdRBvuPNsaesoYJkTTxZQ6p5yw2CRHrdci3VnVy5SuDu4ZU3AJUqoUz0REaH641g1EQIQG2vn3n4RbO4Ab0jTc-BwW7vA2s-AaD44u7ozjRdzDHvxBGJxGjC8brrUCZOIzT30a7mAWv989clc9R8s80IvuXAU0fyACMsRH0WTq7dFA4jFSg?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Sur un beau terrain gazonné sur le bord de la rivière, avec des arbres matures, des tables de pique-nique, et même un gazebo en cas de pluie.   Site visité lors de notre passage à vélo le 16 juillet 2021.<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/b3l8t9ku0s2eh889q91ve5q4pg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piv8j7aetB0v2Ob_BK1Pc_mqZ843a6eHgFEhTKg96pMH8hger1XqotMVjwEerIF8AXyBpKWqz_71MMtKAvqN9JeK23X2kK3KtfNDMqnLuCzwkU02UcKH1ZxNxv9qLn09Yu35GUsnEmVOhwI8ZJo3hSjtiLmih80PWVXq1EO2IpHqo7Qe7JABlmQu6rr-xOf7Eei2?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Parc municipal, Village de Norton"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -68.73631,
+                50.64229
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Il est possible d'installer des tentes à ce belvédère. La vue sur le barrage de nuit est magnifique!<br>Pas de toilettes, ni eau potable.",
+            "name": "Camping sauvage belvédère Manic 5"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -70.3671091,
+                48.2438991
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Très bel endroit avec eau potable et toilettes. Il y a plusieurs endroits pour piquer une tente.",
+            "name": "Parc des artistes"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.8721567,
+                45.3318241
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/ajmgpc22noodljk3f67bemfkcg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitXtd2b0_0ccCNLfMHfnQrSUHfOHcDm7dcTBtbbRUrrzpXTwwj-wIvpnH7EfV66Tco0lX9lm6iPjh064EaggEjgh0gdROC269-RbazkHJX6oprGEPnLMT8bAB1dxIeDqTa3weN962NZxq_NWtPOdVZcN4MhAk3xG7pN_eWFxZ1zv-EILkC3FnXa_zm90XUiqmUG?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Beau site, très facile à manquer, en haut de la piste cyclable, côté nord.<br>Aucun service, mais les toilettes ne sont vraiment pas loin (≈1 à 2 km) en direction de Granby. On peut percevoir le bruit de l'autoroute au loin, mais ce n'est pas très dérangeant.<br>Je n'ai vu aucun panneau d'interdiction.<br><br>J'ai campé là en juillet 2021, en route vers les Cantons-de-l'Est.<br>-Nicola, l'administrateur de la carte.<br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/9ag2klh7q3jjuldam0hq4l7tag/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiumJWwnW_G62-Q_Wvio8fa-mQNBiMIJ6Sk6NN0YoFo_7oewC6LJ43iTnn6BvJhunLQM9udP8bKfJe4Ap6dex56tANS-xQr0a4Vj8ZyQLXuHSInuWYGMeC7U4JiQMCTXkZ-jwORZqoRJV7I6LRMeY0BpCZRjTNkGcmuJOyZ6RzeHEJ_JLjPHlBoHBS1A9OvUD_MK?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/e1qd9gfopi459jq5kg3tmo2mes/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitqqYQZxAIyUR13VYetTRrqpHM6kfrPDnMFFfMGyFcFwIpMxibLepxwvCLhmEDQBVJiCw68raSRwXemY0-Sv_yeiufPCUDI2Wiesc4Kgbk0F4Hw1R15whPyDVL0DbMDYv0M6SK0DtEVpvvMeSfCTDPUQ8Y8GDUSy8sESAz5hCo_Co9qcl11B7G5xfweF3usqtM2?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Montérégiade (Ange-Gardien)\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -71.0561762,
+                45.3304579
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/dpduhuh6jjvvrmiil79rhr8tvk/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitrvsakPhCaVmFB3AgXn2fkvPEaL0lB5gK_SqhS_tMHDE5gkAMOB3S1Zxp8Qua_ThgjN1ymXurQ5JW3PK9_OZmCL3fW_UnFmZi467bGV0B2uXHVS8b7bHASWJ3rYcnqoEN3IAjuJAz5w0FN6MY-6W6uN4k8AB7-D-Dcjj-HuVyX1uVUim_H-FlfIn_71llG0TI?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Il y a un lean to (abri 3 coté) sur le bord du parking de la montagne de marbre. Il y en aussi un 2 ei dans le bois (Voir photo), accessible par le parking, la rivieres est juste a coté pour filtrer de l'eau, Il y a aussi une toilette seche. Le parking est animer le jour, mais le soir ben tranquille. Pas de wifi, mais il y a du réseau cellulaire. pas de poubelle non plus.",
+            "name": "Lean To de la Montagne de Marbre (parking)"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.3577555,
+                45.2073661
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/4c73paoolutkjc0gnosj5t3pe0/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitqQJDGhsJk9fR89eFES7xQPxXAg5B2LfemzpI2-mwj-vyvWgK6PDLl28WWSMW3XlfnVfbcYfKJy6tIcH5LnPNiLaNcyOueT8BJ0qL8M7NqGDloSml7u67CY7jVajJfT-uRH-U6S3h4khInUpb6swLJgkOMouT_O5uSSEz9AzcV4V4fXsYZVUyFBmJ-daGOCKz7?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Je n'ai pas l'habitude de camper dans les parcs de village, mais j'ai tenté ma chance ici derrière ces arbres. Il y a manière de s'installer sans être trop visible, par contre la surface n'est pas plate à 100 %. Un samedi soir de juillet, c'était calme, mis à part un groupe de jeunes qui jouaient au basketball entre environ 21 h et 22 h. Il y a des toilettes sèches près de l'entrée du parc, mais pas d'eau.<br>Attention : le parc est officiellement fermé de nuit. Il faut donc être discret.<br><br>J'ai campé là en juillet 2021 sans problème.<br>-Nicola, l'administrateur de la carte.",
+            "name": "Bolton-Est – Parc Terrio\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.135324,
+                45.0545713
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/1l89piqbg08qa96geut20p3o1g/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisDN4oFexZzSwWhwScgf7_Q-___2nk5mRHXRzlpzPzvGeHRghg-2GeEo33lEE10JvxFdwTuLrel8378vNzsq0CR4lqgZ48vdwp-dItcF79Dey8JFvaUbyASKHtlDftYEMLbxOcVyo5iaOQVCKiQI81Y63aXNjbhA7QISlhXxOQuTaCwXWmxkXxU6HET_fyqYy8j?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Site 5 étoiles près des cascades, en bas du sentier Tomifobia. Pas de toilettes, ni de poubelles. Il n'y a qu'un seul petit banc. Il y a juste assez d'espace pour installer sa tente et dormir paisiblement au son des cascades.<br>Officiellement, il est interdit de camper sur le bord de ce sentier.<br>Possibilité de se baigner, et de filtrer l'eau de la rivière.<br><br>J'ai campé ici sans problème en juillet 2021.<br>-Nicola, l'administrateur de la carte",
+            "name": "Sentier Tomifobia – rivière et cascades\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -71.1604251,
+                45.3612858
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/g06bog963eqk99sssjsnokesis/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiutRkmPued9Gh5tWVgbsrPYHBWZbzuLd0tdltyDA7Pfrnf00Ws5fZRR0O0vWoiD9VIKd-Zs0r00g1u7bRAE1ZjkAH5eiYtL8aUdINBxcG_X28KtB84MhcXOsjNgs8cztnEHkIsaBJWiihtRreyzdjYh0Jp9HlSBADG98fsDJYJcJSyw6Q6bEWAg48n0jEdePaT8?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Site 5 étoiles isolé et à ma connaissance légal sur le bord des cascades / chutes de la rivière au Saumon. Aucun service, mais il y a une toilette sèche à quelques centaines de mètres au sud-est, au camping officiel pour les randonneurs.<br>Ici, on dort au son des cascades et il est possible de se baigner. Je n'ai pas vu personne de la nuit. Pas de réseau cellulaire.<br><br>Campé là en juillet 2021 et passé une très belle nuit.<br>-Nicola, l'administrateur de la carte<br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/nj8vll4di6v8dljsuqbjv0gul4/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivQ7UWiNoqjBKP6JTBueVEU2O6f2LlkBVesL__Vg7wxuo83-IFIbuPbQLCAS6AbhV0u1F1_dU_9BSPQ1Zjngv_GgXm1OdtLri4CfUMcypB1fLtscH-t5va1pAazizXHzeiZKry2-YP5Gn_kIiMXv4sdG8WEJ_Dv-WZ4RkT57xh9ETKXN8pYXHI9JqBYptQM8n-U?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/olkdoblr3au45f8inh0i8g1c04/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuWd3o2MdTuR60TF-F2t8X0CrGOzSmDGMMlLnuVVWwAxphoXQwSyOeeVemALaICyekEJr-zKnZMVq0Mg6NXEfuGBL3dzJVh3BTDz03TaGwXYYd75OcBPNndzT68skMHn-oeMcFCF4uMc-O6L-QbL0hvVH3NeiuOGuEfw9PiNxzu8TdJHzOztH38EVJMSkeukp9n?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Chutes de la rivière au Saumon\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.0544342,
+                45.7130642
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/gbu8rsh2s0rbm6iqli03ghvg0g/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pith7DHsjE7QYqtgPeNB-Fd9dqRKQbygodq6sEuv7rXMFkEAIrDrwaqd0BtW51nufvn86u5_XHxZMRRDercSxF39XgPCUYjari0Nji8-wOHl4t-t_0oGUrWe10n5ZmX0eWWaXhWcHIxq1AdICvR8PczBDUcrGkmLL7Xxlrf07KSvn-2Tij9VfqE_K2FlYQZoL0Nn?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Halte cycliste assez spacieuse avec de l'espace pour s'installer à l'abri du regards des automobilistes passant sur le chemin, et si les moustiques nous dérangent pas, à l'abri des utilisateurs de la piste cyclable aussi. Par contre, je n'ai pas vu de panneau d'interdiction, donc je ne me suis pas trop trop caché. Seuls quelques passants sympathiques sont venus durant l'heure du souper, et un couple fumant et écoutant de la musique à tue-tête sur leur cyclomoteur électrique, mais ils ne m'ont pas vraiment dérangé.<br>Toilettes sèches, poubelle et recyclage, tables, mais pas d'eau potable.<br><br>Campé là en juillet 2021 sans problème.<br>-Nicola, l'administrateur de la carte",
+            "name": "Halte St-Cyr\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.3221976,
+                45.3921741
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/3m6gesdjmsekk5q8htkq25c8lg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiueDHvcoWNh8AmNXGbNGKuS6Q5UGpaGdyaL3wpT5BPGLPrpbiHVeenIeqUA9yyFmi_mSpG_T8di1JhjXwdL5B-naXQZaSbsiGbXfn6mSxJQfNpo_tBnte4-cbKG4pkVrR3pJ_FPUy-qK5QTbGtQIOWxgukcyjijTkE3B3CD_Q5iW9RAogl7Av-uCocbtjD5rSpx?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Site de dernier recours à déconseiller. Trop de moustiques, pas d'accès à l'eau (stagnante) de la rivière sans risque se casser les jambes, et surtout, juste en face d'une mine (de quartz?). Réveil brutal à l'aube, mais heureusement, la machinerie lourde est partie après 5 ou 10 longues minutes. C'était suivi par seulement du va-et-vient, mais au moins j'ai pu dormir. Pas vu de panneau d'interdiction.<br>Pas de services.<br><br>Campé là en juillet 2021.<br>-Nicola, l'administrateur de la carte.",
+            "name": "En face d'une mine\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -64.6973446,
+                45.7352519
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/po72083skhurae86nq26rvqa48/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pis_zEhzQqUEfssUKViuTEVBFKavekdgX7St-59-DNHfyhwLND3FefzWTo7e1wEqyDDRCT7dM07d6MLuwDVo34cIpkMt3sY3gstiI-YUpH5rIjyaCKDYwkPH7M_NrjFBgMfz00rlELQR_8_sKOBa0mXCR3YmFdv6wMTnpB8ufMPw8-MY-mB5M0i1IvmLh-mTtA70?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Un superbe site de camping sauvage, sur un ancien phare aménagé en parc.  Au milieu des marais, tout près de la Baie de Fundy.  Site visité lors de notre passage à vélo le 18 juillet 2021.<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/dfcvarjq5d4gke5ohrah61ggu8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivUyGG49gdM9qliqTxI8Tk3XkGwjxjsIaJWY3-19uxYXIyxK5lVCSanLxulINzzJg7z6JhmlQg93m1UMMFOKR0Z0nwV-Xi8p3ZIAE6WGu4BPzoWoyvZ9O96ZzJ5z6_VZwBzzddg76y-8BjM3MBIjBl1MfDuS_zT1v1PfwXXlia_tSQLKu9iiL9SkKunp5izh0pv?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/j51hveoi2slf06nmt7og4hp91g/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuE82ESID6CwXL3o-DKaZGNHuDRCTAPUepRKxDF3wvxuAQOmg-uVT0quNEOkQMsJ30MDWyRCrLZ2xowqardplhOAFD3hLEw1MBgoO_UVOcgAqz_hnNX2Obiu5pij_lWJv8lWHVEibZtAyhVGj2CR1APd9rfj5U97zUD_14AzaLUk-cQ18lxj9_8Pb_wEMIK5mo7?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Anderson Hollow Lighthouse"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.567078,
+                45.3695124
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Une halte routière avec un chemin qui fait une boucle, avec plusieurs espaces de stationnement avec tables à pique-nique. Il n'y a pas d'affiche qui indique que nous n'avons pas le droit de camper. Nous y sommes installé.e.s au coucher du soleil et sommes parti.e.s le lendemain matin. Les citoyen.ne.s que nous avons croisé.e.s étaient très courtois.e.s. Avec toilettes, eau (non potable), grand abris (pratique pour faire sécher la tente le lendemain matin!) et prises électriques. Route un peu bruyante, avec des bouchons c'est parfait! Situé à une distance parfaite de la microbrasserie La Ferme ;) <br><br>17 juillet 2021; Charlie et Maude",
+            "name": "Parc de la mairie Shefford"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.6103204,
+                45.1092557
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "La cour d'école est super grande, et le fond de la cour est à la lisière d'un bois. Pas visible d'aucune rue. Par contre il n'y a pas de toilettes ni d'eau (mais ravitaillement possible à de multiples endroits autour), et bien sûr il faut être discret et respectueux du lieu. Et se timer avec les vacances scolaires, sinon le réveil sera brutal ;) On y a croisé personne - c'était parfait pour dépanner. <br><br>18 juillet 2021 - Charlie et Maude",
+            "name": "School Sutton"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.9961944444444,
+                45.2343333333333
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "On était en route vers le camping, quand on a vu ce sentier municipal le long de la voie ferrée. Quelques spots tranquilles pour mettre sa tente le long du sentier. Toilette sèche à l'entrée et petit abris avec bancs de parc. Pas de point d'eau, mais comme il n'y a rien autour, nous avons demandé au camping le lendemain matin et ils nous ont laissé remplir nos gourdes :) On a même eu droit à un concert de ouaouarons! <br>45°14'03.6\"N 72°59'46.3\"W<br><br>19 juin 2021 - Charlie et Brigitte",
+            "name": "Sentier municipal de Sainte-Sabine"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -71.8936944444444,
+                45.3205
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "On y a pas camper, mais on a vu de beaux spots dans ce coin-là pour tenter au bord de la rivière. Parfait pour l'approvisionnement en eau si on traite l'eau. On a vu une tente aussi dans le coin.<br><br>45°19'13.8\"N 71°53'37.3\"W<br>Juillet 2021 - Charlie et Maude",
+            "name": "Piste North Hatley - Lennoxville"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -64.7356814,
+                46.0806965
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/arf03eiluhb6pk5889bqt24cng/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitO7e8ramQawLicFOimwOeITTTRq0gbrJjPa_xq7rCVBVk1NK9w86elFqtH_1M8FEAn35fM668C-6VkWChu7r3Cnkz4d0anx7yaFiFk4kfytapazOzBDxJvKovRKK8XOhHFQbEWuyD518UsLVBv5lj69y9wkl-RA8n-qkvAKGAYXDa2_r2VaUvxGc3BPYnGTJ8w?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>En retrait de la piste cyclable, peu après avoir quitté Moncton et Dieppe en direction sud, cette halte cyclable dispose de tables de pique-nique, de toilette sèche, et de verdure suffisante pour y monter vos tentes. Pas d'eau courante, ,ais commerces à proximité Subway, Tim Horton, etc).  Moustiques présents, car voisin de la lagune en bordure de la rivière Petit Codiac.  Site assez joli et tranquille, néanmoins   Site visité lors de notre passage à vélo le 21 juillet 2021.<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/rqfdtldpun9ku06co2mi22nqi8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuFqoqh8Ixdn5dIf518_2WOuXu03RH1dZ2bYG2n70QjfLImffLItpK5DEaFZrobYpwfCN6wuaL3BxXdz_mXFeXytXEKlQPLxQpBxHRmiqytnAwFjT8rhcKgOV5hn2JPlG0Lpk_Wvsbymm81xGhuMXkuVlHtyqtcnvC9n8wAuTVAuKH_0vHxt3QJkeW_4iCIMOiJ?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/1jhsa63k04u0k1l3egppjmj1b0/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pit9iB61qBRDAYvZfT-noc-r9kgFmE_9zz1QnFW3KhEhRtMhMDij58a6R4lwer7Gui7TkmsQ0JFb9rFwYLOL6wKEoOCbMalGQlJTvehe4Z0sFxiAscxOQhDf_Wzi6tmUDN4NknEiT094UaVxTPzloVU4lfb0RTvJi_1TOs1EFmpw0n5gMmlp4mLx9kk-gO6eAZxM?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Halte cyclable, Route du littoral de Fundy"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -73.8742665,
+                46.1750154
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/6oibtdco9vr8umlmas93umu9jc/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitG9jswf9_0vZgJiaWDNvZ90skoXj9CA_RpatR5ZuKFjHUQlOoa1EVbnC7I-CBx5AE4nt0ggVxNnJZDyO3GFReza2fM3wBlpRzXzoLvr6NCnif3lRB1gVJmSMfbuVDQYD_9KFleobGmO6yXDNAIZUWoyM15pZzC0owhnSkph2dyJ08Q6zIfZKnJS5zSs6nsWwZU?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Plusieurs beaux emplacements avec accès à la rivière. Les chemins sont accidentés dans ce coin et prisés des quads et autres 4X4. Le spot commence à être connu mais tranquille et sympathique malgré tout. J'ai passé 2 nuits, soit un vendredi et samedi soir 17-18 juillet 2021. Possibilité de baignade et de faire un feu de camp. Guillaume F.",
+            "name": "En bordure de la rivière Ouareau"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -61.4993872,
+                47.5618641
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/e8l6pq9urc41f8p5eas6veencg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piv9IUi-DsYVXQMJgRL2NxggApCLouCmBCDcry-N8Xryyg6Rzcw6wyS4dkvoA-nbW_RctDmuzT8luN0KDaPyLZfMHrIGwiKYcw8VrndamxtalpFc-SVEzClNKNXXOyMyQM9mMaaJVrs2BXgbmdmaDK5IlsQFbQsEDaz5zCs_S3GhSplbdwnh4FDEdPaK3k1wY7xH?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Pas d'eau - pas de toilette<br>Blocs sanitaires disponibles entre 10h et 19h à la plage de la grande échouerie à quelques km au nord, ainsi que près du port de Grande Entrée.<br>Plage bien à l'abri du vent ouest ou nord<br>Juste assez d'espace pour une tente au-dessus de la ligne de marée.<br>Accès par le chemin du Bassin Est<br>Plage connue mais relativement peu fréquentée (en pleine saison touristique, on n'a vu personne entre 20h et 8h du matin).",
+            "name": "Plage du bassin est"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -71.8658843,
+                48.7376303
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Très tranquille, il y avait un peu de gens, mais personne est venu nous déranger. Pas de toilettes, d'électricité et d'eau potable. On s'est installé dans le coin à gauche du quai, c'était très discret.",
+            "name": "Quai de Sainte-Monique"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -74.3685062,
+                46.1032488
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/6n8gj39kqheue8tobgq7d6ecls/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitAj3EfTo_JePW-cy4C1K0GYW73jxizDHeF9KN5LJuluaKW1f2_7bGKWwZIUczy2sCEAF3KoLfBF8HXmqMHTU9ygnndX4EAz7tpDc3mouqpIvjoLhHh0R1wWWTCyNrLG2DoVRZTrwkGaSEf9FJFlbebG-xNyTHEY207pLx9cLZlnNPLtSbu9yDuqLtVNwi9W1k?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Porte en métal avec un cadenas rouillé sur le côté Sud du Petit Train du Nord. La clôture juste à côté de la porte est enlevée et on peut y passer facilement avec les vélos. Une belle plage de sable à côté du lac et plein d'espace pour des tentes.<br><br>*****<br><br>Couché là le 20 août 2020. Vraiment un beau spot, tranquille et belle baignade dans le petit lac. Update avec photo.<br><br>*****<br><br>Couché là en 2021, exactement comme décrit. Un peu trop près de la route, on entend les voitures, mais avec des bouchons c'est correct. Endroit magnifique. Attention, cet endroit est sur un terrain privé, mais aucune maison dans les environs. Soyez discrets! :)<br>- admin",
+            "name": "Camping sauvage petit lac"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -57.1282525,
+                51.4286513
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Camping rustique avec toilette sèche. Tables de pique-nique, gazon, plateforme en bois. Pas d’eau, mais village est tout près. Les campeurs y sont expressément bienvenus 😊. Visité le 5 sept 2021; Pion et Giguère, Cyclo-voyageurs.  our blog:Normand_Pion@yahoo.ca<br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br>+<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br>+<br>tandemetcie.com",
+            "name": "Parc municipal Blanc-Sablon"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -56.8600094,
+                51.4607005
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Au bout de la route! Spot extraordinaire face au Détroit de Belle-Isle;  Baleines et mammifères marins sous vos yeux, icebergs si vous y êtes en début de saison.  Terrain gazonné, moyennement abrité ( peux être trop venteux pour tente légère si tempête annoncée …) mais vue fabuleuse! Toilette et eau potable durant les heures de visite, mais bâtiment fermé après 5pm; Présence tolérée ( de fait , j’y ai été plus que bien accueilli!); J’ai campé ici le 6 sept 2021.Site visité lors de notre passage à vélo le 25 juin 2021.Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
+            "name": "Phare historique de Anse-Amour"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -57.5341735,
+                50.3382778
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Bel espace aménagé sur la falaise surplombant le village; La mer est à vos pieds! Tables de pique-nique, gazebo, terrain gazonné et plat, abrité du vent du large par un gros buisson ( insuffisant en cas de tempête!  VÉRIFIER la météo avant de camper ici!!! Pas de toilette; un petit ruisseau au pied de la falaise ( accessible sous le pont qui donne accès au village) procurera l’eau  nécessaire . Mon plus beaux spot de camping sauvage en 2021!  Camping lors de mon passage à vélo le 12 sept 2021.              <br>                 Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
+            "name": "Village de Bellburns, parc municipal "
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -53.3471862,
+                48.3633483
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Beau terrain gazonné surplombant la falaise côté est de la route. Le phare est á 200 mètres. Le joli village de Trinity de l’autre côté de la baie; Fantastiques paysages au lever du soleil! Relativement bien abrité du vent du large par de gros buisson. Néanmoins à Terre-Neuve il est toujours prudent de vérifier la météo et s’abstenir quand de forts vents sont prévus … Pas de toilette, pas d’eau à proximité; prévoir vos réserves d’eau á Dunfield ( plus rien après le village!).      J’ai campé dur ce site fabuleux  le 16 sept  2021.Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
+            "name": "Phare historique de Pointe-Trinity"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -73.1646553,
+                46.0843009
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/ueut0kdk0cjv4orp3bum9t30cs/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitPAzGH6PAeWrPiD0qH3sISM0Z653jbuU-E1r4sZkbpOKtu2aX6jt2XX6p4aoGo1FurHTcgBNfj55dViIsgwpCg38P_6KD_4jmgsNgrVA-r98mBh47di1-0MQBrXF1eJ0-hJeIJ6Hd_aVEk3pOlswKSSdUAJuE5Q9cfhiCvb2BYT7SKx03tHf3ATVgx-vsiG8YZ?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Très beau site avec toit, tables de picnic, bac de recyclage et poubelle. À l'entrée des sentiers des îles de Berthier.",
+            "name": "Point 251"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -67.1420445,
+                48.1483433
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Section de l'ancienne route 132. Place pour feu et de l'eau accessible.",
+            "name": "Ancienne route 132\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -71.9322013,
+                46.6182355
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Il y a un grand bâtiment municipal et des emplacements pour faire des feux. N'en faites pas, tentez-vous tranquilos et profiter du fleuve. Je me suis baigné dans le fleuve à marée basse à l'été 2021 et c'était très agréable.",
+            "name": "Point 253"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.2056338,
+                46.505
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "À la quantité de VR cordés là, il semble permis de s'y installer. Toilette chimique derrière l'église et boyau d'arrosage pour l'eau.",
+            "name": "Point 254"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.4944937,
+                45.2557379
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "À 5.5 km du village, petit espace où il est permis de camper. Sur le bord du lac.",
+            "name": "Point 255"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.6200374,
+                46.2261848
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Derrière le point d'informations touristiques, prendre le bas vers la rivière, à gauche, il y a un grand espace vert où on peut tenter sans problème. Tranquille la nuit malgré le pont.",
+            "name": "Point 256"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.9724183,
+                45.8499286
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "On trouvera sans doute un coin agréable près du parc récréatif ou le long de la \"rue du Parc\" qui se poursuit en \"piste cyclable\" non-asphaltée.",
+            "name": "Point 257"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.2069164,
+                46.9590859
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "C'est une halte dite municipale, mais qui porte aussi un autre nom. Aménagement : toilettes sèches, tables de pique-nique en granite. Village à 2 km. Les gens s'arrêtent et repartent. Probablement plus achalandé pendant les vacances ?",
+            "name": "Point 258"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.6923379,
+                46.9192702
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "J'aime personnellement mieux les endroits plus discrets que les parcs, alors je me suis rabattu sur le côté de l'église (le cimetière est sur une butte) où il y a de grands arbres.",
+            "name": "Point 259"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.0356671,
+                46.9126758
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Quand vous êtes sur la piste cyclable, un panneau indique le pont de pierre. Le sentier se rend jusqu'à la route qui borde un parc. Je n'hésiterais pas à m'y tenter un soir de semaine en basse saison.",
+            "name": "Point 260"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -75.0746963,
+                46.0219764
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/67ps72i3bo5ds9itb58a0bpjpk/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuVZkM0w-B_lcYhcTOkdcAeSJS6UD2OIpOrPFvwMZPOFIkJ8qBrhq1UEB5xHAHYNx0ulJX1T8VoRQqyzpLMEaIkONDHWwIfKhzl3FvxvWfoQmbF0jQGAuCXg6BykXdeQ77eaDTLTMTTIc5QDorj3gHoh4FjCsGYPvfk3aXxLJwIUzDaGHZH1le-k20s9Tc1D-Io?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>J'ai passé une nuit de vendredi à samedi ici en aout 2022, sous les pins et au son des chutes (et des voisins). Aucune interdiction affichée. Pas d'eau potable. Toilette sèche « hors service » mais débarrée et assez propre à mon passage. Il y a des passants durant la journée (descente de kayaks et de tubes) mais sinon c'est plus tranquille quand on s'éloigne du stationnement. Accès facile à la rivière. Deux dépanneurs à proximité.<br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/9stv0v0oqf5dtq7tfullnrhe5g/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pivn08VoVLEdml_9YASWNgtfGSXdRdyoU-O4g7W8DO-10DTXj71PvXEGCdUCaPA5Cc998ItXAeA19RPCs9NkYO7IN3j0d85EenSSWXW8XAfaPz6LJBSZHhm3nG6IN8Xri4pPiLmh5qtrTBF_ACviDKyqyVZGv4MGTtg2z9Fe68nYIYpCC0FhQ-bK9vfeuZWvfikN?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Duhamel – halte routière\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -75.0909011,
+                46.0520992
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/3nslju6iqr3d93lsn6ajtvfb6s/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piu6DfBr25YEEjDX5bu8XAGZm0yBSQAf3Ro96PlMjnP_B0qVw2pTTyx0lvQQUSVpaKd-38BRnMIOM2b1n2AxOJIDqnNr6FB0ZJKY64-32RcB8Fyk15Baq7LbaK4CLS5472M7u_rFRIUXuU5KtApwwAHPnRMYRAsY2EFgkpNy-z73n0QV_OH8CdImqe58xk2UtwCf?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>À quelques pas de la piste cyclable, non accessible en voiture, il y a une halte cycliste sur le bord de l'eau. Je n'ai pas campé là, n'ayant pas vu l'emplacement sur la carte avant que j'étais déjà campé à la halte routière plus au sud.<br>Table à pique-nique. Pas de toilettes, ni d'eau potable, mais accès à la rivière. Un peu plus à l'est, un autre site, avec une grande table.<br>Pas de panneaux d'interdiction.<br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/i1vbui02fcjvggnue2imkq8pqc/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivFpvSYMH9ENImSQY5xJI_UW9WvZjwzWm-CwLIYN7xeLIcQbUlMsOCi_Uggrb4C4jl0HwsvhrI7qY4JDI6ngVu9CuVd9ItzwnGCetDqi7lSeBtlaQCwjUxy1XeHwoiEvo9RY2m-aihpEoP43npDXa9nharVCzbJAArL319CtgCrHqBUdqZBbuRllMP9_7NQfA6j?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Duhamel – bord de l'eau tranquille\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -74.8468228,
+                46.1316674
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/vtntev72lt7bofvgh61df7ni20/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiufeppYUHfCQ2o4dbK2U3x9ZF1QYAWzktNPjPbT-SCo0VrV9W8VooyKFFA5uaXL5rpaTz2v_UCyl_7n6Ju9pICawTXl7344p5v-5n_c3YGaSXIuzfwnzTdagio_7_c5Oxfpfd8thW9STzKR04MIU8_jHV-Dl2qIbl9MPRFupcESEtKEFBzAWn3JBEuWK_BYNJkp?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Très bel endroit pour camper. Il y a plusieurs choix. Il y a l'emplacement principal, gazonné, tables à pique-nique, toilette sèche, entouré d'arbres, mais j'avais choisi lors de mes 2 passages en aout 2022 un petit emplacement sur le bord de l'eau près des rapides, immédiatement à l'est. Plus loin à l'est, il y a d'autres accès sous les arbres avec l'accès à l'eau aussi.<br>Lors de mon 2e passage un samedi soir, c'était assez achalandé. Mais bon, aucun panneau d'interdiction, et c'est un espace public.",
+            "name": "Rivière Maskinongé\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -64.8980354,
+                47.4174291
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/ve6aidku0vchqd6snfm54nh38k/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivQFuTgvJ7vDXwBYaoInuK53LfWJu_Q_VhoUvXt8cMUxlHu_NF8OxL33ErGLsOy-XbEqI6-4o4BXTguvRTbINAvXNNRoJJ3_rybC9dpqDASUJPk36KCONtX3Vm3Au_Smbebux1UQ9Vxr7tIIqMyWaBF611gQJLHq2ZvHDaefnUaYVKz8eQrkO_lRrtPd_RuvP9T?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Campé là en juin 2022. Tranquille, puisque le stationnement principal est situé plus loin au nord. Quelques pêcheurs à mon passage. Aucun panneau d'interdiction. Pas de toilettes, pas d'eau potable, pas d'ombre!<br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/nmi1oifhdr779udel9j65ip6ck/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuljK1LnPrPdVpEaTNb9sm9-_fYXTX1bEZ9kaoL6yzTX_Us_tDyTkaH25hXw8JqvrdEf-yq43w1gzJFgXpV-Tlr9-k0QPj0eIgzJS3QiTsq83gT4TCce6mpg3g71YrEnVnlZe_cDFG-B22uS1wgkQBdYEl4-_sXuJlESt_R0-KFIsKAqoJzynm2hFfiAdUlDth6?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/ka27alk4l69iiip3isvim19fgo/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piv5f6elyyiDQ5fjBFOzdyz_RQ4ZCImtFYHzHHuMuhbi-8cXhcfkJsITkUPQwQxzL2FQpuo_cK427C7ynJacv4c3thld8k-6VZHEIfaML0VAtdjYo8IMeoPam1fU5vj7Xr61aEF0HyaipeTTL0ejvDNIyToEU5YrakSVN-zaaaZsew4TYhsgrBTVyhUhLoPAevKX?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Plage immense\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -73.2130568,
+                45.5443792
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "On indique que le parc est ouvert de 8 h à minuit, mais j'y ai vu des VR passer la nuit. Derrière le bâtiment sanitaire, il y a une place avec des tables parfait pour une tente. Pas d'interdiction de camper. Sinon, voir en face :",
+            "name": "Point 265"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -73.2131319,
+                45.5438589
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Je préfère de loin les endroits discrets : juste devant la pancarte d'interdiction de stationnement, il y a les vestiges d'une ancienne maison. Ça donne sur le grand parc. Le couvert forestier est vaste, le sol est dégagé. L'endroit parfait. La route peut être bruyante, mais pas trop la nuit.",
+            "name": "Point 266"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -79.2992364,
+                48.5523825
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "À côté de l'église de Rapide-Danseur, j'ai rencontré un gars de Vélo-Québec encore dans sa tente. Il m'a dit que le maire du village (qui habite à côté de l'église) lui a permis de s'installer là.",
+            "name": "Point 267"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -64.810275,
+                46.9874492
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Quelques touristes sur la plage en fin de journée et calme durant la nuit. Pas de toilettes ni d'eau potable. Bel emplacement pour une nuit.",
+            "name": "Pointe-Sapin"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -60.800022,
+                46.8306766
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Superbe plage où l'on a pu dormir à la belle étoile en août 2023. Il y a quelques vans qui s'y stationnent aussi pour la nuit. Pas d'eau potable ni de toilettes.",
+            "name": "Pleasant Bay\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -73.3228528,
+                45.1608161
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/trg2q1sme34shu63elcp8lkv3o/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisWNRq2-oHmkKEMFomPk8xjG4sVMjGZB7TsMwM4HFenIMQJr0BDifGiiXiEiXZav-3ZosVBjL-YNiZpGNEKqD1bLkkDBAWpeakLVm9w9QIIpoyG0Bhx0jYw75SelkwE7SXbLGtjbr-8H_bA9Cg7t2GpMG6dbk2NZGnBQmxK6w_6E5Ygx33T2KD-tqdl2HKiMZsolgvUfyjcqwefU8h2ALQE1YSXRtJHYr97iGcRegdtiJ0Wfg?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Joli spot de fin de journée, en bordure de Route Verte #2, entre St-Valentin et St-Blaise.<br><br>Il s'agit d'un parc municipal au milieu des champs, à la croisée du Rang St-Joseph et Montée du Petit Rang; Quelques bancs, mais pas de table de pique-nique, PAS DE TOILETTE, et pas d'eau courante.<br><br>Prévoir vos réserves d'eau pour la nuit dans le village de St-Blaise si vous arrivez par le nord (8 km avant), ou dans le village de St-Valentin si vous arrivez par le sud.  (4 km avant)<br><br>Pion et Giguère, tandémistes et Cyclo-Voyageurs<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br>http://www.crazyguyonabike.com/rikimiki<br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/e0gt127mgo940c6n5grka38uj0/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piu6icnvJzqADq4XiK8KsOnohfKY5mj0fZCzgBEFDcLWbOnBpYtfriU4PqcnMhyRVwGKb1JRMn5V85CdEdxNSJWvGn_BMXmJqATHKBH3geOiuEAQQXkGw-uZx5DDTEsJQD1bx0_tVX48Ah3QtxiSr_r0nbcbAa-jUIuUrrIm4k-nR_68oVTKH219qXzI8BeQ0_isEF1wauar5VwzRvo-4Y_BRcZVGd6uxIBlo4K0c70ImflYKQ?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Point 270 Parc Municipal St-Valentin"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -73.4289984,
+                45.5319644
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/5lfnphjjcotmq8tfneekng924g/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pis7k1gQDPqxB0pbdS7KuQtcZ4z5dn0X13wRGBVVZLBVwnPWnrjCJr7rUKODOhoLKf0qeLou1l7A8FvXQQ1TcLOoWKLnArkCWBg7b0pmms5Z6Ug56N4DaOMYHzv1Y9mY-WsSHRkBenlN_Sx6EGMedQjMnvPtQL_yK4pRQP4mydbx4sUij4CUv6Nr177IYxlWVP4Tc5YKLEEzp3gSzgMK0PFrd54r8gScl0RtIk7FLy6nTBzMZg?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Entrée sud-est du Parc, dans un  secteur peu fréquenté.  Verdure, tables de pique-nique, toilette sèche.  Pas d'eau, mais commerces de proximité à 500 mètres.  <br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/ktkgotpqvdo08u00vlqca685h8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisSOH9xspRpIh-w-_1OkkaqJInikHtKotlP-YjwES7Lv1la_k--NOGsoFiPEjLaHfzCYJUhPvQAvNq8R1BrPITZZRbfQZto7Lv91cPUIeBfAIg7cyzIun4YM_OP3pxdBYfI17tCoa0izxxn9DQ0eT39PMzf2lQCl1OzZ9vfXp7Bo9xn5Iwy3SCtGgd7U3xLcJbPZrnMyRL91fIlxGdW0szdpZ9LILtLxwGl2AamvDsWrvytOQ?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/5rllvu9jt0miofnolt082s67l0/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuYVVKGBYNl8BdXI2PNYXhDQErkCheBOObbDk_PyMKCdGCj-tRJShP9P9YGoCxAPHSv8Dv_IKUjVWIipaidricoRZwLI-xJXodvRRlUJDRK1x36di14QJrY2FzoUIxldiXyJGp49Lu8-TsNNhWOcqthF6uKXrtAZT0B-Or_tprYe94OX0ClOi-7Q5kwhNmoTfcBFJ27gJwsQj73QqNOpZSnGSEV2n0QKnJlUd_EZ3HHnMqYrQ?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Boisé du Tremblay"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.5466842,
+                45.6771617
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/vq0oikjn64jqsr0evtnatrjs2s/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PittzpWzQLAoCYfwG2_KWLmZ4kfBG8KW9WH_snWnmwn0IP8W_fq_EoqyhpaosibdosC003iCWZbIuIwI6OzsN8GHDydRKC_-FnAfJcpjAOl_wRS9-2F-Ho8RJQmnaf7r-zoahDilA7I3SQgfBidn0X6MEFvvYS2tE6HHXzw6TQzGhxBTgpTsDFLmBmkEo-Qlnb83vil_BGxuF-zFuocOyDP14GkUhpMwZ_cNDtDAAAQ56631Lw?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Halte cycliste quelques km au nord d'Acton Vale. Pas de toilettes ni d'eau potable. Possibilité pour une petite tente (2 places) d'être montée sous l'abri, sinon un peu plus de place à côté. Un beau mur pour protéger des vents de l'ouest! Eau potable et toilettes à Acton Vale, à côté de l'information touristique.<br>On entend un peu la circulation automobile de la R139, mais c'est juste assez loin pour pas que ça devienne trop incommodant.<br>Aucun panneau d'interdiction sur place, par contre, il y a des panneaux discrets aux intersections, donc techniquement, le camping est illégal sur la piste dans sa portion de la MRC d'Acton.<br>-admin",
+            "name": "Halte cycliste Acton Vale\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.5308996,
+                45.7094201
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/sjvv8j68ng12k17v9b4acob9rs/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivFV_G5o_6jyPvpZfu2b0EIbLjXZtjVWH9B95dVLJx1wbCTFiRsUOQh7rF_rPA5QnQBe3ObycP2G3BZ6wnb_TN3fJuJV9UEUZKZYISAVCbSRKvlp6B91QYkere2XQCreBKRV_jhZmdVq_oE2KAFeA7fdrN8Y7rlaIVjJ8sXUaCeHdXzfM0xCet2xSCOMsmMXEx_9VBR3fIaG1LsnEzacgOqSuzXEfYx_9A3cU87R0YwS9j0bA?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Alternative pas mal identique à la halte un peu plus au sud. Je n'ai pas campé là, ayant campé à la halte plus au sud.<br>Aucun panneau d'interdiction sur place, par contre, il y a des panneaux discrets aux intersections, donc techniquement, le camping est illégal sur la piste dans sa portion de la MRC d'Acton.",
+            "name": "Halte cycliste sur la Campagnarde\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.4900707,
+                45.7822
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/7qj9097guiod9hos3s84i6a0gg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiutO6uijZ-2tAJjzklN9_qV3hCGxme7vFA9SKtSJ7mCyc-RK1zKdet6KX-lG-bwSEC_Z3b2eikpNQlO-Rhb8ANUta8KNIFWoPkz8fkG2yq7pzyCYEu3OFU0EDGSoMFPcIDt0K5Dv9bEWeCwVNGvyVXo5nT9_7oYeb_IoEHmMKZ3hAI321h4WwSnKV05ugedWqnAqwzvY79Lo47CGYU0lkS9_IzixqzdtODaYKzTSX6r5NUROQ?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Sûrement un bel endroit pour installer sa tente. Je n'ai vu aucun panneau d'interdiction. Je n'ai pas campé là puisque j'y suis passé en matinée, malheureusement!<br>Pas de toilettes. Belle rivière avec de l'eau à filtrer. Par contre, quand même près de Wickham et Drummondville, donc ça risque d'être achalandé. Il faut toutefois noter que cet endroit est à une bonne centaine de mètres de la halte cyclistes, donc pas visible de la piste.<br>-admin<br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/bh6n1cupd1pbqvqjfum9ev73qk/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiujFvCTdDWC_k3clurXma26BV3-MRAccTLpxBQjQs2B64_6wgWuuRImnO9X-k3PeGpGnPZwEooA2WXMAfTJkHGH_4YXx9RP0773taEJ2qTaT_EBhnvR3LMMZbHxsq2ETTcGEwNZwVwLiaQ0sx-SUUByVAP8rzZl1581uvRhhuKnLc6gEC-wYKQlvpunbCBMECu7ataBfEhzI7uUVWtKp4Ti9fMju9TmRXof0gSYDLAUecpgXg?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Site potentiel près de la rivière St-Germain\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.3031623,
+                45.7796864
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/m8k5s7ptskpptm5t4tqbjmn6hg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuQnkmuZl3TfWf_ObcINTU9pPSbqAsLJJqfczXKFGqoLA8rffRa7C8eUbdNGFB6w5D5hDb4BkGXXOFG_WIFjqxQEawdSeQQTkePYcFED3oeZ_XbrSJWKUe5mlQfQA70-u9waaE0FqV_APLWa5-Qa5yugMhywgUlEsXsbEOx4h53qq2MssswOlfaUXDRFwhKeLSnYB67P6mmrsKIFHXnAYzczvFbMlFH3Xsel4dokuxVeWckug?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>C'est bien le nom du ruisseau. Il y aurait probablement moyen d'y camper sans problème sur un des deux bords des ponts, à cette halte le long de cette courte mais bucolique piste cyclable qui mène au village de l'Avenir.<br>J'y suis passé, mais je n'y ai pas campé, puisque c'était l'après-midi. Aucune toilette, pas d'eau, mais une rivière si on a un filtre.<br>-admin<br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/v9dckb08gj17mf3vc2ilfgt6f4/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisWCs15YcgSXOpbfKydATGt1NPqb6w0GmYaR8Zoe9mQlTmDOgKoInreWKACZlF8BAednuUoWqwGiVUHknH6687ceP5i4gpumtvLrQCIAM19kyDDPB9F1q6iAOhvIrwoENgMaGHT65EQxAe1L9HS_Wr29UPoJbyCQSFvMlx8GoSdY5FXYKuAOST37LGZsDFlV_GT91WS9yPwXniOXarB169ssyAQyXY37-SkmJh4QPeOFjB5eQ?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Sur le bord du Grand Ruisseau\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.5924754,
+                45.469872
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Une belle alternative à la SÉPAQ. Halte presque identique à celle au nord d'Acton Vale, avec un beau toit et un mur pour se protéger contrer les vents de l'ouest. Je m'y suis réfugié pendant une heure en matinée pour laisser passer un orage mais je n'y ai pas passé la nuit.<br>Aucun panneau d'interdiction, contrairement aux haltes dans la MRC d'Acton.<br>-admin",
+            "name": "Halte cycliste près du parc de la Yamaska\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -75.9296386,
+                46.5906834
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/0h6cnbtj8rjmqikk5huuqeni7c/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisJDkqpp8L04-RMgDz6YXSwy5tM6wiEpPjn_lTt55wT2sHGuiOimOlEJ1Qc4K7xqMlHm6s5pJWQrmyXqOyEMO9X-ec89ATXmeCAU-l3ZQCVjd7dMzcC32pKvH4TfplNFMiZa4nA-M4msvCu2uxy16XLrYFo9NkJfRaKzIvvsPOXfbocBcYOCoQsn4lFFhpCRlf0GvNUcN-HiNTSzijG-3ebps7lRs8fPaDhUtDjy0xI7Juu8Q?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Aire de gazon en contrebas du pont couvert de Grand Remous. Accès à la plateforme d'observation par des escaliers. Possibilité de descendre le talus.<br><br>PAS de toilette sur place. Poubelle au niveau de la route. Accès à la rivière (attention au courant) pour la vaisselle ou se rincer. Dépanneur ouvert tôt et tard à quelques kilomètres sur la 117 (toilettes). Possibilité de se mettre à l'abri sous le pont.<br><br>Lieu très tranquille. Quelques habitations à proximité.<br><br>Circulation sur le pont interdite aux véhicules à moteur, passage possible à vélo [août 2023].<br><br>La rivière fait beaucoup de bruit<br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/oh3v5fhatpjocbvmea6ngdm4ik/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitwoeR5DLzQ-CfNbMnHhmOKm162eMyQ7eorBdwkoChysF0FykxFyeTpFNJxgshkN7o7XyBl1GMZd1rFKdNsGmZFGMHqI9gxxC8V2jTckWAat9b8MiysFQFckNK5hpdAPFDwr1wiSlhI43CGfkUbPcq_rXYV5SlKF_oTEdbe66kez_8DESAplEkO4i3Us-paM0Zs0Vm92Ia2A5mW4zTH1jvDPvaDyJFK9O-lmaAh4l_Hl5Mohw?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/bdcs27iv1it0i88iupnaavcod8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pit4KDSguPr-jvRMNCewKyPuEUCrHA0QP5QJ-tRgJXjsXdnrmFzQZP907RZLm3av9Ygk0SWFFF_xw1Q0gBqPQ9CLFWQRIxLISkJ_cQLe1UttvVI7_QTMfrPVUvl-s5jy91F5DMhQQuWWeNQK16kYnZe_v44HK_wC9m-QemL-lHuOQkUVBMHqN25pG5jCz-Pfpj6iS5eJZpLWErX-DD4yPTgQkpv0-RaCQvWYHMPyJfzlesOK3Q?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Pont couvert\n"
+        },
+        "type": "Feature"
+    }
 ]
 
 const officiels = [
-        {
-            "geometry": {
-                "coordinates": [
-                    -69.3753252,
-                    47.7554025
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/7f32h9p227j5iggrf3v0vm6qlc/1692479857250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5QHraQAXpzN4s9gDlolDH4Pyg02ro87_ZwXdk3veGzw4vL4JqG8gYyWPSj5szzx6ZXrWwXHHKz7nyDZsOpP_2GCSc__vxufLWxex36ckqybqJoH8j8XDRGkthhQ1Af2cfCws-ZFV_9iRflmOAqfYrP5L1nLls7Mrisuo77BVniiLYl_aIfQpf3du7ZVGNSV4Kg?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>https://www.petit-temis.ca/fr/services-<br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/rkeof4moip8chpjot5c32f0b48/1692479857250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4SIENtmVmO-iNBZ_EFGNGPgchMpVnsjAx659ie-6VRb6sfoi4KRUDLf2_M9Oeuvb3pygk0NVU-LOeXJsSRYwwiIbPH6jhJq5Kc7WpDUQOPw9JvYedRvPUb4lB_1FAbT58D8doWy0SbuV7XQ9hyFMqggbDqJ11gCR_8vfKAKC_YUmVLQJhIxV6RPDBBV6JgGDeT?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Halte-camping de la rivière des Roches"
-            },
-            "type": "Feature"
+    {
+        "geometry": {
+            "coordinates": [
+                -69.3753252,
+                47.7554025
+            ],
+            "type": "Point"
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    -69.2074299,
-                    47.7044111
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/eq6nudh0vb4rdk998gnuqi9bh4/1692479857250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6WzKTybeMZwIk6GPCo9uXvFDKMteImq0DRZ2h-ARQGxIZqxTSipPW6Ybah40KNnlUMPz4cTu-VqlKcPcyO1fd6fDXbyePc711aRMHIjRP9mq1iWimpXqQdna0XypJalSBnsQP4JTu0dugGilECcJAkFeN49pkiIXkJeYd8sk1sMtM8gT8Lb-jxqMAxJe8rcjHt?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>https://www.petit-temis.ca/fr/services-",
-                "name": "Halte-camping du ruisseau Beaulieu"
-            },
-            "type": "Feature"
+        "properties": {
+            "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/6kdh93urs8qqectf7trvdlkahs/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivQZo8lDd-3qVt6bexNAlVHXcsyC2RR2R9wEHXnC5zOcEwH32LMX7Mp2rdFJyv_wAylAr3OySPkC6hraEaiRJRgBtmlSY0wnsl2wuaLMksBLexP-HtPTlvWR5UBOyUW8roG3k6Ih4JWFc_3a0gE0EM7e2O7uq0Hx1TMacBAKeJFvTX6-KwHElBjH9YAz9EbzKvR?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>https://www.petit-temis.ca/fr/services-<br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/fvv6bg532hcghchhl1bc1kn9kg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiskSVjCrupydVJGXsBC0stA3-p9JbsmGbprGiByPPv8pgotQdbChYBFlWKk2zRhALQgbaARDEj2Rds6SLJhu8LRHSlu_JGlwxbKNIRElV249wuTY2BrpGuHoG8ynA3KNx_fu-vq0_8oW9hkMb5VcW2r6kpshtZ_RGBzoVOScdhkD4QJDGrhFHiLEvVIS5cwhRGo?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Halte-camping de la rivière des Roches"
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    -69.0108449,
-                    47.6715348
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "https://www.petit-temis.ca/fr/services-",
-                "name": "Halte-camping de l'Observatoire"
-            },
-            "type": "Feature"
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -69.2074299,
+                47.7044111
+            ],
+            "type": "Point"
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    -74.378917,
-                    45.5802987
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/qu4r3qja5872bj4eml8airh144/1692479857250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5u56WVsuTx2RAXjClnIEatugZg6n1bvSUjxFAM6PrtoTOXcara4MzPBw8Crmq3HGIHmAori7xjRTlAeSvgwCZ22crhE6IWKggAeY-3Jg0lINswLzQZyD-A3mUp0sGzptW-cihGDzI9mH4WHlLA5SQiroSxtGrRSJBIUA82xc-uzbwu2RwvZJGioNtwaf7oVudp?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Beau secteur boisé sommairement aménagé.<br>Belle piste cyclable pour s'y rendre.<br>Chaque site comprend suffisamment d'espace pour 2-3 tentes. Toilette sèche à proximité. Pas d'eau courante.  Village assez loin.<br>Alentours marécageux, donc beaucoup de maringouins à la fin mai !<br>Quelques sites ont des bancs avec dossiers, mais pas de table de pique-nique.<br><br>Nous y avons campé avec bonheur le 23 mai 2020<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/j8p1c59et675ibgoni53d13g30/1692479857250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6oM93EWCsQwuG_i_4juDxtrPR68GvUUB7beGu22fAZf9_9Wrk4PR0_UhrAHsVfRhMRhLQqYNuYIicaj-2x5ue8OcfP2B70pvhjhX-dm8GkZsSRZE0IbvD6GfpUYBn5XxreLNi-jjGXL1LiFekvNM6U0pUcxcEpRG9FSxtfQrWJVgibMWbUy5ypljgpralconjW?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/9ko7mqo8qmc1uckkk54n1v8to8/1692479857250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet72qjSr8gFmQ5RKTXyjhTHi8pdzfdDCMVFiG6mK1jn9MbldzEn43eGaT-_ftcWWGhDm-aDrc9NMhGKcPV_Hau7ywqzrlCg5b7jhphgt-7DjDExUFjrhyKewEJYzM3Igv68vPOl5yv2FiE4tG_hcW2oPHxPI_EESVZnY0OXMycqiU4__mMYD8BubZ8oLLe3v3DyZ?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/g5qj37aq1usg6l21nspv6h4rqk/1692479857250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5uNCHLmF4QjVqRX3G_ADBQ0Ju2micPHYvasDgNxjdKZGIFCKAtzkykzzkSJ56I2XxjR_iMl8O7oxAzedGU7rWy9HGDXogGjn_i3_Q77N6lkmbqeF9M7_qtO-eEZBcB7yEB1JrFahCfM5liMkq5YAQG4UALcmofIhXLySXRhTqjmfZq1A4V7uHJ7he_ZJPe4x--?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/93eafg2fvajjbvos4642q1n20o/1692479857250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6xuopSG9Zrd7-LhMdDwgEVtFImpj33cfySb1P67qWAilFoKuHU0zGEoH2AW5HlXkyop2hVJKy4EEJ4GtI1JLggOLor-i8mCxzlew3InRHk1tSQADJvebWYh9o8Ji0eQlwtg9tEU9HhNWyPWPMR4lb9PAPzDv9SdpNzG9BNjyymOgFjn_pDBbqRasOVpRBlKCiD?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Boisé Von Allmen, Ile aux Chats, Carillon"
-            },
-            "type": "Feature"
+        "properties": {
+            "description": "<img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/rvlrpbfovupg1s8i27dsuotkt4/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PissPJAluEwSc0Bwn3S1RCzxQoQnmCZJAbtq866gx6Od3afy99KSv3TqyY4jf2Z1n2W-D5F5OjD-jxLpTaEtbNUtXhA8x_uDpd6DZmL0iUo4Zzl2u16F6kUN5PPHRYyIyxslEVsuh0JdZFlkbdTPtD1nSUzVi4Ogd3VTzwm_f18bF4oWSaVH4xFADOVj1cKub8ha?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>https://www.petit-temis.ca/fr/services-",
+            "name": "Halte-camping du ruisseau Beaulieu"
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    -75.1684047,
-                    46.4993358
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "http://www.lacsaguay.qc.ca/loisirs.html",
-                "name": "BOISÉ JOSEPH-B.B.-GAUTHIER"
-            },
-            "type": "Feature"
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -69.0108449,
+                47.6715348
+            ],
+            "type": "Point"
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    -75.8929411,
-                    46.4696285
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "aménagé, gratuit. (2019)",
-                "name": "Aumond"
-            },
-            "type": "Feature"
+        "properties": {
+            "description": "https://www.petit-temis.ca/fr/services-",
+            "name": "Halte-camping de l'Observatoire"
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    -74.3847539,
-                    45.5791922
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/ntke6nfg57g92mohfn0dpmcc2s/1692479857250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7d_dz025msHeqXZCk5scTaZ77Wn7NE4MMpV-5qGfdf3h1ng-KpdTiMv_-uZKIalpD2cAcoiRq1gwBb6TrhKvCC15QlgFkB_g_ZBDzeeb2NclvbH9AoY7ior0aUXkGc0BvuIZa70L1Lr46Hk8rGXUGY0fWsCnuOsnX1nqALFBO1nZIWgmOV0RfrABDOk8mSO042?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>.Beau secteur boisé, en bordure de la Route Verte #1;<br>Comprend suffisamment d'espace pour 2-3 tentes. Toilette sèche à proximité. Pas d'eau courante, mais rivière à proximité si vous avez un filtre.  Village assez loin.<br>Nous y avons campé avec bonheur le 5 octobre  2020, à notre dernier jour de voyage en 2020!, puis une nouvelle fois le 18 mai 2021<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/pmfj3cjuiv73ul5fu3rpjokfgg/1692479857250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4q8jvOIEhBH3tiljnCQAIfq-vcoRn-2sRG2HwooFjW5au3qdXY3xxobe6A92FJBYzq_bF1MGlf1Oe4eUYwFjZ2lSPaL0qEYetrMjGQw9xxHQ8xy2-TLP4B72gZjwCPgVkg4wTE8gEbKUHBhf-DSb16TG0lEyJpLbl_HVEzFOEnja3Oge72wyaU9rUuGlUwlOB4?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Boisé Von Allmen"
-            },
-            "type": "Feature"
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -74.378917,
+                45.5802987
+            ],
+            "type": "Point"
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    -74.3795036,
-                    45.580445
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Dans le boisé du parc, on peut y installer des tentes.",
-                "name": "Camping rustique, sans eau"
-            },
-            "type": "Feature"
+        "properties": {
+            "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/dnf7el4kh1i18657uvourpigbc/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piu-scKOwKb8cZfBxJybRHECokZrBCeycA5U2HmBOoMzYvf07o3Kz-wkoj_ltmJop6c88LvHicP6EAe9T78a8_hVuXnufq-cJPKYFMDPe2tak5cT-3ILpcabdgZTBlLWcMaYjM6zTaDcY_06X6cBWQYgqmxNNBzFJD_3nc22bVXwlP3LHzv4zAjUaQDSaky8ROsk?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Beau secteur boisé sommairement aménagé.<br>Belle piste cyclable pour s'y rendre.<br>Chaque site comprend suffisamment d'espace pour 2-3 tentes. Toilette sèche à proximité. Pas d'eau courante.  Village assez loin.<br>Alentours marécageux, donc beaucoup de maringouins à la fin mai !<br>Quelques sites ont des bancs avec dossiers, mais pas de table de pique-nique.<br><br>Nous y avons campé avec bonheur le 23 mai 2020<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/ijf0l3rn6ers3p28ee3os9rlno/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piv-jcBEo0Bn4tNEDS9FpaYrIwVKMBtR9JNdxmbk29-Dawya45rWbJijK5Iz4TmC5LzMcA7PH22K6PfgYn5ReBHC_gw5Elqvlp63MtbfPPv-ZNLFfnhyXu_UOBMBE7ziDZ6gRkIugJMEJrd5AgDgykWcuyLIaYRj3Tc__RK4rYvkdu3NF9AdrGZAuVYxznC2TvDE?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/gcv9gh820nlnkltvr7q40pqifc/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PistHpZBo8UD4BJM3GV6gRTbAV19JDr6QnYE_W-Tlk3LUZzIaoiGRV4VbQDuU22ev5vBKqdrlGCWH0ArBlHMZSQr5LXEek0bDngGZom4L7lkigkIVodpztaM9FWzia3t_Yz9vtbqxRbKmOkm0bHb6BVcAZyjDJ8Rzwf4e2B3DbhiNLhjqWTa2-veR1pjH0lSyk3y?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/87q8gdo56m6t4ub1q5ejguf648/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Piu4eaaah0fdDP-ubkpHm8-hLJKwEKrjfw_F04rMHvGCGVg92nKvciAb-vcS4lm35wDQbXEeqaN0qSqqxDLh8q9Ph5npTYwf_iu40lCJCoMTvrHUVreAMs2yXalqSku6HwlUBCSXpUWVlM6Fa_GxG2lS0X2-EgDtUYsz5rNfGDSfY-2292-Jst3-qGKsmP-e-qFD?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/id3j7jgqfpbdid7166b4p0b9ak/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pis2vya450OoHLAIZ-eu7lUjtiFm2t4BhUBaXTNo9VV6ByUoZ42PNM2lzfF2ya8ZwZdiKmxolndxM9hErhSEuPZDXsylFRqbQaEuhzHltFfIf7D7xwCsk54n7QVz3V7szwsqDb9-5MlxSS_GYDdKq8dmMd32VOBFR4Mk6QXBE25QV6Vj_kgyPou7ZxrHKmvd5rnK?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Boisé Von Allmen, Ile aux Chats, Carillon"
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    -64.58537,
-                    49.0901
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Note de l'administrateur : aucune info présente. Je crois que c'est un camping payant mais peu cher.",
-                "name": "Camping Azellus\n"
-            },
-            "type": "Feature"
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -75.1684047,
+                46.4993358
+            ],
+            "type": "Point"
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.19477,
-                    48.24008
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "CCamping très abordable (10$/personne avec places toujours disponibles). Wi-Fi et douches gratuites.",
-                "name": "Camping de l'Anse"
-            },
-            "type": "Feature"
+        "properties": {
+            "description": "http://www.lacsaguay.qc.ca/loisirs.html",
+            "name": "BOISÉ JOSEPH-B.B.-GAUTHIER"
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    -76.5552884,
-                    45.6875973
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/bb5iiepk892d5vikhe2uni1uro/1692479857250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4uj3sEN60XxgC41l0uDBOH6d34RuN_Zg8TGMMP9O_72izaoqvQlTqi37jQVH9Lym3w1lNPRVUsYIXduM-fQjkYu5YaeA3HZzOu2H_t9eZIxM5z4QBcc09laDoTaRKP6qJ0tmmDkjZlkEXOkjEEcUsX79M-DN4HkQh7nMpa5AqLaDTZsEo69VDw3830G0PF_SPp?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Note de l'administrateur : je l'ai changé de catégorie puisque le camping semble officiellement permis aux haltes cyclistes dotées d'un bloc sanitaire. Ce n'est donc pas des sites non officiels.<br><br>Il y a enntre Fort Coulonge et Luskville dans le ¨Pontiac, environs 5 haltes cyclistes aménagées en bordure de la Route Verte #1,  avec tables de pique-nique, abri pour la pluie, toilette; Toutes super tranquilles!<br>Sites visités lors de notre passage à vélo le 3 octobre 2020.<br>Hélène and Normand<br>Sainte-Anne des Lacs, Québec - Canada<br>rikimiki@me.com<br>tandemetcie.comhttps://www.crazyguyonabike.com/doc/?o=1ni&doc_id=15622&v=26l<br>+<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
-                "name": "Halte cyclable, Route Verte #1"
-            },
-            "type": "Feature"
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -75.8929411,
+                46.4696285
+            ],
+            "type": "Point"
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    -68.5494918,
-                    49.060829
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Caroline septembre 2020 : Endroit génial avec 3 plateformes en bois et de l'espace sur le gazon pour mettre une tente. Toilettes et eau non potable sur le site. La municipalité laisse une boîte pour les contributions volontaires. Visité le 29 juin 2021. Super site de bivouac. Contribution volontaire.",
-                "name": "Point 186 Camping officiel gratuit"
-            },
-            "type": "Feature"
+        "properties": {
+            "description": "aménagé, gratuit. (2019)",
+            "name": "Aumond"
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    -64.5020407,
-                    50.3034681
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/fu64drjjes3g99t8ifcsk5iq9s/1692479857250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7f2M4W1hA9PbqLWDrotys6xf2wGBcAF5bUL-ZjI7Rj3uklx_Is0Us1v7-De8C4WZroEDdNA7uwVjaL25bilhDy9_nPkCGztzo09QswXbAYk_qPEaoZge1yoPK-k3ZzcHHafJjQh9o7TKBj-g7RppaAbQeGgUhsyix_I-JNWGRc81xMx85P_n38EJyrY5337XAQ?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Caroline septembre 2020 : magnifique vue sur la baie et le village. J'y ai campé sur l'aller et le retour. Il y a un sentier aussi à partir du belvédère. Une boîte à don est laissée par l'église pour réparer le toit! Toilette sèche.<br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/kaa1m5t8ve3rjf6to0sqdepb34/1692479857250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6D3sdK0QAK4hFiVv7gMh9oGDgtePV6jgJnFOI2XJRd4bqCXNBeXQ__zeskayaXuTd3lYG_qc9fZfa6WFORhDvq-HZ4Sz1KO2CkF54EtF-6N6QnYIVLcqzgmVb4o-2XyvrRWFDe4EE4eflZr5FVFdFeh0o9LmPpclRN1AINeYJ1GwKakbGBnRkX9nITD-JSAuMY?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Point 190 Camping gratuit officiel"
-            },
-            "type": "Feature"
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -74.3847539,
+                45.5791922
+            ],
+            "type": "Point"
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    -61.2690757,
-                    50.1776034
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/2b79bvffnfughfvj6ls2b51kn0/1692479857250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7RDrZ0fzYG0nNprUNdIsS7dx46T9nDqqHgly2DqUqgaunoqj_eZiK5RiRmgHnMhPDV74WVtZI5otj1NVAGolxakiYd9e6R1D8lqfV9ve-e-FOTpEOOwwo-9GpTtm7Yh-MMLpu52-qcvYqe9aQqPT7w5YwKSr8eHv5O22fz0oAsDAAEAE6BX-7nvyXxYMlq88-X?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Caroline septembre 2020 : Endroit officiel et gratuit. Pas de services, sauf une table de pique-nique, mais il y a un dépanneur au village. La vue est sublime, on se sent au bout du monde, et on l'est presque! l'endroit est assez vaseux alors j'ai monté ma tente sur la passerelle en bois qui permet de monter au bateau échoué.<br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/ba3uhimjkmcru9s6kmhvrjrbuc/1692479857250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4HrbtlMrw0-nmsE2gfRq328jDN90MevOgNeh9ji5jzX5iBYZmWIkNEc1lPddaThhZVDZ45t8CpJCHkKLLXze9yiG7dQvyxIgU_Y9JPbbofQmIK5eqB2g-LTBoxflAv0lhcm1t32JgZ2EJYDi3zgjFKd_4Flf1SIR31ZLCxTK37nBXDQFt6RbphN1X_x5fbVOav?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/tqeb7g47o4kqrn0cta687aolk8/1692479857250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6egVxKj3QskUmuj7EK3KJAG2s_-FXWohYK31IICvPmnbA9k26zb9Tq0UcEK-NDyGgVHJRLs7_HT_vqm-oM3xyposdLAhuVvH6Q9kYtzjGl18NuPSuABfaDX9lCHC0YUZFC1SCPcGuOOhlW_JW3Cqqg7msYs_gn_oOOPiHfcyv6jBJf7VrfiNtBv7wr1a19cwLa?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Point 191 au Brion"
-            },
-            "type": "Feature"
+        "properties": {
+            "description": "<img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/ss9shpdg537d7ns872s25lhll0/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PisnHI2YTWXgt3Nn0GEh-FtI7KGAT88Z7OYSv21r5cjHjhabLo82ICubYX3GX35iik1YgvvJFHLvrOexrDQaUptPMCBVn85S3QIs7Ny1FWYeGucF4sDJTU5nqILPtZKoijQbHK4YXp4ZGKMoJJmsB8GcS-BnsipD_5sy_CQfuYk-RVTEonkrqmQyKzKHuUCH4sr4?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>.Beau secteur boisé, en bordure de la Route Verte #1;<br>Comprend suffisamment d'espace pour 2-3 tentes. Toilette sèche à proximité. Pas d'eau courante, mais rivière à proximité si vous avez un filtre.  Village assez loin.<br>Nous y avons campé avec bonheur le 5 octobre  2020, à notre dernier jour de voyage en 2020!, puis une nouvelle fois le 18 mai 2021<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/hc0p23h80nkjgno7vtahepvslc/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivmwpFBlrk_qwmSaWlKfB8IRZwNkTA-OC5iaZQQYh-ezmHzWw-WqpuIWM56H7Qqvc4xyBSh1hcVJjUEP1MQp6qcfgypXpUjy1iXdZ1zUy6ICHuL29QYKKcjCRotfOTyLkVY3aYzN5q1oIAzMOc9kO0RK4t1t-z2eBJvaMo4uQJCKLKRDCy4X2E0ig2nSgAnZM4B?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Boisé Von Allmen"
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.0593175,
-                    47.9468237
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/7vs0nsd3hsmaot7gbud79rt5oo/1692479857250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5iSxuOwEZ219FckyCCbrlhSeqOv6cDooFbQ-1ZxRwkqG7q113LzWAUDILpRyJC3n59Q_159On_V9t9BiVB2WMsrK8gt1OmTaukrr57FOr8TLy2A_BpmkpDLDBAoaB8_UxRkJCLXcgGh-BsSvzMSJ64T3GyI7iKbn25MHoPI53AajP_s2AXHSk-TU7WUe7h0oqU?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Toilette, eau, table de picnic.",
-                "name": "Halte camping Lac Deschêne"
-            },
-            "type": "Feature"
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -74.3795036,
+                45.580445
+            ],
+            "type": "Point"
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    -71.912138,
-                    46.1104286
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "https://camping-plagedessables.com/<br>Établissement Bienvenue Cyclistes selon le site de la route verte<br>Note de l'admin : seuls les camping abordables devraient être indiquées, alors que leur site web indique un prix autour de 35 $. Est-ce qu'ils offrent un tarif réduit aux cyclotouristes?",
-                "name": "Camping plages des Sables\n"
-            },
-            "type": "Feature"
+        "properties": {
+            "description": "Dans le boisé du parc, on peut y installer des tentes.",
+            "name": "Camping rustique, sans eau"
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.3212158,
-                    47.9729138
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Possible de camper près de l’accueil. Bin marché, toilettes, eau courante non potable, possibilité de prendre une douche au camping non loin.",
-                "name": "Accueil Zec Kiskissink"
-            },
-            "type": "Feature"
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -64.58537,
+                49.0901
+            ],
+            "type": "Point"
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    -64.6976721,
-                    46.5359556
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/i5cvun4ml48id6op2aojpm5cms/1692479857250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4edNs9ivUwU16xv3cty1peKVFAV7NT3uGrhBlnYB1iiutULp0tzuvK6cMlDa2Xcj1QrJ2_dsp2-58cGpnnxCbVnqIP2SmOpuFVUoT-XdZL-fF6KEgx2QaAOsUFoMjAwjRQQar8fczXnQIMQnY033vyXy9YV71xU1fbp_L5ulycOM0VGW1yhLegdmQ0FFA4D2QF?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Spécial pour les cyclos: seulement $15 par tente.  Avec douche, toilette, abri pour cuisiner au sec, tables de pique-nique, eau courante, électricité.  A 5 minutes de la Dune de Bouctouche, magnifique aménagement de 13 km au milieu des dunes. Nous avons dormi sur ce  site  lors de notre passage à vélo le 24 juillet 2021.<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/vhb0bcbbog1o0ca8ri62eqo8mo/1692479857250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet49Gr_blTFATdbs4F19Nnc2P33iqvC787tjUo6Uq74kcCa0zZTqssaQbCrwuUKNrlFl3BpbavwDY_CPSx_M4L59jV-2-vFFVdAfd5kO98ntRC3zFrXsdH9UkuYXhtPkDoliLe4XGe-vVl9fX5sWa-2lC2Ow21yUyfp6nr8mewqnb_NV_uJ90gzNxMJtnIYn9X4h?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/n9b8ihk8r2o32u0ta6qo8tanjc/1692479857250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5XY7UWp2HzDP8RKPmIY73uI7dEn_66Rn7lJxZOsvGIF40bUpus_qfQastnnBJaxTi50wY4d2XPN2QpJ3kJNNFaC3IEbz95_OBF-vS0m4A0Kj_1Hs7ymygsG3YeIRcAbbmZv9S2LKym-oIO2vgCrSKmv88tszhuqiUwScOm0j8Xk39cyBnvPiAzaZjvE6eMI5GR?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Chez Maury - camping à la ferme"
-            },
-            "type": "Feature"
+        "properties": {
+            "description": "Note de l'administrateur : aucune info présente. Je crois que c'est un camping payant mais peu cher.",
+            "name": "Camping Azellus\n"
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    -73.250044,
-                    45.2886655
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Centre plein air Ronald Beauregard. Grand parc très fréquenté où il est permis de camper (il y a des VR dans le stationnement). Ce serait le paradis si la piscine était pas un danger bactériologique (elle est fermée et la pancarte le dit). Toilettes chimiques. Il y a un marché Richelieu 1 km plus au sud sur Jacques-Cartier. je ne suis pas resté pour la nuit (y'avait vraiment trop de monde pour mon besoin de solitude), mais c'est faisable.",
-                "name": "Point 19"
-            },
-            "type": "Feature"
-        }
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -70.19477,
+                48.24008
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "CCamping très abordable (10$/personne avec places toujours disponibles). Wi-Fi et douches gratuites.",
+            "name": "Camping de l'Anse"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -76.5552884,
+                45.6875973
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/fje97cf7l552u3iiji5tl2ehh0/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pitn8KsZpkm0vGJYzkxCL0LW0S_IlfqM-uZxfK0BjZBXIHErXVBjrzKQj_GPgCmKXzbXDWupgBPPJeSHpO8jvuyOOLXAFfoPGGfvJtsD7m9XRkm0VTdpjusaNUkg_ecJPfR0kepREaIdt51Y9LsUfdT3zTdCtrL5M3GxTD5uOrlcxtXuO7zYzmuZcKzdnrHfK7NF?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Note de l'administrateur : je l'ai changé de catégorie puisque le camping semble officiellement permis aux haltes cyclistes dotées d'un bloc sanitaire. Ce n'est donc pas des sites non officiels.<br><br>Il y a enntre Fort Coulonge et Luskville dans le ¨Pontiac, environs 5 haltes cyclistes aménagées en bordure de la Route Verte #1,  avec tables de pique-nique, abri pour la pluie, toilette; Toutes super tranquilles!<br>Sites visités lors de notre passage à vélo le 3 octobre 2020.<br>Hélène and Normand<br>Sainte-Anne des Lacs, Québec - Canada<br>rikimiki@me.com<br>tandemetcie.comhttps://www.crazyguyonabike.com/doc/?o=1ni&doc_id=15622&v=26l<br>+<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
+            "name": "Halte cyclable, Route Verte #1"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -68.5494918,
+                49.060829
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Caroline septembre 2020 : Endroit génial avec 3 plateformes en bois et de l'espace sur le gazon pour mettre une tente. Toilettes et eau non potable sur le site. La municipalité laisse une boîte pour les contributions volontaires. Visité le 29 juin 2021. Super site de bivouac. Contribution volontaire.",
+            "name": "Point 186 Camping officiel gratuit"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -64.5020407,
+                50.3034681
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/7gv7tc8sfkvfefir4mor93bk04/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivCfy0buxcBPiWLE9nvZn-wXrUWBcfHontfJoji0LxOINaJwVfYU62ngjMNgURRKDRovxKk7uzXSJvHzCd-QsqD0alx1AploUCjspMT2X1dutOcVTPy3hHZcb60oNLNyr4YX9lo-gsGZD_am9o8x5NjcUrUPny8XXBGPENSVLG85-JlbA_O3Ni2-9PFKYQe17ta?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Caroline septembre 2020 : magnifique vue sur la baie et le village. J'y ai campé sur l'aller et le retour. Il y a un sentier aussi à partir du belvédère. Une boîte à don est laissée par l'église pour réparer le toit! Toilette sèche.<br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/pcsj56uq9egqm599pmmvvd203s/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiskAB_92fDlBBh5ndWEiNqBPrx1tjj8jNrSsxYjaJ8J8SRpvjvulCu9ZRYGNFNrOgK8-s6xvnAZ8gKGksBfyKepVPjCnPI8MqTh1EiS-aPGkglXA3ds_oh8zILYD9BGcUc8i_vdJRedHy1bch--MufI-WOh_VWwaFJAmde97PDfDYHi7aGcar8hK7XJzFWsQANu?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Point 190 Camping gratuit officiel"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -61.2690757,
+                50.1776034
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/7avpjcmcivfu0k5m9ilnnr17vo/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiugrcPgZ7GJ-eJ7ie4wisVytdQBAUchKMCKMMX93qlih9LIyAOQUe119wcHU3Cl5yaCjkSOBACvvUzIrtwnIi0jB4-RwSnp7OciyLvb1bqy6qz4GGwVlFe7Qm_wCZSwbv7wfGn0k8gj7g2VZlGzB3hWP0HlL-Us2tZ1hQfw654ssn8zUIW-UDQeAb-QWe9GkL5l?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Caroline septembre 2020 : Endroit officiel et gratuit. Pas de services, sauf une table de pique-nique, mais il y a un dépanneur au village. La vue est sublime, on se sent au bout du monde, et on l'est presque! l'endroit est assez vaseux alors j'ai monté ma tente sur la passerelle en bois qui permet de monter au bateau échoué.<br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/jr2o5ioqbch02thmg3fej27s8k/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiunLHEEyiqP9Fk9nLekTAQaWlY64JQJhgZYlkX7ziT4cJ_MDrAVOzyzB4QVie70GuySib98F_JfNMAcYi22FR7_ToD15uOUSZNFgYCCimeHzaAm1Na1Z7dZS7gep_jpvTdMKUsgO4fl6X1Of7e23eaCW4Ll18KzWWlzWVwjBggdufBbALVpbIknD5BKFot98s5p?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/ibb5lgit4d7dds2tki2vvub3eg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitnkXuFVNQ66HwGYSv_vSCGtUPpio7NKI2159_K7umh790x-TUDJiwV5i5DLV1B6krQpgZom9o0MY1laytaO7Eida7FWq_znd1LB9xJNbBqk0p2QyoF4DtgHLF7Y0PVJ4fqAkLLLWTaMOiXupueVkCBKPrHR0_GNVmt9o-Pyh13wvLIBVNhTsVJgiodxsuCtDKM?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Point 191 au Brion"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -70.0593175,
+                47.9468237
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/vu4c76ca1vq3hc6fassbt098io/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuDGM19hEDFfNi2E5BfAiOLyJ5tjv1vhb63bFKcNas48rgwTE62XRFCtDrOE_r7iveJIAF3MZOufbZRPjpYzoM2OQji-yFIwFXkhb2EvwuEfEaTfFuwywVjr0PNfYlQp9oklP7eHrwI73AK1rrmIoH2TtfKVLKTfgTAgg61jJ1JpYs27MA99U3q8IYN-sSM35BM?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Toilette, eau, table de picnic.",
+            "name": "Halte camping Lac Deschêne"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -71.912138,
+                46.1104286
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "https://camping-plagedessables.com/<br>Établissement Bienvenue Cyclistes selon le site de la route verte<br>Note de l'admin : seuls les camping abordables devraient être indiquées, alors que leur site web indique un prix autour de 35 $. Est-ce qu'ils offrent un tarif réduit aux cyclotouristes?",
+            "name": "Camping plages des Sables\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.3212158,
+                47.9729138
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Possible de camper près de l’accueil. Bin marché, toilettes, eau courante non potable, possibilité de prendre une douche au camping non loin.",
+            "name": "Accueil Zec Kiskissink"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -64.6976721,
+                46.5359556
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/778jao8r3qdhmpa1qms12kkqek/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuUmczbuzgwoupnWjpchEtiAnw8uq1O7fowMJuECxlVtBZUVukfAWV1D2MY8Wxn_XvRyFpYzEkEqp0pD-KGgEomAQKgjCMV_8zdx3KE7pG5P4HEpG2pmuTeuHfptCgLt_TaiVj2HkDfx8H4a60vRz9FNCXywBvVYbXjv0nvMcN7gviZLeM0SQ8CsAWCDdSN8RTG?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Spécial pour les cyclos: seulement $15 par tente.  Avec douche, toilette, abri pour cuisiner au sec, tables de pique-nique, eau courante, électricité.  A 5 minutes de la Dune de Bouctouche, magnifique aménagement de 13 km au milieu des dunes. Nous avons dormi sur ce  site  lors de notre passage à vélo le 24 juillet 2021.<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/7ni776ibb9tgvs0d673ifvuvps/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitAxYuk1-cdkSfnuZjCSPEXQrQrxzyET4o5jFIgXJXUZXgYHhK0vAYOEr7kg6UphYnDNqaBJaVlUfuvtAIHJVzDB17EI-HKjps971bqSguUzU4sYwf4D7-zLLyGQJ4yYVsUgsNC6JcR-xAZZqtYlQjJ_MJsHuiiw7hEPC-S8JWdNriyqNJzerUpSo6ucuv0q3R8?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/u9ikv34k5ioqm37veml7rgvdv4/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pit0u72oxyA08a7UShAEzMVZYN4PPZMDYVXdEcaCuKf9mrIWNNBqqdH13aPx5ENO8qf9_ZjYqvd2zGIrb4WZAHTg866Jfs_9ydUMCqJEF--CXW7E07w5NbWyvuNVVuqxsGiRS8ythLJu8njBM99MxO6__A6RVGnPnzKZHviLZL1I1Qk6lTO60X-rSDiXwrT4e_Xn?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Chez Maury - camping à la ferme"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -73.250044,
+                45.2886655
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Centre plein air Ronald Beauregard. Grand parc très fréquenté où il est permis de camper (il y a des VR dans le stationnement). Ce serait le paradis si la piscine était pas un danger bactériologique (elle est fermée et la pancarte le dit). Toilettes chimiques. Il y a un marché Richelieu 1 km plus au sud sur Jacques-Cartier. je ne suis pas resté pour la nuit (y'avait vraiment trop de monde pour mon besoin de solitude), mais c'est faisable.",
+            "name": "Point 19"
+        },
+        "type": "Feature"
+    }
 ]
 
 const proprios = [
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.80693,
-                    46.537417
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://lh3.googleusercontent.com/umsh/AOq6mzoIo6sUhsS1hypSGNfamjEewEW5sDQOt2fulLqAhDlCH6I84W-AUz-Y4wEXcP33eSkMGpC5zDLFMlSPTUPCT-hYgNdQgXVsU-6ttNbV1ELIs-N8TASuguQdaZIfzVtPHFL_XAoZqRKcjYyszbQN0ixwBwkKwJdY5FB0LuD-MBgKMt2V79H9qx0UaKcerUPIQ6dsfHia-JAxJA94R_rggZCWXnba0uZAGrMtI4zUH64HD36nm4JNG5q9p070CB2DuwKFX_2MrhfXiPcHH1Tdzcpi14EFJHyS_kLKFoBner-WNmdcgQbYBjDMcVanC-p5HozzY03OUVRoihN_NQVQwMKk_Az6lKzAENPybRjO5c2-KRjn8alL_Ql7i2xs51ucfjbs6APbYpWK7qX_dMbZyyc9nV_zIpDhO0GJUty5KqgAM7tTQEKVBpmkiG8stmv4V5Fd04PUtQOnJZ97FtE26P8nn5sJkYBdN9_AQygu69hJU2ZOqj8LXGnyykpHNrsk4TcZAYsipfJj7eMjKJBQ5W2BtXCGuBlXsaIbPPuh5uhoT2LQ0UHzXXQApK2_wRO-wPq6xSlFA-T1lYnLtBvDA95ga15VmEe9hYWePMnup8Rzeqr69aWacQUR9gQfnsl5gyrWymOubH_OLUuOD_oTUEqww3SvP0zxsqjJYlfm6trepbbLr0dnmtYJUdvWa9mVDolvnSmaaNW1UZKjBIm3efsSQevsNP3dtEkzirrQtVE820MFcxRYz0rHaBbdokmr4iFSOmDXT9eSedY56lywfftMT9-cF9qf1in3hwfGoE_Fvf1Z-ySu9AQqufGtRBdl7UwOqGug2MkVe2j3Ov2SMgGcZoXdj3AzpN4nL0irVkN31ZiizhQ3_nuM4uNBkvNSn0VoCKWfR_84wQ9NqEhWPvBwHgjA_2J7qy61vNFHKbZo3kx-90RdyB6nPF2I52J6Q01LESnUeEpa2NQXsEZMy34-qNj5gZI4akeLH3UjV411BUsIb_WQt8uKbuHVAUipoYRipFltOcOj1cvFGCKPDwfE61my6t75xAssov4\" height=\"200\" width=\"100%\" /><br><br>Le camping est fermé mais le proprio accepte que l'on s'installe pour une nuit. Table à pique-nique, emplacement pour feu. Il y a un abri avec table et toilette sèche habituellement mais ce n'était pas encore ouvert il y a 2 semaines.<br>***<br>Ancien camping de Saint-Malachie. Il y a une halte vélo avec abris, tables toilette.<br><br><img src=\"https://doc-0s-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/gtck8s25prgdmfs8is298eg5tg/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4Dpu4fBSqbm4PA6qSdnn4b__xRx519d6Rtei9BcQsVdCJglkxLF906QGg541vDVuYZYwz5SRqLUsl3Y7hLdW7xquLZgrxCrr5gR5tGMmpWtFCh05hsy9kaPj2tlixEvvu3Bo1ZN-tyAmXDUGXNt6zCyDwrPA_sc2CBk4zmxS5YbPBFU-o7eoAq5BNOrODEKhY?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "Ancien camping saint-Malachie"
-            },
-            "type": "Feature"
+    {
+        "geometry": {
+            "coordinates": [
+                -70.80693,
+                46.537417
+            ],
+            "type": "Point"
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    -65.48198,
-                    48.03765
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Après un souper ici, le propriétaire du café nous a proposé de nous y installer en arrière pour la nuit. Quel accueil chaleureux! <br>Les repas sont goûteux et les croissants trop délicieux!",
-                "name": "Café des Acadiens"
-            },
-            "type": "Feature"
+        "properties": {
+            "description": "<img src=\"https://lh3.googleusercontent.com/umsh/AD1GIHPCzl3bHnL_d7K3yMd9WBWb_ZxwcPg_zJI6rEgTUmdpnzqrx1bCB-0pCZCOG4w62rtLcKBmyjf8Ws-JAeCx1wfCRYYvhUmrZKzjv7qX5gYVTPzmptXbYrc8p18w6yReX33L4OxbWfOfPH0waV-KC-96j39eUuVU5WURMcYIRT717efeuNtiItYhge1ZDTYoePCJ-aH36GTQa5lb09gp5VKrFYOqQBYBRfgpnHU6n26jd0DbZ9wXTijHFKXY6ewf-3lJWMYfHd3r5Xbcr1qe5Qp_DbS_TnAw5MznHQv6h9S4JgrcmoGaTMGstSmdP0bqQKe4PYRGEhk2zLsXKxv4YUQ5cz3LiUZvjQIlNV_14bRfo2rdr1NF1dyr3UdCVPL7h4bkO4JopTEu6ozAgGipebJHwfW_38tNo9FtdB3uccg57bkc5Z7A6YNnLHvqwdAqLxF1P43DDE20Wbvl_rSX-LSjIhMzrkpj4xogNiW-2N86ezVK2_kAVEoolq9ZW1-1EKhRuQZgQ1TqD6dHlEpzvXNHv38wiqxzPl-Sy1-Xjj0qqj3vtjAGUd5MyLLJ6espoQmXLt9HilDwi_ovOKXViYp0krnMG1PTVmeWU8VqNVV4LNiv5xzEKKi_q-PpK0gW3ikrYAYJAPkMvfXqsFLgNQT7y7auxkVTrPRph3ZWxjHTmhNnFZ3iy4tKhJOY3UKcFc82VK1OJXmLb2odYttcB0P1sNP12niDIjQS836HU2ku1Lp1BF4MpQEZiM5hLv1lJwlyh4H8-xFgxvdhb8pGbmtukiUdpD9LaJktCjhX3Yrf9fOzZ9CJXbW1uzhJqP9dJsFlqu89BKvbuLNuASWlT6AUj2zHCqvMkHiH6zAI59V4MWa1K3t0dk-NvAWpAjY9QETHDoIRcY-mS27Eqk_7RwCn-Hsy3CXdrEmHgJbqV2ceusfF9q5BJAxDuJ5AjoE8OrPdihYezfklS77yUjOk35nzVIo8nat0Z8UmMPpwbyXoEzSQNW69joAnMDUFFN9eAaIXxgkrkBFUKBloGywyJcptp04wdZPQKknJ3IE\" height=\"200\" width=\"auto\" /><br><br>Le camping est fermé mais le proprio accepte que l'on s'installe pour une nuit. Table à pique-nique, emplacement pour feu. Il y a un abri avec table et toilette sèche habituellement mais ce n'était pas encore ouvert il y a 2 semaines.<br>***<br>Ancien camping de Saint-Malachie. Il y a une halte vélo avec abris, tables toilette.<br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/tfggnsqtadgcjcsmjumoi2ja40/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivItMnE66h7p19Z-CL9zUJdP8HeuEh_MWVCVA2wOB4hGJc32vDqf5Zkl1YsPIe9YuxsO-P09jrR0ZWnhCrak6TaD1iFwqpo4rz9nmMDFrKi2Rigc_7LF7IJG1QcVom4nsFX4ylCt0S2cEkrdcMoaWxMEcZeppKfTpQN9nlEqu2JJ9kBa1Uya1VOG8sw_OCQN9U?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "Ancien camping saint-Malachie"
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    -76.460893,
-                    49.403251
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://lh3.googleusercontent.com/umsh/AOq6mzoeipWAxwsbPcGhhUzYrbnOlbHx2vdKRpOBfLVqMKvyQH_6eM9bJs_6GPoaL86f5UuDM6HPjUhcTNk_VNxfqYWR2RjiU6mR0JdoJobHrhYkwG_0TaXTHp_cs1bV2Sb-905iOqnEu59Y91AFtg69-CkNJVrQoyv41D42WD_kTgPTZN7BEG4dbw6QFJJkngPU9q7jsOeIu7QHEkA-VhYMKVs1h1PizFiAXLret2oeH6DxAANmKnoHmR7Dq6YZKRCJ4cOEYGVOHB-t_mxLcAOqNulbwxsgun9qsCsI7sByNZLjFUNsNScxgI1ubuwuvmbRTX5oLUaeKm03NYMWkGKK10CSuEzb4HXDhgdYjeA3kVZbiqgnTbFAxZz6ij7Gqpzy8Zoj8foKuge_bYPt-00jsZAap8K61p2bR3sAjkQpdxyXo56HOol9QwIGdr7RQd2uVG9gmsY7JcLvhnVyBs7hgs_4uPulKDMoU0EshVat8TDBPPtSFhJMiB2ZjngDJsUeMIlATFScxJ14jEDi7PFhabV1VOiX-0_tsoXD4WTQIdI5rZ6YECrtGjttfJr5wviBBXUW1BckszDWvAa1FYXaKQ\" height=\"200\" width=\"100%\" /><br><br>Pourvoirie Miquelon, sur la pointe du Lac Pusticamica, dans le hameau de Miquelon<br><br>Le propriétaire permet gentiment aux cyclo-voyageurs de camper une nuit sur un terrain sous les arbres, à proximité du lac.  Espace plat, suffisamment grand pour plusieurs tentes.<br>Nous avons campé ici avec la gang de Echo Explora le 22 août 2020.<br><br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br><img src=\"https://lh3.googleusercontent.com/umsh/AOq6mzoRrq_ehYRrfVHXnWEJcYKV3gPq3V6xlbbdjGkvfCH3VTmb__B9QDw5voTTrYtLCp__YHEkG8DsIYMgnbGkvOp7zI153MgwLHpsKICqiTgeJfzVMmHoeWSHVBNgqMw7vcYLiVt8K1qRUvQ5uiIF4AQWyz8mT32zmjiAhX9DdJzWR3NIgCtMr5eOtbjARznhAg54HC201AwtK6eFtiEPPj0I0lCfE0JK_iaulWH6ovQdl9MxnXIZvpJPC1VPAvWIyfv1EtXoHjHa5wXrTk7M13tzGbUVI_mD5k3ARDMoQzAlap7U6-4J4sJXyb2Z4KOXoDjGnpc6l5dM_OwHokQ0LQvhF1JMclQlwmPCBpPUHY4qfmdd4EwD4WQSejNrI4YiWHHrdVOISnjaoOe0_C_PzosV3adVGDnZil-eRCkQjCD21yH6jDqBdo6-V6HpodiYPbGQkYr3Qh1872I11QKPT4XwYSUxmjQOnEmTJkYnK0lPGcfuRfWTIwg2hYcp-MX22T4YgOLbSzh-03k9RBOOVsSfl15B-wl6QFjwSMKzh1OXdsIl4_zH5MZxMtJLB00NxkwHtpvzwqr-vOo4HiXt\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://lh3.googleusercontent.com/umsh/AOq6mzqdY2h5uydpvQradFk4EPLIOlPJTa6-U0r7z8LHJRPzbORkk_p_oJOSKHsW4P3mx982BcE9RCqb39B1K5NsWuHzmm-8RpLa_8ySpqsDx2HG981Rqp0e5xdPsq_Us4iP3JVq4IFUg2-DlfQITLRbHtTn9awbDuI4BbCA_tYt7AG9TFHM2wng2bJRdi5Z_iV1ONsOHbam7Vi0Pi5WgiznceMvnehLK43O46O2C7AmnG5mZgr_Ybn6-J4lO9kh2MJHMMnASmHfvY4AuiCEVWRNklj02d224mKefUUT6prbWao5SK0FtMuXNZHiW1qs1mEIiOXvx8rdUBksFnalBwV6loxFIyQwNd1XNdADogT775jy-uEkR9kpbXQSVpJPHmRKYdYJ3xgEBgxscTRHedTfk1jhlzQucGMDf29QwZnotIEhwWcFiXyNIawQvDZXaYxD04sYwcgbzQu3r06dYq6xXx-uqUWBeuC8fcMvn1GQWJVQYKw1AGLVkJ1HTdlOevyP2EFnJLLLbI3g2r1JnwoWvA2fx-hWxuP_wr-Z2oosqpe9XZXfmHcuwgmHnnvBpdZYznCJ9VMxMSOgXTk73z2pTg\" height=\"200\" width=\"100%\" />",
-                "name": "Pourvoirie Miquelon"
-            },
-            "type": "Feature"
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -65.48198,
+                48.03765
+            ],
+            "type": "Point"
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    -73.242832,
-                    45.550787
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://lh3.googleusercontent.com/umsh/AOq6mzqhqurkGfpKXlb6ttxbduRc01dsugygkFOs-m1rjxDJyHX3E3AA8bXRYUiKf5ElOjd_zw4_x9EhwCuO7ApPTM55Dvgyqx8HGYUKbzQwYwKdVHetOPSqRA0Va6tR9GJU0XhMPB-Wkg3UNIfPreyqPQmYXyI69JtetUHDuf3EXKHxTCVQIrC1VaP1ff5G6kVJSKYtql2UTlU2CttbPfJOVvAUa4L-8fwKcVcJ3pUx0d6PKLUthZICWdm_03zwxtss-M5qHWO_dcBuHL4rc92M1SZb27Z6i-YH3g_YCA-8HWDBPO5qeqvz2f3Of0Kvk_sBVzpvx33eWo5-BzgLzVQnAcwRRcOF5yMz77dblnnymE11EO2em7w_QlxVseJ3PsNPDAcPzGqh5mgah8bRYP6F4c9ZEZrVIx1Q1kSyItlVGS0H3TuAHdUY86CM9DqZl1bERqaiWbeVo_hQAdHsFMBukR-eep3MOjuSHiQPxU_SVWC3xxo6xy6JmwK7gFJYaM_8irvgG8QhgA5eRxHeO7NBeNse78CXkeF4aj3Q0FpQsHeZA6TI8xI5Q27QJ00hdDlbG48uqhDHnt4Pg7y8kylOpQ\" height=\"200\" width=\"100%\" /><br><br>812 rue Albert-Leal, McMasterville. <br>Contactez nous par notre page Facebook.<br>Bienvenues cyclotouristes! Résidence avec piscine, spa, douche, garage pour ranger les vélos, cabane pouvant coucher 4 personnes, terrain pouvant accueillir tente et bien sûr eau et hospitalité!",
-                "name": "La famille aux 10 roues"
-            },
-            "type": "Feature"
+        "properties": {
+            "description": "Après un souper ici, le propriétaire du café nous a proposé de nous y installer en arrière pour la nuit. Quel accueil chaleureux! <br>Les repas sont goûteux et les croissants trop délicieux!",
+            "name": "Café des Acadiens"
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.977199,
-                    47.008613
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Note de l'admin : merci de mettre plus de détails!",
-                "name": "Point 7"
-            },
-            "type": "Feature"
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -76.460893,
+                49.403251
+            ],
+            "type": "Point"
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    -71.384272,
-                    46.675512
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Maison de campagne situé à St-Nicolas (rive sud de Québec) à 2 minutes de la pisciculture Bernieres... vaste terrain près d'une forêt, jardin d'eau, grand potager, accès à une piscine (non-chauffée) petits animaux de ferme, accès à de l'eau potable et douche si désirée.<br>14 km des ponts de Québec<br>8 km de l'accès à une plage au fleuve à marée basse<br>Contactez : janieblefebvre@gmail.com",
-                "name": "Maison de campagne"
-            },
-            "type": "Feature"
+        "properties": {
+            "description": "<img src=\"https://lh3.googleusercontent.com/umsh/AD1GIHOAi_7kh0v7X5y_nCkYwMasCq-O3SBSkzpzZQALOvJksyaC1TdL4zR2cUTgZLSmoRybe6e1l2qCFRKAIU60MG5ZH8KoDTVmrjZ0viKO139go98TGqa-SnxAUjsfZHaOz18Rn8pf4D7xKU3idNXtuWJYcHPrjdw0akcAEWMf2EkYCwiuQP8pJD9VhrCU6Fjt0acdlTAu_4iqh5AUf6-LDEGFQw8jUZgdd04Kg76-nfnSaJPpXtygs4Tk5sT5_Hzv7goClMX0tfnJZFQPMrVmvJxXnZm8LIwkew9e2pqlLDDIHLBTt3QI8B_jtgTWMKrIkTBLh0yjx4sF8H7vFsswa17MZJxOwxxev_FS3GKQXMR538I6LbseQUxVlVoJ4smxpZgmxDPeACWUQei50BMkR4Ar3q73S_mxNJcMAvL7CN_z8nooRYJgrUAYAB_MacIy0SDc9enihufdUj5h9k_ul5Zugop-WZp9bwxRYVu7XcLwTFbWqcWca3xKTUT9XYh_g7kb2zc5NlKpXXGs7eSQVFJawc-m7tAZ0NOoRlGt7UN9uv55s0UBpgm9uJ_W4nA3zw4jd-EjvrsfqNejcDFZqQ\" height=\"200\" width=\"auto\" /><br><br>Pourvoirie Miquelon, sur la pointe du Lac Pusticamica, dans le hameau de Miquelon<br><br>Le propriétaire permet gentiment aux cyclo-voyageurs de camper une nuit sur un terrain sous les arbres, à proximité du lac.  Espace plat, suffisamment grand pour plusieurs tentes.<br>Nous avons campé ici avec la gang de Echo Explora le 22 août 2020.<br><br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br><img src=\"https://lh3.googleusercontent.com/umsh/AD1GIHNlavGCY45fbjupz__3VKYHQoo3LdSqOkywDcqUInoZ3yE1ywZM40ef6tSO07x0tGMDeaVy8i7fwQRUnAVgRQSy8DutHpfcDqkqquiwaoNE-YpTCdjO1J8SsA3jDatZxiqkn4uOeesq4seNtL2c2F9NMwEOYzufgAvU2WcpEXWD_Iwe90rkthG4fEoB7nmF-G5qQZjvoKFjPBdYvYtMCv3hvbCxfJ4PAvXQd6gBXOywILCRqADN6aFUc6oAnq4rmO9awNSRZyjUi3Bz_xJwK8RVOh7jvHEHXdM3O1ZLiadYrXA9Ir8LyQVHeFB8IS-65uHqUjMhYlGYMc0x2AnIehziFKDqOwRoIXoeJICGCVAuE8WfB_pC9R0s8tO1ICDDBG1sjIMQNGasfocXZUWVbe2uA7QoJ6cRVvaY1SzP5CZRIxocqLFt57hRNxViyZVdRevTewPXdJeCrLLVK5RZZNbV8B2BXNB8WoIxrqyh9VHJmCuXf3-afJ_rzAl0PnowYCBsqfoRBSpXVfCQGyUuBQn3zEd3HawKljr3hPFCEr6GKzhua-KWgB6j_b3O7e4gUtgaQq0ayO6KSfJeUvfw\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://lh3.googleusercontent.com/umsh/AD1GIHMLppujJuAjLnqtpQ0GCG0lnGLkCmhd2k7j-0_qTWrIz3F2dxUr8FrYAsiOp0WSOLERXkwOxMe0w8WXAynpnBbHDKUiBkmOyWnxj7uQVtK8SQn4itLW92g-Jcwjw44MxaKOXmrOhFzTqTfslN7PlLAMcZ92vmTZewXF1uHtBXcq3njCPQC6FcSwyUijntKtxR-CxGSv2i-FQ3gM_-CySHrONlSLRqgHPLExDljnVwf1wBotNilwzh5WO_SKZhuri-s2aPbgOsbkQS_1xyYACNR99uZRCOAi3HqvdXwZRwAssYBPx1Y2YOP1s3GnzZZyVnI0-kn42WwRiWdlYq3nDkFyyKle5PnkoByYmV9yhPuG_-4kRU03gwSahUwbI0ZVTpbcPqc_svbw5fv6XiQv-e7uXYVGIMxsg87SMeNBysfsmJixcomdenZzETyRLxodiyubt__b56llxqgCUL5KDp0gmG3kT618REBU-6XzXGTtJB2cb4AbTF24leUR1pN1k4V_ZEGglbImUBvK8Mi9vPkcp3Naw1FUBU9nvBBUNtTwPyxAPmzrEiCl50fNQ6jdcf45yigOUQR1QEH3NIeLag\" height=\"200\" width=\"auto\" />",
+            "name": "Pourvoirie Miquelon"
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.683238,
-                    45.388266
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Grand terrain où on accepte tous les cyclovoyageurs de passage. <br>Idéalement appelez-nous : 438 725 3787<br>On offre eau, terrain pour camper, piscine, garage pour ranger les vélos au besoin - et idéalement on se partage un bon repas sur la terrasse si c'est possible.<br><br>On ne peut accueillir du monde dans la maison jusqu'au 12 septembre - mais vous êtes les bienvenus pour planter votre tente.",
-                "name": "Chez Yan et Laura"
-            },
-            "type": "Feature"
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -73.242832,
+                45.550787
+            ],
+            "type": "Point"
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    -67.453608,
-                    48.863914
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Petit Matane viens piqué ta tente chez moi 819 919 6595 par contribution volontaires",
-                "name": "Point 224"
-            },
-            "type": "Feature"
+        "properties": {
+            "description": "<img src=\"https://lh3.googleusercontent.com/umsh/AD1GIHO75AzkL8ik5YPIb2f6zksx1mBBvpfLM6Dd4-bEX0ZYimxdXtYSVbKOlzTXJ_grjSmUNXIL_OHBVf5C-o8N3y_lGyyj7xnfxwX50mCKjeG53qucAakGHRu4QcNamymiWiFrtGCYTx_AWQ37imi3q_RqwfQTn_7QPG7DwmvhAp1KqZXreSiTf_-ekxkY_naA-NK2gObLXQRbjnUuNC1vr8d4p-lvilrfcTSSKE05FopwcoiAIfAlI7prLCm-r7a-VJmq31ZgqFTdEBQPJXtQgqqxjSplDrLgcjqTWDs0GqJpN1e2PoIbFfLpQM7pF0D8gxob_Rwd4VCfpDNDVdpgzmzVH4dYJWq12jXHegUaUmmol8az9yC9Z2m7KK1_Bbzya51VnqDlmpb6Jx9D13iPdpBAG98d9-lpl1SCYqciteT29k3SmGHo0Bt5gvAFBrJJnXlWR8jFQ7ZedrrsHJchAlHrJSrHmzWV6i-EpZYXOkVLARNgXDbhYT8ZbO6M7TFU5XZBrt4AcJpmkQ6b9Jy7q9zVIKI0twMI_G1kv0dhl6Mb5HwfFH3aDQXs29p_8O26gEfxev-D74Z3qlHzT7A5vA\" height=\"200\" width=\"auto\" /><br><br>812 rue Albert-Leal, McMasterville. <br>Contactez nous par notre page Facebook.<br>Bienvenues cyclotouristes! Résidence avec piscine, spa, douche, garage pour ranger les vélos, cabane pouvant coucher 4 personnes, terrain pouvant accueillir tente et bien sûr eau et hospitalité!",
+            "name": "La famille aux 10 roues"
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    -71.6372832,
-                    45.7257903
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "Maison ancestrale avec grand terrain, table à pique-nique, emplacement pour feu, toilette à compost, étang, belle nature. Nous sommes aussi sur Warmshowers (Hildegund Janzing et Michel Bachelet) et accueillons avec plaisir les cyclistes de passage. Vous pouvez nous contacter avant pour un accueil plus \"organisé\" (avec repas partagé, si ça adonne!), mais vous pouvez aussi simplement vous arrêter au passage et planter votre tente, même si nous sommes absents.<br>Contact: hildejanzing@gmail.com; 819-828-0518.",
-                "name": "Maison ancestrale à Ham-Sud\n"
-            },
-            "type": "Feature"
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -70.977199,
+                47.008613
+            ],
+            "type": "Point"
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.694796,
-                    46.9437501
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-00-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/blu8ubnpjn2a3vog92eehh3rho/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5qgSt5dngZoVPm6av5fFDx39_eIEcNwq0iKpgwPEdHnUYFKgdGKwm7rg7oD0h-Dom2u0Q0rACildBCgbJuI7eNhjdV2RJVuWfuYlKzOcwXEd4y67_JptmeGxzqtfyJLfLxkm7_5xIKmAN3ub6G8V04Dk_aIvnupMXkyOt7zdHl70domfvgtQ1GwFMAOisBUd8?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Voir image.",
-                "name": "Bord du fleuve\n"
-            },
-            "type": "Feature"
+        "properties": {
+            "description": "Note de l'admin : merci de mettre plus de détails!",
+            "name": "Point 7"
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.8797445,
-                    45.4352974
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/p239qcco78k5mgg4uiglstu4dc/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6J-k7I7FWEJJPwgkOHhBghW7amipSc0GGVc1yJTZ_Pp82e2NGjiCHBVH78entLU4BDIDSU_2A62CIf4xQStJ_MPhiBqDPK7a8q_Ttrsbh__C80eoMhQg-uTh8Vt2trIUQJFV-V2TBsVxdxaK2_kPbnYkMpRkdV9Dl8fsU0q_Yq3OIGtjXlrWYlGzLgJuFIzg-7?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>La ville de Saint-Paul-D'Abbotsford offre depuis 2020 des plaques de bois pour les cyclotouristes qui veulent y installer leur tente. En 2020, le projet avait été reporté, mais je crois que les plaques sont installés maintenant. Le parc est bien équipé pour le camping (point d'eau, toilettes, abri avec tables) et le dépanneur est juste sur la rue principale. Un bel endroit!",
-                "name": "Plateformes dans le parc "
-            },
-            "type": "Feature"
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -71.384272,
+                46.675512
+            ],
+            "type": "Point"
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    -70.8286741,
-                    46.890043
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/ehcki0nf4da8ds4g0cav134c3k/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4hKA_UWM3ZPw1bzTkuZbWlQ33KeDJhpkpD5alI_aPvkvj1Mfa--Db5x0pNM4Gtvy-PTI_1jdH34W-ISc-NsgtWTT1ZF5jadawhmGlx57sE4uXp44PNpLNcl0Dlz0L540XGyECb8KS1p11jYPjkq_4VQeeBaSlYixtwUKTiwQcIcJtNPCRSOG7djdlDz9Z7RDM7sEP8c30RB4aYnQDh1p0lJWdZNSPxBpTudS0msnGkiPCaSA?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>On a un beau site de camping (sans services, sans traces svp), chez nous à St-Vallier dans Bellechasse, sur la route verte. Site privé, ombragé, tranquilité assurée, toilette sèche, rond de feu, plage sur le fleuve et en bonus très peu ou pas de moustique!<br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/dduvo9l1eve7e1tg7ddvrln6no/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet5F0CduDDFdJ5oca-rf7aT50iu-YRnnjLDMo75qIR-7SmEeNOtodUeO7v1lzM3at1IWamjJtLLmOXkTImsn5Q6GFHTZt1EUfgvMUPRTOezOrSOYF9ubw6nrs98ubqoRf43K1VSkyX9yX-ibs-45WmdkEbT6mOzdxAFsNCPaK4XB7-fC3Im2yKnVz1Tpv_HWQaBufEwXoHEFitgmEuEF6pop5GLeSAbvGeB0WbHCkrKx22RyVw?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/p8nj894c1njf77rptj2noao86o/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet4XcS2kLaoMHVsNPwZdQ_1gb3ptHagOJuVK-e4HzH1znYrY17lx_Bv4vgZGaHbUKtqIwSVw3PMT-PUeWb0TK9MP_g8d1enk-5QHl1Ci60c8rzfxBGGbs1FXKpM7Xsn7TEyhKSvyPln2e6oz2dpI6e9hM1JKL9Az-wOQF36xGf6wUS-7SIdb1m9TDDSyBXDMDZ8bBlwffnk5ipPuXK4yEO-NZLaYUYyRsWTgH0xBtI0nOt6gxg?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-0k-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/584d601anak5htoit1pnkk1fe8/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet57GouhvW9GFwGBSRUz1iQ6vm7bWEtJlgAUmPALT-KSCNoLsQNfSG98EW2_i6UkjJkt2Y6pcKhDT2dpztvgbhQMVj4JdzjPjSctvoDogL6xJWvkN9AQ0BU0r9xPOeagmkoxqVpcu6AmkkRUfO-ZWNl9FG_EYnPI5i1BuiMGet1VJtBSyxEvz5Xg1x2bkuvQbLpty6AS9dVCrfuZ8JIaC2t11IEGfA7sgH7cKLwMZEnTMPO-qw?session=0&fife\" height=\"200\" width=\"100%\" /><br><br><img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/3gd2p2agra5qda5knalqlcc77s/1692480156250/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet7X6aY3533_TcJ5WyNu_fEcCRjWUqifCPJXdrj-Tux7Ks1-L43gaHZGg6JSWrdC0Go_3pGkfXND6fidv1ZJEbGT9gRgkl35-iVjza76e-yRaBSn7GPaln7ENRbBN0S7IAK2A6Tr83mmH8BnsgeFkFPu17gsNm48SSVNd-xdnOmR3jFCQampsPAb9yGVhqgIyetj0KVzHzOeINA-sLKgVKS0poNEcEHw2gsJV2db7unZ0E_56Q?session=0&fife\" height=\"200\" width=\"100%\" />",
-                "name": "St-Vallier"
-            },
-            "type": "Feature"
-        }
+        "properties": {
+            "description": "Maison de campagne situé à St-Nicolas (rive sud de Québec) à 2 minutes de la pisciculture Bernieres... vaste terrain près d'une forêt, jardin d'eau, grand potager, accès à une piscine (non-chauffée) petits animaux de ferme, accès à de l'eau potable et douche si désirée.<br>14 km des ponts de Québec<br>8 km de l'accès à une plage au fleuve à marée basse<br>Contactez : janieblefebvre@gmail.com",
+            "name": "Maison de campagne"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.683238,
+                45.388266
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Grand terrain où on accepte tous les cyclovoyageurs de passage. <br>Idéalement appelez-nous : 438 725 3787<br>On offre eau, terrain pour camper, piscine, garage pour ranger les vélos au besoin - et idéalement on se partage un bon repas sur la terrasse si c'est possible.<br><br>On ne peut accueillir du monde dans la maison jusqu'au 12 septembre - mais vous êtes les bienvenus pour planter votre tente.",
+            "name": "Chez Yan et Laura"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -67.453608,
+                48.863914
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Petit Matane viens piqué ta tente chez moi 819 919 6595 par contribution volontaires",
+            "name": "Point 224"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -71.6372832,
+                45.7257903
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Maison ancestrale avec grand terrain, table à pique-nique, emplacement pour feu, toilette à compost, étang, belle nature. Nous sommes aussi sur Warmshowers (Hildegund Janzing et Michel Bachelet) et accueillons avec plaisir les cyclistes de passage. Vous pouvez nous contacter avant pour un accueil plus \"organisé\" (avec repas partagé, si ça adonne!), mais vous pouvez aussi simplement vous arrêter au passage et planter votre tente, même si nous sommes absents.<br>Contact: hildejanzing@gmail.com; 819-828-0518.",
+            "name": "Maison ancestrale à Ham-Sud\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -70.694796,
+                46.9437501
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-14-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/2epvilvtvetu1ld0ig0rug5ucc/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PivT3E9XcdE_q3ouj48YbyECMZpgPdSsV0Pwn4Q-oirWvfhVZxvjRbBvUU23fUPRc5Y_W3E6oJaP9gdhOv_pQO4utfUQntpgyheXIlSSSq_QRNi9iCWU_hQFkr6l5beDm3MEeYvSvsYMkgctc3nf4wkRYdtfQaaMzoMf_o0vkUn3PmQ-5CCITmMfn97WXXzk5ro?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Voir image.",
+            "name": "Bord du fleuve\n"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.8797445,
+                45.4352974
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/3n1v862hb4rmdr3qm3abgdifks/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiuWJXGsAU1d_WyYAmCR4zgTyeMYx4Nn6dJixklY6sol5lK7YbaVoxfkCMt9Y6tyRVXBwaLUkfToNMZ4zoXaDOgZJ9Bh42uCoGkyoAHHURRMgvx0c0B3BjeVeUC3LOYH8qyoj4UTMTEfjFJzsPRlrGmOpxmrsmBEQUzGUiKjwhOXL9KYTPNv73Ay4fBMDql1vmpy?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>La ville de Saint-Paul-D'Abbotsford offre depuis 2020 des plaques de bois pour les cyclotouristes qui veulent y installer leur tente. En 2020, le projet avait été reporté, mais je crois que les plaques sont installés maintenant. Le parc est bien équipé pour le camping (point d'eau, toilettes, abri avec tables) et le dépanneur est juste sur la rue principale. Un bel endroit!",
+            "name": "Plateformes dans le parc "
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -70.8286741,
+                46.890043
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "<img src=\"https://doc-0c-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/a2i0m16b6l1jarmjhvlq7usdbo/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pis0XmypLBju_OQQDsH1kQtAp-Hr2P8IAWP5odxR2hoSypQ67kJel-8t7rbHK66KV3rgjp0p5t1AxIsJ3kBmvTmDhu5R9xn4t_CR2gcO1vGWLt_hVtlwL9MDNXLQ3217cujNL1ogQPlQl7_YBjlM9ExJaoObwqWEAELf9XxIAWarSQD96o9Nn5iBFkyEnG75iEOK3EdK6HsEdMb6CLloDqDCNelu1S48Kgg_9vlr1y_ZfzDGoA?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>On a un beau site de camping (sans services, sans traces svp), chez nous à St-Vallier dans Bellechasse, sur la route verte. Site privé, ombragé, tranquilité assurée, toilette sèche, rond de feu, plage sur le fleuve et en bonus très peu ou pas de moustique!<br><br><img src=\"https://doc-0g-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/56f6gcr4do01cckbf2tfl3akhg/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitkBFTzX9XA8DyQDsLmOn9TOVuRdclTIcAZ-XFDqBIw_fmHcqfqK2hkciIpdnsD9y2wAd2dkiVw86VrE6alz9qudRbIIsBClmyB7ybTPjmo03zLHu6uzLJFzC5-WbhJ_L-GVhFwzB-lrAM2xwzrBkrIytHlT064-uyTyMI9opeL4AH29vF1RaOuROSFA0KFdQ6YUaPw0V-PCsam0JB2HRmfQ5h4AL6LwNaa0Rxdm5KuGZWk8g?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-04-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/5qf9ek0ik6oudi6pdbt9nfe6r8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PitIdmQzH0Td_TXr1EeG3wQ231dlt56iXyBnqNYCKbAKKGsARXUqoF3uz4OgPKpz9zX5mUiOuC68WnM8LXof8rw5woQlqgFHMSZJirWHDlf37HX0Pt654BuwGSxLvYi1GxQkyuLZTGeUmK2s1n7s6UwsciL4CHFGcozSGR4PClXojsAVF-0Ygm2t3hXygzHL0Wk3UHGVwIv7xIxjdPeY9bl6JghXm52C6_7XpfHuoeVZU2X6lA?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/0dnoh0kgdkk40vgg1t801e033k/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8PiukvhD2DGiMzf1Zk5NPLIx3Hr0vT2d2jYYUDD3A7W4H8Fum5PbS2BeV05_9Z2_R-dl4nYpreGAsXU32uq2N5xhXzlB29DiUcAVfTru0IcFPjNVK_DMbrWm-x-C0RZAaBWT_qB6eRRR8hrUrV3JLe-sXv1Xr_mt40mRWYp3QeX8n_Teo0EpH_gCNZXh_4VJ8pS5z565j9xafbNm5mozJmzXxUVJAIWJ40dK8gR_cVHD_HSih9w?session=0&fife\" height=\"200\" width=\"auto\" /><br><br><img src=\"https://doc-08-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/g09upgot25pe0no9kdkcd3ure4/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pitf_oQGsQrx8cdhaxTBkfy_Xca5FanyWlkk75S-dFZK-PbgXx3wJssuYKjcI41WyGuxB3zFPg006aL_r9s614ZIclDDGmFTOD0rqlluvjkGrGps4QEAd-Evd5YhCHwpKmF_FBsOqY1FzKzBa87OLT25F-lzwh7bWsYuieFmZcNAIB3SsyvvcgH5JPWNbHpZwnOHlAQkUuXC-sgAgMJxSOr0Ae05aP_kFHzYOKHOG_MxQi74Kg?session=0&fife\" height=\"200\" width=\"auto\" />",
+            "name": "St-Vallier"
+        },
+        "type": "Feature"
+    }
 ]
-
+    
 const autres = [
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.6140398,
-                    45.1127559
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "type": "autre",
-                "description": "Point d'eau 100 Rue Pleasant",
-                "name": "Point d'eau 100 Rue Pleasant"
-            },
-            "type": "Feature"
+    {
+        "geometry": {
+            "coordinates": [
+                -72.6140398,
+                45.1127559
+            ],
+            "type": "Point"
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    -62.8061091,
-                    50.2894102
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "type": "autre",
-                "description": "<img src=\"https://doc-10-bs-mymaps.googleusercontent.com/untrusted/hostedimage/vq0gjqshd206tslpv4624emae4/eh17fgvvkrne73ohi50nqoaadk/1691979181750/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5ACnmet6G1_ibxbDZ4llq4Ul-26aYoKuJHqMwGP8CQFLpidIqdbgFILDX64M4sXs4DXs7Fexg7tbUaD9eAaYQV4JfBQwn7HbIt6DrzYFZ8CB92it4plVZhcbMI3tJxcS0GXxkRfVLvq9s7HcyXV6hfBOSNlsfeqywv9wOfk1B1PYyjeHRH22fHGZa8Gv5KTlzxfsUc-aV?session=0&fife\" height=\"200\" width=\"100%\" /><br><br>Chambre et dortoir, cuisine communautaire, possibilité de faire son lavage (demander à l'hôte). Hôtes très sympathiques. Odeur de moisi au dortoir.",
-                "name": "Auberge de jeunesse\n"
-            },
-            "type": "Feature"
+        "properties": {
+            "description": "Point d'eau 100 Rue Pleasant",
+            "name": "Point d'eau 100 Rue Pleasant"
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    -65.5065723,
-                    50.287713
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "type": "autre",
-                "description": "A compter des spots de camping à l'est du pont de la Rivière au Bouleau, il faut compter environs 200 mètres vers l'est. C'est un petit ruisseau en pente du coté nord de la route 138, on entend couler l'eau assez fort quand on approche.<br>L'eau est claire et nous ne l'avions pas filtré.<br>Site visité le 7 juillet 2020<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPIonMaritimes2020",
-                "name": "Point d'eau, ruisseau en retrait de la route 138"
-            },
-            "type": "Feature"
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -62.8061091,
+                50.2894102
+            ],
+            "type": "Point"
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    -68.4927945,
-                    48.4917208
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "type": "autre",
-                "description": "Point d'eau",
-                "name": "Point d'eau"
-            },
-            "type": "Feature"
+        "properties": {
+            "description": "<img src=\"https://doc-0o-bs-mymaps.googleusercontent.com/untrusted/hostedimage/m/ril7s7o2r7o122taccjrfcdo00/nfqgb87c3gt9vui3vut50prev8/1705163063500/6AkfITAxHUEmmDX-OBtDbQQBk2PYpULQ/11313125914491486929/5AEQ8Pittken36HopbW-K8IuL8sVOYJn9S-Ec1OMkuFdtn7mQWzKiPSn7f-fk7BJ_cHEDNYmezO0qqOIpILozEd2HsDpfHsb6AHwJqVgYpsL7B5z59w6VWwYRCPN5H0cWmKk5OfoZdcDYieL5S4cTWMeinae8KIURQ6VeZmD9m1KZn8liUWGKVkPm2XK98un8sVTnTJZw?session=0&fife\" height=\"200\" width=\"auto\" /><br><br>Chambre et dortoir, cuisine communautaire, possibilité de faire son lavage (demander à l'hôte). Hôtes très sympathiques. Odeur de moisi au dortoir.",
+            "name": "Auberge de jeunesse\n"
         },
-        {
-            "geometry": {
-                "coordinates": [
-                    -72.1591626,
-                    45.2670085
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "type": "autre",
-                "description": "Douches à l'intérieur du bloc sanitaire derrière le resto Petit Taco. Utile quand on voyage en mode camping sauvage.<br>Utilisé en 2021.<br>https://ioverlander.com/places/95188-shower<br>-admin",
-                "name": "Douche"
-            },
-            "type": "Feature"
-        }
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -65.5065723,
+                50.287713
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "A compter des spots de camping à l'est du pont de la Rivière au Bouleau, il faut compter environs 200 mètres vers l'est. C'est un petit ruisseau en pente du coté nord de la route 138, on entend couler l'eau assez fort quand on approche.<br>L'eau est claire et nous ne l'avions pas filtré.<br>Site visité le 7 juillet 2020<br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPIonMaritimes2020",
+            "name": "Point d'eau, ruisseau en retrait de la route 138"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -68.4927945,
+                48.4917208
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Point d'eau",
+            "name": "Point d'eau"
+        },
+        "type": "Feature"
+    },
+    {
+        "geometry": {
+            "coordinates": [
+                -72.1591626,
+                45.2670085
+            ],
+            "type": "Point"
+        },
+        "properties": {
+            "description": "Douches à l'intérieur du bloc sanitaire derrière le resto Petit Taco. Utile quand on voyage en mode camping sauvage.<br>Utilisé en 2021.<br>https://ioverlander.com/places/95188-shower<br>-admin",
+            "name": "Douche"
+        },
+        "type": "Feature"
+    }
 ]
 
 module.exports = {non_officiels, officiels, proprios, autres}
