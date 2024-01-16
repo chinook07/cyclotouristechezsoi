@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import veloBoite from "../images/velo-boite.jpg";
-import veloEmboite from "../images/velo-emboite.jpg";
-import avion from "../images/avion.jpg";
+import veloBoite from "../images/velo-boite.webp";
+import veloEmboite from "../images/velo-emboite.webp";
+import avion from "../images/avion.webp";
 import { faArrowCircleRight, faArrowCircleDown } from "@fortawesome/free-solid-svg-icons";
 
 const AvionImages = () => {

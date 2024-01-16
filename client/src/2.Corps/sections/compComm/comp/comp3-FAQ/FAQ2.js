@@ -13,7 +13,7 @@ import meteo4 from "../../images/poutine.jpg";
 import camping1 from "../../images/camping-tomifobia.jpg";
 import camping2 from "../../images/camping-rouge.jpg";
 import repas1 from "../../images/repas-poulet.jpg";
-import repas2 from "../../images/fruits.jpg";
+import repas2 from "../../images/fruits.webp";
 import osmand from "../../images/osmand-eau.jpg"
 
 const FAQ2 = ({ boiteOuverte, setBoiteOuverte }) => {

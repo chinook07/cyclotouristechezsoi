@@ -1,6 +1,6 @@
 import DeuxFigures from "../../../CompReutilisables/DeuxFigures";
-import veloAutocar from "./images/velo-autocar.jpg"
-import veloTrain from "./images/velo-train-exo.jpg"
+import veloAutocar from "./images/velo-autocar.webp"
+import veloTrain from "./images/velo-train-exo.webp"
 
 const Intro = () => {
 

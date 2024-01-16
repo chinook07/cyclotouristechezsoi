@@ -1,8 +1,8 @@
 import { ExternalLink } from "react-external-link";
 
 import DeuxFigures from "../../../CompReutilisables/DeuxFigures";
-import trainCharlevoix1 from "./images/train-charlevoix-1.jpg"
-import trainCharlevoix2 from "./images/train-charlevoix-2.jpg"
+import trainCharlevoix1 from "./images/train-charlevoix-1.webp"
+import trainCharlevoix2 from "./images/train-charlevoix-2.webp"
 
 import TableauRegions from "./comp/TableauRegions";
 import navettes from "./donnees/navettes.json";
