@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-import img1 from "./images/404/boite-velo-brise.jpg";
-import img2 from "./images/404/piste-fermee.jpg";
-import img3 from "./images/404/pont-barrieres.jpg";
-import img4 from "./images/404/Varennes-inonde.jpg";
+import img1 from "./images/404/boite-velo-brise.webp";
+import img2 from "./images/404/piste-fermee.webp";
+import img3 from "./images/404/pont-barrieres.webp";
+import img4 from "./images/404/Varennes-inonde.webp";
 
 const Erreur = () => {
 

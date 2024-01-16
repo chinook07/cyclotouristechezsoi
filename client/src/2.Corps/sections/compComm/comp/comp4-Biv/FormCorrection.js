@@ -15,7 +15,6 @@ const FormCorrection = ({ site }) => {
         })
             .then(() => setConfirmation(true))
             .catch(err => console.log(err))
-        
     }
     
     return (

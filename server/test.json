@@ -1,0 +1,88 @@
+{
+    "_id": {
+        "$numberInt": "5018"
+    },
+    "type": "Feature",
+    "properties": {
+        "name": "Test – clg",
+        "description": "commence sans photos",
+        "annee": {
+            "$numberInt": "2024"
+        },
+        "type": "s_autres",
+        "dateAuj": "13-janv.-2024",
+        "commentaires": [
+            {
+                "description": "premier console",
+                "annee": {
+                    "$numberInt": "2024"
+                }
+            },
+            {
+                "description": "premier console",
+                "annee": {
+                    "$numberInt": "2024"
+                }
+            },
+            {
+                "description": "premier console",
+                "annee": {
+                    "$numberInt": "2024"
+                }
+            },
+            {
+                "description": "premier console",
+                "annee": {
+                    "$numberInt": "2024"
+                }
+            },
+            {
+                "description": "premier console",
+                "annee": {
+                    "$numberInt": "2024"
+                }
+            },
+            {
+                "description": "premier console",
+                "annee": {
+                    "$numberInt": "2024"
+                }
+            },
+            {
+                "description": "rgehrhtrh",
+                "annee": {
+                    "$numberInt": "2024"
+                }
+            },
+            {
+                "description": "clg1",
+                "annee": {
+                    "$numberInt": "2024"
+                }
+            },
+            {
+                "description": "clg1",
+                "annee": {
+                    "$numberInt": "2024"
+                }
+            },
+            {
+                "description": "clg1",
+                "annee": {
+                    "$numberInt": "2024"
+                }
+            }
+        ]
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            {
+                "$numberDouble": "-72.82287597656251"
+            },
+            {
+                "$numberDouble": "44.83286520410918"
+            }
+        ]
+    }
+}

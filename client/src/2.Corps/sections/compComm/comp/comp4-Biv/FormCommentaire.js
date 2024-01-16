@@ -59,6 +59,7 @@ const FormCommentaire = ({ site }) => {
     }
 
     const ajoutCommentaire = async (e) => {
+        console.log(champs.fichiers);
         e.preventDefault()
         try {
             const response = await fetch("/api/commentaire-site", {
