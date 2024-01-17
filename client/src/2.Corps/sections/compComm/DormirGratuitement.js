@@ -9,7 +9,7 @@ import { faAngleRight, faAnglesRight, faClose } from "@fortawesome/free-solid-sv
 import CarteCampings from "./comp/comp4-Biv/CarteCampings";
 import DemandeEdition from "./comp/comp4-Biv/DemandeEdition";
 import FormAjout from "./comp/comp4-Biv/FormAjout";
-import campingLaPatrie from "./images/camping-la-patrie.jpg"
+import campingLaPatrie from "./images/camping-la-patrie.webp"
 
 const DormirGratuitement = () => {
     const [montrerAjoutCarte, setMontrerAjoutCarte] = useState(false);

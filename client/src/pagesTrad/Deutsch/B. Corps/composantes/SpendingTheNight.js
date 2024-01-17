@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ExternalLink } from "react-external-link";
 
 import { faCampground } from "@fortawesome/free-solid-svg-icons";
-import imgCamping from "../../../images/bienvenue-cyclistes.jpg"
+import imgCamping from "../../../images/bienvenue-cyclistes.webp"
 
 const SpendingTheNight = () => {
     return (

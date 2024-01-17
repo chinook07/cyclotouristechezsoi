@@ -2,12 +2,12 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 
 import carrousel from "../donnees/caroussel.json"
-import car0 from "../images/carrousel/baiestecath.jpg";
-import car1 from "../images/carrousel/cabano.jpg";
-import car2 from "../images/carrousel/monteregie.jpg";
-import car3 from "../images/carrousel/perce.jpg";
-import car4 from "../images/carrousel/portneuf.jpg";
-import car5 from "../images/carrousel/stukely.jpg";
+import car0 from "../images/carrousel/baiestecath.webp";
+import car1 from "../images/carrousel/cabano.webp";
+import car2 from "../images/carrousel/monteregie.webp";
+import car3 from "../images/carrousel/perce.webp";
+import car4 from "../images/carrousel/portneuf.webp";
+import car5 from "../images/carrousel/stukely.webp";
 import Chargement from "../../../CompReutilisables/Chargement";
 
 const Carrousel = () => {

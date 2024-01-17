@@ -4,7 +4,7 @@ import { ExternalLink } from "react-external-link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faAngleDoubleDown, faAngleDoubleUp, faTrain, faPlane, faCampground, faHotel } from "@fortawesome/free-solid-svg-icons";
-import demontepneus from "../../images/demontepneus.jpg";
+import demontepneus from "../../images/demontepneus.webp";
 
 const Comm2 = ({ boiteOuverte, setBoiteOuverte }) => {
     

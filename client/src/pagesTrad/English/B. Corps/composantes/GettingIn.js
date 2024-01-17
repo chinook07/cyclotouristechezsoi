@@ -5,7 +5,7 @@ import { ExternalLink } from "react-external-link";
 
 import { CycloContext } from "../../../../CycloContext";
 import { faPlaneArrival } from "@fortawesome/free-solid-svg-icons";
-import imgTrain from "../../../images/bike-on-train.jpg";
+import imgTrain from "../../../images/bike-on-train.webp";
 
 const GettingIn = () => {
 

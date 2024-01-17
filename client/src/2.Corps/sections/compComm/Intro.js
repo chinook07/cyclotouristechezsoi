@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 import DeuxFiguresPetit from "../../../CompReutilisables/DeuxFiguresPetit";
-import debut1 from "./images/pont-JC.jpg";
-import debut2 from "./images/fraises-fleuve.jpg";
+import debut1 from "./images/pont-JC.webp";
+import debut2 from "./images/fraises-fleuve.webp";
 
 const Intro = () => {
 

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Climat from "./sousComposantes/Climat";
 import Animaux from "./sousComposantes/Animaux";
 import { faSuitcase } from "@fortawesome/free-solid-svg-icons";
-import imgDrapeau from "../../../images/quebec-flag.jpg"
+import imgDrapeau from "../../../images/quebec-flag.webp"
 
 const Visiting = () => {
     return (

@@ -2,12 +2,12 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 
 import carrousel from "../donnees/caroussel.json"
-import car0 from "../../../../2.Corps/accueil/images/carrousel/baiestecath.jpg";
-import car1 from "../../../../2.Corps/accueil/images/carrousel/cabano.jpg";
-import car2 from "../../../../2.Corps/accueil/images/carrousel/monteregie.jpg";
-import car3 from "../../../../2.Corps/accueil/images/carrousel/perce.jpg";
-import car4 from "../../../../2.Corps/accueil/images/carrousel/portneuf.jpg";
-import car5 from "../../../../2.Corps/accueil/images/carrousel/stukely.jpg";
+import car0 from "../../../../2.Corps/accueil/images/carrousel/baiestecath.webp";
+import car1 from "../../../../2.Corps/accueil/images/carrousel/cabano.webp";
+import car2 from "../../../../2.Corps/accueil/images/carrousel/monteregie.webp";
+import car3 from "../../../../2.Corps/accueil/images/carrousel/perce.webp";
+import car4 from "../../../../2.Corps/accueil/images/carrousel/portneuf.webp";
+import car5 from "../../../../2.Corps/accueil/images/carrousel/stukely.webp";
 import Chargement from "../../../../CompReutilisables/Chargement";
 
 const Carrousel = () => {

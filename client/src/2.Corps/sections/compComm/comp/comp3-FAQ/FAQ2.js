@@ -6,15 +6,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DeuxFiguresPetit from "../../../../../CompReutilisables/DeuxFiguresPetit";
 import TableauRoutes from "./TableauRoutes";
 import { faAngleDoubleDown, faAngleDoubleUp } from "@fortawesome/free-solid-svg-icons";
-import meteo1 from "../../images/radar.jpg";
-import meteo3 from "../../images/poutine-ingredients.png";
-import meteo2 from "../../images/cumulonimbus.jpg";
-import meteo4 from "../../images/poutine.jpg";
-import camping1 from "../../images/camping-tomifobia.jpg";
-import camping2 from "../../images/camping-rouge.jpg";
-import repas1 from "../../images/repas-poulet.jpg";
+import meteo1 from "../../images/radar.webp";
+import meteo3 from "../../images/poutine-ingredients.webp";
+import meteo2 from "../../images/cumulonimbus.webp";
+import meteo4 from "../../images/poutine.webp";
+import camping1 from "../../images/camping-tomifobia.webp";
+import camping2 from "../../images/camping-rouge.webp";
+import repas1 from "../../images/repas-poulet.webp";
 import repas2 from "../../images/fruits.webp";
-import osmand from "../../images/osmand-eau.jpg"
+import osmand from "../../images/osmand-eau.webp"
 
 const FAQ2 = ({ boiteOuverte, setBoiteOuverte }) => {
 

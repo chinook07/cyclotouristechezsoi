@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { ExternalLink } from "react-external-link";
 
-import auteur from "./images/auteur.jpg"
+import auteur from "./images/auteur.webp"
 
 const APropos = () => {
 

@@ -4,13 +4,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faAngleLeft, faAngleRight, faBed, faTemperatureEmpty, faTemperatureHalf, faTemperatureFull, faCampground, faCaravan, faBug, faGrinStars } from "@fortawesome/free-solid-svg-icons";
 import moments from "../../donnees/moments.json";
-import mois1 from "../../images/varennes-inondation.jpg";
+import mois1 from "../../images/varennes-inondation.webp";
 import mois2 from "../../images/monteregiade.webp";
-import mois3 from "../../images/sentier-waterfront.jpg";
+import mois3 from "../../images/sentier-waterfront.webp";
 import mois4 from "../../images/traversier_tadoussac.webp";
 import mois5 from "../../images/riviere-rouge.webp";
-import mois6 from "../../images/mauricie.jpg";
-import mois7 from "../../images/riviere_rideau.jpg";
+import mois6 from "../../images/mauricie.webp";
+import mois7 from "../../images/riviere_rideau.webp";
 
 
 const Moment = () => {

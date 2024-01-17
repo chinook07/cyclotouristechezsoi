@@ -21,4 +21,4 @@ export { default as PhotoTitre20 } from "./v20.webp";
 export { default as PhotoTitre21 } from "./v21.webp";
 export { default as PhotoTitre22 } from "./v22.webp";
 export { default as PhotoTitre23 } from "./v23.webp";
-export { default as PhotoTitre24 } from "./v24.jpg";
+export { default as PhotoTitre24 } from "./v24.webp";
