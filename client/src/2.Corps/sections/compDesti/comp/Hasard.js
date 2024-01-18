@@ -58,6 +58,9 @@ const Choix = styled.div`
         text-decoration: none;
         width: 100%;
     }
+    &:hover {
+        border-width: 4px;
+    }
 `
 
 const ImgFond = styled.div`

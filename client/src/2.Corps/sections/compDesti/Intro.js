@@ -101,6 +101,9 @@ const Hexagon = styled.div`
             }
         }
     }
+    &:hover {
+        border-width: 3px;
+    }
 `
 
 const ImgFond = styled.div`
