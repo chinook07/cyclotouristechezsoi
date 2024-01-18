@@ -5,6 +5,7 @@ import { format } from "date-fns";
 import Carrousel from "./comp/Caroussel";
 import NavAccueil from "./comp/NavAccueil";
 import NavBlogue from "./comp/NavBlogue";
+import TestWebP from "./comp/TestWebP";
 import texteAcc from "./donnees/texteAcc.json";
 
 const Accueil = () => {
@@ -16,12 +17,12 @@ const Accueil = () => {
             <Carrousel />
             <Intro>
                 <h1>Explorez le Québec à vélo</h1>
-                
                 <p>
                     <span>{texteAcc[mois - 1]} </span>
                     <span>Pour vous aider dans la planification, découvrez les renseignements pertinents colligés sur ce site web. Que vous soyez débutant, chevronné, ou simplement curieux, vous trouverez des conseils de matériel, de trajets et bien davantage.</span></p>
                 <p>Bonne visite!</p>
             </Intro>
+            {/* <TestWebP /> */}
             <NavAccueil />
             <Billets>Récents billets de blogue sur <ExternalLink href="https://touristechezsoi.ca/">Touriste chez soi</ExternalLink></Billets>
             <NavBlogue />
