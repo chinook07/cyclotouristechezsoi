@@ -1,40 +1,29 @@
 import styled from "styled-components";
 
-import veloPermis from "../../images/velo-permis.png";
-import veloInterdit from "../../images/velo-interdit.png";
-import autoroute from "../../images/autoroute.png";
-import routePrimaire from "../../images/route-primaire.png";
-import routeSecondaire from "../../images/route-secondaire.png";
-import autorouteCollectrice from "../../images/autoroute-collectrice.png";
+import typesRoutes from "../../donnees/typesRoutes.json";
+import * as panneaux from "../../images/indexRoutes";
 
 const TableauRoutes = () => {
     return (
         <Wrapper>
+            <caption>Les catégories de routes au Québec</caption>
             <tbody>
-                <tr>
-                    <td><img src={autoroute} alt="" /></td>
-                    <th>1 à 99</th>
-                    <td>Autoroutes</td>
-                    <td><img src={veloInterdit} alt="vélos interdits" /></td>
-                </tr>
-                <tr>
-                    <td><img src={routePrimaire} alt="" /></td>
-                    <th>101 à 199</th>
-                    <td>Routes nationales</td>
-                    <td><img src={veloPermis} alt="vélos autorisés" /></td>
-                </tr>
-                <tr>
-                    <td><img src={routeSecondaire} alt="" /></td>
-                    <th>201 à 399</th>
-                    <td>Routes régionales</td>
-                    <td><img src={veloPermis} alt="vélos autorisés" /></td>
-                </tr>
-                <tr>
-                    <td><img src={autorouteCollectrice} alt="" /></td>
-                    <th>401 à 999</th>
-                    <td>Autoroutes</td>
-                    <td><img src={veloInterdit} alt="vélos interdits" /></td>
-                </tr>
+                {
+                    typesRoutes.map((item, index) => {
+                        return (
+                            <tr key={index}>
+                                <td>
+                                    <img alt="" src={panneaux[item.panneau1]} />
+                                </td>
+                                <th>{item.num}</th>
+                                <td>{item.nom}</td>
+                                <td>
+                                    <img alt={item.panneau2} src={panneaux[item.panneau2]} />
+                                </td>
+                            </tr>
+                        )
+                    })
+                }
             </tbody>
         </Wrapper>
     )
@@ -43,6 +32,9 @@ const TableauRoutes = () => {
 const Wrapper = styled.table`
     border: 2px solid var(--c10);
     border-collapse: collapse;
+    caption {
+        padding: 10px;
+    }
     tr:not(:last-of-type) {
         border-bottom: 1px solid var(--c3);
     }

@@ -4,14 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faAngleLeft, faAngleRight, faBed, faTemperatureEmpty, faTemperatureHalf, faTemperatureFull, faCampground, faCaravan, faBug, faGrinStars } from "@fortawesome/free-solid-svg-icons";
 import moments from "../../donnees/moments.json";
-import mois1 from "../../images/varennes-inondation.webp";
-import mois2 from "../../images/monteregiade.webp";
-import mois3 from "../../images/sentier-waterfront.webp";
-import mois4 from "../../images/traversier_tadoussac.webp";
-import mois5 from "../../images/riviere-rouge.webp";
-import mois6 from "../../images/mauricie.webp";
-import mois7 from "../../images/riviere_rideau.webp";
-
+import * as imgMoments from "../../images/indexMoments";
 
 const Moment = () => {
 
@@ -26,8 +19,6 @@ const Moment = () => {
         [faTemperatureHalf, faBed, faCampground],
         [faTemperatureEmpty, faBed]
     ];
-
-    const imagesAMontrer = [mois1, mois2, mois3, mois4, mois5, mois6, mois7]
 
     const avancer = () => {
         mois === 6 ? setMois(0) : setMois(mois + 1)
@@ -60,7 +51,7 @@ const Moment = () => {
                 </Fleches>
             </div>
             <figure>
-                <img alt={moments[mois].imgAlt} src={imagesAMontrer[mois]} />
+                <img alt={moments[mois].imgAlt} src={imgMoments[`mois${mois+1}`]} />
                 <figcaption>{moments[mois].caption}</figcaption>
             </figure>
         </Wrapper>

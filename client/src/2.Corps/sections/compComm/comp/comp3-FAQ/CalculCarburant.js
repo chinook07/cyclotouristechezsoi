@@ -35,18 +35,16 @@ const CalculCarburant = () => {
             <Choix>
                 <span>J'ai une cartouche de</span>
                 <span>
-                    <label>
-                        <input type="radio" value="100" name="choixCarb" onChange={choisirCarb} />
-                        <span>100 g</span>
-                    </label>
-                    <label>
-                        <input type="radio" value="230" name="choixCarb" onChange={choisirCarb} />
-                        <span>230 g</span>
-                    </label>
-                    <label>
-                        <input type="radio" value="450" name="choixCarb" onChange={choisirCarb} />
-                        <span>450 g.</span>
-                    </label>
+                    {
+                        Object.entries(tare).map((item, index) => {
+                            return (
+                                <label key={index}>
+                                    <input type="radio" value={item[0]} name="choixCarb" onChange={choisirCarb} />
+                                    <span>{item[0]} g</span>
+                                </label>
+                            )
+                        })
+                    }
                 </span>
                 
             </Choix>

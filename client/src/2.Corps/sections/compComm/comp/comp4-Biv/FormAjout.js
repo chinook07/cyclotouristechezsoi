@@ -116,7 +116,8 @@ const FormAjout = ({ setConfirmation, setMontrerAjoutCarte, ajoutsFaits, setAjou
     }
     
     return (
-        <Wrapper onSubmit={ajoutSite}
+        <Wrapper
+            onSubmit={ajoutSite}
             encType="multipart/form-data"
             // action="https://formspree.io/f/mvodrepv"
             // method="POST"

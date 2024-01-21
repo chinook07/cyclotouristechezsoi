@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 
+import distanceParJr from "../../donnees/distancesParJr.json";
+
 const CalculJours = () => {
 
     const [type, setType] = useState();
@@ -31,21 +33,26 @@ const CalculJours = () => {
     return (
         <Wrapper>
             <Quadri>
-                <span></span>
-                <span>Profil du voyageur</span>
-                <span>Km/jr</span>
-                <input id="profil1" type="radio" name="calculJours" value="50" onChange={mAJType} />
-                <label htmlFor="profil1">Cyclocontemplateur</label>
-                <label htmlFor="profil1">40-60</label>
-                <input id="profil2" type="radio" name="calculJours" value="70" onChange={mAJType} />
-                <label htmlFor="profil2">Cyclotouriste relaxe</label>
-                <label htmlFor="profil2">60-80</label>
-                <input id="profil3" type="radio" name="calculJours" value="90" onChange={mAJType} />
-                <label htmlFor="profil3">Cyclotouriste motivé</label>
-                <label htmlFor="profil3">80-100</label>
-                <input id="profil4" type="radio" name="calculJours" value="110" onChange={mAJType} />
-                <label htmlFor="profil4">Cyclosportif qualifié</label>
-                <label htmlFor="profil4">100-120</label>
+                <legend>Km/jr</legend>
+                {
+                    distanceParJr.map((item, index) => {
+                        return (
+                            <>
+                                <input
+                                    id={`profil${index}`}
+                                    type="radio"
+                                    name="calculJours"
+                                    onChange={mAJType}
+                                    value={item.distance}
+                                />
+                                <label htmlFor={`profil${index}`}>
+                                    <span>{item.nom}</span>
+                                    <span>{`${item.distance - 10}–${item.distance + 10}`}</span>
+                                </label>
+                            </>
+                        )
+                    })
+                }
             </Quadri>
             <label>
                 <span>Trajet total (km) : </span>
@@ -74,12 +81,22 @@ const Wrapper = styled.form`
     }
 `
 
-const Quadri = styled.div`
+const Quadri = styled.fieldset`
+    border: none;
     display: grid;
     gap: 5px 15px;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto;
     justify-content: center;
-    margin-bottom: 12px;
+    margin: 12px auto;
+    width: fit-content;
+    label {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+    }
+    legend {
+        text-align: right;
+    }
     @media screen and (max-width: 400px) {
         gap: 5px 5px;
     }

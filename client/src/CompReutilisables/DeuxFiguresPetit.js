@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { ExternalLink } from "react-external-link";
 
 const DeuxFiguresPetit = ({photo1, photo2}) => {
+    console.log(photo1);
     return (
         <Wrapper>
             <figure>

@@ -1,0 +1,26 @@
+[
+    {
+        "src": 0,
+        "alt": "graphique montrant les vents dominants de l'ouest à Montréal durant l'été",
+        "cap": "Les vents à Montréal.",
+        "lien": "Weather Spark",
+        "href": "https://fr.weatherspark.com/s/25077/1/M%C3%A9t%C3%A9o-moyenne-en-%C3%A9t%C3%A9-%C3%A0-Montr%C3%A9al-Canada#Figures-WindDirection"
+    },
+    {
+        "src": 1,
+        "alt": "graphique montrant les vents dominants de l'ouest et du sud à Rimouski durant l'été",
+        "cap": "Les vents à Rimouski.",
+        "lien": "Weather Spark",
+        "href": "https://fr.weatherspark.com/s/27467/1/M%C3%A9t%C3%A9o-moyenne-en-%C3%A9t%C3%A9-%C3%A0-Rimouski-Canada#Figures-WindDirection"
+    },
+    {
+        "src": 2,
+        "alt": "dénivelé d'un trajet sur Ride With GPS",
+        "cap": "Un calcul d'itinéraire sur Ride with GPS."
+    },
+    {
+        "src": 3,
+        "alt": "dénivelé d'un trajet sur Google Maps",
+        "cap": "Un calcul d'itinéraire sur Google Maps."
+    }
+]

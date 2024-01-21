@@ -1,0 +1,22 @@
+[
+    {
+        "nom": "Cyclocontemplateur",
+        "distance": 50
+    },
+    {
+        "nom": "Cyclotouriste relaxe",
+        "distance": 70
+    },
+    {
+        "nom": "Cyclotouriste motivé",
+        "distance": 90
+    },
+    {
+        "nom": "Cyclosportif qualifié",
+        "distance": 110
+    },
+    {
+        "nom": "Cyclosportif pressé",
+        "distance": 130
+    }
+]

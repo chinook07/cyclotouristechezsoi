@@ -72,6 +72,7 @@ const Selectionnez = styled.form`
 	max-width: 250px;
 	text-align: center;
 	select {
+        border-radius: 5px;
 		margin-top: 5px;
 		padding: 5px;
 	}

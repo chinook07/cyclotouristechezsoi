@@ -1,0 +1,30 @@
+[
+    {
+        "panneau1": "autoroute",
+        "num": "1 à 99",
+        "nom": "Autoroutes",
+        "panneau2": "veloInterdit",
+        "panneau2Alt": "vélos interdits"
+    },
+    {
+        "panneau1": "routePrimaire",
+        "num": "101 à 199",
+        "nom": "Routes nationales",
+        "panneau2": "veloPermis",
+        "panneau2Alt": "vélos autorisés"
+    },
+    {
+        "panneau1": "routeSecondaire",
+        "num": "201 à 399",
+        "nom": "Routes régionales",
+        "panneau2": "veloPermis",
+        "panneau2Alt": "vélos autorisés"
+    },
+    {
+        "panneau1": "autorouteCollectrice",
+        "num": "401 à 999",
+        "nom": "Autoroutes",
+        "panneau2": "veloInterdit",
+        "panneau2Alt": "vélos interdits"
+    }
+]
