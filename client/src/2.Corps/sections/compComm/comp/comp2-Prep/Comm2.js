@@ -235,6 +235,9 @@ const Boite = styled.li`
             transition: all 0.2s;
         }
     }
+    svg:not(:last-child) {
+        margin-right: 5px;
+    }
 `
 
 export default Comm2;

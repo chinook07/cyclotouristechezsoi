@@ -27,9 +27,6 @@ const Boite1 = () => {
 
 const Wrapper = styled.div`
     padding: 0 20px 20px;
-    svg:not(:last-child) {
-        margin-right: 5px;
-    }
 `
 
 export default Boite1;
