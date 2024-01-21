@@ -21,7 +21,7 @@ const ABCDEF = () => {
             <section>
                 <h2>Au-delà des horizons : prendre l'avion</h2>
                 <AvionImages />
-                <p>S'envoler dans les airs sera toujours plus compliqué que prendre un train, surtout avec un vélo. En plus des files d'attente, des contrôles de sécurité et autres trépidations, il faut s'assurer de bien emballer son vélo. Certaines lignes aériennes imposent la boite, d'autres ont des exigences plus souples. Peu importe l'emballage fourni, il n'est que rarement fourni par la ligne aérienne ou disponible pour l'achat à l'aéroport. Il serait parfois plus simple de se trouver un moyen de transport pour rejoindre l'aéroport avec son vélo déjà démonté.</p>
+                <p>S'envoler dans les airs sera toujours plus compliqué que prendre un train, surtout avec un vélo. En plus des files d'attente, des contrôles de sécurité et autres trépidations, il faut s'assurer de bien emballer son vélo. Certaines lignes aériennes imposent la boite, d'autres ont des exigences plus souples. Peu importe l'emballage préconisé, il n'est que rarement fourni par la ligne aérienne ou disponible pour achat à l'aéroport. Il serait parfois plus simple de se trouver un moyen de transport pour rejoindre l'aéroport avec son vélo déjà démonté.</p>
                 <p>Contrairement à ce qui est du transport par autocar, votre vélo sera manipulé par plusieurs personnes (et machines) avant d'arriver à bon port. <strong>Assurez-vous de bien protéger les pièces sensibles de votre monture pour éviter les mauvaises surprises à destination.</strong></p>
             </section>
         </div>
