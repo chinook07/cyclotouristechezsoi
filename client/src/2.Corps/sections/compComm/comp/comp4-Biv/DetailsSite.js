@@ -9,7 +9,7 @@ import Commentaires from "./Commentaires";
 const DetailsSite = ({ site, fermerSite }) => {
     console.log(site);
     return (
-        <Wrapper>
+        <Wrapper id="nouveauIFrame">
             <Banniere>
                 {
                     site.properties.name
@@ -50,7 +50,7 @@ const DetailsSite = ({ site, fermerSite }) => {
 
 const Wrapper = styled.div`
     background-color: var(--c6);
-    border-radius: 5px;
+    border-radius:1 5px;
     color: var(--c11);
     max-height: 92%;
     left: 8%;

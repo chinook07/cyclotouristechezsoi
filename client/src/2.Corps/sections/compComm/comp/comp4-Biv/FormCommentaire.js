@@ -5,7 +5,7 @@ import { format } from 'date-fns';
 import TelevPhotos from "./TelevPhotos";
 import { frCA } from 'date-fns/locale';
 
-const FormCommentaire = ({ site }) => {
+const FormCommentaire = ({ site, rapport, setConfirmation }) => {
 
     const anneeCourante = new Date().getFullYear();
     const dateAuj = format(new Date(), "dd-MMM-yyyy", { locale: frCA });
@@ -19,7 +19,7 @@ const FormCommentaire = ({ site }) => {
         type: site.properties.type,
         legit: false
     });
-    const [confirmation, setConfirmation] = useState(false);
+    
 
     const mAJDescription = (e) => setChamps(prec => ({ ...prec, description: e.target.value }));
     const mAJFichiers = (e) => {
@@ -39,7 +39,8 @@ const FormCommentaire = ({ site }) => {
         console.log(result);
         const formData = new FormData();
         formData.append("type", champs.type);
-        formData.append("id", site._id)
+        formData.append("id", site._id);
+        formData.append("nComm", result.nDeCommentaires);
         for (let i = 0; i < champs.fichiers.length; i++) {
             formData.append("fichiers", champs.fichiers[i]);
         }
@@ -86,8 +87,9 @@ const FormCommentaire = ({ site }) => {
                 console.log(result);
                 setConfirmation(true)
                 if (champs.fichiers.length > 0) {
-                    await handleUploads(result);
+                    await handleUploads({ result });
                 }
+                // rapport(undefined)
             }
         } catch (err) {
             console.log(err);
@@ -137,7 +139,7 @@ const FormCommentaire = ({ site }) => {
                     type="email"
                     value={champs.courriel}
                 />
-                <Validation>
+                <div>
                     <input
                         id="validComm"
                         name="validComm"
@@ -147,13 +149,9 @@ const FormCommentaire = ({ site }) => {
                         value={champs.legit}
                     />
                     <label htmlFor="validComm">Je consens que ces informations sont exacts, dans la mesure du possible.</label>
-                </Validation>
+                </div>
                 <button type="submit">Envoyer</button>
             </fieldset>
-            {
-                confirmation &&
-                <Confirm>Merci d'avoir contribué à la carte!</Confirm>
-            }
         </Wrapper>
     )
 }
@@ -197,12 +195,5 @@ const AnneeVisite = styled.div`
         padding: 5px;
     }
 `
-
-const Confirm = styled.p`
-    font-weight: bold;
-    text-align: center;
-`
-
-const Validation = styled.div``
 
 export default FormCommentaire;

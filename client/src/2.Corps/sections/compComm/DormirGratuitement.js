@@ -30,7 +30,7 @@ const DormirGratuitement = () => {
 
     const fermerMerci = () => {
         console.log("fermer");
-        // setConfirmation(false);
+        setConfirmation(false);
     }
 
 	return (

@@ -16,6 +16,18 @@ const Commentaires = ({ site }) => {
                             <h4>Commentaire {index + 1}</h4>
                             <p>{ReactHtmlParser(item.description)}</p>
                             {
+                                item.fichiers &&
+                                <Album>
+                                        {
+                                            item.fichiers.map((img, imgInd) => {
+                                                return (
+                                                    <img key={imgInd} alt="" src={`http://serveur.touristechezsoi.ca/uploads/` + img} />
+                                                )
+                                            })
+                                        }
+                                </Album>
+                            }
+                            {
                                 item.annee &&
                                 <Ital>Visité en {item.annee}</Ital>
                             }
@@ -25,7 +37,6 @@ const Commentaires = ({ site }) => {
             }
         </>
     )
-
 }
 
 const Comment = styled.div`
@@ -33,6 +44,19 @@ const Comment = styled.div`
     border-radius: 5px;
     margin: 10px;
     padding: 10px;
+    img {
+        display: block;
+        margin: 0 auto;
+        max-width: 400px;
+        object-fit: contain;
+        width: 100%;
+    }
+`
+
+const Album = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 `
 
 const Ital = styled.p`

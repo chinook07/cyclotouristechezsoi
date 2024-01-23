@@ -1,8 +1,6 @@
 const express = require("express");
-// const multer = require("multer");
 const morgan = require("morgan");
 const fileUpload = require('express-fileupload');
-// const bodyParser = require("body-parser");
 
 const {
     nouveauSite,
@@ -10,19 +8,25 @@ const {
     tousSites,
     commentaireSite,
     commentairesPhotos
-} = require("./handlers")
+} = require("./handlers");
+
+const {
+    chercherCourriel,
+    chercherCourrielCommentaire
+} = require("./handlersCrypto")
 
 express()
     .use(morgan("tiny"))
     .use(express.json())
     .use(express.static("public"))
     .use(fileUpload())
-    // .use(bodyParser.urlencoded({extended: true}))
     .get("/api/tous-sites", tousSites)
     .post("/api/nouveau-site", nouveauSite)
     .post("/api/telev-photos", televPhotos)
     .post("/api/commentaires-photos", commentairesPhotos)
     .put("/api/commentaire-site", commentaireSite)
+    .get("/api/courriel/:id", chercherCourriel)
+    .get("/api/courriel-commentaire/:id", chercherCourrielCommentaire)
     .get("*", (req, res) => {
         res.status(404).json({
             status: 404,

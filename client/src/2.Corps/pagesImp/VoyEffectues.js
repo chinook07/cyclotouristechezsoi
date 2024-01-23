@@ -19,7 +19,11 @@ const VoyEffectues = () => {
             <section>
                 <h2>Quelques idées pour vous mettre sur la bonne piste!</h2>
                 <p>Que ça soit pour se renseigner, planifier ou tout simplement pour s'inspirer, voici mon historique de cyclotourisme, d'abord sur une carte, puis en ordre chronologique. Même si j'ai parcouru plusieurs des grandes destinations de la province, je sais qu'il reste énormément d'endroits à découvrir ici comme ailleurs.</p>
-                <p>L'été 2023 en fut un de nouveaux projets, et malheureusement, j'ai dû me limiter à une seule sortie de quatre jours. Ce fut alors une expérience courte, mais mémorable, principalement le long de la Route verte 1 et 4 entre Montréal, Drummondville et Sherbrooke.</p>
+                <p>L'été 2024 arrive à grands pas. Deux grands projets s'annoncent :</p>
+                <ListeObjectifs>
+                    <li>Je veux progressivement initier mon fils qui aura 18 mois cet été, au cyclotourisme. Si j'aimerais faire de longs voyages avec lui, nos escapades cette année seront plus modestes.</li>
+                    <li>Équipé de mon passeport et de l'argent américain, je veux découvrir une région que j'ai jusqu'à maintenant boudée : le Vermont. Je vise un parcours d'environ 10 jours à travers le nord de l'état.</li>
+                </ListeObjectifs>
                 <Stats1 />
                 <H3e>Nuitées<FontAwesomeIcon icon={faMoon} /></H3e>
                 <Stats2 />
@@ -57,6 +61,11 @@ const H3e = styled.h3`
     svg {
         margin-left: 5px;
     }
+`
+
+const ListeObjectifs = styled.ol`
+    list-style-position: inside;
+    padding-left: 0;
 `
 
 export default VoyEffectues;

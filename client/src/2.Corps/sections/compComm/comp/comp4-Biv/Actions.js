@@ -7,12 +7,14 @@ import FormCommentaire from "./FormCommentaire";
 const Actions = ({ site }) => {
 
     const [action, setAction] = useState();
+    const [confirmation, setConfirmation] = useState(false);
 
     const rapport = (actionAFaire) => {
         if (action === actionAFaire) {
             setAction(undefined)
         } else {
             setAction(actionAFaire);
+            document.getElementById("nouveauIFrame").scrollTop += 200;
         }
     }
     
@@ -28,7 +30,11 @@ const Actions = ({ site }) => {
             }
             {
                 action === "ajout" &&
-                <FormCommentaire site={site} />
+                <FormCommentaire site={site} rapport={rapport} setConfirmation={setConfirmation} />
+            }
+            {
+                confirmation &&
+                <Confirm>Merci d'avoir contribué à la carte!</Confirm>
             }
         </Wrapper>
     )
@@ -49,6 +55,11 @@ const Boutons = styled.div`
         padding: 10px 15px;
         width: fit-content;
     }
+`
+
+const Confirm = styled.p`
+    font-weight: bold;
+    text-align: center;
 `
 
 export default Actions;
