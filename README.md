@@ -16,4 +16,4 @@ Le site est fait en React.js, avec un petit backend en Node.js / Express qui ser
 
 ## Quand est-ce que le projet sera complet?
 
-Tout le front-end a été complété le 26 décembre, avec quelques ajustements à venir. Le back-end sera déployé dans un deuxième temps.
+Tout le front-end a été complété en décembre 2022, avec quelques ajustements à venir. Le back-end sera déployé dans un deuxième temps.
