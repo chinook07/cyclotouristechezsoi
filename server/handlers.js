@@ -43,7 +43,6 @@ const tousSites = async (req, res) => {
 
 const nouveauSite = async (req, res) => {
     const { type, properties, geometry, contributeur } = req.body;
-    console.log(properties);
     await openSesame();
     const sites = await db.collection(properties.type).find().toArray();
     const nombre = parseInt(sites[sites.length - 1]._id) + 1;
@@ -140,7 +139,6 @@ const commentairesPhotos = async (req, res) => {
     let session;
     try {
         session = await openSesame();
-        console.log(req.body);
         let dbAChercher;
         switch (req.body.type) {
             case "officiel":
@@ -253,7 +251,6 @@ const commentaireSite = async (req, res) => {
         }
     );
     const commentRacc = properties.description.slice(0, 25);
-    console.log(commentRacc);
     await db.collection("contributeurs").updateOne(
         { _id: _id },
         {

@@ -2,9 +2,6 @@ import styled from "styled-components";
 import ReactHtmlParser from 'react-html-parser';
 
 const Commentaires = ({ site }) => {
-    
-    console.log(site.properties.commentaires.length > 0);
-    console.log(site.properties.commentaires);
 
     return (
         <>

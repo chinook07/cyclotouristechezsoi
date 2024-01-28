@@ -1,6 +1,9 @@
 const express = require("express");
+const cors = require("cors");
 const morgan = require("morgan");
 const fileUpload = require('express-fileupload');
+
+const PORT = process.env.PORT || 8000
 
 const {
     nouveauSite,
@@ -17,6 +20,8 @@ const {
 
 express()
     .use(morgan("tiny"))
+    .use(cors())
+    .options("https://www.cyclotouristechezsoi.ca", cors())
     .use(express.json())
     .use(express.static("public"))
     .use(fileUpload())
@@ -33,4 +38,4 @@ express()
             message: "Désolé, erreur🚲!"
         })
     })
-    .listen(8000, () => console.log(`Listening on port 8000`));
+    .listen(PORT, () => console.log(`Listening on port ${PORT}`));

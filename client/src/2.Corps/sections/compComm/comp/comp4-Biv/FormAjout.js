@@ -35,10 +35,7 @@ const FormAjout = ({ setConfirmation, setMontrerAjoutCarte, ajoutsFaits, setAjou
     const mAJNom = (e) => setChamps(prec => ({ ...prec, nom: e.target.value }));
     const mAJCourriel = (e) => setChamps(prec => ({ ...prec, courriel: e.target.value }));
     const mAJType = (e) => setChamps(prec => ({ ...prec, type: e.target.value }));
-    const mAJFichiers = (e) => {
-        console.log(e.target.files);
-        setChamps(prec => ({ ...prec, fichiers: e.target.files }))
-    };
+    const mAJFichiers = (e) => {setChamps(prec => ({ ...prec, fichiers: e.target.files }))};
 
     const annees = [];
     for (let i = 2020; i <= anneeCourante; i++) {
@@ -117,10 +114,10 @@ const FormAjout = ({ setConfirmation, setMontrerAjoutCarte, ajoutsFaits, setAjou
     
     return (
         <Wrapper
-            onSubmit={ajoutSite}
-            encType="multipart/form-data"
-            // action="https://formspree.io/f/mvodrepv"
-            // method="POST"
+            // onSubmit={ajoutSite}
+            // encType="multipart/form-data"
+            action="https://formspree.io/f/mvodrepv"
+            method="POST"
         >
             <fieldset>
                 <legend>Ajout d'un site de camping</legend>
@@ -164,9 +161,10 @@ const FormAjout = ({ setConfirmation, setMontrerAjoutCarte, ajoutsFaits, setAjou
                     required
                     value={champs.description}
                 />
-                <p>Il est fortement suggéré d'ajouter des photos de l'emplacement, dans le but de bâtir un répertoire de qualité.</p>
+                {/* <p>Il est fortement suggéré d'ajouter des photos de l'emplacement, dans le but de bâtir un répertoire de qualité.</p> */}
+                <p>Le téléversement de photos est temporairement indisponible. Merci pour votre compréhension!</p>
                 {/* <LiensImgDESUET ajoutPhoto={ajoutPhoto} liens={liens} /> */}
-                <TelevPhotos mAJFichiers={mAJFichiers} />
+                {/* <TelevPhotos mAJFichiers={mAJFichiers} /> */}
                 <TypeDeSite mAJType={mAJType} />
                 <AnneeVisite>
                     <label htmlFor="anneeVisite">Année visitée : </label>

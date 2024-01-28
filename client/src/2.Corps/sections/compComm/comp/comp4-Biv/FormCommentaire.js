@@ -23,7 +23,6 @@ const FormCommentaire = ({ site, rapport, setConfirmation }) => {
 
     const mAJDescription = (e) => setChamps(prec => ({ ...prec, description: e.target.value }));
     const mAJFichiers = (e) => {
-        console.log(e.target.files);
         setChamps(prec => ({ ...prec, fichiers: e.target.files }))
     };
     const mAJAnnee = (e) => setChamps(prec => ({ ...prec, annee: e.target.value }));
@@ -36,7 +35,6 @@ const FormCommentaire = ({ site, rapport, setConfirmation }) => {
     }
 
     const handleUploads = async ({ result }) => {
-        console.log(result);
         const formData = new FormData();
         formData.append("type", champs.type);
         formData.append("id", site._id);
@@ -44,7 +42,6 @@ const FormCommentaire = ({ site, rapport, setConfirmation }) => {
         for (let i = 0; i < champs.fichiers.length; i++) {
             formData.append("fichiers", champs.fichiers[i]);
         }
-        console.log(formData);
         fetch("/api/commentaires-photos", {
             method: "POST",
             body: formData,
@@ -60,7 +57,6 @@ const FormCommentaire = ({ site, rapport, setConfirmation }) => {
     }
 
     const ajoutCommentaire = async (e) => {
-        console.log(champs.fichiers);
         e.preventDefault()
         try {
             const response = await fetch("/api/commentaire-site", {
@@ -84,12 +80,11 @@ const FormCommentaire = ({ site, rapport, setConfirmation }) => {
             })
             if (response.status === 200) {
                 const result = await response.json();
-                console.log(result);
                 setConfirmation(true)
                 if (champs.fichiers.length > 0) {
                     await handleUploads({ result });
                 }
-                // rapport(undefined)
+                rapport(undefined)
             }
         } catch (err) {
             console.log(err);

@@ -133,15 +133,19 @@ const CarteCampings = ({ ajoutsFaits }) => {
     //     onActivate: () => {} // callback before engine starts retrieving locations
     // }
 
+    const baseURL = process.env.NODE_ENV === 'production' ? 'https://serveur.touristechezsoi.ca/api' : 'http://localhost:3000/api';
+
+    console.log(baseURL);
+
     useEffect(() => {
-        fetch("/api/tous-sites")
+        fetch(`${baseURL}/tous-sites`)
             .then(res => res.json())
             .then(donnees => {
                 console.log("fetch");
                 rendreCompatible(donnees.collections);
             })
             .then(() => setCartePrete(true))
-    }, [ajoutsFaits])
+    }, [])
 
     console.log("fetch again");
 
