@@ -25,7 +25,9 @@ express()
     .options("https://www.cyclotouristechezsoi.ca", cors())
     .use(express.json())
     .use(express.static("public"))
-    .use(fileUpload())
+    .use(fileUpload({
+        useTempFiles: true
+    }))
     .get("/api/test", testApi)
     .get("/api/tous-sites", tousSites)
     .post("/api/nouveau-site", nouveauSite)

@@ -34,6 +34,8 @@ const FormCommentaire = ({ site, rapport, setConfirmation }) => {
         annees.push(i)
     }
 
+    const baseURL = process.env.NODE_ENV === 'production' ? 'https://ccs-serveur.onrender.com/api' : 'http://localhost:8000/api';
+
     const handleUploads = async ({ result }) => {
         const formData = new FormData();
         formData.append("type", champs.type);
@@ -42,7 +44,7 @@ const FormCommentaire = ({ site, rapport, setConfirmation }) => {
         for (let i = 0; i < champs.fichiers.length; i++) {
             formData.append("fichiers", champs.fichiers[i]);
         }
-        fetch("/api/commentaires-photos", {
+        fetch(`${baseURL}/commentaires-photos`, {
             method: "POST",
             body: formData,
         })
@@ -59,7 +61,7 @@ const FormCommentaire = ({ site, rapport, setConfirmation }) => {
     const ajoutCommentaire = async (e) => {
         e.preventDefault()
         try {
-            const response = await fetch("/api/commentaire-site", {
+            const response = await fetch(`${baseURL}/commentaire-site`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",

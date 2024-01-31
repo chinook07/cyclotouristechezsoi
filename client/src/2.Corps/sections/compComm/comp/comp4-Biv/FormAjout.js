@@ -44,6 +44,8 @@ const FormAjout = ({ setConfirmation, setMontrerAjoutCarte, ajoutsFaits, setAjou
 
     const mAJLegit = (e) => setChamps(prec => ({ ...prec, legit: e.target.checked }));
 
+    const baseURL = process.env.NODE_ENV === 'production' ? 'https://ccs-serveur.onrender.com/api' : 'http://localhost:8000/api';
+
     const handleUploads = (result) => {
         const formData = new FormData();
         formData.append("type", champs.type);
@@ -52,7 +54,7 @@ const FormAjout = ({ setConfirmation, setMontrerAjoutCarte, ajoutsFaits, setAjou
             formData.append("fichiers", champs.fichiers[i]);
         }
         console.log(formData);
-        fetch("/api/telev-photos", {
+        fetch(`${baseURL}/telev-photos`, {
             method: "POST",
             body: formData,
         })
@@ -69,7 +71,7 @@ const FormAjout = ({ setConfirmation, setMontrerAjoutCarte, ajoutsFaits, setAjou
     const ajoutSite = async (e) => {
         e.preventDefault()
         try {
-            const response = await fetch("/api/nouveau-site", {
+            const response = await fetch(`${baseURL}/nouveau-site`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -114,10 +116,10 @@ const FormAjout = ({ setConfirmation, setMontrerAjoutCarte, ajoutsFaits, setAjou
     
     return (
         <Wrapper
-            // onSubmit={ajoutSite}
-            // encType="multipart/form-data"
-            action="https://formspree.io/f/mvodrepv"
-            method="POST"
+            onSubmit={ajoutSite}
+            encType="multipart/form-data"
+            // action="https://formspree.io/f/mvodrepv"
+            // method="POST"
         >
             <fieldset>
                 <legend>Ajout d'un site de camping</legend>
@@ -161,10 +163,10 @@ const FormAjout = ({ setConfirmation, setMontrerAjoutCarte, ajoutsFaits, setAjou
                     required
                     value={champs.description}
                 />
-                {/* <p>Il est fortement suggéré d'ajouter des photos de l'emplacement, dans le but de bâtir un répertoire de qualité.</p> */}
-                <p>Le téléversement de photos est temporairement indisponible. Merci pour votre compréhension!</p>
+                <p>Il est fortement suggéré d'ajouter des photos de l'emplacement, dans le but de bâtir un répertoire de qualité.</p>
+                {/* <p>Le téléversement de photos est temporairement indisponible. Merci pour votre compréhension!</p> */}
                 {/* <LiensImgDESUET ajoutPhoto={ajoutPhoto} liens={liens} /> */}
-                {/* <TelevPhotos mAJFichiers={mAJFichiers} /> */}
+                <TelevPhotos mAJFichiers={mAJFichiers} />
                 <TypeDeSite mAJType={mAJType} />
                 <AnneeVisite>
                     <label htmlFor="anneeVisite">Année visitée : </label>

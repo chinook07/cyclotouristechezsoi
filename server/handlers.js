@@ -1,6 +1,8 @@
 const { MongoClient } = require("mongodb");
+const ftp = require("basic-ftp");
+const fs = require('fs');
 require("dotenv").config();
-const { MONGO_URI } = process.env;
+const { MONGO_URI, FTP_HOST, FTP_USER, FTP_PASSWORD } = process.env;
 
 const path = require('path');
 
@@ -137,7 +139,7 @@ const televPhotos = async (req, res) => {
             await closeSesame(session);
         }
     }
-}; // ok
+}; // doit refaire avec FTP
 
 const commentairesPhotos = async (req, res) => {
     let session;
@@ -165,14 +167,14 @@ const commentairesPhotos = async (req, res) => {
         }
         const idAChercher = parseInt(req.body.id);
         const commAAjouter = parseInt(req.body.nComm) - 1;
-        if (req.files.fichiers.constructor === Array) {
+        if (req.files.fichiers.constructor === Array) { // doit refaire cette partie
             let updatePromises = [];
             try {
                 req.files.fichiers.forEach(item => {
                     let nomDeFichier = Math.round(1e4 * Math.random()).toString().concat("-", item.name);
                     let sentier = path.join(__dirname, 'uploads', nomDeFichier);
                     item.mv(sentier);
-                    updatePromises.push( // problème est ici!!!
+                    updatePromises.push(
                         db.collection(dbAChercher).updateOne(
                             { _id: idAChercher },
                             { $push: { [`properties.commentaires.${commAAjouter}.fichiers`]: nomDeFichier } },
@@ -187,20 +189,29 @@ const commentairesPhotos = async (req, res) => {
                 res.status(500).send(err);
             }
         } else {
-            const fichier = req.files.fichiers;
-            const nomDeFichier = Math.round(1e4 * Math.random()).toString().concat("-", fichier.name);
-            const sentier = path.join(__dirname, 'uploads', nomDeFichier);
+            const client = new ftp.Client();
+            const laPhoto = req.files.fichiers;
+            const nomDeFichier = Math.round(1e4 * Math.random()).toString().concat("-", laPhoto.name);
+            const sentier = '/telev/' + nomDeFichier;
             try {
-                await fichier.mv(sentier);
+                await client.access({
+                    host: FTP_HOST,
+                    user: FTP_USER,
+                    password: FTP_PASSWORD,
+                    secure: false
+                })
+                await client.uploadFrom(laPhoto.tempFilePath, sentier)
                 await db.collection(dbAChercher).updateOne(
                     { _id: idAChercher },
                     { $push: { [`properties.commentaires.${commAAjouter}.fichiers`]: nomDeFichier } },
                     { session }
                 );
-                res.status(201).json({ status: 201, message: 'Une photo téléversée!' });
+                await res.status(201).json({ status: 201, message: 'Une photo téléversée!' });
             } catch (err) {
                 console.error("erreur avec fichier", err);
                 res.status(500).send(err);
+            } finally {
+                client.close();
             }
         }
     } catch (err) {

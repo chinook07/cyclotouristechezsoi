@@ -15,8 +15,6 @@ const CarteCampings = ({ ajoutsFaits }) => {
     const icone2 = process.env.PUBLIC_URL + '/carteCampings/marqueur-orange.png';
     const icone3 = process.env.PUBLIC_URL + '/carteCampings/marqueur-rouge.png';
     const icone4 = process.env.PUBLIC_URL + '/carteCampings/marqueur-bleu.png';
-
-    console.log("process", process.env.PUBLIC_URL);
     
     const [lesSitesA, setLesSitesA] = useState({});
     const [lesSitesB, setLesSitesB] = useState({});
@@ -136,8 +134,6 @@ const CarteCampings = ({ ajoutsFaits }) => {
     // }
 
     const baseURL = process.env.NODE_ENV === 'production' ? 'https://ccs-serveur.onrender.com/api' : 'http://localhost:8000/api';
-
-    console.log(baseURL);
 
     useEffect(() => {
         fetch(`${baseURL}/tous-sites`)
