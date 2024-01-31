@@ -1,7 +1,7 @@
 # DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
-PassengerAppRoot "/home/touriste/serveur.touristechezsoi.ca"
+PassengerAppRoot "/home/touriste/ccs-serveur.onrender.com"
 PassengerBaseURI "/"
-PassengerNodejs "/home/touriste/nodevenv/serveur.touristechezsoi.ca/10/bin/node"
+PassengerNodejs "/home/touriste/nodevenv/ccs-serveur.onrender.com/10/bin/node"
 PassengerAppType node
 PassengerStartupFile server.js
 # DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END

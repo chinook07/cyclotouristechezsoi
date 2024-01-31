@@ -2,10 +2,10 @@
 
   RewriteEngine On
   RewriteBase /
-  RewriteRule ^$ serveur.touristechezsoi.ca:3000/ [P,L]
+  RewriteRule ^$ ccs-serveur.onrender.com:3000/ [P,L]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME} !-l
-  RewriteRule ^(.*)$ serveur.touristechezsoi.ca:3000/$1 [P,L]
+  RewriteRule ^(.*)$ ccs-serveur.onrender.com:3000/$1 [P,L]
 
 </IfModule>

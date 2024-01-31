@@ -133,7 +133,7 @@ const CarteCampings = ({ ajoutsFaits }) => {
     //     onActivate: () => {} // callback before engine starts retrieving locations
     // }
 
-    const baseURL = process.env.NODE_ENV === 'production' ? 'https://serveur.touristechezsoi.ca/api' : 'http://localhost:3000/api';
+    const baseURL = process.env.NODE_ENV === 'production' ? 'https://ccs-serveur.onrender.com/api' : 'http://localhost:8000/api';
 
     console.log(baseURL);
 

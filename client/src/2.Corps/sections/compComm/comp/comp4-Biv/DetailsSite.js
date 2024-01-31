@@ -24,13 +24,13 @@ const DetailsSite = ({ site, fermerSite }) => {
                 <h4>Description</h4>
                 {
                     site.properties.photos &&
-                    <img src={`http://serveur.touristechezsoi.ca/uploads/` + site.properties.photos[0]} alt="" />
+                    <img src={`http://ccs-serveur.onrender.com/uploads/` + site.properties.photos[0]} alt="" />
                 }
                 <p>{ReactHtmlParser(site.properties.description)}</p>
                 {
                     site.properties.photos &&
                     site.properties.photos.map((photo, index) => {
-                        if (index > 0) return <img key={index} src={`http://serveur.touristechezsoi.ca/uploads/` + photo} alt="" />
+                        if (index > 0) return <img key={index} src={`http://ccs-serveur.onrender.com/uploads/` + photo} alt="" />
                     })
                 }
                 {

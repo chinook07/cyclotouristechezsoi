@@ -14,7 +14,7 @@ import campingLaPatrie from "./images/camping-la-patrie.webp"
 const DormirGratuitement = () => {
     const [montrerAjoutCarte, setMontrerAjoutCarte] = useState(false);
     const [confirmation, setConfirmation] = useState(false);
-    const [ajoutsFaits, setAjoutsFaits] = useState(0)
+    const [ajoutsFaits, setAjoutsFaits] = useState(0);
 
     const alternerFormulaire = () => {
         if (montrerAjoutCarte) {
