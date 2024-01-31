@@ -111,8 +111,6 @@ const CarteAjout = () => {
             <Chargement />
         )
     }
-
-    
 }
 
 const Carte = styled(MapContainer)`

@@ -25,6 +25,10 @@ const closeSesame = async () => {
     console.log("disconnected!");
 }
 
+const testApi = async (req, res) => {
+    return res.status(200).json({ status: 200, message: "succès" })
+}
+
 const tousSites = async (req, res) => {
     await openSesame();
     const sites_a = await db.collection("s_non_officiels").find().toArray();
@@ -268,6 +272,7 @@ const commentaireSite = async (req, res) => {
 } // ok
 
 module.exports = {
+    testApi,
     tousSites,
     nouveauSite,
     televPhotos,

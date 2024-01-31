@@ -6,6 +6,7 @@ const fileUpload = require('express-fileupload');
 const PORT = process.env.PORT || 8000
 
 const {
+    testApi,
     nouveauSite,
     televPhotos,
     tousSites,
@@ -25,6 +26,7 @@ express()
     .use(express.json())
     .use(express.static("public"))
     .use(fileUpload())
+    .get("/api/test", testApi)
     .get("/api/tous-sites", tousSites)
     .post("/api/nouveau-site", nouveauSite)
     .post("/api/telev-photos", televPhotos)
