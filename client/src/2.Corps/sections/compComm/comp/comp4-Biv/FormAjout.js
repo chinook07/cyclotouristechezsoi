@@ -70,47 +70,50 @@ const FormAjout = ({ setConfirmation, setMontrerAjoutCarte, ajoutsFaits, setAjou
 
     const ajoutSite = async (e) => {
         e.preventDefault()
-        try {
-            const response = await fetch(`${baseURL}/nouveau-site`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                },
-                body: JSON.stringify({
-                    type: "Feature",
-                    properties: {
-                        name: champs.name,
-                        description: champs.description,
-                        annee: champs.annee,
-                        type: champs.type,
-                        dateAuj
+        if (coordAjout.lat !== undefined) {
+            try {
+                const response = await fetch(`${baseURL}/nouveau-site`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
                     },
-                    geometry: {
-                        type: "Point",
-                        coordinates: [coordAjout.lng, coordAjout.lat]
-                    },
-                    contributeur: {
-                        nom: champs.nom,
-                        courriel: champs.courriel
+                    body: JSON.stringify({
+                        type: "Feature",
+                        properties: {
+                            name: champs.name,
+                            description: champs.description,
+                            annee: champs.annee,
+                            type: champs.type,
+                            dateAuj
+                        },
+                        geometry: {
+                            type: "Point",
+                            coordinates: [coordAjout.lng, coordAjout.lat]
+                        },
+                        contributeur: {
+                            nom: champs.nom,
+                            courriel: champs.courriel
+                        }
+                    })
+                });
+                if (response.status === 201) {
+                    const result = await response.json();
+                    setConfirmation(true);
+                    if (champs.fichiers.length > 0) {
+                        await handleUploads(result);
                     }
-                })
-            });
-
-            if (response.status === 201) {
-                const result = await response.json();
-                setConfirmation(true);
-                if (champs.fichiers.length > 0) {
-                    await handleUploads(result);
+                    setMontrerAjoutCarte(false);
+                    let x = ajoutsFaits;
+                    setAjoutsFaits(x + 1);
+                } else {
+                    console.log("Failed to create a new site.");
                 }
-                setMontrerAjoutCarte(false);
-                let x = ajoutsFaits;
-                setAjoutsFaits(x + 1);
-            } else {
-                console.log("Failed to create a new site.");
+            } catch (err) {
+                console.log(err);
             }
-        } catch (err) {
-            console.log(err);
+        } else {
+            alert("Veuillez séléctionner un emplacement sur la carte!")
         }
     }
     
@@ -118,8 +121,6 @@ const FormAjout = ({ setConfirmation, setMontrerAjoutCarte, ajoutsFaits, setAjou
         <Wrapper
             onSubmit={ajoutSite}
             encType="multipart/form-data"
-            // action="https://formspree.io/f/mvodrepv"
-            // method="POST"
         >
             <fieldset>
                 <legend>Ajout d'un site de camping</legend>

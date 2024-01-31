@@ -66,7 +66,7 @@ const nouveauSite = async (req, res) => {
     )
     await closeSesame();
     return res.status(201).json({ status: 201, message: `nouveau site`, id: nombre })
-} // ok
+} // 
 
 const integrerPhotos = (description, liens) => {
     let lienDebut = '<img src=\"';
@@ -94,12 +94,19 @@ const televPhotos = async (req, res) => {
         const dbAChercher = req.body.type;
         const idAChercher = parseInt(req.body.id);
         if (req.files.fichiers.constructor === Array) {
+            const client = new ftp.Client();
             let updatePromises = [];
             try {
-                req.files.fichiers.forEach(item => {
+                await client.access({
+                    host: FTP_HOST,
+                    user: FTP_USER,
+                    password: FTP_PASSWORD,
+                    secure: false
+                })
+                for (const item of req.files.fichiers) {
                     let nomDeFichier = Math.round(1e4 * Math.random()).toString().concat("-", item.name);
-                    let sentier = path.join(__dirname, 'uploads', nomDeFichier);
-                    item.mv(sentier);
+                    const sentier = '/telev/' + nomDeFichier;
+                    await client.uploadFrom(item.tempFilePath, sentier)
                     updatePromises.push(
                         db.collection(dbAChercher).updateOne(
                             { _id: idAChercher },
@@ -107,19 +114,28 @@ const televPhotos = async (req, res) => {
                             { session }
                         )
                     );
-                });
+                };
                 await Promise.all(updatePromises);
                 res.status(201).json({ status: 201, message: 'Photos téléversés!' });
             } catch (err) {
                 console.error(err);
                 res.status(500).send(err);
+            } finally {
+                client.close();
             }
         } else {
-            const fichier = req.files.fichiers;
-            const nomDeFichier = Math.round(1e4 * Math.random()).toString().concat("-", fichier.name);
-            const sentier = path.join(__dirname, 'uploads', nomDeFichier);
+            const client = new ftp.Client();
+            const laPhoto = req.files.fichiers;
+            const nomDeFichier = Math.round(1e4 * Math.random()).toString().concat("-", laPhoto.name);
+            const sentier = '/telev/' + nomDeFichier;
             try {
-                await fichier.mv(sentier);
+                await client.access({
+                    host: FTP_HOST,
+                    user: FTP_USER,
+                    password: FTP_PASSWORD,
+                    secure: false
+                })
+                await client.uploadFrom(laPhoto.tempFilePath, sentier)
                 await db.collection(dbAChercher).updateOne(
                     { _id: idAChercher },
                     { $push: { "properties.photos": nomDeFichier } },
@@ -129,6 +145,8 @@ const televPhotos = async (req, res) => {
             } catch (err) {
                 console.error("erreur avec fichier", err);
                 res.status(500).send(err);
+            } finally {
+                client.close();
             }
         }
     } catch (err) {
@@ -139,7 +157,7 @@ const televPhotos = async (req, res) => {
             await closeSesame(session);
         }
     }
-}; // doit refaire avec FTP
+}; // ok
 
 const commentairesPhotos = async (req, res) => {
     let session;
@@ -167,13 +185,20 @@ const commentairesPhotos = async (req, res) => {
         }
         const idAChercher = parseInt(req.body.id);
         const commAAjouter = parseInt(req.body.nComm) - 1;
-        if (req.files.fichiers.constructor === Array) { // doit refaire cette partie
+        if (req.files.fichiers.constructor === Array) {
+            const client = new ftp.Client();
             let updatePromises = [];
             try {
-                req.files.fichiers.forEach(item => {
+                await client.access({
+                    host: FTP_HOST,
+                    user: FTP_USER,
+                    password: FTP_PASSWORD,
+                    secure: false
+                })
+                for (const item of req.files.fichiers) {
                     let nomDeFichier = Math.round(1e4 * Math.random()).toString().concat("-", item.name);
-                    let sentier = path.join(__dirname, 'uploads', nomDeFichier);
-                    item.mv(sentier);
+                    const sentier = '/telev/' + nomDeFichier;
+                    await client.uploadFrom(item.tempFilePath, sentier)
                     updatePromises.push(
                         db.collection(dbAChercher).updateOne(
                             { _id: idAChercher },
@@ -181,12 +206,14 @@ const commentairesPhotos = async (req, res) => {
                             { session }
                         )
                     );
-                });
+                }
                 await Promise.all(updatePromises);
                 res.status(201).json({ status: 201, message: 'Photos téléversés!' });
             } catch (err) {
                 console.error(err);
                 res.status(500).send(err);
+            } finally {
+                client.close();
             }
         } else {
             const client = new ftp.Client();

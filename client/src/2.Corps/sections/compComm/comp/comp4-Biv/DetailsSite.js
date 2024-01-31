@@ -7,6 +7,9 @@ import Actions from "./Actions";
 import Commentaires from "./Commentaires";
 
 const DetailsSite = ({ site, fermerSite }) => {
+
+    console.log(site);
+    
     return (
         <Wrapper id="nouveauIFrame">
             <Banniere>
