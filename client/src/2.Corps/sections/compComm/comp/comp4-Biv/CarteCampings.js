@@ -15,11 +15,13 @@ const CarteCampings = ({ ajoutsFaits }) => {
     const icone2 = process.env.PUBLIC_URL + '/carteCampings/marqueur-orange.png';
     const icone3 = process.env.PUBLIC_URL + '/carteCampings/marqueur-rouge.png';
     const icone4 = process.env.PUBLIC_URL + '/carteCampings/marqueur-bleu.png';
+    const icone5 = process.env.PUBLIC_URL + '/carteCampings/marqueur-gris.png';
     
     const [lesSitesA, setLesSitesA] = useState({});
     const [lesSitesB, setLesSitesB] = useState({});
     const [lesSitesC, setLesSitesC] = useState({});
     const [lesSitesZ, setLesSitesZ] = useState({});
+    const [lesSitesT, setLesSitesT] = useState({});
     const [cartePrete, setCartePrete] = useState(false);
     const [site, setSite] = useState();
     // const [position, setPosition] = useState([0, 0]);
@@ -57,6 +59,13 @@ const CarteCampings = ({ ajoutsFaits }) => {
         popupAnchor: [1, -34],
     });
 
+    const iconeGrise = new L.Icon({
+        iconUrl: icone5,
+        iconSize: [12, 20],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+    });
+
     const rendreCompatible = (donnees) => {
         let sitesA = {
             type: "FeatureCollection",
@@ -71,6 +80,10 @@ const CarteCampings = ({ ajoutsFaits }) => {
             features: []
         };
         let sitesZ = {
+            type: "FeatureCollection",
+            features: []
+        };
+        let sitesT = {
             type: "FeatureCollection",
             features: []
         };
@@ -90,10 +103,17 @@ const CarteCampings = ({ ajoutsFaits }) => {
             item.properties.type = "autre"
             sitesZ.features.push(item)
         })
+        if (donnees.test !== undefined) {
+            donnees.test.forEach(item => {
+                item.properties.type = "test"
+                sitesT.features.push(item)
+            })
+        }
         setLesSitesA(sitesA);
         setLesSitesB(sitesB);
         setLesSitesC(sitesC);
         setLesSitesZ(sitesZ);
+        setLesSitesT(sitesT);
     }
 
     const rappErreur = () => {
@@ -120,6 +140,9 @@ const CarteCampings = ({ ajoutsFaits }) => {
             case "autre":
                 layer.setIcon(iconeBleue);
                 break;
+            case "test":
+                layer.setIcon(iconeGrise);
+                break;
             default:
                 console.log(false);
         }
@@ -139,13 +162,10 @@ const CarteCampings = ({ ajoutsFaits }) => {
         fetch(`${baseURL}/tous-sites`)
             .then(res => res.json())
             .then(donnees => {
-                console.log("fetch");
                 rendreCompatible(donnees.collections);
             })
             .then(() => setCartePrete(true))
     }, [])
-
-    console.log("fetch again");
 
     return (
         <CarteComplete>
@@ -216,6 +236,16 @@ const CarteCampings = ({ ajoutsFaits }) => {
                                     {
                                         lesSitesZ.features.length &&
                                             <Sites data={lesSitesZ} key={`sitesZ-${ajoutsFaits}`} onEachFeature={(feature, layer) => {
+                                                surChaque(feature, layer)
+                                                layer.on('click', () => choisirSite(feature));
+                                            }
+                                            } />
+                                    }
+                                    </LayersControl.Overlay>
+                                    <LayersControl.Overlay name="test" checked>
+                                    {
+                                        lesSitesT.features.length &&
+                                            <Sites data={lesSitesT} key={`sitesT-${ajoutsFaits}`} onEachFeature={(feature, layer) => {
                                                 surChaque(feature, layer)
                                                 layer.on('click', () => choisirSite(feature));
                                             }

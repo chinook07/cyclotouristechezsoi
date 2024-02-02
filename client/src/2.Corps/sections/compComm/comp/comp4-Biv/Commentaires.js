@@ -18,7 +18,8 @@ const Commentaires = ({ site }) => {
                                         {
                                             item.fichiers.map((img, imgInd) => {
                                                 return (
-                                                    <img key={imgInd} alt="" src={`http://ccs-serveur.onrender.com/uploads/` + img} />
+                                                    // <img key={imgInd} alt="" src={`http://ccs-serveur.onrender.com/uploads/` + img} />
+                                                    <p key={imgInd}>Oups! La photo {img} devrait apparaitre ici!</p>
                                                 )
                                             })
                                         }

@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 8000
 const {
     testApi,
     nouveauSite,
+    photosDuSite,
     televPhotos,
     tousSites,
     commentaireSite,
@@ -30,6 +31,7 @@ express()
     }))
     .get("/api/test", testApi)
     .get("/api/tous-sites", tousSites)
+    .put("/api/photos-du-site", photosDuSite)
     .post("/api/nouveau-site", nouveauSite)
     .post("/api/telev-photos", televPhotos)
     .post("/api/commentaires-photos", commentairesPhotos)

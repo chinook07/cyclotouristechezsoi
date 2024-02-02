@@ -13,7 +13,7 @@ node_modules
 /build
 
 # temp
-/temp
+/tmp
 
 # misc
 .DS_Store

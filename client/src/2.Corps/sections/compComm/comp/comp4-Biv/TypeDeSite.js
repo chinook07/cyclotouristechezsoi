@@ -45,6 +45,16 @@ const TypeDeSite = ({mAJType}) => {
                     ></input>
                     <span>Autre</span>
                 </label>
+                <label>
+                    <input
+                        name="typeCamping"
+                        onChange={mAJType}
+                        required
+                        type="radio"
+                        value="s_tests"
+                    ></input>
+                    <span>Pour tests seulement</span>
+                </label>
             </div>
         </Wrapper>
     )
@@ -58,6 +68,9 @@ const Wrapper = styled.label`
         display: flex;
         flex-direction: column;
         margin-top: 10px;
+        label:last-child {
+            color: gray;
+        }
     }
 `
 

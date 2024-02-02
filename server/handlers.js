@@ -4,14 +4,7 @@ const fs = require('fs');
 require("dotenv").config();
 const { MONGO_URI, FTP_HOST, FTP_USER, FTP_PASSWORD } = process.env;
 
-const path = require('path');
-
-const options = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-};
-
-const client = new MongoClient(MONGO_URI, options);
+const client = new MongoClient(MONGO_URI);
 const db = client.db();
 
 const Cryptr = require('cryptr');
@@ -37,15 +30,50 @@ const tousSites = async (req, res) => {
     const sites_b = await db.collection("s_officiels").find().toArray();
     const sites_c = await db.collection("s_proprios").find().toArray();
     const sites_z = await db.collection("s_autres").find().toArray();
+    const sites_t = await db.collection("s_tests").find().toArray();
     await closeSesame();
     const collections = {
         "sites_non_officiels": sites_a,
         "sites_officiels": sites_b,
         "sites_proprios": sites_c,
-        "autres": sites_z
+        "autres": sites_z,
+        "test": sites_t
     }
     return res.status(200).json({ status: 200, collections, message: "Voici vos sites." })
 } // ok
+
+const photosDuSite = async (req, res) => {
+    const { photosOrigine, photosComm } = req.body;
+    const client = new ftp.Client();
+    try {
+        await client.access({
+            host: FTP_HOST,
+            user: FTP_USER,
+            password: FTP_PASSWORD,
+            secure: false
+        })
+        let tousPhotosOrigine = [];
+        for (const item of photosOrigine) {
+            let sentier = "/telev/" + item;
+            const buffer = await client.downloadTo(item, sentier);
+            console.log("buffer", buffer.toString());
+            tousPhotosOrigine.push({ filename: item, content: buffer.toString('base64') })
+        }
+        console.log(tousPhotosOrigine);
+        let tousPhotosComm = [];
+        for (const item of photosComm) {
+            let sentier = "/telev/" + item;
+            const buffer = await client.downloadTo(item, sentier);
+            tousPhotosComm.push({ filename: item, content: buffer.toString('base64') })
+        }
+        return res.status(200).json({ status: 200, message: "Détails du site.", tousPhotosComm: tousPhotosComm, tousPhotosOrigine: tousPhotosOrigine })
+    } catch (error) {
+        console.log("erreur", error);
+        client.close();
+    } finally {
+        client.close();
+    }
+}
 
 const nouveauSite = async (req, res) => {
     const { type, properties, geometry, contributeur } = req.body;
@@ -66,7 +94,7 @@ const nouveauSite = async (req, res) => {
     )
     await closeSesame();
     return res.status(201).json({ status: 201, message: `nouveau site`, id: nombre })
-} // 
+} // ok
 
 const integrerPhotos = (description, liens) => {
     let lienDebut = '<img src=\"';
@@ -180,6 +208,12 @@ const commentairesPhotos = async (req, res) => {
             case "s_autres":
                 dbAChercher = "s_autres"
                 break;
+            case "s_tests":
+                dbAChercher = "s_tests"
+                break;
+            case "test":
+                dbAChercher = "s_tests"
+                break;
             default:
                 break;
         }
@@ -267,8 +301,14 @@ const commentaireSite = async (req, res) => {
         case "autre":
             dbAChercher = "s_autres"
             break;
-        case "s_autres":
+        case "s_autres": // peut supprimer?
             dbAChercher = "s_autres"
+            break;
+        case "s_tests": // peut supprimer?
+            dbAChercher = "s_tests"
+            break;
+        case "test":
+            dbAChercher = "s_tests"
             break;
         default:
             break;
@@ -312,6 +352,7 @@ const commentaireSite = async (req, res) => {
 module.exports = {
     testApi,
     tousSites,
+    photosDuSite,
     nouveauSite,
     televPhotos,
     commentaireSite,

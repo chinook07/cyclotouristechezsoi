@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ReactHtmlParser from 'react-html-parser';
 
@@ -8,7 +9,62 @@ import Commentaires from "./Commentaires";
 
 const DetailsSite = ({ site, fermerSite }) => {
 
+    const [photosAChercher, setPhotosAChercher] = useState({});
+    const [photosPrets, setPhotosPrets] = useState({
+        origine: [],
+        commentaires: []
+    });
+
     console.log(site);
+
+    useEffect(() => {
+        let photosDuSite = {
+            "photosOrigine": [],
+            "photosComm" : []
+        };
+        if (site.properties.photos) {
+            site.properties.photos.forEach((item) => {
+                photosDuSite.photosOrigine.push(item)
+            })
+        }
+        if (site.properties.commentaires) {
+            site.properties.commentaires.forEach((comment) => {
+                if (comment.fichiers) {
+                    comment.fichiers.forEach((commPhoto) => {
+                        photosDuSite.photosComm.push(commPhoto)
+                    })
+                }
+            })
+        }
+        console.log(photosDuSite);
+        setPhotosAChercher(photosDuSite);
+    }, [])
+
+    const baseURL = process.env.NODE_ENV === 'production' ? 'https://ccs-serveur.onrender.com/api' : 'http://localhost:8000/api';
+
+    // reste à faire
+
+    useEffect(() => {
+        if (Object.keys(photosAChercher).length > 0 && (photosAChercher.photosOrigine.length > 0 || photosAChercher.photosComm.length > 0)) {
+            console.log(photosAChercher);
+            fetch(`${baseURL}/photos-du-site`, {
+                method: "PUT",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(photosAChercher)
+            })
+                .then(res => res.json())
+                .then(donnees => {
+                    console.log(donnees.tousPhotosOrigine);
+                    console.log("détails photos");
+                    setPhotosPrets({
+                        origine: donnees.tousPhotosOrigine,
+                        commentaires: donnees.tousPhotosComm
+                    })
+                })
+        }
+    }, [photosAChercher])
     
     return (
         <Wrapper id="nouveauIFrame">
@@ -26,16 +82,29 @@ const DetailsSite = ({ site, fermerSite }) => {
             <Description>
                 <h4>Description</h4>
                 {
+                    photosPrets.origine.length > 0 &&
+                    <>
+                        <p>Oups! La photo {photosPrets.origine[0].filename} devrait apparaitre ici!</p>
+                        <img src={`data:image/png;base64,${photosPrets.origine[0].content}`} alt="" />
+                    </>
+                }
+                {/* {
                     site.properties.photos &&
                     <img src={`http://ccs-serveur.onrender.com/uploads/` + site.properties.photos[0]} alt="" />
-                }
+                } */}
                 <p>{ReactHtmlParser(site.properties.description)}</p>
                 {
+                    photosPrets.origine.length &&
+                    photosPrets.origine.map((photo, index) => {
+                        if (index > 0) return <p key={index}>Oups! La photo {photo.filename} devrait apparaitre ici!</p>
+                    })
+                }
+                {/* {
                     site.properties.photos &&
                     site.properties.photos.map((photo, index) => {
                         if (index > 0) return <img key={index} src={`http://ccs-serveur.onrender.com/uploads/` + photo} alt="" />
                     })
-                }
+                } */}
                 {
                     site.properties.annee &&
                     <Ital>Visité en {site.properties.annee}</Ital>
