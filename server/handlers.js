@@ -1,14 +1,38 @@
 const { MongoClient } = require("mongodb");
 const ftp = require("basic-ftp");
 const fs = require('fs');
+const nodemailer = require("nodemailer");
 require("dotenv").config();
-const { MONGO_URI, FTP_HOST, FTP_USER, FTP_PASSWORD } = process.env;
+const { MONGO_URI, FTP_HOST, FTP_USER, FTP_PASSWORD, COURRIEL_USER, COURRIEL_PASSWORD } = process.env;
 
 const client = new MongoClient(MONGO_URI);
 const db = client.db();
 
 const Cryptr = require('cryptr');
 const cryptr = new Cryptr('myTotallySecretKey');
+
+const transporter = nodemailer.createTransport({
+    host: "mail.cyclotouristechezsoi.ca",
+    port: 465,
+    secure: true,
+    auth: {
+        user: COURRIEL_USER,
+        pass: COURRIEL_PASSWORD
+    }
+})
+
+const envoyerCourriel = async (properties, geometry, contributeur) => {
+    console.log("properties", properties);
+    console.log("geometry", geometry);
+    console.log("contributeur", contributeur);
+    const info = await transporter.sendMail({
+        from: "'Serveur CCS' <cyclotouristechezsoi@hotmail.ca>",
+        to: COURRIEL_USER,
+        subject: "Nouveau site ajouté sur CCS",
+        text: "Nouveau site ajouté sur CCS",
+        html: `Utilisateur ${contributeur.nom} a ajouté un site (type : ${properties.type}) ayant comme titre <i>${properties.name}</i> au ${geometry.coordinates[0]}, ${geometry.coordinates[1]}.`
+    })
+}
 
 const openSesame = async () => {
     await client.connect();
@@ -73,7 +97,7 @@ const photosDuSite = async (req, res) => {
     } finally {
         client.close();
     }
-}
+} // les photos ne sont pas lisibles
 
 const nouveauSite = async (req, res) => {
     const { type, properties, geometry, contributeur } = req.body;
@@ -92,6 +116,7 @@ const nouveauSite = async (req, res) => {
             contSecret: cryptr.encrypt(contributeur.courriel)
         }
     )
+    envoyerCourriel(properties, geometry, contributeur);
     await closeSesame();
     return res.status(201).json({ status: 201, message: `nouveau site`, id: nombre })
 } // ok
