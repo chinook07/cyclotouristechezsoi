@@ -2,12 +2,10 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 
 import DetailsSite from "./DetailsSite";
-import { MapContainer, TileLayer, ScaleControl, GeoJSON, Circle, LayersControl, useMapEvents, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, ScaleControl, GeoJSON, LayersControl } from "react-leaflet";
 
-// import LocateControl from "leaflet.locatecontrol";
-// import LocateControl from 'react-leaflet-locate-control';
 import L from "leaflet";
-// import Logo from "../../../../../images/icones/logo.png"
+import Chargement from "../../../../../CompReutilisables/Chargement";
 
 const CarteCampings = ({ ajoutsFaits }) => {
     
@@ -24,12 +22,7 @@ const CarteCampings = ({ ajoutsFaits }) => {
     const [lesSitesT, setLesSitesT] = useState({});
     const [cartePrete, setCartePrete] = useState(false);
     const [site, setSite] = useState();
-    // const [position, setPosition] = useState([0, 0]);
-
-    // const iconeVelo = new L.Icon({
-    //     iconUrl: "https://cdn2.iconfinder.com/data/icons/leisure-entertainment-minimalist-icon-set/100/bike-01-256.png",
-    //     iconSize: [30, 30]
-    // })
+    const [cyclOSMFonctionne, setCyclOSMFonctionne] = useState();
 
     const iconeVerte = new L.Icon({
         iconUrl: icone1,
@@ -116,10 +109,6 @@ const CarteCampings = ({ ajoutsFaits }) => {
         setLesSitesT(sitesT);
     }
 
-    const rappErreur = () => {
-        console.log("erreur");
-    }
-
     const choisirSite = (feature) => {
         setSite(feature);
     }
@@ -148,13 +137,24 @@ const CarteCampings = ({ ajoutsFaits }) => {
         }
     }
 
-    // const locateOptions = {
-    //     position: 'topright',
-    //     strings: {
-    //         title: 'Show me where I am, yo!'
-    //     },
-    //     onActivate: () => {} // callback before engine starts retrieving locations
-    // }
+    const cyclOSMVerif = async () => {
+        const serveurs = ["a", "b", "c"];
+        let succes = false;
+        for (const serv of serveurs) {
+            const urlServ = `https://${serv}.tile-cyclosm.openstreetmap.fr/cyclosm/9/153/181.png`;
+            try {
+                const response = await fetch(urlServ); // essayer sans no-cors une fois en production
+                console.log("serveur", serv, "=", response.ok);
+                if (response.ok) {
+                    succes = true;
+                    break;
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        setCyclOSMFonctionne(succes);
+    }
 
     const baseURL = process.env.NODE_ENV === 'production' ? 'https://ccs-serveur.onrender.com/api' : 'http://localhost:8000/api';
 
@@ -164,123 +164,164 @@ const CarteCampings = ({ ajoutsFaits }) => {
             .then(donnees => {
                 rendreCompatible(donnees.collections);
             })
-            .then(() => setCartePrete(true))
+            .then(() => {
+                cyclOSMVerif()
+                setCartePrete(true)
+                console.log("carte prête");
+            })
     }, [])
 
-    return (
-        <CarteComplete>
-            {
-                cartePrete &&
-                    <Carte
-                    center={[46, -73]}
-                    zoom={8}
-                >
-                    <LayersControl position="topright">
-                        <>
-                            <LayersControl.BaseLayer name="CyclOSM" checked>
-                                <TileLayer
-                                    minZoom={5}
-                                    url="https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png"
-                                    attribution='<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases" title="CyclOSM - Open Bicycle render">CyclOSM</a> | Données: &copy; contributeurs <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                                />
-                            </LayersControl.BaseLayer>
-                            <LayersControl.BaseLayer name="OpenStreetMap">
-                                <TileLayer
-                                    minZoom={5}
-                                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                                    attribution='<a href="https://openstreetmap.org/copyright" title="OpenStreetMap Copyright">OpenStreetMap</a> | Données: &copy; contributeurs <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                                />
-                            </LayersControl.BaseLayer>
-                            <LayersControl.BaseLayer name="Esri (satellite)">
-                                <TileLayer
-                                    minZoom={5}
-                                    url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
-                                    attribution='Tuiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, et la communauté des utilisateurs des SIG'
-                                />
-                            </LayersControl.BaseLayer>
-                        </>
-                        {
-                            cartePrete &&
-                            <>
-                                <LayersControl.Overlay name="Sites non-officiels" checked>
-                                        {
-                                            lesSitesA.features.length &&
-                                            <Sites data={lesSitesA} key={`sitesA-${ajoutsFaits}`} onEachFeature={(feature, layer) => {
-                                                surChaque(feature, layer)
-                                                layer.on('click', () => choisirSite(feature));
+    if (cartePrete) {
+        return (
+            <CarteComplete>
+                {
+                    cartePrete &&
+                        <Carte
+                            center={[46, -73]}
+                            zoom={8}
+                        >
+                            <LayersControl position="topright">
+                                {
+                                    cyclOSMFonctionne &&
+                                    <>
+                                        <LayersControl.BaseLayer name="CyclOSM" checked>
+                                            <TileLayer
+                                                minZoom={5}
+                                                url="https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png"
+                                                attribution='<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases" title="CyclOSM - Open Bicycle render">CyclOSM</a> | Données: &copy; contributeurs <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                                            />
+                                        </LayersControl.BaseLayer>
+                                        <LayersControl.BaseLayer name="OpenStreetMap">
+                                            <TileLayer
+                                                minZoom={5}
+                                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                                attribution='<a href="https://openstreetmap.org/copyright" title="OpenStreetMap Copyright">OpenStreetMap</a> | Données: &copy; contributeurs <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                                            />
+                                        </LayersControl.BaseLayer>
+                                        <LayersControl.BaseLayer name="Esri (satellite)">
+                                            <TileLayer
+                                                minZoom={5}
+                                                url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+                                                attribution='Tuiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, et la communauté des utilisateurs des SIG'
+                                            />
+                                        </LayersControl.BaseLayer>
+                                    </>
+                                }
+                                {
+                                    cyclOSMFonctionne === false &&
+                                    <>
+                                        <LayersControl.BaseLayer name="OpenStreetMap" checked>
+                                            <TileLayer
+                                                minZoom={5}
+                                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                                attribution='<a href="https://openstreetmap.org/copyright" title="OpenStreetMap Copyright">OpenStreetMap</a> | Données: &copy; contributeurs <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                                            />
+                                        </LayersControl.BaseLayer>
+                                        <LayersControl.BaseLayer name="CyclOSM (présentement hors-service)">
+                                            <TileLayer
+                                                minZoom={5}
+                                                url="https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png"
+                                                attribution='<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases" title="CyclOSM - Open Bicycle render">CyclOSM</a> | Données: &copy; contributeurs <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                                            />
+                                        </LayersControl.BaseLayer>
+                                        <LayersControl.BaseLayer name="Esri (satellite)">
+                                            <TileLayer
+                                                minZoom={5}
+                                                url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+                                                attribution='Tuiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, et la communauté des utilisateurs des SIG'
+                                            />
+                                        </LayersControl.BaseLayer>
+                                    </>
+                                }
+                                
+                                {
+                                    cartePrete &&
+                                    <>
+                                        <LayersControl.Overlay name="Sites non-officiels" checked>
+                                            {
+                                                lesSitesA.features.length &&
+                                                <Sites
+                                                    data={lesSitesA}
+                                                    key={`sitesA-${ajoutsFaits}`}
+                                                    onEachFeature={(feature, layer) => {
+                                                        surChaque(feature, layer)
+                                                        layer.on('click', () => choisirSite(feature));
+                                                    }
+                                                } />
                                             }
-                                            } />
-                                    }
-                                </LayersControl.Overlay>
-                                <LayersControl.Overlay name="Sites pour cyclistes seulement OU à faible cout / gratuits" checked>
-                                    {
-                                        lesSitesB.features.length &&
-                                            <Sites data={lesSitesB} key={`sitesB-${ajoutsFaits}`} onEachFeature={(feature, layer) => {
-                                                surChaque(feature, layer)
-                                                layer.on('click', () => choisirSite(feature));
+                                        </LayersControl.Overlay>
+                                        <LayersControl.Overlay name="Sites pour cyclistes seulement OU à faible cout / gratuits" checked>
+                                            {
+                                                lesSitesB.features.length &&
+                                                <Sites
+                                                    data={lesSitesB}
+                                                    key={`sitesB-${ajoutsFaits}`}
+                                                    onEachFeature={(feature, layer) => {
+                                                        surChaque(feature, layer)
+                                                        layer.on('click', () => choisirSite(feature));
+                                                    }
+                                                } />
                                             }
-                                            } />
-                                    }
-                                </LayersControl.Overlay>
-                                <LayersControl.Overlay name="Sites offerts par un propriétaire" checked>
-                                    {
-                                        lesSitesC.features.length &&
-                                            <Sites data={lesSitesC} key={`sitesC-${ajoutsFaits}`} onEachFeature={(feature, layer) => {
-                                                surChaque(feature, layer)
-                                                layer.on('click', () => choisirSite(feature));
+                                        </LayersControl.Overlay>
+                                        <LayersControl.Overlay name="Sites offerts par un propriétaire" checked>
+                                            {
+                                                lesSitesC.features.length &&
+                                                <Sites
+                                                    data={lesSitesC}
+                                                    key={`sitesC-${ajoutsFaits}`}
+                                                    onEachFeature={(feature, layer) => {
+                                                        surChaque(feature, layer)
+                                                        layer.on('click', () => choisirSite(feature));
+                                                    }
+                                                } />
                                             }
-                                            } />
-                                    }
-                                </LayersControl.Overlay>
-                                <LayersControl.Overlay name="autres" checked>
-                                    {
-                                        lesSitesZ.features.length &&
-                                            <Sites data={lesSitesZ} key={`sitesZ-${ajoutsFaits}`} onEachFeature={(feature, layer) => {
-                                                surChaque(feature, layer)
-                                                layer.on('click', () => choisirSite(feature));
+                                        </LayersControl.Overlay>
+                                        <LayersControl.Overlay name="autres" checked>
+                                            {
+                                                lesSitesZ.features.length &&
+                                                <Sites
+                                                    data={lesSitesZ}
+                                                    key={`sitesZ-${ajoutsFaits}`}
+                                                    onEachFeature={(feature, layer) => {
+                                                        surChaque(feature, layer)
+                                                        layer.on('click', () => choisirSite(feature));
+                                                    }
+                                                } />
                                             }
-                                            } />
-                                    }
-                                    </LayersControl.Overlay>
-                                    <LayersControl.Overlay name="test" checked>
-                                    {
-                                        lesSitesT.features.length &&
-                                            <Sites data={lesSitesT} key={`sitesT-${ajoutsFaits}`} onEachFeature={(feature, layer) => {
-                                                surChaque(feature, layer)
-                                                layer.on('click', () => choisirSite(feature));
+                                            </LayersControl.Overlay>
+                                            <LayersControl.Overlay name="test" checked>
+                                            {
+                                                lesSitesT.features.length &&
+                                                <Sites
+                                                    data={lesSitesT}
+                                                    key={`sitesT-${ajoutsFaits}`}
+                                                    onEachFeature={(feature, layer) => {
+                                                        surChaque(feature, layer)
+                                                        layer.on('click', () => choisirSite(feature));
+                                                    }
+                                                } />
                                             }
-                                            } />
-                                    }
-                                </LayersControl.Overlay>
-                            </>
-                        }
-                        
-                    </LayersControl>
-                    {/* <LayersControl position="topleft">
-                        <button onClick={(e) => locateUser(e.target)}>Trouver mon emplacement</button>
-                        <LayersControl.Overlay checked name="Emplacement">
-                            {position[0] !== 0 && position[1] !== 0 && (
-                                <>
-                                    <Marker icon={iconeVelo} position={position}>
-                                        <Popup>Vous êtes ici!</Popup>
-                                    </Marker>
-                                    <Circle center={position} radius={100} />
-                                </>
-                            )}
-                        </LayersControl.Overlay>
-                    </LayersControl>
-                    */}
-                    <ScaleControl imperial={false} position="bottomleft" />
-                    {/* <LocateControl options={locateOptions} startDirectly/> */}
-                </Carte>
-            }
-            {
-                site !== undefined &&
-                <DetailsSite site={site} fermerSite={fermerSite} />
-            }
-        </CarteComplete>
-        
-    )
+                                        </LayersControl.Overlay>
+                                    </>
+                                }
+                            </LayersControl>
+                            <ScaleControl imperial={false} position="bottomleft" />
+                    </Carte>
+                }
+                {
+                    site !== undefined &&
+                    <DetailsSite site={site} fermerSite={fermerSite} />
+                }
+            </CarteComplete>
+        )
+    } else {
+        return (
+            <ChargementBoite>
+                <Chargement></Chargement>
+                <p>Chargement en cours</p>
+            </ChargementBoite>
+        )
+    }
 }
 
 const CarteComplete = styled.div`
@@ -301,6 +342,15 @@ const Sites = styled(GeoJSON)`
     fill: red;
     stroke: purple;
     color: var(--c1);
+`
+
+const ChargementBoite = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 600px;
+    max-height: 90vh;
 `
 
 export default CarteCampings;

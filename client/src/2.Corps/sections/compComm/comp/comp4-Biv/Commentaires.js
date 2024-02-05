@@ -38,8 +38,9 @@ const Commentaires = ({ site }) => {
 }
 
 const Comment = styled.div`
-    background-color: var(--c4);
+    background-color: var(--c0);
     border-radius: 5px;
+    color: var(--c4);
     margin: 10px;
     padding: 10px;
     img {

@@ -56,7 +56,7 @@ const DetailsSite = ({ site, fermerSite }) => {
             })
                 .then(res => res.json())
                 .then(donnees => {
-                    console.log(donnees.tousPhotosOrigine);
+                    console.log(donnees);
                     console.log("détails photos");
                     setPhotosPrets({
                         origine: donnees.tousPhotosOrigine,
@@ -85,26 +85,16 @@ const DetailsSite = ({ site, fermerSite }) => {
                     photosPrets.origine.length > 0 &&
                     <>
                         <p>Oups! La photo {photosPrets.origine[0].filename} devrait apparaitre ici!</p>
-                        <img src={`data:image/png;base64,${photosPrets.origine[0].content}`} alt="" />
+                        <img src={`data:image/jpg;base64,${photosPrets.origine[0].content}`} alt="" />
                     </>
                 }
-                {/* {
-                    site.properties.photos &&
-                    <img src={`http://ccs-serveur.onrender.com/uploads/` + site.properties.photos[0]} alt="" />
-                } */}
                 <p>{ReactHtmlParser(site.properties.description)}</p>
                 {
-                    photosPrets.origine.length &&
+                    photosPrets.origine.length > 1 &&
                     photosPrets.origine.map((photo, index) => {
                         if (index > 0) return <p key={index}>Oups! La photo {photo.filename} devrait apparaitre ici!</p>
                     })
                 }
-                {/* {
-                    site.properties.photos &&
-                    site.properties.photos.map((photo, index) => {
-                        if (index > 0) return <img key={index} src={`http://ccs-serveur.onrender.com/uploads/` + photo} alt="" />
-                    })
-                } */}
                 {
                     site.properties.annee &&
                     <Ital>Visité en {site.properties.annee}</Ital>
@@ -161,6 +151,9 @@ const Banniere = styled.div`
         &:hover {
             background-color: var(--c1);
         }
+    }
+    @media screen and (max-width: 500px) {
+        padding: 10px 5px;
     }
 `
 

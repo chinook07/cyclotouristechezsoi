@@ -145,7 +145,7 @@ const FormCommentaire = ({ site, rapport, setConfirmation }) => {
                         type="checkbox"
                         value={champs.legit}
                     />
-                    <label htmlFor="validComm">Je consens que ces informations sont exacts, dans la mesure du possible.</label>
+                    <label htmlFor="validComm">Je consens que ces informations sont exactes, dans la mesure du possible.</label>
                 </div>
                 <button type="submit">Envoyer</button>
             </fieldset>

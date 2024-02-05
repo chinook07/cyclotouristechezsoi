@@ -19,7 +19,7 @@ const Actions = ({ site }) => {
     }
     
     return (
-        <Wrapper>
+        <>
             <Boutons>
                 <button onClick={() => rapport("erreur")}>Signalez une erreur</button>
                 <button onClick={() => rapport("ajout")}>Ajouter un commentaire</button>
@@ -36,13 +36,9 @@ const Actions = ({ site }) => {
                 confirmation &&
                 <Confirm>Merci d'avoir contribué à la carte!</Confirm>
             }
-        </Wrapper>
+        </>
     )
 }
-
-const Wrapper = styled.div`
-    
-`
 
 const Boutons = styled.div`
     display: flex;
@@ -54,6 +50,9 @@ const Boutons = styled.div`
         cursor: pointer;
         padding: 10px 15px;
         width: fit-content;
+        &:hover {
+            background-color: var(--c0);
+        }
     }
 `
 

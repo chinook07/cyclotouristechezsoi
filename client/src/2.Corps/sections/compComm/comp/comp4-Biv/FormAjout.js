@@ -149,23 +149,28 @@ const FormAjout = ({ setConfirmation, setMontrerAjoutCarte, ajoutsFaits, setAjou
                         </div>
                     </Endroit>
                 }
-                <Name
-                    name="name"
-                    onChange={mAJName}
-                    placeholder="Titre"
-                    required
-                    value={champs.name}
-                />
-                <Description
-                    name="description"
-                    onChange={mAJDescription}
-                    placeholder="Description détaillée : accès, quiétude, services, etc."
-                    rows="10"
-                    required
-                    value={champs.description}
-                />
+                <Name>
+                    <label htmlFor="name">Choisissez un titre captivant pour votre site!</label>
+                    <input
+                        name="name"
+                        onChange={mAJName}
+                        placeholder="Titre"
+                        required
+                        value={champs.name}
+                    />
+                </Name>
+                <Description>
+                    <label htmlFor="description">Qu'est-ce qui rend ce site unique? Décrivez-le en quelques phrases!</label>
+                    <textarea
+                        name="description"
+                        onChange={mAJDescription}
+                        placeholder="Description détaillée : accès, quiétude, services, etc."
+                        rows="10"
+                        required
+                        value={champs.description}
+                    />
+                </Description>
                 <p>Il est fortement suggéré d'ajouter des photos de l'emplacement, dans le but de bâtir un répertoire de qualité.</p>
-                {/* <p>Le téléversement de photos est temporairement indisponible. Merci pour votre compréhension!</p> */}
                 {/* <LiensImgDESUET ajoutPhoto={ajoutPhoto} liens={liens} /> */}
                 <TelevPhotos mAJFichiers={mAJFichiers} />
                 <TypeDeSite mAJType={mAJType} />
@@ -189,6 +194,7 @@ const FormAjout = ({ setConfirmation, setMontrerAjoutCarte, ajoutsFaits, setAjou
                         }
                     </select>
                 </AnneeVisite>
+                <p>Vos coordonnées ne seront pas affichés sur la carte et ne serviront que si l'administrateur doit vous contacter en cas d'erreur.</p>
                 <Contributeur mAJNom={mAJNom} mAJCourriel={mAJCourriel} champs={champs} />
                 <Legit>
                     <input
@@ -209,11 +215,13 @@ const FormAjout = ({ setConfirmation, setMontrerAjoutCarte, ajoutsFaits, setAjou
 const Wrapper = styled.form`
     fieldset {
         border: none;
-        border-radius: 5px;
+        border-radius: 0 0 10px 10px;
+        margin: 0;
         legend {
             background-color: var(--c6);
             border-radius: 5px;
             color: var(--c0);
+            display: none;
             padding: 5px 10px;
         }
         background-color: var(--c2);
@@ -242,18 +250,27 @@ const Endroit = styled.div`
     }
 `
 
-const Name = styled.input`
-    border-radius: 5px;
-    margin: 15px 0;
-    padding: 10px;
-    width: 250px;
+const Name = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    input {
+        border-radius: 5px;
+        margin: 15px 0;
+        padding: 10px;
+    }
 `
 
-const Description = styled.textarea`
-    border-radius: 5px;
-    margin: 10px 0;
-    padding: 10px;
-    width: 100%;
+const Description = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    textarea {
+        border-radius: 5px;
+        margin: 10px 0;
+        padding: 10px;
+        width: 100%;
+    }
 `
 
 const AnneeVisite = styled.div`

@@ -46,7 +46,7 @@ const FormCorrection = ({ site }) => {
                         required
                         type="checkbox"
                     />
-                    <label htmlFor="validCorr">Je consens que ces informations sont exacts, dans la mesure du possible.</label>
+                    <label htmlFor="validCorr">Je consens que ces informations sont exactes, dans la mesure du possible.</label>
                 </Validation>
                 <button type="submit">Envoyer</button>
             </fieldset>

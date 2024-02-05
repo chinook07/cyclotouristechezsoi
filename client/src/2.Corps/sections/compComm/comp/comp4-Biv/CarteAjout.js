@@ -27,30 +27,39 @@ const CarteAjout = () => {
     const [cyclOSMFonctionne, setCyclOSMFonctionne] = useState();
     const [cartePrete, setCartePrete] = useState(false);
 
-    useEffect(() => {
-        cyclOSMVerif()
-    }, [])
-
     const cyclOSMVerif = async () => {
-        try {
-            const response = await fetch('https://a.tile-cyclosm.openstreetmap.fr/cyclosm/9/153/181.png', { mode: 'no-cors' }); // essayer sans no-cors une fois en production
-            response.ok ? setCyclOSMFonctionne(true) : setCyclOSMFonctionne(false);
-        } catch {
-            setCyclOSMFonctionne(false);
-        } finally {
-            setCartePrete(true)
+        const serveurs = ["a", "b", "c"];
+        let succes = false;
+        for (const serv of serveurs) {
+            const urlServ = `https://${serv}.tile-cyclosm.openstreetmap.fr/cyclosm/9/153/181.png`;
+            try {
+                const response = await fetch(urlServ); // essayer sans no-cors une fois en production
+                console.log("serveur", serv, "=", response.ok);
+                if (response.ok) {
+                    succes = true;
+                    break;
+                }
+            } catch (err) {
+                console.log(err);
+            }
         }
+        setCyclOSMFonctionne(succes);
+        setCartePrete(true);
     }
+
+    useEffect(() => {
+        cyclOSMVerif();
+    }, [])
 
     if (cartePrete) {
         return (
             <Carte
                 center={[46, -73]}
-                zoom={8}
+                zoom="8"
             >
                 <LayersControl position="topright">
                     {
-                        cyclOSMFonctionne === true &&
+                        cyclOSMFonctionne &&
                         <>
                             <LayersControl.BaseLayer name="CyclOSM" checked>
                                 <TileLayer

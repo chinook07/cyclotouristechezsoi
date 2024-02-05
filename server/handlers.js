@@ -22,9 +22,6 @@ const transporter = nodemailer.createTransport({
 })
 
 const envoyerCourriel = async (properties, geometry, contributeur) => {
-    console.log("properties", properties);
-    console.log("geometry", geometry);
-    console.log("contributeur", contributeur);
     const info = await transporter.sendMail({
         from: "'Serveur CCS' <cyclotouristechezsoi@hotmail.ca>",
         to: COURRIEL_USER,
@@ -80,8 +77,8 @@ const photosDuSite = async (req, res) => {
         for (const item of photosOrigine) {
             let sentier = "/telev/" + item;
             const buffer = await client.downloadTo(item, sentier);
-            console.log("buffer", buffer.toString());
-            tousPhotosOrigine.push({ filename: item, content: buffer.toString('base64') })
+            console.log("buffer", buffer);
+            tousPhotosOrigine.push({ filename: item, content: buffer })
         }
         console.log(tousPhotosOrigine);
         let tousPhotosComm = [];
@@ -90,7 +87,13 @@ const photosDuSite = async (req, res) => {
             const buffer = await client.downloadTo(item, sentier);
             tousPhotosComm.push({ filename: item, content: buffer.toString('base64') })
         }
-        return res.status(200).json({ status: 200, message: "Détails du site.", tousPhotosComm: tousPhotosComm, tousPhotosOrigine: tousPhotosOrigine })
+        res.set('Content-Type', 'image/jpg');
+        return res.status(200).json({
+            status: 200,
+            message: "Détails du site.",
+            tousPhotosComm: tousPhotosComm,
+            tousPhotosOrigine: tousPhotosOrigine
+        })
     } catch (error) {
         console.log("erreur", error);
         client.close();
