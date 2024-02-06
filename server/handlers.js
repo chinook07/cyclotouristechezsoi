@@ -47,12 +47,17 @@ const testApi = async (req, res) => {
 
 const tousSites = async (req, res) => {
     await openSesame();
-    const sites_a = await db.collection("s_non_officiels").find().toArray();
-    const sites_b = await db.collection("s_officiels").find().toArray();
-    const sites_c = await db.collection("s_proprios").find().toArray();
-    const sites_z = await db.collection("s_autres").find().toArray();
-    const sites_t = await db.collection("s_tests").find().toArray();
+    const [sites_a, sites_b, sites_c, sites_z, sites_t] = await Promise.all([
+        db.collection("s_non_officiels").find().toArray(),
+        db.collection("s_officiels").find().toArray(),
+        db.collection("s_proprios").find().toArray(),
+        db.collection("s_autres").find().toArray(),
+        db.collection("s_tests").find().toArray()
+    ])
     await closeSesame();
+    if (sites_a.length === 0) {
+        return res.status(500).json({ status: 500, message: "Pas de Mongo aujourd'hui" })
+    }
     const collections = {
         "sites_non_officiels": sites_a,
         "sites_officiels": sites_b,
@@ -107,10 +112,6 @@ const nouveauSite = async (req, res) => {
     await openSesame();
     const sites = await db.collection(properties.type).find().toArray();
     const nombre = parseInt(sites[sites.length - 1]._id) + 1;
-    // if (properties.photos.length > 0) {
-    //     let resultat = integrerPhotos(properties.description, properties.photos);
-    //     properties.description = resultat;
-    // }
     await db.collection(properties.type).insertOne({ _id: nombre, type, properties, geometry });
     await db.collection("contributeurs").insertOne(
         {

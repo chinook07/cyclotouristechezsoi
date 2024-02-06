@@ -19,17 +19,15 @@ const DormirGratuitement = () => {
     const alternerFormulaire = () => {
         if (montrerAjoutCarte) {
             setMontrerAjoutCarte(false)
-            console.log("fermer", ajoutsFaits);
+            console.log(ajoutsFaits);
             let x = ajoutsFaits;
             setAjoutsFaits(x + 1); // F5 la carte quand tu fermes le formulaire
         } else {
             setMontrerAjoutCarte(true)
-            console.log("ouvrir");
         }
     }
 
     const fermerMerci = () => {
-        console.log("fermer");
         setConfirmation(false);
     }
 
@@ -177,17 +175,13 @@ const CarteGoogle = styled.iframe`
 
 const Confirm = styled.div`
     background-color: var(--c6);
-    border-radius: 10px;
+    border-radius: 0 0 10px 10px;
     display: flex;
     gap: 10px;
-    /* justify-content: space-evenly; */
-    /* left: 50%; */
+    justify-content: center;
     margin: 0 auto;
     padding: 10px;
-    /* position: absolute; */
-    /* top: 50%; */
-    /* transform: translate(-50%, -50%); */
-    width: fit-content;
+    width: 100%;
     p {
         color: var(--c11);
         font-weight: bold;

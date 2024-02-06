@@ -23,6 +23,7 @@ const CarteCampings = ({ ajoutsFaits }) => {
     const [cartePrete, setCartePrete] = useState(false);
     const [site, setSite] = useState();
     const [cyclOSMFonctionne, setCyclOSMFonctionne] = useState();
+    const [mongoFonctionne, setMongoFonctionne] = useState(true);
 
     const iconeVerte = new L.Icon({
         iconUrl: icone1,
@@ -169,9 +170,10 @@ const CarteCampings = ({ ajoutsFaits }) => {
                 setCartePrete(true)
                 console.log("carte prête");
             })
+            .catch(() => setMongoFonctionne(false))
     }, [])
 
-    if (cartePrete) {
+    if (cartePrete && mongoFonctionne) {
         return (
             <CarteComplete>
                 {
@@ -313,6 +315,12 @@ const CarteCampings = ({ ajoutsFaits }) => {
                     <DetailsSite site={site} fermerSite={fermerSite} />
                 }
             </CarteComplete>
+        )
+    } else if (!mongoFonctionne) {
+        return (
+            <ChargementBoite>
+                <p>Désolé, la base de données ne répond pas. Veuillez réessayer plus tard.</p>
+            </ChargementBoite>
         )
     } else {
         return (
