@@ -2,18 +2,12 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 
 import DetailsSite from "./DetailsSite";
-import { MapContainer, TileLayer, ScaleControl, GeoJSON, LayersControl } from "react-leaflet";
-
+import CarteCouches from "./CarteCouches";
+import { MapContainer, ScaleControl } from "react-leaflet";
 import L from "leaflet";
 import Chargement from "../../../../../CompReutilisables/Chargement";
 
 const CarteCampings = ({ ajoutsFaits }) => {
-    
-    const icone1 = process.env.PUBLIC_URL + '/carteCampings/marqueur-vert.png';
-    const icone2 = process.env.PUBLIC_URL + '/carteCampings/marqueur-orange.png';
-    const icone3 = process.env.PUBLIC_URL + '/carteCampings/marqueur-rouge.png';
-    const icone4 = process.env.PUBLIC_URL + '/carteCampings/marqueur-bleu.png';
-    const icone5 = process.env.PUBLIC_URL + '/carteCampings/marqueur-gris.png';
     
     const [lesSitesA, setLesSitesA] = useState({});
     const [lesSitesB, setLesSitesB] = useState({});
@@ -25,89 +19,56 @@ const CarteCampings = ({ ajoutsFaits }) => {
     const [cyclOSMFonctionne, setCyclOSMFonctionne] = useState();
     const [mongoFonctionne, setMongoFonctionne] = useState(true);
 
-    const iconeVerte = new L.Icon({
-        iconUrl: icone1,
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-    });
+    const creerIcones = (iconeUrl) => {
+        return new L.Icon({
+            iconUrl: iconeUrl,
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+        })
+    }
 
-    const iconeJaune = new L.Icon({
-        iconUrl: icone2,
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-    });
-
-    const iconeRouge = new L.Icon({
-        iconUrl: icone3,
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-    });
-
-    const iconeBleue = new L.Icon({
-        iconUrl: icone4,
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-    });
+    const iconeVerte = creerIcones(process.env.PUBLIC_URL + '/carteCampings/marqueur-vert.png');
+    const iconeJaune = creerIcones(process.env.PUBLIC_URL + '/carteCampings/marqueur-orange.png');
+    const iconeRouge = creerIcones(process.env.PUBLIC_URL + '/carteCampings/marqueur-rouge.png');
+    const iconeBleue = creerIcones(process.env.PUBLIC_URL + '/carteCampings/marqueur-bleu.png');
 
     const iconeGrise = new L.Icon({
-        iconUrl: icone5,
+        iconUrl: process.env.PUBLIC_URL + '/carteCampings/marqueur-gris.png',
         iconSize: [12, 20],
         iconAnchor: [12, 41],
         popupAnchor: [1, -34],
     });
 
     const rendreCompatible = (donnees) => {
-        let sitesA = {
-            type: "FeatureCollection",
-            features: []
-        };
-        let sitesB = {
-            type: "FeatureCollection",
-            features: []
-        };
-        let sitesC = {
-            type: "FeatureCollection",
-            features: []
-        };
-        let sitesZ = {
-            type: "FeatureCollection",
-            features: []
-        };
-        let sitesT = {
-            type: "FeatureCollection",
-            features: []
-        };
-        donnees.sites_non_officiels.forEach(item => {
-            item.properties.type = "Site non-officiel"
-            sitesA.features.push(item)
+        let lettresDesRepertoires = ["A", "B", "C", "Z", "T"];
+        let sites = {};
+        lettresDesRepertoires.forEach(lettre => {
+            sites[`${lettre}`] = {
+                type: "FeatureCollection",
+                features: []
+            }
         })
-        donnees.sites_officiels.forEach(item => {
-            item.properties.type = "Site officiel pour cyclistes seulement OU à faible cout / gratuit"
-            sitesB.features.push(item)
-        })
-        donnees.sites_proprios.forEach(item => {
-            item.properties.type = "Site offert par un propriétaire"
-            sitesC.features.push(item)
-        })
-        donnees.autres.forEach(item => {
-            item.properties.type = "autre"
-            sitesZ.features.push(item)
-        })
-        if (donnees.test !== undefined) {
-            donnees.test.forEach(item => {
-                item.properties.type = "test"
-                sitesT.features.push(item)
-            })
-        }
-        setLesSitesA(sitesA);
-        setLesSitesB(sitesB);
-        setLesSitesC(sitesC);
-        setLesSitesZ(sitesZ);
-        setLesSitesT(sitesT);
+        let types = [
+            "Site non-officiel",
+            "Site officiel pour cyclistes seulement OU à faible cout / gratuit",
+            "Site offert par un propriétaire",
+            "autre",
+            "test"
+        ]
+        Object.keys(donnees).forEach((categorie, index) => {
+            if (donnees[categorie] !== undefined) {
+                donnees[categorie].forEach(item => {
+                    item.properties.type = types[index];
+                    sites[lettresDesRepertoires[index]].features.push(item)
+                })
+            }
+        });
+        setLesSitesA(sites.A);
+        setLesSitesB(sites.B);
+        setLesSitesC(sites.C);
+        setLesSitesZ(sites.Z);
+        setLesSitesT(sites.T);
     }
 
     const choisirSite = (feature) => {
@@ -182,131 +143,18 @@ const CarteCampings = ({ ajoutsFaits }) => {
                             center={[46, -73]}
                             zoom={8}
                         >
-                            <LayersControl position="topright">
-                                {
-                                    cyclOSMFonctionne &&
-                                    <>
-                                        <LayersControl.BaseLayer name="CyclOSM" checked>
-                                            <TileLayer
-                                                minZoom={5}
-                                                url="https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png"
-                                                attribution='<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases" title="CyclOSM - Open Bicycle render">CyclOSM</a> | Données: &copy; contributeurs <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                                            />
-                                        </LayersControl.BaseLayer>
-                                        <LayersControl.BaseLayer name="OpenStreetMap">
-                                            <TileLayer
-                                                minZoom={5}
-                                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                                                attribution='<a href="https://openstreetmap.org/copyright" title="OpenStreetMap Copyright">OpenStreetMap</a> | Données: &copy; contributeurs <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                                            />
-                                        </LayersControl.BaseLayer>
-                                        <LayersControl.BaseLayer name="Esri (satellite)">
-                                            <TileLayer
-                                                minZoom={5}
-                                                url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
-                                                attribution='Tuiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, et la communauté des utilisateurs des SIG'
-                                            />
-                                        </LayersControl.BaseLayer>
-                                    </>
-                                }
-                                {
-                                    cyclOSMFonctionne === false &&
-                                    <>
-                                        <LayersControl.BaseLayer name="OpenStreetMap" checked>
-                                            <TileLayer
-                                                minZoom={5}
-                                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                                                attribution='<a href="https://openstreetmap.org/copyright" title="OpenStreetMap Copyright">OpenStreetMap</a> | Données: &copy; contributeurs <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                                            />
-                                        </LayersControl.BaseLayer>
-                                        <LayersControl.BaseLayer name="CyclOSM (présentement hors-service)">
-                                            <TileLayer
-                                                minZoom={5}
-                                                url="https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png"
-                                                attribution='<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases" title="CyclOSM - Open Bicycle render">CyclOSM</a> | Données: &copy; contributeurs <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                                            />
-                                        </LayersControl.BaseLayer>
-                                        <LayersControl.BaseLayer name="Esri (satellite)">
-                                            <TileLayer
-                                                minZoom={5}
-                                                url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
-                                                attribution='Tuiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, et la communauté des utilisateurs des SIG'
-                                            />
-                                        </LayersControl.BaseLayer>
-                                    </>
-                                }
-                                
-                                {
-                                    cartePrete &&
-                                    <>
-                                        <LayersControl.Overlay name="Sites non-officiels" checked>
-                                            {
-                                                lesSitesA.features.length &&
-                                                <Sites
-                                                    data={lesSitesA}
-                                                    key={`sitesA-${ajoutsFaits}`}
-                                                    onEachFeature={(feature, layer) => {
-                                                        surChaque(feature, layer)
-                                                        layer.on('click', () => choisirSite(feature));
-                                                    }
-                                                } />
-                                            }
-                                        </LayersControl.Overlay>
-                                        <LayersControl.Overlay name="Sites pour cyclistes seulement OU à faible cout / gratuits" checked>
-                                            {
-                                                lesSitesB.features.length &&
-                                                <Sites
-                                                    data={lesSitesB}
-                                                    key={`sitesB-${ajoutsFaits}`}
-                                                    onEachFeature={(feature, layer) => {
-                                                        surChaque(feature, layer)
-                                                        layer.on('click', () => choisirSite(feature));
-                                                    }
-                                                } />
-                                            }
-                                        </LayersControl.Overlay>
-                                        <LayersControl.Overlay name="Sites offerts par un propriétaire" checked>
-                                            {
-                                                lesSitesC.features.length &&
-                                                <Sites
-                                                    data={lesSitesC}
-                                                    key={`sitesC-${ajoutsFaits}`}
-                                                    onEachFeature={(feature, layer) => {
-                                                        surChaque(feature, layer)
-                                                        layer.on('click', () => choisirSite(feature));
-                                                    }
-                                                } />
-                                            }
-                                        </LayersControl.Overlay>
-                                        <LayersControl.Overlay name="autres" checked>
-                                            {
-                                                lesSitesZ.features.length &&
-                                                <Sites
-                                                    data={lesSitesZ}
-                                                    key={`sitesZ-${ajoutsFaits}`}
-                                                    onEachFeature={(feature, layer) => {
-                                                        surChaque(feature, layer)
-                                                        layer.on('click', () => choisirSite(feature));
-                                                    }
-                                                } />
-                                            }
-                                            </LayersControl.Overlay>
-                                            <LayersControl.Overlay name="test" checked>
-                                            {
-                                                lesSitesT.features.length &&
-                                                <Sites
-                                                    data={lesSitesT}
-                                                    key={`sitesT-${ajoutsFaits}`}
-                                                    onEachFeature={(feature, layer) => {
-                                                        surChaque(feature, layer)
-                                                        layer.on('click', () => choisirSite(feature));
-                                                    }
-                                                } />
-                                            }
-                                        </LayersControl.Overlay>
-                                    </>
-                                }
-                            </LayersControl>
+                            <CarteCouches
+                                cyclOSMFonctionne={cyclOSMFonctionne}
+                                cartePrete={cartePrete}
+                                choisirSite={choisirSite}
+                                surChaque={surChaque}
+                                ajoutsFaits={ajoutsFaits}
+                                lesSitesA={lesSitesA}
+                                lesSitesB={lesSitesB}
+                                lesSitesC={lesSitesC}
+                                lesSitesZ={lesSitesZ}
+                                lesSitesT={lesSitesT}
+                            />
                             <ScaleControl imperial={false} position="bottomleft" />
                     </Carte>
                 }
@@ -343,13 +191,6 @@ const Carte = styled(MapContainer)`
     img {
         width: 100%;
     }
-`
-
-const Sites = styled(GeoJSON)`
-    background-color: green;
-    fill: red;
-    stroke: purple;
-    color: var(--c1);
 `
 
 const ChargementBoite = styled.div`
