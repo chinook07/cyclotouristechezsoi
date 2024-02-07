@@ -43,7 +43,7 @@ const Nav1Mobi = () => {
                                 onClick={montrerMenu}
                                 smooth={true}
                                 to="section1"
-                            >Visiting Quebec</ScrollLink>
+                            >Einleitung</ScrollLink>
                         </li>
                         <li>
                             <ScrollLink
@@ -51,7 +51,7 @@ const Nav1Mobi = () => {
                                 onClick={montrerMenu}
                                 smooth={true}
                                 to="section2"
-                            >Getting in</ScrollLink>
+                            >Einreisen</ScrollLink>
                         </li>
                         <li>
                             <ScrollLink
@@ -59,7 +59,7 @@ const Nav1Mobi = () => {
                                 onClick={montrerMenu} 
                                 smooth={true} 
                                 to="section3"
-                            >Places to ride</ScrollLink>
+                            >Radrouten</ScrollLink>
                         </li>
                         <li>
                             <ScrollLink 
@@ -67,7 +67,7 @@ const Nav1Mobi = () => {
                                 onClick={montrerMenu} 
                                 smooth={true} 
                                 to="section4"
-                            >Getting around</ScrollLink>
+                            >Verkehrsmittel</ScrollLink>
                         </li>
                         <li>
                             <ScrollLink 
@@ -75,7 +75,7 @@ const Nav1Mobi = () => {
                                 onClick={montrerMenu} 
                                 smooth={true} 
                                 to="section5"
-                            >Spending the night</ScrollLink>
+                            >Übernachten</ScrollLink>
                         </li>
                         <li>
                             <ScrollLink
@@ -83,10 +83,10 @@ const Nav1Mobi = () => {
                                 onClick={montrerMenu} 
                                 smooth={true} 
                                 to="section6"
-                            >About</ScrollLink>
+                            >Über mich</ScrollLink>
                         </li>
                         <Langue onClick={handleLang}>
-                            <span>EN</span>
+                            <span>DE</span>
                             <span><FontAwesomeIcon icon={faGlobeEurope}/></span>
                         </Langue>
                         {

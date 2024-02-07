@@ -45,21 +45,21 @@ const Nav1 = () => {
                         offset={-52}
                         smooth={true}
                         to="section4"
-                    >Getting around</ScrollLink>
+                    >Verkehrsmittel</ScrollLink>
                 </li>
                 <li>
                     <ScrollLink
                         offset={-52}
                         smooth={true}
                         to="section5"
-                    >Spending the night</ScrollLink>
+                    >Übernachten</ScrollLink>
                 </li>
                 <li>
                     <ScrollLink
                         offset={-52}
                         smooth={true}
                         to="section6"
-                    >About</ScrollLink>
+                    >Über mich</ScrollLink>
                 </li>
             </Menu>
             <Langue onClick={handleLang}>

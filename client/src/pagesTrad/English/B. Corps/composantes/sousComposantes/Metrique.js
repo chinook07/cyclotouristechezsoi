@@ -81,7 +81,7 @@ const Cercle = styled.span`
     right: 0;
     top: 0;
     transition: 0.4s;
-    &:before {
+    &::before {
         background-color: white;
         border-radius: 50%;
         bottom: 4px;
