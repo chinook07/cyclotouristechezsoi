@@ -12,33 +12,33 @@ const db = client.db();
 const Cryptr = require('cryptr');
 const cryptr = new Cryptr('myTotallySecretKey');
 
-const openSesame = async () => {
+const ouvrirMongo = async () => {
     await client.connect();
-    console.log("connected!");
+    console.log("connecté à Mongo!");
 }
 
-const closeSesame = async () => {
+const fermerMongo = async () => {
     await client.close();
-    console.log("disconnected!");
+    console.log("déconnecté de Mongo!");
 }
 
 const chercherCourriel = async (req, res) => {
     const id = parseInt((req.params).id)
-    await openSesame();
+    await ouvrirMongo();
     const resultat = await db.collection("contributeurs").findOne({ _id: id })
     if (resultat.contSecret) {
         const courrielDec = cryptr.decrypt(resultat.contSecret);
-        await closeSesame();
+        await fermerMongo();
         return res.status(200).json({ status: 200, id, courrielDec })
     } else {
-        await closeSesame();
+        await fermerMongo();
         return res.status(404).json({ status: 404, "message": "pas de courriel à déchiffrer" })
     }
 }
 
 const chercherCourrielCommentaire = async (req, res) => {
     const id = parseInt((req.params).id);
-    await openSesame();
+    await ouvrirMongo();
     const resultat = await db.collection("contributeurs").findOne({ _id: id });
     let tousCommentaires = [];
     resultat.commentaires.forEach(element => {
@@ -49,7 +49,7 @@ const chercherCourrielCommentaire = async (req, res) => {
             })
         }
     });
-    await closeSesame();
+    await fermerMongo();
     return res.status(200).json({ status: 200, id, tousCommentaires })
 }
 

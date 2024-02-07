@@ -7,12 +7,12 @@ const PORT = process.env.PORT || 8000
 
 const {
     testApi,
-    nouveauSite,
-    photosDuSite,
-    televPhotos,
     tousSites,
-    commentaireSite,
-    commentairesPhotos
+    photosDuSite,
+    nouveauSite,
+    nouveauSitePhoto,
+    nouveauCommentaire,
+    nouveauCommentairePhoto
 } = require("./handlers");
 
 const {
@@ -26,16 +26,14 @@ express()
     .options("https://www.cyclotouristechezsoi.ca", cors())
     .use(express.json())
     .use(express.static("public"))
-    .use(fileUpload({
-        useTempFiles: true
-    }))
+    .use(fileUpload({useTempFiles: true}))
     .get("/api/test", testApi)
     .get("/api/tous-sites", tousSites)
     .put("/api/photos-du-site", photosDuSite)
     .post("/api/nouveau-site", nouveauSite)
-    .post("/api/telev-photos", televPhotos)
-    .post("/api/commentaires-photos", commentairesPhotos)
-    .put("/api/commentaire-site", commentaireSite)
+    .post("/api/telev-photos", nouveauSitePhoto)
+    .put("/api/commentaire-site", nouveauCommentaire)
+    .post("/api/commentaires-photos", nouveauCommentairePhoto)
     .get("/api/courriel/:id", chercherCourriel)
     .get("/api/courriel-commentaire/:id", chercherCourrielCommentaire)
     .get("*", (req, res) => {
@@ -44,4 +42,4 @@ express()
             message: "Désolé, erreur🚲!"
         })
     })
-    .listen(PORT, () => console.log(`Listening on port ${PORT}`));
+    .listen(PORT, () => console.log(`Écoute sur le port ${PORT}`));

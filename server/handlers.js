@@ -1,17 +1,16 @@
 const { MongoClient } = require("mongodb");
 const ftp = require("basic-ftp");
-const fs = require('fs');
-const nodemailer = require("nodemailer");
+const Cryptr = require('cryptr');
+const { createTransport } = require("nodemailer");
 require("dotenv").config();
 const { MONGO_URI, FTP_HOST, FTP_USER, FTP_PASSWORD, COURRIEL_USER, COURRIEL_PASSWORD } = process.env;
 
 const client = new MongoClient(MONGO_URI);
 const db = client.db();
 
-const Cryptr = require('cryptr');
 const cryptr = new Cryptr('myTotallySecretKey');
 
-const transporter = nodemailer.createTransport({
+const transporter = createTransport({
     host: "mail.cyclotouristechezsoi.ca",
     port: 465,
     secure: true,
@@ -31,22 +30,22 @@ const envoyerCourriel = async (properties, geometry, contributeur) => {
     })
 }
 
-const openSesame = async () => {
+const ouvrirMongo = async () => {
     await client.connect();
-    console.log("connected!");
+    console.log("connecté à Mongo!");
 }
 
-const closeSesame = async () => {
+const fermerMongo = async () => {
     await client.close();
-    console.log("disconnected!");
+    console.log("déconnecté de Mongo!");
 }
 
 const testApi = async (req, res) => {
     return res.status(200).json({ status: 200, message: "succès" })
 }
 
-const tousSites = async (req, res) => {
-    await openSesame();
+const tousSites = async (req, res) => { // aller chercher tous les sites
+    await ouvrirMongo();
     const [sites_a, sites_b, sites_c, sites_z, sites_t] = await Promise.all([
         db.collection("s_non_officiels").find().toArray(),
         db.collection("s_officiels").find().toArray(),
@@ -54,7 +53,7 @@ const tousSites = async (req, res) => {
         db.collection("s_autres").find().toArray(),
         db.collection("s_tests").find().toArray()
     ])
-    await closeSesame();
+    await fermerMongo();
     if (sites_a.length === 0) {
         return res.status(500).json({ status: 500, message: "Pas de Mongo aujourd'hui" })
     }
@@ -68,7 +67,7 @@ const tousSites = async (req, res) => {
     return res.status(200).json({ status: 200, collections, message: "Voici vos sites." })
 } // ok
 
-const photosDuSite = async (req, res) => {
+const photosDuSite = async (req, res) => { // aller chercher les photos d'un site (et ses commentaires) de particulier
     const { photosOrigine, photosComm } = req.body;
     const client = new ftp.Client();
     try {
@@ -107,9 +106,9 @@ const photosDuSite = async (req, res) => {
     }
 } // les photos ne sont pas lisibles
 
-const nouveauSite = async (req, res) => {
+const nouveauSite = async (req, res) => { // créer un nouveau site et l'ajouter sur la carte
     const { type, properties, geometry, contributeur } = req.body;
-    await openSesame();
+    await ouvrirMongo();
     const sites = await db.collection(properties.type).find().toArray();
     const nombre = parseInt(sites[sites.length - 1]._id) + 1;
     await db.collection(properties.type).insertOne({ _id: nombre, type, properties, geometry });
@@ -121,33 +120,14 @@ const nouveauSite = async (req, res) => {
         }
     )
     envoyerCourriel(properties, geometry, contributeur);
-    await closeSesame();
+    await fermerMongo();
     return res.status(201).json({ status: 201, message: `nouveau site`, id: nombre })
 } // ok
 
-const integrerPhotos = (description, liens) => {
-    let lienDebut = '<img src=\"';
-    let lienFin = '" height=\"200\" width=\"100%\" /><br><br>';
-    let listeLiensGarni = [];
-    liens.forEach(url => {
-        let urlGarni = lienDebut.concat(url, lienFin);
-        listeLiensGarni.push(urlGarni);
-    });
-    let resultat = listeLiensGarni[0].concat(description, "<br><br>");
-    if (listeLiensGarni.length > 0) {
-        listeLiensGarni.forEach((lien, index) => {
-            if (index > 0) {
-                resultat += lien;
-            }
-        })
-    }
-    return resultat;
-} // désuet
-
-const televPhotos = async (req, res) => {
+const nouveauSitePhoto = async (req, res) => { // ajouter des photos sur un nouveau site
     let session;
     try {
-        session = await openSesame();
+        session = await ouvrirMongo();
         const dbAChercher = req.body.type;
         const idAChercher = parseInt(req.body.id);
         if (req.files.fichiers.constructor === Array) {
@@ -211,15 +191,98 @@ const televPhotos = async (req, res) => {
         res.status(500).send(err);
     } finally {
         if (session) {
-            await closeSesame(session);
+            await fermerMongo(session);
         }
     }
 }; // ok
 
-const commentairesPhotos = async (req, res) => {
+const integrerPhotos = (description, liens) => { // fonction désuète
+    let lienDebut = '<img src=\"';
+    let lienFin = '" height=\"200\" width=\"100%\" /><br><br>';
+    let listeLiensGarni = [];
+    liens.forEach(url => {
+        let urlGarni = lienDebut.concat(url, lienFin);
+        listeLiensGarni.push(urlGarni);
+    });
+    let resultat = listeLiensGarni[0].concat(description, "<br><br>");
+    if (listeLiensGarni.length > 0) {
+        listeLiensGarni.forEach((lien, index) => {
+            if (index > 0) {
+                resultat += lien;
+            }
+        })
+    }
+    return resultat;
+} // désuet
+
+const nouveauCommentaire = async (req, res) => { // ajouter un commentaire sur un site existant
+    const { _id, properties, contributeur } = req.body;
+    let dbAChercher;
+    switch (properties.type) {
+        case "officiel":
+            dbAChercher = "s_officiels"
+            break;
+        case "non-officiel":
+            dbAChercher = "s_non_officiels"
+            break;
+        case "proprio":
+            dbAChercher = "s_proprios"
+            break;
+        case "autre":
+            dbAChercher = "s_autres"
+            break;
+        case "s_autres": // peut supprimer?
+            dbAChercher = "s_autres"
+            break;
+        case "s_tests": // peut supprimer?
+            dbAChercher = "s_tests"
+            break;
+        case "test":
+            dbAChercher = "s_tests"
+            break;
+        default:
+            break;
+    }
+    await ouvrirMongo();
+    const found = await db.collection(dbAChercher).findOne({ _id: _id });
+    let nDeCommentaires;
+    if (found.properties.commentaires) {
+        nDeCommentaires = found.properties.commentaires.length + 1;
+    } else {
+        nDeCommentaires = 1;
+    }
+    await db.collection(dbAChercher).updateOne(
+        { _id: _id },
+        {
+            $push: {
+                "properties.commentaires": {
+                    description: properties.description,
+                    annee: properties.annee
+                }
+            }
+        }
+    );
+    const commentRacc = properties.description.slice(0, 25);
+    await db.collection("contributeurs").updateOne(
+        { _id: _id },
+        {
+            $push: {
+                "commentaires": {
+                    commentaire: commentRacc,
+                    contributeur: contributeur,
+                    contSecret: cryptr.encrypt(contributeur.courriel)
+                }
+            }
+        }
+    )
+    await fermerMongo();
+    return res.status(200).json({ status: 200, message: `commentaire ajouté`, nDeCommentaires })
+} // ok
+
+const nouveauCommentairePhoto = async (req, res) => { // ajouter des photos lors d'un ajout de commentaire
     let session;
     try {
-        session = await openSesame();
+        session = await ouvrirMongo();
         let dbAChercher;
         switch (req.body.type) {
             case "officiel":
@@ -309,81 +372,17 @@ const commentairesPhotos = async (req, res) => {
         res.status(500).send(err);
     } finally {
         if (session) {
-            await closeSesame(session);
+            await fermerMongo(session);
         }
     }
 }; // ok
-
-const commentaireSite = async (req, res) => {
-    const { _id, properties, contributeur } = req.body;
-    let dbAChercher;
-    switch (properties.type) {
-        case "officiel":
-            dbAChercher = "s_officiels"
-            break;
-        case "non-officiel":
-            dbAChercher = "s_non_officiels"
-            break;
-        case "proprio":
-            dbAChercher = "s_proprios"
-            break;
-        case "autre":
-            dbAChercher = "s_autres"
-            break;
-        case "s_autres": // peut supprimer?
-            dbAChercher = "s_autres"
-            break;
-        case "s_tests": // peut supprimer?
-            dbAChercher = "s_tests"
-            break;
-        case "test":
-            dbAChercher = "s_tests"
-            break;
-        default:
-            break;
-    }
-    await openSesame();
-    const found = await db.collection(dbAChercher).findOne({ _id: _id });
-    let nDeCommentaires;
-    if (found.properties.commentaires) {
-        nDeCommentaires = found.properties.commentaires.length + 1;
-    } else {
-        nDeCommentaires = 1;
-    }
-    await db.collection(dbAChercher).updateOne(
-        { _id: _id },
-        {
-            $push: {
-                "properties.commentaires": {
-                    description: properties.description,
-                    annee: properties.annee
-                }
-            }
-        }
-    );
-    const commentRacc = properties.description.slice(0, 25);
-    await db.collection("contributeurs").updateOne(
-        { _id: _id },
-        {
-            $push: {
-                "commentaires": {
-                    commentaire: commentRacc,
-                    contributeur: contributeur,
-                    contSecret: cryptr.encrypt(contributeur.courriel)
-                }
-            }
-        }
-    )
-    await closeSesame();
-    return res.status(200).json({ status: 200, message: `commentaire ajouté`, nDeCommentaires })
-} // ok
 
 module.exports = {
     testApi,
     tousSites,
     photosDuSite,
     nouveauSite,
-    televPhotos,
-    commentaireSite,
-    commentairesPhotos
+    nouveauSitePhoto,
+    nouveauCommentaire,
+    nouveauCommentairePhoto
 }
