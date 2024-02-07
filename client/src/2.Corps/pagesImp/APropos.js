@@ -36,7 +36,7 @@ const APropos = () => {
             </div>
             <div>
                 <h3>Vous avez besoin d'un site web comme celui-ci?</h3>
-                <p>N'hésitez pas à <Link to="/contact">me contacter</Link> pour voir si je peux vous aider à réaliser votre projet. J'ai bâti ce site web par moi-même en apprenant des langues de programmation, d'abord en HTML/CSS/JavaScript, puis en React.js. Il me fera plaisir de trouver <ExternalLink href="https://www.linkedin.com/in/nicolazoghbi/">un autre défi</ExternalLink> à surmonter!</p>
+                <p>N'hésitez pas à <Link to="/contact">me contacter</Link> pour voir si je peux vous aider à réaliser votre projet. J'ai bâti ce site web par moi-même en apprenant des langues de programmation, d'abord en HTML/CSS/JavaScript, puis en React/Node. Il me fera plaisir de trouver <ExternalLink href="https://www.linkedin.com/in/nicolazoghbi/">un autre défi</ExternalLink> à surmonter!</p>
             </div>
         </>
     )
