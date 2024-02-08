@@ -27,7 +27,7 @@ const Synthese = () => {
             </section>
             <section>
                 <h2>Recherche par ville</h2>
-                <p>Attention! Sont exclus des résultats la plupart des circuits d'autobus qui ne sont en opération que dans la sens du pointe, c'est-à-dire de la banlieue vers le centre-ville le matin, et vice-versa.</p>
+                <p>Attention! Sont exclus des résultats la plupart des circuits d'autobus qui ne sont en opération que dans la direction du pointe, c'est-à-dire de la banlieue vers le centre-ville le matin, et vice-versa.</p>
                 <Recherche setRecherchee={setRecherchee} setVilleSouhaitee={setVilleSouhaitee} />
                 {
                     recherchee &&
