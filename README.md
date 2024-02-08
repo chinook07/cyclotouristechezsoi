@@ -12,8 +12,12 @@ Oui, sur [Cyclotouriste chez soi](https://cyclotouristechezsoi.ca/)!
 
 ## Quelles technologies sont utilisées?
 
-Le site est fait en React.js, avec un petit backend en Node.js / Express qui sera mis en service éventuellement. En terme d'API, je me servirai de celui de Leaflet pour créer des cartes.
+Le site est fait en React.js, avec un petit backend en Node.js / Express. En terme d'API, je me sers de celui de Leaflet pour créer des cartes.
 
 ## Quand est-ce que le projet sera complet?
 
-Tout le front-end a été complété en décembre 2022, avec quelques ajustements à venir. Le back-end sera déployé dans un deuxième temps.
+Tout le front-end a été complété en décembre 2022, avec quelques ajustements à venir. Le back-end a enfin été déployé en janvier 2024.
+
+## Si je veux déployer le projet en local, est-ce qu'il me manque quelque chose?
+
+Oui, le fichier .env, avec les accès à Mongo, mon FTP et mon adresse courriel.
