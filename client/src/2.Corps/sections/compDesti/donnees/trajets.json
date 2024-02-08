@@ -561,7 +561,8 @@
         "deA": [
             "Montréal",
             "New York"
-        ]
+        ],
+        "sortieRapide": "prendre le REM (en dehors des heures de pointe) à la station du Quartier (Brossard). En se synchronisant avec les heures plus restrictives des trains exo, on peut aussi commencer à la gare Candiac et filer à travers la campagne vers St-Jean-sur-Richelieu."
     },
     {
         "id": 15,
@@ -639,7 +640,8 @@
         "deA": [
             "Mont-Laurier",
             "Montréal"
-        ]
+        ],
+        "sortieRapide": "prendre le train St-Jérôme–Montréal (s'arrête à Laval en fin de semaine), ou le métro à la station de la Concorde."
     },
     {
         "id": 17,
@@ -719,7 +721,8 @@
         "deA": [
             "Montréal",
             "Beaupré"
-        ]
+        ],
+        "sortieRapide": "prendre le métro à la station Honoré-Beaugrand, ou encore mieux, la navette fluviale Vieux-Port–Pointe-aux-Trembles."
     },
     {
         "id": 19,
@@ -760,7 +763,8 @@
         "deA": [
             "Côteau-du-Lac",
             "Lévis"
-        ]
+        ],
+        "sortieRapide": "pour rouler vers le sud-ouest, prendre le train de banlieue Montréal–Ste-Catherine ou la navette fluviale de/vers Châteauguay. Pour rouler vers Bécancour et Lévis, prendre une des deux navettes fluviales suivantes : Vieux-Port–Boucherville ou Vieux-Port–Pointe-aux-Trembles–Varennes."
     },
     {
         "id": 20,
@@ -801,7 +805,8 @@
         "deA": [
             "Montréal",
             "Sherbrooke"
-        ]
+        ],
+        "sortieRapide": "prendre le REM (en dehors des heures de pointe) à la station du Quartier (Brossard). En se synchronisant avec les heures plus restrictives des trains exo, on peut aussi commencer à la gare Candiac et filer à travers la campagne vers St-Jean-sur-Richelieu."
     },
     {
         "id": 21,
@@ -844,7 +849,8 @@
         "deA": [
             "Gatineau–Ottawa",
             "Montréal"
-        ]
+        ],
+        "sortieRapide": "prendre le métro à la station Henri-Bourassa."
     },
     {
         "id": 22,
@@ -885,7 +891,8 @@
         "deA": [
             "Ottawa–Gatineau",
             "Montréal"
-        ]
+        ],
+        "sortieRapide": "prendre le train Vaudreuil–Montréal."
     },
     {
         "id": 23,
@@ -999,7 +1006,8 @@
         "deA": [
             "Toronto",
             "Montréal"
-        ]
+        ],
+        "sortieRapide": "prendre le train entre Dorion–Montréal."
     },
     {
         "id": 26,

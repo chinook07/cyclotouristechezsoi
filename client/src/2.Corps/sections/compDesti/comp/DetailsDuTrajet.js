@@ -12,6 +12,7 @@ const DetailsDuTrajet = ({ itineraire, changerTrajet }) => {
 	const { ecran } = useContext(CycloContext);
 
     const details = trajetsDB.find((item) => item.trajet === itineraire);
+    console.log(details);
 
 	return (
 		<div>
@@ -38,7 +39,11 @@ const DetailsDuTrajet = ({ itineraire, changerTrajet }) => {
 					})}
 				</ul>
 				<p>Proportion sur piste cyclable : {details.proportion} %.</p>
-				<p>Terrain : {details.terrain}</p>
+                <p>Terrain : {details.terrain}</p>
+                {
+                    details.sortieRapide &&
+                    <p>Pour entrer rapidement à Montréal ou en sortir : {details.sortieRapide}</p>
+                }
 			</div>
 			<h3>Notes de l'auteur</h3>
 			<NotesAuteur details={details} />
