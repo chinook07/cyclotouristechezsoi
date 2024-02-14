@@ -77,6 +77,7 @@ const photosDuSite = async (req, res) => { // aller chercher les photos d'un sit
             password: FTP_PASSWORD,
             secure: false
         })
+        // commençons par les photos de la publication d'origine
         let tousPhotosOrigine = [];
         for (const item of photosOrigine) {
             let sentier = "/telev/" + item;
@@ -85,6 +86,7 @@ const photosDuSite = async (req, res) => { // aller chercher les photos d'un sit
             tousPhotosOrigine.push({ filename: item, content: buffer })
         }
         console.log(tousPhotosOrigine);
+        // ensuite les photos sur les commentaires
         let tousPhotosComm = [];
         for (const item of photosComm) {
             let sentier = "/telev/" + item;
@@ -94,7 +96,7 @@ const photosDuSite = async (req, res) => { // aller chercher les photos d'un sit
         res.set('Content-Type', 'image/jpg');
         return res.status(200).json({
             status: 200,
-            message: "Détails du site.",
+            message: "Photos du site.",
             tousPhotosComm: tousPhotosComm,
             tousPhotosOrigine: tousPhotosOrigine
         })

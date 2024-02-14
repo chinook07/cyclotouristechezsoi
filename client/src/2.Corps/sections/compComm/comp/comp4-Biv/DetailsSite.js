@@ -56,8 +56,7 @@ const DetailsSite = ({ site, fermerSite }) => {
             })
                 .then(res => res.json())
                 .then(donnees => {
-                    console.log(donnees);
-                    console.log("détails photos");
+                    console.log("Je suis allé chercher les photos du serveur", donnees);
                     setPhotosPrets({
                         origine: donnees.tousPhotosOrigine,
                         commentaires: donnees.tousPhotosComm

@@ -75,7 +75,6 @@ const Wrapper = styled.div`
             }
         }
     }
-    
     @media screen and (max-width: 660px) {
         align-items: center;
         flex-direction: column;

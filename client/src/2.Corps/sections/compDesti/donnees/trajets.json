@@ -764,7 +764,7 @@
             "Côteau-du-Lac",
             "Lévis"
         ],
-        "sortieRapide": "pour rouler vers le sud-ouest, prendre le train de banlieue Montréal–Ste-Catherine ou la navette fluviale de/vers Châteauguay. Pour rouler vers Bécancour et Lévis, prendre une des deux navettes fluviales suivantes : Vieux-Port–Boucherville ou Vieux-Port–Pointe-aux-Trembles–Varennes."
+        "sortieRapide": "pour rouler vers le sud-ouest, prendre la navette fluviale vers Châteauguay et suivre le lac St-Louis jusqu'à Beauharnois. Pour rouler vers Bécancour et Lévis, prendre une des deux navettes fluviales suivantes : Vieux-Port–Boucherville ou Vieux-Port–Pointe-aux-Trembles–Varennes."
     },
     {
         "id": 20,
@@ -1137,7 +1137,7 @@
         "terrain": "peu côteux, plusieurs côtes dans le Parc de la Gatineau.",
         "deja": false,
         "notes": "Un projet est en cours pour aménager un tronçon du parc linéaire sur le territoire de la municipalité de Chelsea.",
-        "varietes": "Quoique le Parc de la Gatineau offre une multitude de sentiers et de routes pour rallier la Véloroute des Draveurs à Gatineau, il est possible de prendre le Chemin de la Rivière et la Route 105 pour un accès plus direct et plus facile.",
+        "varietes": "Quoique le Parc de la Gatineau offre une multitude de sentiers et de routes pour rallier la Véloroute des Draveurs à Gatineau, il est possible de prendre la nouvelle Voie verte Chelsea pour un accès plus direct et facile.",
         "carteURL": "10/46.0970/-76.0604",
         "ass": [
             {

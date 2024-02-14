@@ -134,6 +134,9 @@ const Controles = styled.div`
         margin: auto 10px;
         padding: 20px;
     }
+    @media print {
+        display: none;
+    }
 `
 
 export default ListeInteractive;
