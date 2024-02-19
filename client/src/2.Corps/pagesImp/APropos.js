@@ -21,7 +21,7 @@ const APropos = () => {
                     <figcaption>L'auteur de ce site web lors de sa traversée de l'Acadie en 2022.</figcaption>
                 </PhotoAuteur>
             </div>
-            <div>
+            <div id="collaborer">
                 <h3>Vous cherchez un collaborateur pour faire la promotion d'un itinéraire cyclable ou la pratique du cyclotourisme?</h3>
                 <p>Alors que l'engouement pour le vélo se fait sentir de plus en plus, votre association ou votre entreprise pourrait profiter de cette tendance, là pour rester. Que ça soit pour la rédaction d'un article ou une conférence à vos employés, je vous invite à <Link to="/contact">me contacter</Link> pour discuter des possibilités.</p>
                 <p>Expérience à ce jour :</p>

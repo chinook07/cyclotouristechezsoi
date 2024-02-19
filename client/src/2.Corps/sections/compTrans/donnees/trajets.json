@@ -423,7 +423,6 @@
         "icone": [
             3,
             5,
-            9,
             10
         ],
         "transporteur": "exo",
@@ -434,7 +433,6 @@
         "icone": [
             3,
             5,
-            9,
             10
         ],
         "transporteur": "exo",
@@ -445,7 +443,6 @@
         "icone": [
             3,
             5,
-            9,
             10
         ],
         "transporteur": "exo",
@@ -618,6 +615,15 @@
         "transporteur": "RÉGIM",
         "trajet": "Plusieurs parcours régionaux. Consultez le site du transporteur.",
         "heures": "sur semaine seulement"
+    },
+    "340": {
+        "icone": [
+            3,
+            5
+        ],
+        "transporteur": "STC de Pierre-de-Saurel",
+        "trajet": "Circuit 750 – Autobus entre Longueuil et Sorel-Tracy.",
+        "heures": "7 jours sur 7"
     },
     "400": {
         "icone": [

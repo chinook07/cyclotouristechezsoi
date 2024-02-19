@@ -10,6 +10,16 @@
         "dates": "7 jrs"
     },
     {
+        "region": "Montérégie",
+        "transporteur": "STC Pierre-de-Saurel",
+        "lien": "https://stcpierredesaurel.ca/",
+        "desserte": [
+            "Longueuil",
+            "Sorel-Tracy"
+        ],
+        "dates": "7 jrs"
+    },
+    {
         "region": "Laurentides",
         "transporteur": "TaCL",
         "lien": "https://www.transportlaurentides.ca/",
