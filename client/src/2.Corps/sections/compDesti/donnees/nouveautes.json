@@ -1,22 +1,22 @@
 [
     {
-        "region": "Beauce",
-        "lienRegion": "beauce",
-        "couleur": "#F3AE2D",
-        "police": "#000",
-        "texte": "Un prolongement de 9 km de la piste cyclable à St-Georges et à l'étude, devrant éventuellent suivre l'ancienne emprise ferroviaire à partir de Notre-Dame-des-Pins.",
-        "lien": "Ville de St-Georges",
-        "url": "http://www.saint-georges.ca/2022/01/18/prolongement-de-la-piste-cyclable-demande-a-la-cptaq/",
-        "complet": false
-    },
-    {
         "region": "Bellechasse",
         "lienRegion": "bellechasse",
         "couleur": "#808080",
         "police": "#000",
-        "texte": "Une nouvelle piste cyclable reliera la Véloroute de la Chaudière à la Cycloroute de Bellechasse. La piste cyclable Dorchester devait être terminée au printemps 2023. Aucune nouvelle information depuis.",
-        "lien": "Beauce Média",
-        "url": "https://www.beaucemedia.ca/actualites/la-piste-cyclable-dorchester-sera-completee-au-printemps/",
+        "texte": "Une nouvelle piste cyclable relie la Véloroute de la Chaudière à la Cycloroute de Bellechasse. La piste cyclable Dorchester devrait être inaugurée au printemps 2024. Aucune nouvelle information depuis, mais la carte thermique (heatmap) de Strava montre une forte fréquentation de l'emprise.",
+        "lien": "La Voix du Sud",
+        "url": "https://www.lavoixdusud.com/actualites/veloroute-dorchester-inauguration-au-printemps-2024/",
+        "complet": false
+    },
+    {
+        "region": "Charlevoix",
+        "lienRegion": "charlevoix",
+        "couleur": "#444",
+        "police": "#fff",
+        "texte": "Charlevoix aura un tracé de la Route verte dans plusieurs années. Celui-ci passera entre autres par la Route des Montagnes entre Baie-Saint-Paul et La Malbaie.",
+        "lien": "La Presse",
+        "url": "https://www.lapresse.ca/voyage/quebec-et-canada/2024-04-20/charlevoix-aura-sa-route-verte.php",
         "complet": false
     },
     {
@@ -24,9 +24,9 @@
         "lienRegion": "cote-nord",
         "couleur": "#3D3DE2",
         "police": "#fff",
-        "texte": "Un projet est en cours pour prolonger la Véloroute des Baleines jusqu'à Kegaska, point de fin de la route 138.",
-        "lien": "Le Manic",
-        "url": "https://www.lemanic.ca/2022/11/12/une-premiere-rencontre-pour-completer-la-veloroute-des-baleines-jusqua-kegaska/",
+        "texte": "La Véloroute des Baleines se rend maintenant jusqu'à Kegaska, point de fin de la route 138. À noter qu'il s'agit principalement d'un itinéraire sur route.",
+        "lien": "Ici Radio-Canada",
+        "url": "https://ici.radio-canada.ca/nouvelle/2049646/veloroute-baleine-velo-valle-cote-nord-velo",
         "complet": false
     },
     {
@@ -54,9 +54,9 @@
         "lienRegion": "montreal-sherbrooke",
         "couleur": "#008400",
         "police": "#fff",
-        "texte": "La Route verte à Carignan et à Chambly passe maintenant par l'emprise ferroviaire plutôt que par des rues résidentielles, sauf par-dessus la rivière L'Acadie.",
-        "lien": "Ville Chambly",
-        "url": "https://ville.chambly.qc.ca/2022/09/la-piste-cyclable-du-boulevard-de-perigny-maintenant-reliee-a-la-route-verte-2/",
+        "texte": "Un projet est en cours pour aménager la Route des Champs dans l'emprise ferroviaire sur presque toute sa longueur. À noter que cette amélioration ne concerne pas la Route verte, mais est digne de mention puisque ce trajet est utilisé comme raccourci pour rouler de Chambly vers Granby.",
+        "lien": "Ville Richelieu",
+        "url": "https://ville.richelieu.qc.ca/communiques-et-avis-publics/prolongement-de-la-route-des-champs/",
         "complet": true
     },
     {
@@ -74,7 +74,7 @@
         "lienRegion": "vallee-de-la-gatineau",
         "couleur": "#4900cf",
         "police": "#fff",
-        "texte": "Une nouvelle piste cyclable de 20 km en Outaouais sera terminée prochainement. Celle-ci sera aménagée sur l'ancienne emprise ferroviaire à Chelsea, offrant un parcours bucolique et sécuritaire, en partie collée sur la rivière Gatineau, une alternative intéressante face aux côtes du grand parc du même nom.",
+        "texte": "Une nouvelle piste cyclable de 20 km en Outaouais a été aménagée sur l'ancienne emprise ferroviaire à Chelsea. Elle offre un parcours bucolique et sécuritaire, en partie collée sur la rivière Gatineau, une alternative intéressante face aux côtes du grand parc du même nom.",
         "lien": "Ville Chelsea",
         "url": "https://www.chelsea.ca/fr/residents/service-municipaux/loisirs-culture-et-vie-communautaire/sentier-communautaire",
         "complet": false
@@ -84,9 +84,9 @@
         "lienRegion": "vallee-de-la-gatineau",
         "couleur": "#4900cf",
         "police": "#fff",
-        "texte": "Une vingtaine de kilomètres de la Véloroute des Draveurs entre Gracefield et Kazabazua a été asphaltée en octobre 2022. Réalisation à confirmer.",
+        "texte": "Un tronçon de sept kilomètres de la Véloroute des Draveurs de Gracefield vers le sud a été asphalté en 2023. Il est prévu de poursuivre l'asphaltage jusqu'à la route 301 à Kazabazua, probablement en 2025.",
         "lien": "CHGA FM",
-        "url": "https://www.chga.fm/la-portion-sud-de-la-veloroute-des-draveurs-sera-asphaltee-cet-automne/",
+        "url": "https://www.chga.fm/la-mrc-vallee-de-la-gatineau-poursuivra-lasphaltage-de-la-veloroute-des-draveurs/",
         "complet": false
     }
 ]
