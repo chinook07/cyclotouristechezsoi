@@ -1,5 +1,19 @@
 [
     {
+        "nom": "Jusqu'aux Iles-de-la-Madeleine à vélo",
+        "url": "https://touristechezsoi.ca/blogue/aux-iles-a-velo.html",
+        "description": "Un archipel mythique au milieu de la mer, qu'il faut atteindre soit par avion, ou bien par une liaison maritime nécessitant d'abord la traversée de deux provinces. Comment y aller à vélo? Et surtout, pourquoi? Certes, c'est un moyen fantastique pour découvrir les Iles de la Madeleine, mais c'est aussi une excellente manière de s'y rendre, à condition d'avoir suffisamment de temps! Choisissez un de plusieurs trajets pour y accéder, et hop, à l'aventure!",
+        "image": "https://touristechezsoi.ca/blogue/jusqu-aux-iles/madeleine.jpg",
+        "alt": "vélo chargé près d'une falaise au-dessus de la mer, avec un phare"
+    },
+    {
+        "nom": "La mobilité durable en début 2024",
+        "url": "https://touristechezsoi.ca/blogue/mobilite-2024.html",
+        "description": "De l'eau a coulé sous les ponts que les cyclistes ont traversés depuis le dernier compte-rendu sur la mobilité durable à Montréal. Des pistes cyclables ont été aménagées, les cinq premières stations du REM ont été inaugurées, Bixi a été hivernisé. Du vélo au métro en passant par le bateau, voici ce qui a amélioré la mobilité durable durant les deux dernières années.",
+        "image": "https://touristechezsoi.ca/blogue/bilan-2024/bixi-hiver.jpg",
+        "alt": "bixis sous la neige, piste cyclable déneigée"
+    },
+    {
         "nom": "C'est l'heure de se mettre au métrique",
         "url": "https://touristechezsoi.ca/blogue/metrique.html",
         "description": "Combien d'onces dans un gallon? C'est quoi, une « pierre »? Est-ce qu'une tuque est nécessaire à 45 °F? Selon votre âge, vous pourriez peut-être répondre à ces dernières questions. Étant donné que la quasi-totalité des pays utilise les unités métriques, est-ce important de connaitre les unités impériales? Devrait-on les bouder, en tant que société? Cap sur un sujet considéré par certains comme banal, mais qui soulève les passions des autres.",
@@ -12,19 +26,5 @@
         "description": "C'est l'histoire d'Olivia et sa famille qui s'installent dans leur nouvel appartement à Montréal, dans un monde radicalement différent suite à l'accélération de la crise climatique. Le hockey sur glace est en voie de disparition, la chaleur accablante et les feux de forêt ont changé le visage du Québec, et la politique municipale est devenue plus captivante qu'auparavant.",
         "image": "https://touristechezsoi.ca/blogue/2039/parlement-feu.jpg",
         "alt": "ciel rouge, parlement au loin"
-    },
-    {
-        "nom": "Pour une ville à 30 km/h",
-        "url": "https://touristechezsoi.ca/blogue/30-km-h.html",
-        "description": "Il est bien connu que la baisse de la limite de vitesse à l'échelle d'un quartier contribue à rendre les rues plus conviviales. Quoique cette action seule ne suffise pas par elle-même, elle demeure une partie critique parmi l'éventail des transformations qui apaisent la circulation.",
-        "image": "https://touristechezsoi.ca/blogue/30-km-h/graphique.png",
-        "alt": "graphique indiquant la corrélation entre la vitesse et la probabilité de mort suite à une collision"
-    },
-    {
-        "nom": "Élections : comment le transport actif s'en est tiré",
-        "url": "https://touristechezsoi.ca/blogue/elections-bilan.html",
-        "description": "Après un été de records climatiques, il sera bientôt le temps d'aller aux urnes et choisir la composition de notre conseil municipal, ainsi que nos conseils d'arrondissement pour les quatre prochaines années. Puisque Montréal est divisée en 19, le parti au pouvoir au niveau de l'arrondissement influence grandement les orientations données dans celui-ci. Qu'en est-il alors du travail fait depuis les dernières élections, strictement au point de vue du transport actif?",
-        "image": "https://touristechezsoi.ca/blogue/elections-bilan-2017/Plateau.png",
-        "alt": "piste cyclable sur la rue St-Denis"
     }
 ]
