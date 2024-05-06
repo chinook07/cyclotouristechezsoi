@@ -34,8 +34,7 @@
         100
     ],
     "Beauharnois": [
-        120,
-        401
+        120
     ],
     "Beaupré": [
         320
@@ -119,8 +118,7 @@
     ],
     "Châteauguay": [
         120,
-        121,
-        403
+        121
     ],
     "Chelsea": [
         300
@@ -370,7 +368,6 @@
         163,
         310,
         311,
-        403,
         404,
         405,
         406,
@@ -384,11 +381,6 @@
     "Normandin": [
         82,
         83
-    ],
-    "Notre-Dame-de-l'Ile-Perrot": [
-        400,
-        401,
-        402
     ],
     "Ottawa": [
         2,
@@ -411,9 +403,6 @@
     ],
     "Pointe-Claire": [
         100
-    ],
-    "Pointe-des-Cascades": [
-        400
     ],
     "Port-Cartier": [
         86
