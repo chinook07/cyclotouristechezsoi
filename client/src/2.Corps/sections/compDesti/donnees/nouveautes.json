@@ -34,9 +34,9 @@
         "lienRegion": "laurentides",
         "couleur": "#f00",
         "police": "#000",
-        "texte": "Le tronçon de 18 km entre Ste-Agathe-des-Monts et Mont-Blanc a été asphalté en 2023. Il ne restera que deux tronçons en poussière de pierre, totalisant 47 km.",
-        "lien": "Ville de Mont-Tremblant",
-        "url": "https://www.villedemont-tremblant.qc.ca/fr/nouvelles/travaux-refection-ptit-train-du-nord",
+        "texte": "Un tronçon supplémentaire de 14 km entre Mont-Tremblant et Labelle sera asphalté d'ici septembre 2024. Il ne restera qu'un tronçon de 32 km en poussière de pierre.",
+        "lien": "P'tit train du Nord",
+        "url": "https://ptittraindunord.com/conditions-de-piste/#content",
         "complet": false
     },
     {
@@ -44,9 +44,9 @@
         "lienRegion": "montreal-quebec-sud",
         "couleur": "#5fe25f",
         "police": "#000",
-        "texte": "La parachèvement de la Route verte entre Ste-Martine et St-Constant par l'ancienne emprise ferroviaire devrait être terminé d'ici le printemps 2024. Le tronçon entre Ste-Martine et le rang St-Régis Nord est maintenant complété.",
-        "lien": "Le Reflet",
-        "url": "https://www.lereflet.qc.ca/la-construction-de-la-piste-cyclable-dans-les-champs-est-lancee",
+        "texte": "La parachèvement de la Route verte entre Ste-Martine et St-Constant par l'ancienne emprise ferroviaire est terminé, par contre, il manque l'accès officiel via la route 209. L'alternative consiste d'y accéder par les rangs Saint-Simon et Saint-Régis Sud.",
+        "lien": "MRC Roussillon",
+        "url": "https://roussillon.ca/grands-projets/parachevement-de-la-route-verte/",
         "complet": false
     },
     {
@@ -54,9 +54,9 @@
         "lienRegion": "montreal-sherbrooke",
         "couleur": "#008400",
         "police": "#fff",
-        "texte": "Un projet est en cours pour aménager la Route des Champs dans l'emprise ferroviaire sur presque toute sa longueur. À noter que cette amélioration ne concerne pas la Route verte, mais est digne de mention puisque ce trajet est utilisé comme raccourci pour rouler de Chambly vers Granby.",
+        "texte": "La Route des Champs est maintenant aménagée dans l'emprise ferroviaire sur presque toute sa longueur. À noter que cette amélioration ne concerne pas la Route verte, mais est digne de mention puisque ce trajet est utilisé comme raccourci pour rouler de Chambly vers Granby.",
         "lien": "Ville Richelieu",
-        "url": "https://ville.richelieu.qc.ca/communiques-et-avis-publics/prolongement-de-la-route-des-champs/",
+        "url": "https://ville.richelieu.qc.ca/inauguration-du-prolongement-du-parc-regional-lineaire-la-route-des-champs-a-richelieu/",
         "complet": true
     },
     {
