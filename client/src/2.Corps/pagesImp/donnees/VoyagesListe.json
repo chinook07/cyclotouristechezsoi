@@ -567,5 +567,32 @@
         "retour": "autocar",
         "lienURL": "https://cycle.travel/map/journey/466849",
         "lienTitre": "Tracé du parcours"
+    },
+    {
+        "categories": "tout flipLineaire flipFacile",
+        "jours": 10,
+        "titre": "Croissants de soleil au Vermont",
+        "date": "Jullet 2024",
+        "anecdote": "Premier vrai voyage à vélo au pays d'Oncle Sam",
+        "note": "Changé de cap en urgence suite à des inondations",
+        "imgAlt": "sentier avec maison ancestrale à gauche",
+        "km": 575,
+        "denivele": 2105,
+        "ratio": 365,
+        "difficulte": 2,
+        "villes": [
+            "Brossard",
+            "Swanton (VT)",
+            "Newport",
+            "Magog (QC)",
+            "Sherbrooke",
+            "Victoriaville",
+            "Québec"
+        ],
+        "alle": "REM",
+        "coucher": "la tente",
+        "retour": "autocar",
+        "lienURL": "https://www.crazyguyonabike.com/doc/nordvermont",
+        "lienTitre": "Récit de voyage"
     }
 ]

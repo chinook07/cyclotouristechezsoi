@@ -20,13 +20,18 @@ const {
     chercherCourrielCommentaire
 } = require("./handlersCrypto")
 
+const {
+    testCourriel
+} = require("./handlersCourriel")
+
 express()
     .use(morgan("tiny"))
     .use(cors())
     .options("https://www.cyclotouristechezsoi.ca", cors())
     .use(express.json())
     .use(express.static("public"))
-    .use(fileUpload({useTempFiles: true}))
+    .use(fileUpload({ useTempFiles: true }))
+    .get("/api/testCourriel", testCourriel)
     .get("/api/test", testApi)
     .get("/api/tous-sites", tousSites)
     .put("/api/photos-du-site", photosDuSite)

@@ -19,11 +19,7 @@ const VoyEffectues = () => {
             <section>
                 <h2>Quelques idées pour vous mettre sur la bonne piste!</h2>
                 <p>Que ça soit pour se renseigner, planifier ou tout simplement pour s'inspirer, voici mon historique de cyclotourisme, d'abord sur une carte, puis en ordre chronologique. Même si j'ai parcouru plusieurs des grandes destinations de la province, je sais qu'il reste énormément d'endroits à découvrir ici comme ailleurs.</p>
-                <p>L'été 2024 arrive à grands pas. Deux grands projets s'annoncent :</p>
-                <ListeObjectifs>
-                    <li>Je veux progressivement initier mon fils qui aura 18 mois cet été, au cyclotourisme. Si j'aimerais faire de longs voyages avec lui, nos escapades cette année seront plus modestes.</li>
-                    <li>Équipé de mon passeport et de l'argent américain, je veux découvrir une région que j'ai jusqu'à maintenant boudée : le Vermont. Je vise un parcours d'environ 10 jours à travers le nord de l'état.</li>
-                </ListeObjectifs>
+                <p>En juillet 2024, j'ai pu découvrir le nord du Vermont à vélo... jusqu'à ce que des inondations majeures me forcent à mettre le cap vers Québec. J'ai alors roulé sur une des plus longues pistes cyclables continues au Québec, soit de Richmond à Lévis. J'ai été émerveillé du début à la fin!</p>
                 <Stats1 />
                 <H3e>Nuitées<FontAwesomeIcon icon={faMoon} /></H3e>
                 <Stats2 />

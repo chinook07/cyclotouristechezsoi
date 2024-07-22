@@ -19,7 +19,7 @@ const Verso = ({ item, index, changerCarte }) => {
             <Titre>{item.titre}</Titre>
             <Diff>
                 <p>Dénivelé positif : {item.denivele}</p>
-                <p>Ratio : {item.ratio}</p>
+                <p>Ratio : {Intl.NumberFormat("fr-CA").format((Math.round(item.ratio / 10))/10)}</p>
                 <div>
                     <p>Difficulté de 1 à 5 : </p>
                     <Cachee aria-disabled>{ item.difficulte }</Cachee>

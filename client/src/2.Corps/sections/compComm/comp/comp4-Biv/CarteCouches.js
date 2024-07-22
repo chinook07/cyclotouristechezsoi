@@ -111,7 +111,7 @@ const CarteCouches = ({ cyclOSMFonctionne, cartePrete, choisirSite, surChaque, a
                             } />
                         }
                         </LayersControl.Overlay>
-                        <LayersControl.Overlay name="test" checked>
+                        <LayersControl.Overlay name="test">
                         {
                             lesSitesT.features.length &&
                             <GeoJSON

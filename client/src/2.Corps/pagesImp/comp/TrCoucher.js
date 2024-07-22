@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { faPlane, faTrain, faTrainSubway, faBusAlt, faBus, faCar, faCampground, faHotel } from "@fortawesome/free-solid-svg-icons";
+import { faPlane, faTrain, faTrainSubway, faTrainTram, faBusAlt, faBus, faCar, faCampground, faHotel } from "@fortawesome/free-solid-svg-icons";
 
 const TrCoucher = ({item}) => {
 
@@ -9,6 +9,7 @@ const TrCoucher = ({item}) => {
         "avion": faPlane,
         "train": faTrain,
         "train de banlieue": faTrainSubway,
+        "REM": faTrainTram,
         "autocar": faBusAlt,
         "autobus": faBus,
         "voiture": faCar,

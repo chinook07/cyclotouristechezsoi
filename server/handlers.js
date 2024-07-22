@@ -83,7 +83,7 @@ const photosDuSite = async (req, res) => { // aller chercher les photos d'un sit
             let sentier = "/telev/" + item;
             const buffer = await client.downloadTo(item, sentier);
             console.log("buffer", buffer);
-            tousPhotosOrigine.push({ filename: item, content: buffer })
+            tousPhotosOrigine.push({ filename: item, content: buffer.toString('base64') })
         }
         console.log(tousPhotosOrigine);
         // ensuite les photos sur les commentaires
@@ -102,7 +102,11 @@ const photosDuSite = async (req, res) => { // aller chercher les photos d'un sit
         })
     } catch (error) {
         console.log("erreur", error);
-        client.close();
+        return res.status(500).json({
+            status: 500,
+            message: "Failed to fetch photos.",
+            error: error.message
+        });
     } finally {
         client.close();
     }

@@ -38,7 +38,7 @@ const DetailsSite = ({ site, fermerSite }) => {
         }
         console.log(photosDuSite);
         setPhotosAChercher(photosDuSite);
-    }, [])
+    }, [site]) // empty dependancy?
 
     const baseURL = process.env.NODE_ENV === 'production' ? 'https://ccs-serveur.onrender.com/api' : 'http://localhost:8000/api';
 
