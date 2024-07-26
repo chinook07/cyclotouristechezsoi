@@ -223,25 +223,20 @@ const integrerPhotos = (description, liens) => { // fonction désuète
 
 const nouveauCommentaire = async (req, res) => { // ajouter un commentaire sur un site existant
     const { _id, properties, contributeur } = req.body;
+    console.log(req.body);
     let dbAChercher;
     switch (properties.type) {
-        case "officiel":
+        case "Site officiel pour cyclistes seulement OU à faible cout / gratuit":
             dbAChercher = "s_officiels"
             break;
-        case "non-officiel":
+        case "Site non-officiel":
             dbAChercher = "s_non_officiels"
             break;
-        case "proprio":
+        case "Site offert par un propriétaire":
             dbAChercher = "s_proprios"
             break;
         case "autre":
             dbAChercher = "s_autres"
-            break;
-        case "s_autres": // peut supprimer?
-            dbAChercher = "s_autres"
-            break;
-        case "s_tests": // peut supprimer?
-            dbAChercher = "s_tests"
             break;
         case "test":
             dbAChercher = "s_tests"
@@ -250,7 +245,9 @@ const nouveauCommentaire = async (req, res) => { // ajouter un commentaire sur u
             break;
     }
     await ouvrirMongo();
+    console.log(dbAChercher);
     const found = await db.collection(dbAChercher).findOne({ _id: _id });
+    console.log(found);
     let nDeCommentaires;
     if (found.properties.commentaires) {
         nDeCommentaires = found.properties.commentaires.length + 1;
@@ -291,23 +288,17 @@ const nouveauCommentairePhoto = async (req, res) => { // ajouter des photos lors
         session = await ouvrirMongo();
         let dbAChercher;
         switch (req.body.type) {
-            case "officiel":
+            case "Site officiel pour cyclistes seulement OU à faible cout / gratuit":
                 dbAChercher = "s_officiels"
                 break;
-            case "non-officiel":
+            case "Site non-officiel":
                 dbAChercher = "s_non_officiels"
                 break;
-            case "proprio":
+            case "Site offert par un propriétaire":
                 dbAChercher = "s_proprios"
                 break;
             case "autre":
                 dbAChercher = "s_autres"
-                break;
-            case "s_autres":
-                dbAChercher = "s_autres"
-                break;
-            case "s_tests":
-                dbAChercher = "s_tests"
                 break;
             case "test":
                 dbAChercher = "s_tests"
