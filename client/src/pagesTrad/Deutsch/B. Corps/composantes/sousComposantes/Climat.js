@@ -19,6 +19,8 @@ const Climat = () => {
 
     const caracteres = ["<", ">"]
 
+    const mois = ["Mai", "Juni", "Juli", "Aug.", "Sept."];
+
     return (
         <Wrapper>
             <Controles>
@@ -74,51 +76,21 @@ const Climat = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Mai</td>
-                                <td>{mesuresMetriques ? villeChoisie.climat.tempMin[0] : (villeChoisie.climat.tempMin[0] * (9/5) + 32).toFixed(0)}</td>
-                                <td>{mesuresMetriques ? villeChoisie.climat.tempMax[0] : (villeChoisie.climat.tempMax[0] * (9/5) + 32).toFixed(0)}</td>
-                                <td>{villeChoisie.climat.nuitsFroides[0]}</td>
-                                <td>{villeChoisie.climat.joursChauds[0]}</td>
-                                <td>{mesuresMetriques ? villeChoisie.climat.pluie[0] : (villeChoisie.climat.pluie[0] / 25.4).toFixed(1)}</td>
-                                <td>{villeChoisie.climat.joursPluvieux[0]}</td>
-                            </tr>
-                            <tr>
-                                <td>Juni</td>
-                                <td>{mesuresMetriques ? villeChoisie.climat.tempMin[1] : (villeChoisie.climat.tempMin[1] * (9/5) + 32).toFixed(0)}</td>
-                                <td>{mesuresMetriques ? villeChoisie.climat.tempMax[1] : (villeChoisie.climat.tempMax[1] * (9/5) + 32).toFixed(0)}</td>
-                                <td>{villeChoisie.climat.nuitsFroides[1]}</td>
-                                <td>{villeChoisie.climat.joursChauds[1]}</td>
-                                <td>{mesuresMetriques ? villeChoisie.climat.pluie[1] : (villeChoisie.climat.pluie[1] / 25.4).toFixed(1)}</td>
-                                <td>{villeChoisie.climat.joursPluvieux[1]}</td>
-                            </tr>
-                            <tr>
-                                <td>Juli</td>
-                                <td>{mesuresMetriques ? villeChoisie.climat.tempMin[2] : (villeChoisie.climat.tempMin[2] * (9/5) + 32).toFixed(0)}</td>
-                                <td>{mesuresMetriques ? villeChoisie.climat.tempMax[2] : (villeChoisie.climat.tempMax[2] * (9/5) + 32).toFixed(0)}</td>
-                                <td>{villeChoisie.climat.nuitsFroides[2]}</td>
-                                <td>{villeChoisie.climat.joursChauds[2]}</td>
-                                <td>{mesuresMetriques ? villeChoisie.climat.pluie[2] : (villeChoisie.climat.pluie[2] / 25.4).toFixed(1)}</td>
-                                <td>{villeChoisie.climat.joursPluvieux[2]}</td>
-                            </tr>
-                            <tr>
-                                <td>Aug.</td>
-                                <td>{mesuresMetriques ? villeChoisie.climat.tempMin[3] : (villeChoisie.climat.tempMin[3] * (9/5) + 32).toFixed(0)}</td>
-                                <td>{mesuresMetriques ? villeChoisie.climat.tempMax[3] : (villeChoisie.climat.tempMax[3] * (9/5) + 32).toFixed(0)}</td>
-                                <td>{villeChoisie.climat.nuitsFroides[3]}</td>
-                                <td>{villeChoisie.climat.joursChauds[3]}</td>
-                                <td>{mesuresMetriques ? villeChoisie.climat.pluie[3] : (villeChoisie.climat.pluie[3] / 25.4).toFixed(1)}</td>
-                                <td>{villeChoisie.climat.joursPluvieux[3]}</td>
-                            </tr>
-                            <tr>
-                                <td>Sept.</td>
-                                <td>{mesuresMetriques ? villeChoisie.climat.tempMin[4] : (villeChoisie.climat.tempMin[4] * (9/5) + 32).toFixed(0)}</td>
-                                <td>{mesuresMetriques ? villeChoisie.climat.tempMax[4] : (villeChoisie.climat.tempMax[4] * (9/5) + 32).toFixed(0)}</td>
-                                <td>{villeChoisie.climat.nuitsFroides[4]}</td>
-                                <td>{villeChoisie.climat.joursChauds[4]}</td>
-                                <td>{mesuresMetriques ? villeChoisie.climat.pluie[4] : (villeChoisie.climat.pluie[4] / 25.4).toFixed(1)}</td>
-                                <td>{villeChoisie.climat.joursPluvieux[4]}</td>
-                            </tr>
+                            {
+                                mois.map((item, index) => {
+                                    return (
+                                        <tr key={index}>
+                                            <td>{item}</td>
+                                            <td>{villeChoisie.climat.tempMin[index]}</td>
+                                            <td>{villeChoisie.climat.tempMax[index]}</td>
+                                            <td>{villeChoisie.climat.nuitsFroides[index]}</td>
+                                            <td>{villeChoisie.climat.joursChauds[index]}</td>
+                                            <td>{villeChoisie.climat.pluie[index]}</td>
+                                            <td>{villeChoisie.climat.joursPluvieux[index]}</td>
+                                        </tr>
+                                    )
+                                })
+                            }
                         </tbody>
                 </table>
             }
