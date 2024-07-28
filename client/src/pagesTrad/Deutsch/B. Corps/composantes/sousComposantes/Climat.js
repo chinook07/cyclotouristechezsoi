@@ -100,6 +100,7 @@ const Climat = () => {
 
 const Wrapper = styled.div`
     background-color: var(--c5);
+    border-radius: 5px;
     max-width: 600px;
     padding: 0 20px 20px;
     table {
