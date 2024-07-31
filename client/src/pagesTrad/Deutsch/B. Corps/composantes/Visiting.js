@@ -25,7 +25,7 @@ const Visiting = () => {
                 <FontAwesomeIcon icon={faTriangleExclamation} />
                 <span> Unwetter</span>
             </h4>
-            <p>Tornados sind daher äußerst selten, es treten etwa fünfmal im Jahr auf, in der Regel kleinere Tornados. Rauch von weit entfernten Waldbränden ist zwar selten, kann aber die Qualität und Sicherheit Ihrer Reise erheblich beeinträchtigen. Im Jahr 2023 verbrannten Brände historischen Ausmaßes fast 50 000 km² (etwa so groß wie Nordrhein-Westfalen) Land in Quebec und setzten viele nordamerikanische Städte für mehrere Tage in Rauch.</p>
+            <p>Tornados sind äußerst selten, es treten etwa fünfmal im Jahr auf, in der Regel kleinere Tornados. Rauch von weit entfernten Waldbränden ist zwar selten, kann aber die Qualität und Sicherheit Ihrer Reise erheblich beeinträchtigen. Im Jahr 2023 verbrannten Brände historischen Ausmaßes fast 50 000 km² (etwa so groß wie Nordrhein-Westfalen) Land in Quebec und setzten viele nordamerikanische Städte für mehrere Tage in Rauch.</p>
             <h3>Tiere</h3>
             <p>Quebec ist nicht Australien! Die Fauna ist viel harmloser als in vielen anderen Teilen der Welt, und das haben wir unseren kalten Wintern zu verdanken. Zunächst einmal sind giftige Schlangen und Spinnen äußerst selten. Es gibt jedoch gewisse Gefahren, vor denen man sich in Acht nehmen muss.</p>
             <Animaux />
