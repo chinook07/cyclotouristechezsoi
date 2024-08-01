@@ -28,7 +28,7 @@ const Visiting = () => {
                 <FontAwesomeIcon icon={faTriangleExclamation} />
                 <span> Severe weather</span>
             </h4>
-            <p>Tornadoes are extremely rare, with around five occurring per year, generally minor ones. Smoke from distant forest fires is uncommon, but can seriously affect the quality and safety of your ride. In 2023, fires of historic proportions burnt nearly 50 000 km² {mesuresMetriques ? <span>(around the size of Nova Scotia, or 65% the landmass of Scotland)</span> : <span>(19 times the size of Rhode Island)</span>} of land within Quebec, smoking out many North American cities for multiple days.</p>
+            <p>Tornadoes are extremely rare, with around five occurring per year, generally minor ones. Smoke from distant forest fires is uncommon, but can seriously affect the quality and safety of your ride. In 2023, fires of historic proportions burnt nearly {mesuresMetriques ? <span>50 000 km² (around the size of Nova Scotia, or 65% the landmass of Scotland)</span> : <span>20 000 square miles (19 times the size of Rhode Island)</span>} of land within Quebec, smoking out many North American cities for multiple days.</p>
             <h3>Animals</h3>
             <p>Quebec is not Australia! The fauna is a lot more benign than in many other parts of the world, and we have our cold winters to thank for that. For a start, poisonous snakes and spiders are extremely uncommon. However, there are certain dangers to watch out for.</p>
             <Animaux />
