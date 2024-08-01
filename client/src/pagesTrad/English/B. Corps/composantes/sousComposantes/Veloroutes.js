@@ -144,26 +144,31 @@ const RouteOptions = styled.div`
     display: grid;
     grid-template-columns: auto auto auto;
     margin-bottom: 15px;
-    h5 {
-        text-align: center;
-    }
-    p {
-        text-align: justify;
-    }
-    figure {
+    div {
         display: flex;
         flex-direction: column;
-        margin: 0;
-        width: 100%;
-        img {
-            width: 100%;
-        }
-        figcaption {
-            background-color: var(--c10);
-            color: var(--c11);
-            margin: 0;
-            padding: 10px 0;
+        justify-content: space-between;
+        h5 {
             text-align: center;
+        }
+        p {
+            text-align: justify;
+        }
+        figure {
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            width: 100%;
+            img {
+                width: 100%;
+            }
+            figcaption {
+                background-color: var(--c10);
+                color: var(--c11);
+                margin: 0;
+                padding: 10px 0;
+                text-align: center;
+            }
         }
     }
     @media screen and (max-width: 850px) {
