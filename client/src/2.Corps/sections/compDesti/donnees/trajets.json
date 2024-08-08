@@ -1025,10 +1025,11 @@
         ],
         "proportion": 85,
         "terrain": "quelques côtes entre Sherbrooke et Richmond, faux-plat entre Dosquet et Québec.",
-        "deja": [
-            "Sherbrooke à Danville"
-        ],
-        "notes": "La portion entre Sherbrooke (Brompton) et Richmond est officiellement fermée. Le détour se fait par St-François-Xavier-de-Brompton. Voir la carte de la Route verte.",
+        "deja": true,
+        "appreciation": 5,
+        "coups": "Les nombreuses haltes aménagées entre Richmond et Lévis qui donnent le sentiment d'avancer vite.",
+        "defis": "",
+        "notes": "De Richmond à Lévis, il s'agit d'un segment de 150 km en ligne droite. Certains peuvent trouver cette partie ennuyante. Personnellement, je l'ai adoré!",
         "carteURL": "10/46.1998/-71.8375",
         "ass": [
             {

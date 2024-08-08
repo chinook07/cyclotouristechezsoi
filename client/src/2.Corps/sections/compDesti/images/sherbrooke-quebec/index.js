@@ -4,3 +4,5 @@ export { default as Gal03 } from "./sherbrooke-quebec-3.webp";
 export { default as Gal04 } from "./sherbrooke-quebec-4.webp";
 export { default as Gal05 } from "./sherbrooke-quebec-5.webp";
 export { default as Gal06 } from "./sherbrooke-quebec-6.webp";
+export { default as Gal07 } from "./sherbrooke-quebec-7.webp";
+export { default as Gal08 } from "./sherbrooke-quebec-8.webp";
