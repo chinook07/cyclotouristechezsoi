@@ -7,14 +7,14 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="8cm"
+   width="18.59cm"
    height="4cm"
-   viewBox="0 0 79.999999 40"
+   viewBox="0 0 185.9 40"
    version="1.1"
    id="svg440"
-   sodipodi:docname="outaouais-sud-m.svg"
+   sodipodi:docname="vallees-champlain-lamoille.svg"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
-   inkscape:export-filename="C:\Users\nicol\Documents\0-Projets web\CycloReact\client\src\2.Corps\sections\compDesti\schemas\vallees-champlain-lamoille-m.png"
+   inkscape:export-filename="C:\Users\nicol\Documents\0-Projets web\CycloReact\client\src\2.Corps\sections\compDesti\schemas\vallees-champlain-lamoille.png"
    inkscape:export-xdpi="102"
    inkscape:export-ydpi="102">
   <defs
@@ -26,9 +26,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="174.84996"
-     inkscape:cy="147.64209"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="338.40695"
+     inkscape:cy="51.685197"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -47,7 +47,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -57,7 +57,7 @@
      id="layer1">
     <path
        style="fill:none;stroke:#ffff00;stroke-width:5.18001;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 2.5900049,11.100815 c 55.7173731,0 55.7173731,0 55.7173731,0"
+       d="m 2.5900049,11.100815 c 164.1388451,0 164.1388451,0 164.1388451,0"
        id="path1350"
        inkscape:export-xdpi="102.95"
        inkscape:export-ydpi="102.95"
@@ -72,21 +72,21 @@
     <path
        id="path1354"
        style="opacity:0.604;fill:#f1ff34;fill-opacity:1;stroke:#ffffff;stroke-width:4.70001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:9.40001, 4.70001;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
-       d="m 55.745591,11.100815 a 0.24226913,0.24226913 0 0 1 -0.24227,0.24227 0.24226913,0.24226913 0 0 1 -0.24227,-0.24227 0.24226913,0.24226913 0 0 1 0.24227,-0.24227 0.24226913,0.24226913 0 0 1 0.24227,0.24227 z"
+       d="m 164.50824,11.100815 a 0.24226913,0.24226913 0 0 1 -0.24227,0.24227 0.24226913,0.24226913 0 0 1 -0.24227,-0.24227 0.24226913,0.24226913 0 0 1 0.24227,-0.24227 0.24226913,0.24226913 0 0 1 0.24227,0.24227 z"
        inkscape:export-xdpi="102.95"
        inkscape:export-ydpi="102.95"
        inkscape:export-filename="C:\Users\nicol\Documents\MEGAsync\Andere\Informatique\Cyclotouristechezsoi\destinations\villes-traversees\abitibi.png" />
     <path
        id="path1356"
        style="opacity:0.604;fill:#f1ff34;fill-opacity:1;stroke:#ffffff;stroke-width:4.70001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:9.40001, 4.70001;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
-       d="m 21.272587,11.096765 a 0.24226913,0.24226913 0 0 1 -0.242271,0.24227 0.24226913,0.24226913 0 0 1 -0.242269,-0.24227 0.24226913,0.24226913 0 0 1 0.242269,-0.24227 0.24226913,0.24226913 0 0 1 0.242271,0.24227 z"
+       d="m 59.353688,11.096765 a 0.24226913,0.24226913 0 0 1 -0.242271,0.24227 0.24226913,0.24226913 0 0 1 -0.242269,-0.24227 0.24226913,0.24226913 0 0 1 0.242269,-0.24227 0.24226913,0.24226913 0 0 1 0.242271,0.24227 z"
        inkscape:export-xdpi="102.95"
        inkscape:export-ydpi="102.95"
        inkscape:export-filename="C:\Users\nicol\Documents\MEGAsync\Andere\Informatique\Cyclotouristechezsoi\destinations\villes-traversees\abitibi.png" />
     <path
        id="path1358"
        style="opacity:0.604;fill:#2aff80;fill-opacity:1;stroke:#ffffff;stroke-width:4.70001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:9.40001, 4.70001;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
-       d="m 38.547625,11.092275 a 0.24226913,0.24226913 0 0 1 -0.24227,0.24227 0.24226913,0.24226913 0 0 1 -0.24227,-0.24227 0.24226913,0.24226913 0 0 1 0.24227,-0.24227 0.24226913,0.24226913 0 0 1 0.24227,0.24227 z"
+       d="m 111.02456,11.092275 a 0.24226913,0.24226913 0 0 1 -0.24227,0.24227 0.24226913,0.24226913 0 0 1 -0.24227,-0.24227 0.24226913,0.24226913 0 0 1 0.24227,-0.24227 0.24226913,0.24226913 0 0 1 0.24227,0.24227 z"
        inkscape:export-xdpi="102.95"
        inkscape:export-ydpi="102.95"
        inkscape:export-filename="C:\Users\nicol\Documents\MEGAsync\Andere\Informatique\Cyclotouristechezsoi\destinations\villes-traversees\abitibi.png" />
@@ -101,20 +101,20 @@
        inkscape:export-ydpi="102.95"
        inkscape:export-filename="C:\Users\nicol\Documents\MEGAsync\Andere\Informatique\Cyclotouristechezsoi\destinations\villes-traversees\abitibi.png"><tspan
          sodipodi:role="line"
+         id="tspan1360"
          x="13.654571"
          y="13.294706"
-         style="font-size:4.23333px;stroke-width:0.264583"
-         id="tspan20">St-Jean-sur-</tspan><tspan
+         style="font-size:4.23333px;stroke-width:0.264583">St-Jean-sur-</tspan><tspan
          sodipodi:role="line"
          x="13.654571"
          y="18.586369"
          style="font-size:4.23333px;stroke-width:0.264583"
-         id="tspan846">  Richelieu</tspan></text>
+         id="tspan843">   Richelieu</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="26.880175"
-       y="2.8777165"
+       x="56.805355"
+       y="-20.673374"
        id="text1366"
        transform="rotate(38.202715)"
        inkscape:export-xdpi="102.95"
@@ -122,14 +122,14 @@
        inkscape:export-filename="C:\Users\nicol\Documents\MEGAsync\Andere\Informatique\Cyclotouristechezsoi\destinations\villes-traversees\abitibi.png"><tspan
          sodipodi:role="line"
          id="tspan1364"
-         x="26.880175"
-         y="2.8777165"
+         x="56.805355"
+         y="-20.673374"
          style="font-size:4.23333px;stroke-width:0.264583">Swanton</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="39.966278"
-       y="-7.4210744"
+       x="96.920654"
+       y="-52.244118"
        id="text1370"
        transform="rotate(38.202715)"
        inkscape:export-xdpi="102.95"
@@ -137,14 +137,14 @@
        inkscape:export-filename="C:\Users\nicol\Documents\MEGAsync\Andere\Informatique\Cyclotouristechezsoi\destinations\villes-traversees\abitibi.png"><tspan
          sodipodi:role="line"
          id="tspan1368"
-         x="39.966278"
-         y="-7.4210744"
+         x="96.920654"
+         y="-52.244118"
          style="font-size:4.23333px;stroke-width:0.264583">Morrisville</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="53.4575"
-       y="-18.038683"
+       x="138.92619"
+       y="-85.302467"
        id="text1374"
        transform="rotate(38.202715)"
        inkscape:export-xdpi="102.95"
@@ -152,8 +152,8 @@
        inkscape:export-filename="C:\Users\nicol\Documents\MEGAsync\Andere\Informatique\Cyclotouristechezsoi\destinations\villes-traversees\abitibi.png"><tspan
          sodipodi:role="line"
          id="tspan1372"
-         x="53.4575"
-         y="-18.038683"
+         x="138.92619"
+         y="-85.302467"
          style="font-size:4.23333px;stroke-width:0.264583">St-Johnsbury</tspan></text>
   </g>
 </svg>

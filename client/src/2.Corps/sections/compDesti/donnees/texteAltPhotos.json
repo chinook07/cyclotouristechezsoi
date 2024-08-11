@@ -284,14 +284,18 @@
             "15": "passerelle de bois sur une rivière"
         },
         "30": {
-            "0": "piste cyclable dans un champ, forêt au loin",
-            "1": "piste cyclable dans la forêt, fossé de chaque côté",
-            "2": "piste cyclable à travers un champ, un arbre au milieu",
-            "3": "grange au bout d'un champ, montagne au loin",
-            "4": "ancienne gare ferroviare en tant que halte cycliste",
-            "5": "maison ancestrale à côté d'une piste cyclable",
-            "6": "piste cyclable dans la forêt, fossé de chaque côté",
-            "7": "marécage, lac et brouillard"
+            "0": "arbre mort dans un champ",
+            "1": "panneau arrêt le bord d'une route rurale",
+            "2": "berges d'un lac",
+            "3": "pont ferroviaire coupé en deux sur un lac",
+            "4": "piste cyclable dans un champ, forêt au loin",
+            "5": "piste cyclable dans la forêt, fossé de chaque côté",
+            "6": "piste cyclable à travers un champ, un arbre au milieu",
+            "7": "grange au bout d'un champ, montagne au loin",
+            "8": "ancienne gare ferroviare en tant que halte cycliste",
+            "9": "maison ancestrale à côté d'une piste cyclable",
+            "10": "piste cyclable dans la forêt, fossé de chaque côté",
+            "11": "marécage, lac et brouillard"
         }
     }
 }

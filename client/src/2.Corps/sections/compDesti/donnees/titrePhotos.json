@@ -284,14 +284,18 @@
             "15": "Edmundston (Nouveau-Brunswick)"
         },
         "30": {
-            "0": "Entre Highgate Center et Sheldon Jct",
-            "1": "Entre Highgate Center et Sheldon Jct",
-            "2": "Entre Sheldon et East Fairfield",
-            "3": "Entre Cambridge Jct et Johnson",
-            "4": "Johnson",
-            "5": "Entre Morrisville et Wolcott",
-            "6": "Entre Greensboro Bend et Walden",
-            "7": "West Danville"
+            "0": "Entre St-Jean-sur-Richelieu et Ste-Anne-de-Sabrevois",
+            "1": "Hecks Corner",
+            "2": "Plage-Desranleau",
+            "3": "Pont Alburg-Swanton (VT)",
+            "4": "Entre Highgate Center et Sheldon Jct",
+            "5": "Entre Highgate Center et Sheldon Jct",
+            "6": "Entre Sheldon et East Fairfield",
+            "7": "Entre Cambridge Jct et Johnson",
+            "8": "Johnson",
+            "9": "Entre Morrisville et Wolcott",
+            "10": "Entre Greensboro Bend et Walden",
+            "11": "West Danville"
         }
     }
 }

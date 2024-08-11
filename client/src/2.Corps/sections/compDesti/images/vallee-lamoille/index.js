@@ -6,3 +6,7 @@ export { default as Gal05 } from "./vallee-lamoille-5.webp";
 export { default as Gal06 } from "./vallee-lamoille-6.webp";
 export { default as Gal07 } from "./vallee-lamoille-7.webp";
 export { default as Gal08 } from "./vallee-lamoille-8.webp";
+export { default as Gal09 } from "./vallee-lamoille-9.webp";
+export { default as Gal10 } from "./vallee-lamoille-10.webp";
+export { default as Gal11 } from "./vallee-lamoille-11.webp";
+export { default as Gal12 } from "./vallee-lamoille-12.webp";

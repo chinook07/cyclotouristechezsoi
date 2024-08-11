@@ -28,3 +28,4 @@ export { default as Has26 } from "./sherbrooke-quebec.webp";
 export { default as Has27 } from "./temiscouata.webp";
 export { default as Has28 } from "./trois-rivieres-shawinigan.webp";
 export { default as Has29 } from "./region.png";
+export { default as Has30 } from "./vallees-champlain-lamoille.webp";
