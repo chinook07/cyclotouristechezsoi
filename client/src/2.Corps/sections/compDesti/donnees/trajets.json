@@ -1159,5 +1159,45 @@
             "Grand-Remous",
             "Gatineau–Ottawa"
         ]
+    },
+    {
+        "id": 30,
+        "trajet": "Vallées Champlain et Lamoille",
+        "intro": "Une nouvelle piste cyclable traverse l'état du Vermont de l'ouest vers l'est. Pour s'y rendre, on suit un beau trajet sur route mettant en vedette le lac Champlain.",
+        "distance": 210,
+        "veloroutes": [
+            "Véloroute du Lac Champlain",
+            "Lamoille Valley Rail Trail"
+        ],
+        "proportion": 70,
+        "terrain": "faux plats sur la Lamoille Valley Rail Trail",
+        "deja": [
+            "St-Jean-sur-Richelieu à Hardwick",
+            "Walden à Danville"
+        ],
+        "appreciation": 5,
+        "coups": "Le paysage fabuleux de cette région du Vermont.",
+        "defis": "La route VT-78 à l'est du pont Alburg-Swanton ne dispose pas d'accotement.",
+        "notes": "L'emprise de la Lamoille Valley Rail Trail est vunérable aux inondations. Vérifiez les mises à jour avant de partir.",
+        "carteURL": "10/44.5657/-72.6020",
+        "ass": [
+            {
+                "titre": "Partez de Montréal ou de Granby",
+                "nombre": 20
+            },
+            {
+                "titre": "Allez ensuite vers Sutton",
+                "nombre": 3
+            },
+            {
+                "titre": "Explorez le lac Champlain",
+                "nombre": 14
+            }
+        ],
+        "type": "forestier",
+        "deA": [
+            "St-Jean-sur-Richelieu",
+            "St-Johnsbury"
+        ]
     }
 ]

@@ -51,6 +51,7 @@ const Destinations = () => {
                 <Route path="/temiscouata/" element={<Trajets ancienLien={27} />} />
                 <Route path="/trois-rivieres-shawinigan/" element={<Trajets ancienLien={28} />} />
                 <Route path="/vallee-gatineau/" element={<Trajets ancienLien={29} />} />
+                <Route path="/vallees-champlain-lamoille/" element={<Trajets ancienLien={30} />} />
                 <Route path="/nouveautes" element={<Nouveautes />} />
                 <Route path="/synthese" element={<Synthese />} />
                 <Route path="/*" element={<Erreur />} />

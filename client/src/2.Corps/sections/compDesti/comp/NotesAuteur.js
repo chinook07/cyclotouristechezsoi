@@ -12,7 +12,7 @@ const NotesAuteur = ({ details }) => {
                     details.deja.length &&
                     details.deja.map((item, index) => {
                         return (
-                            <span key={index}>{item} <FontAwesomeIcon icon={faCheck} /></span>
+                            <span key={index}>{item} <FontAwesomeIcon icon={faCheck} /> </span>
                         )
                     })
                 }

@@ -282,6 +282,16 @@
             "13": "Frontière du Nouveau-Brunswick",
             "14": "Frontière du Nouveau-Brunswick",
             "15": "Edmundston (Nouveau-Brunswick)"
+        },
+        "30": {
+            "0": "Entre Highgate Center et Sheldon Jct",
+            "1": "Entre Highgate Center et Sheldon Jct",
+            "2": "Entre Sheldon et East Fairfield",
+            "3": "Entre Cambridge Jct et Johnson",
+            "4": "Johnson",
+            "5": "Entre Morrisville et Wolcott",
+            "6": "Entre Greensboro Bend et Walden",
+            "7": "West Danville"
         }
     }
 }

@@ -282,6 +282,16 @@
             "13": "frontière indiquant le Nouveau-Brunswick",
             "14": "frontière indiquant le Nouveau-Brunswick",
             "15": "passerelle de bois sur une rivière"
+        },
+        "30": {
+            "0": "piste cyclable dans un champ, forêt au loin",
+            "1": "piste cyclable dans la forêt, fossé de chaque côté",
+            "2": "piste cyclable à travers un champ, un arbre au milieu",
+            "3": "grange au bout d'un champ, montagne au loin",
+            "4": "ancienne gare ferroviare en tant que halte cycliste",
+            "5": "maison ancestrale à côté d'une piste cyclable",
+            "6": "piste cyclable dans la forêt, fossé de chaque côté",
+            "7": "marécage, lac et brouillard"
         }
     }
 }
