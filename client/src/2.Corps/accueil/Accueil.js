@@ -5,7 +5,7 @@ import { format } from "date-fns";
 import Carrousel from "./comp/Caroussel";
 import NavAccueil from "./comp/NavAccueil";
 import NavBlogue from "./comp/NavBlogue";
-import TestWebP from "./comp/TestWebP";
+import Conference from "./comp/Conference";
 import texteAcc from "./donnees/texteAcc.json";
 
 const Accueil = () => {
@@ -24,6 +24,7 @@ const Accueil = () => {
             </Intro>
             {/* <TestWebP /> */}
             <NavAccueil />
+            <Conference />
             <Billets>Récents billets de blogue sur <ExternalLink href="https://touristechezsoi.ca/">Touriste chez soi</ExternalLink></Billets>
             <NavBlogue />
         </>
