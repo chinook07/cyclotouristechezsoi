@@ -14,7 +14,7 @@ const Boite15 = () => {
     return (
         
         <Wrapper>
-            <p>Au Québec, il est relativement facile de trouver des points d'eau. On trouve des abreuvoirs dans les parcs, les bâtiments municipaux (centres communautaires, bibliothèques) et les autres espaces publics.</p>
+            <p>Au Québec, il est relativement facile de trouver des points d'eau. On trouve des abreuvoirs dans les parcs, les bâtiments municipaux (centres communautaires, bibliothèques) et les autres espaces publics. D'autres lieux où l'on peut souvent se ravitailler en eau incluent les stations-services, les restaurants, les dépanneurs et à l'occasion les supermarchés.</p>
             <p>Parfois, il faudra remplir sa bouteille dans le lavabo d'une salle de bain. L'eau est tout aussi potable que celle d'un évier de cuisine, mais l'espace de dégagement limité peut être gênant pour les grandes bouteilles.</p>
             <h4>Est-ce qu'il y a une carte des points d'eau?</h4>
             <p>Les cartes de <ExternalLink href="https://www.routeverte.com/cartographie-route-verte/">la Route verte</ExternalLink> et de <ExternalLink href="https://www.quebec511.info/fr/Carte/Default.aspx">Québec 511</ExternalLink> offrent la possibilité d'afficher les haltes routières. En cliquant dessus, on voit si de l'eau y est disponible. Par expérience, cette information n'est pas toujours véridique.</p>
