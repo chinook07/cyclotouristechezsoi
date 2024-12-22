@@ -26,10 +26,6 @@
     "Baie-d'Urfé": [
         100
     ],
-    "Baie-Saint-Paul": [
-        8,
-        9
-    ],
     "Beaconsfield": [
         100
     ],
@@ -217,7 +213,6 @@
         100
     ],
     "La Malbaie": [
-        9,
         85
     ],
     "La Pocatière": [
@@ -414,7 +409,6 @@
     "Québec": [
         2,
         4,
-        8,
         50,
         51,
         52,
@@ -559,7 +553,6 @@
         305
     ],
     "Sainte-Anne-de-Beaupré": [
-        8,
         320
     ],
     "Sainte-Anne-de-Bellevue": [

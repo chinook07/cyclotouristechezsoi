@@ -42,7 +42,7 @@
     {
         "region": "Québec",
         "transporteur": "PLUMobile",
-        "lien": "http://www.plumobile.ca/",
+        "lien": "https://plumobile.ca/services-complementaires/",
         "desserte": [
             "Québec",
             "la Côte-de-Beaupré et l'Ile d'Orléans"
@@ -50,19 +50,9 @@
         "dates": "7 jrs"
     },
     {
-        "region": "Québec et Charlevoix",
-        "transporteur": "Train de Charlevoix",
-        "lien": "http://traindecharlevoix.com/",
-        "desserte": [
-            "Québec (Beauport)",
-            "La Malbaie"
-        ],
-        "dates": "7 jrs"
-    },
-    {
         "region": "Gaspésie",
         "transporteur": "RÉGIM",
-        "lien": "https://regim.info/",
+        "lien": "https://regim.info/comment-lutiliser/supports-a-velos/",
         "desserte": [
             "Les différentes communautés de la région"
         ],
