@@ -1,5 +1,12 @@
 [
     {
+        "nom": "Pour une huitième année forte en mobilité durable",
+        "url": "https://touristechezsoi.ca/blogue/dossiers-chauds-2025.html",
+        "description": "Après une année marquée d'avancées en matière de mobilité durable, 2025 sera décisive sur le plan électoral, car les Montréalais iront aux urnes en novembre. De nombreuses personnes critiquent la mairesse Valérie Plante, mais le parti d'opposition peine à recruter des candidats et le nombre de ses employés permanents diminue rapidement. Dans le contexte de la crise climatique grandissante, il est alors non seulement souhaitable, mais aussi probable que le candidat qui briguera la chefferie de Projet Montréal se trouve à la tête de la ville dans moins de 12 mois.",
+        "image": "https://touristechezsoi.ca/blogue/dossiers-chauds-2025/canal-lachine.jpg",
+        "alt": "arbres en couleur près d'une piste cyclable à l'aube, canal à gauche"
+    },
+    {
         "nom": "Jusqu'aux Iles-de-la-Madeleine à vélo",
         "url": "https://touristechezsoi.ca/blogue/aux-iles-a-velo.html",
         "description": "Un archipel mythique au milieu de la mer, qu'il faut atteindre soit par avion, ou bien par une liaison maritime nécessitant d'abord la traversée de deux provinces. Comment y aller à vélo? Et surtout, pourquoi? Certes, c'est un moyen fantastique pour découvrir les Iles de la Madeleine, mais c'est aussi une excellente manière de s'y rendre, à condition d'avoir suffisamment de temps! Choisissez un de plusieurs trajets pour y accéder, et hop, à l'aventure!",
@@ -19,12 +26,5 @@
         "description": "Combien d'onces dans un gallon? C'est quoi, une « pierre »? Est-ce qu'une tuque est nécessaire à 45 °F? Selon votre âge, vous pourriez peut-être répondre à ces dernières questions. Étant donné que la quasi-totalité des pays utilise les unités métriques, est-ce important de connaitre les unités impériales? Devrait-on les bouder, en tant que société? Cap sur un sujet considéré par certains comme banal, mais qui soulève les passions des autres.",
         "image": "https://www.touristechezsoi.ca/blogue/metrique/horloge.png",
         "alt": "horloge décimale"
-    },
-    {
-        "nom": "2039 dans une ville méconnaissable",
-        "url": "https://touristechezsoi.ca/blogue/2039.html",
-        "description": "C'est l'histoire d'Olivia et sa famille qui s'installent dans leur nouvel appartement à Montréal, dans un monde radicalement différent suite à l'accélération de la crise climatique. Le hockey sur glace est en voie de disparition, la chaleur accablante et les feux de forêt ont changé le visage du Québec, et la politique municipale est devenue plus captivante qu'auparavant.",
-        "image": "https://touristechezsoi.ca/blogue/2039/parlement-feu.jpg",
-        "alt": "ciel rouge, parlement au loin"
     }
 ]
