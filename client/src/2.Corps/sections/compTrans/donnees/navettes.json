@@ -1,22 +1,26 @@
 [
     {
-        "lien": "https://www.voyageravelo.com/",
+        "lien": "https://www.voyageravelo.com/services/",
         "regions": "Montérégie, Centre-du-Québec, dans les axes Toronto–Montréal–Matane et Montréal–Sherbrooke"
     },
     {
+        "lien": "https://cooparrierepays.ca/pages/navettes-routieres",
+        "regions": "MRC Témiscamingue"
+    },
+    {
         "lien": "https://www.autobuslepetittraindunord.com/",
-        "regions": "Parc linéaire le P'tit train du Nord"
-    },
-    {
-        "lien": "https://fr.veloroutedesbleuets.com/navette-de-bagages",
-        "regions": "Véloroute des Bleuets"
-    },
-    {
-        "lien": "https://navettesdufjord.com/fr/trajets/veloroute-du-fjord-du-saguenay",
-        "regions": "Véloroute du Fjord"
+        "regions": "Parc linéaire le P'tit train du Nord (de Saint-Jérôme à Mont-Laurier)"
     },
     {
         "lien": "https://www.veloroute-des-baleines.ca/services-aux-cyclistes",
-        "regions": "Véloroute des Baleines"
+        "regions": "Véloroute des Baleines (de Tadoussac à Baie-Trinité)"
+    },
+    {
+        "lien": "https://veloroutedesbleuets.com/navette-de-bagages/",
+        "regions": "Véloroute des Bleuets (Lac–Saint-Jean)"
+    },
+    {
+        "lien": "https://navettesdufjord.com/fr/trajets/veloroute-du-fjord-du-saguenay",
+        "regions": "Véloroute du Fjord (Saguenay)"
     }
 ]
