@@ -26,12 +26,12 @@ const APropos = () => {
                 <p>Alors que l'engouement pour le vélo se fait sentir de plus en plus, votre association ou votre entreprise pourrait profiter de cette tendance, là pour rester. Que ça soit pour la rédaction d'un article ou une conférence à vos employés, je vous invite à <Link to="/contact">me contacter</Link> pour discuter des possibilités.</p>
                 <p>Expérience à ce jour :</p>
                 <ul>
-                    <li>Quatre textes dans le livre <ExternalLink href="https://www.guidesulysse.com/fr/produit.aspx?ISBN=9782765860860">Randonnées à vélo en Europe – 50 itinéraires de rêve</ExternalLink>, à venir en mars 2024.</li>
+                    <li>Quatre conférences données à <ExternalLink href="https://www.velo.qc.ca/categorie-evenement/conference-velo-maison-des-cyclistes/">la Maison des cyclistes</ExternalLink> entre 2017 et 2025.</li>
+                    <li>Quatre textes dans le livre <ExternalLink href="https://icq.affiliationfocus.com/client/click/a0e742e24b0f47d5c2732e58dc76477c">Randonnées à vélo en Europe – 50 itinéraires de rêve</ExternalLink> (lien affilié qui me donne une partie des profits).</li>
                     <li>Deux textes dans le livre <ExternalLink href="https://icq.affiliationfocus.com/client/click/24eadbfbaab163a5d6ee6bdd4c00b8f1">Randonnées à vélo en Amérique du Nord – 50 itinéraires de rêve</ExternalLink> (lien affilié qui me donne une partie des profits).</li>
                     <li>Deux articles de blogue en collaboration avec Tourisme Montérégie suite à un séjour <ExternalLink href="https://www.tourisme-monteregie.qc.ca/une-viree-a-velo-juste-parfaite-dans-le-suroit/?season=summer">dans Suroît</ExternalLink> et un autre <ExternalLink href="https://www.tourisme-monteregie.qc.ca/sejour-a-velo-pour-admirer-les-couleurs-de-lautomne/?season=fall">dans le nord-est de la région</ExternalLink> en 2020.</li>
                     <li>Fait parti du comité organisateur du <ExternalLink href="https://www.facebook.com/events/parc-maisonneuve/v%C3%A9lo-sur-glace-2020-forum-v%C3%A9lo-dhiver/439723316683787/">Forum du vélo d'hiver 2020</ExternalLink>.</li>
                     <li>Miniconférences données au Salon du vélo de Montréal en 2018, avec Vélo Québec.</li>
-                    <li>Trois conférences données à <ExternalLink href="https://www.velo.qc.ca/categorie-evenement/conference-velo-maison-des-cyclistes/">la Maison des cyclistes</ExternalLink> entre 2017 et 2019.</li>
                 </ul>
             </div>
             <div>
