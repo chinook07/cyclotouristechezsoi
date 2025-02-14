@@ -4,9 +4,9 @@
         "lienRegion": "bellechasse",
         "couleur": "#808080",
         "police": "#000",
-        "texte": "Une nouvelle piste cyclable relie la Véloroute de la Chaudière à la Cycloroute de Bellechasse. La piste cyclable Dorchester devrait être inaugurée au printemps 2024. Aucune nouvelle information depuis, mais la carte thermique (heatmap) de Strava montre une forte fréquentation de l'emprise.",
-        "lien": "La Voix du Sud",
-        "url": "https://www.lavoixdusud.com/actualites/veloroute-dorchester-inauguration-au-printemps-2024/",
+        "texte": "Une nouvelle piste cyclable reliera prochainement la Véloroute de la Chaudière à la Cycloroute de Bellechasse. Les travaux sont presque complétés, mais il reste encore deux petits tronçons à Scott et à Sainte-Hénédine.",
+        "lien": "En Beauce",
+        "url": "https://www.enbeauce.com/actualites/municipal/621333/veloroute-de-dorchester-encore-des-travaux-avant-sa-completion",
         "complet": false
     },
     {
@@ -34,9 +34,9 @@
         "lienRegion": "laurentides",
         "couleur": "#f00",
         "police": "#000",
-        "texte": "Un tronçon supplémentaire de 14 km entre Mont-Tremblant et Labelle sera asphalté d'ici septembre 2024. Il ne restera qu'un tronçon de 32 km en poussière de pierre.",
-        "lien": "P'tit train du Nord",
-        "url": "https://ptittraindunord.com/conditions-de-piste/#content",
+        "texte": "Un tronçon supplémentaire de 10 km entre Prévost et Saint-Jérôme sera asphalté au printemps 2025. Il ne restera qu'un tronçon de 22 km en poussière de pierre de Val-Morin à Prévost.",
+        "lien": "Journal Le Nord",
+        "url": "https://www.journallenord.com/actualite/le-ptit-train-du-nord-sera-asphalte-de-saint-jerome-a-prevost/",
         "complet": false
     },
     {
@@ -66,7 +66,7 @@
         "police": "#fff",
         "texte": "Sept sites de camping rustique ont été établis le long de la Vélopiste Jacques-Cartier/Portneuf. Il faut réserver à l'avance.",
         "lien": "Vélopiste Jacques-Cartier/Portneuf",
-        "url": "https://www.velopistejcp.com/camping",
+        "url": "https://www.velopistejcp.com/carte-interactive",
         "complet": true
     },
     {
