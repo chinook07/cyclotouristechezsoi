@@ -379,6 +379,16 @@
         "trajet": "Circuits 31/32 – Autobus entre Montréal et Châteauguay.",
         "heures": "7 jours sur 7."
     },
+    "122": {
+        "icone": [
+            3,
+            5,
+            10
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 111 – Autobus entre Montréal et Ste-Martine.",
+        "heures": "7 jours sur 7."
+    },
     "130": {
         "icone": [
             3,
@@ -528,6 +538,106 @@
         "transporteur": "exo",
         "trajet": "Circuit 59 – Autobus entre Laval et Mirabel.",
         "heures": "sur semaine seulement, principalement à l'heure de pointe."
+    },
+    "180": {
+        "icone": [
+            3,
+            5,
+            10
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 105 – Autobus entre Chambly et Marieville.",
+        "heures": "7 jours sur 7."
+    },
+    "181": {
+        "icone": [
+            3,
+            5,
+            10
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 481 – Autobus entre Brossard et Chambly.",
+        "heures": "7 jours sur 7."
+    },
+    "182": {
+        "icone": [
+            3,
+            5,
+            10
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 487 – Autobus entre Brossard et Chambly.",
+        "heures": "sur semaine seulement, vers Chambly le matin, vers Brossard l'après-midi."
+    },
+    "183": {
+        "icone": [
+            3,
+            5,
+            10
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 680 – Autobus entre Longueuil et Chambly.",
+        "heures": "fins de semaine seulement."
+    },
+    "184": {
+        "icone": [
+            3,
+            5,
+            10
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 681 – Autobus entre Longueuil et Chambly.",
+        "heures": "sur semaine seulement"
+    },
+    "185": {
+        "icone": [
+            3,
+            5,
+            10
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 685 – Autobus entre Carignan et St-Jean-sur-Richelieu.",
+        "heures": "sur semaine seulement, quelques départs seulement"
+    },
+    "190": {
+        "icone": [
+            3,
+            5,
+            10
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 325 – Autobus entre Longueuil et Ste-Julie.",
+        "heures": "sur semaine seulement"
+    },
+    "191": {
+        "icone": [
+            3,
+            5,
+            10
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 340 – Autobus entre Longueuil et Ste-Julie.",
+        "heures": "fins de semaine seulement."
+    },
+    "192": {
+        "icone": [
+            3,
+            5,
+            10
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 350 – Autobus entre Longueuil et Ste-Julie.",
+        "heures": "7 jours sur 7"
+    },
+    "193": {
+        "icone": [
+            3,
+            5,
+            10
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 600 – Autobus entre Brossard et Ste-Julie.",
+        "heures": "sur semaine seulement"
     },
     "300": {
         "icone": [

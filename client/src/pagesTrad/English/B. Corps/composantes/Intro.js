@@ -1,11 +1,14 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 import Traduc from "./sousComposantes/Traduc";
 import Metrique from "./sousComposantes/Metrique";
 
+import { CycloContext } from "../../../../CycloContext";
+
 const Intro = () => {
 
+    const { mesuresMetriques } = useContext(CycloContext)
     const [montrerTraduc, setMontrerTraduc] = useState(false);
 
     const traduc = (effet) => {
@@ -24,6 +27,9 @@ const Intro = () => {
                 <Traduc />
             }
             <Metrique />
+            {
+                !mesuresMetriques && <p>In these times of political unrest, non-MAGA Americans are welcome to enjoy their vacations in Quebec.</p>
+            }
         </section>
     )
 }

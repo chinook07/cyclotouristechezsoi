@@ -19,8 +19,8 @@ const VoyEffectues = () => {
             <section>
                 <h2>Quelques idées pour vous mettre sur la bonne piste!</h2>
                 <p>Que ça soit pour se renseigner, planifier ou tout simplement pour s'inspirer, voici mon historique de cyclotourisme, d'abord sur une carte, puis en ordre chronologique. Même si j'ai parcouru plusieurs des grandes destinations de la province, je sais qu'il reste énormément d'endroits à découvrir ici comme ailleurs.</p>
-                <p>En juillet 2024, j'ai pu découvrir le nord du Vermont à vélo... jusqu'à ce que des inondations majeures me forcent à mettre le cap vers Québec. J'ai alors roulé sur une des plus longues pistes cyclables continues au Québec, soit de Richmond à Lévis. J'ai été émerveillé du début à la fin!</p>
-                <p>L'été 2025 est encore trop loin pour concrétiser des plans, mais j'aimerais initier mon fils au cyclotourisme, en plus de faire un autre voyage aux États-Unis.</p>
+                <p>En juin 2025, j'ai enfin pu initier mon fils au cyclotourisme lors d'une sortie de 5 jours de Montréal vers l'Université Bishop's (Sherbrooke). L'expérience s'est bien déroulée, et j'ai déjà hâte à notre prochain périple en dyade.</p>
+                <p>Place aux vacances à vélo en solo! En juillet, je prendrai la route pendant 9 jours, sillonant routes et pistes cyclables entre le parc national du Mont-Tremblant et Ottawa, en passant par Mont-Laurier et Maniwaki.</p>
                 <Stats1 />
                 <H3e>Nuitées<FontAwesomeIcon icon={faMoon} /></H3e>
                 <Stats2 />

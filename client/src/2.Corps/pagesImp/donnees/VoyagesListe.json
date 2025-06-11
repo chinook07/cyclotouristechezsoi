@@ -594,5 +594,30 @@
         "retour": "autocar",
         "lienURL": "https://www.crazyguyonabike.com/doc/nordvermont",
         "lienTitre": "Récit de voyage"
+    },
+    {
+        "categories": "tout flipLineaire flipFacile",
+        "jours": 5,
+        "titre": "Baptême du feu – vers Bishop's avec mon fils",
+        "date": "Juin 2025",
+        "anecdote": "Nombre de parcs visités : 7",
+        "note": "Premier voyage avec mon gars de 2 ans",
+        "imgAlt": "guidon du vélo devant l'université Bishop's, casque d'un enfant",
+        "km": 215,
+        "denivele": 940,
+        "ratio": 435,
+        "difficulte": 2,
+        "villes": [
+            "Montréal",
+            "Longueuil",
+            "Chambly",
+            "Granby",
+            "Magog",
+            "Sherbrooke"
+        ],
+        "coucher": "un toit",
+        "retour": "voiture",
+        "lienURL": "https://www.crazyguyonabike.com/doc/papaetfils",
+        "lienTitre": "Récit de voyage"
     }
 ]
