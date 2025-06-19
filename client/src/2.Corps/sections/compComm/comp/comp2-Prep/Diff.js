@@ -23,12 +23,14 @@ const Diff = () => {
             <Cadran>
                 {
                     jpm >= 9
-                        ? <img src={mesurediffcraque} alt="un cadran craqué montrat plus que 9 jurons par minute" />
-                        : <img src={mesurediff} alt={`un cadran montrant ${jpm} jurons par minute`} />
-                }
-                {
-                    jpm < 9 &&
-                        <Aiguille jpm={jpm} />
+                        ? <>
+                            <img src={mesurediffcraque} alt="un cadran craqué montrat plus que 9 jurons par minute" />
+                            <Aiguille jpm={9} />
+                        </>
+                        : <>
+                            <img src={mesurediff} alt={`un cadran montrant ${jpm} jurons par minute`} />
+                            <Aiguille jpm={jpm} />
+                        </>
                 }
             </Cadran>
             
@@ -109,7 +111,6 @@ const Cadran = styled.div`
     position: relative;
     img {
         display: block;
-        
         width: 100%;
     }
 `
