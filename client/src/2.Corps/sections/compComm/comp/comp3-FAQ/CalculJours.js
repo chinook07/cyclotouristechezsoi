@@ -34,10 +34,11 @@ const CalculJours = () => {
         <Wrapper>
             <Quadri>
                 <legend>Km/jr</legend>
+                <ul>
                 {
                     distanceParJr.map((item, index) => {
                         return (
-                            <>
+                            <li key={index}>
                                 <input
                                     id={`profil${index}`}
                                     type="radio"
@@ -49,10 +50,11 @@ const CalculJours = () => {
                                     <span>{item.nom}</span>
                                     <span>{`${item.distance - 10}–${item.distance + 10}`}</span>
                                 </label>
-                            </>
+                            </li>
                         )
                     })
                 }
+                </ul>
             </Quadri>
             <label>
                 <span>Trajet total (km) : </span>
@@ -83,12 +85,15 @@ const Wrapper = styled.form`
 
 const Quadri = styled.fieldset`
     border: none;
-    display: grid;
-    gap: 5px 15px;
-    grid-template-columns: auto auto;
     justify-content: center;
     margin: 12px auto;
     width: fit-content;
+    ul li {
+        display: flex;
+        justify-content: space-between;
+        column-gap: 8px;
+        list-style: none;
+    }
     label {
         display: flex;
         justify-content: space-between;

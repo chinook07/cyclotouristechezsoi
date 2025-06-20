@@ -4,8 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import TrCoucher from "./TrCoucher";
 import TrCoucherAR from "./TrCoucherAR";
-import { FaMountain } from "react-icons/fa";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faMountain } from "@fortawesome/free-solid-svg-icons";
 
 const Verso = ({ item, index, changerCarte }) => {
 
@@ -25,7 +24,7 @@ const Verso = ({ item, index, changerCarte }) => {
                     <Cachee aria-disabled>{ item.difficulte }</Cachee>
                     <Montagnes>
                         {
-                            [...Array(item.difficulte)].map((e, i) => <FaMountain key={i} />)
+                            [...Array(item.difficulte)].map((e, i) => <FontAwesomeIcon icon={faMountain} key={i} />)
                         }
                     </Montagnes>
                 </div>
