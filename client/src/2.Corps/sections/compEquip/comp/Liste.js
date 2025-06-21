@@ -38,9 +38,9 @@ const Liste = ({ bagages, camping, packThis }) => {
                                                 </Chose>
                                             )
                                         }
+                                        return null;
                                     })
                                 }
-                                {/* <ChosePlus /> */}
                             </div>
                         </Categorie>
                     )
@@ -73,14 +73,6 @@ const Chose = styled.button`
     padding: 8px 12px;
     svg {
         margin-right: 5px;
-    }
-`
-
-const ChosePlus = styled.form`
-    input {
-        border-radius: 15px;
-        margin: 5px;
-        padding: 8px 12px;
     }
 `
 

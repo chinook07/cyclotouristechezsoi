@@ -1,12 +1,10 @@
 import styled from "styled-components";
-import { useState, useContext } from "react";
+import { useState } from "react";
 
-import { CycloContext } from "../../../../../CycloContext";
 import climat from "../donnees/climat.json"
 
 const Climat = () => {
 
-    const { mesuresMetriques } = useContext(CycloContext);
     const [villeChoisie, setVilleChoisie] = useState(false);
 
     const choisirVille = (choix) => {

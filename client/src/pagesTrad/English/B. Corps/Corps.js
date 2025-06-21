@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link as ScrollLink, Element, animateScroll as scroll } from 'react-scroll';
+import {  Element } from 'react-scroll';
 
 import Intro from "./composantes/Intro";
 import Visiting from "./composantes/Visiting";
