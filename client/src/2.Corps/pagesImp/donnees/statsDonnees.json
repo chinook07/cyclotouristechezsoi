@@ -1,15 +1,15 @@
 [
     {
         "valeur": "voyages effectués",
-        "nombre": 26
+        "nombre": 27
     },
     {
         "valeur": "jrs sur la route",
-        "nombre": 181
+        "nombre": 190
     },
     {
         "valeur": "km voyagés",
-        "nombre": 9678
+        "nombre": 10121
     },
     {
         "valeur": "crevaisons souffertes",
@@ -21,6 +21,6 @@
     },
     {
         "valeur": "Route verte pédalée",
-        "nombre": 67
+        "nombre": 70
     }
 ]

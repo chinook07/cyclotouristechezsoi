@@ -20,7 +20,7 @@ const VoyEffectues = () => {
                 <h2>Quelques idées pour vous mettre sur la bonne piste!</h2>
                 <p>Que ça soit pour se renseigner, planifier ou tout simplement pour s'inspirer, voici mon historique de cyclotourisme, d'abord sur une carte, puis en ordre chronologique. Même si j'ai parcouru plusieurs des grandes destinations de la province, je sais qu'il reste énormément d'endroits à découvrir ici comme ailleurs.</p>
                 <p>En juin 2025, j'ai enfin pu initier mon fils au cyclotourisme lors d'une sortie de 5 jours de Montréal vers l'Université Bishop's (Sherbrooke). L'expérience s'est bien déroulée, et j'ai déjà hâte à notre prochain périple en dyade.</p>
-                <p>Place aux vacances à vélo en solo! En juillet, je prendrai la route pendant 9 jours, sillonant routes et pistes cyclables entre le parc national du Mont-Tremblant et Ottawa, en passant par Mont-Laurier et Maniwaki.</p>
+                <p>Le mois suivant, j'ai pris des vacances à vélo en solo! J'ai roulé pendant 9 jours sur les plus belles pistes cyclables du Québec, dont le P'tit train du Nord, la Véloroute des Draveurs et la toute nouvelle Voie verte Chelsea. Que me réserve la saison 2026? Je ne sais pas encore, mais on se croise les doigts pour que ça soit enfin l'année où les vélos soient acceptés à bord des trains vers l'Ontario. Si c'est le cas, la province à l'ouest sera à certainement à redécouvrir!</p>
                 <Stats1 />
                 <H3e>Nuitées<FontAwesomeIcon icon={faMoon} /></H3e>
                 <Stats2 />

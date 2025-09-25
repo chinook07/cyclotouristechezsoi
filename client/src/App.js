@@ -12,7 +12,7 @@ const App = () => {
     return (
         <>
             <GlobalStyles />
-            <BrowserRouter>
+            <BrowserRouter future={{v7_relativeSplatPath: true}}>
                 <Routes>
                     <Route path="/english" element={<English />} />
                     <Route path="/deutsch" element={<Deutsch />} />

@@ -1,19 +1,19 @@
 [
     {
         "valeur": "en camping aménagé",
-        "nombre": 81
+        "nombre": 83
     },
     {
         "valeur": "en bivouac",
-        "nombre": 29
+        "nombre": 32
     },
     {
         "valeur": "à l'auberge / l'hôtel",
-        "nombre": 22
+        "nombre": 24
     },
     {
         "valeur": "chez l'habitant",
-        "nombre": 25
+        "nombre": 26
     },
     {
         "valeur": "en transit (avion, train)",

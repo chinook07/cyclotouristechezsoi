@@ -619,5 +619,30 @@
         "retour": "voiture",
         "lienURL": "https://www.crazyguyonabike.com/doc/papaetfils",
         "lienTitre": "Récit de voyage"
+    },
+    {
+        "categories": "tout flipLineaire flipFacile",
+        "jours": 9,
+        "titre": "Finir le triangle de l'ouest 11 ans plus tard",
+        "date": "Juillet 2025",
+        "anecdote": "Accumulation de pluie en roulant : <1 mm",
+        "note": "Première fois sur le P'tit train du Nord au complet",
+        "imgAlt": "coucher de soleil sur une piste cyclable, horizon enfumée, conifères en avant-plan",
+        "km": 445,
+        "denivele": 2000,
+        "ratio": 445,
+        "difficulte": 2,
+        "villes": [
+            "St-Jérôme",
+            "Mont-Tremblant",
+            "Mont-Laurier",
+            "Maniwaki",
+            "Ottawa-Gatineau"
+        ],
+        "alle": "train de banlieue",
+        "coucher": "la tente",
+        "retour": "autocar",
+        "lienURL": "https://www.crazyguyonabike.com/doc/boucleouest",
+        "lienTitre": "Récit de voyage"
     }
 ]
