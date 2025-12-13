@@ -4,9 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Legende = ({toutesIcones}) => {
 
     const legendeTexte = [
+        "train interurbain",
         "train",
         "autocar",
-        "train de banlieue",
         "autobus",
         "traversier",
         "vélos non-démontés acceptés",

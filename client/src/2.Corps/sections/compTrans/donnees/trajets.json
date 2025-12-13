@@ -8,7 +8,7 @@
         "transporteur": "Via Rail",
         "trajet": "Lien ferroviaire entre Montréal, Kingston et Toronto.",
         "heures": "7 jours sur 7.",
-        "velos": "Transport des vélos non disponible jusqu'au renouvellement de la flotte de trains entre fin 2022 et 2024."
+        "velos": "Transport des vélos non disponible jusqu'à nouvel ordre."
     },
     "2": {
         "icone": [
@@ -19,7 +19,7 @@
         "transporteur": "Via Rail",
         "trajet": "Lien ferroviaire entre Ottawa, Montréal et Québec.",
         "heures": "7 jours sur 7.",
-        "velos": "Transport des vélos non disponible jusqu'au renouvellement de la flotte de trains entre fin 2022 et 2024."
+        "velos": "Transport des vélos non disponible jusqu'à nouvel ordre."
     },
     "3": {
         "icone": [
@@ -30,7 +30,7 @@
         "transporteur": "Via Rail",
         "trajet": "Lien ferroviaire entre Ottawa, Kingston et Toronto.",
         "heures": "7 jours sur 7.",
-        "velos": "Transport des vélos non disponible jusqu'au renouvellement de la flotte de trains, possiblement en 2024."
+        "velos": "Transport des vélos non disponible jusqu'à nouvel ordre."
     },
     "4": {
         "icone": [
@@ -356,7 +356,7 @@
             9
         ],
         "transporteur": "REM",
-        "trajet": "REM A1 entre Montréal et Brossard",
+        "trajet": "REM A1/A4 entre Deux-Montagnes et Brossard",
         "heures": "7 jours sur 7"
     },
     "120": {
