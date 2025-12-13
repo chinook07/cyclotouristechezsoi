@@ -125,6 +125,9 @@
         62,
         330
     ],
+    "Charette": [
+        351
+    ],
     "Château-Richer": [
         320
     ],
@@ -291,6 +294,10 @@
     "Longue-Rive": [
         85
     ],
+    "Louiseville": [
+        50,
+        350
+    ],
     "Louvicourt": [
         10
     ],
@@ -311,6 +318,9 @@
     ],
     "Mascouche": [
         102
+    ],
+    "Maskinongé": [
+        350
     ],
     "Matagami": [
         11
@@ -513,6 +523,9 @@
         130,
         131
     ],
+    "Saint-Boniface": [
+        351
+    ],
     "Saint-Bruno": [
         82,
         83
@@ -531,8 +544,14 @@
     "Saint-Donat": [
         311
     ],
+    "Saint-Édouard-de-Maskinongé": [
+        351
+    ],
     "Saint-Esprit": [
         311
+    ],
+    "Saint-Étienne-de-Grès": [
+        351
     ],
     "Saint-Eustache": [
         170
@@ -561,9 +580,15 @@
     "Saint-Julien": [
         311
     ],
+    "Saint-Justin": [
+        350
+    ],
     "Saint-Lambert": [
         2,
         104
+    ],
+    "Saint-Paulin": [
+        351
     ],
     "Saint-Prime": [
         82,
@@ -595,6 +620,9 @@
         30,
         305
     ],
+    "Sainte-Angèle-de-Prémont": [
+        351
+    ],
     "Sainte-Anne-de-Beaupré": [
         320
     ],
@@ -624,6 +652,10 @@
     ],
     "Sainte-Rose-du-Nord": [
         420
+    ],
+    "Sainte-Ursule": [
+        350,
+        351
     ],
     "Salaberry-de-Valleyfield": [
         120
@@ -667,7 +699,9 @@
         60
     ],
     "Trois-Rivières": [
-        51
+        51,
+        350,
+        351
     ],
     "Val-d'Or": [
         10,
@@ -710,5 +744,8 @@
     "Wakefield": [
         21,
         300
+    ],
+    "Yamachiche": [
+        350
     ]
 }

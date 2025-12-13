@@ -715,6 +715,24 @@
         "trajet": "Circuit 750 – Autobus entre Longueuil et Sorel-Tracy.",
         "heures": "7 jours sur 7"
     },
+    "350": {
+        "icone": [
+            3,
+            5
+        ],
+        "transporteur": "CTCAM",
+        "trajet": "Express Bleu – Autobus entre Trois-Rivières et Sainte-Ursule.",
+        "heures": "sur semaine seulement"
+    },
+    "351": {
+        "icone": [
+            3,
+            5
+        ],
+        "transporteur": "CTCAM",
+        "trajet": "Express Vert – Autobus entre Trois-Rivières et Saint-Édouard-de-Maskinongé.",
+        "heures": "sur semaine seulement"
+    },
     "400": {
         "icone": [
             4,

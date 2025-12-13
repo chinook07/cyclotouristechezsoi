@@ -1,21 +1,20 @@
 [
     {
-        "region": "Outaouais",
-        "transporteur": "Transcollines",
-        "lien": "http://transcollines.ca/",
+        "region": "Gaspésie",
+        "transporteur": "RÉGIM",
+        "lien": "https://regim.info/comment-lutiliser/supports-a-velos/",
         "desserte": [
-            "Gatineau",
-            "Val-des-Monts, Chelsea et Cantley"
+            "Les différentes communautés de la région"
         ],
-        "dates": "7 jrs"
+        "dates": "LUN–VEN"
     },
     {
-        "region": "Montérégie",
-        "transporteur": "STC Pierre-de-Saurel",
-        "lien": "https://stcpierredesaurel.ca/",
+        "region": "Lanaudière",
+        "transporteur": "MRC de Joliette",
+        "lien": "https://mrcjoliette.qc.ca/transport-mrc-joliette/circuits-regionaux/",
         "desserte": [
-            "Longueuil",
-            "Sorel-Tracy"
+            "Montréal",
+            "différentes localités de Lanaudière"
         ],
         "dates": "7 jrs"
     },
@@ -30,12 +29,31 @@
         "dates": "7 jrs"
     },
     {
-        "region": "Lanaudière",
-        "transporteur": "MRC de Joliette",
-        "lien": "https://mrcjoliette.qc.ca/transport-mrc-joliette/circuits-regionaux/",
+        "region": "Mauricie",
+        "transporteur": "CTCAM",
+        "lien": "https://ctcmaskinonge.org/fr/supports-a-velo",
         "desserte": [
-            "Montréal",
-            "différentes localités de Lanaudière"
+            "Les différentes communautés de la MRC de Maskinongé"
+        ],
+        "dates": "LUN–VEN"
+    },
+    {
+        "region": "Montérégie",
+        "transporteur": "STC Pierre-de-Saurel",
+        "lien": "https://stcpierredesaurel.ca/",
+        "desserte": [
+            "Longueuil",
+            "Sorel-Tracy"
+        ],
+        "dates": "7 jrs"
+    },
+    {
+        "region": "Outaouais",
+        "transporteur": "Transcollines",
+        "lien": "http://transcollines.ca/",
+        "desserte": [
+            "Gatineau",
+            "Val-des-Monts, Chelsea et Cantley"
         ],
         "dates": "7 jrs"
     },
@@ -48,14 +66,5 @@
             "la Côte-de-Beaupré et l'Ile d'Orléans"
         ],
         "dates": "7 jrs"
-    },
-    {
-        "region": "Gaspésie",
-        "transporteur": "RÉGIM",
-        "lien": "https://regim.info/comment-lutiliser/supports-a-velos/",
-        "desserte": [
-            "Les différentes communautés de la région"
-        ],
-        "dates": "LUN–VEN"
     }
 ]
