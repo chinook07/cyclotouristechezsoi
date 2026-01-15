@@ -173,7 +173,7 @@
         ],
         "transporteur": "Orléans Express",
         "trajet": "Ligne d'autocar entre Montréal, Victoriaville et Québec.",
-        "heures": "2 départs par semaine"
+        "heures": "7 jours sur 7"
     },
     "53": {
         "icone": [
@@ -218,6 +218,39 @@
         "transporteur": "Orléans Express",
         "trajet": "Ligne d'autocar entre Rimouski, Percé et Gaspé.",
         "heures": "7 jours sur 7"
+    },
+    "70": {
+        "icone": [
+            2,
+            6,
+            7,
+            8
+        ],
+        "transporteur": "La Québécoise",
+        "trajet": "Ligne d'autocar entre Sherbrooke, Victoriaville et Québec.",
+        "heures": "7 jours sur 7"
+    },
+    "71": {
+        "icone": [
+            2,
+            6,
+            7,
+            8
+        ],
+        "transporteur": "La Québécoise",
+        "trajet": "Ligne d'autocar entre Sherbrooke, Drummondville et Québec.",
+        "heures": "2 départs par semaine"
+    },
+    "72": {
+        "icone": [
+            2,
+            6,
+            7,
+            8
+        ],
+        "transporteur": "La Québécoise",
+        "trajet": "Ligne d'autocar entre Sherbrooke, Drummondville et Trois-Rivières.",
+        "heures": "4 départs par semaine"
     },
     "80": {
         "icone": [
