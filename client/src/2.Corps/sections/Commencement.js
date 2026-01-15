@@ -5,6 +5,7 @@ import Intro from "./compComm/Intro";
 import Preparation from "./compComm/Preparation";
 import FoireAuxQuestions from "./compComm/FoireAuxQuestions";
 import DormirGratuitement from "./compComm/DormirGratuitement";
+import Enfants from "./compComm/Enfants"
 import Erreur from "../pagesAutres/Erreur";
 import TestCarte from "./compComm/TestCarte";
 
@@ -13,7 +14,8 @@ const Commencement = () => {
     const choix = [
         { "titre": "Préparation", "lien": "preparation" },
         { "titre": "Foire aux questions", "lien": "faq" },
-        { "titre": "Dormir gratuitement", "lien": "bivouac" }
+        { "titre": "Dormir gratuitement", "lien": "bivouac" },
+        // { "titre": "Avec des enfants", "lien": "enfants"}
     ]
 
     return (
@@ -24,6 +26,7 @@ const Commencement = () => {
                 <Route path="/preparation" element={<Preparation />} />
                 <Route path="/faq" element={<FoireAuxQuestions />} />
                 <Route path="/bivouac" element={<DormirGratuitement />} />
+                <Route path="/enfants" element={<Enfants />} />
                 <Route path="/testcarte" element={<TestCarte />} />
                 <Route path="/*" element={<Erreur />} />
             </Routes>
