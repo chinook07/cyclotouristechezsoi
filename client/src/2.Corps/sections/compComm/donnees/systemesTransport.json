@@ -1,0 +1,98 @@
+[
+    {
+        "nom": "Siège avant",
+        "age": "De 9 mois à 3 ans",
+        "prix": [
+            100,
+            300
+        ],
+        "avantages": [
+            "Permet à l'enfant de voir devant lui"
+        ],
+        "inconvenients": [
+            "Nuit à la visibilité des parents de courte taille"
+        ]
+    },
+    {
+        "nom": "Siège arrière",
+        "age": "De 1 à 5 ans",
+        "prix": [
+            100,
+            400
+        ],
+        "avantages": [
+            "Permet à l'enfant de faire une sieste si le siège est inclinable"
+        ],
+        "inconvenients": [
+            "Condamme le porte-bagages arrière"
+        ]
+    },
+    {
+        "nom": "Chariot",
+        "age": "De 1 à 6 ans",
+        "prix": [
+            500,
+            2000
+        ],
+        "avantages": [
+            "Permet à l'enfant de jouer et de dormir",
+            "Vient avec de l'espace supplémentaire de chargement",
+            "Certains modèles peuvent être utilisés comme poussette"
+        ],
+        "inconvenients": [
+            "Lourd et encombrant sur les sentiers étroits",
+            "Prix élevé"
+        ]
+    },
+    {
+        "nom": "Siège sur cadre",
+        "age": "De 2 à 8 ans",
+        "prix": [
+            200,
+            300
+        ],
+        "avantages": [
+            "Permet à l'enfant de voir devant lui"
+        ],
+        "inconvenients": [
+            "Place l'enfant trop près des jambes du parent"
+        ]
+    },
+    {
+        "nom": "Demi-vélo Weehoo",
+        "age": "De 2 à 9 ans",
+        "prix": 500,
+        "avantages": [
+            "Donne l'option à l'enfant de pédaler",
+            "Permet à l'enfant de faire une petite sieste"
+        ],
+        "inconvenients": [
+            "Peut être difficile de démonter pour le transport",
+            "Empêche l'utilisation de sacoches par-dessus le porte-bagages",
+            "Peut aussi empêcher l'utilisation de sacoches latérales à l'arrière"
+        ]
+    },
+    {
+        "nom": "Remorquage de vélo FollowMe Tandem",
+        "age": "De 3 à 9 ans",
+        "prix": 450,
+        "avantages": [
+            "Donne l'option à l'enfant de pédaler",
+            "Permet à l'enfant de pédaler de façon autonome"
+        ],
+        "inconvenients": [
+            "Peu d'inconvénients"
+        ]
+    },
+    {
+        "nom": "Demi-vélo classique Trail-a-Bike",
+        "age": "De 4 à 9 ans",
+        "prix": 400,
+        "avantages": [
+            "Donne l'option à l'enfant de pédaler"
+        ],
+        "inconvenients": [
+            "Empêche l'utilisation de sacoches par-dessus le porte-bagages"
+        ]
+    }
+]

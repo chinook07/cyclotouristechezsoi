@@ -766,6 +766,15 @@
         "trajet": "Express Vert – Autobus entre Trois-Rivières et Saint-Édouard-de-Maskinongé.",
         "heures": "sur semaine seulement"
     },
+    "360": {
+        "icone": [
+            3,
+            5
+        ],
+        "transporteur": "Transport HSF",
+        "trajet": "Ligne Verte – Autobus entre Sherbrooke, East Angus et Cookshire-Eaton.",
+        "heures": "sur semaine seulement"
+    },
     "400": {
         "icone": [
             4,

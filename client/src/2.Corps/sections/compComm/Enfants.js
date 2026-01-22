@@ -1,11 +1,9 @@
 import styled from "styled-components";
-import { useState } from "react";
 
 import TableauSystemes from "./comp/comp5-Enf/TableauSystemes";
+import MeilleursChoix from "./comp/comp5-Enf/MeilleursChoix";
 
 const Enfants = () => {
-
-    const [boiteOuverte, setBoiteOuverte] = useState()
 
     return (
         <Wrapper>
@@ -14,6 +12,9 @@ const Enfants = () => {
             <h3>Les différents systèmes de transport</h3>
             <p>Il existe plusieurs façons de transporter un enfant qui ne nécessitent pas l'achat d'un vélo-cargo onéreux.</p>
             <TableauSystemes />
+            <h3>Les meilleures configurations</h3>
+            <p>Tel qu'on constate dans le tableau ci-dessus, il n'y a pas d'approche universelle. Chaque système a ses avantages et ses inconvénients. Parfois, il peut être judicieux de combiner deux systèmes pour le bonheur des parents et de l'enfant.</p>
+            <MeilleursChoix />
         </Wrapper>
     )
 }

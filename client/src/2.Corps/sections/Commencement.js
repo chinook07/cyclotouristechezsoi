@@ -12,10 +12,10 @@ import TestCarte from "./compComm/TestCarte";
 const Commencement = () => {
     
     const choix = [
-        { "titre": "Préparation", "lien": "preparation" },
-        { "titre": "Foire aux questions", "lien": "faq" },
+        { "titre": "Préparer", "lien": "preparation" },
+        { "titre": "FAQ", "lien": "faq" },
         { "titre": "Dormir gratuitement", "lien": "bivouac" },
-        // { "titre": "Avec des enfants", "lien": "enfants"}
+        { "titre": "Avec des enfants", "lien": "enfants"}
     ]
 
     return (

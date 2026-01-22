@@ -37,14 +37,14 @@ const Wrapper = styled.nav`
         &.active {
             font-weight: bold;
         }
-        @media screen and (min-width: 581px) {
+        @media screen and (min-width: 601px) {
             &:not(:last-child)::after {
                 content: "|";
                 margin-left: 10px;
             }
         }
     }
-    @media screen and (max-width: 580px) {
+    @media screen and (max-width: 600px) {
         flex-direction: column;
         gap: 10px;
         text-align: center;
