@@ -1,16 +1,8 @@
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import systemesTransport from "../../donnees/systemesTransport.json";
 
 const TableauSystemes = () => {
-    console.log(systemesTransport);
-    // systemesTransport.map((systeme, index) => {
-    //     console.log(systeme.nom);
-    //     return (
-    //         <p key={index}>{systeme.nom}</p>
-    //     )
-    // })
     return (
         <Wrapper>
             <caption>Les différents systèmes de transport</caption>

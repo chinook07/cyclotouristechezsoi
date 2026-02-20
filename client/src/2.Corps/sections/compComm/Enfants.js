@@ -15,6 +15,8 @@ const Enfants = () => {
             <h3>Les meilleures configurations</h3>
             <p>Tel qu'on constate dans le tableau ci-dessus, il n'y a pas d'approche universelle. Chaque système a ses avantages et ses inconvénients. Parfois, il peut être judicieux de combiner deux systèmes pour le bonheur des parents et de l'enfant.</p>
             <MeilleursChoix />
+            <h3>Autres conseils</h3>
+            <p>Pour mieux réussir votre voyage... (à terminer)</p>
         </Wrapper>
     )
 }
