@@ -171,7 +171,6 @@ const FormAjout = ({ setConfirmation, setMontrerAjoutCarte, ajoutsFaits, setAjou
                     />
                 </Description>
                 <p>Il est fortement suggéré d'ajouter des photos de l'emplacement, dans le but de bâtir un répertoire de qualité.</p>
-                {/* <LiensImgDESUET ajoutPhoto={ajoutPhoto} liens={liens} /> */}
                 <TelevPhotos mAJFichiers={mAJFichiers} />
                 <TypeDeSite mAJType={mAJType} />
                 <AnneeVisite>

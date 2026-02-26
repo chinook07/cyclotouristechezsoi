@@ -1,0 +1,338 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "_id": 3019,
+            "type": "Feature",
+            "properties": {
+                "name": "Halte de la Grande-Anse (camping)",
+                "description": "15$ la nuit pour une tente. Douche et toilettes à disposition.\n\nTrès beau spot avec le son des voitures au loin (mais pas très fort)\n\nLes propriétaires sont très gentils.",
+                "annee": 2024,
+                "type": "s_officiels",
+                "dateAuj": "13-juil.-2024",
+                "photos": [
+                    "5934-PXL_20240713_203938910.jpg"
+                ]
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -70.0384173522883,
+                    47.37168101221652
+                ]
+            }
+        },
+        {
+            "_id": 3000,
+            "geometry": {
+                "coordinates": [
+                    -69.3753252,
+                    47.7554025
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "<img src='https://cyclotouristechezsoi.ca/ccImages/off/.png' width='auto' /><br><br>https://www.petit-temis.ca/fr/services-<br><br><img src='https://cyclotouristechezsoi.ca/ccImages/off/.png' width='auto' />",
+                "name": "Halte-camping de la rivière des Roches"
+            },
+            "type": "Feature"
+        },
+        {
+            "_id": 3013,
+            "geometry": {
+                "coordinates": [
+                    -61.2690757,
+                    50.1776034
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "<img src='https://cyclotouristechezsoi.ca/ccImages/off/.png' width='auto' /><br><br>Caroline septembre 2020 : Endroit officiel et gratuit. Pas de services, sauf une table de pique-nique, mais il y a un dépanneur au village. La vue est sublime, on se sent au bout du monde, et on l'est presque! l'endroit est assez vaseux alors j'ai monté ma tente sur la passerelle en bois qui permet de monter au bateau échoué.<br><br><img src='https://cyclotouristechezsoi.ca/ccImages/off/.png' width='auto' /><br><br><img src='https://cyclotouristechezsoi.ca/ccImages/off/.png' width='auto' />",
+                "name": "Point 191 au Brion"
+            },
+            "type": "Feature"
+        },
+        {
+            "_id": 3009,
+            "geometry": {
+                "coordinates": [
+                    -70.19477,
+                    48.24008
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "CCamping très abordable (10$/personne avec places toujours disponibles). Wi-Fi et douches gratuites.",
+                "name": "Camping de l'Anse",
+                "commentaires": [
+                    {
+                        "description": "Quelqu'un m'a signalé y avoir été en juillet 2024 et payé 35,34 $ pour une tente.",
+                        "annee": 2024
+                    }
+                ]
+            },
+            "type": "Feature"
+        },
+        {
+            "_id": 3015,
+            "geometry": {
+                "coordinates": [
+                    -71.912138,
+                    46.1104286
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "https://camping-plagedessables.com/<br>Établissement Bienvenue Cyclistes selon le site de la route verte<br>Note de l'admin : seuls les camping abordables devraient être indiquées, alors que leur site web indique un prix autour de 35 $. Est-ce qu'ils offrent un tarif réduit aux cyclotouristes?",
+                "name": "Camping plages des Sables\n"
+            },
+            "type": "Feature"
+        },
+        {
+            "_id": 3011,
+            "geometry": {
+                "coordinates": [
+                    -68.5494918,
+                    49.060829
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Caroline septembre 2020 : Endroit génial avec 3 plateformes en bois et de l'espace sur le gazon pour mettre une tente. Toilettes et eau non potable sur le site. La municipalité laisse une boîte pour les contributions volontaires. Visité le 29 juin 2021. Super site de bivouac. Contribution volontaire.",
+                "name": "Point 186 Camping officiel gratuit"
+            },
+            "type": "Feature"
+        },
+        {
+            "_id": 3002,
+            "geometry": {
+                "coordinates": [
+                    -69.0108449,
+                    47.6715348
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "https://www.petit-temis.ca/fr/services-",
+                "name": "Halte-camping de l'Observatoire"
+            },
+            "type": "Feature"
+        },
+        {
+            "_id": 3016,
+            "geometry": {
+                "coordinates": [
+                    -72.3212158,
+                    47.9729138
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Possible de camper près de l’accueil. Bin marché, toilettes, eau courante non potable, possibilité de prendre une douche au camping non loin.",
+                "name": "Accueil Zec Kiskissink"
+            },
+            "type": "Feature"
+        },
+        {
+            "_id": 3017,
+            "geometry": {
+                "coordinates": [
+                    -64.6976721,
+                    46.5359556
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "<img src='https://cyclotouristechezsoi.ca/ccImages/off/.png' width='auto' /><br><br>Spécial pour les cyclos: seulement $15 par tente.  Avec douche, toilette, abri pour cuisiner au sec, tables de pique-nique, eau courante, électricité.  A 5 minutes de la Dune de Bouctouche, magnifique aménagement de 13 km au milieu des dunes. Nous avons dormi sur ce  site  lors de notre passage à vélo le 24 juillet 2021.<br>Pion et Giguère, cyclo-voyageurs<br>Laurentides, Québec, Canada<br>Normand_Pion@yahoo.ca<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite ...\"<br><br>http://www.crazyguyonabike.com/doc/Canada-tandemTour2021<br><br>http://www.crazyguyonabike.com/rikimiki<br><br>http://tandemetcie.com<br><br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/<br><br><img src='https://cyclotouristechezsoi.ca/ccImages/off/.png' width='auto' /><br><br><img src='https://cyclotouristechezsoi.ca/ccImages/off/.png' width='auto' />",
+                "name": "Chez Maury - camping à la ferme"
+            },
+            "type": "Feature"
+        },
+        {
+            "_id": 3014,
+            "geometry": {
+                "coordinates": [
+                    -70.0593175,
+                    47.9468237
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "<img src='https://cyclotouristechezsoi.ca/ccImages/off/.png' width='auto' /><br><br>Toilette, eau, table de picnic.",
+                "name": "Halte camping Lac Deschêne"
+            },
+            "type": "Feature"
+        },
+        {
+            "_id": 3006,
+            "geometry": {
+                "coordinates": [
+                    -74.3847539,
+                    45.5791922
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "<img src='https://cyclotouristechezsoi.ca/ccImages/off/.png' width='auto' /><br><br>.Beau secteur boisé, en bordure de la Route Verte #1;<br>Comprend suffisamment d'espace pour 2-3 tentes. Toilette sèche à proximité. Pas d'eau courante, mais rivière à proximité si vous avez un filtre.  Village assez loin.<br>Nous y avons campé avec bonheur le 5 octobre  2020, à notre dernier jour de voyage en 2020!, puis une nouvelle fois le 18 mai 2021<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br><img src='https://cyclotouristechezsoi.ca/ccImages/off/.png' width='auto' />",
+                "name": "Boisé Von Allmen"
+            },
+            "type": "Feature"
+        },
+        {
+            "_id": 3012,
+            "geometry": {
+                "coordinates": [
+                    -64.5020407,
+                    50.3034681
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "<img src='https://cyclotouristechezsoi.ca/ccImages/off/.png' width='auto' /><br><br>Caroline septembre 2020 : magnifique vue sur la baie et le village. J'y ai campé sur l'aller et le retour. Il y a un sentier aussi à partir du belvédère. Une boîte à don est laissée par l'église pour réparer le toit! Toilette sèche.<br><br><img src='https://cyclotouristechezsoi.ca/ccImages/off/.png' width='auto' />",
+                "name": "Point 190 Camping gratuit officiel"
+            },
+            "type": "Feature"
+        },
+        {
+            "_id": 3007,
+            "geometry": {
+                "coordinates": [
+                    -74.3795036,
+                    45.580445
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Dans le boisé du parc, on peut y installer des tentes.",
+                "name": "Camping rustique, sans eau"
+            },
+            "type": "Feature"
+        },
+        {
+            "_id": 3020,
+            "type": "Feature",
+            "properties": {
+                "name": "Halte-repos moulin Vincelotte ",
+                "description": "Camping avec tente pour 10$. Toilettes et douche.\n\nL'eau n'est PAS potable.\n\nLa vue sur l'estuaire du St-Laurent est magnifique.\n\nIl y a quelques produits en libre-service (fromage crème glacée viande etc)",
+                "annee": 2024,
+                "type": "s_officiels",
+                "dateAuj": "26-juil.-2024",
+                "photos": [
+                    "3010-PXL_20240726_111812120.jpg"
+                ]
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -70.45215787520793,
+                    47.06360344834485
+                ]
+            }
+        },
+        {
+            "_id": 3004,
+            "geometry": {
+                "coordinates": [
+                    -75.1684047,
+                    46.4993358
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "http://www.lacsaguay.qc.ca/loisirs.html",
+                "name": "BOISÉ JOSEPH-B.B.-GAUTHIER"
+            },
+            "type": "Feature"
+        },
+        {
+            "_id": 3018,
+            "geometry": {
+                "coordinates": [
+                    -73.250044,
+                    45.2886655
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Centre plein air Ronald Beauregard. Grand parc très fréquenté où il est permis de camper (il y a des VR dans le stationnement). Ce serait le paradis si la piscine était pas un danger bactériologique (elle est fermée et la pancarte le dit). Toilettes chimiques. Il y a un marché Richelieu 1 km plus au sud sur Jacques-Cartier. je ne suis pas resté pour la nuit (y'avait vraiment trop de monde pour mon besoin de solitude), mais c'est faisable.",
+                "name": "Point 19"
+            },
+            "type": "Feature"
+        },
+        {
+            "_id": 3001,
+            "geometry": {
+                "coordinates": [
+                    -69.2074299,
+                    47.7044111
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "<img src='https://cyclotouristechezsoi.ca/ccImages/off/.png' width='auto' /><br><br>https://www.petit-temis.ca/fr/services-",
+                "name": "Halte-camping du ruisseau Beaulieu"
+            },
+            "type": "Feature"
+        },
+        {
+            "_id": 3008,
+            "geometry": {
+                "coordinates": [
+                    -64.58537,
+                    49.0901
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Note de l'administrateur : aucune info présente. Je crois que c'est un camping payant mais peu cher.",
+                "name": "Camping Azellus\n"
+            },
+            "type": "Feature"
+        },
+        {
+            "_id": 3005,
+            "geometry": {
+                "coordinates": [
+                    -75.8929411,
+                    46.4696285
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "aménagé, gratuit. (2019)",
+                "name": "Aumond"
+            },
+            "type": "Feature"
+        },
+        {
+            "_id": 3003,
+            "geometry": {
+                "coordinates": [
+                    -74.378917,
+                    45.5802987
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "<img src='https://cyclotouristechezsoi.ca/ccImages/off/.png' width='auto' /><br><br>Beau secteur boisé sommairement aménagé.<br>Belle piste cyclable pour s'y rendre.<br>Chaque site comprend suffisamment d'espace pour 2-3 tentes. Toilette sèche à proximité. Pas d'eau courante.  Village assez loin.<br>Alentours marécageux, donc beaucoup de maringouins à la fin mai !<br>Quelques sites ont des bancs avec dossiers, mais pas de table de pique-nique.<br><br>Nous y avons campé avec bonheur le 23 mai 2020<br>Normand Pion et Hélène Giguère<br>rikimiki@me.com<br>http://www.crazyguyonabike.com/doc/NPionMaritimes2020<br><br><img src='https://cyclotouristechezsoi.ca/ccImages/off/.png' width='auto' /><br><br><img src='https://cyclotouristechezsoi.ca/ccImages/off/.png' width='auto' /><br><br><img src='https://cyclotouristechezsoi.ca/ccImages/off/.png' width='auto' /><br><br><img src='https://cyclotouristechezsoi.ca/ccImages/off/.png' width='auto' />",
+                "name": "Boisé Von Allmen, Ile aux Chats, Carillon"
+            },
+            "type": "Feature"
+        },
+        {
+            "_id": 3010,
+            "geometry": {
+                "coordinates": [
+                    -76.5552884,
+                    45.6875973
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "<img src='https://cyclotouristechezsoi.ca/ccImages/off/.png' width='auto' /><br><br>Note de l'administrateur : je l'ai changé de catégorie puisque le camping semble officiellement permis aux haltes cyclistes dotées d'un bloc sanitaire. Ce n'est donc pas des sites non officiels.<br><br>Il y a enntre Fort Coulonge et Luskville dans le ¨Pontiac, environs 5 haltes cyclistes aménagées en bordure de la Route Verte #1,  avec tables de pique-nique, abri pour la pluie, toilette; Toutes super tranquilles!<br>Sites visités lors de notre passage à vélo le 3 octobre 2020.<br>Hélène and Normand<br>Sainte-Anne des Lacs, Québec - Canada<br>rikimiki@me.com<br>tandemetcie.comhttps://www.crazyguyonabike.com/doc/?o=1ni&doc_id=15622&v=26l<br>+<br>https://www.facebook.com/groups/Normand.et.Helene.en.tandem/",
+                "name": "Halte cyclable, Route Verte #1"
+            },
+            "type": "Feature"
+        }
+    ]
+}

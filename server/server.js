@@ -7,6 +7,7 @@ const PORT = process.env.PORT || 8000
 
 const {
     testApi,
+    testMongo,
     tousSites,
     photosDuSite,
     nouveauSite,
@@ -33,6 +34,7 @@ express()
     .use(fileUpload({ useTempFiles: true }))
     .get("/api/testCourriel", testCourriel)
     .get("/api/test", testApi)
+    .get("/api/testMongo", testMongo)
     .get("/api/tous-sites", tousSites)
     .put("/api/photos-du-site", photosDuSite)
     .post("/api/nouveau-site", nouveauSite)

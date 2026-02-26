@@ -7,8 +7,9 @@ import CampingInterdit from "./comp/comp4-Biv/CampingInterdit";
 import interditParDefault from "./donnees/interditParDefault.json";
 import { faAngleRight, faAnglesRight, faClose, faAnglesDown, faAnglesUp } from "@fortawesome/free-solid-svg-icons";
 import CarteCampings from "./comp/comp4-Biv/CarteCampings";
+import NouvelleCarteCampings from "./comp/comp4-Biv/NouvelleCarteCampings";
 import DemandeEdition from "./comp/comp4-Biv/DemandeEdition";
-import FormAjout from "./comp/comp4-Biv/FormAjout";
+import FormAjoutSite from "./comp/comp4-Biv/FormAjoutSite";
 import campingLaPatrie from "./images/camping-la-patrie.webp"
 
 const DormirGratuitement = () => {
@@ -37,8 +38,8 @@ const DormirGratuitement = () => {
                 <p>Il est possible de voyager à vélo sans toujours devoir débourser un montant parfois dérisoire chaque nuit. Certains campings privés peuvent avoir des allures de tout-inclus, alors que de nombreux cyclotouristes ne cherchent qu'un petit terrain pour une quinzaine d'heures, avec un bloc sanitaire et une table à piquenique. Une personne voulant manger un sandwich et une salade n'irait pas à un buffet cinq-étoiles. Sous cette même optique, il existe des solutions de rechange aux campings payants.</p>
                 <p>Cette carte est le fruit du travail de plusieurs cyclotouristes ayant ajouté des sites recommandés pour le bivouac. Il incombe à l'usager d'être responsable de ses actions, de respecter les règlements en vigueur, et bien sûr de laisser l'endroit propre pour les autres utilisateurs. <strong>Le cyclotourisme a un nombre très limité d'adeptes, encore moins si on ne compte que ceux et celles dormant dans leurs tentes. Pour éviter que ces endroits de repos deviennent surutilisés, veuillez ne pas partager le lien de cette page librement sur les réseaux sociaux. Aidons-nous à conserver ces sites pour les générations futures!</strong></p>
                 {/* <CarteGoogle title="carte des campings gratuits" src="https://www.google.com/maps/d/u/0/embed?mid=1obdd8oU_9xShpHUY-L29RT6OwxerfCGI&ehbc=2E312F"></CarteGoogle> */}
-                <p><strong>Attention! La nouvelle carte est en mode bêta!</strong> Certaines fonctionnalités peuvent être non-fonctionnelles. Les photos que vous ajouterez à l'aide des formulaires d'ajout de site ou de commentaires ne seront pas visibles, bien qu'elles le seront une fois la fonctionnalité réparée.</p>
-                <CarteCampings ajoutsFaits={ajoutsFaits} />
+                <p><strong>La carte a migré vers une plateforme plus fiable.</strong> Vous pourrez vous en servir à nouveau pour rechercher un endroit à dormir.</p>
+                <NouvelleCarteCampings />
             </section>
             <section>
                 <BoutonAjoutCamping>
@@ -51,7 +52,7 @@ const DormirGratuitement = () => {
                 </BoutonAjoutCamping>
                 {
                     montrerAjoutCarte &&
-                    <FormAjout
+                    <FormAjoutSite
                         confirmation={confirmation}
                         setConfirmation={setConfirmation}
                         setMontrerAjoutCarte={setMontrerAjoutCarte}
@@ -62,15 +63,11 @@ const DormirGratuitement = () => {
                 {
                     confirmation &&
                     <Confirm>
-                            <p>Merci d'avoir contribué à la carte!</p>
+                            <p>Merci d'avoir contribué à la carte! Le site apparaitra sur la carte dans les 5 prochains jours.</p>
                             <button onClick={fermerMerci}><FontAwesomeIcon icon={faClose} /></button>
                         </Confirm>
                 }
             </section>
-            {/* <section>
-                <h2>Comment ajouter un emplacement de camping?</h2>
-                <p>Vous pouvez maintenant ajouter un site directement sur la carte <CommeUnLien onClick={alternerFormulaire} tabIndex="0">par ce court formulaire</CommeUnLien>, sans délai et sans devoir apprendre à utiliser Google My Maps.</p>
-            </section> */}
             <section>
                 <h2>Est-ce que c'est permis?</h2>
                 <p>Il n'y a aucune loi provinciale encadrant le camping sauvage mur-à-mur. <ExternalLink href="https://educaloi.qc.ca/actualites-juridiques/camping-peut-on-installer-sa-tente-nimporte-ou/">Sur les terres du domaine public</ExternalLink>, il est possible de s'installer, par contre il s'avère difficile de trouver des cartes pour ainsi connaitre leurs emplacements. Sur les abords des pistes cyclables, il y a souvent des panneaux interdisant le camping, et couramment la même situation aux haltes routières. Même si le camping n'est pas proscrit dans le cas d'un parc public, il peut être illégal de se trouver dans celui-ci après une certaine heure. Finalement, certaines municipalités comme Gaspé ont choisi d'interdire le camping sur tout le territoire, sauf aux sites aménagés.</p>

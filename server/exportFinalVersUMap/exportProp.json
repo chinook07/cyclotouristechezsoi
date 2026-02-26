@@ -1,0 +1,185 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "_id": 4006,
+            "geometry": {
+                "coordinates": [
+                    -72.683238,
+                    45.388266
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Grand terrain où on accepte tous les cyclovoyageurs de passage. <br>Idéalement appelez-nous : 438 725 3787<br>On offre eau, terrain pour camper, piscine, garage pour ranger les vélos au besoin - et idéalement on se partage un bon repas sur la terrasse si c'est possible.<br><br>On ne peut accueillir du monde dans la maison jusqu'au 12 septembre - mais vous êtes les bienvenus pour planter votre tente.",
+                "name": "Chez Yan et Laura"
+            },
+            "type": "Feature"
+        },
+        {
+            "_id": 4001,
+            "geometry": {
+                "coordinates": [
+                    -65.48198,
+                    48.03765
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Après un souper ici, le propriétaire du café nous a proposé de nous y installer en arrière pour la nuit. Quel accueil chaleureux! <br>Les repas sont goûteux et les croissants trop délicieux!",
+                "name": "Café des Acadiens"
+            },
+            "type": "Feature"
+        },
+        {
+            "_id": 4002,
+            "geometry": {
+                "coordinates": [
+                    -76.460893,
+                    49.403251
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "<img src='https://cyclotouristechezsoi.ca/ccImages/pro/.png' width='auto' /><br><br>Pourvoirie Miquelon, sur la pointe du Lac Pusticamica, dans le hameau de Miquelon<br><br>Le propriétaire permet gentiment aux cyclo-voyageurs de camper une nuit sur un terrain sous les arbres, à proximité du lac.  Espace plat, suffisamment grand pour plusieurs tentes.<br>Nous avons campé ici avec la gang de Echo Explora le 22 août 2020.<br><br>Normand Pion y Hélène Giguère<br>rikimiki@me.com<br>\" ... Plus tu pédales moins vite, moins tu avances plus vite …\"<br>http://tandemetcie.com<br>http://www.crazyguyonabike.com/doc/NPionQuebecNord2020<br><br><img src='https://cyclotouristechezsoi.ca/ccImages/pro/.png' width='auto' /><br><br><img src='https://cyclotouristechezsoi.ca/ccImages/pro/.png' width='auto' />",
+                "name": "Pourvoirie Miquelon"
+            },
+            "type": "Feature"
+        },
+        {
+            "_id": 4009,
+            "geometry": {
+                "coordinates": [
+                    -70.694796,
+                    46.9437501
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "<img src='https://cyclotouristechezsoi.ca/ccImages/pro/.png' width='auto' /><br><br>Voir image.",
+                "name": "Bord du fleuve\n"
+            },
+            "type": "Feature"
+        },
+        {
+            "_id": 4011,
+            "geometry": {
+                "coordinates": [
+                    -70.8286741,
+                    46.890043
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "<img src='https://cyclotouristechezsoi.ca/ccImages/pro/.png' width='auto' /><br><br>On a un beau site de camping (sans services, sans traces svp), chez nous à St-Vallier dans Bellechasse, sur la route verte. Site privé, ombragé, tranquilité assurée, toilette sèche, rond de feu, plage sur le fleuve et en bonus très peu ou pas de moustique!<br><br><img src='https://cyclotouristechezsoi.ca/ccImages/pro/.png' width='auto' /><br><br><img src='https://cyclotouristechezsoi.ca/ccImages/pro/.png' width='auto' /><br><br><img src='https://cyclotouristechezsoi.ca/ccImages/pro/.png' width='auto' /><br><br><img src='https://cyclotouristechezsoi.ca/ccImages/pro/.png' width='auto' />",
+                "name": "St-Vallier"
+            },
+            "type": "Feature"
+        },
+        {
+            "_id": 4003,
+            "geometry": {
+                "coordinates": [
+                    -73.242832,
+                    45.550787
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "<img src='https://cyclotouristechezsoi.ca/ccImages/pro/.png' width='auto' /><br><br>812 rue Albert-Leal, McMasterville. <br>Contactez nous par notre page Facebook.<br>Bienvenues cyclotouristes! Résidence avec piscine, spa, douche, garage pour ranger les vélos, cabane pouvant coucher 4 personnes, terrain pouvant accueillir tente et bien sûr eau et hospitalité!",
+                "name": "La famille aux 10 roues"
+            },
+            "type": "Feature"
+        },
+        {
+            "_id": 4000,
+            "geometry": {
+                "coordinates": [
+                    -70.80693,
+                    46.537417
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "<img src='https://cyclotouristechezsoi.ca/ccImages/pro/.png' width='auto' /><br><br>Le camping est fermé mais le proprio accepte que l'on s'installe pour une nuit. Table à pique-nique, emplacement pour feu. Il y a un abri avec table et toilette sèche habituellement mais ce n'était pas encore ouvert il y a 2 semaines.<br>***<br>Ancien camping de Saint-Malachie. Il y a une halte vélo avec abris, tables toilette.<br><br><img src='https://cyclotouristechezsoi.ca/ccImages/pro/.png' width='auto' />",
+                "name": "Ancien camping saint-Malachie"
+            },
+            "type": "Feature"
+        },
+        {
+            "_id": 4007,
+            "geometry": {
+                "coordinates": [
+                    -67.453608,
+                    48.863914
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Petit Matane viens piqué ta tente chez moi 819 919 6595 par contribution volontaires",
+                "name": "Point 224"
+            },
+            "type": "Feature"
+        },
+        {
+            "_id": 4008,
+            "geometry": {
+                "coordinates": [
+                    -71.6372832,
+                    45.7257903
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Maison ancestrale avec grand terrain, table à pique-nique, emplacement pour feu, toilette à compost, étang, belle nature. Nous sommes aussi sur Warmshowers (Hildegund Janzing et Michel Bachelet) et accueillons avec plaisir les cyclistes de passage. Vous pouvez nous contacter avant pour un accueil plus \"organisé\" (avec repas partagé, si ça adonne!), mais vous pouvez aussi simplement vous arrêter au passage et planter votre tente, même si nous sommes absents.<br>Contact: hildejanzing@gmail.com; 819-828-0518.",
+                "name": "Maison ancestrale à Ham-Sud\n"
+            },
+            "type": "Feature"
+        },
+        {
+            "_id": 4005,
+            "geometry": {
+                "coordinates": [
+                    -71.384272,
+                    46.675512
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Maison de campagne situé à St-Nicolas (rive sud de Québec) à 2 minutes de la pisciculture Bernieres... vaste terrain près d'une forêt, jardin d'eau, grand potager, accès à une piscine (non-chauffée) petits animaux de ferme, accès à de l'eau potable et douche si désirée.<br>14 km des ponts de Québec<br>8 km de l'accès à une plage au fleuve à marée basse<br>Contactez : janieblefebvre@gmail.com",
+                "name": "Maison de campagne"
+            },
+            "type": "Feature"
+        },
+        {
+            "_id": 4010,
+            "geometry": {
+                "coordinates": [
+                    -72.8797445,
+                    45.4352974
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "<img src='https://cyclotouristechezsoi.ca/ccImages/pro/.png' width='auto' /><br><br>La ville de Saint-Paul-D'Abbotsford offre depuis 2020 des plaques de bois pour les cyclotouristes qui veulent y installer leur tente. En 2020, le projet avait été reporté, mais je crois que les plaques sont installés maintenant. Le parc est bien équipé pour le camping (point d'eau, toilettes, abri avec tables) et le dépanneur est juste sur la rue principale. Un bel endroit!",
+                "name": "Plateformes dans le parc "
+            },
+            "type": "Feature"
+        },
+        {
+            "_id": 4004,
+            "geometry": {
+                "coordinates": [
+                    -70.977199,
+                    47.008613
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "Note de l'admin : merci de mettre plus de détails!",
+                "name": "Point 7"
+            },
+            "type": "Feature"
+        }
+    ]
+}

@@ -44,8 +44,20 @@ const testApi = async (req, res) => {
     return res.status(200).json({ status: 200, message: "succès" })
 }
 
+const testMongo = async (req, res) => {
+    console.log("va ouvrir Mongo");
+    await ouvrirMongo();
+    console.log("Mongo ouvert");
+    console.log("va fermer Mongo");
+    await fermerMongo();
+    console.log("Mongo fermé");
+    return res.status(200).json({ status: 200, message: "succès" })
+}
+
 const tousSites = async (req, res) => { // aller chercher tous les sites
     await ouvrirMongo();
+    console.log("mongo ouvert");
+    // await console.log(db.collection("s_non_officiels"));
     const [sites_a, sites_b, sites_c, sites_z, sites_t] = await Promise.all([
         db.collection("s_non_officiels").find().toArray(),
         db.collection("s_officiels").find().toArray(),
@@ -376,6 +388,7 @@ const nouveauCommentairePhoto = async (req, res) => { // ajouter des photos lors
 
 module.exports = {
     testApi,
+    testMongo,
     tousSites,
     photosDuSite,
     nouveauSite,

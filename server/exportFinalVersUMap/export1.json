@@ -1,0 +1,312 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "_id": 7013,
+            "type": "Feature",
+            "properties": {
+                "name": "test mobile en ligne avec photo",
+                "description": "Test",
+                "annee": 2024,
+                "type": "s_tests",
+                "dateAuj": "05-févr.-2024",
+                "commentaires": [
+                    {
+                        "description": "test",
+                        "annee": 2024
+                    },
+                    {
+                        "description": "test 2",
+                        "annee": 2024
+                    }
+                ]
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -73.72375488281251,
+                    44.445153817262074
+                ]
+            }
+        },
+        {
+            "_id": 7016,
+            "type": "Feature",
+            "properties": {
+                "name": "test avec photo",
+                "description": "test",
+                "annee": 2025,
+                "type": "s_tests",
+                "dateAuj": "18-févr.-2025"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -74.17968750000001,
+                    40.68376227690408
+                ]
+            }
+        },
+        {
+            "_id": 7002,
+            "type": "Feature",
+            "properties": {
+                "name": "test pour de vrai",
+                "description": "ok",
+                "annee": "2022",
+                "type": "s_tests",
+                "dateAuj": "02-févr.-2024"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -69.91149902343751,
+                    43.97317509949047
+                ]
+            }
+        },
+        {
+            "_id": 7011,
+            "type": "Feature",
+            "properties": {
+                "name": "terter ",
+                "description": "wtw w wt w",
+                "annee": 2024,
+                "type": "s_tests",
+                "dateAuj": "02-févr.-2024"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.53048741954346,
+                    43.518318856929376
+                ]
+            }
+        },
+        {
+            "_id": 7003,
+            "type": "Feature",
+            "properties": {
+                "name": "test2",
+                "description": "test2 sans photos",
+                "annee": 2024,
+                "type": "s_tests",
+                "dateAuj": "02-févr.-2024",
+                "commentaires": [
+                    {
+                        "description": "commentaire 1 sans photo",
+                        "annee": 2024
+                    },
+                    {
+                        "description": "commentaire avec 1 photo",
+                        "annee": 2024,
+                        "fichiers": [
+                            "6397-Dinos.jpg"
+                        ]
+                    }
+                ]
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -71.85607910156251,
+                    44.64533035584484
+                ]
+            }
+        },
+        {
+            "_id": 7004,
+            "type": "Feature",
+            "properties": {
+                "name": "test 1 photo",
+                "description": "test 1 photo",
+                "annee": 2024,
+                "type": "s_tests",
+                "dateAuj": "02-févr.-2024",
+                "photos": [
+                    "286-Dinos.jpg"
+                ]
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -73.51501464843751,
+                    44.7858557630407
+                ]
+            }
+        },
+        {
+            "_id": 7008,
+            "type": "Feature",
+            "properties": {
+                "name": "test courriel envoyé",
+                "description": "test courriel envoyé",
+                "annee": 2024,
+                "type": "s_tests",
+                "dateAuj": "02-févr.-2024"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -74.88281250000001,
+                    44.203496934845276
+                ]
+            }
+        },
+        {
+            "_id": 7015,
+            "type": "Feature",
+            "properties": {
+                "name": "test après changement d'hébergement",
+                "description": "aucun",
+                "annee": 2025,
+                "type": "s_tests",
+                "dateAuj": "01-janv.-2025"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -73.82263183593751,
+                    42.7914368915556
+                ]
+            }
+        },
+        {
+            "_id": 7012,
+            "type": "Feature",
+            "properties": {
+                "name": "watertown",
+                "description": "Ttt",
+                "annee": 2024,
+                "type": "s_tests",
+                "dateAuj": "02-févr.-2024"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -75.93200683593751,
+                    44.063446092353914
+                ]
+            }
+        },
+        {
+            "_id": 7006,
+            "type": "Feature",
+            "properties": {
+                "name": "test en ligne!",
+                "description": "test",
+                "annee": 2024,
+                "type": "s_tests",
+                "dateAuj": "02-févr.-2024"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -75.64086914062501,
+                    44.50985029700485
+                ]
+            }
+        },
+        {
+            "_id": 7010,
+            "type": "Feature",
+            "properties": {
+                "name": "tt4t3 ",
+                "description": "54y54y 54y54 ",
+                "annee": 2024,
+                "type": "s_tests",
+                "dateAuj": "02-févr.-2024"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.49953763131056,
+                    43.83992373170579
+                ]
+            }
+        },
+        {
+            "_id": 7005,
+            "type": "Feature",
+            "properties": {
+                "name": "test 2 photos",
+                "description": "test 2 photos",
+                "annee": 2024,
+                "type": "s_tests",
+                "dateAuj": "02-févr.-2024",
+                "photos": [
+                    "5295-1.jpg",
+                    "8380-2.jpg"
+                ]
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -75.27832031250001,
+                    44.58667738761882
+                ]
+            }
+        },
+        {
+            "_id": 7009,
+            "type": "Feature",
+            "properties": {
+                "name": "test courriel envoyé",
+                "description": "test courriel envoyé",
+                "annee": 2024,
+                "type": "s_tests",
+                "dateAuj": "02-févr.-2024"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -74.88281250000001,
+                    44.203496934845276
+                ]
+            }
+        },
+        {
+            "_id": "7001",
+            "type": "Feature",
+            "properties": {
+                "type": "s_tests"
+            }
+        },
+        {
+            "_id": 7007,
+            "type": "Feature",
+            "properties": {
+                "name": "test mobile avec photo",
+                "description": "Belle photo!",
+                "annee": 2024,
+                "type": "s_tests",
+                "dateAuj": "02-févr.-2024"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -74.09179687500001,
+                    44.22315838623309
+                ]
+            }
+        },
+        {
+            "_id": 7014,
+            "type": "Feature",
+            "properties": {
+                "name": "courriel test",
+                "description": "cccc",
+                "annee": 2024,
+                "type": "s_tests",
+                "dateAuj": "06-févr.-2024"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -75.00915527343751,
+                    42.99862111927107
+                ]
+            }
+        }
+    ]
+}
