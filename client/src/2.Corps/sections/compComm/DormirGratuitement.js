@@ -152,10 +152,9 @@ const DormirGratuitement = () => {
                 </p>
                 <p>
                     <FontAwesomeIcon icon={faAnglesRight} />
-                    <span>Pour ajouter plusieurs lieux, la meilleure façon serait de le faire directement dans <ExternalLink href="https://www.google.com/maps/d/edit?mid=1obdd8oU_9xShpHUY-L29RT6OwxerfCGI&usp=sharing">Mes cartes Google en mode édition</ExternalLink>. Pour être en mesure de modifier la carte, vous devez en faire la demande ci-dessous. Malheureusement, il faut normalement un compte Google, sinon ça risque de ne pas fonctionner.</span>
+                    <span>Pour ajouter plusieurs lieux, la meilleure façon serait de le faire directement dans <ExternalLink href="https://www.google.com/maps/d/edit?mid=1obdd8oU_9xShpHUY-L29RT6OwxerfCGI&usp=sharing">uMap en mode édition</ExternalLink>. Pour être en mesure de modifier la carte, vous devez en faire la demande ci-dessous. Malheureusement, il faut normalement un compte Google, sinon ça risque de ne pas fonctionner.</span>
                 </p>
                 <DemandeEdition />
-                <p>L'auteur travaille actuellement pour migrer les données sur une carte interactive Leaflet.js. En attendant, il faut malheureusement continuer à dépendre de Google.</p>
             </section> */}
             <section>
                 <h2>J'aimerais proposer aux cyclotouristes de monter leurs tentes dans ma cour arrière.</h2>
@@ -205,11 +204,11 @@ const BoutonAjoutCamping = styled.h2`
     }
 `
 
-const CarteGoogle = styled.iframe`
-    height: 500px;
-    max-height: 80vh;
-    width: 100%;
-`
+// const CarteGoogle = styled.iframe`
+//     height: 500px;
+//     max-height: 80vh;
+//     width: 100%;
+// `
 
 const Confirm = styled.div`
     background-color: var(--c6);
@@ -252,10 +251,10 @@ const IllegalParDefault = styled.div`
 	}
 `
 
-const CommeUnLien = styled.span`
-    color: #0000cc;
-    cursor: pointer;
-    text-decoration: underline;
-`
+// const CommeUnLien = styled.span`
+//     color: #0000cc;
+//     cursor: pointer;
+//     text-decoration: underline;
+// `
 
 export default DormirGratuitement;

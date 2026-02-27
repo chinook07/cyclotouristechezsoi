@@ -7,7 +7,6 @@ import FoireAuxQuestions from "./compComm/FoireAuxQuestions";
 import DormirGratuitement from "./compComm/DormirGratuitement";
 import Enfants from "./compComm/Enfants"
 import Erreur from "../pagesAutres/Erreur";
-import TestCarte from "./compComm/TestCarte";
 
 const Commencement = () => {
     
@@ -27,7 +26,6 @@ const Commencement = () => {
                 <Route path="/faq" element={<FoireAuxQuestions />} />
                 <Route path="/bivouac" element={<DormirGratuitement />} />
                 <Route path="/enfants" element={<Enfants />} />
-                <Route path="/testcarte" element={<TestCarte />} />
                 <Route path="/*" element={<Erreur />} />
             </Routes>
             <FilDArianne racine={"commencement"} choix={choix} />

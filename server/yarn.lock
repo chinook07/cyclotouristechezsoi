@@ -263,10 +263,10 @@ basic-auth@~2.0.1:
   dependencies:
     safe-buffer "5.1.2"
 
-basic-ftp@^5.0.4:
-  version "5.0.4"
-  resolved "https://registry.npmjs.org/basic-ftp/-/basic-ftp-5.0.4.tgz"
-  integrity sha512-8PzkB0arJFV4jJWSGOYR+OEic6aeKMu/osRhBULN6RY0ykby6LKhbmuQ5ublvaas5BOwboah5D87nrHyuh8PPA==
+basic-ftp@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.npmjs.org/basic-ftp/-/basic-ftp-5.2.0.tgz"
+  integrity sha512-VoMINM2rqJwJgfdHq6RiUudKt2BV+FY5ZFezP/ypmwayk68+NzzAQy4XXLlqsGD4MCzq3DrmNFD/uUmBJuGoXw==
 
 bin-links@^6.0.0:
   version "6.0.0"
