@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 
-import CarteCampings from "./comp/comp4-Biv/CarteCampings";
+import CarteCampings from "./comp/comp4-Biv/v2CarteCampings";
 
 const TestCarte = () => {
 

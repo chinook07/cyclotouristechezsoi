@@ -1,3 +1,5 @@
+// inutilisé pour la v3 de la carte
+// 
 import styled from "styled-components";
 import { useState } from "react";
 

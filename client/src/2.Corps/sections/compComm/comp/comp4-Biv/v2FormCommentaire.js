@@ -1,8 +1,10 @@
+// inutilisé pour la v3 de la carte
+
 import styled from "styled-components";
 import { useState } from "react";
 import { format } from 'date-fns';
 
-import TelevPhotos from "./TelevPhotos";
+import TelevPhotos from "./v2TelevPhotos";
 import { frCA } from 'date-fns/locale';
 
 const FormCommentaire = ({ site, rapport, setConfirmation }) => {
@@ -20,7 +22,6 @@ const FormCommentaire = ({ site, rapport, setConfirmation }) => {
         legit: false
     });
     
-
     const mAJDescription = (e) => setChamps(prec => ({ ...prec, description: e.target.value }));
     const mAJFichiers = (e) => {
         setChamps(prec => ({ ...prec, fichiers: e.target.files }))

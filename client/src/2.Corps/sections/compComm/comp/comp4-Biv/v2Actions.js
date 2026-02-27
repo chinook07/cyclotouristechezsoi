@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { useState } from "react";
 
-import FormCorrection from "./FormCorrection";
-import FormCommentaire from "./FormCommentaire";
+import FormCorrection from "./v2FormCorrection";
+import FormCommentaire from "./v2FormCommentaire";
 
 const Actions = ({ site }) => {
 

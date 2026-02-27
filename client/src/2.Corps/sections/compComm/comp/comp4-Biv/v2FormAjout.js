@@ -1,4 +1,4 @@
-// formulaire pour ajouter un site de camping à la carte
+// inutilisé pour la v3 de la carte
 
 import styled from "styled-components";
 import { useState, useContext } from "react";
@@ -6,9 +6,9 @@ import { format } from 'date-fns';
 
 import CarteAjout from "./CarteAjout";
 import { CycloContext } from "../../../../../CycloContext";
-import TypeDeSite from "./TypeDeSite";
-import TelevPhotos from "./TelevPhotos";
-import Contributeur from "./Contributeur";
+import TypeDeSite from "./v2TypeDeSite";
+import TelevPhotos from "./v2TelevPhotos";
+import Contributeur from "./v2Contributeur";
 import { frCA } from 'date-fns/locale';
 
 const FormAjout = ({ setConfirmation, setMontrerAjoutCarte, ajoutsFaits, setAjoutsFaits }) => {

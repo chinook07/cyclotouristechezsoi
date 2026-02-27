@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 
-import DetailsSite from "./DetailsSite";
-import CarteCouches from "./CarteCouches";
+import DetailsSite from "./v2DetailsSite";
+import CarteCouches from "./v2CarteCouches";
 import { MapContainer, ScaleControl } from "react-leaflet";
 import L from "leaflet";
 import Chargement from "../../../../../CompReutilisables/Chargement";

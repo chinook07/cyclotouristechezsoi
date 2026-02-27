@@ -1,21 +1,35 @@
 import styled from "styled-components";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { ExternalLink } from "react-external-link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import CampingInterdit from "./comp/comp4-Biv/CampingInterdit";
 import interditParDefault from "./donnees/interditParDefault.json";
-import { faAngleRight, faAnglesRight, faClose, faAnglesDown, faAnglesUp } from "@fortawesome/free-solid-svg-icons";
-import CarteCampings from "./comp/comp4-Biv/CarteCampings";
+import { faClose, faAnglesDown, faAnglesUp } from "@fortawesome/free-solid-svg-icons";
+// import CarteCampings from "./comp/comp4-Biv/CarteCampings";
 import NouvelleCarteCampings from "./comp/comp4-Biv/NouvelleCarteCampings";
-import DemandeEdition from "./comp/comp4-Biv/DemandeEdition";
+// import DemandeEdition from "./comp/comp4-Biv/DemandeEdition";
 import FormAjoutSite from "./comp/comp4-Biv/FormAjoutSite";
-import campingLaPatrie from "./images/camping-la-patrie.webp"
+import FormMAJ from "./comp/comp4-Biv/FormMAJ";
+import campingLaPatrie from "./images/camping-la-patrie.webp";
 
 const DormirGratuitement = () => {
+    const [montrerModifCarte, setMontrerModifCarte] = useState(false);
     const [montrerAjoutCarte, setMontrerAjoutCarte] = useState(false);
     const [confirmation, setConfirmation] = useState(false);
+    const [modifFaits, setModifFaits] = useState(0);
     const [ajoutsFaits, setAjoutsFaits] = useState(0);
+
+    const alternerFormulaireModif = () => {
+        if (montrerModifCarte) {
+            setMontrerModifCarte(false)
+            console.log(modifFaits);
+            let x = ajoutsFaits;
+            setModifFaits(x + 1); // F5 la carte quand tu fermes le formulaire
+        } else {
+            setMontrerModifCarte(true)
+        }
+    }
 
     const alternerFormulaire = () => {
         if (montrerAjoutCarte) {
@@ -38,8 +52,35 @@ const DormirGratuitement = () => {
                 <p>Il est possible de voyager à vélo sans toujours devoir débourser un montant parfois dérisoire chaque nuit. Certains campings privés peuvent avoir des allures de tout-inclus, alors que de nombreux cyclotouristes ne cherchent qu'un petit terrain pour une quinzaine d'heures, avec un bloc sanitaire et une table à piquenique. Une personne voulant manger un sandwich et une salade n'irait pas à un buffet cinq-étoiles. Sous cette même optique, il existe des solutions de rechange aux campings payants.</p>
                 <p>Cette carte est le fruit du travail de plusieurs cyclotouristes ayant ajouté des sites recommandés pour le bivouac. Il incombe à l'usager d'être responsable de ses actions, de respecter les règlements en vigueur, et bien sûr de laisser l'endroit propre pour les autres utilisateurs. <strong>Le cyclotourisme a un nombre très limité d'adeptes, encore moins si on ne compte que ceux et celles dormant dans leurs tentes. Pour éviter que ces endroits de repos deviennent surutilisés, veuillez ne pas partager le lien de cette page librement sur les réseaux sociaux. Aidons-nous à conserver ces sites pour les générations futures!</strong></p>
                 {/* <CarteGoogle title="carte des campings gratuits" src="https://www.google.com/maps/d/u/0/embed?mid=1obdd8oU_9xShpHUY-L29RT6OwxerfCGI&ehbc=2E312F"></CarteGoogle> */}
-                <p><strong>La carte a migré vers une plateforme plus fiable.</strong> Vous pourrez vous en servir à nouveau pour rechercher un endroit à dormir.</p>
+                <p><strong>La carte a migré vers une plateforme plus fiable.</strong> Vous pourrez vous en servir à nouveau pour rechercher un endroit à dormir. Les photos ajoutées sur la première version (lorsqu'elle était hébergée sur Google My Maps) seront intégrées une par une d'ici la fin du printemps.</p>
                 <NouvelleCarteCampings />
+            </section>
+            <section>
+                <BoutonAjoutCamping>
+                    <button onClick={alternerFormulaireModif}>Modifier un emplacement de camping</button>
+                    {
+                        montrerModifCarte
+                            ? <FontAwesomeIcon icon={faAnglesUp} onClick={alternerFormulaireModif} />
+                            : <FontAwesomeIcon icon={faAnglesDown} onClick={alternerFormulaireModif} />
+                    }
+                </BoutonAjoutCamping>
+                {
+                    montrerModifCarte &&
+                    <FormMAJ
+                        confirmation={confirmation}
+                        setConfirmation={setConfirmation}
+                        setMontrerAjoutCarte={setMontrerAjoutCarte}
+                        ajoutsFaits={ajoutsFaits}
+                        setAjoutsFaits={setAjoutsFaits}
+                    />
+                }
+                {
+                    confirmation &&
+                    <Confirm>
+                            <p>Merci d'avoir contribué à la carte! Le site apparaitra sur la carte dans les 5 prochains jours.</p>
+                            <button onClick={fermerMerci}><FontAwesomeIcon icon={faClose} /></button>
+                        </Confirm>
+                }
             </section>
             <section>
                 <BoutonAjoutCamping>

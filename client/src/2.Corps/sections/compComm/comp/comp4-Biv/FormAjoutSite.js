@@ -5,8 +5,8 @@ import { useState, useContext } from "react";
 
 import CarteAjout from "./CarteAjout";
 import { CycloContext } from "../../../../../CycloContext";
-import TypeDeSite from "./TypeDeSite";
-import Contributeur from "./Contributeur";
+import TypeDeSite from "./v2TypeDeSite";
+import Contributeur from "./v2Contributeur";
 import LiensImgManuel from "./LiensImgManuel";
 
 const FormAjoutSite = ({ setConfirmation, setMontrerAjoutCarte, ajoutsFaits, setAjoutsFaits }) => {

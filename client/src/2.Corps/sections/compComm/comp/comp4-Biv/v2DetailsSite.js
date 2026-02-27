@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ReactHtmlParser from 'react-html-parser';
 
 import { faClose } from "@fortawesome/free-solid-svg-icons";
-import Actions from "./Actions";
-import Commentaires from "./Commentaires";
+import Actions from "./v2Actions";
+import Commentaires from "./v2Commentaires";
 
 const DetailsSite = ({ site, fermerSite }) => {
 
