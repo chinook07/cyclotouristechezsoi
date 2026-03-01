@@ -8,7 +8,7 @@ import interditParDefault from "./donnees/interditParDefault.json";
 import { faClose, faAnglesDown, faAnglesUp } from "@fortawesome/free-solid-svg-icons";
 // import CarteCampings from "./comp/comp4-Biv/CarteCampings";
 import NouvelleCarteCampings from "./comp/comp4-Biv/NouvelleCarteCampings";
-// import DemandeEdition from "./comp/comp4-Biv/DemandeEdition";
+import FormDevenirContri from "./comp/comp4-Biv/FormDevenirContri";
 import FormAjoutSite from "./comp/comp4-Biv/FormAjoutSite";
 import FormMAJ from "./comp/comp4-Biv/FormMAJ";
 import campingLaPatrie from "./images/camping-la-patrie.webp";
@@ -16,6 +16,7 @@ import campingLaPatrie from "./images/camping-la-patrie.webp";
 const DormirGratuitement = () => {
     const [montrerModifCarte, setMontrerModifCarte] = useState(false);
     const [montrerAjoutCarte, setMontrerAjoutCarte] = useState(false);
+    const [montrerContri, setMontrerContri] = useState(false);
     const [confirmation, setConfirmation] = useState(false);
     const [modifFaits, setModifFaits] = useState(0);
     const [ajoutsFaits, setAjoutsFaits] = useState(0);
@@ -39,6 +40,18 @@ const DormirGratuitement = () => {
             setAjoutsFaits(x + 1); // F5 la carte quand tu fermes le formulaire
         } else {
             setMontrerAjoutCarte(true)
+        }
+    }
+
+    const alternerFormulaireContri = () => {
+        console.log("alterner contri");
+        if (montrerContri) {
+            setMontrerContri(false)
+            console.log(modifFaits);
+            let x = ajoutsFaits;
+            setModifFaits(x + 1); // F5 la carte quand tu fermes le formulaire
+        } else {
+            setMontrerContri(true)
         }
     }
 
@@ -97,6 +110,33 @@ const DormirGratuitement = () => {
                         confirmation={confirmation}
                         setConfirmation={setConfirmation}
                         setMontrerAjoutCarte={setMontrerAjoutCarte}
+                        ajoutsFaits={ajoutsFaits}
+                        setAjoutsFaits={setAjoutsFaits}
+                    />
+                }
+                {
+                    confirmation &&
+                    <Confirm>
+                            <p>Merci d'avoir contribué à la carte! Le site apparaitra sur la carte dans les 5 prochains jours.</p>
+                            <button onClick={fermerMerci}><FontAwesomeIcon icon={faClose} /></button>
+                        </Confirm>
+                }
+            </section>
+            <section>
+                <BoutonAjoutCamping>
+                    <button onClick={alternerFormulaireContri}>Devenir contributeur</button>
+                    {
+                        montrerContri
+                            ? <FontAwesomeIcon icon={faAnglesUp} onClick={alternerFormulaireContri} />
+                            : <FontAwesomeIcon icon={faAnglesDown} onClick={alternerFormulaireContri} />
+                    }
+                </BoutonAjoutCamping>
+                {
+                    montrerContri &&
+                    <FormDevenirContri
+                        confirmation={confirmation}
+                        setConfirmation={setConfirmation}
+                        setMontrerContri={setMontrerContri}
                         ajoutsFaits={ajoutsFaits}
                         setAjoutsFaits={setAjoutsFaits}
                     />
