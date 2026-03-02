@@ -137,8 +137,8 @@ const DormirGratuitement = () => {
                         confirmation={confirmation}
                         setConfirmation={setConfirmation}
                         setMontrerContri={setMontrerContri}
-                        ajoutsFaits={ajoutsFaits}
-                        setAjoutsFaits={setAjoutsFaits}
+                        // ajoutsFaits={ajoutsFaits}
+                        // setAjoutsFaits={setAjoutsFaits}
                     />
                 }
                 {

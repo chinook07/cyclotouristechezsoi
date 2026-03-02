@@ -75,7 +75,6 @@ const FormAjoutSite = ({ setConfirmation, setMontrerAjoutCarte, ajoutsFaits, set
             alert("Veuillez séléctionner un emplacement sur la carte!")
         }
         e.preventDefault();
-        
     }
 
     return (

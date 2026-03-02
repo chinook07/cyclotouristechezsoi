@@ -3,10 +3,10 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faAnglesUp, faAnglesDown } from "@fortawesome/free-solid-svg-icons";
-import couche from "../../images/couche.png";
-import description from "../../images/description.png";
-import photo from "../../images/photo.png";
-import repere from "../../images/repere.png";
+import uMap1 from "../../images/uMap-editer.png";
+import uMap2 from "../../images/uMap-ajout.png";
+import uMap3 from "../../images/uMap-categorie.png";
+import uMap4 from "../../images/uMap-enr.png";
 
 const ContriInstructions = () => {
 
@@ -25,7 +25,7 @@ const ContriInstructions = () => {
                     id="acc-tete"
                     onClick={montrerAcc}
                     type="button"
-                >Comment ajouter un site avec Google</button>
+                >Comment ajouter un site avec uMap</button>
                 {
                     accVisible
                         ? <FontAwesomeIcon icon={faAnglesUp} onClick={montrerAcc} />
@@ -41,30 +41,23 @@ const ContriInstructions = () => {
                         >
                         <ol>
                             <li>
-                                <p>Cliquez sur la couche appropriée, selon le type de site.</p>
-                                <img src={couche} alt="il faut cliquer sur une couche" />
+                                <p>Activez l'édition de la carte à l'aide du bouton se trouvant en haut à droite de l'écran.</p>
+                                <img src={uMap1} alt="bouton éditer" />
                             </li>
                             <li>
-                                <p>Ajoutez un repère.<img src={repere} alt="icone lieu" /></p>
+                                <p>Juste en bas, ajoutez un marqueur, puis choisissez l'emplacement exact de votre site de camping.</p>
+                                <img src={uMap2} alt="icone lieu" />
                             </li>
                             <li>
-                                <p>Cliquez sur l'emplacement exact de votre site de camping.</p>
+                                <p>Sélectionnez d'abord la bonne catégorie de votre emplacement. Rédigez ensuite une description détaillée de l'endroit, et décidez-vous d'un titre.</p>
+                                <img src={uMap3} alt="liste de catégories" />
                             </li>
                             <li>
-                                <p>Décidez-vous d'un titre, et rédigez une description détaillée de l'endroit.</p>
-                                <img src={description} alt="" />
+                                <p>Cliquez sur X, puis sur Enregistrer.</p>
+                                <img src={uMap4} alt="icone enregistrer" />
                             </li>
                             <li>
-                                <p>Cliquez sur la caméra <img src={photo} alt="icone caméra" /> (fortement recommandé) pour ajouter des photos à partir de :</p>
-                                <ul>
-                                    <li>votre appareil</li>
-                                    <li>un lien web</li>
-                                    <li>vos photos Google</li>
-                                    <li>votre disque nuagique (Google Drive)</li>
-                                </ul>
-                            </li>
-                            <li>
-                                <p>Si vous vous êtes trompés avec l'emplacement, cliquez une fois sur le repère et déplacez-le au bon endroit.</p>
+                                <p>Pour ajouter des photos (fortement recommandé), vous pouvez envoyer les images à l'administrateur, par l'adresse courriel qui vous aura été communiqué avec vous en remplissant le formulaire ci-dessous.</p>
                             </li>
                         </ol>
                         <p><strong>SVP, ne modifiez pas les styles ou les couches! Tout se fera automatiquement.</strong></p>
@@ -75,6 +68,7 @@ const ContriInstructions = () => {
 }
 
 const Wrapper = styled.div`
+    border-bottom: 1px solid var(--c3);
     h3 {
         background-color: var(--c3);
         border-radius: 10px 10px 0 0;
