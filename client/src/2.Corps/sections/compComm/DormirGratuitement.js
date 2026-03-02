@@ -18,15 +18,10 @@ const DormirGratuitement = () => {
     const [montrerAjoutCarte, setMontrerAjoutCarte] = useState(false);
     const [montrerContri, setMontrerContri] = useState(false);
     const [confirmation, setConfirmation] = useState(false);
-    const [modifFaits, setModifFaits] = useState(0);
-    const [ajoutsFaits, setAjoutsFaits] = useState(0);
 
     const alternerFormulaireModif = () => {
         if (montrerModifCarte) {
             setMontrerModifCarte(false)
-            console.log(modifFaits);
-            let x = ajoutsFaits;
-            setModifFaits(x + 1); // F5 la carte quand tu fermes le formulaire
         } else {
             setMontrerModifCarte(true)
         }
@@ -35,21 +30,14 @@ const DormirGratuitement = () => {
     const alternerFormulaire = () => {
         if (montrerAjoutCarte) {
             setMontrerAjoutCarte(false)
-            console.log(ajoutsFaits);
-            let x = ajoutsFaits;
-            setAjoutsFaits(x + 1); // F5 la carte quand tu fermes le formulaire
         } else {
             setMontrerAjoutCarte(true)
         }
     }
 
     const alternerFormulaireContri = () => {
-        console.log("alterner contri");
         if (montrerContri) {
             setMontrerContri(false)
-            console.log(modifFaits);
-            let x = ajoutsFaits;
-            setModifFaits(x + 1); // F5 la carte quand tu fermes le formulaire
         } else {
             setMontrerContri(true)
         }
@@ -79,20 +67,7 @@ const DormirGratuitement = () => {
                 </BoutonAjoutCamping>
                 {
                     montrerModifCarte &&
-                    <FormMAJ
-                        confirmation={confirmation}
-                        setConfirmation={setConfirmation}
-                        setMontrerAjoutCarte={setMontrerAjoutCarte}
-                        ajoutsFaits={ajoutsFaits}
-                        setAjoutsFaits={setAjoutsFaits}
-                    />
-                }
-                {
-                    confirmation &&
-                    <Confirm>
-                            <p>Merci d'avoir contribué à la carte! Le site apparaitra sur la carte dans les 5 prochains jours.</p>
-                            <button onClick={fermerMerci}><FontAwesomeIcon icon={faClose} /></button>
-                        </Confirm>
+                    <FormMAJ />
                 }
             </section>
             <section>
@@ -106,20 +81,7 @@ const DormirGratuitement = () => {
                 </BoutonAjoutCamping>
                 {
                     montrerAjoutCarte &&
-                    <FormAjoutSite
-                        confirmation={confirmation}
-                        setConfirmation={setConfirmation}
-                        setMontrerAjoutCarte={setMontrerAjoutCarte}
-                        ajoutsFaits={ajoutsFaits}
-                        setAjoutsFaits={setAjoutsFaits}
-                    />
-                }
-                {
-                    confirmation &&
-                    <Confirm>
-                            <p>Merci d'avoir contribué à la carte! Le site apparaitra sur la carte dans les 5 prochains jours.</p>
-                            <button onClick={fermerMerci}><FontAwesomeIcon icon={faClose} /></button>
-                        </Confirm>
+                    <FormAjoutSite />
                 }
             </section>
             <section>
@@ -133,20 +95,7 @@ const DormirGratuitement = () => {
                 </BoutonAjoutCamping>
                 {
                     montrerContri &&
-                    <FormDevenirContri
-                        confirmation={confirmation}
-                        setConfirmation={setConfirmation}
-                        setMontrerContri={setMontrerContri}
-                        // ajoutsFaits={ajoutsFaits}
-                        // setAjoutsFaits={setAjoutsFaits}
-                    />
-                }
-                {
-                    confirmation &&
-                    <Confirm>
-                            <p>Merci d'avoir contribué à la carte! Le site apparaitra sur la carte dans les 5 prochains jours.</p>
-                            <button onClick={fermerMerci}><FontAwesomeIcon icon={faClose} /></button>
-                        </Confirm>
+                    <FormDevenirContri />
                 }
             </section>
             <section>
@@ -241,32 +190,6 @@ const BoutonAjoutCamping = styled.h2`
     }
     svg {
         padding: 10px;
-    }
-`
-
-// const CarteGoogle = styled.iframe`
-//     height: 500px;
-//     max-height: 80vh;
-//     width: 100%;
-// `
-
-const Confirm = styled.div`
-    background-color: var(--c6);
-    border-radius: 0 0 10px 10px;
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin: 0 auto;
-    padding: 10px;
-    width: 100%;
-    p {
-        color: var(--c11);
-        font-weight: bold;
-        margin: 0;
-        text-align: center;
-    }
-    button {
-        cursor: pointer;
     }
 `
 

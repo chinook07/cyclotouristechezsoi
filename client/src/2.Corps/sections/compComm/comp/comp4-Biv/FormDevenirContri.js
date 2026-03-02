@@ -6,7 +6,7 @@ import ContriInstructions from "./ContriInstructions";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { ExternalLink } from "react-external-link";
 
-const DevenirContri = (setMontrerContri) => {
+const FormDevenirContri = () => {
 
     const [confirmationDEM, setConfirmationDEM] = useState(false);
 
@@ -132,4 +132,4 @@ const Confirm = styled.div`
     }
 `
 
-export default DevenirContri;
+export default FormDevenirContri;

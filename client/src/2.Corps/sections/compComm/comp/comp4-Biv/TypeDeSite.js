@@ -45,16 +45,6 @@ const TypeDeSite = ({mAJType}) => {
                     ></input>
                     <span>Autre</span>
                 </label>
-                <label>
-                    <input
-                        name="typeCamping"
-                        onChange={mAJType}
-                        required
-                        type="radio"
-                        value="s_tests"
-                    ></input>
-                    <span>Pour tests seulement</span>
-                </label>
             </div>
         </Wrapper>
     )

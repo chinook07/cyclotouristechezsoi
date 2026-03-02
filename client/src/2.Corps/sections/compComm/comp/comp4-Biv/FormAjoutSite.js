@@ -2,16 +2,23 @@
 
 import styled from "styled-components";
 import { useState, useContext } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import CarteAjout from "./CarteAjout";
+import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { CycloContext } from "../../../../../CycloContext";
-import TypeDeSite from "./v2TypeDeSite";
-import Contributeur from "./v2Contributeur";
+import TypeDeSite from "./TypeDeSite";
+import Contributeur from "./Contributeur";
 import LiensImgManuel from "./LiensImgManuel";
 
-const FormAjoutSite = ({ setConfirmation, setMontrerAjoutCarte, ajoutsFaits, setAjoutsFaits }) => {
+const FormAjoutSite = () => {
         
     const { coordAjout } = useContext(CycloContext);
+    const [confirmation, setConfirmation] = useState(false);
+
+    const fermerMerci = () => {
+        setConfirmation(false);
+    }
 
     const anneeCourante = new Date().getFullYear();
 
@@ -129,7 +136,7 @@ const FormAjoutSite = ({ setConfirmation, setMontrerAjoutCarte, ajoutsFaits, set
                         value={champs.description}
                     />
                 </Description>
-                <LiensImgManuel mAJLiens={mAJLiens} />
+                <LiensImgManuel mAJLiens={mAJLiens} champsLiens={champs.liens} />
                 <TypeDeSite mAJType={mAJType} />
                 <AnneeVisite>
                     <label htmlFor="anneeVisite">Année visitée : </label>
@@ -165,6 +172,13 @@ const FormAjoutSite = ({ setConfirmation, setMontrerAjoutCarte, ajoutsFaits, set
                 </Legit>
                 <Envoyer type="submit">Ajouter</Envoyer>
             </fieldset>
+            {
+                confirmation &&
+                <Confirm>
+                        <p>Merci d'avoir contribué à la carte! Le site apparaitra sur la carte dans les 5 prochains jours.</p>
+                            <button onClick={fermerMerci}><FontAwesomeIcon icon={faClose} /></button>
+                </Confirm>
+            }
         </Wrapper>
     )
 }
@@ -254,6 +268,26 @@ const Envoyer = styled.button`
     padding: 10px 15px;
     &:hover {
         box-shadow: 1px 1px var(--c6);
+    }
+`
+
+const Confirm = styled.div`
+    background-color: var(--c6);
+    border-radius: 0 0 10px 10px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 10px;
+    width: 100%;
+    p {
+        color: var(--c11);
+        font-weight: bold;
+        margin: 0;
+        text-align: center;
+    }
+    button {
+        cursor: pointer;
     }
 `
 

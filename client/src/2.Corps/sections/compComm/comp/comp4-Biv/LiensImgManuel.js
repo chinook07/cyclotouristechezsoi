@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { ExternalLink } from "react-external-link";
 
-const LiensImgManuel = ({ mAJLiens }) => {
+const LiensImgManuel = ({ mAJLiens, champsLiens }) => {
     
     return (
         <Wrapper>
@@ -18,7 +18,11 @@ const LiensImgManuel = ({ mAJLiens }) => {
                     htmlFor="lienimg"
                     name="liens"
                 >Veuillez lister les liens url vers vos images ci-dessous. Si vous avez ajouté des photos à <ExternalLink href="https://c.gmx.fr/@942516742939220237/Qfd4yoXUR4mKUmxUGFJqeg">ce dossier nuagique partagé</ExternalLink>, merci de le mentionner ici.</label>
-                <textarea name="lienimg" onChange={mAJLiens} />
+                <textarea
+                    name="lienimg"
+                    onChange={mAJLiens}
+                    value={champsLiens}
+                />
             </LiensImg>
         </Wrapper>
     )
