@@ -5,8 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import CampingInterdit from "./comp/comp4-Biv/CampingInterdit";
 import interditParDefault from "./donnees/interditParDefault.json";
-import { faClose, faAnglesDown, faAnglesUp } from "@fortawesome/free-solid-svg-icons";
-// import CarteCampings from "./comp/comp4-Biv/CarteCampings";
+import { faAnglesDown, faAnglesUp } from "@fortawesome/free-solid-svg-icons";
 import NouvelleCarteCampings from "./comp/comp4-Biv/NouvelleCarteCampings";
 import FormDevenirContri from "./comp/comp4-Biv/FormDevenirContri";
 import FormAjoutSite from "./comp/comp4-Biv/FormAjoutSite";
@@ -17,7 +16,6 @@ const DormirGratuitement = () => {
     const [montrerModifCarte, setMontrerModifCarte] = useState(false);
     const [montrerAjoutCarte, setMontrerAjoutCarte] = useState(false);
     const [montrerContri, setMontrerContri] = useState(false);
-    const [confirmation, setConfirmation] = useState(false);
 
     const alternerFormulaireModif = () => {
         if (montrerModifCarte) {
@@ -43,17 +41,13 @@ const DormirGratuitement = () => {
         }
     }
 
-    const fermerMerci = () => {
-        setConfirmation(false);
-    }
-
 	return (
         <Wrapper>
             <section>
                 <p>Il est possible de voyager à vélo sans toujours devoir débourser un montant parfois dérisoire chaque nuit. Certains campings privés peuvent avoir des allures de tout-inclus, alors que de nombreux cyclotouristes ne cherchent qu'un petit terrain pour une quinzaine d'heures, avec un bloc sanitaire et une table à piquenique. Une personne voulant manger un sandwich et une salade n'irait pas à un buffet cinq-étoiles. Sous cette même optique, il existe des solutions de rechange aux campings payants.</p>
                 <p>Cette carte est le fruit du travail de plusieurs cyclotouristes ayant ajouté des sites recommandés pour le bivouac. Il incombe à l'usager d'être responsable de ses actions, de respecter les règlements en vigueur, et bien sûr de laisser l'endroit propre pour les autres utilisateurs. <strong>Le cyclotourisme a un nombre très limité d'adeptes, encore moins si on ne compte que ceux et celles dormant dans leurs tentes. Pour éviter que ces endroits de repos deviennent surutilisés, veuillez ne pas partager le lien de cette page librement sur les réseaux sociaux. Aidons-nous à conserver ces sites pour les générations futures!</strong></p>
                 {/* <CarteGoogle title="carte des campings gratuits" src="https://www.google.com/maps/d/u/0/embed?mid=1obdd8oU_9xShpHUY-L29RT6OwxerfCGI&ehbc=2E312F"></CarteGoogle> */}
-                <p><strong>La carte a migré vers une plateforme plus fiable.</strong> Vous pourrez vous en servir à nouveau pour rechercher un endroit à dormir. Les photos ajoutées sur la première version (lorsqu'elle était hébergée sur Google My Maps) seront intégrées une par une d'ici la fin du printemps.</p>
+                <p><strong>La carte a migré vers une plateforme plus fiable.</strong> Vous pourrez vous en servir à nouveau pour rechercher un endroit à dormir. Les photos ajoutées sur la première version (lorsqu'elle était hébergée sur Google My Maps) seront intégrées une par une d'ici la fonte des neiges.</p>
                 <NouvelleCarteCampings />
             </section>
             <section>

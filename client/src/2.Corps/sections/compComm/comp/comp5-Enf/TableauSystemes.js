@@ -52,6 +52,12 @@ const Wrapper = styled.table`
             margin: 0;
         }
     }
+    @media screen and (max-width: 600px) {
+        tr {
+            display: flex;
+            flex-direction: column;
+        }
+    }
 `
 
 export default TableauSystemes;
