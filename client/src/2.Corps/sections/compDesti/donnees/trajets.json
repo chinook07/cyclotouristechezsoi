@@ -613,13 +613,11 @@
         ],
         "proportion": 95,
         "terrain": "faux plats",
-        "deja": [
-            "Labelle à Montréal"
-        ],
+        "deja": true,
         "appreciation": 5,
-        "coups": "Les nombreuses haltes aménagées et les nombreux lacs et rivières.",
+        "coups": "Les anciennes gare réaménagées en haltes cyclistes.",
         "defis": "L'achalandage lors des belles fins de semaine d'été.",
-        "notes": "Un nouveau tronçon à Val-David est maintenant asphalté.",
+        "notes": "Il ne reste qu'un tronçon à asphalter – soit entre Sainte-Adèle et Prévost.",
         "varietes": "Le Corridor aérobique est une piste cyclable d'Amherst à Morin Heights qu'on peut prendre à l'aide de deux tronçons sur route, pour effectuer une boucle avec Le P'tit train du Nord.",
         "carteURL": "10/46.0885/-74.3658",
         "ass": [
@@ -1130,15 +1128,19 @@
         "id": 29,
         "trajet": "Vallée de la Gatineau",
         "intro": "En dehors des sentiers battus, le clou du trajet consiste d'un parc linéaire serpentant à travers une vallée méconnue.",
-        "distance": 190,
+        "distance": 180,
         "veloroutes": [
-            "Véloroute des Draveurs"
+            "Véloroute des Draveurs",
+            "Voie Verte Chelsea"
         ],
-        "proportion": 65,
-        "terrain": "peu côteux, plusieurs côtes dans le Parc de la Gatineau.",
-        "deja": false,
-        "notes": "Un projet est en cours pour aménager un tronçon du parc linéaire sur le territoire de la municipalité de Chelsea.",
-        "varietes": "Quoique le Parc de la Gatineau offre une multitude de sentiers et de routes pour rallier la Véloroute des Draveurs à Gatineau, il est possible de prendre la nouvelle Voie verte Chelsea pour un accès plus direct et facile.",
+        "proportion": 55,
+        "terrain": "peu côteux, quelques côtes sur les tronçons sur route.",
+        "deja": true,
+        "appreciation": 4,
+        "coups": "La partie nord de la Véloroute des Draveurs, longeant plusieurs lacs, ainsi que ses nombreux haltes cyclistes et la possibilité de (parfois) se mouiller les pieds.",
+        "defis": "Les nombreux chainons manquants de cet itinéraire.",
+        "notes": "La Véloroute des Draveurs se termine officiellement à Low, mais se poursuit sur 3 km vers le sud, vers la Promenade du Soleil N. Ce trajet épargne plusieurs côtes sur l'autre rive de la Gatineau, mais implique un segment hasardeux de 5 km sur la route 105 sans accotement.",
+        "varietes": "Le Parc de la Gatineau offre une multitude de sentiers et de routes pour rallier la Véloroute des Draveurs à Gatineau, pour ceux qui se cherchent un défi.",
         "carteURL": "10/46.0970/-76.0604",
         "ass": [
             {

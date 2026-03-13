@@ -283,6 +283,20 @@
             "14": "frontière indiquant le Nouveau-Brunswick",
             "15": "passerelle de bois sur une rivière"
         },
+        "29": {
+            "0": "moulin à eau",
+            "1": "ancien bateau sur terre",
+            "2": "lac avec eau peu profonde, collines au loin",
+            "3": "piste cyclable asphaltée sur le bord d'un lac",
+            "4": "arbre mort penché vers un lac, colline de l'autre côté",
+            "5": "oiseau surplombant un pré",
+            "6": "crépuscule par-dessus une piste cyclable en zone marécageuse",
+            "7": "botte de foin dans un pré",
+            "8": "route en gravier au milieu d'un champ, colline au loin",
+            "9": "pont couvert surplombant une rivière",
+            "10": "piste cyclable le long d'une rivière, barrage au loin",
+            "11": "Parlement du Canada sur l'horizon, garde-fou d'un pont à l'avant-plan"
+        },
         "30": {
             "0": "arbre mort dans un champ",
             "1": "panneau arrêt le bord d'une route rurale",

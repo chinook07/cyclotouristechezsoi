@@ -21,9 +21,10 @@ import * as imagesTout24 from "../images/portneuf/index";
 import * as imagesTout25 from "../images/sentier-waterfront/index";
 import * as imagesTout26 from "../images/sherbrooke-quebec/index";
 import * as imagesTout27 from "../images/temiscouata/index";
+import * as imagesTout29 from "../images/vallee-gatineau/index";
 import * as imagesTout30 from "../images/vallee-lamoille/index";
 
-let imagesTout0, imagesTout2, imagesTout4, imagesTout14, imagesTout23, imagesTout28, imagesTout29;
+let imagesTout0, imagesTout2, imagesTout4, imagesTout14, imagesTout23, imagesTout28;
 
 const imagesTout = [
     imagesTout0,

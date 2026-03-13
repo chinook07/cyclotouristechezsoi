@@ -1,0 +1,12 @@
+export { default as Gal01 } from "./vallee-gatineau-1.webp";
+export { default as Gal02 } from "./vallee-gatineau-2.webp";
+export { default as Gal03 } from "./vallee-gatineau-3.webp";
+export { default as Gal04 } from "./vallee-gatineau-4.webp";
+export { default as Gal05 } from "./vallee-gatineau-5.webp";
+export { default as Gal06 } from "./vallee-gatineau-6.webp";
+export { default as Gal07 } from "./vallee-gatineau-7.webp";
+export { default as Gal08 } from "./vallee-gatineau-8.webp";
+export { default as Gal09 } from "./vallee-gatineau-9.webp";
+export { default as Gal10 } from "./vallee-gatineau-10.webp";
+export { default as Gal11 } from "./vallee-gatineau-11.webp";
+export { default as Gal12 } from "./vallee-gatineau-12.webp";
