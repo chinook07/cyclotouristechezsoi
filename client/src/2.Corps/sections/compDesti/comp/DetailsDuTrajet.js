@@ -10,9 +10,7 @@ import * as TousSchemas from "../schemas/index";
 
 const DetailsDuTrajet = ({ itineraire, changerTrajet }) => {
 	const { ecran } = useContext(CycloContext);
-
     const details = trajetsDB.find((item) => item.trajet === itineraire);
-    console.log(details);
 
 	return (
 		<div>

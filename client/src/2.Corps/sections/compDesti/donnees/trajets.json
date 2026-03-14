@@ -528,7 +528,7 @@
     {
         "id": 14,
         "trajet": "Lac Champlain",
-        "intro": "Avec la pandémie derrière nous, il est à nouveau possible de rouler en direction de New York.",
+        "intro": "Il est possible de rouler vers les douanes en sortant de Montréal. Passage à vos risques!",
         "distance": 675,
         "veloroutes": [
             "Route verte 2",
@@ -562,7 +562,7 @@
             "Montréal",
             "New York"
         ],
-        "sortieRapide": "prendre le REM (en dehors des heures de pointe) à la station du Quartier (Brossard). En se synchronisant avec les heures plus restrictives des trains exo, on peut aussi commencer à la gare Candiac et filer à travers la campagne vers St-Jean-sur-Richelieu."
+        "sortieRapide": "prendre le REM (en dehors des heures de pointe) à la station du Quartier (Brossard). On peut aussi prendre le train exo vers Candiac le matin, pour filer à travers la campagne vers St-Jean-sur-Richelieu."
     },
     {
         "id": 15,
@@ -639,7 +639,7 @@
             "Mont-Laurier",
             "Montréal"
         ],
-        "sortieRapide": "prendre le train St-Jérôme–Montréal (s'arrête à Laval en fin de semaine), ou le métro à la station de la Concorde."
+        "sortieRapide": "prendre le train à la gare Saint-Jérôme, ou le métro à la station de la Concorde."
     },
     {
         "id": 17,
@@ -762,7 +762,7 @@
             "Côteau-du-Lac",
             "Lévis"
         ],
-        "sortieRapide": "pour rouler vers le sud-ouest, prendre la navette fluviale vers Châteauguay et suivre le lac St-Louis jusqu'à Beauharnois. Pour rouler vers Bécancour et Lévis, prendre une des deux navettes fluviales suivantes : Vieux-Port–Boucherville ou Vieux-Port–Pointe-aux-Trembles–Varennes."
+        "sortieRapide": "pour rouler vers le sud-ouest, prendre un des nombreux autobus exo qui traversent le pont Mercier. Pour rouler en direction de Lévis, prendre une des deux navettes fluviales suivantes : Vieux-Port–Boucherville ou Vieux-Port–Pointe-aux-Trembles–Varennes."
     },
     {
         "id": 20,
@@ -804,7 +804,7 @@
             "Montréal",
             "Sherbrooke"
         ],
-        "sortieRapide": "prendre le REM (en dehors des heures de pointe) à la station du Quartier (Brossard). En se synchronisant avec les heures plus restrictives des trains exo, on peut aussi commencer à la gare Candiac et filer à travers la campagne vers St-Jean-sur-Richelieu."
+        "sortieRapide": "prendre le REM (en dehors des heures de pointe) à la station du Quartier (Brossard). On peut aussi prendre le train exo vers Candiac le matin, pour filer à travers la campagne vers St-Jean-sur-Richelieu."
     },
     {
         "id": 21,
@@ -848,7 +848,7 @@
             "Gatineau–Ottawa",
             "Montréal"
         ],
-        "sortieRapide": "prendre le métro à la station Henri-Bourassa."
+        "sortieRapide": "prendre le REM (en dehors des heures de pointe) à la station Deux-Montagnes ou le métro à la station Henri-Bourassa."
     },
     {
         "id": 22,
@@ -890,7 +890,7 @@
             "Ottawa–Gatineau",
             "Montréal"
         ],
-        "sortieRapide": "prendre le train Vaudreuil–Montréal."
+        "sortieRapide": "prendre le train à la gare de Vaudreuil."
     },
     {
         "id": 23,
@@ -1005,7 +1005,7 @@
             "Toronto",
             "Montréal"
         ],
-        "sortieRapide": "prendre le train entre Dorion–Montréal."
+        "sortieRapide": "prendre le train à la gare de Dorion."
     },
     {
         "id": 26,

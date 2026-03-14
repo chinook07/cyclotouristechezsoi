@@ -5,8 +5,8 @@
         "couleur": "#808080",
         "police": "#000",
         "texte": "Une nouvelle piste cyclable reliera prochainement la Véloroute de la Chaudière à la Cycloroute de Bellechasse. Les travaux sont presque complétés, mais il reste encore deux petits tronçons à Scott et à Sainte-Hénédine.",
-        "lien": "En Beauce",
-        "url": "https://www.enbeauce.com/actualites/municipal/621333/veloroute-de-dorchester-encore-des-travaux-avant-sa-completion",
+        "lien": "Info Web",
+        "url": "https://info-web.ca/veloroute-de-dorchester-la-mrc-nouvelle-beauce-met-de-la-pression/",
         "complet": false
     },
     {
@@ -34,7 +34,7 @@
         "lienRegion": "laurentides",
         "couleur": "#f00",
         "police": "#000",
-        "texte": "Un tronçon supplémentaire de 10 km entre Prévost et Saint-Jérôme sera asphalté au printemps 2025. Il ne restera qu'un tronçon de 22 km en poussière de pierre de Val-Morin à Prévost.",
+        "texte": "Un tronçon supplémentaire de 10 km entre Prévost et Saint-Jérôme était supposé d'être asphalté au printemps 2025. Par contre, en date de début 2026, les travaux n'ont pas encore été effectués.",
         "lien": "Journal Le Nord",
         "url": "https://www.journallenord.com/actualite/le-ptit-train-du-nord-sera-asphalte-de-saint-jerome-a-prevost/",
         "complet": false
@@ -77,16 +77,6 @@
         "texte": "Une nouvelle piste cyclable de 20 km en Outaouais a été aménagée sur l'ancienne emprise ferroviaire à Chelsea. Elle offre un parcours bucolique et sécuritaire, en partie collée sur la rivière Gatineau, une alternative intéressante face aux côtes du grand parc du même nom.",
         "lien": "Ville Chelsea",
         "url": "https://www.chelsea.ca/fr/residents/service-municipaux/loisirs-culture-et-vie-communautaire/sentier-communautaire",
-        "complet": false
-    },
-    {
-        "region": "Vallée de la Gatineau",
-        "lienRegion": "vallee-de-la-gatineau",
-        "couleur": "#4900cf",
-        "police": "#fff",
-        "texte": "Un tronçon de sept kilomètres de la Véloroute des Draveurs de Gracefield vers le sud a été asphalté en 2023. Il est prévu de poursuivre l'asphaltage jusqu'à la route 301 à Kazabazua, probablement en 2025.",
-        "lien": "CHGA FM",
-        "url": "https://www.chga.fm/la-mrc-vallee-de-la-gatineau-poursuivra-lasphaltage-de-la-veloroute-des-draveurs/",
         "complet": false
     }
 ]
