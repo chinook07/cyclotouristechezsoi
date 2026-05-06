@@ -21,6 +21,7 @@ const Accueil = () => {
                     <span>{texteAcc[mois - 1]} </span>
                     <span>Pour vous aider dans la planification, découvrez les renseignements pertinents colligés sur ce site web. Que vous soyez débutant, chevronné, ou simplement curieux, vous trouverez des conseils de matériel, de trajets et bien davantage.</span></p>
                 <p>Bonne visite!</p>
+                <p>Le contenu de ce site a été rédigé par un être humain.</p>
             </Intro>
             {/* <TestWebP /> */}
             <NavAccueil />

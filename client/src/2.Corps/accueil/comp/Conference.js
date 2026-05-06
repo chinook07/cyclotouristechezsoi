@@ -4,7 +4,7 @@ import { ExternalLink } from "react-external-link";
 const Conference = () => {
     return (
         <Wrapper>
-            <h2>Conférence prochaine</h2>
+            <h2>Conférence passée</h2>
             <ul>
                 <li>Célébrer les 30 ans de la Route verte, en dyade père-fils et en solo</li>
                 <li>Date : <time dateTime="2026-03-02 19:00">2 mars 2026 à 19 h sur le web</time></li>

@@ -195,6 +195,9 @@ const IllegalParDefault = styled.div`
 		height: 100%;
 		width: 50%;
 	}
+    @media screen and (min-width: 1400px) {
+		max-width: 1400px;
+	}
 	@media screen and (min-width: 900px) {
 		li {
 			margin: 4% 0;
