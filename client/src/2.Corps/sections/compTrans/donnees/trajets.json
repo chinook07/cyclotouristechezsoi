@@ -339,7 +339,7 @@
             8
         ],
         "transporteur": "exo",
-        "trajet": "Train de banlieue entre Montréal et Vaudreuil, avec un départ par jour jusqu'à Hudson.",
+        "trajet": "Train de banlieue entre Montréal et Vaudreuil-Dorion, avec trois départs par jour jusqu'à / à partir de Hudson.",
         "heures": "7 jours sur 7."
     },
     "101": {
@@ -390,6 +390,16 @@
         ],
         "transporteur": "REM",
         "trajet": "REM A1/A4 entre Deux-Montagnes et Brossard",
+        "heures": "7 jours sur 7"
+    },
+    "111": {
+        "icone": [
+            1,
+            5,
+            9
+        ],
+        "transporteur": "REM",
+        "trajet": "REM A1/A3 entre Sainte-Anne-de-Bellevue et Brossard",
         "heures": "7 jours sur 7"
     },
     "120": {
@@ -539,7 +549,7 @@
             10
         ],
         "transporteur": "exo",
-        "trajet": "Circuit 8 – Autobus entre Laval et Saint-Eustache.",
+        "trajet": "Circuit 708 – Autobus entre Laval et Deux-Montagnes.",
         "heures": "7 jours sur 7."
     },
     "171": {
@@ -549,7 +559,7 @@
             10
         ],
         "transporteur": "exo",
-        "trajet": "Circuit 9 – Autobus entre Laval, Sainte-Thérèse et Saint-Jérôme.",
+        "trajet": "Circuit 709 – Autobus entre Laval, Sainte-Thérèse et Saint-Jérôme.",
         "heures": "7 jours sur 7."
     },
     "172": {
@@ -559,7 +569,7 @@
             10
         ],
         "transporteur": "exo",
-        "trajet": "Circuit 28 – Autobus entre Laval, Bois-des-Fillion et Terrebonne.",
+        "trajet": "Circuit 512 – Autobus entre Laval, Bois-des-Fillion et Terrebonne.",
         "heures": "7 jours sur 7."
     },
     "173": {
@@ -569,8 +579,38 @@
             10
         ],
         "transporteur": "exo",
-        "trajet": "Circuit 59 – Autobus entre Laval et Mirabel.",
-        "heures": "sur semaine seulement, principalement à l'heure de pointe."
+        "trajet": "Circuit 707 – Autobus entre Laval et Mirabel.",
+        "heures": "heure de pointe seulement (deux directions)"
+    },
+    "174": {
+        "icone": [
+            3,
+            5,
+            10
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 600 – Autobus entre Sainte-Thérèse et Deux-Montagnes.",
+        "heures": "7 jours sur 7"
+    },
+    "175": {
+        "icone": [
+            3,
+            5,
+            10
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 604 – Autobus entre Sainte-Thérèse et Deux-Montagnes.",
+        "heures": "7 jours sur 7"
+    },
+    "176": {
+        "icone": [
+            3,
+            5,
+            10
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 610 – Autobus entre Sainte-Thérèse et Terrebonne.",
+        "heures": "7 jours sur 7"
     },
     "180": {
         "icone": [
@@ -671,6 +711,106 @@
         "transporteur": "exo",
         "trajet": "Circuit 600 – Autobus entre Brossard et Ste-Julie.",
         "heures": "sur semaine seulement"
+    },
+    "200": {
+        "icone": [
+            3,
+            5,
+            9
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 188 – Autobus entre Vaudreuil-Dorion et Hudson.",
+        "heures": "heure de pointe seulement (deux directions), secteur partiellement équipé de supports à vélo"
+    },
+    "201": {
+        "icone": [
+            3,
+            5,
+            9
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 189 – Autobus entre Vaudreuil-Dorion et Saint-Lazare.",
+        "heures": "heure de pointe seulement (deux directions), secteur partiellement équipé de supports à vélo"
+    },
+    "202": {
+        "icone": [
+            3,
+            5,
+            9
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 490 – Autobus entre Sainte-Anne-de-Bellevue et Vaudreuil-Dorion.",
+        "heures": "sur semaine seulement, secteur partiellement équipé de supports à vélo"
+    },
+    "203": {
+        "icone": [
+            3,
+            5,
+            9
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 491 – Autobus entre Sainte-Anne-de-Bellevue et Vaudreuil-Dorion.",
+        "heures": "7 jours sur 7, secteur partiellement équipé de supports à vélo"
+    },
+    "204": {
+        "icone": [
+            3,
+            5,
+            9
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 493 – Autobus entre Sainte-Anne-de-Bellevue et Vaudreuil-Dorion.",
+        "heures": "sur semaine seulement, secteur partiellement équipé de supports à vélo"
+    },
+    "205": {
+        "icone": [
+            3,
+            5,
+            9
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 591 – Autobus entre Sainte-Anne-de-Bellevue et Vaudreuil-Dorion.",
+        "heures": "heure de pointe seulement (deux directions), secteur partiellement équipé de supports à vélo"
+    },
+    "206": {
+        "icone": [
+            3,
+            5,
+            9
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 593 – Autobus entre Sainte-Anne-de-Bellevue et Notre-Dame-de-l'Ile-Perrot.",
+        "heures": "heure de pointe seulement (deux directions), secteur partiellement équipé de supports à vélo"
+    },
+    "207": {
+        "icone": [
+            3,
+            5,
+            9
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 695 – Autobus entre Vaudreuil-Dorion et Rigaud.",
+        "heures": "heure de pointe seulement (deux directions), secteur partiellement équipé de supports à vélo"
+    },
+    "208": {
+        "icone": [
+            3,
+            5,
+            9
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 790 – Autobus entre Sainte-Anne-de-Bellevue et Vaudreuil-Dorion.",
+        "heures": "fins de semaine seulement, secteur partiellement équipé de supports à vélo."
+    },
+    "209": {
+        "icone": [
+            3,
+            5,
+            9
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 793 – Autobus entre Sainte-Anne-de-Bellevue et Vaudreuil-Dorion.",
+        "heures": "sur semaine seulement, secteur partiellement équipé de supports à vélo"
     },
     "300": {
         "icone": [
