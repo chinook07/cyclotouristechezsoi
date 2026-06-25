@@ -852,6 +852,96 @@
         "trajet": "Circuit 793 – Autobus entre Sainte-Anne-de-Bellevue et Vaudreuil-Dorion.",
         "heures": "sur semaine seulement, secteur partiellement équipé de supports à vélo"
     },
+    "210": {
+        "icone": [
+            3,
+            5,
+            9
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 458 – Autobus entre Brossard et La Prairie.",
+        "heures": "heure de pointe seulement (deux directions), secteur partiellement équipé de supports à vélo"
+    },
+    "211": {
+        "icone": [
+            3,
+            5,
+            9
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 459 – Autobus entre Brossard et Candiac.",
+        "heures": "heure de pointe seulement (deux directions), secteur partiellement équipé de supports à vélo"
+    },
+    "212": {
+        "icone": [
+            3,
+            5,
+            9
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 550 – Autobus entre Longueuil et La Prairie.",
+        "heures": "heure de pointe seulement (deux directions), secteur partiellement équipé de supports à vélo"
+    },
+    "213": {
+        "icone": [
+            3,
+            5,
+            9
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 551 – Autobus entre Longueuil et Candiac.",
+        "heures": "heure de pointe seulement (deux directions), secteur partiellement équipé de supports à vélo"
+    },
+    "214": {
+        "icone": [
+            3,
+            5,
+            9
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 554 – Autobus entre Brossard et Delson.",
+        "heures": "heure de pointe seulement (deux directions), secteur partiellement équipé de supports à vélo"
+    },
+    "215": {
+        "icone": [
+            3,
+            5,
+            9
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 555 – Autobus entre Longueuil et Delson.",
+        "heures": "heure de pointe seulement (deux directions), secteur partiellement équipé de supports à vélo"
+    },
+    "216": {
+        "icone": [
+            3,
+            5,
+            9
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 556 – Autobus entre Montréal et Delson.",
+        "heures": "sur semaine seulement, secteur partiellement équipé de supports à vélo"
+    },
+    "217": {
+        "icone": [
+            3,
+            5,
+            9
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 650 – Autobus entre Brossard et Delson.",
+        "heures": "7 jours sur 7, secteur partiellement équipé de supports à vélo"
+    },
+    "218": {
+        "icone": [
+            3,
+            5,
+            9
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 651 – Autobus entre Longueuil et Delson.",
+        "heures": "7 jours sur 7, secteur partiellement équipé de supports à vélo"
+    },
     "300": {
         "icone": [
             3,
