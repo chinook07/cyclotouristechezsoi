@@ -479,8 +479,48 @@
             10
         ],
         "transporteur": "exo",
-        "trajet": "Plusieurs parcours entre Longueuil, Varennes et St-Amable. Consultez le site du transporteur.",
-        "heures": "7 jours sur 7, surtout en pointe."
+        "trajet": "Circuit 370 – Autobus entre Sainte-Julie et Saint-Amable.",
+        "heures": "7 jours sur 7"
+    },
+    "143": {
+        "icone": [
+            3,
+            5,
+            10
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 707 – Autobus entre Longueuil et Contrecoeur.",
+        "heures": "heure de pointe seulement (sens opposé de la pointe)"
+    },
+    "144": {
+        "icone": [
+            3,
+            5,
+            10
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 720 – Autobus entre Longueuil et Varennes.",
+        "heures": "7 jours sur 7"
+    },
+    "145": {
+        "icone": [
+            3,
+            5,
+            10
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 723 – Autobus entre Longueuil et Varennes.",
+        "heures": "sur semaine seulement"
+    },
+    "146": {
+        "icone": [
+            3,
+            5,
+            10
+        ],
+        "transporteur": "exo",
+        "trajet": "Circuit 732 – Autobus entre Longueuil et Saint-Amable.",
+        "heures": "heure de pointe seulement (sens opposé de la pointe)"
     },
     "150": {
         "icone": [
